@@ -120,6 +120,11 @@ struct rt_lwp
     char working_directory[DFS_PATH_MAX];
     int debug;
     uint32_t bak_first_ins;
+
+    #ifdef RT_LWP_ENABLE_ASID
+    uint64_t generation;
+    unsigned asid;
+    #endif
 };
 
 struct rt_lwp *lwp_self(void);
@@ -293,6 +298,6 @@ rt_channel_t gdb_server_channel(void);
 int dbg_step_type(void);
 void dbg_attach_req(void *pc);
 int dbg_check_suspend(void);
-void rt_hw_set_process_id(int pid);
+void set_process_id(int pid);
 
 #endif

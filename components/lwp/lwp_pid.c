@@ -336,11 +336,18 @@ struct rt_lwp* lwp_new(void)
     }
     lwp->pid = pid;
     lwp_pid_set_lwp(pid, lwp);
+
+    #ifdef RT_LWP_ENABLE_ASID
+    lwp->generation = 0;
+    lwp->asid = 0;
+    #endif
+
 out:
     rt_hw_interrupt_enable(level);
     return lwp;
 }
 
+extern void remove_asid(unsigned asid);
 void lwp_free(struct rt_lwp* lwp)
 {
     rt_base_t level;
@@ -409,6 +416,10 @@ void lwp_free(struct rt_lwp* lwp)
 
 #ifdef RT_USING_USERSPACE
     lwp_unmap_user_space(lwp);
+#endif
+
+#ifdef RT_LWP_ENABLE_ASID
+    remove_asid(lwp->asid);
 #endif
 
     level = rt_hw_interrupt_disable();

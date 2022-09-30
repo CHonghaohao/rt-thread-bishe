@@ -267,6 +267,24 @@ rt_hw_set_process_id:
     MCR p15, 0, r0, c13, c0, 1
     mov pc, lr
 
+#ifdef RT_LWP_ENABLE_ASID
+.global rt_hw_mmu_switch
+rt_hw_mmu_switch:
+    orr r0, #0x18
+    mcr p15, 0, r0, c2, c0, 0    /* ttbr0   write r0 to ttbr0*/
+
+    and r2, r1, #0xff
+    mov r1, r1, LSL #0x8
+    orr r1, r1, r2                /* r1 = (asid << 8) | (asid & 0xFFUL) */
+    mcr p15, 0, r1, c13, c0, 1    /* set contextid = r1*/ 
+
+    mcr p15, 0, r0, c7, c5, 0    /* iciallu */
+    mcr p15, 0, r0, c7, c5, 6    /* bpiall */
+
+    dsb
+    isb
+    mov pc, lr
+#else
 .global rt_hw_mmu_switch
 rt_hw_mmu_switch:
     orr r0, #0x18
@@ -281,6 +299,7 @@ rt_hw_mmu_switch:
     dsb
     isb
     mov pc, lr
+#endif
 .global rt_hw_mmu_tbl_get
 rt_hw_mmu_tbl_get:
     mrc p15, 0, r0, c2, c0, 0    /* ttbr0 */
@@ -604,8 +623,8 @@ vector_resv:
     b       .
 
 #ifdef RT_USING_SMP
-.global rt_hw_clz
-rt_hw_clz:
+.global rt_clz
+rt_clz:
     clz r0, r0
     bx lr
 
@@ -622,7 +641,7 @@ rt_secondary_cpu_entry:
 after_enable_mmu_n:
     ldr     r0, =MMUTable
     add     r0, r5
-    bl      rt_hw_mmu_switch
+    bl      switch_mmu
 #endif
 
 #ifdef RT_USING_FPU
