@@ -641,7 +641,7 @@ rt_secondary_cpu_entry:
 after_enable_mmu_n:
     ldr     r0, =MMUTable
     add     r0, r5
-    bl      switch_mmu
+    bl      rt_hw_mmu_switch
 #endif
 
 #ifdef RT_USING_FPU
