@@ -60,9 +60,9 @@ static unsigned get_update_asid(struct rt_lwp *l)
     global_generation++;
     memset(asid_valid_bitmap, 0, MAX_ASID * sizeof(char));
 
-    asid_valid_bitmap[i] = 1;
+    asid_valid_bitmap[1] = 1;
     l->generation = global_generation;
-    l->asid = i;
+    l->asid = 1;
 
     // invalidate all TLB entries
     asm volatile("mcr p15, 0, %0, c8, c7, 0"::"r"(0)); 

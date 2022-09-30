@@ -347,7 +347,7 @@ out:
     return lwp;
 }
 
-extern void remove_asid(unsigned asid);
+extern void remove_asid(uint64_t generation, unsigned asid);
 void lwp_free(struct rt_lwp* lwp)
 {
     rt_base_t level;
@@ -419,7 +419,7 @@ void lwp_free(struct rt_lwp* lwp)
 #endif
 
 #ifdef RT_LWP_ENABLE_ASID
-    remove_asid(lwp->asid);
+    remove_asid(lwp->generation, lwp->asid);
 #endif
 
     level = rt_hw_interrupt_disable();
