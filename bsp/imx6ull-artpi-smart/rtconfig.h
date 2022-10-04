@@ -395,4 +395,8 @@
 
 #define BSP_USING_USB_DEVICE
 
+/* enable ASID */
+// #define RT_LWP_ENABLE_ASID
+// #define MAX_ASID_BITS 8
+
 #endif
