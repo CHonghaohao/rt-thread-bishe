@@ -172,6 +172,41 @@ void handle_user(rt_size_t scause, rt_size_t stval, rt_size_t sepc, struct rt_hw
     sys_exit(-1);
 }
 
+static void vector_enable(struct rt_hw_stack_frame *sp)
+{
+    sp->sstatus |= SSTATUS_VS_INITIAL;
+}
+
+/** 
+ * detect V/D support, and do not distinguish V/D instruction
+ */
+static int illegal_inst_recoverable(rt_ubase_t stval, struct rt_hw_stack_frame *sp)
+{
+    // first 7 bits is opcode
+    int opcode = stval & 0x7f;
+    int csr = (stval & 0xFFF00000) >> 20;
+    // ref riscv-v-spec-1.0, [Vector Instruction Formats]
+    int width = ((stval & 0x7000) >> 12) - 1;
+    int flag = 0;
+
+    switch (opcode)
+    {
+    case 0x57: // V
+    case 0x27: // scalar FLOAT
+    case 0x07:
+    case 0x73: // CSR
+        flag = 1;
+        break;
+    }
+
+    if (flag)
+    {
+        vector_enable(sp);
+    }
+
+    return flag;
+}
+
 /* Trap entry */
 void handle_trap(rt_size_t scause, rt_size_t stval, rt_size_t sepc, struct rt_hw_stack_frame *sp)
 {
@@ -213,6 +248,11 @@ void handle_trap(rt_size_t scause, rt_size_t stval, rt_size_t sepc, struct rt_hw
         }
         else
         {
+            if (scause == 0x2)
+            {
+                if (!(sp->sstatus & SSTATUS_VS) && illegal_inst_recoverable(stval, sp))
+                    return;
+            }
             if (!(sp->sstatus & 0x100))
             {
                 handle_user(scause, stval, sepc, sp);

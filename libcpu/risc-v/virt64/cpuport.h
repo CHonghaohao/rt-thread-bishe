@@ -20,6 +20,7 @@
 #define REGBYTES                8
 #else
 // error here, not portable
+#error "Not supported XLEN"
 #endif
 
 /* 33 general register */
@@ -32,8 +33,16 @@
 #define CTX_FPU_REG_NR  0
 #endif
 
+#ifdef ENABLE_VECTOR
+/* 32 128/256 bits registers, for risc-v 64, we assuming 64 64-bit regs */
+/* TODO we should detect VLEN on the fly */
+#define CTX_VECTOR_REG_NR  (64 + 4)
+#else
+#define CTX_VECTOR_REG_NR  0
+#endif
+
 /* all context registers */
-#define CTX_REG_NR  (CTX_GENERAL_REG_NR + CTX_FPU_REG_NR)
+#define CTX_REG_NR  (CTX_GENERAL_REG_NR + CTX_FPU_REG_NR + CTX_VECTOR_REG_NR)
 
 #ifndef __ASSEMBLY__
 rt_inline void rt_hw_dsb()

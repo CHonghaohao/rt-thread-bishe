@@ -35,6 +35,10 @@ config ENABLE_FPU
     bool "Enable FPU"
     default y
 
+config ENABLE_VECTOR
+    bool "Using RISC-V Vector Extension"
+    default n
+
 config RT_USING_USERSPACE_32BIT_LIMIT
     bool "Enable userspace 32bit limit"
     default n

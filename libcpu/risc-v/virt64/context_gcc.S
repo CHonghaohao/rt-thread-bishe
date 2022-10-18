@@ -32,23 +32,32 @@ rt_hw_context_switch_to:
 /*
  * void rt_hw_context_switch(rt_ubase_t from, rt_ubase_t to);
  *
- * a0 --> from
- * a1 --> to
+ * a0 --> from SP pointer
+ * a1 --> to SP pointer
  */
     .globl rt_hw_context_switch
 rt_hw_context_switch:
-    mv t2, sp
-    li t0, 0x120//set SPIE and SPP = 1
-    csrs sstatus, t0//if enter here,caller must be in system thread
-    csrw sepc, ra//return address
-    //saved from thread context
-    SAVE_ALL
+    // backup prev stack top of from thread
+    csrw sscratch, sp
 
-    STORE t2, 32 * REGBYTES(sp)//save user_sp
+    // on sret, reset status to
+    // 1. interrupt DISABLE
+    // 2. cpu in supervisor mode
+    // 3. reserved other status
+    li t0, 0x120
+    csrs sstatus, t0
+
+    // simulate a exception return to supervisor mode
+    // by storing ra in sepc of from-thread stack frame
+    csrw sepc, ra
+
+    // NOTE: we do NOT guarantee that any temporary registers
+    // will remains their value after SAVE_ALL
+    SAVE_ALL
 
     STORE sp, (a0)
 
-    //restore to thread context
+    // restore to thread context
     LOAD sp, (a1)
 
     la s0, rt_current_thread
@@ -65,3 +74,33 @@ rt_hw_context_switch:
 
     RESTORE_ALL
     sret
+
+#ifdef ENABLE_VECTOR
+/**
+ * @param a0 pointer to frame bottom
+ */
+.global rt_hw_vector_ctx_save
+rt_hw_vector_ctx_save:
+    SAVE_VECTOR a0
+    ret
+
+/**
+ * @param a0 pointer to frame bottom
+ */
+.global rt_hw_vector_ctx_restore
+rt_hw_vector_ctx_restore:
+    RESTORE_VECTOR a0
+    ret
+
+.global rt_hw_disable_vector
+rt_hw_disable_vector:
+    li t0, SSTATUS_VS
+    csrc sstatus, t0
+    ret
+
+.global rt_hw_enable_vector
+rt_hw_enable_vector:
+    li t0, SSTATUS_VS
+    csrs sstatus, t0
+    ret
+#endif /* ENABLE_VECTOR */
