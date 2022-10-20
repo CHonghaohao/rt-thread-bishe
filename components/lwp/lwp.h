@@ -121,10 +121,8 @@ struct rt_lwp
     int debug;
     uint32_t bak_first_ins;
 
-    #ifdef RT_LWP_ENABLE_ASID
     uint64_t generation;
     unsigned asid;
-    #endif
 };
 
 struct rt_lwp *lwp_self(void);

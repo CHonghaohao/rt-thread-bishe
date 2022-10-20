@@ -176,11 +176,7 @@ bss_loop:
 #ifdef RT_USING_USERSPACE
     ldr r0, =MMUTable     /* vaddr    */
     add r0, r5            /* to paddr */
-#ifdef RT_LWP_ENABLE_ASID
     bl  rt_hw_mmu_switch_kernel
-#else
-    bl  rt_hw_mmu_switch
-#endif
 #else
     bl rt_hw_mmu_init
 #endif
@@ -271,7 +267,6 @@ rt_hw_set_process_id:
     MCR p15, 0, r0, c13, c0, 1
     mov pc, lr
 
-#ifdef RT_LWP_ENABLE_ASID
 .global rt_hw_mmu_switch
 rt_hw_mmu_switch:
     mov r3, #0
@@ -304,31 +299,12 @@ rt_hw_mmu_switch_kernel:
         so no need to update ASID, 
         neither to flush TLB
     */
-    ; mov r0, #0
-    ; mcr p15, 0, r0, c8, c7, 0
     mcr p15, 0, r0, c7, c5, 0    /* iciallu */
     mcr p15, 0, r0, c7, c5, 6    /* bpiall */
 
     dsb
     isb
     mov pc, lr
-
-#else
-.global rt_hw_mmu_switch
-rt_hw_mmu_switch:
-    orr r0, #0x18
-    mcr p15, 0, r0, c2, c0, 0    /* ttbr0 */
-
-    /* invalid tlb */
-    mov r0, #0
-    mcr p15, 0, r0, c8, c7, 0
-    mcr p15, 0, r0, c7, c5, 0    /* iciallu */
-    mcr p15, 0, r0, c7, c5, 6    /* bpiall */
-
-    dsb
-    isb
-    mov pc, lr
-#endif
 
 .global rt_hw_mmu_tbl_get
 rt_hw_mmu_tbl_get:
@@ -671,11 +647,7 @@ rt_secondary_cpu_entry:
 after_enable_mmu_n:
     ldr     r0, =MMUTable
     add     r0, r5
-#ifdef RT_LWP_ENABLE_ASID
     bl      rt_hw_mmu_switch_kernel
-#else
-    bl      rt_hw_mmu_switch
-#endif
 #endif
 
 #ifdef RT_USING_FPU

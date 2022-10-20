@@ -337,10 +337,8 @@ struct rt_lwp* lwp_new(void)
     lwp->pid = pid;
     lwp_pid_set_lwp(pid, lwp);
 
-    #ifdef RT_LWP_ENABLE_ASID
     lwp->generation = 0;
     lwp->asid = 0;
-    #endif
 
 out:
     rt_hw_interrupt_enable(level);
@@ -418,9 +416,7 @@ void lwp_free(struct rt_lwp* lwp)
     lwp_unmap_user_space(lwp);
 #endif
 
-#ifdef RT_LWP_ENABLE_ASID
     remove_asid(lwp->generation, lwp->asid);
-#endif
 
     level = rt_hw_interrupt_disable();
     /* for children */
