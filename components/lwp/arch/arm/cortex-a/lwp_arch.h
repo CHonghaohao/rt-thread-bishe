@@ -43,6 +43,9 @@ rt_inline void icache_invalid_all(void)
     asm volatile ("mcr p15, 0, r0, c7, c5, 0\ndsb\nisb":::"memory");//iciallu
 }
 
+unsigned int arch_get_asid(struct rt_lwp *lwp);
+void arch_remove_asid(struct rt_lwp *lwp);
+
 #ifdef __cplusplus
 }
 #endif

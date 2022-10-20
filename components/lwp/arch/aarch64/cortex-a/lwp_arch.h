@@ -41,6 +41,9 @@ rt_inline void icache_invalid_all(void)
     asm volatile ("ic ialluis\n\tisb sy":::"memory");
 }
 
+unsigned int arch_get_asid(struct rt_lwp *lwp);
+void arch_remove_asid(struct rt_lwp *lwp);
+
 #ifdef __cplusplus
 }
 #endif

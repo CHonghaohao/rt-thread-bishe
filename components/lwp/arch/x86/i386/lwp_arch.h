@@ -45,6 +45,9 @@ rt_inline unsigned long rt_hw_ffz(unsigned long x)
     return __builtin_ffs(~x) - 1;
 }
 
+unsigned int arch_get_asid(struct rt_lwp *lwp);
+void arch_remove_asid(struct rt_lwp *lwp);
+
 #ifdef __cplusplus
 }
 #endif

@@ -74,4 +74,15 @@ int arch_expand_user_stack(void *addr)
     return ret;
 }
 
+unsigned int arch_get_asid(struct rt_lwp *lwp)
+{
+    // TODO
+    return 0;
+}
+
+void arch_remove_asid(struct rt_lwp *lwp)
+{
+    // TODO
+}
+
 #endif

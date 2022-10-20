@@ -368,4 +368,15 @@ void lwp_signal_do_return(rt_hw_stack_frame_t *frame)
 }
 #endif /* RT_USING_SIGNALS */
 
+unsigned int arch_get_asid(struct rt_lwp *lwp)
+{
+    // TODO
+    return 0;
+}
+
+void arch_remove_asid(struct rt_lwp *lwp)
+{
+    // TODO
+}
+
 #endif  /* RT_USING_USERSPACE */

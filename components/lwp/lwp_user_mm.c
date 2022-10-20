@@ -29,51 +29,7 @@ int lwp_user_space_init(struct rt_lwp *lwp)
     return arch_user_space_init(lwp);
 }
 
-#define MAX_ASID_BITS 8
-#define MAX_ASID (1 << MAX_ASID_BITS)
-static uint64_t global_generation = 1;
-static char asid_valid_bitmap[MAX_ASID];
-static unsigned get_update_asid(struct rt_lwp *l)
-{
-    if (l->generation == global_generation)
-    {
-        return l->asid;
-    }
-
-    for (unsigned i = 1; i < MAX_ASID; i++)
-    {
-        if (asid_valid_bitmap[i] == 0)
-        {
-            asid_valid_bitmap[i] = 1;
-            l->generation = global_generation;
-            l->asid = i;
-            return i;
-        }
-    }
-
-    global_generation++;
-    memset(asid_valid_bitmap, 0, MAX_ASID * sizeof(char));
-
-    asid_valid_bitmap[1] = 1;
-    l->generation = global_generation;
-    l->asid = 1;
-
-    // invalidate all TLB entries
-    asm volatile ("mcr p15, 0, r0, c8, c7, 0\ndsb\nisb" ::: "memory");
-
-    return 1;
-}
-
-void remove_asid(uint64_t generation, unsigned asid)
-{
-    if (generation == global_generation)
-    {
-        asid_valid_bitmap[asid] = 0;
-    }
-}
-
 void rt_hw_mmu_switch(void *mtable, unsigned int pid, unsigned char asid);
-void rt_hw_mmu_switch_kernel(void *mtable);
 void *rt_hw_mmu_tbl_get(void);
 void lwp_mmu_switch(struct rt_thread *thread)
 {
@@ -93,15 +49,9 @@ void lwp_mmu_switch(struct rt_thread *thread)
     pre_mmu_table = rt_hw_mmu_tbl_get();
     if (pre_mmu_table != new_mmu_table)
     {
-        if (l)
-        {
-            unsigned asid = get_update_asid(l);
-            rt_hw_mmu_switch(new_mmu_table, l->pid, asid);
-        }
-        else 
-        {
-            rt_hw_mmu_switch_kernel(new_mmu_table);
-        }
+        unsigned int asid = arch_get_asid(l);
+        pid_t pid = l ? l->pid : 0; 
+        rt_hw_mmu_switch(new_mmu_table, pid, asid);
     }
 }
 
