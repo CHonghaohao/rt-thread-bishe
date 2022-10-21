@@ -176,7 +176,7 @@ bss_loop:
 #ifdef RT_USING_USERSPACE
     ldr r0, =MMUTable     /* vaddr    */
     add r0, r5            /* to paddr */
-    bl  rt_hw_mmu_switch_kernel
+    bl  rt_hw_mmu_switch
 #else
     bl rt_hw_mmu_init
 #endif
@@ -283,22 +283,6 @@ rt_hw_mmu_switch:
     mcr p15, 0, r1, c13, c0, 1    /* set contextid = r1*/ 
     isb
 
-    mcr p15, 0, r0, c7, c5, 0    /* iciallu */
-    mcr p15, 0, r0, c7, c5, 6    /* bpiall */
-
-    dsb
-    isb
-    mov pc, lr
-
-.global rt_hw_mmu_switch_kernel
-rt_hw_mmu_switch_kernel:
-    orr r0, #0x18
-    mcr p15, 0, r0, c2, c0, 0    /* ttbr0 */
-
-    /*  The nG bit of tlb entries of kernel is 0, 
-        so no need to update ASID, 
-        neither to flush TLB
-    */
     mcr p15, 0, r0, c7, c5, 0    /* iciallu */
     mcr p15, 0, r0, c7, c5, 6    /* bpiall */
 
@@ -647,7 +631,7 @@ rt_secondary_cpu_entry:
 after_enable_mmu_n:
     ldr     r0, =MMUTable
     add     r0, r5
-    bl      rt_hw_mmu_switch_kernel
+    bl      rt_hw_mmu_switch
 #endif
 
 #ifdef RT_USING_FPU

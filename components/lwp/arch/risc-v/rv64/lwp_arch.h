@@ -66,9 +66,6 @@ rt_inline void icache_invalid_all(void)
     //TODO:
 }
 
-unsigned int arch_get_asid(struct rt_lwp *lwp);
-void arch_remove_asid(struct rt_lwp *lwp);
-
 #ifdef __cplusplus
 }
 #endif

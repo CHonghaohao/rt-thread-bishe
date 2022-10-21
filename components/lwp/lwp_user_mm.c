@@ -35,6 +35,8 @@ void lwp_mmu_switch(struct rt_thread *thread)
 {
     struct rt_lwp *l = RT_NULL;
     void *pre_mmu_table = RT_NULL, *new_mmu_table = RT_NULL;
+    unsigned int asid = 0; 
+    pid_t pid = 0; 
 
     if (thread->lwp)
     {
@@ -49,8 +51,10 @@ void lwp_mmu_switch(struct rt_thread *thread)
     pre_mmu_table = rt_hw_mmu_tbl_get();
     if (pre_mmu_table != new_mmu_table)
     {
-        unsigned int asid = arch_get_asid(l);
-        pid_t pid = l ? l->pid : 0; 
+#ifdef LWP_ENABLE_ASID
+        asid = arch_get_asid(l);
+#endif
+        pid = l ? l->pid : 0; 
         rt_hw_mmu_switch(new_mmu_table, pid, asid);
     }
 }

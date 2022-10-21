@@ -238,15 +238,4 @@ void lwp_set_thread_context(void *exit_addr, void *new_thread_stack, void *user_
      */
 }
 
-unsigned int arch_get_asid(struct rt_lwp *lwp)
-{
-    // TODO
-    return 0;
-}
-
-void arch_remove_asid(struct rt_lwp *lwp)
-{
-    // TODO
-}
-
 #endif
