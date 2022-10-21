@@ -122,7 +122,7 @@ struct rt_lwp
     uint32_t bak_first_ins;
 
     uint64_t generation;
-    unsigned asid;
+    unsigned int asid;
 };
 
 struct rt_lwp *lwp_self(void);

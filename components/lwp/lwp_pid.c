@@ -415,7 +415,9 @@ void lwp_free(struct rt_lwp* lwp)
     lwp_unmap_user_space(lwp);
 #endif
 
+#ifdef LWP_ENABLE_ASID
     arch_remove_asid(lwp);
+#endif
 
     level = rt_hw_interrupt_disable();
     /* for children */
