@@ -274,14 +274,19 @@ rt_hw_mmu_switch:
     isb
     
     orr r0, #0x18
-    mcr p15, 0, r0, c2, c0, 0    /* ttbr0   write r0 to ttbr0*/
-    isb
+    mcr p15, 0, r0, c2, c0, 0    /* ttbr0 */
 
+#ifdef LWP_ENABLE_ASID
+    isb
     mov r1, r1, LSL #0x8         
     and r2, r2, #0xff             
     orr r1, r1, r2                /* contextid.PROCID = pid, contextid.ASID = asid*/
     mcr p15, 0, r1, c13, c0, 1    /* set contextid = r1*/ 
     isb
+#else
+    mov r0, #0
+    mcr p15, 0, r0, c8, c7, 0
+#endif
 
     mcr p15, 0, r0, c7, c5, 0    /* iciallu */
     mcr p15, 0, r0, c7, c5, 6    /* bpiall */
