@@ -11,7 +11,6 @@
  */
 
 #define SSTATUS_FS      0x00006000U /* initial state of FPU, clear to disable */
-#define __ASSEMBLY__
 #include <cpuport.h>
 
 boot_hartid: .int

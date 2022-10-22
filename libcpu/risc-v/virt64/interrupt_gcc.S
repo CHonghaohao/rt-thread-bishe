@@ -11,7 +11,6 @@
  * 2021/12/24     JasonHu      Add user setting save/restore
  */
 
-#define __ASSEMBLY__
 #include "cpuport.h"
 #include "encoding.h"
 #include "stackframe.h"
@@ -28,7 +27,7 @@ trap_entry:
     la sp, __stack_cpu0
     //backup context
     SAVE_ALL
-    
+
     RESTORE_SYS_GP
 
     //check syscall
@@ -50,7 +49,6 @@ trap_entry:
     beqz  s2, spurious_interrupt
     sw    zero, 0(s0)
 
-.global rt_hw_context_switch_interrupt_do
 rt_hw_context_switch_interrupt_do:
 
 //swap to thread kernel stack
@@ -85,19 +83,14 @@ copy_context_loop_interrupt:
     addi t2, t2, 8
     bnez s0, copy_context_loop_interrupt
 
-    la    s0, rt_interrupt_from_thread
-    LOAD  s1, 0(s0)
-    STORE sp, 0(s1)
+do_ctx_switch:
+    la    t0, rt_interrupt_from_thread
+    LOAD  a0, 0(t0)
 
-    la    s0, rt_interrupt_to_thread
-    LOAD  s1, 0(s0)
-    LOAD  sp, 0(s1)
+    la    t0, rt_interrupt_to_thread
+    LOAD  a1, 0(t0)
 
-    #ifdef RT_USING_USERSPACE
-        mv a0, s1
-        jal rt_thread_sp_to_thread
-        jal lwp_mmu_switch
-    #endif
+    jal     rt_hw_context_switch
 
 spurious_interrupt:
     LOAD t0, 2 * REGBYTES(sp)

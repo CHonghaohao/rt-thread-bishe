@@ -10,11 +10,74 @@
  * 2021/02/02     lizhirui     Add userspace support
  */
 
-#define __ASSEMBLY__
 #include "cpuport.h"
 #include "stackframe.h"
 
-    .globl rt_hw_context_switch_to
+/**
+ * sstatus -> interrupt frame
+ * sepc -> interrupt frame
+ * sscratch -> ?
+ * sp -> TCB
+ * tp -> pointer to current TCB
+ */
+
+.macro PUSH_8 reg
+    addi    sp, sp, -8
+    STORE   \reg, (sp)
+.endm
+
+.macro POP_8 reg
+    LOAD    \reg, (sp)
+    addi    sp, sp, 8
+.endm
+
+.macro RESERVE_CONTEXT
+    PUSH_8  tp
+    PUSH_8  ra
+    PUSH_8  s0
+    PUSH_8  s1
+    PUSH_8  s2
+    PUSH_8  s3
+    PUSH_8  s4
+    PUSH_8  s5
+    PUSH_8  s6
+    PUSH_8  s7
+    PUSH_8  s8
+    PUSH_8  s9
+    PUSH_8  s10
+    PUSH_8  s11
+    csrr    s11, sstatus
+    li      s10, (SSTATUS_SPP)
+    or      s11, s11, s10
+    PUSH_8  s11
+.endm
+
+.macro RESTORE_CONTEXT
+    POP_8   s11
+    csrw    sstatus, s11
+    POP_8   s11
+    POP_8   s10
+    POP_8   s9
+    POP_8   s8
+    POP_8   s7
+    POP_8   s6
+    POP_8   s5
+    POP_8   s4
+    POP_8   s3
+    POP_8   s2
+    POP_8   s1
+    POP_8   s0
+    POP_8   ra
+    POP_8   tp
+    csrw    sepc, ra
+.endm
+
+/*
+ * void rt_hw_context_switch_to(rt_ubase_t to);
+ *
+ * a0 --> to SP pointer
+ */
+.globl rt_hw_context_switch_to
 rt_hw_context_switch_to:
     LOAD sp, (a0)
 
@@ -26,7 +89,7 @@ rt_hw_context_switch_to:
         jal lwp_mmu_switch
     #endif
 
-    RESTORE_ALL
+    RESTORE_CONTEXT
     sret
 
 /*
@@ -34,32 +97,18 @@ rt_hw_context_switch_to:
  *
  * a0 --> from SP pointer
  * a1 --> to SP pointer
+ *
+ * It should only be used on local interrupt disable
  */
-    .globl rt_hw_context_switch
+.globl rt_hw_context_switch
 rt_hw_context_switch:
-    // backup prev stack top of from thread
-    csrw sscratch, sp
-
-    // on sret, reset status to
-    // 1. interrupt DISABLE
-    // 2. cpu in supervisor mode
-    // 3. reserved other status
-    li t0, 0x120
-    csrs sstatus, t0
-
-    // simulate a exception return to supervisor mode
-    // by storing ra in sepc of from-thread stack frame
-    csrw sepc, ra
-
-    // NOTE: we do NOT guarantee that any temporary registers
-    // will remains their value after SAVE_ALL
-    SAVE_ALL
-
+    RESERVE_CONTEXT
     STORE sp, (a0)
 
-    // restore to thread context
+    // restore to thread SP
     LOAD sp, (a1)
 
+    // restore Address Space
     la s0, rt_current_thread
     LOAD s1, (s0)
 
@@ -68,11 +117,7 @@ rt_hw_context_switch:
         jal lwp_mmu_switch
     #endif
 
-    LOAD t0, 2 * REGBYTES(sp)
-    andi t0, t0, 0x100
-    beqz t0, arch_ret_to_user
-
-    RESTORE_ALL
+    RESTORE_CONTEXT
     sret
 
 #ifdef ENABLE_VECTOR

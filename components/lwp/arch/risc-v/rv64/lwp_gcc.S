@@ -12,7 +12,6 @@
 
 #include "rtconfig.h"
 
-#define __ASSEMBLY__
 #include "cpuport.h"
 #include "encoding.h"
 #include "stackframe.h"
