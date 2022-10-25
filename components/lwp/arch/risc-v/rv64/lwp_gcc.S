@@ -24,6 +24,8 @@
 .global arch_start_umode
 .type arch_start_umode, % function
 arch_start_umode:
+    // load kstack for user process
+    csrw sscratch, a3
     li t0, SSTATUS_SPP | SSTATUS_SIE    // set as user mode, close interrupt
     csrc sstatus, t0 
     li t0, SSTATUS_SPIE // enable interrupt when return to user mode
@@ -56,6 +58,8 @@ arch_crt_start_umode:
     mv sp, a0//user_sp
     mv ra, a0//return address
     mv a0, s0//args
+
+    csrw sscratch, a3
     sret//enter user mode
 
 .global arch_ret_to_user
@@ -63,11 +67,13 @@ arch_ret_to_user:
     call lwp_signal_check
     beqz a0, ret_to_user_exit
     RESTORE_ALL
-    //now sp is user sp
+    csrw sscratch, zero
+    // now sp is user sp
     J user_do_signal
 
 ret_to_user_exit:
     RESTORE_ALL
+    csrw sscratch, zero
     sret
 
 /*#ifdef RT_USING_LWP
@@ -132,6 +138,7 @@ arch_signal_quit:
     //a0 is user_ctx
     mv sp, a0
     RESTORE_ALL
+    csrw sscratch, zero
     sret
 
 user_do_signal:
@@ -234,36 +241,6 @@ arch_clone_exit:
 
 .global syscall_entry
 syscall_entry:
-    //swap to thread kernel stack
-    csrr t0, sstatus
-    andi t0, t0, 0x100
-    beqz t0, __restore_sp_from_tcb
-
-__restore_sp_from_sscratch:
-    csrr t0, sscratch
-    j __move_stack_context
-
-__restore_sp_from_tcb:
-    la a0, rt_current_thread
-    LOAD a0, 0(a0)
-    jal get_thread_kernel_stack_top
-    mv t0, a0
-
-__move_stack_context:
-    mv t1, sp//src
-    mv sp, t0//switch stack
-    addi sp, sp, -CTX_REG_NR * REGBYTES
-    //copy context
-    li s0, CTX_REG_NR//cnt
-    mv t2, sp//dst
-
-copy_context_loop:
-    LOAD t0, 0(t1)
-    STORE t0, 0(t2)
-    addi s0, s0, -1
-    addi t1, t1, 8
-    addi t2, t2, 8
-    bnez s0, copy_context_loop
 
     LOAD s0, 7 * REGBYTES(sp)
     addi s0, s0, -0xfe
@@ -285,13 +262,12 @@ arch_syscall_exit:
     CLOSE_INTERRUPT
 
     #if defined(RT_USING_USERSPACE)
-        LOAD s0, 2 * REGBYTES(sp)
+        LOAD s0, FRAME_OFF_SSTATUS(sp)
         andi s0, s0, 0x100
         bnez s0, dont_ret_to_user
-        li s0, 0
         j arch_ret_to_user
-        dont_ret_to_user:
     #endif
+dont_ret_to_user:
 
 #ifdef RT_USING_USERSPACE
     /* restore setting when syscall exit */
@@ -304,5 +280,6 @@ arch_syscall_exit:
 
     //restore context
     RESTORE_ALL
+    csrw sscratch, zero
     sret
 

@@ -177,7 +177,7 @@ static void vector_enable(struct rt_hw_stack_frame *sp)
     sp->sstatus |= SSTATUS_VS_INITIAL;
 }
 
-/** 
+/**
  * detect V/D support, and do not distinguish V/D instruction
  */
 static int illegal_inst_recoverable(rt_ubase_t stval, struct rt_hw_stack_frame *sp)
@@ -207,9 +207,34 @@ static int illegal_inst_recoverable(rt_ubase_t stval, struct rt_hw_stack_frame *
     return flag;
 }
 
+static void handle_nested_trap_panic(
+    rt_size_t cause,
+    rt_size_t tval,
+    rt_size_t epc,
+    struct rt_hw_stack_frame *eframe)
+{
+    LOG_E("\n-------- [SEVER ERROR] --------");
+    LOG_E("Nested trap detected");
+    LOG_E("scause:0x%p,stval:0x%p,sepc:0x%p\n", cause, tval, epc);
+    dump_regs(eframe);
+    rt_hw_cpu_shutdown();
+}
+
+#ifndef RT_USING_SMP
+static volatile int nested = 0;
+#define ENTER_TRAP \
+    nested += 1
+#define EXIT_TRAP \
+    nested -= 1
+#define CHECK_NESTED_PANIC(cause, tval, epc, eframe) \
+    if (nested != 1)                                 \
+    handle_nested_trap_panic(cause, tval, epc, eframe)
+#endif /* RT_USING_SMP */
+
 /* Trap entry */
 void handle_trap(rt_size_t scause, rt_size_t stval, rt_size_t sepc, struct rt_hw_stack_frame *sp)
 {
+    ENTER_TRAP;
     rt_size_t id = __MASKVALUE(scause, __MASK(63UL));
     const char *msg;
 
@@ -230,6 +255,8 @@ void handle_trap(rt_size_t scause, rt_size_t stval, rt_size_t sepc, struct rt_hw
     }
     else
     {
+        // trap cannot nested when handling another trap / interrupt
+        CHECK_NESTED_PANIC(scause, stval, sepc, sp);
         rt_size_t id = __MASKVALUE(scause, __MASK(63UL));
         const char *msg;
 
@@ -248,16 +275,18 @@ void handle_trap(rt_size_t scause, rt_size_t stval, rt_size_t sepc, struct rt_hw
         }
         else
         {
+#ifdef ENABLE_VECTOR
             if (scause == 0x2)
             {
                 if (!(sp->sstatus & SSTATUS_VS) && illegal_inst_recoverable(stval, sp))
-                    return;
+                    goto _exit;
             }
+#endif /* ENABLE_VECTOR */
             if (!(sp->sstatus & 0x100))
             {
                 handle_user(scause, stval, sepc, sp);
                 // if handle_user() return here, jump to u mode then
-                return;
+                goto _exit;
             }
 
             // handle kernel exception:
@@ -268,7 +297,6 @@ void handle_trap(rt_size_t scause, rt_size_t stval, rt_size_t sepc, struct rt_hw
         dump_regs(sp);
         rt_kprintf("--------------Thread list--------------\n");
         rt_kprintf("current thread: %s\n", rt_thread_self()->name);
-        list_process();
 
         extern struct rt_thread *rt_current_thread;
         rt_kprintf("--------------Backtrace--------------\n");
@@ -277,4 +305,7 @@ void handle_trap(rt_size_t scause, rt_size_t stval, rt_size_t sepc, struct rt_hw
         while (1)
             ;
     }
+_exit:
+    EXIT_TRAP;
+    return ;
 }

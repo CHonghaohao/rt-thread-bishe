@@ -8,6 +8,8 @@
  * 2018/10/28     Bernard      The unify RISC-V porting implementation
  * 2018/12/27     Jesven       Add SMP support
  * 2021/02/02     lizhirui     Add userspace support
+ * 2022/10/22     WangXiaoyao  Support User mode RVV;
+ *                             Trimming process switch context
  */
 
 #include "cpuport.h"
