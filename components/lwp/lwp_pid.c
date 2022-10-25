@@ -840,9 +840,9 @@ static void cmd_killall(int argc, char** argv)
         return;
     }
 
-    while((pid = lwp_name2pid(argv[1])) >= 0)
+    while((pid = lwp_name2pid(argv[1])) > 0)
     {
-        lwp_kill(pid, 0);
+        lwp_kill(pid, SIGKILL);
         rt_thread_mdelay(100);
     }
 }
