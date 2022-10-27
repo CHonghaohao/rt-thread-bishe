@@ -59,15 +59,13 @@ arch_crt_start_umode:
     mv ra, a0//return address
     mv a0, s0//args
 
-    csrw sscratch, a3
+    csrw sscratch, s3
     sret//enter user mode
 
 .global arch_ret_to_user
 arch_ret_to_user:
     call lwp_signal_check
     beqz a0, ret_to_user_exit
-    RESTORE_ALL
-    csrw sscratch, zero
     // now sp is user sp
     J user_do_signal
 
@@ -142,14 +140,18 @@ arch_signal_quit:
     sret
 
 user_do_signal:
-    //now sp is user sp
-    //save context to user sp
+    csrw sscratch, sp
+    RESTORE_ALL
+    // now sp is user sp
+    // and in interrupt close
     SAVE_ALL
-    //ensure original user sp correct
+
+    // save user sp in SAVE_ALL frame
     mv t0, sp
     addi t0, t0, CTX_REG_NR * REGBYTES
-    STORE t0, CTX_REG_NR * REGBYTES(sp)
-    OPEN_INTERRUPT
+    STORE t0, 32 * REGBYTES(sp)
+
+    // save lwp_sigreturn in user memory
     mv s0, sp
     la t0, lwp_sigreturn//t0 = src
     la t1, lwp_sigreturn_end
@@ -165,25 +167,53 @@ lwp_sigreturn_copy_loop:
     mv t1, t2
     bnez t1, lwp_sigreturn_copy_loop
 
-    mv a0, sp//sp
-    li a1, 0//pc
-    li a2, 0//flag
+    // restore kernel stack
+    csrrw sp, sscratch, s0
+
+    /**
+     * a0: user sp
+     * a1: user_pc (not used)
+     * a2: user_flag (not used)
+     */ 
+    csrr a0, sscratch
+    mv a1, zero
+    mv a2, zero
     call lwp_signal_backup
-    //a0 = signal id
-    mv sp, s0//update new sp
-    mv s2, a0//signal id backup
-    call lwp_sighandler_get//need a0 returned by lwp_signal_backup
-    mv ra, s0//lwp_sigreturn func addr
-    mv s1, s0//if func = 0,s1 = lwp_sigreturn func
+    // a0 <- signal id
+
+    // restore kernel sp to initial, and load `sp` to user stack
+
+    // s2 <- signal id(a0)
+    mv s2, a0
+    call lwp_sighandler_get
+    // a0 <- signal_handler
+
+    // ra <- lwp_sigreturn
+    mv ra, s0
+
+    mv s1, s0
     beqz a0, skip_user_signal_handler
+    // a0 <- signal_handler
     mv s1, a0
 
 skip_user_signal_handler:
-    li t0, 0x100
-    csrc sstatus, t0
+    // enter user mode and enable interrupt when return to user mode
+    li t0, SSTATUS_SPP
+    csrc sstatus, t0 
+    li t0, SSTATUS_SPIE
+    csrs sstatus, t0
+
+    /**
+     * sp <- user sp
+     * sscratch <- kernel sp
+     */
+    csrrw sp, sscratch, sp
+
+    // sepc <- signal_handler
     csrw sepc, s1
-    mv a0, s2//signal id as arg 0
-    sret//enter lwp signal handler
+    // a0 <- signal id
+    mv a0, s2
+    sret
 
 .align 3
 lwp_debugreturn:
