@@ -37,15 +37,15 @@ if PLATFORM == 'gcc':
     OBJDUMP = PREFIX + 'objdump'
     OBJCPY  = PREFIX + 'objcopy'
 
-    DEVICE  = ' -mcmodel=medany -march=rv64imafdc -mabi=lp64'
-    CFLAGS  = DEVICE + ' -fvar-tracking -ffreestanding -fno-common -ffunction-sections -fdata-sections -fstrict-volatile-bitfields'
-    AFLAGS  = ' -c' + DEVICE + ' -x assembler-with-cpp'
+    DEVICE  = ' -mcmodel=medany -march=rv64imafdc -mabi=lp64 '
+    CFLAGS  = DEVICE + '-ffreestanding -fno-common -ffunction-sections -fdata-sections -fstrict-volatile-bitfields'
+    AFLAGS  = ' -c' + DEVICE + ' -x assembler-with-cpp -D__ASSEMBLY__ '
     LFLAGS  = DEVICE + ' -nostartfiles -Wl,--gc-sections,-Map=rtthread.map,-cref,-u,_start -T link.lds' + ' -lsupc++ -lgcc -static'
     CPATH   = ''
     LPATH   = ''
 
     if BUILD == 'debug':
-        CFLAGS += ' -O0 -ggdb'
+        CFLAGS += ' -O0 -ggdb -fvar-tracking '
         AFLAGS += ' -ggdb'
     else:
         CFLAGS += ' -O2 -Os'

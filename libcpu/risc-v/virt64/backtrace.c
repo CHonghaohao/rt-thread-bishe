@@ -79,6 +79,7 @@ static void _assert_backtrace_cb(const char *ex, const char *func, rt_size_t lin
     rt_kprintf("(%s) assertion failed at function:%s, line number:%d \n", ex, func, line);
 
     rt_hw_backtrace(0, 0);
+    rt_hw_cpu_shutdown();
 }
 
 static int rt_hw_backtrace_init(void)
