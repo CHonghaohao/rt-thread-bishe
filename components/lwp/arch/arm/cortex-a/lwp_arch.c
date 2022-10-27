@@ -105,6 +105,12 @@ unsigned int arch_get_asid(struct rt_lwp *lwp)
         return lwp->asid;
     }
 
+    if (lwp->asid && !asid_valid_bitmap[lwp->asid])
+    {
+        asid_valid_bitmap[lwp->asid] = 1;
+        return lwp->asid;
+    }
+
     for (unsigned i = 1; i < MAX_ASID; i++)
     {
         if (asid_valid_bitmap[i] == 0)
@@ -112,7 +118,7 @@ unsigned int arch_get_asid(struct rt_lwp *lwp)
             asid_valid_bitmap[i] = 1;
             lwp->generation = global_generation;
             lwp->asid = i;
-            return i;
+            return lwp->asid;
         }
     }
 
@@ -123,17 +129,9 @@ unsigned int arch_get_asid(struct rt_lwp *lwp)
     lwp->generation = global_generation;
     lwp->asid = 1;
 
-    rt_hw_cpu_tlb_invalidate();
+    asm volatile ("mcr p15, 0, r0, c8, c7, 0\ndsb\nisb" ::: "memory");
 
-    return 1;
-}
-
-void arch_remove_asid(struct rt_lwp *lwp)
-{
-    if (lwp->generation == global_generation)
-    {
-        asid_valid_bitmap[lwp->asid] = 0;
-    }
+    return lwp->asid;
 }
 
 #endif

@@ -29,14 +29,16 @@ int lwp_user_space_init(struct rt_lwp *lwp)
     return arch_user_space_init(lwp);
 }
 
-void rt_hw_mmu_switch(void *mtable, unsigned int pid, unsigned char asid);
+#ifdef LWP_ENABLE_ASID
+void rt_hw_mmu_switch(void *mtable, unsigned int pid, unsigned int asid);
+#else
+void rt_hw_mmu_switch(void *mtable);
+#endif
 void *rt_hw_mmu_tbl_get(void);
 void lwp_mmu_switch(struct rt_thread *thread)
 {
     struct rt_lwp *l = RT_NULL;
     void *pre_mmu_table = RT_NULL, *new_mmu_table = RT_NULL;
-    unsigned int asid = 0; 
-    pid_t pid = 0; 
 
     if (thread->lwp)
     {
@@ -52,10 +54,10 @@ void lwp_mmu_switch(struct rt_thread *thread)
     if (pre_mmu_table != new_mmu_table)
     {
 #ifdef LWP_ENABLE_ASID
-        asid = arch_get_asid(l);
+        rt_hw_mmu_switch(new_mmu_table, l ? l->pid : 0, arch_get_asid(l));
+#else
+        rt_hw_mmu_switch(new_mmu_table);
 #endif
-        pid = l ? l->pid : 0; 
-        rt_hw_mmu_switch(new_mmu_table, pid, asid);
     }
 }
 
