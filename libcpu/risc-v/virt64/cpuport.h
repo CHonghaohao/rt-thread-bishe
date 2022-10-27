@@ -34,9 +34,14 @@
 #endif
 
 #ifdef ENABLE_VECTOR
-/* 32 128/256 bits registers, for risc-v 64, we assuming 64 64-bit regs */
-/* TODO we should detect VLEN on the fly */
-#define CTX_VECTOR_REG_NR  (64 + 4)
+
+#if defined(ARCH_VECTOR_VLEN_128)
+#define CTX_VECTOR_REGS 64
+#elif defined(ARCH_VECTOR_VLEN_256)
+#define CTX_VECTOR_REGS 128
+#endif
+
+#define CTX_VECTOR_REG_NR  (CTX_VECTOR_REGS + 4)
 #else
 #define CTX_VECTOR_REG_NR  0
 #endif

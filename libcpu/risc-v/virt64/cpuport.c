@@ -18,7 +18,7 @@
 
 #include <lwp_arch.h>
 
-#define K_SSTATUS_DEFAULT (SSTATUS_SPP | SSTATUS_SPIE | SSTATUS_SUM)
+#define K_SSTATUS_DEFAULT (SSTATUS_SPP | SSTATUS_SPIE | SSTATUS_SUM | SSTATUS_FS)
 
 /**
  * @brief from thread used interrupt context switch
