@@ -270,36 +270,36 @@ static int _round_down_table(const struct clk_div_table *table, int div)
 
 int fls(int val)
 {
-	int  bit = 32;
+    int  bit = 32;
 
-	if (!val)
-		return 0;
-	if (!(val & 0xffff0000u)) 
-	{
-		val <<= 16;
-		bit -= 16;
-	}
-	if (!(val & 0xff000000u)) 
-	{
-		val <<= 8;
-		bit -= 8;
-	}
-	if (!(val & 0xf0000000u)) 
-	{
-		val <<= 4;
-		bit -= 4;
-	}
-	if (!(val & 0xc0000000u)) 
-	{
-		val <<= 2;
-		bit -= 2;
-	}
-	if (!(val & 0x80000000u)) 
-	{
-		bit -= 1;
-	}
+    if (!val)
+        return 0;
+    if (!(val & 0xffff0000u))
+    {
+        val <<= 16;
+        bit -= 16;
+    }
+    if (!(val & 0xff000000u))
+    {
+        val <<= 8;
+        bit -= 8;
+    }
+    if (!(val & 0xf0000000u))
+    {
+        val <<= 4;
+        bit -= 4;
+    }
+    if (!(val & 0xc0000000u))
+    {
+        val <<= 2;
+        bit -= 2;
+    }
+    if (!(val & 0x80000000u))
+    {
+        bit -= 1;
+    }
 
-	return bit;
+    return bit;
 }
 
 static int __roundup_pow_of_two(unsigned int x)

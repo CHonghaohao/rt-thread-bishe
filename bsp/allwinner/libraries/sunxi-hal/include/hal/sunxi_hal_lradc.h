@@ -45,18 +45,18 @@ extern "C" {
 typedef void (*lradc_callback_t)(uint32_t irq_status, uint32_t data);
 
 typedef struct {
-	lradc_callback_t func;
-	void *arg;
+    lradc_callback_t func;
+    void *arg;
 } lradc_func_data;
 
 /*****************************************************************************
  * Enums
  *****************************************************************************/
 typedef enum{
-	HAL_ADC_STATUS_ERROR_PARAMETER = -3,
-	HAL_ADC_STATUS_ERROR_CHANNEL = -2,
-	HAL_ADC_STATUS_ERROR = -1,
-	HAL_ADC_STATUS_OK = 0
+    HAL_ADC_STATUS_ERROR_PARAMETER = -3,
+    HAL_ADC_STATUS_ERROR_CHANNEL = -2,
+    HAL_ADC_STATUS_ERROR = -1,
+    HAL_ADC_STATUS_OK = 0
 } hal_lradc_status_t;
 
 /*****************************************************************************

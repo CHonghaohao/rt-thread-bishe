@@ -43,17 +43,17 @@
  */
 OS_Status OS_SemaphoreCreate(OS_Semaphore_t *sem, uint32_t initCount, uint32_t maxCount)
 {
-//	OS_HANDLE_ASSERT(!OS_SemaphoreIsValid(sem), sem->handle);
+//  OS_HANDLE_ASSERT(!OS_SemaphoreIsValid(sem), sem->handle);
 
-	sem->handle = rt_sem_create("os_sem", initCount, RT_IPC_FLAG_PRIO);
-	OS_DBG("%s(), handle %p\n", __func__, sem->handle);
+    sem->handle = rt_sem_create("os_sem", initCount, RT_IPC_FLAG_PRIO);
+    OS_DBG("%s(), handle %p\n", __func__, sem->handle);
 
-	if (sem->handle == NULL) {
-		OS_ERR("err %"OS_HANDLE_F"\n", sem->handle);
-		return OS_FAIL;
-	}
+    if (sem->handle == NULL) {
+        OS_ERR("err %"OS_HANDLE_F"\n", sem->handle);
+        return OS_FAIL;
+    }
 
-	return OS_OK;
+    return OS_OK;
 }
 
 /**
@@ -65,9 +65,9 @@ OS_Status OS_SemaphoreCreate(OS_Semaphore_t *sem, uint32_t initCount, uint32_t m
  */
 OS_Status OS_SemaphoreCreateBinary(OS_Semaphore_t *sem)
 {
-	OS_ERR("OS_SemaphoreCreateBinary() NOT SUPPORT!\n");
+    OS_ERR("OS_SemaphoreCreateBinary() NOT SUPPORT!\n");
 
-	return OS_SemaphoreCreate(sem, 0, 1);
+    return OS_SemaphoreCreate(sem, 0, 1);
 }
 
 /**
@@ -77,17 +77,17 @@ OS_Status OS_SemaphoreCreateBinary(OS_Semaphore_t *sem)
  */
 OS_Status OS_SemaphoreDelete(OS_Semaphore_t *sem)
 {
-	rt_err_t ret;
+    rt_err_t ret;
 
-	OS_HANDLE_ASSERT(OS_SemaphoreIsValid(sem), sem->handle);
+    OS_HANDLE_ASSERT(OS_SemaphoreIsValid(sem), sem->handle);
 
-	ret = rt_sem_delete(sem->handle);
-	if (ret != RT_EOK) {
-		OS_ERR("err %"OS_BASETYPE_F"\n", ret);
-		return OS_FAIL;
-	}
-	OS_SemaphoreSetInvalid(sem);
-	return OS_OK;
+    ret = rt_sem_delete(sem->handle);
+    if (ret != RT_EOK) {
+        OS_ERR("err %"OS_BASETYPE_F"\n", ret);
+        return OS_FAIL;
+    }
+    OS_SemaphoreSetInvalid(sem);
+    return OS_OK;
 }
 
 /**
@@ -101,18 +101,18 @@ OS_Status OS_SemaphoreDelete(OS_Semaphore_t *sem)
  */
 OS_Status OS_SemaphoreWait(OS_Semaphore_t *sem, OS_Time_t waitMS)
 {
-	rt_err_t ret;
+    rt_err_t ret;
 
-	OS_DBG("%s(), handle %p, wait %u ms\n", __func__, sem->handle, (unsigned int)waitMS);
-	OS_HANDLE_ASSERT(OS_SemaphoreIsValid(sem), sem->handle);
+    OS_DBG("%s(), handle %p, wait %u ms\n", __func__, sem->handle, (unsigned int)waitMS);
+    OS_HANDLE_ASSERT(OS_SemaphoreIsValid(sem), sem->handle);
 
-	ret = rt_sem_take(sem->handle, OS_CalcWaitTicks(waitMS));
-	if (ret != RT_EOK) {
-		OS_DBG("%s() fail @ %d, %"OS_TIME_F" ms\n", __func__, __LINE__, (unsigned int)waitMS);
-		return OS_E_TIMEOUT;
-	}
+    ret = rt_sem_take(sem->handle, OS_CalcWaitTicks(waitMS));
+    if (ret != RT_EOK) {
+        OS_DBG("%s() fail @ %d, %"OS_TIME_F" ms\n", __func__, __LINE__, (unsigned int)waitMS);
+        return OS_E_TIMEOUT;
+    }
 
-	return OS_OK;
+    return OS_OK;
 }
 
 /**
@@ -122,17 +122,17 @@ OS_Status OS_SemaphoreWait(OS_Semaphore_t *sem, OS_Time_t waitMS)
  */
 OS_Status OS_SemaphoreRelease(OS_Semaphore_t *sem)
 {
-	rt_err_t ret;
+    rt_err_t ret;
 
-	OS_HANDLE_ASSERT(OS_SemaphoreIsValid(sem), sem->handle);
+    OS_HANDLE_ASSERT(OS_SemaphoreIsValid(sem), sem->handle);
 
-	ret = rt_sem_release(sem->handle);
-	if (ret != RT_EOK) {
-		OS_DBG("%s() fail @ %d\n", __func__, __LINE__);
-		return OS_FAIL;
-	}
+    ret = rt_sem_release(sem->handle);
+    if (ret != RT_EOK) {
+        OS_DBG("%s() fail @ %d\n", __func__, __LINE__);
+        return OS_FAIL;
+    }
 
-	return OS_OK;
+    return OS_OK;
 }
 
 /**
@@ -142,15 +142,15 @@ OS_Status OS_SemaphoreRelease(OS_Semaphore_t *sem)
  */
 OS_Status OS_SemaphoreReset(OS_Semaphore_t *sem)
 {
-	rt_err_t ret;
+    rt_err_t ret;
 
-	OS_HANDLE_ASSERT(OS_SemaphoreIsValid(sem), sem->handle);
+    OS_HANDLE_ASSERT(OS_SemaphoreIsValid(sem), sem->handle);
 
-	ret = rt_sem_control(sem->handle, RT_IPC_CMD_RESET, NULL);
-	if (ret != RT_EOK) {
-		OS_DBG("%s() fail @ %d\n", __func__, __LINE__);
-		return OS_FAIL;
-	}
+    ret = rt_sem_control(sem->handle, RT_IPC_CMD_RESET, NULL);
+    if (ret != RT_EOK) {
+        OS_DBG("%s() fail @ %d\n", __func__, __LINE__);
+        return OS_FAIL;
+    }
 
-	return OS_OK;
+    return OS_OK;
 }

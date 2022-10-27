@@ -48,43 +48,43 @@
 OS_Status OS_TimerCreate(OS_Timer_t *timer, OS_TimerType type,
                          OS_TimerCallback_t cb, void *arg, OS_Time_t periodMS)
 {
-	rt_uint8_t flag;
+    rt_uint8_t flag;
 
-	OS_HANDLE_ASSERT(!OS_TimerIsValid(timer), timer->handle);
+    OS_HANDLE_ASSERT(!OS_TimerIsValid(timer), timer->handle);
 
-	flag = RT_TIMER_FLAG_SOFT_TIMER;
-	if (type == OS_TIMER_PERIODIC) {
-		flag |= RT_TIMER_FLAG_PERIODIC;
-	} else {
-		flag |= RT_TIMER_FLAG_ONE_SHOT;
-	}
+    flag = RT_TIMER_FLAG_SOFT_TIMER;
+    if (type == OS_TIMER_PERIODIC) {
+        flag |= RT_TIMER_FLAG_PERIODIC;
+    } else {
+        flag |= RT_TIMER_FLAG_ONE_SHOT;
+    }
 
-	timer->handle = rt_timer_create("os_timer", cb, arg,
-	                                OS_MSecsToTicks(periodMS), flag);
-	OS_DBG("%s(), handle %p\n", __func__, timer->handle);
+    timer->handle = rt_timer_create("os_timer", cb, arg,
+                                    OS_MSecsToTicks(periodMS), flag);
+    OS_DBG("%s(), handle %p\n", __func__, timer->handle);
 
-	if (timer->handle == NULL) {
-		OS_ERR("err %"OS_HANDLE_F"\n", timer->handle);
-		return OS_FAIL;
-	}
-	return OS_OK;
+    if (timer->handle == NULL) {
+        OS_ERR("err %"OS_HANDLE_F"\n", timer->handle);
+        return OS_FAIL;
+    }
+    return OS_OK;
 }
 
 OS_Status OS_TimerDelete(OS_Timer_t *timer)
 {
-	rt_err_t ret;
+    rt_err_t ret;
 
-	OS_DBG("%s(), handle %p\n", __func__, timer->handle);
-	OS_HANDLE_ASSERT(OS_TimerIsValid(timer), timer->handle);
+    OS_DBG("%s(), handle %p\n", __func__, timer->handle);
+    OS_HANDLE_ASSERT(OS_TimerIsValid(timer), timer->handle);
 
-	ret = rt_timer_delete(timer->handle);
-	if (ret != RT_EOK) {
-		OS_ERR("err %"OS_BASETYPE_F"\n", ret);
-		return OS_FAIL;
-	}
+    ret = rt_timer_delete(timer->handle);
+    if (ret != RT_EOK) {
+        OS_ERR("err %"OS_BASETYPE_F"\n", ret);
+        return OS_FAIL;
+    }
 
-	OS_TimerSetInvalid(timer);
-	return OS_OK;
+    OS_TimerSetInvalid(timer);
+    return OS_OK;
 }
 
 /**
@@ -95,18 +95,18 @@ OS_Status OS_TimerDelete(OS_Timer_t *timer)
  */
 OS_Status OS_TimerStart(OS_Timer_t *timer)
 {
-	rt_err_t ret;
+    rt_err_t ret;
 
-	OS_DBG("%s(), handle %p\n", __func__, timer->handle);
-	OS_HANDLE_ASSERT(OS_TimerIsValid(timer), timer->handle);
+    OS_DBG("%s(), handle %p\n", __func__, timer->handle);
+    OS_HANDLE_ASSERT(OS_TimerIsValid(timer), timer->handle);
 
-	ret = rt_timer_start(timer->handle);
-	if (ret != RT_EOK) {
-		OS_ERR("err %"OS_BASETYPE_F"\n", ret);
-		return OS_FAIL;
-	}
+    ret = rt_timer_start(timer->handle);
+    if (ret != RT_EOK) {
+        OS_ERR("err %"OS_BASETYPE_F"\n", ret);
+        return OS_FAIL;
+    }
 
-	return OS_OK;
+    return OS_OK;
 }
 
 /**
@@ -127,30 +127,30 @@ OS_Status OS_TimerStart(OS_Timer_t *timer)
  */
 OS_Status OS_TimerChangePeriod(OS_Timer_t *timer, OS_Time_t periodMS)
 {
-	rt_err_t ret;
+    rt_err_t ret;
 
-	OS_DBG("%s(), handle %p\n", __func__, timer->handle);
-	OS_HANDLE_ASSERT(OS_TimerIsValid(timer), timer->handle);
+    OS_DBG("%s(), handle %p\n", __func__, timer->handle);
+    OS_HANDLE_ASSERT(OS_TimerIsValid(timer), timer->handle);
 
-	if (OS_TimerIsActive(timer)) {
-		ret = rt_timer_stop(timer->handle);
-		if (ret != RT_EOK) {
-			OS_ERR("err %"OS_BASETYPE_F"\n", ret);
-			return OS_FAIL;
-		}
-	}
-	ret = rt_timer_control(timer->handle, RT_TIMER_CTRL_SET_TIME, &periodMS);
-	if (ret != RT_EOK) {
-		OS_ERR("err %"OS_BASETYPE_F"\n", ret);
-		return OS_FAIL;
-	}
-	ret = rt_timer_start(timer->handle);
-	if (ret != RT_EOK) {
-		OS_ERR("err %"OS_BASETYPE_F"\n", ret);
-		return OS_FAIL;
-	}
+    if (OS_TimerIsActive(timer)) {
+        ret = rt_timer_stop(timer->handle);
+        if (ret != RT_EOK) {
+            OS_ERR("err %"OS_BASETYPE_F"\n", ret);
+            return OS_FAIL;
+        }
+    }
+    ret = rt_timer_control(timer->handle, RT_TIMER_CTRL_SET_TIME, &periodMS);
+    if (ret != RT_EOK) {
+        OS_ERR("err %"OS_BASETYPE_F"\n", ret);
+        return OS_FAIL;
+    }
+    ret = rt_timer_start(timer->handle);
+    if (ret != RT_EOK) {
+        OS_ERR("err %"OS_BASETYPE_F"\n", ret);
+        return OS_FAIL;
+    }
 
-	return OS_OK;
+    return OS_OK;
 }
 
 /**
@@ -160,20 +160,20 @@ OS_Status OS_TimerChangePeriod(OS_Timer_t *timer, OS_Time_t periodMS)
  */
 OS_Status OS_TimerStop(OS_Timer_t *timer)
 {
-	rt_err_t ret;
+    rt_err_t ret;
 
-	OS_DBG("%s(), handle %p\n", __func__, timer->handle);
-	OS_HANDLE_ASSERT(OS_TimerIsValid(timer), timer->handle);
+    OS_DBG("%s(), handle %p\n", __func__, timer->handle);
+    OS_HANDLE_ASSERT(OS_TimerIsValid(timer), timer->handle);
 
-	if (!OS_TimerIsActive(timer)) {
-		return OS_OK;
-	}
+    if (!OS_TimerIsActive(timer)) {
+        return OS_OK;
+    }
 
-	ret = rt_timer_stop(timer->handle);
-	if (ret != RT_EOK) {
-		OS_ERR("err %"OS_BASETYPE_F"\n", ret);
-		return OS_FAIL;
-	}
+    ret = rt_timer_stop(timer->handle);
+    if (ret != RT_EOK) {
+        OS_ERR("err %"OS_BASETYPE_F"\n", ret);
+        return OS_FAIL;
+    }
 
-	return OS_OK;
+    return OS_OK;
 }

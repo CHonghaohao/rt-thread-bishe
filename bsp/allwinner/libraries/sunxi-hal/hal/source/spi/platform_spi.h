@@ -34,17 +34,17 @@
 #define __PLATFORM_SPI_H__
 
 struct sunxi_spi_params_t {
-	unsigned long reg_base;
-	uint16_t irq_num;
-	uint8_t gpio_num;
-	gpio_pin_t gpio_clk;
-	gpio_pin_t gpio_mosi;
-	gpio_pin_t gpio_miso;
-	gpio_pin_t gpio_cs0;
-	gpio_pin_t gpio_wp;
-	gpio_pin_t gpio_hold;
-	uint8_t mux;
-	uint8_t driv_level;
+    unsigned long reg_base;
+    uint16_t irq_num;
+    uint8_t gpio_num;
+    gpio_pin_t gpio_clk;
+    gpio_pin_t gpio_mosi;
+    gpio_pin_t gpio_miso;
+    gpio_pin_t gpio_cs0;
+    gpio_pin_t gpio_wp;
+    gpio_pin_t gpio_hold;
+    uint8_t mux;
+    uint8_t driv_level;
 };
 
 

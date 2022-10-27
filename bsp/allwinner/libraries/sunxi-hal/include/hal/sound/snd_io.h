@@ -36,13 +36,13 @@
 unsigned int snd_codec_read(struct snd_codec *codec, unsigned int reg);
 int snd_codec_write(struct snd_codec *codec, unsigned int reg, unsigned int val);
 int snd_codec_update_bits(struct snd_codec *codec, unsigned int reg,
-				unsigned int mask, unsigned int value);
+                unsigned int mask, unsigned int value);
 
 
 unsigned int snd_platform_read(struct snd_platform *platform, unsigned int reg);
 int snd_platform_write(struct snd_platform *platform, unsigned int reg, unsigned int val);
 int snd_platform_update_bits(struct snd_platform *platform, unsigned int reg,
-				unsigned int mask, unsigned int value);
+                unsigned int mask, unsigned int value);
 
 
 #endif /* __SOUND_IO_H_ */

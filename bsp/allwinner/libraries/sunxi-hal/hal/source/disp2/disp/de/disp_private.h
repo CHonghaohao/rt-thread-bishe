@@ -60,8 +60,8 @@ extern s32 disp_init_lcd(struct disp_bsp_init_para *para);
 extern s32 disp_exit_lcd(void);
 extern s32 disp_init_hdmi(struct disp_bsp_init_para *para);
 extern s32 disp_exit_hdmi(void);
-extern s32 disp_init_tv(void);	/* (struct disp_bsp_init_para * para); */
-extern s32 disp_exit_tv(void);	/* (struct disp_bsp_init_para * para); */
+extern s32 disp_init_tv(void);  /* (struct disp_bsp_init_para * para); */
+extern s32 disp_exit_tv(void);  /* (struct disp_bsp_init_para * para); */
 extern s32 disp_exit_vdpo(void);
 extern s32 disp_tv_set_func(struct disp_device *ptv, struct disp_tv_func *func);
 extern s32 disp_init_tv_para(struct disp_bsp_init_para *para);

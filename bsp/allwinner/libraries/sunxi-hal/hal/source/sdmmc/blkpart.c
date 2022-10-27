@@ -192,7 +192,7 @@ rt_size_t part_read(rt_device_t dev, rt_off_t offset, void *data, rt_size_t size
     {
         return 0;
     }
-    
+
     ssize_t ret, sz = 0;
     struct part *part = (struct part *)dev->user_data;
     struct blkpart *blk = part->blk;
@@ -269,19 +269,19 @@ rt_size_t part_read(rt_device_t dev, rt_off_t offset, void *data, rt_size_t size
      */
     while (size >= blk->page_bytes)
     {
-		uint32_t len = (size/blk->page_bytes)*blk->page_bytes;
-        
-		ret = spinor_dev->read(spinor_dev, offset / blk->blk_bytes, (char *)data, len / blk->blk_bytes);
-        ret *= blk->page_bytes;
-		if (ret != len)
-		{
-			goto err;
-		}
+        uint32_t len = (size/blk->page_bytes)*blk->page_bytes;
 
-		offset += len;
-		data += len;
-		sz += len;
-		size -= len;
+        ret = spinor_dev->read(spinor_dev, offset / blk->blk_bytes, (char *)data, len / blk->blk_bytes);
+        ret *= blk->page_bytes;
+        if (ret != len)
+        {
+            goto err;
+        }
+
+        offset += len;
+        data += len;
+        sz += len;
+        size -= len;
     }
 
     /**
@@ -377,16 +377,16 @@ static int do_erase_write_blk(rt_device_t dev, struct blkpart *blk, uint32_t add
 #else
     int ret = -1;
 
-	blk_dev_erase_t erase_sector;
-	memset(&erase_sector, 0, sizeof(blk_dev_erase_t));
-	erase_sector.addr = addr;
-	erase_sector.len = size;
-	ret = dev->control(dev, BLOCK_DEVICE_CMD_ERASE_SECTOR, &erase_sector);
-	if (ret)
-	{
-		return -EIO;
-	}
-	
+    blk_dev_erase_t erase_sector;
+    memset(&erase_sector, 0, sizeof(blk_dev_erase_t));
+    erase_sector.addr = addr;
+    erase_sector.len = size;
+    ret = dev->control(dev, BLOCK_DEVICE_CMD_ERASE_SECTOR, &erase_sector);
+    if (ret)
+    {
+        return -EIO;
+    }
+
     ret = dev->write(dev, addr, buf, size);
     if (ret == size)
     {
@@ -405,7 +405,7 @@ rt_size_t _part_write(rt_device_t dev, rt_off_t offset, const void *data, rt_siz
     struct blkpart *blk = part->blk;
     rt_device_t spinor_dev = blk->dev;
     char *blk_buf = NULL;
-	int (*pwrite)(rt_device_t dev, struct blkpart * blk, uint32_t addr, uint32_t size, char *buf);
+    int (*pwrite)(rt_device_t dev, struct blkpart * blk, uint32_t addr, uint32_t size, char *buf);
 
     if (size == 0)
     {
@@ -431,15 +431,15 @@ rt_size_t _part_write(rt_device_t dev, rt_off_t offset, const void *data, rt_siz
              part->devname, offset, size, erase_before_write);
     offset += part->off;
 
-	if (offset % blk->blk_bytes || size % blk->blk_bytes)
-	{
-		blk_buf = malloc(blk->blk_bytes);
-		if (!blk_buf)
-		{
-			return -ENOMEM;
-		}
-		memset(blk_buf, 0, blk->blk_bytes);
-	}
+    if (offset % blk->blk_bytes || size % blk->blk_bytes)
+    {
+        blk_buf = malloc(blk->blk_bytes);
+        if (!blk_buf)
+        {
+            return -ENOMEM;
+        }
+        memset(blk_buf, 0, blk->blk_bytes);
+    }
 
     if (erase_before_write)
     {
@@ -454,7 +454,7 @@ rt_size_t _part_write(rt_device_t dev, rt_off_t offset, const void *data, rt_siz
      * Step 1:
      * write the beginning data that not align to block size
      */
-	if (offset % blk->blk_bytes)
+    if (offset % blk->blk_bytes)
     {
         uint32_t addr, poff, len;
 
@@ -478,7 +478,7 @@ rt_size_t _part_write(rt_device_t dev, rt_off_t offset, const void *data, rt_siz
         memcpy(blk_buf + poff, data, len);
 
         pr_debug("step3: flush the fixed page data\n");
-		ret = pwrite(spinor_dev, blk, addr / blk->blk_bytes, blk->blk_bytes / blk->blk_bytes, blk_buf);
+        ret = pwrite(spinor_dev, blk, addr / blk->blk_bytes, blk->blk_bytes / blk->blk_bytes, blk_buf);
         ret *= blk->blk_bytes;
         if (ret != blk->blk_bytes)
         {
@@ -490,46 +490,46 @@ rt_size_t _part_write(rt_device_t dev, rt_off_t offset, const void *data, rt_siz
         sz += len;
         size -= len;
     }
-	while (size >= blk->blk_bytes)
+    while (size >= blk->blk_bytes)
     {
-		uint32_t len = (size/blk->blk_bytes)*blk->blk_bytes;
-		ret = pwrite(spinor_dev, blk, offset / blk->blk_bytes, len / blk->blk_bytes, (char *)data);
-		ret *= blk->blk_bytes;
-        if (ret != len)
-		{
-			goto err;
-		}
-
-		offset += len;
-		data += len;
-		sz += len;
-		size -= len;
-    }
-	
-	if (size)
-	{
-		pr_debug("last size %u not align %u, write them\n", size, blk->blk_bytes);
-
-		pr_debug("step1: read page data from addr 0x%x\n", offset);
-		memset(blk_buf, 0x00, sizeof(blk->blk_bytes));
-		ret = spinor_dev->read(spinor_dev, offset / blk->blk_bytes, blk_buf, blk->blk_bytes);
-		if (ret != blk->blk_bytes)
-		{
-			goto err;
-		}
-
-		pr_debug("step2: copy buf to page data with page with len %u\n", size);
-		memcpy(blk_buf, data, size);
-
-		pr_debug("step3: flush the fixed page data\n");
-		ret = pwrite(spinor_dev, blk, offset / blk->blk_bytes, blk->blk_bytes / blk->blk_bytes, blk_buf);
+        uint32_t len = (size/blk->blk_bytes)*blk->blk_bytes;
+        ret = pwrite(spinor_dev, blk, offset / blk->blk_bytes, len / blk->blk_bytes, (char *)data);
         ret *= blk->blk_bytes;
-		if (ret != blk->blk_bytes)
-		{
-			goto err;
-		}
-		sz += size;
-	}	
+        if (ret != len)
+        {
+            goto err;
+        }
+
+        offset += len;
+        data += len;
+        sz += len;
+        size -= len;
+    }
+
+    if (size)
+    {
+        pr_debug("last size %u not align %u, write them\n", size, blk->blk_bytes);
+
+        pr_debug("step1: read page data from addr 0x%x\n", offset);
+        memset(blk_buf, 0x00, sizeof(blk->blk_bytes));
+        ret = spinor_dev->read(spinor_dev, offset / blk->blk_bytes, blk_buf, blk->blk_bytes);
+        if (ret != blk->blk_bytes)
+        {
+            goto err;
+        }
+
+        pr_debug("step2: copy buf to page data with page with len %u\n", size);
+        memcpy(blk_buf, data, size);
+
+        pr_debug("step3: flush the fixed page data\n");
+        ret = pwrite(spinor_dev, blk, offset / blk->blk_bytes, blk->blk_bytes / blk->blk_bytes, blk_buf);
+        ret *= blk->blk_bytes;
+        if (ret != blk->blk_bytes)
+        {
+            goto err;
+        }
+        sz += size;
+    }
 #ifdef DEBUG
     pr_debug("write data:\n");
     hexdump(data, sz);
@@ -541,10 +541,10 @@ err:
     pr_err("write failed - %d\n", (int)ret);
 out:
 
-	if (blk_buf)
-	{
-		free(blk_buf);
-	}
+    if (blk_buf)
+    {
+        free(blk_buf);
+    }
     return ret ? ret / blk->blk_bytes: sz / blk->blk_bytes;
 }
 rt_size_t part_erase_before_write(rt_device_t dev, rt_off_t offset, const void *data, rt_size_t size)

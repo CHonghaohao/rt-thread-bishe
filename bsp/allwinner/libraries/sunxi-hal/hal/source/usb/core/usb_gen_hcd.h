@@ -95,7 +95,7 @@ struct hc_gen_dev
     char            irq_descr[24];  /* driver + bus # */
 
     //  struct timer_list   rh_timer;   //rh的timer
-    //	USB_OS_KERNEL_SOFT_TIMER *rh_timer; //其到时处理函数为rh_timer_func()
+    //  USB_OS_KERNEL_SOFT_TIMER *rh_timer; //其到时处理函数为rh_timer_func()
     osal_timer_t rh_timer;
     /* drives root-hub polling */
     struct urb      *status_urb;    //查询root hub status的urb
@@ -135,12 +135,12 @@ struct hc_gen_dev
 
 static inline struct usb_virt_bus *hcd_to_bus(struct hc_gen_dev *hcd)
 {
-	return &hcd->self;
+    return &hcd->self;
 }
 
 static inline struct hc_gen_dev *bus_to_hcd(struct usb_virt_bus *bus)
 {
-	return container_of(bus, struct hc_gen_dev, self);
+    return container_of(bus, struct hc_gen_dev, self);
 }
 
 #define HC_DRIVER_FLAG_HCD_MEMORY   0x0001      /* HC regs use memory (else I/O) */

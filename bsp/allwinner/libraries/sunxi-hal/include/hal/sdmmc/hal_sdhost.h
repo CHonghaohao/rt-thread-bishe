@@ -37,7 +37,7 @@
 
 //#include "driver/chip/hal_def.h"
 #include "hal/hal_gpio.h"
-#include <stddef.h>                                                             
+#include <stddef.h>
 #include <stdint.h>
 #include <kconfig.h>
 
@@ -47,23 +47,23 @@ extern "C" {
 #endif
 
 typedef enum {
-	SDC0 = 0,       /*!< SDC0 controller */
-	SDC1 = 1,       /*!< SDC1 controller */
-	SDC_NUM         /*!< only support 2 SD controller. */
+    SDC0 = 0,       /*!< SDC0 controller */
+    SDC1 = 1,       /*!< SDC1 controller */
+    SDC_NUM         /*!< only support 2 SD controller. */
 } SDC_Port;
 
 typedef enum {
-	SDCGPIO_BAS = 0,
-	SDCGPIO_DET = 1,
+    SDCGPIO_BAS = 0,
+    SDCGPIO_DET = 1,
 } HAL_SDCGPIOType;
 
 typedef struct {
-	uint8_t   data_bits;
-	int8_t    has_detect_gpio;
-	GPIO_Port detect_port;
-	GPIO_Pin  detect_pin;
-	uint16_t  detect_delay; /* delay interval (in ms) to wait power stable */
-	GPIO_PinState   detect_pin_present_val;
+    uint8_t   data_bits;
+    int8_t    has_detect_gpio;
+    GPIO_Port detect_port;
+    GPIO_Pin  detect_pin;
+    uint16_t  detect_delay; /* delay interval (in ms) to wait power stable */
+    GPIO_PinState   detect_pin_present_val;
 } HAL_SDCGPIOCfg;
 
 /** @bried Detect card callback if used CONFIG_DETECT_CARD. */
@@ -71,12 +71,12 @@ typedef void (*card_detect_cb)(uint32_t present);
 
 /** @bried SDC Init Structure definition. */
 typedef struct {
-	uint16_t                debug_mask;
-	uint8_t                 low_speed;
-	uint8_t                 dma_use;
-	uint32_t                pwr_mode;
+    uint16_t                debug_mask;
+    uint8_t                 low_speed;
+    uint8_t                 dma_use;
+    uint32_t                pwr_mode;
 #ifdef CONFIG_DETECT_CARD
-	uint32_t                cd_mode;
+    uint32_t                cd_mode;
 /* NOTE: The specification advise that CARD_DETECT_BY_D3 is not a preferred
  *       mechanism for card detection. Moreover it won't work with MMC cards.
  *       And, this won't work with external pull-up resistors on the card interface.
@@ -87,7 +87,7 @@ typedef struct {
 #define CARD_DETECT_BY_FS        (4)    /* mmc insert/remove by fs */
 #define CARD_DETECT_BY_D3        (5)    /* mmc detected by data3 */
 
-	card_detect_cb          cd_cb;  /* NOTE: should delay 500ms before rescan card to wait Voltage stable */
+    card_detect_cb          cd_cb;  /* NOTE: should delay 500ms before rescan card to wait Voltage stable */
 #endif
 } SDC_InitTypeDef;
 

@@ -231,10 +231,10 @@ static int _usb_parse_interface_desc(int cfgno,
     /* Allocate space for the right(?) number of endpoints */
     num_ep = num_ep_orig = alt->desc.bNumEndpoints;
     alt->desc.bNumEndpoints = 0;        // Use as a counter
-	if (num_ep == 0) {
-		hal_log_info("num_ep:%d", num_ep);
-		return buffer - buffer0;
-	}
+    if (num_ep == 0) {
+        hal_log_info("num_ep:%d", num_ep);
+        return buffer - buffer0;
+    }
 
     if (num_ep > USB_MAXENDPOINTS)
     {

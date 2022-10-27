@@ -36,13 +36,13 @@
 #if defined(CONFIG_CORE_DSP0)
 #include <hal_prcm.h>
 
-#define SUNXI_DMAC_PBASE	(0x07091000)
-#define DMA_IRQ_NUM		(6)
+#define SUNXI_DMAC_PBASE    (0x07091000)
+#define DMA_IRQ_NUM     (6)
 
-#define NR_MAX_CHAN		8	/* total of channels */
-#define START_CHAN_OFFSET	0
+#define NR_MAX_CHAN     8   /* total of channels */
+#define START_CHAN_OFFSET   0
 
-#define HAL_CLK_PERIPH_DMA	CCU_MOD_CLK_R_DMA
+#define HAL_CLK_PERIPH_DMA  CCU_MOD_CLK_R_DMA
 #else
 /* CPUX */
 #endif /* CONFIG_CORE_DSP0 */
@@ -50,37 +50,37 @@
 /*
  * The source DRQ type and port corresponding relation
  */
-#define DRQSRC_SRAM			0
-#define DRQSRC_PSRAM_CBUS		0
-#define DRQSRC_SDRAM			0
+#define DRQSRC_SRAM         0
+#define DRQSRC_PSRAM_CBUS       0
+#define DRQSRC_SDRAM            0
 /* #define DRQSRC_RESEVER   2 */
-#define DRQSRC_DAUDIO_0_RX		3
-#define DRQSRC_DAUDIO_1_RX		4
-#define DRQSRC_UART0_RX			5
+#define DRQSRC_DAUDIO_0_RX      3
+#define DRQSRC_DAUDIO_1_RX      4
+#define DRQSRC_UART0_RX         5
 /* #define DRQSRC_RESEVER   6 */
-#define DRQSRC_TWI0_RX			7
-#define DRQSRC_DMIC			8
-#define DRQSRC_AUDIO_CODEC		9
+#define DRQSRC_TWI0_RX          7
+#define DRQSRC_DMIC         8
+#define DRQSRC_AUDIO_CODEC      9
 /* #define DRQSRC_RESEVER   10 */
-#define DRQSRC_MAD_RX			11
-#define DRQSRC_PSRAM_SBUS		12
+#define DRQSRC_MAD_RX           11
+#define DRQSRC_PSRAM_SBUS       12
 
 /*
  * The destination DRQ type and port corresponding relation
  */
-#define DRQDST_SRAM			0
-#define DRQDST_PSRAM_CBUS		0
-#define DRQDST_SDRAM			0
+#define DRQDST_SRAM         0
+#define DRQDST_PSRAM_CBUS       0
+#define DRQDST_SDRAM            0
 /* #define DRQDST_RESEVER   2 */
-#define DRQDST_DAUDIO_0_TX		3
-#define DRQDST_DAUDIO_1_TX		4
-#define DRQDST_UART0_TX			5
+#define DRQDST_DAUDIO_0_TX      3
+#define DRQDST_DAUDIO_1_TX      4
+#define DRQDST_UART0_TX         5
 /* #define DRQDST_RESEVER   6 */
-#define DRQDST_TWI0_TX			7
+#define DRQDST_TWI0_TX          7
 /* #define DRQDST_RESEVER   8 */
-#define DRQDST_AUDIO_CODEC		9
+#define DRQDST_AUDIO_CODEC      9
 /* #define DRQDST_RESEVER   10 */
-#define DRQDST_MAD_TX			11
-#define DRQDST_PSRAM_SBUS		12
+#define DRQDST_MAD_TX           11
+#define DRQDST_PSRAM_SBUS       12
 
 #endif /*__DMA_SUN50IW11_H__  */

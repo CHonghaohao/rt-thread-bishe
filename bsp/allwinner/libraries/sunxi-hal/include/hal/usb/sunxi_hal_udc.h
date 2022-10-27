@@ -13,25 +13,25 @@
 #include "ch9.h"
 
 typedef enum {
-	UDC_EVENT_RX_STANDARD_REQUEST = 1,
-	UDC_EVENT_RX_CLASS_REQUEST = 2,
-	UDC_EVENT_RX_DATA = 3,
-	UDC_EVENT_TX_COMPLETE = 4,
+    UDC_EVENT_RX_STANDARD_REQUEST = 1,
+    UDC_EVENT_RX_CLASS_REQUEST = 2,
+    UDC_EVENT_RX_DATA = 3,
+    UDC_EVENT_TX_COMPLETE = 4,
 } udc_callback_event_t;
 
 typedef enum {
-	UDC_ERRNO_SUCCESS = 0,
-	UDC_ERRNO_CMD_NOT_SUPPORTED = -1,
-	UDC_ERRNO_CMD_INVALID = -2,
-	UDC_ERRNO_BUF_NULL = -3,
-	UDC_ERRNO_BUF_FULL = -4,
-	UDC_ERRNO_EP_INVALID = -5,
-	UDC_ERRNO_RX_NOT_READY = -6,
-	UDC_ERRNO_TX_BUSY = -7,
+    UDC_ERRNO_SUCCESS = 0,
+    UDC_ERRNO_CMD_NOT_SUPPORTED = -1,
+    UDC_ERRNO_CMD_INVALID = -2,
+    UDC_ERRNO_BUF_NULL = -3,
+    UDC_ERRNO_BUF_FULL = -4,
+    UDC_ERRNO_EP_INVALID = -5,
+    UDC_ERRNO_RX_NOT_READY = -6,
+    UDC_ERRNO_TX_BUSY = -7,
 } udc_errno_t;
 
 typedef udc_errno_t (*udc_callback_t)(uint8_t ep_addr, udc_callback_event_t event,
-				void *data, uint32_t len);
+                void *data, uint32_t len);
 
 int32_t hal_udc_init(void);
 int32_t hal_udc_deinit(void);

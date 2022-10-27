@@ -38,85 +38,85 @@
 
 void snd_ctl_open(const char **name)
 {
-	const snd_pcm_config_t *pcm_config = NULL;
-	char ctl_name[32] = "ctl.!";
+    const snd_pcm_config_t *pcm_config = NULL;
+    char ctl_name[32] = "ctl.!";
 
-	strcat(ctl_name, *name);
-	pcm_config = snd_pcm_config_get_config(ctl_name);
-	if (!pcm_config)
-		return ;
-	struct {
-		const char *type;
-		const char *name;
-	} snd_pcm_open_ctl_name_table[] = {
-		{ "hw", ((const snd_pcm_hw_config_t *)(pcm_config->config))->card_name},
-	};
+    strcat(ctl_name, *name);
+    pcm_config = snd_pcm_config_get_config(ctl_name);
+    if (!pcm_config)
+        return ;
+    struct {
+        const char *type;
+        const char *name;
+    } snd_pcm_open_ctl_name_table[] = {
+        { "hw", ((const snd_pcm_hw_config_t *)(pcm_config->config))->card_name},
+    };
 
-	int size = sizeof(snd_pcm_open_ctl_name_table) / sizeof(snd_pcm_open_ctl_name_table[0]);
-	int i;
-	for (i = 0; i < size; ++i) {
-		if (0 == strcmp(pcm_config->type, snd_pcm_open_ctl_name_table[i].type)) {
-			*name = snd_pcm_open_ctl_name_table[i].name;
-			break;
-		}
-	}
+    int size = sizeof(snd_pcm_open_ctl_name_table) / sizeof(snd_pcm_open_ctl_name_table[0]);
+    int i;
+    for (i = 0; i < size; ++i) {
+        if (0 == strcmp(pcm_config->type, snd_pcm_open_ctl_name_table[i].type)) {
+            *name = snd_pcm_open_ctl_name_table[i].name;
+            break;
+        }
+    }
 }
 
 int snd_ctl_num(const char *name)
 {
-	snd_ctl_open(&name);
+    snd_ctl_open(&name);
 
-	return ksnd_ctl_num(name);
+    return ksnd_ctl_num(name);
 }
 
 int snd_ctl_get_bynum(const char *name, const unsigned int elem_num, snd_ctl_info_t *info)
 {
-	int ret;
+    int ret;
 
-	snd_ctl_open(&name);
-	memset(info, 0, sizeof(snd_ctl_info_t));
-	ret = ksnd_ctl_get_bynum(name, elem_num, info);
+    snd_ctl_open(&name);
+    memset(info, 0, sizeof(snd_ctl_info_t));
+    ret = ksnd_ctl_get_bynum(name, elem_num, info);
 
-	return ret;
+    return ret;
 }
 
 int snd_ctl_get(const char *name, const char *elem, snd_ctl_info_t *info)
 {
-	int ret;
+    int ret;
 
-	memset(info, 0, sizeof(snd_ctl_info_t));
-	ret = ksnd_ctl_get(name, elem, info);
-	awalsa_debug("ret=%d\n", ret);
-	return ret;
+    memset(info, 0, sizeof(snd_ctl_info_t));
+    ret = ksnd_ctl_get(name, elem, info);
+    awalsa_debug("ret=%d\n", ret);
+    return ret;
 }
 
 int snd_ctl_set_bynum(const char *name, const unsigned int elem_num, unsigned int val)
 {
-	int ret;
+    int ret;
 
-	ret = ksnd_ctl_set_bynum(name, elem_num, val);
-	return ret;
+    ret = ksnd_ctl_set_bynum(name, elem_num, val);
+    return ret;
 }
 
 int snd_ctl_set(const char *name, const char *elem, unsigned int val)
 {
-	int ret;
+    int ret;
 
-	ret = ksnd_ctl_set(name, elem, val);
-	return ret;
+    ret = ksnd_ctl_set(name, elem, val);
+    return ret;
 }
 
 int snd_ctl_add(const char *name, snd_ctl_info_t *info)
 {
-	int ret;
+    int ret;
 
-	ret = ksnd_ctl_add_elem(name, (void *)info);
-	return ret;
+    ret = ksnd_ctl_add_elem(name, (void *)info);
+    return ret;
 }
 
 int snd_ctl_remove(const char *name, const unsigned int elem_num)
 {
-	int ret;
-	ret = ksnd_ctl_remove_elem(name, elem_num);
-	return ret;
+    int ret;
+    ret = ksnd_ctl_remove_elem(name, elem_num);
+    return ret;
 }

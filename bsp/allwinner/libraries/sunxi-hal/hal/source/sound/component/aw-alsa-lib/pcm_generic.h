@@ -36,8 +36,8 @@
 #include <aw-alsa-lib/pcm.h>
 
 typedef struct {
-	snd_pcm_t *slave;
-	int close_slave;
+    snd_pcm_t *slave;
+    int close_slave;
 } snd_pcm_generic_t;
 
 int snd_pcm_generic_close(snd_pcm_t *pcm);
@@ -65,8 +65,8 @@ snd_pcm_sframes_t snd_pcm_generic_writei(snd_pcm_t *pcm, const void *buffer, snd
 snd_pcm_sframes_t snd_pcm_generic_readi(snd_pcm_t *pcm, void *buffer, snd_pcm_uframes_t size);
 snd_pcm_sframes_t snd_pcm_generic_avail_update(snd_pcm_t *pcm);
 snd_pcm_sframes_t snd_pcm_generic_mmap_commit(snd_pcm_t *pcm,
-					      snd_pcm_uframes_t offset,
-					      snd_pcm_uframes_t size);
+                          snd_pcm_uframes_t offset,
+                          snd_pcm_uframes_t size);
 int snd_pcm_generic_may_wait_for_avail_min(snd_pcm_t *pcm, snd_pcm_uframes_t avail);
 
 #endif /* __AW_ALSA_PCM_GENERIC_H */

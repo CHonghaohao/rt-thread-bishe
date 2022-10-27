@@ -54,17 +54,17 @@ static __always_inline int OS_IsISRContext(void)
 
 static __always_inline TickType_t OS_CalcWaitTicks(OS_Time_t msec)
 {
-	TickType_t tick;
-	if (msec == OS_WAIT_FOREVER) {
-		tick = portMAX_DELAY;
-	} else if (msec != 0) {
-		tick = OS_MSecsToTicks(msec);
-		if (tick == 0)
-			tick = 1;
-	} else {
-		tick = 0;
-	}
-	return tick;
+    TickType_t tick;
+    if (msec == OS_WAIT_FOREVER) {
+        tick = portMAX_DELAY;
+    } else if (msec != 0) {
+        tick = OS_MSecsToTicks(msec);
+        if (tick == 0)
+            tick = 1;
+    } else {
+        tick = 0;
+    }
+    return tick;
 }
 
 /* memory */

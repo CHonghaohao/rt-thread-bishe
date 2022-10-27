@@ -22,7 +22,7 @@ struct hub_thread_context
 {
     //USB_OS_KERNEL_EVENT    *hub_thread_complete;    //hub thread的 create,exit的complete
    // USB_OS_KERNEL_EVENT   *hub_thread_event;        //只是用来控制thread的sleep/wakeup
-    hal_sem_t	hub_thread_complete;    //hub thread的 create,exit的complete
+    hal_sem_t   hub_thread_complete;    //hub thread的 create,exit的complete
     hal_sem_t   hub_thread_event;        //只是用来控制thread的sleep/wakeup
     volatile    u32 hub_thread_exit_flag ;                  //hub thread 退出flag
     //如USB_HUB_THREAD_EXIT_FLAG_TRUE

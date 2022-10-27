@@ -29,86 +29,86 @@ extern u32 g_clk_no_len;
 
 s32 plat_get_reg_base(u32 index, u32 *data)
 {
-	if (index >= g_reg_base_len || !data)
-		return -1;
-	*data = g_reg_base[index];
-	return 0;
+    if (index >= g_reg_base_len || !data)
+        return -1;
+    *data = g_reg_base[index];
+    return 0;
 }
 
 s32 plat_get_irq_no(u32 index, u32 *data)
 {
-	if (index >= g_irq_no_len || !data)
-		return -1;
-	*data = g_irq_no[index];
-	return 0;
+    if (index >= g_irq_no_len || !data)
+        return -1;
+    *data = g_irq_no[index];
+    return 0;
 }
 
 s32 plat_get_clk(char *name, hal_clk_id_t *data)
 {
-	static int init_get_clk = 0;
-	u32 i = 0;
-	*data = (hal_clk_id_t)-1;
-	if (!init_get_clk) {
-		for (i = 0; i < g_clk_no_len; ++i) {
-			g_clk_no[i].clk = hal_clock_get(HAL_SUNXI_CCU, g_clk_no[i].clk_id);
-			g_clk_no[i].clk_parent = hal_clock_get(HAL_SUNXI_CCU, g_clk_no[i].clk_parent_id);
-			g_clk_no[i].rst = hal_reset_control_get(HAL_SUNXI_RESET, g_clk_no[i].rst_id);
-		}
-		init_get_clk = 1;
-	}
-	for (i = 0; i < g_clk_no_len; ++i) {
-		if(!strcmp(name, g_clk_no[i].name))
-			break;
-	}
-	if (i >= g_clk_no_len || !data)
-		return -1;
-	*data = g_clk_no[i].clk_id;
-	return 0;
+    static int init_get_clk = 0;
+    u32 i = 0;
+    *data = (hal_clk_id_t)-1;
+    if (!init_get_clk) {
+        for (i = 0; i < g_clk_no_len; ++i) {
+            g_clk_no[i].clk = hal_clock_get(HAL_SUNXI_CCU, g_clk_no[i].clk_id);
+            g_clk_no[i].clk_parent = hal_clock_get(HAL_SUNXI_CCU, g_clk_no[i].clk_parent_id);
+            g_clk_no[i].rst = hal_reset_control_get(HAL_SUNXI_RESET, g_clk_no[i].rst_id);
+        }
+        init_get_clk = 1;
+    }
+    for (i = 0; i < g_clk_no_len; ++i) {
+        if(!strcmp(name, g_clk_no[i].name))
+            break;
+    }
+    if (i >= g_clk_no_len || !data)
+        return -1;
+    *data = g_clk_no[i].clk_id;
+    return 0;
 }
 
 s32 plat_get_clk_parent(hal_clk_id_t clk, hal_clk_id_t *parent)
 {
-	u32 i = 0;
-	*parent = (hal_clk_id_t)-1;
-	for (i = 0; i < g_clk_no_len; ++i) {
-		if (g_clk_no[i].clk_id == clk) {
-			*parent = g_clk_no[i].clk_parent_id;
-			break;
-		}
-	}
+    u32 i = 0;
+    *parent = (hal_clk_id_t)-1;
+    for (i = 0; i < g_clk_no_len; ++i) {
+        if (g_clk_no[i].clk_id == clk) {
+            *parent = g_clk_no[i].clk_parent_id;
+            break;
+        }
+    }
 
-	return (i == g_clk_no_len) ? -1 : 0;
+    return (i == g_clk_no_len) ? -1 : 0;
 }
 
 s32 plat_get_clk_from_id(hal_clk_id_t clk_id, hal_clk_t *clk, struct reset_control **rst)
 {
-	u32 i = 0;
-	*rst = NULL;
-	for (i = 0; i < g_clk_no_len; ++i) {
-		if (g_clk_no[i].clk_id == clk_id) {
-			*clk = g_clk_no[i].clk;
-			*rst = g_clk_no[i].rst;
-			break;
-		} else if (g_clk_no[i].clk_parent_id == clk_id) {
-			*clk = g_clk_no[i].clk_parent;
-		}
-	}
+    u32 i = 0;
+    *rst = NULL;
+    for (i = 0; i < g_clk_no_len; ++i) {
+        if (g_clk_no[i].clk_id == clk_id) {
+            *clk = g_clk_no[i].clk;
+            *rst = g_clk_no[i].rst;
+            break;
+        } else if (g_clk_no[i].clk_parent_id == clk_id) {
+            *clk = g_clk_no[i].clk_parent;
+        }
+    }
 
-	return (i == g_clk_no_len) ? -1 : 0;
+    return (i == g_clk_no_len) ? -1 : 0;
 
 }
 
 s32 plat_get_rst_by_name(char *name, struct reset_control **rst)
 {
-	int i;
+    int i;
 
-	for (i = 0; i < g_clk_no_len; ++i) {
-		if(!strcmp(name, g_clk_no[i].name)) {
-			*rst = g_clk_no[i].rst;
-			return 0;
-		}
-	}
+    for (i = 0; i < g_clk_no_len; ++i) {
+        if(!strcmp(name, g_clk_no[i].name)) {
+            *rst = g_clk_no[i].rst;
+            return 0;
+        }
+    }
 
-	return -1;
+    return -1;
 }
 

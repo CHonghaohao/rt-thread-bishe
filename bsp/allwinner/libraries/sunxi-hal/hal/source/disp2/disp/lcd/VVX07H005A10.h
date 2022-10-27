@@ -3,15 +3,15 @@
  *
  *       Filename:  lcd_panel_cfg.h
  *
- *    Description:  
+ *    Description:
  *
  *        Version:  1.0
  *        Created:  01/27/2021 04:32:55 PM
  *       Revision:  none
  *       Compiler:  gcc
  *
- *         Author:  YOUR NAME (), 
- *   Organization:  
+ *         Author:  YOUR NAME (),
+ *   Organization:
  *
  * =====================================================================================
  */

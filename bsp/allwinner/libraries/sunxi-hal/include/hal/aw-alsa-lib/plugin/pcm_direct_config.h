@@ -36,13 +36,13 @@
 #include <aw-alsa-lib/pcm.h>
 
 typedef struct {
-	const char *pcm;
-	snd_pcm_format_t format;
-	int rate;
-	int channels;
-	snd_pcm_sframes_t period_size;
-	snd_pcm_sframes_t buffer_size;
-	unsigned int periods;
+    const char *pcm;
+    snd_pcm_format_t format;
+    int rate;
+    int channels;
+    snd_pcm_sframes_t period_size;
+    snd_pcm_sframes_t buffer_size;
+    unsigned int periods;
 } snd_pcm_direct_slave_config_t;
 
 #endif /* __AW_ALSA_PCM_DIRECT_CONFIG_H */

@@ -36,7 +36,7 @@ s32 usb_core_init(void)
 {
     usb_host_enable();
     usb_virt_bus_init();
-	usb_drivers_init();
+    usb_drivers_init();
     usb_gen_hcd_init();
     usb_gen_hub_init();
     return EPDK_OK;
@@ -46,7 +46,7 @@ s32 usb_core_exit(void)
 {
     //  usb_gen_hub_exit();
     usb_gen_hcd_exit();
-	usb_drivers_exit();
+    usb_drivers_exit();
     usb_virt_bus_exit();
     usb_host_disable();
     return EPDK_OK;

@@ -119,14 +119,14 @@ int hal_is_mailbox_empty(hal_mailbox_t mailbox)
 
 hal_workqueue *hal_workqueue_create(const char *name, unsigned short stack_size, unsigned char priority)
 {
-	return rt_workqueue_create(name, stack_size, priority);
+    return rt_workqueue_create(name, stack_size, priority);
 }
 
 int hal_workqueue_dowork(hal_workqueue *queue, hal_work *work)
 {
-	int ret = 0;
-	ret = rt_workqueue_dowork(queue, work);
-	return ret;
+    int ret = 0;
+    ret = rt_workqueue_dowork(queue, work);
+    return ret;
 }
 
 hal_queue_t hal_queue_create(const char *name, unsigned int item_size, unsigned int queue_size)

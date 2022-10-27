@@ -1,21 +1,21 @@
 /*
 ********************************************************************************************************************
-*                                             
+*
 *
 *                              (c) Copyright 2007-2010, javen.China
-*										All	Rights Reserved
+*                                       All Rights Reserved
 *
-* File Name 	: misc_lib.h
+* File Name     : misc_lib.h
 *
-* Author 		: javen
+* Author        : javen
 *
-* Version 		: 1.0
+* Version       : 1.0
 *
-* Date 			: 2010.08.04
+* Date          : 2010.08.04
 *
-* Description 	: 
+* Description   :
 *
-* History 		:
+* History       :
 *
 ********************************************************************************************************************
 */

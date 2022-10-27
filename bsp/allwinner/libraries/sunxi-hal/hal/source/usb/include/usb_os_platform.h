@@ -4,8 +4,8 @@
 #include <stdint.h>
 #include <typedef.h>
 
-#define dma_addr_t	unsigned long
-#define gfp_t		uint32_t
+#define dma_addr_t  unsigned long
+#define gfp_t       uint32_t
 
 uint16_t le16_to_cpu(uint16_t x);
 uint32_t le32_to_cpu(uint32_t x);

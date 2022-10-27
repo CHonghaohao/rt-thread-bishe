@@ -9,13 +9,13 @@
  */
 
 /**
- *	All Winner Tech, All Right Reserved. 2014-2015 Copyright (c)
+ *  All Winner Tech, All Right Reserved. 2014-2015 Copyright (c)
  *
- *	File name   :       de_smbl.h
+ *  File name   :       de_smbl.h
  *
- *	Description :       display engine 2.0 smbl basic function declaration
+ *  Description :       display engine 2.0 smbl basic function declaration
  *
- *	History     :       2014/05/15  vito cheng  v0.1  Initial version
+ *  History     :       2014/05/15  vito cheng  v0.1  Initial version
  *
  */
 #ifndef __DE_SMBL_H__
@@ -31,7 +31,7 @@ int de_smbl_set_reg_base(unsigned int sel, void *base);
 int de_smbl_sync(unsigned int sel);
 int de_smbl_enable(unsigned int sel, unsigned int en);
 int de_smbl_set_window(unsigned int sel, unsigned int win_enable,
-		       struct disp_rect window);
+               struct disp_rect window);
 int de_smbl_set_para(unsigned int sel, unsigned int width, unsigned int height);
 int de_smbl_set_lut(unsigned int sel, unsigned short *lut);
 int de_smbl_get_hist(unsigned int sel, unsigned int *cnt);

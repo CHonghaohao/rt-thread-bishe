@@ -57,7 +57,7 @@ OS_Status OS_SemaphoreReset(OS_Semaphore_t *sem);
  */
 static inline int OS_SemaphoreIsValid(OS_Semaphore_t *sem)
 {
-	return (sem->handle != OS_INVALID_HANDLE);
+    return (sem->handle != OS_INVALID_HANDLE);
 }
 
 /**
@@ -67,7 +67,7 @@ static inline int OS_SemaphoreIsValid(OS_Semaphore_t *sem)
  */
 static inline void OS_SemaphoreSetInvalid(OS_Semaphore_t *sem)
 {
-	sem->handle = OS_INVALID_HANDLE;
+    sem->handle = OS_INVALID_HANDLE;
 }
 
 #ifdef __cplusplus

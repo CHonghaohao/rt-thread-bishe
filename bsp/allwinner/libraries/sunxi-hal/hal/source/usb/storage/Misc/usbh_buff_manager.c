@@ -13,16 +13,16 @@
 *
 * Date          : 2009.08.19
 *
-* Description   : ÆôÓÃ»º´æ»úÖÆ£¬ÓÃÀ´Ìá¸ßUSBHµÄ¶ÁĞ´ËÙ¶È.
-*                 µ±fs_buffer < 32kµÄÊ±ºò£¬ÕâÖÖ»úÖÆ²ÅÓĞĞ§
-*                 µ±fs_buffer >= 32kµÄÊ±ºò£¬ÕâÖÖ»úÖÆ·´¶ø»áÓ°ÏìËÙ¶È
-*                 µ±fs_bufferµÄµØÖ·ÊÇ²»Á¬ĞøµÄµØÖ·£¬±ØĞëÓÃÕâÖÖ»úÖÆ, ÒòÎªdma¶ÁĞ´±ØĞë±£Ö¤ÊÇÁ¬ĞøµÄÎïÀíµØÖ·
+* Description   : å¯ç”¨ç¼“å­˜æœºåˆ¶ï¼Œç”¨æ¥æé«˜USBHçš„è¯»å†™é€Ÿåº¦.
+*                 å½“fs_buffer < 32kçš„æ—¶å€™ï¼Œè¿™ç§æœºåˆ¶æ‰æœ‰æ•ˆ
+*                 å½“fs_buffer >= 32kçš„æ—¶å€™ï¼Œè¿™ç§æœºåˆ¶åè€Œä¼šå½±å“é€Ÿåº¦
+*                 å½“fs_bufferçš„åœ°å€æ˜¯ä¸è¿ç»­çš„åœ°å€ï¼Œå¿…é¡»ç”¨è¿™ç§æœºåˆ¶, å› ä¸ºdmaè¯»å†™å¿…é¡»ä¿è¯æ˜¯è¿ç»­çš„ç‰©ç†åœ°å€
 *
-* ×¢:  »º´æ¹ÜÀíµÄ»ù´¡ÊÇdevice´¦ÓÚÁ¬½Ó×´Ì¬. Èç¹ûdevice±»°Î×ßÁË, ±ØĞëÖØĞÂÅäÖÃbuff
+* æ³¨:  ç¼“å­˜ç®¡ç†çš„åŸºç¡€æ˜¯deviceå¤„äºè¿æ¥çŠ¶æ€. å¦‚æœdeviceè¢«æ‹”èµ°äº†, å¿…é¡»é‡æ–°é…ç½®buff
 *
 * History       :
-*     v1.0  holi  2008.11.22 - ¶ÁĞ´ËÙ¶È¿ì, µ«ÊÇÖ»Ö§³Öµ¥¸ölun
-*     v2.0  javen 2009.08.19 - Ö§³Ö¶à¸ölun ºÍ ¶àÖÖÀàĞÍµÄÉè±¸, µ«ÊÇ¶ÁĞ´ËÙ¶È²»ÈçÒÔÇ°
+*     v1.0  holi  2008.11.22 - è¯»å†™é€Ÿåº¦å¿«, ä½†æ˜¯åªæ”¯æŒå•ä¸ªlun
+*     v2.0  javen 2009.08.19 - æ”¯æŒå¤šä¸ªlun å’Œ å¤šç§ç±»å‹çš„è®¾å¤‡, ä½†æ˜¯è¯»å†™é€Ÿåº¦ä¸å¦‚ä»¥å‰
 ********************************************************************************************************************
 */
 #include "usb_os_platform.h"
@@ -35,7 +35,7 @@ static usbh_buff_manager_t usbh_buff_manager;
 typedef int(* buff_blk_func_t)(void *pBuffer, unsigned int blk, unsigned int n, void *hDev);
 
 
-/* usbh_temp_buffµÄ×î´ó³¤¶È */
+/* usbh_temp_buffçš„æœ€å¤§é•¿åº¦ */
 static unsigned int usbh_temp_buff_max_len(void)
 {
     return usbh_buff_manager.temp_buff_len;
@@ -46,7 +46,7 @@ static unsigned int usbh_temp_buff_max_len(void)
 *                     set_usbh_temp_buff_default
 *
 * Description:
-*     ³õÊ¼»¯Ò»¸öusbh_temp_buff
+*     åˆå§‹åŒ–ä¸€ä¸ªusbh_temp_buff
 * Arguments:
 *
 * Returns:
@@ -75,15 +75,15 @@ static void set_usbh_temp_buff_default(usbh_temp_buff_t *temp_buff)
     temp_buff->used_time     = 0;
     temp_buff->is_valid      = 0;
     temp_buff->is_busy       = 0;
-	memset(temp_buff->buff, 0, temp_buff->buff_len);
+    memset(temp_buff->buff, 0, temp_buff->buff_len);
     EXIT_CRITICAL(cpu_sr);
 }
 
-/* ÉèÖÃÄ¿±êbuffÎªbusy×´Ì¬, ´ËÊ±buffµÄ×´Ì¬²»ÔÊĞí±»ĞŞ¸Ä¡£
+/* è®¾ç½®ç›®æ ‡buffä¸ºbusyçŠ¶æ€, æ­¤æ—¶buffçš„çŠ¶æ€ä¸å…è®¸è¢«ä¿®æ”¹ã€‚
  *
- * usbh_temp_buffÔÚÊ¹ÓÃdma½ÓÊÕÊı¾İÆÚ¼ä, ¿ÉÄÜÓĞblk_read»òÕßblk_write
- * ÇëÇóÊÔÍ¼È¥ĞŞ¸ÄbuffµÄÊôĞÔ, ÈçÉèÖÃbuffÎªÎŞĞ§¡£busy×´Ì¬¿ÉÒÔ·ÀÖ¹ÕâÑùµÄ
- * ÊÂÇé·¢Éú
+ * usbh_temp_buffåœ¨ä½¿ç”¨dmaæ¥æ”¶æ•°æ®æœŸé—´, å¯èƒ½æœ‰blk_readæˆ–è€…blk_write
+ * è¯·æ±‚è¯•å›¾å»ä¿®æ”¹buffçš„å±æ€§, å¦‚è®¾ç½®buffä¸ºæ— æ•ˆã€‚busyçŠ¶æ€å¯ä»¥é˜²æ­¢è¿™æ ·çš„
+ * äº‹æƒ…å‘ç”Ÿ
  */
 static void set_usbh_temp_buff_busy(unsigned int buff_num)
 {
@@ -109,7 +109,7 @@ static void set_usbh_temp_buff_busy(unsigned int buff_num)
     }
 }
 
-/* ÉèÖÃÄ¿±êbuffÎª²»busy×´Ì¬, ´ËÊ±buffµÄ×´Ì¬ÔÊĞí±»ĞŞ¸Ä¡£ */
+/* è®¾ç½®ç›®æ ‡buffä¸ºä¸busyçŠ¶æ€, æ­¤æ—¶buffçš„çŠ¶æ€å…è®¸è¢«ä¿®æ”¹ã€‚ */
 static void set_usbh_temp_buff_free(unsigned int buff_num)
 {
     usbh_buff_manager_t *buff_mgr = &usbh_buff_manager;
@@ -139,12 +139,12 @@ static void set_usbh_temp_buff_free(unsigned int buff_num)
 *                     set_usbh_temp_buff_valid
 *
 * Description:
-*     Èç¹û³É¹¦µÄ×°ÔØÁËdeviceµÄÊı¾İ, ¾ÍÈÏÎªÕâ¸öbufferÊÇÓĞĞ§µÄ
+*     å¦‚æœæˆåŠŸçš„è£…è½½äº†deviceçš„æ•°æ®, å°±è®¤ä¸ºè¿™ä¸ªbufferæ˜¯æœ‰æ•ˆçš„
 * Arguments:
-*     buff         :  input.  ´ıÉèÖÃÓĞĞ§µÄbuff
-*     dev_id       :  input.  Éè±¸±êÊ¶·û
-*     start_lba    :  input.  ÆğÊ¼ÉÈÇø
-*     sector_size  :  input.  ÉÈÇø´óĞ¡
+*     buff         :  input.  å¾…è®¾ç½®æœ‰æ•ˆçš„buff
+*     dev_id       :  input.  è®¾å¤‡æ ‡è¯†ç¬¦
+*     start_lba    :  input.  èµ·å§‹æ‰‡åŒº
+*     sector_size  :  input.  æ‰‡åŒºå¤§å°
 * Returns:
 *
 * note:
@@ -167,7 +167,7 @@ static int set_usbh_temp_buff_valid(unsigned int buff_num, unsigned int dev_id, 
 
     //for (i = 0; i < buff_mgr->temp_buff_nr; i++)
     {
-        //ÉèÖÃbuffÓĞĞ§£¬²¢ÇÒ±£´æËüËù¼ÇÂ¼µÄÆğÊ¼ÉÈÇø
+        //è®¾ç½®buffæœ‰æ•ˆï¼Œå¹¶ä¸”ä¿å­˜å®ƒæ‰€è®°å½•çš„èµ·å§‹æ‰‡åŒº
         //if (buff_mgr->buff_array[i].buff == buff)
         {
             ENTER_CRITICAL(cpu_sr);
@@ -175,7 +175,7 @@ static int set_usbh_temp_buff_valid(unsigned int buff_num, unsigned int dev_id, 
             buff_mgr->buff_array[buff_num].sector_size   = sector_size;
             buff_mgr->buff_array[buff_num].start_lba     = start_lba;
             buff_mgr->buff_array[buff_num].end_lba       = start_lba + (buff_mgr->buff_array[buff_num].buff_len / sector_size) - 1;
-            buff_mgr->buff_array[buff_num].used_time     = 1;  /* µÚÒ»´Î±»fsÊ¹ÓÃ */
+            buff_mgr->buff_array[buff_num].used_time     = 1;  /* ç¬¬ä¸€æ¬¡è¢«fsä½¿ç”¨ */
             buff_mgr->buff_array[buff_num].is_valid      = 1;
             EXIT_CRITICAL(cpu_sr);
             /*
@@ -195,12 +195,12 @@ static int set_usbh_temp_buff_valid(unsigned int buff_num, unsigned int dev_id, 
 *                     set_usbh_temp_buff_invalid
 *
 * Description:
-*     ÉèÖÃdevµÄÄ³Ò»¸öbuffÎŞĞ§¡£lbaÄÚÈİµÄÂäµ½bufferÄÚ,¾ÍÈÏÎª´ÎbufferÎŞĞ§
+*     è®¾ç½®devçš„æŸä¸€ä¸ªbuffæ— æ•ˆã€‚lbaå†…å®¹çš„è½åˆ°bufferå†…,å°±è®¤ä¸ºæ¬¡bufferæ— æ•ˆ
 * Arguments:
-*     dev_id  :  input.  ÓÃÀ´È·¶¨Éè±¸µÄÉí·İ
-*     lba     :  input.  ÓÃÀ´²éÕÒbuff
+*     dev_id  :  input.  ç”¨æ¥ç¡®å®šè®¾å¤‡çš„èº«ä»½
+*     lba     :  input.  ç”¨æ¥æŸ¥æ‰¾buff
 * Returns:
-*     ·µ»Ø³É¹¦ÓëÊ§°Ü
+*     è¿”å›æˆåŠŸä¸å¤±è´¥
 * note:
 *
 *
@@ -213,7 +213,7 @@ static int set_usbh_temp_buff_invalid(unsigned int dev_id, unsigned int lba)
 
     for (i = 0; i < buff_mgr->temp_buff_nr; i++)
     {
-        //ÉèÖÃdevµÄlbaµÄbuffÎŞĞ§
+        //è®¾ç½®devçš„lbaçš„buffæ— æ•ˆ
         if ((buff_mgr->buff_array[i].dev_id == dev_id)
             && (buff_mgr->buff_array[i].start_lba <= lba)
             && (lba <= buff_mgr->buff_array[i].end_lba))
@@ -230,11 +230,11 @@ static int set_usbh_temp_buff_invalid(unsigned int dev_id, unsigned int lba)
 *                     set_usbh_temp_buff_invalid_by_dev
 *
 * Description:
-*     ÉèÖÃºÍdev_idÆ¥ÅäµÄbuffÎŞĞ§
+*     è®¾ç½®å’Œdev_idåŒ¹é…çš„buffæ— æ•ˆ
 * Arguments:
-*     dev_id  :  input.  ÓÃÀ´È·¶¨Éè±¸µÄÉí·İ
+*     dev_id  :  input.  ç”¨æ¥ç¡®å®šè®¾å¤‡çš„èº«ä»½
 * Returns:
-*     ·µ»Ø³É¹¦ÓëÊ§°Ü
+*     è¿”å›æˆåŠŸä¸å¤±è´¥
 * note:
 *
 *
@@ -247,7 +247,7 @@ int set_usbh_temp_buff_invalid_by_dev(unsigned int dev_id)
 
     for (i = 0; i < buff_mgr->temp_buff_nr; i++)
     {
-        //Óëdev_idÆ¥ÅäµÄËùÓĞµÄbuff¶¼ÎŞĞ§
+        //ä¸dev_idåŒ¹é…çš„æ‰€æœ‰çš„bufféƒ½æ— æ•ˆ
         if (buff_mgr->buff_array[i].dev_id == dev_id)
         {
             set_usbh_temp_buff_default(&(buff_mgr->buff_array[i]));
@@ -262,11 +262,11 @@ int set_usbh_temp_buff_invalid_by_dev(unsigned int dev_id)
 *                     set_usbh_temp_buff_invalid
 *
 * Description:
-*     ÉèÖÃºÍdev_idÆ¥ÅäµÄbuffÎŞĞ§
+*     è®¾ç½®å’Œdev_idåŒ¹é…çš„buffæ— æ•ˆ
 * Arguments:
-*     dev_id  :  input.  ÓÃÀ´È·¶¨Éè±¸µÄÉí·İ
+*     dev_id  :  input.  ç”¨æ¥ç¡®å®šè®¾å¤‡çš„èº«ä»½
 * Returns:
-*     ·µ»Ø³É¹¦ÓëÊ§°Ü
+*     è¿”å›æˆåŠŸä¸å¤±è´¥
 * note:
 *
 *********************************************************************
@@ -289,18 +289,18 @@ int set_all_usbh_temp_buff_invalid(void)
 *                     select_invalid_usbh_temp_buff
 *
 * Description:
-*     Ñ¡ÔñÒ»¸öÃ»ÓĞÓÃµÄbuff£¬ÓÃÀ´×ªÔØdeviceµÄÊı¾İ
+*     é€‰æ‹©ä¸€ä¸ªæ²¡æœ‰ç”¨çš„buffï¼Œç”¨æ¥è½¬è½½deviceçš„æ•°æ®
 * Arguments:
 *
 * Returns:
 *
 * note:
-*   ÌôÑ¡µÄ²ßÂÔÎª:
-*       1¡¢buff´¦ÓÚbusy×´Ì¬, ²»Ñ¡
-*       2¡¢ÌôÑ¡invalid buff
-*       3¡¢ÌôÑ¡valid buffÀïÃæ±»fsÊ¹ÓÃ´ÎÊı×îÉÙµÄÒ»¸öbuff
-*       4¡¢ËùÓĞµÄbuffµÄbit´ÎÊıÒ»Ñù, ¾Í°´Ë³ĞòÌôÑ¡Ò»¸ö·ÇbusyµÄbuff
-*       5¡¢ÒÔÉÏÌõ¼ş¶¼²»Âú×ã, ÌôÑ¡Ê§°Ü, ·µ»ØNULL
+*   æŒ‘é€‰çš„ç­–ç•¥ä¸º:
+*       1ã€buffå¤„äºbusyçŠ¶æ€, ä¸é€‰
+*       2ã€æŒ‘é€‰invalid buff
+*       3ã€æŒ‘é€‰valid buffé‡Œé¢è¢«fsä½¿ç”¨æ¬¡æ•°æœ€å°‘çš„ä¸€ä¸ªbuff
+*       4ã€æ‰€æœ‰çš„buffçš„bitæ¬¡æ•°ä¸€æ ·, å°±æŒ‰é¡ºåºæŒ‘é€‰ä¸€ä¸ªébusyçš„buff
+*       5ã€ä»¥ä¸Šæ¡ä»¶éƒ½ä¸æ»¡è¶³, æŒ‘é€‰å¤±è´¥, è¿”å›NULL
 *
 *
 *********************************************************************
@@ -309,25 +309,25 @@ static void *select_invalid_usbh_temp_buff(unsigned int *buff_num)
 {
     usbh_buff_manager_t *buff_mgr = &usbh_buff_manager;
     void *temp_buff = NULL;
-    unsigned int min_used = 0xffffffff;       //×îĞ¡µÄÊ¹ÓÃ´ÎÊı
-    //unsigned int buff_num = 0;               //±»Ñ¡ÖĞµÄbuffµÄºÅ
+    unsigned int min_used = 0xffffffff;       //æœ€å°çš„ä½¿ç”¨æ¬¡æ•°
+    //unsigned int buff_num = 0;               //è¢«é€‰ä¸­çš„buffçš„å·
     unsigned int i = 0;
-	
-	if (buff_num == NULL) 
-	{
-		return NULL;
-	}
 
-    //--<1>--ÌôÑ¡invalidµÄbuffer
+    if (buff_num == NULL)
+    {
+        return NULL;
+    }
+
+    //--<1>--æŒ‘é€‰invalidçš„buffer
     for (i = 0; i < buff_mgr->temp_buff_nr; i++)
     {
-        //--<1-1>--Éè±¸´¦ÓÚbusy×´Ì¬, ¾ÍÈ¥ÌôÑ¡ÏÂÒ»¸ö
+        //--<1-1>--è®¾å¤‡å¤„äºbusyçŠ¶æ€, å°±å»æŒ‘é€‰ä¸‹ä¸€ä¸ª
         if (buff_mgr->buff_array[i].is_busy)
         {
             continue;
         }
 
-        //--<1-2>--ÌôÑ¡invalidµÄbuffer
+        //--<1-2>--æŒ‘é€‰invalidçš„buffer
         if (buff_mgr->buff_array[i].is_valid == 0)
         {
             temp_buff = buff_mgr->buff_array[i].buff;
@@ -336,7 +336,7 @@ static void *select_invalid_usbh_temp_buff(unsigned int *buff_num)
             return temp_buff;
         }
 
-        //--<1-3>--buffer¶¼ÓĞĞ§£¬¾ÍÈ¥ÌôÑ¡±»fsÊ¹ÓÃ´ÎÊı×îÉÙµÄÒ»¸öbuff
+        //--<1-3>--bufferéƒ½æœ‰æ•ˆï¼Œå°±å»æŒ‘é€‰è¢«fsä½¿ç”¨æ¬¡æ•°æœ€å°‘çš„ä¸€ä¸ªbuff
         if (min_used > buff_mgr->buff_array[i].used_time)
         {
             min_used  = buff_mgr->buff_array[i].used_time;
@@ -344,19 +344,19 @@ static void *select_invalid_usbh_temp_buff(unsigned int *buff_num)
             temp_buff = buff_mgr->buff_array[i].buff;
         }
 
-        //--<1-4>--ÔÚÃ¿´ÎÌôÑ¡µÄ¹ı³ÌÖĞ, used_time³ı2
-        //Èç¹ûÔÚÏÂÒ»´ÎÌôÑ¡Ö®Ç°, ÓÖ±»fsÊ¹ÓÃ, ÕâÑùËüÓÖÂıÂıÉú³¤ÁË£» ·ñÔò£¬»áÂıÂıÀÏÈ¥
+        //--<1-4>--åœ¨æ¯æ¬¡æŒ‘é€‰çš„è¿‡ç¨‹ä¸­, used_timeé™¤2
+        //å¦‚æœåœ¨ä¸‹ä¸€æ¬¡æŒ‘é€‰ä¹‹å‰, åˆè¢«fsä½¿ç”¨, è¿™æ ·å®ƒåˆæ…¢æ…¢ç”Ÿé•¿äº†ï¼› å¦åˆ™ï¼Œä¼šæ…¢æ…¢è€å»
         buff_mgr->buff_array[i].used_time = buff_mgr->buff_array[i].used_time >> 1;
     }
 
-    //--<2>--ÌôÑ¡±»fsÊ¹ÓÃ´ÎÊı×îÉÙµÄbuffer
+    //--<2>--æŒ‘é€‰è¢«fsä½¿ç”¨æ¬¡æ•°æœ€å°‘çš„buffer
     if (min_used != 0xffffffff)
     {
         set_usbh_temp_buff_default(&(buff_mgr->buff_array[*buff_num]));
         return temp_buff;
     }
 
-    //--<3>--Ã»ÓĞÕÒµ½ÀíÏëµÄbuffer¾Í°´Ë³ĞòÌôÑ¡Ò»¸ö²»³£ÓÃµÄ,
+    //--<3>--æ²¡æœ‰æ‰¾åˆ°ç†æƒ³çš„bufferå°±æŒ‰é¡ºåºæŒ‘é€‰ä¸€ä¸ªä¸å¸¸ç”¨çš„,
     for (i = 0; i < buff_mgr->temp_buff_nr; i++)
     {
         if (buff_mgr->buff_array[i].is_busy == 0)
@@ -368,23 +368,23 @@ static void *select_invalid_usbh_temp_buff(unsigned int *buff_num)
         }
     }
 
-    //--<4>--ËùÓĞµÄbuff¶¼´¦ÓÚbusy×´Ì¬, ¾ÍÎŞbuff¿ÉÓÃÁË
+    //--<4>--æ‰€æœ‰çš„bufféƒ½å¤„äºbusyçŠ¶æ€, å°±æ— buffå¯ç”¨äº†
     temp_buff = NULL;
     return temp_buff;
 }
 
-/* Ñ¡Ôñ×îÓÅµÄbuffer, ·µ»Ø×îÓÅµÄbufferºÅ */
+/* é€‰æ‹©æœ€ä¼˜çš„buffer, è¿”å›æœ€ä¼˜çš„bufferå· */
 static int select_best_buffer(unsigned int dev_id, unsigned int lba, unsigned int size, unsigned int *nr)
 {
     usbh_buff_manager_t *buff_mgr = &usbh_buff_manager;
-    unsigned int max_len = 0;  /* ÃüÖĞbufferÀï´æ·ÅµÄ×î´óÊı¾İ³¤¶È */
+    unsigned int max_len = 0;  /* å‘½ä¸­bufferé‡Œå­˜æ”¾çš„æœ€å¤§æ•°æ®é•¿åº¦ */
     unsigned int i = 0;
 
     for (i = 0; i < buff_mgr->temp_buff_nr; i++)
     {
         if ((dev_id == buff_mgr->buff_array[i].dev_id) && buff_mgr->buff_array[i].is_valid)
         {
-            /* Âäµ½ÁËbufferÄÚ */
+            /* è½åˆ°äº†bufferå†… */
             if (buff_mgr->buff_array[i].start_lba <= lba && buff_mgr->buff_array[i].end_lba >= lba)
             {
                 if (max_len <= (buff_mgr->buff_array[i].end_lba - lba + 1))
@@ -416,17 +416,17 @@ static int select_best_buffer(unsigned int dev_id, unsigned int lba, unsigned in
 *                     read_usbh_temp_buff
 *
 * Description:
-*     Èç¹û³É¹¦µÄ×°ÔØÁËdeviceµÄÊı¾İ, ¾ÍÈÏÎªÕâ¸öbufferÊÇÓĞĞ§µÄ
+*     å¦‚æœæˆåŠŸçš„è£…è½½äº†deviceçš„æ•°æ®, å°±è®¤ä¸ºè¿™ä¸ªbufferæ˜¯æœ‰æ•ˆçš„
 *
 * Arguments:
-*     dev_id  :  input.  ÓÃÀ´²éÕÒÖ¸¶¨Éè±¸µÄbuff
-*     lba     :  input.  ±¾´Î¶ÁĞ´µÄÆğÊ¼ÉÈÇø
-*     size    :  input.  ±¾´Î¶ÁĞ´µÄÉÈÇø¸öÊı
-*     buff    :  output. ×ªÔØ±¾´Î¶ÁµÄÊı¾İ
+*     dev_id  :  input.  ç”¨æ¥æŸ¥æ‰¾æŒ‡å®šè®¾å¤‡çš„buff
+*     lba     :  input.  æœ¬æ¬¡è¯»å†™çš„èµ·å§‹æ‰‡åŒº
+*     size    :  input.  æœ¬æ¬¡è¯»å†™çš„æ‰‡åŒºä¸ªæ•°
+*     buff    :  output. è½¬è½½æœ¬æ¬¡è¯»çš„æ•°æ®
 *
 * Returns:
-*     is_copy = 1: ·µ»Ø´ÓbufferÖĞ¶ÁÈ¡µÄÊı¾İ
-*     is_copy = 0: ·µ»Ø´ÓbufferÖĞ×î´óĞ§Êı¾İ³¤¶È
+*     is_copy = 1: è¿”å›ä»bufferä¸­è¯»å–çš„æ•°æ®
+*     is_copy = 0: è¿”å›ä»bufferä¸­æœ€å¤§æ•ˆæ•°æ®é•¿åº¦
 *
 * note:
 *                     start     lba                 lba+size           end
@@ -439,10 +439,10 @@ static int select_best_buffer(unsigned int dev_id, unsigned int lba, unsigned in
 static int read_usbh_temp_buff(unsigned int dev_id, unsigned int lba, unsigned int size, void *buff, unsigned int is_copy)
 {
     usbh_buff_manager_t *buff_mgr = &usbh_buff_manager;
-    unsigned int buff_start        = 0;  /* Êı¾İÔÚbuffµÄÆğÊ¼µØÖ·       */
-    unsigned int valid_sector      = 0;  /* bufferÀïµÄĞ§Êı¾İ³¤¶È       */
-    unsigned int max_valid_sector  = 0;  /* bufferÀïµÄ×î´óĞ§Êı¾İ³¤¶È   */
-    unsigned int buff_len          = 0;  /* ±¾´Î¶ÁĞ´Êı¾İµÄ³¤¶È         */
+    unsigned int buff_start        = 0;  /* æ•°æ®åœ¨buffçš„èµ·å§‹åœ°å€       */
+    unsigned int valid_sector      = 0;  /* bufferé‡Œçš„æ•ˆæ•°æ®é•¿åº¦       */
+    unsigned int max_valid_sector  = 0;  /* bufferé‡Œçš„æœ€å¤§æ•ˆæ•°æ®é•¿åº¦   */
+    unsigned int buff_len          = 0;  /* æœ¬æ¬¡è¯»å†™æ•°æ®çš„é•¿åº¦         */
     unsigned int buff_no           = 0;
 #define min( x, y )          ( (x) < (y) ? (x) : (y) )
 
@@ -486,15 +486,15 @@ static int read_usbh_temp_buff(unsigned int dev_id, unsigned int lba, unsigned i
 *                     write_usbh_temp_buff
 *
 * Description:
-*     Êı¾İÔÚĞ´ÈëdeviceÖ®Ç°, ¸üĞÂusbh_temp_buff, ÒÔ±ãÏÂ´ÎÖ±½Ó¶ÁÈ¡
+*     æ•°æ®åœ¨å†™å…¥deviceä¹‹å‰, æ›´æ–°usbh_temp_buff, ä»¥ä¾¿ä¸‹æ¬¡ç›´æ¥è¯»å–
 * Arguments:
-*     dev_id  :  input.  ÓÃÀ´²éÕÒÖ¸¶¨Éè±¸µÄbuff
-*     lba     :  input.  ±¾´Î¶ÁĞ´µÄÆğÊ¼ÉÈÇø
-*     size    :  input.  ±¾´Î¶ÁĞ´µÄÉÈÇø¸öÊı
-*     buff    :  input.  ×ªÔØ±¾´ÎĞ´µÄÊı¾İ
+*     dev_id  :  input.  ç”¨æ¥æŸ¥æ‰¾æŒ‡å®šè®¾å¤‡çš„buff
+*     lba     :  input.  æœ¬æ¬¡è¯»å†™çš„èµ·å§‹æ‰‡åŒº
+*     size    :  input.  æœ¬æ¬¡è¯»å†™çš„æ‰‡åŒºä¸ªæ•°
+*     buff    :  input.  è½¬è½½æœ¬æ¬¡å†™çš„æ•°æ®
 *
 * Returns:
-*     ·µ»ØĞ´³É¹¦µÄbuffµØÖ·
+*     è¿”å›å†™æˆåŠŸçš„buffåœ°å€
 * note:
 *
 *
@@ -503,8 +503,8 @@ static int read_usbh_temp_buff(unsigned int dev_id, unsigned int lba, unsigned i
 static void *write_usbh_temp_buff(unsigned int dev_id, unsigned int lba, unsigned int size, const void *buff)
 {
     usbh_buff_manager_t *buff_mgr = &usbh_buff_manager;
-    unsigned int buff_start  = 0;  /* Êı¾İÔÚbuffµÄÆğÊ¼µØÖ· */
-    unsigned int buff_len    = 0;  /* ±¾´Î¶ÁĞ´Êı¾İµÄ³¤¶È */
+    unsigned int buff_start  = 0;  /* æ•°æ®åœ¨buffçš„èµ·å§‹åœ°å€ */
+    unsigned int buff_len    = 0;  /* æœ¬æ¬¡è¯»å†™æ•°æ®çš„é•¿åº¦ */
     unsigned int i           = 0;
 
     if (buff == NULL)
@@ -513,13 +513,13 @@ static void *write_usbh_temp_buff(unsigned int dev_id, unsigned int lba, unsigne
         return NULL;
     }
 
-    //--<1>--ÔÚÏÖÓĞµÄbuffÀïÃæÈ¥Ñ°ÕÒºÏÊÊµÄbuff
+    //--<1>--åœ¨ç°æœ‰çš„buffé‡Œé¢å»å¯»æ‰¾åˆé€‚çš„buff
     for (i = 0; i < buff_mgr->temp_buff_nr; i++)
     {
-        //dev_idÆ¥Åä, ²¢ÇÒÕâ¸öbuffÓĞĞ§, ¾ÍÈ¥È·ÈÏ±¾´Î¶ÁĞ´µÄlbaÊÇ·ñÍêÕûµÄÂäÔÚbuffÄÚ
+        //dev_idåŒ¹é…, å¹¶ä¸”è¿™ä¸ªbuffæœ‰æ•ˆ, å°±å»ç¡®è®¤æœ¬æ¬¡è¯»å†™çš„lbaæ˜¯å¦å®Œæ•´çš„è½åœ¨buffå†…
         if ((dev_id == buff_mgr->buff_array[i].dev_id) && buff_mgr->buff_array[i].is_valid)
         {
-            //Òª¶ÁµÄlbaÂäÔÚbuffÄÚ, ²¢ÇÒsizeÃ»ÓĞ³¬³öbuffµÄ·¶Î§, ¾Í¿ÉÒÔÖ±½Ó¸üĞÂÁË
+            //è¦è¯»çš„lbaè½åœ¨buffå†…, å¹¶ä¸”sizeæ²¡æœ‰è¶…å‡ºbuffçš„èŒƒå›´, å°±å¯ä»¥ç›´æ¥æ›´æ–°äº†
             if ((buff_mgr->buff_array[i].start_lba <= (lba + size))
                 && ((lba + size) < buff_mgr->buff_array[i].end_lba)
                 && (buff_mgr->buff_array[i].start_lba <= lba)
@@ -536,7 +536,7 @@ static void *write_usbh_temp_buff(unsigned int dev_id, unsigned int lba, unsigne
 
                 buff_mgr->buff_array[i].used_time++;
                 memcpy((void *)((unsigned char *)(buff_mgr->buff_array[i].buff) + buff_start), buff, buff_len);
-                //ÕâÀï·µ»ØblkµÄÆ«ÒÆµØÖ·
+                //è¿™é‡Œè¿”å›blkçš„åç§»åœ°å€
                 //return buff_mgr->buff_array[i].buff;
                 return (void *)((unsigned char *)(buff_mgr->buff_array[i].buff) + buff_start);
             }
@@ -551,34 +551,34 @@ static void *write_usbh_temp_buff(unsigned int dev_id, unsigned int lba, unsigne
 *                     usbh_msc_special_read
 *
 * Description:
-*     Í¨¹ıusbh_temp_buff¹ÜÀíÀ´¶ÁÈ¡Éè±¸µÄÊı¾İ, Èç¹ûusbh_temp_buffÀïÃæÓĞ
-* ÏëÒªµÄÊı¾İ£¬¾Í´Óusbh_temp_buffÀï¶Á¡£·ñÔòÖ±½ÓÏòdevice¶ÁÈ¡Êı¾İ¡£
+*     é€šè¿‡usbh_temp_buffç®¡ç†æ¥è¯»å–è®¾å¤‡çš„æ•°æ®, å¦‚æœusbh_temp_buffé‡Œé¢æœ‰
+* æƒ³è¦çš„æ•°æ®ï¼Œå°±ä»usbh_temp_buffé‡Œè¯»ã€‚å¦åˆ™ç›´æ¥å‘deviceè¯»å–æ•°æ®ã€‚
 *
 * Arguments:
-*     pBuffer           :  output. ½ÓÊÕ±¾´Î¶ÁµÄÊı¾İ
-*     blk               :  input.  ±¾´Î¶ÁĞ´µÄÆğÊ¼ÉÈÇø
-*     n                 :  input.  ±¾´Î¶ÁĞ´µÄÉÈÇø¸öÊı
-*     hDev              :  input.  Éè±¸¾ä±ú
-*     dev_id            :  input.  Éè±¸ºÅ
-*     blk_read_entry    :  input.  ¿éÉè±¸¶Áº¯ÊıµÄÈë¿Ú, Èçsd_read.
+*     pBuffer           :  output. æ¥æ”¶æœ¬æ¬¡è¯»çš„æ•°æ®
+*     blk               :  input.  æœ¬æ¬¡è¯»å†™çš„èµ·å§‹æ‰‡åŒº
+*     n                 :  input.  æœ¬æ¬¡è¯»å†™çš„æ‰‡åŒºä¸ªæ•°
+*     hDev              :  input.  è®¾å¤‡å¥æŸ„
+*     dev_id            :  input.  è®¾å¤‡å·
+*     blk_read_entry    :  input.  å—è®¾å¤‡è¯»å‡½æ•°çš„å…¥å£, å¦‚sd_read.
 *
 * Returns:
-*     ·µ»Ø¶Á³É¹¦µÄblkÊı
+*     è¿”å›è¯»æˆåŠŸçš„blkæ•°
 * note:
 *
-*  usbh_temp_buff¶ÁµÄ²ßÂÔÊÇ:
+*  usbh_temp_buffè¯»çš„ç­–ç•¥æ˜¯:
 *
-*      1¡¢user buffer sizeĞ¡ÓÚusb temp buffer size
-*      (1)¡¢²éÑ¯µ¥¸ötemp bufferÀïÓĞ¶àÉÙÓĞĞ§Êı¾İ, ²éÑ¯ÓĞĞ§Êı¾İ×î´óµÄÄÄ¸öbuffer
-*      (2)¡¢Èç¹ûÂú×ãuser bufferµÄÒªÇó, ¾Í·µ»Ø¡£
-*      (3)¡¢Èç¹û²»ÄÜ¹»Âú×ã£¬¾Í¿ªÆôÁíÍâÒ»¸öusb temp buffer
-*           ´ÓdeviceÈ¡Êı¾İ£¬°ÑÓĞĞ§Êı¾İcopyµ½user bufferÖĞ¡£
+*      1ã€user buffer sizeå°äºusb temp buffer size
+*      (1)ã€æŸ¥è¯¢å•ä¸ªtemp bufferé‡Œæœ‰å¤šå°‘æœ‰æ•ˆæ•°æ®, æŸ¥è¯¢æœ‰æ•ˆæ•°æ®æœ€å¤§çš„å“ªä¸ªbuffer
+*      (2)ã€å¦‚æœæ»¡è¶³user bufferçš„è¦æ±‚, å°±è¿”å›ã€‚
+*      (3)ã€å¦‚æœä¸èƒ½å¤Ÿæ»¡è¶³ï¼Œå°±å¼€å¯å¦å¤–ä¸€ä¸ªusb temp buffer
+*           ä»deviceå–æ•°æ®ï¼ŒæŠŠæœ‰æ•ˆæ•°æ®copyåˆ°user bufferä¸­ã€‚
 *
-*      2¡¢user buffer size´óÓÚµÈÓÚusb temp buffer size
-*      (1)¡¢´Óusb temp bufferÀïÈ¡ÓĞĞ§Êı¾İ
-*      (2)¡¢Èç¹ûÊ£ÓàÊı¾İ´óÓÚµÈÓÚusb temp buffer size£¬¾ÍÖ±½ÓÓÃuser buffer´ÓÉè±¸È¡Êı¾İ
-*      (3)¡¢Èç¹ûÊ£ÓàÊı¾İĞ¡ÓÚusb temp buffer size£¬¾Í¿ªÆôÁíÍâÒ»¸öusb temp buffer
-*           ´ÓdeviceÈ¡Êı¾İ£¬°ÑÓĞĞ§Êı¾İcopyµ½user bufferÖĞ¡£
+*      2ã€user buffer sizeå¤§äºç­‰äºusb temp buffer size
+*      (1)ã€ä»usb temp bufferé‡Œå–æœ‰æ•ˆæ•°æ®
+*      (2)ã€å¦‚æœå‰©ä½™æ•°æ®å¤§äºç­‰äºusb temp buffer sizeï¼Œå°±ç›´æ¥ç”¨user bufferä»è®¾å¤‡å–æ•°æ®
+*      (3)ã€å¦‚æœå‰©ä½™æ•°æ®å°äºusb temp buffer sizeï¼Œå°±å¼€å¯å¦å¤–ä¸€ä¸ªusb temp buffer
+*           ä»deviceå–æ•°æ®ï¼ŒæŠŠæœ‰æ•ˆæ•°æ®copyåˆ°user bufferä¸­ã€‚
 *
 ********************************************************************************************************
 */
@@ -592,10 +592,10 @@ int usbh_msc_special_read(void *pBuffer,
                           void *blk_read_entry)
 {
     unsigned char *Buffer_temp   = (unsigned char *)pBuffer;
-    unsigned int temp_sector_1 = 0;            //±¾´ÎËùÒª¶ÁĞ´µÄÊı¾İ³¤¶È
-    unsigned int total_len     = 0;            //±¾´ÎËùÒª¶ÁĞ´µÄÊı¾İ³¤¶È
-    unsigned int left_sector   = 0;            /* Ê£ÓàÉÈÇø¸öÊı  */
-    //  unsigned int sector_nr     = 0;            //±¾´Î³É¹¦¶ÁÈ¡µÄÉÈÇø¸öÊı
+    unsigned int temp_sector_1 = 0;            //æœ¬æ¬¡æ‰€è¦è¯»å†™çš„æ•°æ®é•¿åº¦
+    unsigned int total_len     = 0;            //æœ¬æ¬¡æ‰€è¦è¯»å†™çš„æ•°æ®é•¿åº¦
+    unsigned int left_sector   = 0;            /* å‰©ä½™æ‰‡åŒºä¸ªæ•°  */
+    //  unsigned int sector_nr     = 0;            //æœ¬æ¬¡æˆåŠŸè¯»å–çš„æ‰‡åŒºä¸ªæ•°
     void *usbh_temp_buff = NULL;        //usbh_temp_buff
     usbh_buff_manager_t *buff_mgr = &usbh_buff_manager;
     buff_blk_func_t buff_blk_read;
@@ -616,13 +616,13 @@ int usbh_msc_special_read(void *pBuffer,
 
     if (total_len < usbh_temp_buff_max_len())
     {
-    	unsigned int buff_num = 0;
-        //(1)¡¢²éÑ¯µ¥¸ötemp bufferÀïÓĞ¶àÉÙÓĞĞ§Êı¾İ, ²éÑ¯ÓĞĞ§Êı¾İ×î´óµÄÄÄ¸öbuffer
+        unsigned int buff_num = 0;
+        //(1)ã€æŸ¥è¯¢å•ä¸ªtemp bufferé‡Œæœ‰å¤šå°‘æœ‰æ•ˆæ•°æ®, æŸ¥è¯¢æœ‰æ•ˆæ•°æ®æœ€å¤§çš„å“ªä¸ªbuffer
         temp_sector_1 = read_usbh_temp_buff(dev_id, blk, n, pBuffer, 0);
         //DMSG_TEMP_TEST("read: --<1-1>--, secter_size = %d, blk = %d, n = %d, temp_sector_1 = %d\n",
          //              secter_size, blk, n, temp_sector_1);
 
-        //(2)¡¢Èç¹ûÂú×ãuser bufferµÄÒªÇó, ¾Í·µ»Ø¡£
+        //(2)ã€å¦‚æœæ»¡è¶³user bufferçš„è¦æ±‚, å°±è¿”å›ã€‚
         if (temp_sector_1 >= n)
         {
             ////DMSG_TEMP_TEST("read: --<1-2>--, secter_size = %d, blk = %d, n = %d, temp_sector_1 = %d\n",
@@ -631,20 +631,20 @@ int usbh_msc_special_read(void *pBuffer,
         }
 
         /*
-        (3)¡¢Èç¹û²»ÄÜ¹»Âú×ã£¬¾Í¿ªÆôÁíÍâÒ»¸öusb temp buffer
-             ´ÓdeviceÈ¡Êı¾İ£¬°ÑÓĞĞ§Êı¾İcopyµ½user bufferÖĞ¡£
+        (3)ã€å¦‚æœä¸èƒ½å¤Ÿæ»¡è¶³ï¼Œå°±å¼€å¯å¦å¤–ä¸€ä¸ªusb temp buffer
+             ä»deviceå–æ•°æ®ï¼ŒæŠŠæœ‰æ•ˆæ•°æ®copyåˆ°user bufferä¸­ã€‚
         */
-        //--<3-1>--ÌôÑ¡Ò»¸öÎŞÓÃµÄbuff, È¥deviceÀïÈ¡Êı¾İ
+        //--<3-1>--æŒ‘é€‰ä¸€ä¸ªæ— ç”¨çš„buff, å»deviceé‡Œå–æ•°æ®
         usbh_temp_buff = select_invalid_usbh_temp_buff(&buff_num);
 
         if (usbh_temp_buff == NULL)
         {
             //DMSG_PANIC("ERR: select_invalid_usbh_temp_buff failed\n");
-            //¼ÈÈ»²»ÄÜÔÙÊ¹ÓÃusbh_temp_buffÁË, ¾ÍÖ±½Ó¶Á°É
+            //æ—¢ç„¶ä¸èƒ½å†ä½¿ç”¨usbh_temp_buffäº†, å°±ç›´æ¥è¯»å§
             return buff_blk_read(pBuffer, blk, n, hDev);
         }
 
-        //--<3-2>--´ÓÉè±¸¶ÁÊı¾İ
+        //--<3-2>--ä»è®¾å¤‡è¯»æ•°æ®
         set_usbh_temp_buff_busy(buff_num);
         temp_sector_1 = buff_blk_read(usbh_temp_buff, blk, buff_mgr->temp_buff_len / secter_size, hDev);
         set_usbh_temp_buff_free(buff_num);
@@ -655,9 +655,9 @@ int usbh_msc_special_read(void *pBuffer,
             return 0;
         }
 
-        //--<3-3>--ÉèÖÃÕâ¸öbuffÓĞĞ§
+        //--<3-3>--è®¾ç½®è¿™ä¸ªbuffæœ‰æ•ˆ
         set_usbh_temp_buff_valid(buff_num, dev_id, blk, secter_size);
-        //--<3-4>--°Ñ´ÓÉè±¸¶ÁÊı¾İ, ´«µİ¸øfs
+        //--<3-4>--æŠŠä»è®¾å¤‡è¯»æ•°æ®, ä¼ é€’ç»™fs
         memcpy(pBuffer, usbh_temp_buff, total_len);
         //DMSG_TEMP_TEST("memcpy1: pBuffer = %x,pBuffer_s = %x, pBuffer_e = %x\n",
                        //(unsigned int)pBuffer, Buffer_temp, Buffer_temp + total_len);
@@ -667,15 +667,15 @@ int usbh_msc_special_read(void *pBuffer,
     }
     else
     {
-    	unsigned int buff_num = 0;
-        //(1)¡¢´Óusb temp bufferÀïÈ¡ÓĞĞ§Êı¾İ
+        unsigned int buff_num = 0;
+        //(1)ã€ä»usb temp bufferé‡Œå–æœ‰æ•ˆæ•°æ®
         temp_sector_1 = read_usbh_temp_buff(dev_id, blk, n, pBuffer, 1);
         //DMSG_TEMP_TEST("read: --<2-1>--, secter_size = %d, blk = %d, n = %d, temp_sector_1 = %d\n",
                        //secter_size, blk, n, temp_sector_1);
 
         if (((n - temp_sector_1) * secter_size) >= usbh_temp_buff_max_len())
         {
-            //(2)¡¢Èç¹ûÊ£ÓàÊı¾İ´óÓÚµÈÓÚusb temp buffer size£¬¾ÍÖ±½ÓÓÃuser buffer´ÓÉè±¸È¡Êı¾İ
+            //(2)ã€å¦‚æœå‰©ä½™æ•°æ®å¤§äºç­‰äºusb temp buffer sizeï¼Œå°±ç›´æ¥ç”¨user bufferä»è®¾å¤‡å–æ•°æ®
             left_sector = buff_blk_read(Buffer_temp + (temp_sector_1 * secter_size),
                                         (blk + temp_sector_1),
                                         (n - temp_sector_1),
@@ -697,19 +697,19 @@ int usbh_msc_special_read(void *pBuffer,
         }
         else
         {
-            /* (3)¡¢Èç¹ûÊ£ÓàÊı¾İĞ¡ÓÚusb temp buffer size£¬¾Í¿ªÆôÁíÍâÒ»¸öusb temp buffer
-                    ´ÓdeviceÈ¡Êı¾İ£¬°ÑÓĞĞ§Êı¾İcopyµ½user bufferÖĞ¡£ */
-            //--<3-1>--ÌôÑ¡Ò»¸öÎŞÓÃµÄbuff, È¥deviceÀïÈ¡Êı¾İ
+            /* (3)ã€å¦‚æœå‰©ä½™æ•°æ®å°äºusb temp buffer sizeï¼Œå°±å¼€å¯å¦å¤–ä¸€ä¸ªusb temp buffer
+                    ä»deviceå–æ•°æ®ï¼ŒæŠŠæœ‰æ•ˆæ•°æ®copyåˆ°user bufferä¸­ã€‚ */
+            //--<3-1>--æŒ‘é€‰ä¸€ä¸ªæ— ç”¨çš„buff, å»deviceé‡Œå–æ•°æ®
             usbh_temp_buff = select_invalid_usbh_temp_buff(&buff_num);
 
             if (usbh_temp_buff == NULL)
             {
                 //DMSG_PANIC("ERR: select_invalid_usbh_temp_buff failed\n");
-                //¼ÈÈ»²»ÄÜÔÙÊ¹ÓÃusbh_temp_buffÁË, ¾ÍÖ±½Ó¶Á°É
+                //æ—¢ç„¶ä¸èƒ½å†ä½¿ç”¨usbh_temp_buffäº†, å°±ç›´æ¥è¯»å§
                 return buff_blk_read(pBuffer, blk, n, hDev);
             }
 
-            //--<3-2>--´ÓÉè±¸¶ÁÊı¾İ
+            //--<3-2>--ä»è®¾å¤‡è¯»æ•°æ®
             set_usbh_temp_buff_busy(buff_num);
             left_sector = buff_blk_read(usbh_temp_buff, (blk + temp_sector_1), buff_mgr->temp_buff_len / secter_size, hDev);
             set_usbh_temp_buff_free(buff_num);
@@ -720,9 +720,9 @@ int usbh_msc_special_read(void *pBuffer,
                 return 0;
             }
 
-            //--<3-3>--ÉèÖÃÕâ¸öbuffÓĞĞ§
+            //--<3-3>--è®¾ç½®è¿™ä¸ªbuffæœ‰æ•ˆ
             set_usbh_temp_buff_valid(buff_num, dev_id, (blk + temp_sector_1), secter_size);
-            //--<3-4>--°Ñ´ÓÉè±¸¶ÁÊı¾İ, ´«µİ¸øfs
+            //--<3-4>--æŠŠä»è®¾å¤‡è¯»æ•°æ®, ä¼ é€’ç»™fs
             memcpy(Buffer_temp + (temp_sector_1 * secter_size),
                           usbh_temp_buff,
                          ((n - temp_sector_1) * secter_size));
@@ -741,22 +741,22 @@ int usbh_msc_special_read(void *pBuffer,
 *                     usbh_msc_special_read
 *
 * Description:
-*     Í¨¹ıusbh_temp_buff¹ÜÀíÀ´¶ÁÈ¡Éè±¸µÄÊı¾İ, Èç¹ûusbh_temp_buffÀïÃæÓĞ
-* ÏëÒªµÄÊı¾İ£¬¾Í´Óusbh_temp_buffÀï¶Á¡£·ñÔòÖ±½ÓÏòdevice¶ÁÈ¡Êı¾İ¡£
+*     é€šè¿‡usbh_temp_buffç®¡ç†æ¥è¯»å–è®¾å¤‡çš„æ•°æ®, å¦‚æœusbh_temp_buffé‡Œé¢æœ‰
+* æƒ³è¦çš„æ•°æ®ï¼Œå°±ä»usbh_temp_buffé‡Œè¯»ã€‚å¦åˆ™ç›´æ¥å‘deviceè¯»å–æ•°æ®ã€‚
 *
 * Arguments:
-*     pBuffer           :  output. ½ÓÊÕ±¾´Î¶ÁµÄÊı¾İ
-*     blk               :  input.  ±¾´Î¶ÁĞ´µÄÆğÊ¼ÉÈÇø
-*     n                 :  input.  ±¾´Î¶ÁĞ´µÄÉÈÇø¸öÊı
-*     hDev              :  input.  Éè±¸¾ä±ú
-*     dev_id            :  input.  Éè±¸ºÅ
-*     blk_read_entry    :  input.  ¿éÉè±¸¶Áº¯ÊıµÄÈë¿Ú, Èçsd_read.
+*     pBuffer           :  output. æ¥æ”¶æœ¬æ¬¡è¯»çš„æ•°æ®
+*     blk               :  input.  æœ¬æ¬¡è¯»å†™çš„èµ·å§‹æ‰‡åŒº
+*     n                 :  input.  æœ¬æ¬¡è¯»å†™çš„æ‰‡åŒºä¸ªæ•°
+*     hDev              :  input.  è®¾å¤‡å¥æŸ„
+*     dev_id            :  input.  è®¾å¤‡å·
+*     blk_read_entry    :  input.  å—è®¾å¤‡è¯»å‡½æ•°çš„å…¥å£, å¦‚sd_read.
 *
 * Returns:
-*     ·µ»Ø¶Á³É¹¦µÄblkÊı
+*     è¿”å›è¯»æˆåŠŸçš„blkæ•°
 * note:
 *
-*  usbh_temp_buff¶ÁµÄ²ßÂÔÊÇ:
+*  usbh_temp_buffè¯»çš„ç­–ç•¥æ˜¯:
 *
 ********************************************************************************************************
 */
@@ -769,8 +769,8 @@ int usbh_msc_special_read(void *pBuffer,
                           void *blk_read_entry)
 {
     unsigned char *Buffer_temp = (unsigned char *)pBuffer;
-    unsigned int this_len = 0;   //±¾´ÎËùÒª¶ÁĞ´µÄÊı¾İ³¤¶È
-    unsigned int sector_nr = 0;  //±¾´Î³É¹¦¶ÁÈ¡µÄÉÈÇø¸öÊı
+    unsigned int this_len = 0;   //æœ¬æ¬¡æ‰€è¦è¯»å†™çš„æ•°æ®é•¿åº¦
+    unsigned int sector_nr = 0;  //æœ¬æ¬¡æˆåŠŸè¯»å–çš„æ‰‡åŒºä¸ªæ•°
     void *usbh_temp_buff = NULL;   //usbh_temp_buff
     usbh_buff_manager_t *buff_mgr = &usbh_buff_manager;
     buff_blk_func_t buff_blk_read;
@@ -784,10 +784,10 @@ int usbh_msc_special_read(void *pBuffer,
         return 0;
     }
 
-    //--<2>--Âú×ãÈçÏÂÖ®Ò», ¾ÍÊ¹ÓÃusbh_temp_buff
-    /* 1¡¢Ã»ÓĞ³¬³öÁËusbh_temp_buffµÄ×î´ó·¶Î§
-     * 2¡¢pBufferµØÖ·ÎïÀí²»Á¬Ğø
-     * 3¡¢µØÖ·²»¶ÔÆä
+    //--<2>--æ»¡è¶³å¦‚ä¸‹ä¹‹ä¸€, å°±ä½¿ç”¨usbh_temp_buff
+    /* 1ã€æ²¡æœ‰è¶…å‡ºäº†usbh_temp_buffçš„æœ€å¤§èŒƒå›´
+     * 2ã€pBufferåœ°å€ç‰©ç†ä¸è¿ç»­
+     * 3ã€åœ°å€ä¸å¯¹å…¶
      */
     sector_nr = n;
     this_len = n * secter_size;
@@ -796,7 +796,7 @@ int usbh_msc_special_read(void *pBuffer,
     if (this_len <= usbh_temp_buff_max_len())
     {
         int ret = 0;
-        //--<3-1>--³¢ÊÔµ½usbh_temp_buffÀï¶Á, ¶Á³É¹¦¾ÍÖ±½ÓÉÁÈË
+        //--<3-1>--å°è¯•åˆ°usbh_temp_buffé‡Œè¯», è¯»æˆåŠŸå°±ç›´æ¥é—ªäºº
         /*
                 if(read_usbh_temp_buff(dev_id, blk, n, pBuffer) == 0){
                     return sector_nr;
@@ -806,7 +806,7 @@ int usbh_msc_special_read(void *pBuffer,
 
         if (sector_nr)
         {
-            /* Èç¹ûÏÖÓĞµÄbufferÀïÃæÓĞÒ»°ëÒÔÉÏµÄÊı¾İ¿ÉÓÃ, ¾ÍÏÈ´ÓbufferÀïÈ¡Êı¾İ, ÔÙÏòÉè±¸È¥Ê£ÓàÊı¾İ */
+            /* å¦‚æœç°æœ‰çš„bufferé‡Œé¢æœ‰ä¸€åŠä»¥ä¸Šçš„æ•°æ®å¯ç”¨, å°±å…ˆä»bufferé‡Œå–æ•°æ®, å†å‘è®¾å¤‡å»å‰©ä½™æ•°æ® */
             if (sector_nr /*> (n/2)*/)
             {
                 sector_nr = read_usbh_temp_buff(dev_id, blk, n, pBuffer, 1);
@@ -823,17 +823,17 @@ int usbh_msc_special_read(void *pBuffer,
             }
         }
 
-        //--<3-2>--ÌôÑ¡Ò»¸öÎŞÓÃµÄbuff, È¥deviceÀïÈ¡Êı¾İ
+        //--<3-2>--æŒ‘é€‰ä¸€ä¸ªæ— ç”¨çš„buff, å»deviceé‡Œå–æ•°æ®
         usbh_temp_buff = select_invalid_usbh_temp_buff();
 
         if (usbh_temp_buff == NULL)
         {
             //DMSG_PANIC("ERR: select_invalid_usbh_temp_buff failed\n");
-            //¼ÈÈ»²»ÄÜÔÙÊ¹ÓÃusbh_temp_buffÁË, ¾ÍÖ±½Ó¶Á°É
+            //æ—¢ç„¶ä¸èƒ½å†ä½¿ç”¨usbh_temp_buffäº†, å°±ç›´æ¥è¯»å§
             return buff_blk_read(pBuffer, blk, n, hDev);
         }
 
-        //--<3-3>--´ÓÉè±¸¶ÁÊı¾İ
+        //--<3-3>--ä»è®¾å¤‡è¯»æ•°æ®
         set_usbh_temp_buff_busy(usbh_temp_buff);
         ret = buff_blk_read(usbh_temp_buff, blk, buff_mgr->temp_buff_len / secter_size, hDev);
         set_usbh_temp_buff_free(usbh_temp_buff);
@@ -844,9 +844,9 @@ int usbh_msc_special_read(void *pBuffer,
             return 0;
         }
 
-        //--<3-2-4>--ÉèÖÃÕâ¸öbuffÓĞĞ§
+        //--<3-2-4>--è®¾ç½®è¿™ä¸ªbuffæœ‰æ•ˆ
         set_usbh_temp_buff_valid(usbh_temp_buff, dev_id, blk, secter_size);
-        //--<3-4>--°Ñ´ÓÉè±¸¶ÁÊı¾İ, ´«µİ¸øfs
+        //--<3-4>--æŠŠä»è®¾å¤‡è¯»æ•°æ®, ä¼ é€’ç»™fs
         memcpy(pBuffer, usbh_temp_buff, this_len);
         return n;
     }
@@ -854,8 +854,8 @@ int usbh_msc_special_read(void *pBuffer,
     {
         /*
          *******************************************************************
-         * ´óÓÚ32k¶ÁµÄÊ±ºò, ²»ÓÃusbh_temp_buffÒ²¾Í²»ÓÃ¸üĞÂusbh_temp_buffÁË
-         * usbh_temp_buffµÄÄÚÈİÒÀ¾ÉºÍdeviceÊÇÍ¬²½µÄ
+         * å¤§äº32kè¯»çš„æ—¶å€™, ä¸ç”¨usbh_temp_buffä¹Ÿå°±ä¸ç”¨æ›´æ–°usbh_temp_buffäº†
+         * usbh_temp_buffçš„å†…å®¹ä¾æ—§å’Œdeviceæ˜¯åŒæ­¥çš„
          *******************************************************************
          */
         sector_nr = read_usbh_temp_buff(dev_id, blk, n, pBuffer, 1);
@@ -885,35 +885,35 @@ int usbh_msc_special_read(void *pBuffer,
 *                     usbh_msc_special_write
 *
 * Description:
-*     Í¨¹ıusbh_temp_buff¹ÜÀíÀ´¶ÁÈ¡Éè±¸µÄÊı¾İ, Èç¹ûusbh_temp_buffÀïÃæÓĞ
-* ÏëÒªµÄÊı¾İ£¬¾Í´Óusbh_temp_buffÀï¶Á¡£·ñÔòÖ±½ÓÏòdevice¶ÁÈ¡Êı¾İ¡£
+*     é€šè¿‡usbh_temp_buffç®¡ç†æ¥è¯»å–è®¾å¤‡çš„æ•°æ®, å¦‚æœusbh_temp_buffé‡Œé¢æœ‰
+* æƒ³è¦çš„æ•°æ®ï¼Œå°±ä»usbh_temp_buffé‡Œè¯»ã€‚å¦åˆ™ç›´æ¥å‘deviceè¯»å–æ•°æ®ã€‚
 *
 * Arguments:
-*     pBuffer           :  input.  ÒªĞ´ÈëdeviceµÄÊı¾İ
-*     blk               :  input.  ±¾´Î¶ÁĞ´µÄÆğÊ¼ÉÈÇø
-*     n                 :  input.  ±¾´Î¶ÁĞ´µÄÉÈÇø¸öÊı
-*     hDev              :  input.  Éè±¸¾ä±ú
-*     dev_id            :  input.  Éè±¸ºÅ
-*     blk_write_entry   :  input.  ¿éÉè±¸¶Áº¯ÊıµÄÈë¿Ú, Èçsd_write.
+*     pBuffer           :  input.  è¦å†™å…¥deviceçš„æ•°æ®
+*     blk               :  input.  æœ¬æ¬¡è¯»å†™çš„èµ·å§‹æ‰‡åŒº
+*     n                 :  input.  æœ¬æ¬¡è¯»å†™çš„æ‰‡åŒºä¸ªæ•°
+*     hDev              :  input.  è®¾å¤‡å¥æŸ„
+*     dev_id            :  input.  è®¾å¤‡å·
+*     blk_write_entry   :  input.  å—è®¾å¤‡è¯»å‡½æ•°çš„å…¥å£, å¦‚sd_write.
 *
 * Returns:
-*     ·µ»Ø¶Á³É¹¦µÄblkÊı
+*     è¿”å›è¯»æˆåŠŸçš„blkæ•°
 * note:
-*  Âú×ãÈçÏÂÖ®Ò», ¾ÍÊ¹ÓÃusbh_temp_buff
-*      1¡¢Ã»ÓĞ³¬³öÁËusbh_temp_buffµÄ×î´ó·¶Î§
-*      2¡¢pBufferµØÖ·ÎïÀí²»Á¬Ğø
-*      3¡¢µØÖ·²»¶ÔÆä
+*  æ»¡è¶³å¦‚ä¸‹ä¹‹ä¸€, å°±ä½¿ç”¨usbh_temp_buff
+*      1ã€æ²¡æœ‰è¶…å‡ºäº†usbh_temp_buffçš„æœ€å¤§èŒƒå›´
+*      2ã€pBufferåœ°å€ç‰©ç†ä¸è¿ç»­
+*      3ã€åœ°å€ä¸å¯¹å…¶
 *
-*  usbh_temp_buffĞ´µÄ²ßÂÔÊÇ:
-*      1¡¢data_len < 32k, pBufferµØÖ·ÎïÀí²»Á¬Ğø, µØÖ·²»¶ÔÆä
-*         (1)¡¢³¢ÊÔ¸üĞÂusbh_temp_buff³É¹¦, ¾ÍÈ¥Ğ´device
-*         (2)¡¢³¢ÊÔ¸üĞÂusbh_temp_buffÊ§°Ü, ¾Í°ÑÏà¹ØµÄusbh_temp_buffÎŞĞ§µô
-*         (3)¡¢µôÑ¡Ò»¸öÎŞĞ§µÄbuff£¬ÓÃÀ´´«ÊäÊı¾İ¡£(ÒòÎªpbuffer¿ÉÄÜÊÇÎïÀí²»Á¬ĞøµÄ)
+*  usbh_temp_buffå†™çš„ç­–ç•¥æ˜¯:
+*      1ã€data_len < 32k, pBufferåœ°å€ç‰©ç†ä¸è¿ç»­, åœ°å€ä¸å¯¹å…¶
+*         (1)ã€å°è¯•æ›´æ–°usbh_temp_buffæˆåŠŸ, å°±å»å†™device
+*         (2)ã€å°è¯•æ›´æ–°usbh_temp_buffå¤±è´¥, å°±æŠŠç›¸å…³çš„usbh_temp_buffæ— æ•ˆæ‰
+*         (3)ã€æ‰é€‰ä¸€ä¸ªæ— æ•ˆçš„buffï¼Œç”¨æ¥ä¼ è¾“æ•°æ®ã€‚(å› ä¸ºpbufferå¯èƒ½æ˜¯ç‰©ç†ä¸è¿ç»­çš„)
 *
-*      2¡¢data_len >= 32k, pBufferµØÖ·ÎïÀíÁ¬Ğø, µØÖ·¶ÔÆä
-*         (1)¡¢°ÑÏà¹ØµÄusbh_temp_buffÎŞĞ§µô
-*         (2)¡¢µôÑ¡Ò»¸öÎŞĞ§µÄbuff, ¸üĞÂ¡£
-*         (3)¡¢ÉèÖÃÕâ¸öbuffÓĞĞ§
+*      2ã€data_len >= 32k, pBufferåœ°å€ç‰©ç†è¿ç»­, åœ°å€å¯¹å…¶
+*         (1)ã€æŠŠç›¸å…³çš„usbh_temp_buffæ— æ•ˆæ‰
+*         (2)ã€æ‰é€‰ä¸€ä¸ªæ— æ•ˆçš„buff, æ›´æ–°ã€‚
+*         (3)ã€è®¾ç½®è¿™ä¸ªbuffæœ‰æ•ˆ
 
 *
 ****************************************************************************
@@ -926,7 +926,7 @@ int usbh_msc_special_write(void *pBuffer,
                            unsigned int secter_size,
                            void *blk_write_entry)
 {
-    unsigned int this_len = 0;     //±¾´ÎËùÒª¶ÁĞ´µÄÊı¾İ³¤¶È
+    unsigned int this_len = 0;     //æœ¬æ¬¡æ‰€è¦è¯»å†™çš„æ•°æ®é•¿åº¦
     void *usbh_temp_buff = NULL;   //usbh_temp_buff
     buff_blk_func_t buff_blk_write;
 
@@ -939,51 +939,51 @@ int usbh_msc_special_write(void *pBuffer,
         return 0;
     }
 
-    //--<3>--Âú×ãÈçÏÂÖ®Ò», ¾ÍÊ¹ÓÃusbh_temp_buff
-    /* 1¡¢Ã»ÓĞ³¬³öÁËusbh_temp_buffµÄ×î´ó·¶Î§
-     * 2¡¢pBufferµØÖ·ÎïÀí²»Á¬Ğø
-     * 3¡¢µØÖ·²»¶ÔÆë
+    //--<3>--æ»¡è¶³å¦‚ä¸‹ä¹‹ä¸€, å°±ä½¿ç”¨usbh_temp_buff
+    /* 1ã€æ²¡æœ‰è¶…å‡ºäº†usbh_temp_buffçš„æœ€å¤§èŒƒå›´
+     * 2ã€pBufferåœ°å€ç‰©ç†ä¸è¿ç»­
+     * 3ã€åœ°å€ä¸å¯¹é½
      */
     this_len = n * secter_size;
     buff_blk_write = (buff_blk_func_t)blk_write_entry;
 
     if (this_len < usbh_temp_buff_max_len())
     {
-    	unsigned int buff_num = 0;
-        //--<3-1-1>--³¢ÊÔ¸üĞÂusbh_temp_buff, ·µ»ØµÄusbh_temp_buff¿ÉÄÜ²¢²»ÊÇbuffµÄÆğÊ¼µØÖ·
+        unsigned int buff_num = 0;
+        //--<3-1-1>--å°è¯•æ›´æ–°usbh_temp_buff, è¿”å›çš„usbh_temp_buffå¯èƒ½å¹¶ä¸æ˜¯buffçš„èµ·å§‹åœ°å€
         usbh_temp_buff = write_usbh_temp_buff(dev_id, blk, n, pBuffer);
 
         if (usbh_temp_buff != NULL)
         {
-            //¸üĞÂ³É¹¦, ¾ÍÖ±½Ó¿ªÊ¼Ğ´ÁË
+            //æ›´æ–°æˆåŠŸ, å°±ç›´æ¥å¼€å§‹å†™äº†
             return buff_blk_write(usbh_temp_buff, blk, n, hDev);
         }
 
-        //¸üĞÂÊ§°Ü, ¾ÍÉèÖÃÕâ¸öbuffÎŞĞ§
-        //ÓĞĞ©buff´æ·ÅÁË²¿·ÖÄÚÈİ,ÕâÀï±ØĞë°ÑÕâ²¿·ÖÄÚÈİÎŞĞ§µô
+        //æ›´æ–°å¤±è´¥, å°±è®¾ç½®è¿™ä¸ªbuffæ— æ•ˆ
+        //æœ‰äº›buffå­˜æ”¾äº†éƒ¨åˆ†å†…å®¹,è¿™é‡Œå¿…é¡»æŠŠè¿™éƒ¨åˆ†å†…å®¹æ— æ•ˆæ‰
         set_usbh_temp_buff_invalid(dev_id, blk);
-        //--<3-1-2>--ÌôÑ¡Ò»¸öÎŞÓÃµÄbuff, Õâ¸öbuff½ö½öÊÇÎªÁË´«Êı¾İ
+        //--<3-1-2>--æŒ‘é€‰ä¸€ä¸ªæ— ç”¨çš„buff, è¿™ä¸ªbuffä»…ä»…æ˜¯ä¸ºäº†ä¼ æ•°æ®
         usbh_temp_buff = select_invalid_usbh_temp_buff(&buff_num);
 
         if (usbh_temp_buff == NULL)
         {
             //DMSG_PANIC("ERR: select_invalid_usbh_temp_buff failed\n");
-            //¼ÈÈ»²»ÄÜÔÙÊ¹ÓÃusbh_temp_buffÁË, ¾ÍÖ±½ÓĞ´°Ñ
+            //æ—¢ç„¶ä¸èƒ½å†ä½¿ç”¨usbh_temp_buffäº†, å°±ç›´æ¥å†™æŠŠ
             return buff_blk_write(pBuffer, blk, n, hDev);
         }
 
         memcpy(usbh_temp_buff, pBuffer, this_len);
         /*
          **********************************************************
-         * ÕâÀïÒòÎªthis_len²»Âú32k,ËùÒÔ²»ÄÜÉèÖÃusbh_temp_buffÓĞĞ§
+         * è¿™é‡Œå› ä¸ºthis_lenä¸æ»¡32k,æ‰€ä»¥ä¸èƒ½è®¾ç½®usbh_temp_buffæœ‰æ•ˆ
          **********************************************************
          */
-        //--<3-1-3>--ÓÃusbh_temp_buffÀ´½øĞĞĞ´
+        //--<3-1-3>--ç”¨usbh_temp_buffæ¥è¿›è¡Œå†™
         return buff_blk_write(usbh_temp_buff, blk, n, hDev);
     }
     else
     {
-        //Êı¾İ´óÓÚ32k, ¾ÍÉèÖÃÓëdev_idÆ¥ÅäµÄbufferÎŞĞ§
+        //æ•°æ®å¤§äº32k, å°±è®¾ç½®ä¸dev_idåŒ¹é…çš„bufferæ— æ•ˆ
         set_usbh_temp_buff_invalid_by_dev(dev_id);
         return buff_blk_write(pBuffer, blk, n, hDev);
     }
@@ -994,7 +994,7 @@ int usbh_msc_special_write(void *pBuffer,
 *                     init_usbh_buff_manager
 *
 * Description:
-*     ³õÊ¼»¯ usbh ÁÙÊ±buffer£¬ÓÃÀ´Ìá¸ßUSBHµÄ¶ÁĞ´ËÙ¶È
+*     åˆå§‹åŒ– usbh ä¸´æ—¶bufferï¼Œç”¨æ¥æé«˜USBHçš„è¯»å†™é€Ÿåº¦
 * Arguments:
 *
 * Returns:
@@ -1009,21 +1009,21 @@ int init_usbh_buff_manager(void)
     usbh_buff_manager_t *buff_mgr = &usbh_buff_manager;
     unsigned int i = 0;
     unsigned int page = 0;
-    //--<1>--³õÊ¼»¯usbh_buff_manager
+    //--<1>--åˆå§‹åŒ–usbh_buff_manager
     memset(buff_mgr, 0, sizeof(usbh_buff_manager_t));
     buff_mgr->temp_buff_nr  = USBH_TEMP_BUFFER_MAX_NUM;
     buff_mgr->temp_buff_len = USBH_TEMP_BUFFER_MAX_LEN;
     page = ((buff_mgr->temp_buff_len + 1023) >> 10) << 10;
     //DMSG_INFO("usb temp buffer size is %d\n", buff_mgr->temp_buff_len);
 
-    //--<2>--¹¹Ôì²¢ÇÒ³õÊ¼»¯Ã¿Ò»¸ötemp_buff
+    //--<2>--æ„é€ å¹¶ä¸”åˆå§‹åŒ–æ¯ä¸€ä¸ªtemp_buff
     for (i = 0; i < buff_mgr->temp_buff_nr; i++)
     {
         buff_mgr->buff_array[i].buff = (void *)hal_malloc(page);
 
         if (buff_mgr->buff_array[i].buff == NULL)
         {
-            //·ÖÅäÊ§°Ü,¾Í·ÅÆúÊ¹ÓÃ»º³å»úÖÆ
+            //åˆ†é…å¤±è´¥,å°±æ”¾å¼ƒä½¿ç”¨ç¼“å†²æœºåˆ¶
             //DMSG_PANIC("ERR: init_usbh_buff_manager: USB_OS_PAGE_MALLOC failed\n");
             goto failed;
         }
@@ -1059,7 +1059,7 @@ failed:
 *                     exit_usbh_buff_manager
 *
 * Description:
-*     sdĞÅÏ¢Éè±¸£¬Ä¿Ç°Ö÷ÒªÓÃÓÚ¼à²âsdÉè±¸µÄ¶ÁĞ´Çé¿ö
+*     sdä¿¡æ¯è®¾å¤‡ï¼Œç›®å‰ä¸»è¦ç”¨äºç›‘æµ‹sdè®¾å¤‡çš„è¯»å†™æƒ…å†µ
 * Arguments:
 *
 * Returns:

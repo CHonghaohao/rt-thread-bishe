@@ -40,8 +40,8 @@
 #include "speex_resampler.h"
 
 struct rate_src {
-	int quality;
-	unsigned int channels;
+    int quality;
+    unsigned int channels;
         SpeexResamplerState *st;
 };
 
@@ -114,7 +114,7 @@ static void pcm_src_reset(void *obj)
 }
 
 static void pcm_src_convert_s16(void *obj, int16_t *dst, unsigned int dst_frames,
-				const int16_t *src, unsigned int src_frames)
+                const int16_t *src, unsigned int src_frames)
 {
    struct rate_src *rate = obj;
    speex_resampler_process_interleaved_int(rate->st, src, &src_frames, dst, &dst_frames);
@@ -122,7 +122,7 @@ static void pcm_src_convert_s16(void *obj, int16_t *dst, unsigned int dst_frames
 
 #ifdef SND_PCM_RATE_FIX_PERIOD_SIZE
 static void pcm_src_convert_s16_fix(void *obj, int16_t *dst, unsigned int *dst_frames,
-				const int16_t *src, unsigned int *src_frames)
+                const int16_t *src, unsigned int *src_frames)
 {
    struct rate_src *rate = obj;
    speex_resampler_process_interleaved_int(rate->st, src, src_frames, dst, dst_frames);
@@ -136,72 +136,72 @@ static void pcm_src_close(void *obj)
 
 #if SND_PCM_RATE_PLUGIN_VERSION >= 0x010002
 static int get_supported_rates(void *obj, unsigned int *rate_min,
-			       unsigned int *rate_max)
+                   unsigned int *rate_max)
 {
-	*rate_min = *rate_max = 0; /* both unlimited */
-	return 0;
+    *rate_min = *rate_max = 0; /* both unlimited */
+    return 0;
 }
 #if 0
 static void dump(void *obj, snd_output_t *out)
 {
-	snd_output_printf(out, "Converter: libspeex "
+    snd_output_printf(out, "Converter: libspeex "
 #ifdef USE_LIBSPEEX
-			  "(external)"
+              "(external)"
 #else
-			  "(builtin)"
+              "(builtin)"
 #endif
-			  "\n");
+              "\n");
 }
 #endif
 #endif
 
 static snd_pcm_rate_ops_t pcm_src_ops = {
-	.close = pcm_src_close,
-	.init = pcm_src_init,
-	.free = pcm_src_free,
-	.reset = pcm_src_reset,
-	.adjust_pitch = pcm_src_adjust_pitch,
-	.convert_s16 = pcm_src_convert_s16,
+    .close = pcm_src_close,
+    .init = pcm_src_init,
+    .free = pcm_src_free,
+    .reset = pcm_src_reset,
+    .adjust_pitch = pcm_src_adjust_pitch,
+    .convert_s16 = pcm_src_convert_s16,
 #ifdef SND_PCM_RATE_FIX_PERIOD_SIZE
-	.convert_s16_fix = pcm_src_convert_s16_fix,
+    .convert_s16_fix = pcm_src_convert_s16_fix,
 #endif
-	.input_frames = input_frames,
-	.output_frames = output_frames,
+    .input_frames = input_frames,
+    .output_frames = output_frames,
 #if SND_PCM_RATE_PLUGIN_VERSION >= 0x010002
-	.version = SND_PCM_RATE_PLUGIN_VERSION,
-	.get_supported_rates = get_supported_rates,
-//	.dump = dump,
+    .version = SND_PCM_RATE_PLUGIN_VERSION,
+    .get_supported_rates = get_supported_rates,
+//  .dump = dump,
 #endif
 };
 
 static int pcm_src_open(unsigned int version, void **objp,
-			snd_pcm_rate_ops_t *ops, int quality)
+            snd_pcm_rate_ops_t *ops, int quality)
 {
-	struct rate_src *rate;
+    struct rate_src *rate;
 
 #if SND_PCM_RATE_PLUGIN_VERSION < 0x010002
-	if (version != SND_PCM_RATE_PLUGIN_VERSION) {
-		fprintf(stderr, "Invalid rate plugin version %x\n", version);
-		return -EINVAL;
-	}
+    if (version != SND_PCM_RATE_PLUGIN_VERSION) {
+        fprintf(stderr, "Invalid rate plugin version %x\n", version);
+        return -EINVAL;
+    }
 #endif
-	rate = calloc(1, sizeof(*rate));
-	if (! rate)
-		return -ENOMEM;
-	rate->quality = quality;
+    rate = calloc(1, sizeof(*rate));
+    if (! rate)
+        return -ENOMEM;
+    rate->quality = quality;
 
-	*objp = rate;
+    *objp = rate;
 #if SND_PCM_RATE_PLUGIN_VERSION >= 0x010002
-	//if (version == 0x010001)
-	//	memcpy(ops, &pcm_src_ops, sizeof(snd_pcm_rate_old_ops_t));
-	//else
+    //if (version == 0x010001)
+    //  memcpy(ops, &pcm_src_ops, sizeof(snd_pcm_rate_old_ops_t));
+    //else
 #endif
-		*ops = pcm_src_ops;
-	return 0;
+        *ops = pcm_src_ops;
+    return 0;
 }
 
 int SND_PCM_RATE_PLUGIN_ENTRY(speexrate) (unsigned int version, void **objp,
-					   snd_pcm_rate_ops_t *ops)
+                       snd_pcm_rate_ops_t *ops)
 {
-	return pcm_src_open(version, objp, ops, 3);
+    return pcm_src_open(version, objp, ops, 3);
 }

@@ -41,7 +41,7 @@ extern "C" {
  * @brief Mutex object definition
  */
 typedef struct OS_Mutex {
-	rt_mutex_t	handle;
+    rt_mutex_t  handle;
 } OS_Mutex_t;
 
 OS_Status OS_MutexCreate(OS_Mutex_t *mutex);
@@ -59,7 +59,7 @@ OS_Status OS_MutexUnlock(OS_Mutex_t *mutex);
  */
 static inline OS_Status OS_RecursiveMutexCreate(OS_Mutex_t *mutex)
 {
-	return OS_MutexCreate(mutex);
+    return OS_MutexCreate(mutex);
 }
 
 /**
@@ -69,7 +69,7 @@ static inline OS_Status OS_RecursiveMutexCreate(OS_Mutex_t *mutex)
  */
 static inline OS_Status OS_RecursiveMutexDelete(OS_Mutex_t *mutex)
 {
-	return OS_MutexDelete(mutex);
+    return OS_MutexDelete(mutex);
 }
 
 /**
@@ -86,7 +86,7 @@ static inline OS_Status OS_RecursiveMutexDelete(OS_Mutex_t *mutex)
  */
 static inline OS_Status OS_RecursiveMutexLock(OS_Mutex_t *mutex, OS_Time_t waitMS)
 {
-	return OS_MutexLock(mutex, waitMS);
+    return OS_MutexLock(mutex, waitMS);
 }
 
 /**
@@ -99,7 +99,7 @@ static inline OS_Status OS_RecursiveMutexLock(OS_Mutex_t *mutex, OS_Time_t waitM
  */
 static inline OS_Status OS_RecursiveMutexUnlock(OS_Mutex_t *mutex)
 {
-	return OS_MutexUnlock(mutex);
+    return OS_MutexUnlock(mutex);
 }
 
 /**
@@ -109,7 +109,7 @@ static inline OS_Status OS_RecursiveMutexUnlock(OS_Mutex_t *mutex)
  */
 static inline int OS_MutexIsValid(OS_Mutex_t *mutex)
 {
-	return (mutex->handle != OS_INVALID_HANDLE);
+    return (mutex->handle != OS_INVALID_HANDLE);
 }
 
 /**
@@ -119,7 +119,7 @@ static inline int OS_MutexIsValid(OS_Mutex_t *mutex)
  */
 static inline void OS_MutexSetInvalid(OS_Mutex_t *mutex)
 {
-	mutex->handle = OS_INVALID_HANDLE;
+    mutex->handle = OS_INVALID_HANDLE;
 }
 
 /**
@@ -131,7 +131,7 @@ static inline void OS_MutexSetInvalid(OS_Mutex_t *mutex)
  */
 static inline OS_ThreadHandle_t OS_MutexGetOwner(OS_Mutex_t *mutex)
 {
-	return (OS_ThreadHandle_t)(mutex->handle->owner);
+    return (OS_ThreadHandle_t)(mutex->handle->owner);
 }
 
 #ifdef __cplusplus

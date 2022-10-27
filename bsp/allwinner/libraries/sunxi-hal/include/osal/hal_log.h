@@ -56,13 +56,13 @@ int printk(const char *fmt, ...);
 #define HAL_LOG_DEBUG_PREFIX            "[DBG]"
 
 #define hal_log_err(...) \
-	do { HAL_LOG_COLOR(HAL_LOG_ERROR_PREFIX, HAL_LOG_COLOR_OFF, ##__VA_ARGS__); } while(0)
+    do { HAL_LOG_COLOR(HAL_LOG_ERROR_PREFIX, HAL_LOG_COLOR_OFF, ##__VA_ARGS__); } while(0)
 #define hal_log_warn(...) \
-	do { HAL_LOG_COLOR(HAL_LOG_WARNING_PREFIX, HAL_LOG_COLOR_OFF, ##__VA_ARGS__); } while(0)
+    do { HAL_LOG_COLOR(HAL_LOG_WARNING_PREFIX, HAL_LOG_COLOR_OFF, ##__VA_ARGS__); } while(0)
 #define hal_log_info(...) \
-	do { HAL_LOG_COLOR(HAL_LOG_INFO_PREFIX, HAL_LOG_COLOR_OFF, ##__VA_ARGS__); } while(0)
+    do { HAL_LOG_COLOR(HAL_LOG_INFO_PREFIX, HAL_LOG_COLOR_OFF, ##__VA_ARGS__); } while(0)
 #define hal_log_debug(...) \
-	do { HAL_LOG_COLOR(HAL_LOG_DEBUG_PREFIX, HAL_LOG_COLOR_OFF, ##__VA_ARGS__); } while(0)
+    do { HAL_LOG_COLOR(HAL_LOG_DEBUG_PREFIX, HAL_LOG_COLOR_OFF, ##__VA_ARGS__); } while(0)
 #endif
 
 #ifdef __cplusplus

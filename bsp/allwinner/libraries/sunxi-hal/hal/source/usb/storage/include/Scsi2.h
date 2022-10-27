@@ -27,9 +27,9 @@
 //----------------------------------------------------------------------------
 
 // timeout values (milliseconds)
-#define  SCSI_MEDIA_POLL_INTERVAL    1250   /* 1.25s, ²éÑ¯media change¼ä¸ôÊ±¼ä  */
-#define  SCSI_MEDIA_OP_TIMEOUT       40000  /* 10s, ¶Á/Ğ´µÈ½éÖÊ²Ù×÷³¬Ê±Ê±¼ä     */
-#define  SCSI_COMMAND_TIMEOUT        20000   /* 2s, ÆÕÍ¨ÃüÁî³¬Ê±Ê±¼ä             */
+#define  SCSI_MEDIA_POLL_INTERVAL    1250   /* 1.25s, æŸ¥è¯¢media changeé—´éš”æ—¶é—´  */
+#define  SCSI_MEDIA_OP_TIMEOUT       40000  /* 10s, è¯»/å†™ç­‰ä»‹è´¨æ“ä½œè¶…æ—¶æ—¶é—´     */
+#define  SCSI_COMMAND_TIMEOUT        20000   /* 2s, æ™®é€šå‘½ä»¤è¶…æ—¶æ—¶é—´             */
 
 #define  SCSI_CMD_RETRY              3
 
@@ -159,65 +159,65 @@
 
 
 //----------------------------------------------------------------------------
-// ÃüÁîÖ´ĞĞµÄ½á¹û
+// å‘½ä»¤æ‰§è¡Œçš„ç»“æœ
 //----------------------------------------------------------------------------
-#define  USB_STATUS_SUCCESS                                 0   /* ÃüÁîÖ´ĞĞ³É¹¦                 */
+#define  USB_STATUS_SUCCESS                                 0   /* å‘½ä»¤æ‰§è¡ŒæˆåŠŸ                 */
 
-/* ÊäÈë²ÎÊı */
-#define  USB_STATUS_BAD_ARGUMENTS                           1   /* ²ÎÊı´íÎó                     */
-#define  USB_STATUS_BUFFER_TOO_SMALL                        2   /* ÊäÈëbufferÌ«Ğ¡               */
+/* è¾“å…¥å‚æ•° */
+#define  USB_STATUS_BAD_ARGUMENTS                           1   /* å‚æ•°é”™è¯¯                     */
+#define  USB_STATUS_BUFFER_TOO_SMALL                        2   /* è¾“å…¥bufferå¤ªå°               */
 
-/* Éè±¸Ïà¹Ø */
-#define  USB_STATUS_DEVICE_DISCONNECTED                     30  /* Éè±¸ÒÑ¾­¶Ï¿ªÁ¬½Ó             */
-#define  USB_STATUS_IO_TIMEOUT                              31  /* IO²Ù×÷³¬Ê±                   */
-#define  USB_STATUS_IO_DEVICE_ERROR                         32  /* Éè±¸´íÎó                     */
-#define  USB_STATUS_DEVICE_BUSY                             33  /* Éè±¸Ã¦                       */
+/* è®¾å¤‡ç›¸å…³ */
+#define  USB_STATUS_DEVICE_DISCONNECTED                     30  /* è®¾å¤‡å·²ç»æ–­å¼€è¿æ¥             */
+#define  USB_STATUS_IO_TIMEOUT                              31  /* IOæ“ä½œè¶…æ—¶                   */
+#define  USB_STATUS_IO_DEVICE_ERROR                         32  /* è®¾å¤‡é”™è¯¯                     */
+#define  USB_STATUS_DEVICE_BUSY                             33  /* è®¾å¤‡å¿™                       */
 
-/* ÃüÁîÏà¹Ø */
-#define  USB_STATUS_INVALID_COMMAND                         60  /* ²»Ö§³ÖµÄÃüÁî                 */
-#define  USB_STATUS_INVALID_FIELD_IN_COMMAND                61  /* ÃüÁîÖĞÓĞ²»Ö§³ÖµÄ×Ö¶Î         */
-#define  USB_STATUS_LOGICAL_BLOCK_ADDRESS_OUT_OF_RANGE      62  /* ³¬¹ı×î´óÂß¼­¿é               */
-#define  USB_STATUS_COMMAND_FAILED                          63  /* ÃüÁîÖ´ĞĞÊ§°Ü                 */
+/* å‘½ä»¤ç›¸å…³ */
+#define  USB_STATUS_INVALID_COMMAND                         60  /* ä¸æ”¯æŒçš„å‘½ä»¤                 */
+#define  USB_STATUS_INVALID_FIELD_IN_COMMAND                61  /* å‘½ä»¤ä¸­æœ‰ä¸æ”¯æŒçš„å­—æ®µ         */
+#define  USB_STATUS_LOGICAL_BLOCK_ADDRESS_OUT_OF_RANGE      62  /* è¶…è¿‡æœ€å¤§é€»è¾‘å—               */
+#define  USB_STATUS_COMMAND_FAILED                          63  /* å‘½ä»¤æ‰§è¡Œå¤±è´¥                 */
 
-/* ÃüÁî½á¹ûÏà¹Ø */
-#define  USB_STATUS_UNIT_NOT_READY                          91  /* ½éÖÊµ¥ÔªÃ»ÓĞ¾ÍĞ÷             */
-#define  USB_STATUS_MEDIA_NOT_PRESENT                       92  /* Ã½Ìå½éÖÊ²»´æÔÚ               */
-#define  USB_STATUS_NOT_READY_TO_READY_TRANSITION           93  /* Media´ÓÃ»ÓĞ×¼±¸¾ÍĞ÷µ½¾ÍĞ÷    */
-#define  USB_STATUS_UNRECOGNIZED_MEDIA                      94  /* ²»Ö§³ÖµÄMedia                */
-#define  USB_STATUS_MEDIA_CHANGE                            95  /* Media·¢Éú±ä»¯                */
-#define  USB_STATUS_UNKOWN_SENSE                            96  /* Î´Öªsense                    */
+/* å‘½ä»¤ç»“æœç›¸å…³ */
+#define  USB_STATUS_UNIT_NOT_READY                          91  /* ä»‹è´¨å•å…ƒæ²¡æœ‰å°±ç»ª             */
+#define  USB_STATUS_MEDIA_NOT_PRESENT                       92  /* åª’ä½“ä»‹è´¨ä¸å­˜åœ¨               */
+#define  USB_STATUS_NOT_READY_TO_READY_TRANSITION           93  /* Mediaä»æ²¡æœ‰å‡†å¤‡å°±ç»ªåˆ°å°±ç»ª    */
+#define  USB_STATUS_UNRECOGNIZED_MEDIA                      94  /* ä¸æ”¯æŒçš„Media                */
+#define  USB_STATUS_MEDIA_CHANGE                            95  /* Mediaå‘ç”Ÿå˜åŒ–                */
+#define  USB_STATUS_UNKOWN_SENSE                            96  /* æœªçŸ¥sense                    */
 
-#define  USB_STATUS_UNKOWN_ERROR                            255 /* Î´Öª´íÎó                     */
+#define  USB_STATUS_UNKOWN_ERROR                            255 /* æœªçŸ¥é”™è¯¯                     */
 
 
 
 //----------------------------------------------------------------------------
-// Inquiry·µ»ØµÄÊı¾İ
+// Inquiryè¿”å›çš„æ•°æ®
 //----------------------------------------------------------------------------
 typedef struct __InquiryData
 {
-    unsigned char Device_Type : 5;           /* Éè±¸ÀàĞÍ                     */
-    unsigned char Qualifier   : 3;           /* ÍâÎ§±êÊ¶·û                   */
+    unsigned char Device_Type : 5;           /* è®¾å¤‡ç±»å‹                     */
+    unsigned char Qualifier   : 3;           /* å¤–å›´æ ‡è¯†ç¬¦                   */
 
-    unsigned char scsi_1             : 7;    /* ÃüÁî¼¯°æ±¾                   */
-    unsigned char Removable_Media    : 1;    /* ¿ÉÒÆ¶¯Î»                     */
+    unsigned char scsi_1             : 7;    /* å‘½ä»¤é›†ç‰ˆæœ¬                   */
+    unsigned char Removable_Media    : 1;    /* å¯ç§»åŠ¨ä½                     */
 
-    unsigned char ANSI_Version   : 4;        /* Éè±¸Ö§³ÖµÄÃüÁî¼¯°æ±¾         */
-    unsigned char ECMA_Version   : 2;        /* Éè±¸Ö§³ÖµÄECMA-111°æ±¾       */
-    unsigned char ISO_Version    : 2;        /* Éè±¸Ö§³ÖµÄISO IS-9316°æ±¾    */
+    unsigned char ANSI_Version   : 4;        /* è®¾å¤‡æ”¯æŒçš„å‘½ä»¤é›†ç‰ˆæœ¬         */
+    unsigned char ECMA_Version   : 2;        /* è®¾å¤‡æ”¯æŒçš„ECMA-111ç‰ˆæœ¬       */
+    unsigned char ISO_Version    : 2;        /* è®¾å¤‡æ”¯æŒçš„ISO IS-9316ç‰ˆæœ¬    */
 
-    unsigned char Data_Format;               /* ±ê×¼INQUIRYÊı¾İµÄÏìÓ¦¸ñÊ½    */
-    unsigned char Additional_Length;         /* ¸½¼Ó³¤¶È                     */
+    unsigned char Data_Format;               /* æ ‡å‡†INQUIRYæ•°æ®çš„å“åº”æ ¼å¼    */
+    unsigned char Additional_Length;         /* é™„åŠ é•¿åº¦                     */
     unsigned char res[3];
 
-    unsigned char Vendor_Info[8];            /* Éè±¸ÖÆÔìÉÌ                   */
-    unsigned char Product_Info[16];          /* ²úÆ·ĞÅÏ¢                     */
-    unsigned char Product_Revision[4];       /* ²úÆ·ĞŞ¶©°æ                   */
+    unsigned char Vendor_Info[8];            /* è®¾å¤‡åˆ¶é€ å•†                   */
+    unsigned char Product_Info[16];          /* äº§å“ä¿¡æ¯                     */
+    unsigned char Product_Revision[4];       /* äº§å“ä¿®è®¢ç‰ˆ                   */
 } __attribute__((packed)) __InquiryData_t;
 
 
 //----------------------------------------------------------------------------
-// request sense ·µ»ØµÄÊı¾İ
+// request sense è¿”å›çš„æ•°æ®
 //----------------------------------------------------------------------------
 typedef struct __SenseData
 {
@@ -239,14 +239,14 @@ typedef struct __SenseData
 } __attribute__((packed))  __SenseData_t;
 
 //----------------------------------------------------------------------------
-// mode sense ·µ»ØµÄÊı¾İ
+// mode sense è¿”å›çš„æ•°æ®
 //----------------------------------------------------------------------------
 #define  SCSI_MODE_SENSE_MAX_DATA_LEN       192
 
 typedef struct __BlockDevSpecPara
 {
     unsigned char res_1 : 4;
-    unsigned char DpoFua : 1;    /* ÊÇ·ñÖ§³Ö½ûÖ¹Ò³Êä³öºÍÇ¿ÆÈµ¥Ôª´æÈ¡ */
+    unsigned char DpoFua : 1;    /* æ˜¯å¦æ”¯æŒç¦æ­¢é¡µè¾“å‡ºå’Œå¼ºè¿«å•å…ƒå­˜å– */
     unsigned char res_2 : 2;
     unsigned char WP: 1;         /* write protect */
 } __attribute__((packed))  __BlockDevSpecPara_t;
@@ -505,7 +505,7 @@ typedef struct _CDROM_Capitilities
  * C/DVD envent status
  *
  */
-#define  CDROM_GET_EVENT_CMD_MAX_RETURN_DATA_LEN        0xff /* Í¨³£¶¼ÊÇ8¸öbyte */
+#define  CDROM_GET_EVENT_CMD_MAX_RETURN_DATA_LEN        0xff /* é€šå¸¸éƒ½æ˜¯8ä¸ªbyte */
 
 /* Notification class request */
 #define  CDROM_NOTIFICATION_CLASS_REQUEST_POWER_MANAGEMENT  0x04

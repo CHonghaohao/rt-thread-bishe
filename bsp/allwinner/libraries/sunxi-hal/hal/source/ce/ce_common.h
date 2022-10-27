@@ -51,67 +51,67 @@ extern "C" {
 #define AES_MAX_KEY_SIZE        (32)
 
 /*ce flow*/
-#define CE_FLOW_NUM		(4)
-#define CE_FLOW_AVAILABLE	(0)
-#define CE_FLOW_UNAVAILABLE	(1)
+#define CE_FLOW_NUM     (4)
+#define CE_FLOW_AVAILABLE   (0)
+#define CE_FLOW_UNAVAILABLE (1)
 
 typedef struct {
-	uint32_t addr;
-	uint32_t len; /* in word (4 bytes). Exception: in byte for AES_CTS */
+    uint32_t addr;
+    uint32_t len; /* in word (4 bytes). Exception: in byte for AES_CTS */
 } ce_scatter_t;
 
 /*define the return value for aes*/
 typedef enum{
-	HAL_AES_STATUS_OK = 0,
-	HAL_AES_INPUT_ERROR = -1,
-	HAL_AES_MALLOC_ERROR = -2,
-	HAL_AES_CRYPTO_ERROR = -3,
-	HAL_AES_TIME_OUT = -4,
+    HAL_AES_STATUS_OK = 0,
+    HAL_AES_INPUT_ERROR = -1,
+    HAL_AES_MALLOC_ERROR = -2,
+    HAL_AES_CRYPTO_ERROR = -3,
+    HAL_AES_TIME_OUT = -4,
 } hal_aes_status_t;
 
 /*define the return value for hal_hash*/
 typedef enum{
-	HAL_HASH_STATUS_OK = 0,
-	HAL_HASH_INPUT_ERROR = -1,
-	HAL_HASH_MALLOC_ERROR = -2,
-	HAL_HASH_CRYPTO_ERROR = -3,
-	HAL_HASH_TIME_OUT = -4,
+    HAL_HASH_STATUS_OK = 0,
+    HAL_HASH_INPUT_ERROR = -1,
+    HAL_HASH_MALLOC_ERROR = -2,
+    HAL_HASH_CRYPTO_ERROR = -3,
+    HAL_HASH_TIME_OUT = -4,
 } hal_hash_status_t;
 
 /*define the return value for hal_rsa*/
 typedef enum{
-	HAL_RSA_STATUS_OK = 0,
-	HAL_RSA_INPUT_ERROR = -1,
-	HAL_RSA_MALLOC_ERROR = -2,
-	HAL_RSA_CRYPTO_ERROR = -3,
-	HAL_RSA_TIME_OUT = -4,
+    HAL_RSA_STATUS_OK = 0,
+    HAL_RSA_INPUT_ERROR = -1,
+    HAL_RSA_MALLOC_ERROR = -2,
+    HAL_RSA_CRYPTO_ERROR = -3,
+    HAL_RSA_TIME_OUT = -4,
 } hal_rsa_status_t;
 
 
 /*define the return value for hal_hash*/
 typedef enum{
-	HAL_RNG_STATUS_OK = 0,
-	HAL_RNG_INPUT_ERROR = -1,
-	HAL_RNG_MALLOC_ERROR = -2,
-	HAL_RNG_CRYPTO_ERROR = -3,
-	HAL_RNG_TIME_OUT = -4,
+    HAL_RNG_STATUS_OK = 0,
+    HAL_RNG_INPUT_ERROR = -1,
+    HAL_RNG_MALLOC_ERROR = -2,
+    HAL_RNG_CRYPTO_ERROR = -3,
+    HAL_RNG_TIME_OUT = -4,
 } hal_rng_status_t;
 
 typedef struct ce_task_desc {
-	uint32_t chan_id;
-	uint32_t comm_ctl;
-	uint32_t sym_ctl;
-	uint32_t asym_ctl;
-	uint32_t key_addr;
-	uint32_t iv_addr;
-	uint32_t ctr_addr;
-	uint32_t data_len; /* in word(4 byte). Exception: in byte for AES_CTS */
+    uint32_t chan_id;
+    uint32_t comm_ctl;
+    uint32_t sym_ctl;
+    uint32_t asym_ctl;
+    uint32_t key_addr;
+    uint32_t iv_addr;
+    uint32_t ctr_addr;
+    uint32_t data_len; /* in word(4 byte). Exception: in byte for AES_CTS */
 
-	ce_scatter_t src[8];
-	ce_scatter_t dst[8];
+    ce_scatter_t src[8];
+    ce_scatter_t dst[8];
 
-	struct ce_task_desc *next;
-	uint32_t reserved[3];
+    struct ce_task_desc *next;
+    uint32_t reserved[3];
 } ce_task_desc_t;
 
 

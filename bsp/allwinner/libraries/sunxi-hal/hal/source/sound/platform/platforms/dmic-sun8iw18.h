@@ -29,24 +29,24 @@
 * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 * OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-#ifndef	__SUN8IW18_DMIC_H_
-#define	__SUN8IW18_DMIC_H_
+#ifndef __SUN8IW18_DMIC_H_
+#define __SUN8IW18_DMIC_H_
 
-#define	SUNXI_DMIC_MEMBASE (0x05095000)
+#define SUNXI_DMIC_MEMBASE (0x05095000)
 
 /*------------------------ CLK CONFIG FOR NORMAL ---------------------------*/
-#define SUNXI_DMIC_CLK_PLL_AUDIO	HAL_CLK_PLL_AUDIO
-#define SUNXI_DMIC_CLK_DMIC		HAL_CLK_PERIPH_DMIC
-#define SUNXI_DMIC_CLK_BUS		0
-#define SUNXI_DMIC_CLK_RST		0
+#define SUNXI_DMIC_CLK_PLL_AUDIO    HAL_CLK_PLL_AUDIO
+#define SUNXI_DMIC_CLK_DMIC     HAL_CLK_PERIPH_DMIC
+#define SUNXI_DMIC_CLK_BUS      0
+#define SUNXI_DMIC_CLK_RST      0
 
 /*------------------------ PIN CONFIG FOR NORMAL ---------------------------*/
 dmic_gpio_t g_dmic_gpio = {
-	.clk	= {GPIOB(12), 3},
-	.din0	= {GPIOB(11), 3},
-	.din1	= {GPIOB(10), 3},
-	.din2	= {GPIOB(9), 3},
-	.din3	= {GPIOB(8), 3},
+    .clk    = {GPIOB(12), 3},
+    .din0   = {GPIOB(11), 3},
+    .din1   = {GPIOB(10), 3},
+    .din2   = {GPIOB(9), 3},
+    .din3   = {GPIOB(8), 3},
 };
 
 /*------------------------ SUNXI DMIC EXP DEFINE ---------------------------*/

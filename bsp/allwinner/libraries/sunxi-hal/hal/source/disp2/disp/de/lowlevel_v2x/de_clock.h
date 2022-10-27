@@ -15,27 +15,27 @@
 #include "de_feat.h"
 
 enum de_clk_id {
-	DE_CLK_NONE = 0,
+    DE_CLK_NONE = 0,
 
-	DE_CLK_CORE0 = 1,
-	DE_CLK_CORE1 = 2,
-	DE_CLK_WB = 3,
+    DE_CLK_CORE0 = 1,
+    DE_CLK_CORE1 = 2,
+    DE_CLK_WB = 3,
 };
 
 struct de_clk_para {
-	enum de_clk_id clk_no;
-	u32 div;
-	u32 ahb_gate_adr;
-	u32 ahb_gate_shift;
-	u32 ahb_reset_adr;
-	u32 ahb_reset_shift;
-	u32 dram_gate_adr;
-	u32 dram_gate_shift;
-	u32 mod_adr;
-	u32 mod_enable_shift;
-	u32 mod_div_adr;
-	u32 mod_div_shift;
-	u32 mod_div_width;
+    enum de_clk_id clk_no;
+    u32 div;
+    u32 ahb_gate_adr;
+    u32 ahb_gate_shift;
+    u32 ahb_reset_adr;
+    u32 ahb_reset_shift;
+    u32 dram_gate_adr;
+    u32 dram_gate_shift;
+    u32 mod_adr;
+    u32 mod_enable_shift;
+    u32 mod_div_adr;
+    u32 mod_div_shift;
+    u32 mod_div_width;
 };
 
 extern s32 de_clk_enable(u32 clk_no);

@@ -44,15 +44,15 @@ extern "C" {
 
 /* command format: <command-name> <arg>... */
 struct cmd_data {
-	char *name;
-	enum cmd_status (*exec)(char *);
+    char *name;
+    enum cmd_status (*exec)(char *);
 };
 
 /* command2 format: <command-name>[ <arg>...] */
 struct cmd2_data {
-	char *name;
-	int name_len;
-	enum cmd_status (*exec)(char *);
+    char *name;
+    int name_len;
+    enum cmd_status (*exec)(char *);
 };
 
 enum cmd_status cmd_exec(char *cmd, const struct cmd_data *cdata, int count);
@@ -66,10 +66,10 @@ const char *cmd_get_status_desc(enum cmd_status status);
 int cmd_write(enum cmd_code_type type, int code, const char *fmt, ...);
 
 #define cmd_write_respond(status, fmt, arg...) \
-	cmd_write(CMD_CODE_TYEP_STATUS, (int)status, fmt, ##arg)
+    cmd_write(CMD_CODE_TYEP_STATUS, (int)status, fmt, ##arg)
 
 #define cmd_write_event(event, fmt, arg...) \
-	cmd_write(CMD_CODE_TYEP_EVENT, (int)event, fmt, ##arg)
+    cmd_write(CMD_CODE_TYEP_EVENT, (int)event, fmt, ##arg)
 
 int32_t cmd_raw_mode_read(uint8_t *buf, int32_t size, uint32_t msec);
 int32_t cmd_raw_mode_write(uint8_t *buf, int32_t size);

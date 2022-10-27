@@ -62,27 +62,27 @@ static hal_rtc_status_t hal_rtc_clk_init(struct hal_rtc_dev *rtc)
     rtc->bus_clk = hal_clock_get(clk_r_type, rtc_clk_r_id);
     if(hal_clock_enable(rtc->bus_clk))
     {
-	RTC_ERR("rtc bus clk enable failed!\n");
-	return RTC_ERROR;
+    RTC_ERR("rtc bus clk enable failed!\n");
+    return RTC_ERROR;
     }
     rtc->rtc1k_clk = hal_clock_get(clk_rtc1k_type, rtc_clk_rtc1k_id);
     if(hal_clock_enable(rtc->rtc1k_clk))
     {
-	RTC_ERR("rtc 1k clk enable failed!\n");
-	return RTC_ERROR;
+    RTC_ERR("rtc 1k clk enable failed!\n");
+    return RTC_ERROR;
     }
     rtc->rtcspi_clk = hal_clock_get(clk_rtcspi_type, rtc_clk_rtcspi_id);
     if(hal_clock_enable(rtc->rtcspi_clk))
     {
-	RTC_ERR("rtc spi clk enable failed!\n");
-	return RTC_ERROR;
+    RTC_ERR("rtc spi clk enable failed!\n");
+    return RTC_ERROR;
     }
 
     rtc->reset = hal_reset_control_get(reset_type, rtc_reset_id);
     if(hal_reset_control_deassert(rtc->reset))
     {
-	RTC_ERR("rtc reset deassert failed!\n");
-	return RTC_ERROR;
+    RTC_ERR("rtc reset deassert failed!\n");
+    return RTC_ERROR;
     }
 #endif
 
@@ -135,7 +135,7 @@ int hal_rtc_set_bootmode_flag(u8 flag)
 
 int hal_rtc_get_bootmode_flag(void)
 {
-    uint boot_flag;
+    int boot_flag;
 
     boot_flag = hal_rtc_read_data(RTC_BOOT_INDEX);
 
@@ -704,8 +704,8 @@ int hal_rtc_init(void)
 
     if(hal_rtc_clk_init(rtc_dev))
     {
-	RTC_ERR("rtc init clk error!\n");
-	return RTC_CLK_ERROR;
+    RTC_ERR("rtc init clk error!\n");
+    return RTC_CLK_ERROR;
     }
 
     /*

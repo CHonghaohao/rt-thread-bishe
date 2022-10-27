@@ -256,7 +256,7 @@ static void uart_reset(uart_port_t uart_port)
     reg_val &= ~(1 << (CCM_UART_RST_OFFSET + uart_port));
     writel(reg_val, 0x0300190c);
     for (i = 0; i < 100; i++)
-	;
+    ;
 
     reg_val = readl(0x300190c);
     reg_val |= (1 << (CCM_UART_RST_OFFSET + uart_port));
@@ -267,7 +267,7 @@ static void uart_reset(uart_port_t uart_port)
     reg_val &= ~(1 << (CCM_UART_GATING_OFFSET + uart_port));
     writel(reg_val, 0x300190c);
     for (i = 0; i < 100; i++)
-	;
+    ;
     reg_val = readl(0x300190c);
     reg_val |= (1 << (CCM_UART_GATING_OFFSET + uart_port));
     writel(reg_val, 0x300190c);
@@ -318,38 +318,38 @@ static void uart_set_fifo(uart_port_t uart_port, uint32_t value)
 
 void hal_uart_set_hardware_flowcontrol(uart_port_t uart_port)
 {
-	const unsigned long uart_base = sunxi_uart_port[uart_port];
-	uart_priv_t *uart_priv = &g_uart_priv[uart_port];
-	uint32_t value;
+    const unsigned long uart_base = sunxi_uart_port[uart_port];
+    uart_priv_t *uart_priv = &g_uart_priv[uart_port];
+    uint32_t value;
 
-	value = hal_readb(uart_base + UART_MCR);
-	value |= UART_MCR_DTR | UART_MCR_RTS | UART_MCR_AFE;
-	uart_priv->mcr = value;
-	hal_writeb(uart_priv->mcr, uart_base + UART_MCR);
+    value = hal_readb(uart_base + UART_MCR);
+    value |= UART_MCR_DTR | UART_MCR_RTS | UART_MCR_AFE;
+    uart_priv->mcr = value;
+    hal_writeb(uart_priv->mcr, uart_base + UART_MCR);
 
-	/* enable with modem status interrupts */
-	value = hal_readb(uart_base + UART_IER);
-	value |= UART_IER_MSI;
-	uart_priv->ier = value;
-	hal_writeb(uart_priv->ier, uart_base + UART_IER);
+    /* enable with modem status interrupts */
+    value = hal_readb(uart_base + UART_IER);
+    value |= UART_IER_MSI;
+    uart_priv->ier = value;
+    hal_writeb(uart_priv->ier, uart_base + UART_IER);
 }
 
 void hal_uart_disable_flowcontrol(uart_port_t uart_port)
 {
-	const unsigned long uart_base = sunxi_uart_port[uart_port];
-	uart_priv_t *uart_priv = &g_uart_priv[uart_port];
-	uint32_t value;
+    const unsigned long uart_base = sunxi_uart_port[uart_port];
+    uart_priv_t *uart_priv = &g_uart_priv[uart_port];
+    uint32_t value;
 
-	value = hal_readb(uart_base + UART_MCR);
-	value &= ~(UART_MCR_DTR | UART_MCR_RTS | UART_MCR_AFE);
-	uart_priv->mcr = value;
-	hal_writeb(uart_priv->mcr, uart_base + UART_MCR);
+    value = hal_readb(uart_base + UART_MCR);
+    value &= ~(UART_MCR_DTR | UART_MCR_RTS | UART_MCR_AFE);
+    uart_priv->mcr = value;
+    hal_writeb(uart_priv->mcr, uart_base + UART_MCR);
 
-	/* disable with modem status interrupts */
-	value = hal_readb(uart_base + UART_IER);
-	value &= ~(UART_IER_MSI);
-	uart_priv->ier = value;
-	hal_writeb(uart_priv->ier, uart_base + UART_IER);
+    /* disable with modem status interrupts */
+    value = hal_readb(uart_base + UART_IER);
+    value &= ~(UART_IER_MSI);
+    uart_priv->ier = value;
+    hal_writeb(uart_priv->ier, uart_base + UART_IER);
 }
 
 static void uart_force_idle(uart_port_t uart_port)
@@ -448,9 +448,9 @@ static irqreturn_t uart_irq_handler(int irq, void *dev_id)
         }
 
         /* if (lsr & UART_LSR_THRE)
-	{
-	    uart_handle_tx(uart_port);
-	}*/
+    {
+        uart_handle_tx(uart_port);
+    }*/
     }
     return 0;
 }
@@ -489,20 +489,20 @@ static int uart_clk_init(int bus, bool enable)
     switch (bus)
     {
         case 0:
-	    clk_id = SUNXI_CLK_UART0;
-	    reset_id = SUNXI_RST_UART0;
+        clk_id = SUNXI_CLK_UART0;
+        reset_id = SUNXI_RST_UART0;
             break;
         case 1:
-	    clk_id = SUNXI_CLK_UART1;
-	    reset_id = SUNXI_RST_UART1;
+        clk_id = SUNXI_CLK_UART1;
+        reset_id = SUNXI_RST_UART1;
             break;
         case 2:
-	    clk_id = SUNXI_CLK_UART2;
-	    reset_id = SUNXI_RST_UART2;
+        clk_id = SUNXI_CLK_UART2;
+        reset_id = SUNXI_RST_UART2;
             break;
         case 3:
-	    clk_id = SUNXI_CLK_UART3;
-	    reset_id = SUNXI_RST_UART3;
+        clk_id = SUNXI_CLK_UART3;
+        reset_id = SUNXI_RST_UART3;
             break;
         default:
             UART_ERR("uart%d is invalid\n", bus);
@@ -510,11 +510,11 @@ static int uart_clk_init(int bus, bool enable)
     }
     if (enable)
     {
-	reset = hal_reset_control_get(reset_type, reset_id);
-	hal_reset_control_deassert(reset);
-	hal_reset_control_put(reset);
+    reset = hal_reset_control_get(reset_type, reset_id);
+    hal_reset_control_deassert(reset);
+    hal_reset_control_put(reset);
 
-	clk = hal_clock_get(clk_type, clk_id);
+    clk = hal_clock_get(clk_type, clk_id);
         ret = hal_clock_enable(clk);
         if (ret)
         {
@@ -550,15 +550,15 @@ static void uart_pinctrl_init(uart_port_t uart_port)
     if (!count)
     {
         UART_ERR("[uart%d] not support in sys_config\n", uart_port);
-	return ;
+    return ;
     }
     Hal_Cfg_GetGPIOSecData(uart_name, gpio_cfg, count);
 
 
     for (i = 0; i < count; i++)
     {
-	uart_pin[i] = (gpio_cfg[i].port - 1) * 32 + gpio_cfg[i].port_num;
-	uart_muxsel[i] = gpio_cfg[i].mul_sel;
+    uart_pin[i] = (gpio_cfg[i].port - 1) * 32 + gpio_cfg[i].port_num;
+    uart_muxsel[i] = gpio_cfg[i].mul_sel;
         hal_gpio_pinmux_set_function(uart_pin[i], uart_muxsel[i]);
     }
 #else
@@ -566,14 +566,26 @@ static void uart_pinctrl_init(uart_port_t uart_port)
     switch (uart_port)
     {
         case UART_0:
+            hal_gpio_set_pull(UART0_RX, GPIO_PULL_UP);
             hal_gpio_pinmux_set_function(UART0_TX, UART0_GPIO_FUNCTION);//TX
             hal_gpio_pinmux_set_function(UART0_RX, UART0_GPIO_FUNCTION);//RX
             break;
         case UART_1:
+            hal_gpio_set_pull(UART1_RX, GPIO_PULL_UP);
             hal_gpio_pinmux_set_function(UART1_TX, UART1_GPIO_FUNCTION);//TX
             hal_gpio_pinmux_set_function(UART1_RX, UART1_GPIO_FUNCTION);//RX
-	    break;
-	default:
+            break;
+        case UART_2:
+            hal_gpio_set_pull(UART2_RX, GPIO_PULL_UP);
+            hal_gpio_pinmux_set_function(UART2_TX, UART2_GPIO_FUNCTION);//TX
+            hal_gpio_pinmux_set_function(UART2_RX, UART2_GPIO_FUNCTION);//RX
+            break;
+        case UART_3:
+            hal_gpio_set_pull(UART3_RX, GPIO_PULL_UP);
+            hal_gpio_pinmux_set_function(UART3_TX, UART3_GPIO_FUNCTION);//TX
+            hal_gpio_pinmux_set_function(UART3_RX, UART3_GPIO_FUNCTION);//RX
+            break;
+        default:
             UART_ERR("[uart%d] not support \n", uart_port);
             break;
     }
@@ -719,7 +731,7 @@ static int _uart_putc(int devid, char c)
 
 int32_t hal_uart_put_char(int32_t dev, char c)
 {
-	return _uart_putc(dev, c);
+    return _uart_putc(dev, c);
 }
 
 int32_t hal_uart_send(int32_t dev, const uint8_t *data, uint32_t num)
@@ -764,7 +776,7 @@ static int _uart_getc(int devid)
 
 uint8_t hal_uart_get_char(int32_t dev)
 {
-	return _uart_getc(dev);
+    return _uart_getc(dev);
 }
 
 int32_t hal_uart_receive_polling(int32_t dev, uint8_t *data, uint32_t num)
@@ -787,7 +799,7 @@ int32_t hal_uart_receive_polling(int32_t dev, uint8_t *data, uint32_t num)
         data ++;
         num --;
 
-	/* FIXME: maybe only used for console? move it away! */
+    /* FIXME: maybe only used for console? move it away! */
         if (ch == '\n')
         {
             break;
@@ -811,7 +823,7 @@ int32_t hal_uart_receive(int32_t dev, uint8_t *data, uint32_t num)
         if (ret == 0)
         {
             rev_count++;
-	    *(data + i) = (uint8_t)data_rev;
+        *(data + i) = (uint8_t)data_rev;
         }
         else
         {
@@ -837,7 +849,7 @@ int32_t hal_uart_receive_no_block(int32_t dev, uint8_t *data, uint32_t num, int3
         if (ret == 0)
         {
             rev_count++;
-			*(data + i) = (uint8_t)data_rev;
+            *(data + i) = (uint8_t)data_rev;
         }
         else
         {
@@ -874,7 +886,7 @@ int32_t hal_uart_control(int32_t uart_port, int cmd, void *args)
 
     /* config uart attributes */
     uart_set_format(uart_port, uart_config->word_length,
-		    uart_config->stop_bit, uart_config->parity);
+            uart_config->stop_bit, uart_config->parity);
     uart_set_baudrate(uart_port, uart_config->baudrate);
 
     return SUNXI_HAL_OK;

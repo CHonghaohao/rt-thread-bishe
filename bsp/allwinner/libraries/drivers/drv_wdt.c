@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2021, RT-Thread Development Team
+ * Copyright (c) 2006-2022, RT-Thread Development Team
  *
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -7,7 +7,8 @@
  * Date           Author       Notes
  * 2021-11-15     JasonHu      first version
  */
-
+#include <rtthread.h>
+#include <rthw.h>
 #include <rtdevice.h>
 #include <sunxi_hal_watchdog.h>
 
@@ -86,7 +87,7 @@ static const struct rt_watchdog_ops wdg_pos =
 
 static rt_watchdog_t wdg;
 
-static int rt_hw_wdg_init(void)
+int rt_hw_wdg_init(void)
 {
     wdg.ops = &wdg_pos;
     rt_hw_watchdog_register(&wdg, "wdt", 0, RT_NULL);
@@ -94,5 +95,13 @@ static int rt_hw_wdg_init(void)
 }
 
 INIT_DEVICE_EXPORT(rt_hw_wdg_init);
+
+void rt_hw_cpu_reset(void)
+{
+    rt_hw_interrupt_disable();
+    hal_watchdog_start(1);
+    while(1);
+}
+MSH_CMD_EXPORT_ALIAS(rt_hw_cpu_reset, reboot, reset machine);
 
 #endif /* RT_USING_WDT && BSP_USING_WDT */

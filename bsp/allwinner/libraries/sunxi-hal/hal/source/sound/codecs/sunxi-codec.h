@@ -46,39 +46,39 @@ unsigned int sunxi_codec_read(struct snd_codec *codec, unsigned int reg);
 unsigned int sunxi_codec_write(struct snd_codec *codec, unsigned int reg, unsigned int val);
 
 struct sunxi_codec_param {
-	int16_t gpio_spk;
-	int16_t gpio_spk_power;//add
-	int16_t pa_msleep_time;
-	uint8_t pa_level;
-	uint8_t digital_vol;
-	uint8_t lineout_vol;
-	uint8_t mic1gain;
-	uint8_t mic2gain;
-	uint8_t mic3gain;
-	uint8_t lineingain;
-	uint8_t adcgain;
-	uint8_t adcdrc_cfg;
-	uint8_t adchpf_cfg;
-	uint8_t dacdrc_cfg;
-	uint8_t dachpf_cfg;
+    int16_t gpio_spk;
+    int16_t gpio_spk_power;//add
+    int16_t pa_msleep_time;
+    uint8_t pa_level;
+    uint8_t digital_vol;
+    uint8_t lineout_vol;
+    uint8_t mic1gain;
+    uint8_t mic2gain;
+    uint8_t mic3gain;
+    uint8_t lineingain;
+    uint8_t adcgain;
+    uint8_t adcdrc_cfg;
+    uint8_t adchpf_cfg;
+    uint8_t dacdrc_cfg;
+    uint8_t dachpf_cfg;
 };
 
 struct sunxi_codec_info {
-	void *codec_base_addr;
-	bool hub_mode;//add to rtos
-	hal_clk_t busclk;
-	hal_clk_t pllclk;
-	hal_clk_t pllclkx4;
-	hal_clk_t moduleclk;
-	hal_clk_t moduleclk1;
+    void *codec_base_addr;
+    bool hub_mode;//add to rtos
+    hal_clk_t busclk;
+    hal_clk_t pllclk;
+    hal_clk_t pllclkx4;
+    hal_clk_t moduleclk;
+    hal_clk_t moduleclk1;
 
-	uint32_t irq;
-	struct sunxi_codec_param param;
+    uint32_t irq;
+    struct sunxi_codec_param param;
 };
 
 struct sample_rate {
-	unsigned int samplerate;
-	unsigned int rate_bit;
+    unsigned int samplerate;
+    unsigned int rate_bit;
 };
 
 #endif /* __SUNXI_CODEC_H */

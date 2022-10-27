@@ -36,28 +36,28 @@
 #include "pcm_generic.h"
 
 typedef snd_pcm_uframes_t (*snd_pcm_slave_xfer_areas_func_t)
-	(snd_pcm_t *pcm,
-	const snd_pcm_channel_area_t *areas, snd_pcm_uframes_t offset,
-	snd_pcm_uframes_t size,
-	const snd_pcm_channel_area_t *slave_areas,
-	snd_pcm_uframes_t slave_offset,
-	snd_pcm_uframes_t *slave_sizep);
+    (snd_pcm_t *pcm,
+    const snd_pcm_channel_area_t *areas, snd_pcm_uframes_t offset,
+    snd_pcm_uframes_t size,
+    const snd_pcm_channel_area_t *slave_areas,
+    snd_pcm_uframes_t slave_offset,
+    snd_pcm_uframes_t *slave_sizep);
 
 typedef snd_pcm_sframes_t (*snd_pcm_slave_xfer_areas_undo_func_t)
-	(snd_pcm_t *pcm,
-	const snd_pcm_channel_area_t *res_areas,	/* result areas */
-	snd_pcm_uframes_t res_offset,		/* offset of result areas */
-	snd_pcm_uframes_t res_size,		/* size of result areas */
-	snd_pcm_uframes_t slave_undo_size);
+    (snd_pcm_t *pcm,
+    const snd_pcm_channel_area_t *res_areas,    /* result areas */
+    snd_pcm_uframes_t res_offset,       /* offset of result areas */
+    snd_pcm_uframes_t res_size,     /* size of result areas */
+    snd_pcm_uframes_t slave_undo_size);
 
 typedef struct {
-	snd_pcm_generic_t gen;
-	snd_pcm_slave_xfer_areas_func_t read;
-	snd_pcm_slave_xfer_areas_func_t write;
-	snd_pcm_slave_xfer_areas_undo_func_t undo_read;
-	snd_pcm_slave_xfer_areas_undo_func_t undo_write;
-	int (*init)(snd_pcm_t *pcm);
-	snd_pcm_uframes_t appl_ptr, hw_ptr;
+    snd_pcm_generic_t gen;
+    snd_pcm_slave_xfer_areas_func_t read;
+    snd_pcm_slave_xfer_areas_func_t write;
+    snd_pcm_slave_xfer_areas_undo_func_t undo_read;
+    snd_pcm_slave_xfer_areas_undo_func_t undo_write;
+    int (*init)(snd_pcm_t *pcm);
+    snd_pcm_uframes_t appl_ptr, hw_ptr;
 } snd_pcm_plugin_t;
 
 void snd_pcm_plugin_init(snd_pcm_plugin_t *plugin);
@@ -68,16 +68,16 @@ extern const snd_pcm_fast_ops_t snd_pcm_plugin_fast_ops;
 
 snd_pcm_sframes_t snd_pcm_plugin_undo_read_generic
      (snd_pcm_t *pcm,
-      const snd_pcm_channel_area_t *res_areas,	/* result areas */
-      snd_pcm_uframes_t res_offset,		/* offset of result areas */
-      snd_pcm_uframes_t res_size,		/* size of result areas */
+      const snd_pcm_channel_area_t *res_areas,  /* result areas */
+      snd_pcm_uframes_t res_offset,     /* offset of result areas */
+      snd_pcm_uframes_t res_size,       /* size of result areas */
       snd_pcm_uframes_t slave_undo_size);
 
 snd_pcm_sframes_t snd_pcm_plugin_undo_write_generic
      (snd_pcm_t *pcm,
-      const snd_pcm_channel_area_t *res_areas,	/* result areas */
-      snd_pcm_uframes_t res_offset,		/* offset of result areas */
-      snd_pcm_uframes_t res_size,		/* size of result areas */
+      const snd_pcm_channel_area_t *res_areas,  /* result areas */
+      snd_pcm_uframes_t res_offset,     /* offset of result areas */
+      snd_pcm_uframes_t res_size,       /* size of result areas */
       snd_pcm_uframes_t slave_undo_size);
 
 int snd_pcm_linear_get_index(snd_pcm_format_t src_format, snd_pcm_format_t dst_format);

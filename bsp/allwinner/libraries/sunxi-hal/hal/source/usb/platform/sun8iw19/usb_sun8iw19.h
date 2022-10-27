@@ -40,10 +40,10 @@
 
 /*hci controller num*/
 
-#define USB_MAX_CONTROLLER_COUNT	    1
+#define USB_MAX_CONTROLLER_COUNT        1
 
-#define SUNXI_USB_OTG_PBASE		        0x05100000
-#define SUNXI_USB_EHCI0_PBASE		    0x05101000
+#define SUNXI_USB_OTG_PBASE             0x05100000
+#define SUNXI_USB_EHCI0_PBASE           0x05101000
 
 struct platform_usb_config
 {

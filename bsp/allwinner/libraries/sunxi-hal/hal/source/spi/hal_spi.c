@@ -31,6 +31,8 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+#define DBG_LVL DBG_WARNING
+#define DBG_TAG "hal.spi"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -54,7 +56,6 @@
 #define __ALIGN_KERNEL_MASK(x, mask) (((x) + (mask)) & ~(mask))
 #define MIN(a, b) (a > b ? b : a)
 
-
 #if (0)
 #define CONFIG_SUNXI_SPI_CPU_XFER_ONLY
 #endif
@@ -71,25 +72,28 @@
 #define SPI_DUMPREG_LEVEL
 #endif
 
-
 #ifdef SPI_INFO_LEVEL
-#define SPI_INFO(fmt, arg...) printf("%s()%d " fmt, __func__, __LINE__, ##arg)
-#define SPI_INFO_IRQ(fmt, arg...) __log("%s()%d " fmt, __func__, __LINE__, ##arg)
-#define SPI_ERR(fmt, arg...) printf("%s()%d " fmt, __func__, __LINE__, ##arg)
-#define SPI_INIT(fmt, arg...) printf("%s()%d " fmt, __func__, __LINE__, ##arg)
+#define SPI_INFO(fmt, arg...) LOG_I("%s()%d " fmt, __func__, __LINE__, ##arg)
+#define SPI_INFO_IRQ(fmt, arg...) LOG_I("%s()%d " fmt, __func__, __LINE__, ##arg)
+#define SPI_ERR(fmt, arg...) LOG_E("%s()%d " fmt, __func__, __LINE__, ##arg)
+#define SPI_INIT(fmt, arg...) LOG_I("%s()%d " fmt, __func__, __LINE__, ##arg)
 #else
-#define SPI_INFO(fmt, arg...)                                                  \
-    do {                                                                   \
+#define SPI_INFO(fmt, arg...) \
+    do                        \
+    {                         \
     } while (0);
-#define SPI_INFO_IRQ(fmt, arg...)                                                  \
-    do {                                                                   \
+#define SPI_INFO_IRQ(fmt, arg...) \
+    do                            \
+    {                             \
     } while (0);
-#define SPI_ERR(fmt, arg...)                                                  \
-    do {                                                                   \
+#define SPI_ERR(fmt, arg...) \
+    do                       \
+    {                        \
     } while (0);
-#define SPI_INIT(fmt, arg...)                                                  \
-    do {                                                                   \
-    } while (0);     
+#define SPI_INIT(fmt, arg...) \
+    do                        \
+    {                         \
+    } while (0);
 #endif
 
 static sunxi_spi_t g_sunxi_spi[HAL_SPI_MASTER_MAX];
@@ -113,11 +117,11 @@ void spi_dump_reg(sunxi_spi_t *sspi, uint32_t offset, uint32_t len)
                            (unsigned long)(sspi->base + offset + i));
 
         cnt += sprintf(buf + cnt, "%08lx ",
-			(unsigned long)hal_readl(sspi->base + offset + i));
+                       (unsigned long)hal_readl(sspi->base + offset + i));
 
         if (i % HEXADECIMAL == REG_CL)
         {
-            printf("%s\n", buf);
+            rt_kprintf("%s\n", buf);
             cnt = 0;
         }
     }
@@ -147,6 +151,23 @@ static spi_master_status_t spi_set_cs(hal_spi_master_slave_port_t chipselect, su
     return ret;
 }
 
+static void spi_config_dhb(sunxi_spi_t *sspi, uint8_t value)
+{
+    uint32_t reg_val = hal_readl(sspi->base + SPI_TC_REG);
+
+    /*6.discard hash burst-DHB */
+    if (value)
+    {
+        reg_val &= ~SPI_TC_DHB;
+    }
+    else
+    {
+        reg_val |= SPI_TC_DHB; /*default DHB =1, discard unused burst */
+    }
+
+    hal_writel(reg_val, sspi->base + SPI_TC_REG);
+}
+
 /* config spi */
 static void spi_config_tc(uint32_t config, sunxi_spi_t *sspi)
 {
@@ -155,7 +176,7 @@ static void spi_config_tc(uint32_t config, sunxi_spi_t *sspi)
     /*1. POL */
     if (config & SPI_POL_ACTIVE_)
     {
-        reg_val |= SPI_TC_POL;    /*default POL = 1 */
+        reg_val |= SPI_TC_POL; /*default POL = 1 */
     }
     else
     {
@@ -165,7 +186,7 @@ static void spi_config_tc(uint32_t config, sunxi_spi_t *sspi)
     /*2. PHA */
     if (config & SPI_PHA_ACTIVE_)
     {
-        reg_val |= SPI_TC_PHA;    /*default PHA = 1 */
+        reg_val |= SPI_TC_PHA; /*default PHA = 1 */
     }
     else
     {
@@ -179,7 +200,7 @@ static void spi_config_tc(uint32_t config, sunxi_spi_t *sspi)
     }
     else
     {
-        reg_val |= SPI_TC_SPOL;    /*default SSPOL = 1,Low level effect */
+        reg_val |= SPI_TC_SPOL; /*default SSPOL = 1,Low level effect */
     }
 
     /*4. LMTF--LSB/MSB transfer first select */
@@ -189,7 +210,7 @@ static void spi_config_tc(uint32_t config, sunxi_spi_t *sspi)
     }
     else
     {
-        reg_val &= ~SPI_TC_FBS;    /*default LMTF =0, MSB first */
+        reg_val &= ~SPI_TC_FBS; /*default LMTF =0, MSB first */
     }
 
     /* set DDB,DHB,SMC,SSCTL */
@@ -200,7 +221,7 @@ static void spi_config_tc(uint32_t config, sunxi_spi_t *sspi)
     }
     else
     {
-        reg_val &= ~SPI_TC_DDB;    /*default DDB =0, ZERO */
+        reg_val &= ~SPI_TC_DDB; /*default DDB =0, ZERO */
     }
 
     /*6.discard hash burst-DHB */
@@ -210,7 +231,7 @@ static void spi_config_tc(uint32_t config, sunxi_spi_t *sspi)
     }
     else
     {
-        reg_val |= SPI_TC_DHB;    /*default DHB =1, discard unused burst */
+        reg_val |= SPI_TC_DHB; /*default DHB =1, discard unused burst */
     }
 
     /*7. set SMC = 1 , SSCTL = 0 ,TPE = 1 */
@@ -440,7 +461,7 @@ static void spi_set_bc_tc_stc(uint32_t tx_len, uint32_t rx_len,
     /* set MBC(0x30) = tx_len + rx_len + dummy_cnt */
     reg_val = hal_readl(sspi->base + SPI_BURST_CNT_REG);
     reg_val &= ~SPI_BC_CNT_MASK;
-    reg_val |= (SPI_BC_CNT_MASK & (tx_len + rx_len + dummy_cnt));
+    reg_val |= (SPI_BC_CNT_MASK & (rx_len + dummy_cnt));
     hal_writel(reg_val, sspi->base + SPI_BURST_CNT_REG);
 
     /* set MTC(0x34) = tx_len */
@@ -553,7 +574,7 @@ static spi_master_status_t spi_mode_check(sunxi_spi_t *sspi)
         {
             spi_disable_dual(sspi);
             spi_enable_quad(sspi);
-            spi_set_bc_tc_stc(sspi->transfer->tx_len, 0,
+            spi_set_bc_tc_stc(sspi->transfer->tx_len, sspi->transfer->tx_len,
                               sspi->transfer->tx_single_len,
                               sspi->transfer->dummy_byte, sspi);
             sspi->mode_type = QUAD_HALF_DUPLEX_TX;
@@ -564,7 +585,7 @@ static spi_master_status_t spi_mode_check(sunxi_spi_t *sspi)
         {
             spi_disable_quad(sspi);
             spi_enable_dual(sspi);
-            spi_set_bc_tc_stc(sspi->transfer->tx_len, 0,
+            spi_set_bc_tc_stc(sspi->transfer->tx_len, sspi->transfer->tx_len,
                               sspi->transfer->tx_single_len,
                               sspi->transfer->dummy_byte, sspi);
             sspi->mode_type = DUAL_HALF_DUPLEX_TX;
@@ -575,7 +596,7 @@ static spi_master_status_t spi_mode_check(sunxi_spi_t *sspi)
         {
             spi_disable_quad(sspi);
             spi_disable_dual(sspi);
-            spi_set_bc_tc_stc(sspi->transfer->tx_len, 0,
+            spi_set_bc_tc_stc(sspi->transfer->tx_len, sspi->transfer->tx_len,
                               sspi->transfer->tx_len,
                               sspi->transfer->dummy_byte, sspi);
             sspi->mode_type = SGLE_HALF_DUPLEX_TX;
@@ -621,7 +642,7 @@ static spi_master_status_t spi_cpu_write(sunxi_spi_t *sspi)
     uint32_t flags = 0;
     uint32_t len = sspi->transfer->tx_len;
     const uint8_t *buf = sspi->transfer->tx_buf;
-    uint32_t poll_time = 0xff;
+    volatile int32_t poll_time;
 #ifdef SPI_DATA_LEVEL
     uint32_t i, j;
     uint8_t dbuf[64], cnt = 0;
@@ -653,7 +674,7 @@ static spi_master_status_t spi_cpu_write(sunxi_spi_t *sspi)
 
     for (; len > 0; --len)
     {
-        hal_writeb(*buf++, sspi->base + SPI_TXDATA_REG);
+        poll_time = 0xFFFFFF;
         while ((spi_query_txfifo(sspi) >= MAX_FIFU) && poll_time--)
             ;
         if (poll_time <= 0)
@@ -664,6 +685,8 @@ static spi_master_status_t spi_cpu_write(sunxi_spi_t *sspi)
             spi_dump_reg(sspi, 0, 0x60);
             return SPI_MASTER_ERROR_TIMEOUT;
         }
+
+        hal_writeb(*buf++, sspi->base + SPI_TXDATA_REG);
     }
 
     return SPI_MASTER_OK;
@@ -674,7 +697,7 @@ static spi_master_status_t spi_cpu_read(sunxi_spi_t *sspi)
     uint32_t flags = 0;
     uint32_t len = sspi->transfer->rx_len;
     uint8_t *buf = sspi->transfer->rx_buf;
-    uint32_t poll_time = 0xff;
+    volatile int32_t poll_time;
     uint32_t n;
 
 #ifdef SPI_DATA_LEVEL
@@ -695,8 +718,10 @@ static spi_master_status_t spi_cpu_read(sunxi_spi_t *sspi)
 
     for (n = 0; n < len; n++)
     {
+        poll_time = 0xFFFFFF;
         while (!spi_query_rxfifo(sspi) && poll_time--)
-            ;
+        {
+        }
         if (poll_time <= 0)
         {
             SPI_ERR("[spi%d] cpu receive data time out!\n",
@@ -1017,116 +1042,119 @@ static spi_master_status_t spi_dma_rx_submit(struct sunxi_spi *sspi)
 
 static spi_master_status_t spi_transfer(sunxi_spi_t *sspi)
 {
+    spi_config_dhb(sspi, 1);
+
     switch (sspi->mode_type)
     {
-        case SGLE_HALF_DUPLEX_RX:
-        case DUAL_HALF_DUPLEX_RX:
-        case QUAD_HALF_DUPLEX_RX:
+    case SGLE_HALF_DUPLEX_RX:
+    case DUAL_HALF_DUPLEX_RX:
+    case QUAD_HALF_DUPLEX_RX:
+    {
+#ifndef CONFIG_SUNXI_SPI_CPU_XFER_ONLY
+        /* >64 use DMA transfer, or use cpu */
+        if (sspi->transfer->rx_len > BULK_DATA_BOUNDARY)
         {
-#ifndef CONFIG_SUNXI_SPI_CPU_XFER_ONLY
-            /* >64 use DMA transfer, or use cpu */
-            if (sspi->transfer->rx_len > BULK_DATA_BOUNDARY)
+            SPI_INFO("[spi%d] rx by dma\n", sspi->port);
+            /* For Rx mode, the DMA end(not TC flag) is real end. */
+            spi_disable_irq(SPI_INTEN_TC, sspi);
+            if (spi_dma_rx_config(sspi))
             {
-                SPI_INFO("[spi%d] rx by dma\n", sspi->port);
-                /* For Rx mode, the DMA end(not TC flag) is real end. */
-                spi_disable_irq(SPI_INTEN_TC, sspi);
-                if (spi_dma_rx_config(sspi))
-                {
-                    return SPI_MASTER_ERROR;
-                }
-                if (spi_dma_rx_submit(sspi))
-                {
-                    return SPI_MASTER_ERROR;
-                }
-                spi_start_xfer(sspi);
+                return SPI_MASTER_ERROR;
             }
-            else
+            if (spi_dma_rx_submit(sspi))
             {
-#endif
-                SPI_INFO("[spi%d] rx by cpu\n", sspi->port);
-                spi_clr_irq_pending(SPI_INT_STA_MASK, sspi);
-                spi_start_xfer(sspi);
-                spi_cpu_read(sspi);
-#ifndef CONFIG_SUNXI_SPI_CPU_XFER_ONLY
+                return SPI_MASTER_ERROR;
             }
-#endif
-            break;
+            spi_start_xfer(sspi);
         }
-        case SGLE_HALF_DUPLEX_TX:
-        case DUAL_HALF_DUPLEX_TX:
-        case QUAD_HALF_DUPLEX_TX:
+        else
         {
-#ifndef CONFIG_SUNXI_SPI_CPU_XFER_ONLY
-            /* >64 use DMA transfer, or use cpu */
-            if (sspi->transfer->tx_len > BULK_DATA_BOUNDARY)
-            {
-                SPI_INFO("[spi%d] tx by dma\n", sspi->port);
-                sspi->sem = 1;
-                spi_start_xfer(sspi);
-                if (spi_dma_tx_config(sspi))
-                {
-                    return SPI_MASTER_ERROR;
-                }
-                if (spi_dma_tx_submit(sspi))
-                {
-                    return SPI_MASTER_ERROR;
-                }
-            }
-            else
-            {
 #endif
-                SPI_INFO("[spi%d] tx by cpu\n", sspi->port);
-                spi_start_xfer(sspi);
-                spi_cpu_write(sspi);
+            SPI_INFO("[spi%d] rx by cpu\n", sspi->port);
+            spi_clr_irq_pending(SPI_INT_STA_MASK, sspi);
+            spi_start_xfer(sspi);
+            spi_cpu_read(sspi);
 #ifndef CONFIG_SUNXI_SPI_CPU_XFER_ONLY
-            }
-#endif
-            break;
         }
-        case FULL_DUPLEX_TX_RX:
+#endif
+        break;
+    }
+    case SGLE_HALF_DUPLEX_TX:
+    case DUAL_HALF_DUPLEX_TX:
+    case QUAD_HALF_DUPLEX_TX:
+    {
+        spi_config_dhb(sspi, 0);
+#ifndef CONFIG_SUNXI_SPI_CPU_XFER_ONLY
+        /* >64 use DMA transfer, or use cpu */
+        if (sspi->transfer->tx_len > BULK_DATA_BOUNDARY)
         {
-#ifndef CONFIG_SUNXI_SPI_CPU_XFER_ONLY
-            /* >64 use DMA transfer, or use cpu */
-            if (sspi->transfer->rx_len > BULK_DATA_BOUNDARY)
+            SPI_INFO("[spi%d] tx by dma\n", sspi->port);
+            sspi->sem = 1;
+            spi_start_xfer(sspi);
+            if (spi_dma_tx_config(sspi))
             {
-                SPI_INFO("[spi%d] tx and rx by dma\n", sspi->port);
-                /* For Rx mode, the DMA end(not TC flag) is real end. */
-                spi_disable_irq(SPI_INTEN_TC, sspi);
-                spi_start_xfer(sspi);
-                spi_cpu_write(sspi);
-                if (spi_dma_rx_config(sspi))
-                {
-                    return SPI_MASTER_ERROR;
-                }
-                if (spi_dma_rx_submit(sspi))
-                {
-                    return SPI_MASTER_ERROR;
-                }
+                return SPI_MASTER_ERROR;
             }
-            else
+            if (spi_dma_tx_submit(sspi))
             {
-#endif
-                SPI_INFO("[spi%d] tx and rx by cpu\n", sspi->port);
-                spi_start_xfer(sspi);
-                spi_cpu_write(sspi);
-                spi_cpu_read(sspi);
-#ifndef CONFIG_SUNXI_SPI_CPU_XFER_ONLY
+                return SPI_MASTER_ERROR;
             }
-#endif
-            break;
         }
-        default:
+        else
         {
-            SPI_ERR("[spi%d] invalid parameter\n", sspi->port);
-            return SPI_MASTER_INVALID_PARAMETER;
+#endif
+            SPI_INFO("[spi%d] tx by cpu\n", sspi->port);
+            spi_start_xfer(sspi);
+            spi_cpu_write(sspi);
+#ifndef CONFIG_SUNXI_SPI_CPU_XFER_ONLY
         }
+#endif
+        break;
+    }
+    case FULL_DUPLEX_TX_RX:
+    {
+#ifndef CONFIG_SUNXI_SPI_CPU_XFER_ONLY
+        /* >64 use DMA transfer, or use cpu */
+        if (sspi->transfer->rx_len > BULK_DATA_BOUNDARY)
+        {
+            SPI_INFO("[spi%d] tx and rx by dma\n", sspi->port);
+            /* For Rx mode, the DMA end(not TC flag) is real end. */
+            spi_disable_irq(SPI_INTEN_TC, sspi);
+            spi_start_xfer(sspi);
+            if (spi_dma_rx_config(sspi))
+            {
+                return SPI_MASTER_ERROR;
+            }
+            if (spi_dma_rx_submit(sspi))
+            {
+                return SPI_MASTER_ERROR;
+            }
+            spi_cpu_write(sspi);
+        }
+        else
+        {
+#endif
+            SPI_INFO("[spi%d] tx and rx by cpu\n", sspi->port);
+            spi_start_xfer(sspi);
+            spi_cpu_write(sspi);
+            spi_cpu_read(sspi);
+#ifndef CONFIG_SUNXI_SPI_CPU_XFER_ONLY
+        }
+#endif
+        break;
+    }
+    default:
+    {
+        SPI_ERR("[spi%d] invalid parameter\n", sspi->port);
+        return SPI_MASTER_INVALID_PARAMETER;
+    }
     }
 
     return SPI_MASTER_OK;
 }
 
 /* wake up the sleep thread, and give the result code */
-static irqreturn_t  spi_irq_handler(int irq, void *ptr)
+static irqreturn_t spi_irq_handler(int irq, void *ptr)
 {
     uint32_t flags = 0;
     uint32_t status = 0, enable = 0;
@@ -1154,7 +1182,7 @@ static irqreturn_t  spi_irq_handler(int irq, void *ptr)
 #endif
         return 0;
     }
-    else if (status & SPI_INT_STA_ERR)     /* master mode:err */
+    else if (status & SPI_INT_STA_ERR) /* master mode:err */
     {
         SPI_INFO_IRQ("[spi%d]  SPI ERR! status %#lx\n", sspi->port, status);
         /* __log("[spi%d] dump reg:\n", sspi->port); */
@@ -1202,26 +1230,26 @@ static spi_master_status_t spi_pinctrl_init(sunxi_spi_t *sspi)
 
     for (i = 0; i < count; i++)
     {
-	spi_pin[i] = (gpio_cfg[i].port - 1) * 32 + gpio_cfg[i].port_num;
-	spi_muxsel[i] = gpio_cfg[i].mul_sel;
+        spi_pin[i] = (gpio_cfg[i].port - 1) * 32 + gpio_cfg[i].port_num;
+        spi_muxsel[i] = gpio_cfg[i].mul_sel;
         ret = hal_gpio_pinmux_set_function(spi_pin[i], spi_muxsel[i]);
-	if (ret)
+        if (ret)
         {
             SPI_ERR("[spi%d] PIN%u set function failed! return %d\n",
-                sspi->port, spi_pin[i], ret);
+                    sspi->port, spi_pin[i], ret);
             return SPI_MASTER_ERROR;
         }
-	ret = hal_gpio_set_driving_level(spi_pin[i], gpio_cfg[i].drv_level);
+        ret = hal_gpio_set_driving_level(spi_pin[i], gpio_cfg[i].drv_level);
         if (ret)
         {
             SPI_ERR("[spi%d] PIN%u set driving level failed! return %d\n",
-                sspi->port, gpio_cfg[i].drv_level, ret);
+                    sspi->port, gpio_cfg[i].drv_level, ret);
             return SPI_MASTER_ERROR;
         }
-	if (gpio_cfg[i].pull)
-	{
+        if (gpio_cfg[i].pull)
+        {
             ret = hal_gpio_set_pull(spi_pin[i], gpio_cfg[i].pull);
-	}
+        }
     }
 
     return ret;
@@ -1235,7 +1263,7 @@ static spi_master_status_t spi_clk_init(sunxi_spi_t *sspi, u32 mode_clk)
     unsigned long rate;
     hal_clk_status_t ret;
     hal_reset_type_t reset_type = HAL_SUNXI_RESET;
-    u32  reset_id;
+    u32 reset_id;
     hal_clk_type_t clk_type = HAL_SUNXI_CCU;
     hal_clk_id_t clk_id;
     hal_clk_id_t clk_bus_id;
@@ -1243,24 +1271,24 @@ static spi_master_status_t spi_clk_init(sunxi_spi_t *sspi, u32 mode_clk)
 
     switch (sspi->port)
     {
-	    case 0:
-		    clk_id = SUNXI_CLK_SPI(0);
-		    clk_bus_id = SUNXI_CLK_BUS_SPI(0);
-		    reset_id = SUNXI_CLK_RST_SPI(0);
-		    break;
-	    case 1:
-		    clk_id = SUNXI_CLK_SPI(1);
-		    clk_bus_id = SUNXI_CLK_BUS_SPI(1);
-		    reset_id = SUNXI_CLK_RST_SPI(1);
-		    break;
-	    case 2:
-		    clk_id = SUNXI_CLK_SPI(2);
-		    clk_bus_id = SUNXI_CLK_BUS_SPI(2);
-		    reset_id = SUNXI_CLK_RST_SPI(2);
-		    break;
-	    default:
-		    SPI_ERR("spi%d is invalid\n", sspi->port);
-		    return SPI_MASTER_INVALID_PARAMETER;
+    case 0:
+        clk_id = SUNXI_CLK_SPI(0);
+        clk_bus_id = SUNXI_CLK_BUS_SPI(0);
+        reset_id = SUNXI_CLK_RST_SPI(0);
+        break;
+    case 1:
+        clk_id = SUNXI_CLK_SPI(1);
+        clk_bus_id = SUNXI_CLK_BUS_SPI(1);
+        reset_id = SUNXI_CLK_RST_SPI(1);
+        break;
+    case 2:
+        clk_id = SUNXI_CLK_SPI(2);
+        clk_bus_id = SUNXI_CLK_BUS_SPI(2);
+        reset_id = SUNXI_CLK_RST_SPI(2);
+        break;
+    default:
+        SPI_ERR("spi%d is invalid\n", sspi->port);
+        return SPI_MASTER_INVALID_PARAMETER;
     }
 
     sspi->reset = hal_reset_control_get(reset_type, reset_id);
@@ -1371,7 +1399,7 @@ static spi_master_status_t spi_dma_tx_complete(sunxi_spi_t *sspi)
     spi_master_status_t ret = 0;
     int xResult;
 
-    xResult = hal_sem_timedwait(sspi->xSemaphore_tx, 100);//100*10ms
+    xResult = hal_sem_timedwait(sspi->xSemaphore_tx, 100); //100*10ms
     if (xResult == 0)
     {
         if (SPI_XFER_OK == sspi->result)
@@ -1432,17 +1460,17 @@ static spi_master_status_t spi_dma_rx_complete(sunxi_spi_t *sspi)
     struct sunxi_dma_chan *chan = sspi->dma_rx.chan;
     hal_dma_status_t dma_ret;
     spi_master_status_t ret;
-    int  xResult;
+    int xResult;
 
 #ifdef SPI_DATA_LEVEL
     unsigned int i, j;
     u8 dbuf[64], cnt = 0;
 #endif
 
-    xResult = hal_sem_timedwait(sspi->xSemaphore_rx, 100);//100*10ms
+    xResult = hal_sem_timedwait(sspi->xSemaphore_rx, 1000); //100*10ms
     if (xResult != 0)
     {
-        SPI_ERR("[spi%d] dma xfer timeout\n", sspi->port);
+        rt_kprintf("[spi%d] dma rx timeout\n", sspi->port);
         SPI_INFO("[spi%d] dump reg:\n", sspi->port);
         spi_dump_reg(sspi, 0, 0x40);
 
@@ -1502,7 +1530,7 @@ end:
  * wait for done completion in this function, wakup in the irq hanlder
  */
 spi_master_status_t hal_spi_xfer(hal_spi_master_port_t port,
-        hal_spi_master_transfer_t *transfer)
+                                 hal_spi_master_transfer_t *transfer)
 {
     uint32_t flags = 0;
     spi_master_status_t ret = 0;
@@ -1540,6 +1568,7 @@ spi_master_status_t hal_spi_xfer(hal_spi_master_port_t port,
     spi_disable_dma_irq(SPI_FIFO_CTL_DRQEN_MASK, sspi);
     spi_reset_fifo(sspi);
     spi_enable_irq(SPI_INTEN_TC | SPI_INTEN_ERR, sspi);
+    // cpu_dcache_clean_all();
 
     if (spi_transfer(sspi))
     {
@@ -1549,74 +1578,74 @@ spi_master_status_t hal_spi_xfer(hal_spi_master_port_t port,
 
     switch (sspi->mode_type)
     {
-        case SGLE_HALF_DUPLEX_RX:
-        case DUAL_HALF_DUPLEX_RX:
-        case QUAD_HALF_DUPLEX_RX:
-        case FULL_DUPLEX_TX_RX:
-        {
+    case SGLE_HALF_DUPLEX_RX:
+    case DUAL_HALF_DUPLEX_RX:
+    case QUAD_HALF_DUPLEX_RX:
+    case FULL_DUPLEX_TX_RX:
+    {
 #ifndef CONFIG_SUNXI_SPI_CPU_XFER_ONLY
-            /* >64 use DMA transfer, or use cpu */
-            if (sspi->transfer->rx_len > BULK_DATA_BOUNDARY)
+        /* >64 use DMA transfer, or use cpu */
+        if (sspi->transfer->rx_len > BULK_DATA_BOUNDARY)
+        {
+            if (spi_dma_rx_complete(sspi))
             {
-                if (spi_dma_rx_complete(sspi))
-                {
-                    ret = SPI_MASTER_ERROR;
-                    goto end;
-                }
+                ret = SPI_MASTER_ERROR;
+                goto end;
+            }
+        }
+        else
+        {
+#endif
+            if (spi_cpu_complete(sspi))
+            {
+                ret = SPI_MASTER_ERROR;
+                goto end;
             }
             else
             {
-#endif
-                if (spi_cpu_complete(sspi))
-                {
-                    ret = SPI_MASTER_ERROR;
-                    goto end;
-                }
-                else
-                {
-                    ret = SPI_MASTER_OK;
-                }
-#ifndef CONFIG_SUNXI_SPI_CPU_XFER_ONLY
+                ret = SPI_MASTER_OK;
             }
-#endif
-            break;
-        }
-        case SGLE_HALF_DUPLEX_TX:
-        case DUAL_HALF_DUPLEX_TX:
-        case QUAD_HALF_DUPLEX_TX:
-        {
 #ifndef CONFIG_SUNXI_SPI_CPU_XFER_ONLY
-            /* >64 use DMA transfer, or use cpu */
-            if (sspi->transfer->tx_len > BULK_DATA_BOUNDARY)
+        }
+#endif
+        break;
+    }
+    case SGLE_HALF_DUPLEX_TX:
+    case DUAL_HALF_DUPLEX_TX:
+    case QUAD_HALF_DUPLEX_TX:
+    {
+#ifndef CONFIG_SUNXI_SPI_CPU_XFER_ONLY
+        /* >64 use DMA transfer, or use cpu */
+        if (sspi->transfer->tx_len > BULK_DATA_BOUNDARY)
+        {
+            if (spi_dma_tx_complete(sspi))
             {
-                if (spi_dma_tx_complete(sspi))
-                {
-                    ret = SPI_MASTER_ERROR;
-                    goto end;
-                }
+                ret = SPI_MASTER_ERROR;
+                goto end;
+            }
+        }
+        else
+        {
+#endif
+            if (spi_cpu_complete(sspi))
+            {
+                ret = SPI_MASTER_ERROR;
+                goto end;
             }
             else
             {
-#endif
-                if (spi_cpu_complete(sspi))
-                {
-                    ret = SPI_MASTER_ERROR;
-                    goto end;
-                }
-                else
-                {
-                    ret = SPI_MASTER_OK;
-                }
-#ifndef CONFIG_SUNXI_SPI_CPU_XFER_ONLY
+                ret = SPI_MASTER_OK;
             }
+#ifndef CONFIG_SUNXI_SPI_CPU_XFER_ONLY
+        }
 #endif
-            break;
-        }
-        default:
-        {
-            SPI_ERR("[spi%d] invalid parameter\n", sspi->port);
-            ret = SPI_MASTER_INVALID_PARAMETER;
-        }
+        break;
+    }
+    default:
+    {
+        SPI_ERR("[spi%d] invalid parameter\n", sspi->port);
+        ret = SPI_MASTER_INVALID_PARAMETER;
+    }
     }
 
 end:
@@ -1655,7 +1684,7 @@ static void spi_set_clk(u32 spi_clk, u32 ahb_clk, unsigned long base_addr, u32 c
         reg_val |= (div_clk | SPI_CLK_CTL_DRS);
         SPI_INFO("CDR2 - n = %ld\n", div_clk);
     }
-    else     /* CDR1 */
+    else /* CDR1 */
     {
         while (ahb_clk > spi_clk)
         {
@@ -1672,9 +1701,10 @@ static void spi_set_clk(u32 spi_clk, u32 ahb_clk, unsigned long base_addr, u32 c
 
 spi_master_status_t hal_spi_hw_config(hal_spi_master_port_t port, hal_spi_master_config_t *spi_config)
 {
-    uint sclk_freq = 0;
+    int sclk_freq = 0;
     unsigned long clock_frequency;
     sunxi_spi_t *sspi = &g_sunxi_spi[port];
+    uint32_t config = 0;
 
     if (NULL == spi_config)
     {
@@ -1724,12 +1754,12 @@ spi_master_status_t hal_spi_hw_config(hal_spi_master_port_t port, hal_spi_master
     }
     else if (sclk_freq != clock_frequency)
     {
-	spi_clk_exit(sspi);
-	if (spi_clk_init(sspi, clock_frequency))
-	{
-		SPI_ERR("[spi%d] init clk error\n", sspi->port);
-		return SPI_MASTER_ERROR;
-	}
+        spi_clk_exit(sspi);
+        if (spi_clk_init(sspi, clock_frequency))
+        {
+            SPI_ERR("[spi%d] init clk error\n", sspi->port);
+            return SPI_MASTER_ERROR;
+        }
     }
     //spi_set_clk(clock_frequency, sclk_freq, sspi->base, 0);
 
@@ -1746,25 +1776,26 @@ spi_master_status_t hal_spi_hw_config(hal_spi_master_port_t port, hal_spi_master
 
     if (spi_config->bit_order)
     {
-        spi_config_tc(SPI_LSB_FIRST_ACTIVE_, sspi);
+        config |= SPI_LSB_FIRST_ACTIVE_;
+        // spi_config_tc(SPI_LSB_FIRST_ACTIVE_, sspi);
     }
 
-    spi_config_tc((spi_config->cpol) | (spi_config->cpha), sspi);
+    config |= (spi_config->cpol) | (spi_config->cpha);
+    spi_config_tc(config, sspi);
 
     spi_enable_bus(sspi);
     spi_set_master(sspi);
     spi_enable_tp(sspi);
     /*spi controller sends ss signal automatically*/
-    spi_ss_owner(sspi, 0);
+    spi_ss_owner(sspi, spi_config->csmode);
     /* reset fifo */
     spi_reset_fifo(sspi);
 
     return SPI_MASTER_OK;
-
 }
 
 spi_master_status_t hal_spi_init(hal_spi_master_port_t port,
-        hal_spi_master_config_t *cfg)
+                                 hal_spi_master_config_t *cfg)
 {
     sunxi_spi_t *sspi = &g_sunxi_spi[port];
 
@@ -1858,7 +1889,7 @@ spi_master_status_t hal_spi_deinit(hal_spi_master_port_t port)
 }
 
 spi_master_status_t hal_spi_write(hal_spi_master_port_t port,
-        const void *buf, uint32_t size)
+                                  const void *buf, uint32_t size)
 {
     spi_master_status_t ret;
     hal_spi_master_transfer_t tr;
@@ -1877,7 +1908,7 @@ spi_master_status_t hal_spi_write(hal_spi_master_port_t port,
 }
 
 spi_master_status_t hal_spi_read(hal_spi_master_port_t port,
-        void *buf, uint32_t size)
+                                 void *buf, uint32_t size)
 {
     spi_master_status_t ret;
     hal_spi_master_transfer_t tr;
@@ -1895,3 +1926,9 @@ spi_master_status_t hal_spi_read(hal_spi_master_port_t port,
     return ret;
 }
 
+void hal_spi_cs(hal_spi_master_port_t port, uint8_t on_off)
+{
+    sunxi_spi_t *sspi = &g_sunxi_spi[port];
+
+    spi_ss_ctrl(sspi, on_off);
+}

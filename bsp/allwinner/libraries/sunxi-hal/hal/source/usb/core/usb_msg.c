@@ -794,17 +794,17 @@ s32 usb_get_device_descriptor(struct usb_host_virt_dev *dev, u32 size)
 {
     struct usb_device_descriptor desc __attribute__((aligned(4)));
     s32 ret = 0;
-	hal_log_info("---usb_get_device_descriptor---1--\n");
+    hal_log_info("---usb_get_device_descriptor---1--\n");
     if (size > sizeof(struct usb_device_descriptor))
     {
         return -EINVAL;
     }
 
     memset(&desc, 0, sizeof(struct usb_device_descriptor));
-	hal_log_info("---usb_get_device_descriptor---2--\n");
+    hal_log_info("---usb_get_device_descriptor---2--\n");
     ret = usb_get_descriptor(dev, USB_DT_DEVICE, 0, (void *)&desc, size);
 
-	hal_log_info("---usb_get_device_descriptor---3--\n");
+    hal_log_info("---usb_get_device_descriptor---3--\n");
     if (ret >= 0)
     {
         memcpy((void *)(&dev->descriptor), (void *)&desc, size);

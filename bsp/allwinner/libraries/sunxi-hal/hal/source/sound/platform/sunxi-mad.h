@@ -257,103 +257,103 @@ enum mad_path_sel {
 #define SRAM_BMODE_CTRL_REG 0x3000004
 
 enum sunxi_mad_standby_debug_flag {
-	SUNXI_MAD_DEBUG_STANDBY_NULL = 0,
-	SUNXI_MAD_DEBUG_STANDBY_SUSPEND = 1,
-	SUNXI_MAD_DEBUG_STANDBY_RESUME = 2,
+    SUNXI_MAD_DEBUG_STANDBY_NULL = 0,
+    SUNXI_MAD_DEBUG_STANDBY_SUSPEND = 1,
+    SUNXI_MAD_DEBUG_STANDBY_RESUME = 2,
 };
 
 enum sunxi_mad_irq_work_flag {
-	SUNXI_MAD_NULL_IRQ_WORK = 0,
-	SUNXI_MAD_LPSD_IRQ_WORK = 1,
-	SUNXI_MAD_DATA_IRQ_WORK = 2,
+    SUNXI_MAD_NULL_IRQ_WORK = 0,
+    SUNXI_MAD_LPSD_IRQ_WORK = 1,
+    SUNXI_MAD_DATA_IRQ_WORK = 2,
 };
 
 enum sunxi_mad_sram_reset_flag {
-	SUNXI_MAD_SRAM_RESET_IDLE = 0,
-	SUNXI_MAD_SRAM_RESET_START = 1,
-	SUNXI_MAD_SRAM_RESET_END = 2,
+    SUNXI_MAD_SRAM_RESET_IDLE = 0,
+    SUNXI_MAD_SRAM_RESET_START = 1,
+    SUNXI_MAD_SRAM_RESET_END = 2,
 };
 
 enum sunxi_mad_status {
-	SUNXI_MAD_OPEN = 0,
-	SUNXI_MAD_PARAMS = 1,
-	SUNXI_MAD_SUSPEND = 2,
-	SUNXI_MAD_RESUME = 3,
-	SUNXI_MAD_CLOSE = 4,
+    SUNXI_MAD_OPEN = 0,
+    SUNXI_MAD_PARAMS = 1,
+    SUNXI_MAD_SUSPEND = 2,
+    SUNXI_MAD_RESUME = 3,
+    SUNXI_MAD_CLOSE = 4,
 };
 
 enum sunxi_mad_dma_type {
-	SUNXI_MAD_DMA_MEM = 0,
-	SUNXI_MAD_DMA_IO = 1,
+    SUNXI_MAD_DMA_MEM = 0,
+    SUNXI_MAD_DMA_IO = 1,
 };
 
 enum sunxi_mad_standby_flag {
-	/* bit0 for sram IO type when standby */
-	SUNXI_MAD_STANDBY_SRAM_MEM = 0x1,
+    /* bit0 for sram IO type when standby */
+    SUNXI_MAD_STANDBY_SRAM_MEM = 0x1,
 };
 
 enum sunxi_mad_wakeup_flag {
-	/* bit0 for wakeup source */
-	SUNXI_MAD_WAKEUP_OFF = 0x0,
-	SUNXI_MAD_WAKEUP_ON = 0x1,
-	/* bit1 for wakeup use or no */
-	SUNXI_MAD_WAKEUP_USE = 0x2,
+    /* bit0 for wakeup source */
+    SUNXI_MAD_WAKEUP_OFF = 0x0,
+    SUNXI_MAD_WAKEUP_ON = 0x1,
+    /* bit1 for wakeup use or no */
+    SUNXI_MAD_WAKEUP_USE = 0x2,
 
-	/* bit2 for lpsd wakeup */
-	SUNXI_MAD_WAKEUP_LPSD_IRQ = 0x4,
-	/* bit3 for mad irq wakeup */
-	SUNXI_MAD_WAKEUP_MAD_IRQ = 0x8,
-	/* bit4 for other irq wakeup */
-	SUNXI_MAD_WAKEUP_OTHER = 0x10,
+    /* bit2 for lpsd wakeup */
+    SUNXI_MAD_WAKEUP_LPSD_IRQ = 0x4,
+    /* bit3 for mad irq wakeup */
+    SUNXI_MAD_WAKEUP_MAD_IRQ = 0x8,
+    /* bit4 for other irq wakeup */
+    SUNXI_MAD_WAKEUP_OTHER = 0x10,
 };
 
 struct sunxi_mad_priv {
-	struct sunxi_mad_info *sunxi_mad;
-	unsigned int mad_bind;
-	unsigned int mad_suspend;
-	/* mad params */
-	unsigned int sample_rate;
-	unsigned int lpsd_chan_sel;
-	unsigned int standby_chan_sel;
-	unsigned int audio_src_chan_num;
+    struct sunxi_mad_info *sunxi_mad;
+    unsigned int mad_bind;
+    unsigned int mad_suspend;
+    /* mad params */
+    unsigned int sample_rate;
+    unsigned int lpsd_chan_sel;
+    unsigned int standby_chan_sel;
+    unsigned int audio_src_chan_num;
 };
 
 struct sunxi_mad_info {
-	hal_clk_id_t mad_clk;
-	hal_clk_id_t mad_cfg_clk;
-	hal_clk_id_t mad_ad_clk;
-	hal_clk_id_t lpsd_clk;
-	hal_clk_id_t pll_clk;
-	hal_clk_id_t hosc_clk;
+    hal_clk_id_t mad_clk;
+    hal_clk_id_t mad_cfg_clk;
+    hal_clk_id_t mad_ad_clk;
+    hal_clk_id_t lpsd_clk;
+    hal_clk_id_t pll_clk;
+    hal_clk_id_t hosc_clk;
 
-	freert_spinlock_t resume_spin;
+    freert_spinlock_t resume_spin;
 
-	unsigned int pll_audio_src_used;
-	unsigned int hosc_src_used;
+    unsigned int pll_audio_src_used;
+    unsigned int hosc_src_used;
 
-	void *mem_base;
+    void *mem_base;
 
-	unsigned int mad_irq;
-	unsigned int lpsd_irq;
-	QueueHandle_t irq_queue;
-	TaskHandle_t pxMadIrqTask;
+    unsigned int mad_irq;
+    unsigned int lpsd_irq;
+    QueueHandle_t irq_queue;
+    TaskHandle_t pxMadIrqTask;
 
-	unsigned int sram_rd_point;
-	unsigned int audio_src_path;
+    unsigned int sram_rd_point;
+    unsigned int audio_src_path;
 
-	unsigned int mad_bind;
+    unsigned int mad_bind;
 
-	int status;
-	unsigned int wakeup_flag;
-	unsigned int suspend_flag;
-	unsigned int sram_reset_flag;
-	int standby_sram_type;
-	int wakeup_irq_en;
-	unsigned int ref_count;
+    int status;
+    unsigned int wakeup_flag;
+    unsigned int suspend_flag;
+    unsigned int sram_reset_flag;
+    int standby_sram_type;
+    int wakeup_irq_en;
+    unsigned int ref_count;
 
-	struct sunxi_mad_priv mad_priv;
+    struct sunxi_mad_priv mad_priv;
 
-	void *private_data;
+    void *private_data;
 };
 
 int sunxi_mad_sram_set_reset_flag(enum sunxi_mad_sram_reset_flag reset_flag);

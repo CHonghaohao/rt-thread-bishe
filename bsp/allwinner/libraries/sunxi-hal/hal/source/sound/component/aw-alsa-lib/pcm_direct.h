@@ -36,145 +36,145 @@
 #include <aw-alsa-lib/plugin/pcm_direct_config.h>
 #include <semaphore.h>
 
-#define DIRECT_IPC_SEMS		1
-#define DIRECT_IPC_SEM_CLIENT	0
+#define DIRECT_IPC_SEMS     1
+#define DIRECT_IPC_SEM_CLIENT   0
 
 typedef void (mix_areas_t)(unsigned int size,
-			   volatile void *dst, void *src,
-			   volatile signed int *sum, size_t dst_step,
-			   size_t src_step, size_t sum_step);
+               volatile void *dst, void *src,
+               volatile signed int *sum, size_t dst_step,
+               size_t src_step, size_t sum_step);
 
 typedef void (mix_areas_16_t)(unsigned int size,
-			      volatile signed short *dst, signed short *src,
-			      volatile signed int *sum, size_t dst_step,
-			      size_t src_step, size_t sum_step);
+                  volatile signed short *dst, signed short *src,
+                  volatile signed int *sum, size_t dst_step,
+                  size_t src_step, size_t sum_step);
 
 typedef void (mix_areas_32_t)(unsigned int size,
-			      volatile signed int *dst, signed int *src,
-			      volatile signed int *sum, size_t dst_step,
-			      size_t src_step, size_t sum_step);
+                  volatile signed int *dst, signed int *src,
+                  volatile signed int *sum, size_t dst_step,
+                  size_t src_step, size_t sum_step);
 
 typedef void (mix_areas_24_t)(unsigned int size,
-			      volatile unsigned char *dst, unsigned char *src,
-			      volatile signed int *sum, size_t dst_step,
-			      size_t src_step, size_t sum_step);
+                  volatile unsigned char *dst, unsigned char *src,
+                  volatile signed int *sum, size_t dst_step,
+                  size_t src_step, size_t sum_step);
 
 typedef void (mix_areas_u8_t)(unsigned int size,
-			      volatile unsigned char *dst, unsigned char *src,
-			      volatile signed int *sum, size_t dst_step,
-			      size_t src_step, size_t sum_step);
+                  volatile unsigned char *dst, unsigned char *src,
+                  volatile signed int *sum, size_t dst_step,
+                  size_t src_step, size_t sum_step);
 
 typedef struct snd_pcm_direct snd_pcm_direct_t;
 
 /* shared among direct plugin clients - be careful to be 32/64bit compatible! */
 typedef struct {
-	unsigned int magic;			/* magic number */
-	snd_pcm_type_t type;			/* PCM type (currently only hw) */
-	struct {
-		snd_pcm_format_t format;
-		snd_interval_t rate;
-		snd_interval_t period_size;
-		snd_interval_t period_time;
-		snd_interval_t periods;
-		snd_interval_t buffer_size;
-		snd_interval_t buffer_time;
-	} hw;
-	struct {
-		/* copied to slave PCMs */
-		snd_pcm_access_t access;
-		snd_pcm_format_t format;
-		unsigned int channels;
-		unsigned int rate;
-		unsigned int period_size;
-		unsigned int period_time;
-		unsigned int periods;
+    unsigned int magic;         /* magic number */
+    snd_pcm_type_t type;            /* PCM type (currently only hw) */
+    struct {
+        snd_pcm_format_t format;
+        snd_interval_t rate;
+        snd_interval_t period_size;
+        snd_interval_t period_time;
+        snd_interval_t periods;
+        snd_interval_t buffer_size;
+        snd_interval_t buffer_time;
+    } hw;
+    struct {
+        /* copied to slave PCMs */
+        snd_pcm_access_t access;
+        snd_pcm_format_t format;
+        unsigned int channels;
+        unsigned int rate;
+        unsigned int period_size;
+        unsigned int period_time;
+        unsigned int periods;
 
-		unsigned int avail_min;
-		unsigned int start_threshold;
-		unsigned int stop_threshold;
-		unsigned int silence_threshold;
-		unsigned int silence_size;
+        unsigned int avail_min;
+        unsigned int start_threshold;
+        unsigned int stop_threshold;
+        unsigned int silence_threshold;
+        unsigned int silence_size;
 
-		unsigned int recoveries;	/* no of executed recoveries on slave*/
+        unsigned int recoveries;    /* no of executed recoveries on slave*/
 
-		unsigned long long boundary;
+        unsigned long long boundary;
 
-		unsigned int info;
-		unsigned int msbits;
-		unsigned int rate_num;
-		unsigned int rate_den;
-		unsigned int hw_flags;
-		unsigned int fifo_size;
-		unsigned int buffer_size;
-		unsigned int buffer_time;
+        unsigned int info;
+        unsigned int msbits;
+        unsigned int rate_num;
+        unsigned int rate_den;
+        unsigned int hw_flags;
+        unsigned int fifo_size;
+        unsigned int buffer_size;
+        unsigned int buffer_time;
 
-		unsigned int sample_bits;
-		unsigned int frame_bits;
-	} s;
-	union {
-		struct {
-			unsigned long long chn_mask;
-		} dshare;
-	} u;
+        unsigned int sample_bits;
+        unsigned int frame_bits;
+    } s;
+    union {
+        struct {
+            unsigned long long chn_mask;
+        } dshare;
+    } u;
 } snd_pcm_direct_share_t;
 
 struct snd_pcm_direct {
-	snd_pcm_type_t type;
-	key_t ipc_key;
+    snd_pcm_type_t type;
+    key_t ipc_key;
 
-	sem_t *semid;
-	int poll_index;
+    sem_t *semid;
+    int poll_index;
 
-	int locked[DIRECT_IPC_SEMS];
-	snd_pcm_t *spcm;
-	snd_pcm_direct_share_t *shmptr;
-	snd_pcm_uframes_t appl_ptr;
-	snd_pcm_uframes_t last_appl_ptr;
-	snd_pcm_uframes_t hw_ptr;
-	snd_pcm_uframes_t avail_max;
+    int locked[DIRECT_IPC_SEMS];
+    snd_pcm_t *spcm;
+    snd_pcm_direct_share_t *shmptr;
+    snd_pcm_uframes_t appl_ptr;
+    snd_pcm_uframes_t last_appl_ptr;
+    snd_pcm_uframes_t hw_ptr;
+    snd_pcm_uframes_t avail_max;
         snd_pcm_uframes_t slave_appl_ptr;
         snd_pcm_uframes_t slave_hw_ptr;
         snd_pcm_uframes_t slave_period_size;
         snd_pcm_uframes_t slave_buffer_size;
         snd_pcm_uframes_t slave_boundary;
 
-	int (*sync_ptr)(snd_pcm_t *pcm);
+    int (*sync_ptr)(snd_pcm_t *pcm);
 
-	snd_pcm_state_t state;
+    snd_pcm_state_t state;
 
-	int interleaved;
-	int slowptr;
-	int max_periods;		/* max periods (-1 = fixed periods, 0 = max buffer size) */
-	int var_periodsize;		/* allow variable period size if max_periods is != -1*/
+    int interleaved;
+    int slowptr;
+    int max_periods;        /* max periods (-1 = fixed periods, 0 = max buffer size) */
+    int var_periodsize;     /* allow variable period size if max_periods is != -1*/
 
-	unsigned int channels;
-	unsigned int *bindings;
-	unsigned int recoveries;	/* mirror of executed recoveries on slave */
+    unsigned int channels;
+    unsigned int *bindings;
+    unsigned int recoveries;    /* mirror of executed recoveries on slave */
 
-	union {
-		struct {
-			int shmid_sum;			/* IPC global sum ring buffer memory identification */
-			int *shm_sum_id;        /* IPC global sum ring buffer memory identification */
-			signed int *sum_buffer;		/* shared sum buffer */
-			mix_areas_16_t *mix_areas_16;
-			mix_areas_32_t *mix_areas_32;
-			mix_areas_24_t *mix_areas_24;
-			mix_areas_u8_t *mix_areas_u8;
-			mix_areas_16_t *remix_areas_16;
-			mix_areas_32_t *remix_areas_32;
-			mix_areas_24_t *remix_areas_24;
-			mix_areas_u8_t *remix_areas_u8;
-		} dmix;
-		struct {
-		} dsnoop;
-		struct {
-			unsigned long long chn_mask;
-		} dshare;
-	} u;
+    union {
+        struct {
+            int shmid_sum;          /* IPC global sum ring buffer memory identification */
+            int *shm_sum_id;        /* IPC global sum ring buffer memory identification */
+            signed int *sum_buffer;     /* shared sum buffer */
+            mix_areas_16_t *mix_areas_16;
+            mix_areas_32_t *mix_areas_32;
+            mix_areas_24_t *mix_areas_24;
+            mix_areas_u8_t *mix_areas_u8;
+            mix_areas_16_t *remix_areas_16;
+            mix_areas_32_t *remix_areas_32;
+            mix_areas_24_t *remix_areas_24;
+            mix_areas_u8_t *remix_areas_u8;
+        } dmix;
+        struct {
+        } dsnoop;
+        struct {
+            unsigned long long chn_mask;
+        } dshare;
+    } u;
 };
 
 struct slave_params {
-	snd_pcm_format_t format;
+    snd_pcm_format_t format;
         int rate;
         int channels;
         int period_time;
@@ -186,31 +186,31 @@ struct slave_params {
 
 static inline int snd_pcm_direct_semaphore_down(snd_pcm_direct_t *dmix, int sem_num)
 {
-	int ret;
+    int ret;
 
-	ret = sem_wait(dmix->semid);
-	if (ret != 0) {
-		awalsa_err("sem_wait failed, ret=%d\n", ret);
-		return -1;
-	}
-	dmix->locked[sem_num]++;
+    ret = sem_wait(dmix->semid);
+    if (ret != 0) {
+        awalsa_err("sem_wait failed, ret=%d\n", ret);
+        return -1;
+    }
+    dmix->locked[sem_num]++;
 
-	return ret;
+    return ret;
 }
 
 static inline int snd_pcm_direct_semaphore_up(snd_pcm_direct_t *dmix, int sem_num)
 {
-	int ret;
+    int ret;
 
-	ret = sem_post(dmix->semid);
-	if (ret != 0) {
-		awalsa_err("sem_post failed, ret=%d\n", ret);
-		return -1;
-	}
+    ret = sem_post(dmix->semid);
+    if (ret != 0) {
+        awalsa_err("sem_post failed, ret=%d\n", ret);
+        return -1;
+    }
 
-	dmix->locked[sem_num]--;
+    dmix->locked[sem_num]--;
 
-	return ret;
+    return ret;
 }
 
 
@@ -221,8 +221,8 @@ int snd_pcm_direct_semaphore_shm_discard(snd_pcm_direct_t *dmix);
 
 int snd_pcm_direct_initialize_slave(snd_pcm_direct_t *dmix, snd_pcm_t *spcm, struct slave_params *params);
 int snd_pcm_direct_initialize_secondary_slave(snd_pcm_direct_t *dmix,
-						snd_pcm_t *spcm,
-						struct slave_params *params);
+                        snd_pcm_t *spcm,
+                        struct slave_params *params);
 
 int snd_pcm_direct_last_pcm(snd_pcm_direct_t *dmix);
 

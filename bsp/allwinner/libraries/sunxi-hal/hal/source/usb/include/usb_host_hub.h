@@ -239,10 +239,10 @@ struct usb_hub
 
     //USB_OS_KERNEL_EVENT *HubStatusSemi;     /* hub status thread的睡眠和唤醒 */
     //USB_OS_KERNEL_EVENT *notify_complete;   /* 同步thread创建/删除           */
-    hal_sem_t	HubStatusSemi;     /* hub status thread的睡眠和唤醒 */
-    hal_sem_t	notify_complete;   /* 同步thread创建/删除           */
+    hal_sem_t   HubStatusSemi;     /* hub status thread的睡眠和唤醒 */
+    hal_sem_t   notify_complete;   /* 同步thread创建/删除           */
 
-    rt_thread_t	thread;
+    rt_thread_t thread;
     __u32 HubStatusThrdId;                  /* hub线程ID                     */
     __u8 HubRemove;                         /* flag. Hub是否拔出             */
     __u32 hub_req_busy;                     /* 正在发送urb请求               */

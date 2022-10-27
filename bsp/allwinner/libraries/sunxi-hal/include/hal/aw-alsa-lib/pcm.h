@@ -44,26 +44,26 @@ extern "C" {
 #include <hal_mutex.h>
 
 #ifndef snd_malloc
-#define snd_malloc(size)	calloc(size, 1)
+#define snd_malloc(size)    calloc(size, 1)
 #endif
 
 #ifndef snd_free
-#define snd_free(ptr)		free(ptr)
+#define snd_free(ptr)       free(ptr)
 #endif
 
 
 /* debug option */
-#define AW_ALSA_LOG_COLOR_NONE		"\e[0m"
-#define AW_ALSA_LOG_COLOR_RED		"\e[31m"
-#define AW_ALSA_LOG_COLOR_GREEN		"\e[32m"
-#define AW_ALSA_LOG_COLOR_YELLOW	"\e[33m"
-#define AW_ALSA_LOG_COLOR_BLUE		"\e[34m"
+#define AW_ALSA_LOG_COLOR_NONE      "\e[0m"
+#define AW_ALSA_LOG_COLOR_RED       "\e[31m"
+#define AW_ALSA_LOG_COLOR_GREEN     "\e[32m"
+#define AW_ALSA_LOG_COLOR_YELLOW    "\e[33m"
+#define AW_ALSA_LOG_COLOR_BLUE      "\e[34m"
 
 //#define AW_ALSA_DEBUG
 #ifdef AW_ALSA_DEBUG
 #define awalsa_debug(fmt, args...) \
-	printf(AW_ALSA_LOG_COLOR_GREEN "[AWALSA_DEBUG][%s:%u]" fmt \
-		AW_ALSA_LOG_COLOR_NONE, __FUNCTION__, __LINE__, ##args)
+    printf(AW_ALSA_LOG_COLOR_GREEN "[AWALSA_DEBUG][%s:%u]" fmt \
+        AW_ALSA_LOG_COLOR_NONE, __FUNCTION__, __LINE__, ##args)
 #else
 #define awalsa_debug(fmt, args...)
 #endif
@@ -71,63 +71,63 @@ extern "C" {
 //#define AW_ALSA_PRINT
 #ifdef AW_ALSA_PRINT
 #define awalsa_print(fmt, args...) \
-	printf("[AWALSA_PRINT][%s:%u]" fmt, \
-		__FUNCTION__, __LINE__, ##args)
+    printf("[AWALSA_PRINT][%s:%u]" fmt, \
+        __FUNCTION__, __LINE__, ##args)
 #else
 #define awalsa_print(fmt, args...)
 #endif
 
 #define awalsa_info(fmt, args...) \
-	printf(AW_ALSA_LOG_COLOR_BLUE "[AWALSA_INFO][%s:%u]" fmt \
-		AW_ALSA_LOG_COLOR_NONE, __FUNCTION__, __LINE__, ##args)
+    printf(AW_ALSA_LOG_COLOR_BLUE "[AWALSA_INFO][%s:%u]" fmt \
+        AW_ALSA_LOG_COLOR_NONE, __FUNCTION__, __LINE__, ##args)
 
 #define awalsa_err(fmt, args...) \
-	printf(AW_ALSA_LOG_COLOR_RED "[AWALSA_ERR][%s:%u]" fmt \
-		AW_ALSA_LOG_COLOR_NONE, __FUNCTION__, __LINE__, ##args)
+    printf(AW_ALSA_LOG_COLOR_RED "[AWALSA_ERR][%s:%u]" fmt \
+        AW_ALSA_LOG_COLOR_NONE, __FUNCTION__, __LINE__, ##args)
 /* end debug option */
 
 /** Non blocking mode (flag for open mode) \hideinitializer */
-//#define SND_PCM_NONBLOCK		0x00000001
+//#define SND_PCM_NONBLOCK      0x00000001
 /** Async notification (flag for open mode) \hideinitializer */
-//#define SND_PCM_ASYNC			0x00000002
+//#define SND_PCM_ASYNC         0x00000002
 /** In an abort state (internal, not allowed for open) */
-//#define SND_PCM_ABORT			0x00008000
+//#define SND_PCM_ABORT         0x00008000
 /** Disable automatic (but not forced!) rate resamplinig */
-#define SND_PCM_NO_AUTO_RESAMPLE	0x00010000
+#define SND_PCM_NO_AUTO_RESAMPLE    0x00010000
 /** Disable automatic (but not forced!) channel conversion */
-#define SND_PCM_NO_AUTO_CHANNELS	0x00020000
+#define SND_PCM_NO_AUTO_CHANNELS    0x00020000
 /** Disable automatic (but not forced!) format conversion */
-#define SND_PCM_NO_AUTO_FORMAT		0x00040000
+#define SND_PCM_NO_AUTO_FORMAT      0x00040000
 /** Disable soft volume control */
-//#define SND_PCM_NO_SOFTVOL		0x00080000
+//#define SND_PCM_NO_SOFTVOL        0x00080000
 
 typedef struct _snd_pcm snd_pcm_t;
 
 enum _snd_pcm_type {
-	/** Kernel level PCM */
-	SND_PCM_TYPE_HW = 0,
-	/** One or more linked PCM with exclusive access to selected
-	    channels */
-	SND_PCM_TYPE_MULTI,
-	/** File writing plugin */
-	SND_PCM_TYPE_FILE,
-	/** Linear format conversion PCM */
-	SND_PCM_TYPE_LINEAR,
-	/** Rate conversion PCM */
-	SND_PCM_TYPE_RATE,
-	/** Attenuated static route PCM */
-	SND_PCM_TYPE_ROUTE,
-	/** Format adjusted PCM */
-	SND_PCM_TYPE_PLUG,
-	/** Direct Mixing plugin */
-	SND_PCM_TYPE_DMIX,
-	/** Direct Snooping plugin */
-	SND_PCM_TYPE_DSNOOP,
-	/** Soft volume plugin */
-	SND_PCM_TYPE_SOFTVOL,
-	/** External filter plugin */
-	SND_PCM_TYPE_EXTPLUG,
-	SND_PCM_TYPE_LAST = SND_PCM_TYPE_EXTPLUG
+    /** Kernel level PCM */
+    SND_PCM_TYPE_HW = 0,
+    /** One or more linked PCM with exclusive access to selected
+        channels */
+    SND_PCM_TYPE_MULTI,
+    /** File writing plugin */
+    SND_PCM_TYPE_FILE,
+    /** Linear format conversion PCM */
+    SND_PCM_TYPE_LINEAR,
+    /** Rate conversion PCM */
+    SND_PCM_TYPE_RATE,
+    /** Attenuated static route PCM */
+    SND_PCM_TYPE_ROUTE,
+    /** Format adjusted PCM */
+    SND_PCM_TYPE_PLUG,
+    /** Direct Mixing plugin */
+    SND_PCM_TYPE_DMIX,
+    /** Direct Snooping plugin */
+    SND_PCM_TYPE_DSNOOP,
+    /** Soft volume plugin */
+    SND_PCM_TYPE_SOFTVOL,
+    /** External filter plugin */
+    SND_PCM_TYPE_EXTPLUG,
+    SND_PCM_TYPE_LAST = SND_PCM_TYPE_EXTPLUG
 };
 
 /** PCM type */
@@ -168,17 +168,17 @@ typedef enum _snd_pcm_stream {
 
 /** PCM area specification */
 typedef struct _snd_pcm_channel_area {
-	/** base address of channel samples */
-	void *addr;
-	/** offset to first sample in bits */
-	unsigned int first;
-	/** samples distance in bits */
-	unsigned int step;
+    /** base address of channel samples */
+    void *addr;
+    /** offset to first sample in bits */
+    unsigned int first;
+    /** samples distance in bits */
+    unsigned int step;
 } snd_pcm_channel_area_t;
 
 
 int snd_pcm_open(snd_pcm_t **pcm, const char *name,
-		snd_pcm_stream_t stream, int mode);
+        snd_pcm_stream_t stream, int mode);
 int snd_pcm_close(snd_pcm_t *pcm);
 
 int snd_pcm_hw_params_malloc(snd_pcm_hw_params_t **ptr);
@@ -217,65 +217,65 @@ int snd_pcm_hw_params_dump(snd_pcm_hw_params_t *params);
 
 /** channel positions */
 enum snd_pcm_chmap_position {
-	SND_CHMAP_UNKNOWN = 0,	/**< unspecified */
-	SND_CHMAP_NA,		/**< N/A, silent */
-	SND_CHMAP_MONO,		/**< mono stream */
-	SND_CHMAP_FL,		/**< front left */
-	SND_CHMAP_FR,		/**< front right */
-	SND_CHMAP_RL,		/**< rear left */
-	SND_CHMAP_RR,		/**< rear right */
-	SND_CHMAP_FC,		/**< front center */
-	SND_CHMAP_LFE,		/**< LFE */
-	SND_CHMAP_SL,		/**< side left */
-	SND_CHMAP_SR,		/**< side right */
-	SND_CHMAP_RC,		/**< rear center */
-	SND_CHMAP_FLC,		/**< front left center */
-	SND_CHMAP_FRC,		/**< front right center */
-	SND_CHMAP_RLC,		/**< rear left center */
-	SND_CHMAP_RRC,		/**< rear right center */
-	SND_CHMAP_FLW,		/**< front left wide */
-	SND_CHMAP_FRW,		/**< front right wide */
-	SND_CHMAP_FLH,		/**< front left high */
-	SND_CHMAP_FCH,		/**< front center high */
-	SND_CHMAP_FRH,		/**< front right high */
-	SND_CHMAP_TC,		/**< top center */
-	SND_CHMAP_TFL,		/**< top front left */
-	SND_CHMAP_TFR,		/**< top front right */
-	SND_CHMAP_TFC,		/**< top front center */
-	SND_CHMAP_TRL,		/**< top rear left */
-	SND_CHMAP_TRR,		/**< top rear right */
-	SND_CHMAP_TRC,		/**< top rear center */
-	SND_CHMAP_TFLC,		/**< top front left center */
-	SND_CHMAP_TFRC,		/**< top front right center */
-	SND_CHMAP_TSL,		/**< top side left */
-	SND_CHMAP_TSR,		/**< top side right */
-	SND_CHMAP_LLFE,		/**< left LFE */
-	SND_CHMAP_RLFE,		/**< right LFE */
-	SND_CHMAP_BC,		/**< bottom center */
-	SND_CHMAP_BLC,		/**< bottom left center */
-	SND_CHMAP_BRC,		/**< bottom right center */
-	SND_CHMAP_LAST = SND_CHMAP_BRC,
+    SND_CHMAP_UNKNOWN = 0,  /**< unspecified */
+    SND_CHMAP_NA,       /**< N/A, silent */
+    SND_CHMAP_MONO,     /**< mono stream */
+    SND_CHMAP_FL,       /**< front left */
+    SND_CHMAP_FR,       /**< front right */
+    SND_CHMAP_RL,       /**< rear left */
+    SND_CHMAP_RR,       /**< rear right */
+    SND_CHMAP_FC,       /**< front center */
+    SND_CHMAP_LFE,      /**< LFE */
+    SND_CHMAP_SL,       /**< side left */
+    SND_CHMAP_SR,       /**< side right */
+    SND_CHMAP_RC,       /**< rear center */
+    SND_CHMAP_FLC,      /**< front left center */
+    SND_CHMAP_FRC,      /**< front right center */
+    SND_CHMAP_RLC,      /**< rear left center */
+    SND_CHMAP_RRC,      /**< rear right center */
+    SND_CHMAP_FLW,      /**< front left wide */
+    SND_CHMAP_FRW,      /**< front right wide */
+    SND_CHMAP_FLH,      /**< front left high */
+    SND_CHMAP_FCH,      /**< front center high */
+    SND_CHMAP_FRH,      /**< front right high */
+    SND_CHMAP_TC,       /**< top center */
+    SND_CHMAP_TFL,      /**< top front left */
+    SND_CHMAP_TFR,      /**< top front right */
+    SND_CHMAP_TFC,      /**< top front center */
+    SND_CHMAP_TRL,      /**< top rear left */
+    SND_CHMAP_TRR,      /**< top rear right */
+    SND_CHMAP_TRC,      /**< top rear center */
+    SND_CHMAP_TFLC,     /**< top front left center */
+    SND_CHMAP_TFRC,     /**< top front right center */
+    SND_CHMAP_TSL,      /**< top side left */
+    SND_CHMAP_TSR,      /**< top side right */
+    SND_CHMAP_LLFE,     /**< left LFE */
+    SND_CHMAP_RLFE,     /**< right LFE */
+    SND_CHMAP_BC,       /**< bottom center */
+    SND_CHMAP_BLC,      /**< bottom left center */
+    SND_CHMAP_BRC,      /**< bottom right center */
+    SND_CHMAP_LAST = SND_CHMAP_BRC,
 };
 
 /** channel map list type */
 enum snd_pcm_chmap_type {
-	SND_CHMAP_TYPE_NONE = 0,/**< unspecified channel position */
-	SND_CHMAP_TYPE_FIXED,	/**< fixed channel position */
-	SND_CHMAP_TYPE_VAR,	/**< freely swappable channel position */
-	SND_CHMAP_TYPE_PAIRED,	/**< pair-wise swappable channel position */
-	SND_CHMAP_TYPE_LAST = SND_CHMAP_TYPE_PAIRED, /**< last entry */
+    SND_CHMAP_TYPE_NONE = 0,/**< unspecified channel position */
+    SND_CHMAP_TYPE_FIXED,   /**< fixed channel position */
+    SND_CHMAP_TYPE_VAR, /**< freely swappable channel position */
+    SND_CHMAP_TYPE_PAIRED,  /**< pair-wise swappable channel position */
+    SND_CHMAP_TYPE_LAST = SND_CHMAP_TYPE_PAIRED, /**< last entry */
 };
 
 /** the channel map header */
 typedef struct snd_pcm_chmap {
-	unsigned int channels;	/**< number of channels */
-	unsigned int pos[0];	/**< channel position array */
+    unsigned int channels;  /**< number of channels */
+    unsigned int pos[0];    /**< channel position array */
 } snd_pcm_chmap_t;
 
 /** the header of array items returned from snd_pcm_query_chmaps() */
 typedef struct snd_pcm_chmap_query {
-	enum snd_pcm_chmap_type type;	/**< channel map type */
-	snd_pcm_chmap_t map;		/**< available channel map */
+    enum snd_pcm_chmap_type type;   /**< channel map type */
+    snd_pcm_chmap_t map;        /**< available channel map */
 } snd_pcm_chmap_query_t;
 
 snd_pcm_chmap_query_t **snd_pcm_query_chmaps(snd_pcm_t *pcm);
@@ -359,25 +359,25 @@ const char *snd_pcm_state_name(const snd_pcm_state_t state);
 
 /* Direct Access (MMAP) functions */
 int snd_pcm_mmap_begin(snd_pcm_t *pcm,
-		       const snd_pcm_channel_area_t **areas,
-		       snd_pcm_uframes_t *offset,
-		       snd_pcm_uframes_t *frames);
+               const snd_pcm_channel_area_t **areas,
+               snd_pcm_uframes_t *offset,
+               snd_pcm_uframes_t *frames);
 snd_pcm_sframes_t snd_pcm_mmap_commit(snd_pcm_t *pcm,
-				      snd_pcm_uframes_t offset,
-				      snd_pcm_uframes_t frames);
+                      snd_pcm_uframes_t offset,
+                      snd_pcm_uframes_t frames);
 snd_pcm_sframes_t snd_pcm_mmap_writei(snd_pcm_t *pcm, const void *buffer, snd_pcm_uframes_t size);
 snd_pcm_sframes_t snd_pcm_mmap_readi(snd_pcm_t *pcm, void *buffer, snd_pcm_uframes_t size);
 
 int snd_pcm_area_silence(const snd_pcm_channel_area_t *dst_channel, snd_pcm_uframes_t dst_offset,
-			 unsigned int samples, snd_pcm_format_t format);
+             unsigned int samples, snd_pcm_format_t format);
 int snd_pcm_areas_silence(const snd_pcm_channel_area_t *dst_channels, snd_pcm_uframes_t dst_offset,
-			  unsigned int channels, snd_pcm_uframes_t frames, snd_pcm_format_t format);
+              unsigned int channels, snd_pcm_uframes_t frames, snd_pcm_format_t format);
 int snd_pcm_area_copy(const snd_pcm_channel_area_t *dst_channel, snd_pcm_uframes_t dst_offset,
-		      const snd_pcm_channel_area_t *src_channel, snd_pcm_uframes_t src_offset,
-		      unsigned int samples, snd_pcm_format_t format);
+              const snd_pcm_channel_area_t *src_channel, snd_pcm_uframes_t src_offset,
+              unsigned int samples, snd_pcm_format_t format);
 int snd_pcm_areas_copy(const snd_pcm_channel_area_t *dst_channels, snd_pcm_uframes_t dst_offset,
-		       const snd_pcm_channel_area_t *src_channels, snd_pcm_uframes_t src_offset,
-		       unsigned int channels, snd_pcm_uframes_t frames, snd_pcm_format_t format);
+               const snd_pcm_channel_area_t *src_channels, snd_pcm_uframes_t src_offset,
+               unsigned int channels, snd_pcm_uframes_t frames, snd_pcm_format_t format);
 
 #ifdef __cplusplus
 }

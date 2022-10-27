@@ -51,9 +51,9 @@ int mscQIC157Command(__mscDev_t *mscDev, __ScsiCmnd_t *ScsiCmnd)
         return USB_ERR_BAD_ARGUMENTS;
     }
 
-    /* ÐÞÕýÃüÁî */
+    /* ÃÃžÃ•Ã½ÃƒÃ¼ÃÃ® */
     //not support
-    /* ´«Êä */
+    /* Â´Â«ÃŠÃ¤ */
     return mscDev->Transport(mscDev, ScsiCmnd);
 }
 
@@ -84,9 +84,9 @@ int mscATAPICommand(__mscDev_t *mscDev, __ScsiCmnd_t *ScsiCmnd)
         return USB_ERR_BAD_ARGUMENTS;
     }
 
-    /* ÐÞÕýÃüÁî */
+    /* ÃÃžÃ•Ã½ÃƒÃ¼ÃÃ® */
     //not support
-    /* ´«Êä */
+    /* Â´Â«ÃŠÃ¤ */
     return mscDev->Transport(mscDev, ScsiCmnd);
 }
 
@@ -117,9 +117,9 @@ int mscUFICommand(__mscDev_t *mscDev, __ScsiCmnd_t *ScsiCmnd)
         return USB_ERR_BAD_ARGUMENTS;
     }
 
-    /* ÐÞÕýÃüÁî */
+    /* ÃÃžÃ•Ã½ÃƒÃ¼ÃÃ® */
     //not support
-    /* ´«Êä */
+    /* Â´Â«ÃŠÃ¤ */
     return mscDev->Transport(mscDev, ScsiCmnd);
 }
 
@@ -150,9 +150,9 @@ int mscScsiCommand(__mscDev_t *mscDev, __ScsiCmnd_t *ScsiCmnd)
         return USB_ERR_BAD_ARGUMENTS;
     }
 
-    /* ÐÞÕýÃüÁî */
+    /* ÃÃžÃ•Ã½ÃƒÃ¼ÃÃ® */
     //not support
-    /* ´«Êä */
+    /* Â´Â«ÃŠÃ¤ */
     return mscDev->Transport(mscDev, ScsiCmnd);
 }
 

@@ -29,16 +29,16 @@
 * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 * OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-#ifndef	__SUN8IW20_DMIC_H_
-#define	__SUN8IW20_DMIC_H_
+#ifndef __SUN8IW20_DMIC_H_
+#define __SUN8IW20_DMIC_H_
 
-#define	SUNXI_DMIC_MEMBASE (0x02031000)
+#define SUNXI_DMIC_MEMBASE (0x02031000)
 
 /*------------------------ CLK CONFIG FOR NORMAL ---------------------------*/
-#define SUNXI_DMIC_CLK_PLL_AUDIO	CLK_PLL_AUDIO0
-#define SUNXI_DMIC_CLK_DMIC		CLK_DMIC
-#define SUNXI_DMIC_CLK_BUS		CLK_BUS_DMIC
-#define SUNXI_DMIC_CLK_RST		RST_BUS_DMIC
+#define SUNXI_DMIC_CLK_PLL_AUDIO    CLK_PLL_AUDIO0
+#define SUNXI_DMIC_CLK_DMIC     CLK_DMIC
+#define SUNXI_DMIC_CLK_BUS      CLK_BUS_DMIC
+#define SUNXI_DMIC_CLK_RST      RST_BUS_DMIC
 
 /*------------------------ PIN CONFIG FOR NORMAL ---------------------------*/
 
@@ -46,11 +46,11 @@
 
 /*------------------------ PIN CONFIG FOR FPGA VERIFY -----------------------*/
 dmic_gpio_t g_dmic_gpio = {
-	.clk	= {GPIOF(9), 2},
-	.din0	= {GPIOF(28), 2},
-	.din1	= {GPIOG(30), 2},
-	.din2	= {GPIOG(28), 2},
-	.din3	= {GPIOG(26), 2},
+    .clk    = {GPIOF(9), 2},
+    .din0   = {GPIOF(28), 2},
+    .din1   = {GPIOG(30), 2},
+    .din2   = {GPIOG(28), 2},
+    .din3   = {GPIOG(26), 2},
 };
 
 #endif /* __SUN8IW20_DMIC_H_ */

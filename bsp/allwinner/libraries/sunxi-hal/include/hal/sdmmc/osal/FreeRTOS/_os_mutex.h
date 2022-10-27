@@ -48,7 +48,7 @@ extern "C" {
  * @brief Mutex object definition
  */
 typedef struct OS_Mutex {
-	SemaphoreHandle_t	handle;
+    SemaphoreHandle_t   handle;
 } OS_Mutex_t;
 
 OS_Status OS_MutexCreate(OS_Mutex_t *mutex);
@@ -67,7 +67,7 @@ OS_Status OS_RecursiveMutexUnlock(OS_Mutex_t *mutex);
  */
 static __always_inline OS_Status OS_RecursiveMutexDelete(OS_Mutex_t *mutex)
 {
-	return OS_MutexDelete(mutex);
+    return OS_MutexDelete(mutex);
 }
 
 /**
@@ -77,7 +77,7 @@ static __always_inline OS_Status OS_RecursiveMutexDelete(OS_Mutex_t *mutex)
  */
 static __always_inline int OS_MutexIsValid(OS_Mutex_t *mutex)
 {
-	return (mutex->handle != OS_INVALID_HANDLE);
+    return (mutex->handle != OS_INVALID_HANDLE);
 }
 
 /**
@@ -87,7 +87,7 @@ static __always_inline int OS_MutexIsValid(OS_Mutex_t *mutex)
  */
 static __always_inline void OS_MutexSetInvalid(OS_Mutex_t *mutex)
 {
-	mutex->handle = OS_INVALID_HANDLE;
+    mutex->handle = OS_INVALID_HANDLE;
 }
 
 /**
@@ -99,7 +99,7 @@ static __always_inline void OS_MutexSetInvalid(OS_Mutex_t *mutex)
  */
 static __always_inline OS_ThreadHandle_t OS_MutexGetOwner(OS_Mutex_t *mutex)
 {
-	return (OS_ThreadHandle_t)xSemaphoreGetMutexHolder(mutex->handle);
+    return (OS_ThreadHandle_t)xSemaphoreGetMutexHolder(mutex->handle);
 }
 
 #ifdef __cplusplus

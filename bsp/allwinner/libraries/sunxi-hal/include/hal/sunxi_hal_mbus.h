@@ -38,27 +38,27 @@
 
 /* MBUS PMU ids */
 enum mbus_pmu {
-	MBUS_PMU_CPU    = 0,    /* CPU bandwidth */
-	MBUS_PMU_GPU,           /* GPU bandwidth */
-	MBUS_PMU_VE,            /* VE */
-	MBUS_PMU_DISP,          /* DISPLAY */
-	MBUS_PMU_OTH,           /* other masters */
-	MBUS_PMU_TOTAL,         /* total masters */
-	MBUS_PMU_RV_SYS,        /* RV_SYS */
-	MBUS_PMU_DE,            /* DE */
-	MBUS_PMU_G2D,           /* G2D */
-	MBUS_PMU_TVD,           /* TVD */
-	MBUS_PMU_CSI,           /* CSI */
-	MBUS_PMU_DSP_SYS,       /* DSP_SYS */
-	MBUS_PMU_DI,            /* DI */
-	MBUS_PMU_IOMMU,         /* IOMMU */
+    MBUS_PMU_CPU    = 0,    /* CPU bandwidth */
+    MBUS_PMU_GPU,           /* GPU bandwidth */
+    MBUS_PMU_VE,            /* VE */
+    MBUS_PMU_DISP,          /* DISPLAY */
+    MBUS_PMU_OTH,           /* other masters */
+    MBUS_PMU_TOTAL,         /* total masters */
+    MBUS_PMU_RV_SYS,        /* RV_SYS */
+    MBUS_PMU_DE,            /* DE */
+    MBUS_PMU_G2D,           /* G2D */
+    MBUS_PMU_TVD,           /* TVD */
+    MBUS_PMU_CSI,           /* CSI */
+    MBUS_PMU_DSP_SYS,       /* DSP_SYS */
+    MBUS_PMU_DI,            /* DI */
+    MBUS_PMU_IOMMU,         /* IOMMU */
 };
 
 typedef enum{
-	HAL_MBUS_STATUS_ERROR_PARAMETER = -3,
-	HAL_MBUS_STATUS_ERROR_CHANNEL = -2,
-	HAL_MBUS_STATUS_ERROR = -1,
-	HAL_MBUS_STATUS_OK = 0
+    HAL_MBUS_STATUS_ERROR_PARAMETER = -3,
+    HAL_MBUS_STATUS_ERROR_CHANNEL = -2,
+    HAL_MBUS_STATUS_ERROR = -1,
+    HAL_MBUS_STATUS_OK = 0
 }hal_mbus_status_t;
 
 hal_mbus_status_t hal_mbus_pmu_get_value(enum mbus_pmu type, unsigned int *value);

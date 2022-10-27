@@ -15,51 +15,51 @@
 #include "de_feat.h"
 
 enum __lcd_irq_id_t {
-	LCD_IRQ_TCON0_VBLK = 15,
-	LCD_IRQ_TCON1_VBLK = 14,
-	LCD_IRQ_TCON0_LINE = 13,
-	LCD_IRQ_TCON1_LINE = 12,
-	LCD_IRQ_TCON0_TRIF = 11,
-	LCD_IRQ_TCON0_CNTR = 10,
-	LCD_IRQ_FSYNC_INT = 9,
-	LCD_IRQ_DATA_EN_INT = 8,
+    LCD_IRQ_TCON0_VBLK = 15,
+    LCD_IRQ_TCON1_VBLK = 14,
+    LCD_IRQ_TCON0_LINE = 13,
+    LCD_IRQ_TCON1_LINE = 12,
+    LCD_IRQ_TCON0_TRIF = 11,
+    LCD_IRQ_TCON0_CNTR = 10,
+    LCD_IRQ_FSYNC_INT = 9,
+    LCD_IRQ_DATA_EN_INT = 8,
 };
 
 enum __dsi_irq_id_t {
-	DSI_IRQ_VIDEO_LINE = 3,
-	DSI_IRQ_VIDEO_VBLK = 2,
-	DSI_IRQ_INSTR_STEP = 1,
-	DSI_IRQ_INSTR_END = 0,
+    DSI_IRQ_VIDEO_LINE = 3,
+    DSI_IRQ_VIDEO_VBLK = 2,
+    DSI_IRQ_INSTR_STEP = 1,
+    DSI_IRQ_INSTR_END = 0,
 };
 
 enum __edp_irq_id_t {
-	EDP_IRQ_VBLK = 0,
-	EDP_IRQ_LINE1 = 1,
+    EDP_IRQ_VBLK = 0,
+    EDP_IRQ_LINE1 = 1,
 };
 
 enum __lcd_src_t {
-	LCD_SRC_DE = 0,
-	LCD_SRC_COLOR_BAR = 1,
-	LCD_SRC_GRAYSCALE = 2,
-	LCD_SRC_BLACK_BY_WHITE = 3,
-	LCD_SRC_BLACK = 4,
-	LCD_SRC_WHITE = 5,
-	LCD_SRC_GRID = 7,
-	LCD_SRC_BLUE = 8
+    LCD_SRC_DE = 0,
+    LCD_SRC_COLOR_BAR = 1,
+    LCD_SRC_GRAYSCALE = 2,
+    LCD_SRC_BLACK_BY_WHITE = 3,
+    LCD_SRC_BLACK = 4,
+    LCD_SRC_WHITE = 5,
+    LCD_SRC_GRID = 7,
+    LCD_SRC_BLUE = 8
 };
 
 enum __tv_set_t {
-	TV_TO_GPIO = 1,
-	LCD_TO_GPIO = 0,
-	TV_CLK_F_CCU = 0,
-	TV_CLK_F_TVE = 1
+    TV_TO_GPIO = 1,
+    LCD_TO_GPIO = 0,
+    TV_CLK_F_CCU = 0,
+    TV_CLK_F_TVE = 1
 };
 
 enum __de_perh_t {
-	LCD0 = 0,
-	LCD1 = 1,
-	TV0 = 2,
-	TV1 = 3
+    LCD0 = 0,
+    LCD1 = 1,
+    TV0 = 2,
+    TV1 = 3
 };
 
 s32 tcon0_out_to_gpio(u32 sel);
@@ -140,13 +140,13 @@ void tcon0_cpu_wr_24b_multi(u32 sel, u8 cmd, u8 *para, u32 para_num);
  * @brief      :set fsync's polarity
  * @param[IN]  :sel:tcon index
  * @param[IN]  :pol:polarity. 1:positive;0:negetive
- *	positive:
+ *  positive:
  *           +---------+
  *  ---------+         +-----------
  *
- *	negative:
+ *  negative:
  *  ---------+         +------------
- *	     +---------+
+ *       +---------+
  *
  * @return     :always 0
  */

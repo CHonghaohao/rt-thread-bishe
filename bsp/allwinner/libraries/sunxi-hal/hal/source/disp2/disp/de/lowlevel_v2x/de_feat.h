@@ -13,11 +13,11 @@
 
 static inline void regwrite(void *dst, void *src, unsigned int n)
 {
-	volatile unsigned int *tmp = dst;
-	unsigned int *s = src;
-	n = n / 4;
-	while (n--)
-		*tmp++ = *s++;
+    volatile unsigned int *tmp = dst;
+    unsigned int *s = src;
+    n = n / 4;
+    while (n--)
+        *tmp++ = *s++;
 }
 #define DE_OUTPUT_TYPE_LCD   1
 #define DE_OUTPUT_TYPE_TV    2
@@ -38,13 +38,13 @@ static inline void regwrite(void *dst, void *src, unsigned int n)
 
 /* features for sun50iw2 */
 
-#define DEVICE_NUM	2
-#define DE_NUM	2
-#define CHN_NUM		4
-#define VI_CHN_NUM	1
-#define UI_CHN_NUM	(CHN_NUM - VI_CHN_NUM)
-#define LAYER_NUM_PER_CHN_PER_VI_CHN	4
-#define LAYER_NUM_PER_CHN_PER_UI_CHN	4
+#define DEVICE_NUM  2
+#define DE_NUM  2
+#define CHN_NUM     4
+#define VI_CHN_NUM  1
+#define UI_CHN_NUM  (CHN_NUM - VI_CHN_NUM)
+#define LAYER_NUM_PER_CHN_PER_VI_CHN    4
+#define LAYER_NUM_PER_CHN_PER_UI_CHN    4
 #define LAYER_MAX_NUM_PER_CHN 4
 
 /* #define SUPPORT_DSI */
@@ -59,7 +59,7 @@ static inline void regwrite(void *dst, void *src, unsigned int n)
 /* #define LVDS_REVERT */
 
 #if defined(CONFIG_FPGA_V4_PLATFORM) \
-	|| defined(CONFIG_FPGA_V7_PLATFORM)
+    || defined(CONFIG_FPGA_V7_PLATFORM)
 /*
  * TCON1_DRIVE_PANEL - General for fpga verify
  * On some platform there is no tcon0
@@ -74,13 +74,13 @@ static inline void regwrite(void *dst, void *src, unsigned int n)
 
 /* features for sun8iw11 */
 
-#define DEVICE_NUM	4
-#define DE_NUM	2
-#define CHN_NUM		4
-#define VI_CHN_NUM	1
-#define UI_CHN_NUM	(CHN_NUM - VI_CHN_NUM)
-#define LAYER_NUM_PER_CHN_PER_VI_CHN	4
-#define LAYER_NUM_PER_CHN_PER_UI_CHN	4
+#define DEVICE_NUM  4
+#define DE_NUM  2
+#define CHN_NUM     4
+#define VI_CHN_NUM  1
+#define UI_CHN_NUM  (CHN_NUM - VI_CHN_NUM)
+#define LAYER_NUM_PER_CHN_PER_VI_CHN    4
+#define LAYER_NUM_PER_CHN_PER_UI_CHN    4
 #define LAYER_MAX_NUM_PER_CHN 4
 
 #define SUPPORT_DSI
@@ -121,13 +121,13 @@ static inline void regwrite(void *dst, void *src, unsigned int n)
 
 /* features for sun8iw15 */
 
-#define DEVICE_NUM	1
-#define DE_NUM	1
-#define CHN_NUM		4
-#define VI_CHN_NUM	1
-#define UI_CHN_NUM	(CHN_NUM - VI_CHN_NUM)
-#define LAYER_NUM_PER_CHN_PER_VI_CHN	4
-#define LAYER_NUM_PER_CHN_PER_UI_CHN	4
+#define DEVICE_NUM  1
+#define DE_NUM  1
+#define CHN_NUM     4
+#define VI_CHN_NUM  1
+#define UI_CHN_NUM  (CHN_NUM - VI_CHN_NUM)
+#define LAYER_NUM_PER_CHN_PER_VI_CHN    4
+#define LAYER_NUM_PER_CHN_PER_UI_CHN    4
 #define LAYER_MAX_NUM_PER_CHN 4
 
 #define SUPPORT_DSI
@@ -151,13 +151,13 @@ static inline void regwrite(void *dst, void *src, unsigned int n)
 #elif defined(CONFIG_ARCH_SUN50IW10)
 /* features for sun50iw10 */
 
-#define DEVICE_NUM	2
-#define DE_NUM	2
-#define CHN_NUM		4
-#define VI_CHN_NUM	2
-#define UI_CHN_NUM	(CHN_NUM - VI_CHN_NUM)
-#define LAYER_NUM_PER_CHN_PER_VI_CHN	4
-#define LAYER_NUM_PER_CHN_PER_UI_CHN	4
+#define DEVICE_NUM  2
+#define DE_NUM  2
+#define CHN_NUM     4
+#define VI_CHN_NUM  2
+#define UI_CHN_NUM  (CHN_NUM - VI_CHN_NUM)
+#define LAYER_NUM_PER_CHN_PER_VI_CHN    4
+#define LAYER_NUM_PER_CHN_PER_UI_CHN    4
 #define LAYER_MAX_NUM_PER_CHN 4
 
 #define SUPPORT_DSI
@@ -182,13 +182,13 @@ static inline void regwrite(void *dst, void *src, unsigned int n)
 
 /* features for sun50iw1 */
 
-#define DEVICE_NUM	4
-#define DE_NUM	2
-#define CHN_NUM		4
-#define VI_CHN_NUM	1
-#define UI_CHN_NUM	(CHN_NUM - VI_CHN_NUM)
-#define LAYER_NUM_PER_CHN_PER_VI_CHN	4
-#define LAYER_NUM_PER_CHN_PER_UI_CHN	4
+#define DEVICE_NUM  4
+#define DE_NUM  2
+#define CHN_NUM     4
+#define VI_CHN_NUM  1
+#define UI_CHN_NUM  (CHN_NUM - VI_CHN_NUM)
+#define LAYER_NUM_PER_CHN_PER_VI_CHN    4
+#define LAYER_NUM_PER_CHN_PER_UI_CHN    4
 #define LAYER_MAX_NUM_PER_CHN 4
 
 #define SUPPORT_DSI
@@ -232,13 +232,13 @@ static inline void regwrite(void *dst, void *src, unsigned int n)
 #elif defined(CONFIG_ARCH_SUN8IW12)
 /* features for sun8iw12 */
 
-#define DEVICE_NUM	2
-#define DE_NUM	1
-#define CHN_NUM		4
-#define VI_CHN_NUM	2
-#define UI_CHN_NUM	(CHN_NUM - VI_CHN_NUM)
-#define LAYER_NUM_PER_CHN_PER_VI_CHN	4
-#define LAYER_NUM_PER_CHN_PER_UI_CHN	4
+#define DEVICE_NUM  2
+#define DE_NUM  1
+#define CHN_NUM     4
+#define VI_CHN_NUM  2
+#define UI_CHN_NUM  (CHN_NUM - VI_CHN_NUM)
+#define LAYER_NUM_PER_CHN_PER_VI_CHN    4
+#define LAYER_NUM_PER_CHN_PER_UI_CHN    4
 #define LAYER_MAX_NUM_PER_CHN 4
 
 #ifdef CONFIG_DISP2_SUNXI_SUPPORT_SMBL
@@ -264,13 +264,13 @@ static inline void regwrite(void *dst, void *src, unsigned int n)
 #endif
 
 #elif defined(CONFIG_ARCH_SUN8IW16)
-#define DEVICE_NUM	2
-#define DE_NUM	1
-#define CHN_NUM		4
-#define VI_CHN_NUM	2
-#define UI_CHN_NUM	(CHN_NUM - VI_CHN_NUM)
-#define LAYER_NUM_PER_CHN_PER_VI_CHN	4
-#define LAYER_NUM_PER_CHN_PER_UI_CHN	4
+#define DEVICE_NUM  2
+#define DE_NUM  1
+#define CHN_NUM     4
+#define VI_CHN_NUM  2
+#define UI_CHN_NUM  (CHN_NUM - VI_CHN_NUM)
+#define LAYER_NUM_PER_CHN_PER_VI_CHN    4
+#define LAYER_NUM_PER_CHN_PER_UI_CHN    4
 #define LAYER_MAX_NUM_PER_CHN 4
 
 #ifdef CONFIG_DISP2_SUNXI_SUPPORT_SMBL
@@ -301,13 +301,13 @@ static inline void regwrite(void *dst, void *src, unsigned int n)
 #endif
 
 #elif defined(CONFIG_ARCH_SUN8IW19)
-#define DEVICE_NUM	1
-#define DE_NUM	1
-#define CHN_NUM		4 /*It is 3 in fact*/
-#define VI_CHN_NUM	2
-#define UI_CHN_NUM	(CHN_NUM - VI_CHN_NUM)
-#define LAYER_NUM_PER_CHN_PER_VI_CHN	4
-#define LAYER_NUM_PER_CHN_PER_UI_CHN	4
+#define DEVICE_NUM  1
+#define DE_NUM  1
+#define CHN_NUM     4 /*It is 3 in fact*/
+#define VI_CHN_NUM  2
+#define UI_CHN_NUM  (CHN_NUM - VI_CHN_NUM)
+#define LAYER_NUM_PER_CHN_PER_VI_CHN    4
+#define LAYER_NUM_PER_CHN_PER_UI_CHN    4
 #define LAYER_MAX_NUM_PER_CHN 4
 
 #ifdef CONFIG_DISP2_SUNXI_SUPPORT_SMBL
@@ -359,13 +359,13 @@ static inline void regwrite(void *dst, void *src, unsigned int n)
 
 #elif defined(CONFIG_ARCH_SUN8IW7)
 
-#define DEVICE_NUM	2
-#define DE_NUM	2
-#define CHN_NUM		4
-#define VI_CHN_NUM	1
-#define UI_CHN_NUM	(CHN_NUM - VI_CHN_NUM)
-#define LAYER_NUM_PER_CHN_PER_VI_CHN	4
-#define LAYER_NUM_PER_CHN_PER_UI_CHN	4
+#define DEVICE_NUM  2
+#define DE_NUM  2
+#define CHN_NUM     4
+#define VI_CHN_NUM  1
+#define UI_CHN_NUM  (CHN_NUM - VI_CHN_NUM)
+#define LAYER_NUM_PER_CHN_PER_VI_CHN    4
+#define LAYER_NUM_PER_CHN_PER_UI_CHN    4
 #define LAYER_MAX_NUM_PER_CHN 4
 #define VEP_NUM  1
 #define DE_WB_RESET_SHARE
@@ -378,11 +378,11 @@ static inline void regwrite(void *dst, void *src, unsigned int n)
 
 /* features for sun8iw17 */
 
-#define DEVICE_NUM	3
-#define DE_NUM	2
-#define CHN_NUM		4
-#define VI_CHN_NUM	2
-#define UI_CHN_NUM	(CHN_NUM - VI_CHN_NUM)
+#define DEVICE_NUM  3
+#define DE_NUM  2
+#define CHN_NUM     4
+#define VI_CHN_NUM  2
+#define UI_CHN_NUM  (CHN_NUM - VI_CHN_NUM)
 #define LAYER_MAX_VI_NUM_PER_CHN 4
 #define LAYER_MAX_UI_NUM_PER_CHN 4
 #define LAYER_MAX_NUM_PER_CHN 4
@@ -406,13 +406,13 @@ static inline void regwrite(void *dst, void *src, unsigned int n)
 /* default features */
 #error "undefined platform!!!"
 
-#define DEVICE_NUM	2
-#define DE_NUM	2
-#define CHN_NUM		4
-#define VI_CHN_NUM	1
-#define UI_CHN_NUM	(CHN_NUM - VI_CHN_NUM)
-#define LAYER_NUM_PER_CHN_PER_VI_CHN	4
-#define LAYER_NUM_PER_CHN_PER_UI_CHN	4
+#define DEVICE_NUM  2
+#define DE_NUM  2
+#define CHN_NUM     4
+#define VI_CHN_NUM  1
+#define UI_CHN_NUM  (CHN_NUM - VI_CHN_NUM)
+#define LAYER_NUM_PER_CHN_PER_VI_CHN    4
+#define LAYER_NUM_PER_CHN_PER_UI_CHN    4
 #define LAYER_MAX_NUM_PER_CHN 4
 
 #define SUPPORT_DSI
@@ -456,23 +456,23 @@ static inline void regwrite(void *dst, void *src, unsigned int n)
 #endif
 
 struct de_feat {
-	const int num_screens;
-	/* indicate layer manager number */
-	const int num_devices;
-	/*indicate timing controller number */
-	const int *num_chns;
-	const int *num_vi_chns;
-	const int *num_layers;
-	const int *is_support_vep;
-	const int *is_support_smbl;
-	const int *is_support_wb;
-	const int *supported_output_types;
-	const int *is_support_scale;
-	const int *scale_line_buffer;
+    const int num_screens;
+    /* indicate layer manager number */
+    const int num_devices;
+    /*indicate timing controller number */
+    const int *num_chns;
+    const int *num_vi_chns;
+    const int *num_layers;
+    const int *is_support_vep;
+    const int *is_support_smbl;
+    const int *is_support_wb;
+    const int *supported_output_types;
+    const int *is_support_scale;
+    const int *scale_line_buffer;
 #if defined(SUPPORT_LBC)
-	const int *is_support_lbc;
+    const int *is_support_lbc;
 #endif
-	const int num_vdpo; /*number of vdpo device*/
+    const int num_vdpo; /*number of vdpo device*/
 };
 
 int de_feat_init(void);
@@ -489,7 +489,7 @@ int de_feat_is_support_vep(unsigned int disp);
 int de_feat_is_support_vep_by_chn(unsigned int disp, unsigned int chn);
 int de_feat_is_support_smbl(unsigned int disp);
 int de_feat_is_supported_output_types(unsigned int disp,
-				      unsigned int output_type);
+                      unsigned int output_type);
 int de_feat_is_support_wb(unsigned int disp);
 int de_feat_is_support_scale(unsigned int disp);
 int de_feat_is_support_scale_by_chn(unsigned int disp, unsigned int chn);

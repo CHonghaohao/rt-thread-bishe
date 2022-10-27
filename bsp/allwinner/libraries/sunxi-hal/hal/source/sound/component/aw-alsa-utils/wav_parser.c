@@ -38,24 +38,24 @@
 void dump_wav_header(wav_header_t *header)
 {
 #if 1
-	char *ptr = (char *)&header->riffType;
-	printf("riffType:     %c%c%c%c\n", ptr[0], ptr[1], ptr[2], ptr[3]);
-	ptr = (char *)&header->waveType;
-	printf("waveType:     %c%c%c%c\n", ptr[0], ptr[1], ptr[2], ptr[3]);
-	printf("channels:     %u\n", header->numChannels);
-	printf("rate:         %u\n", header->sampleRate);
-	printf("bits:         %u\n", header->bitsPerSample);
-	printf("align:        %u\n", header->blockAlign);
-	printf("data size:    %u\n", header->dataSize);
+    char *ptr = (char *)&header->riffType;
+    printf("riffType:     %c%c%c%c\n", ptr[0], ptr[1], ptr[2], ptr[3]);
+    ptr = (char *)&header->waveType;
+    printf("waveType:     %c%c%c%c\n", ptr[0], ptr[1], ptr[2], ptr[3]);
+    printf("channels:     %u\n", header->numChannels);
+    printf("rate:         %u\n", header->sampleRate);
+    printf("bits:         %u\n", header->bitsPerSample);
+    printf("align:        %u\n", header->blockAlign);
+    printf("data size:    %u\n", header->dataSize);
 #else
-	int i;
-	unsigned char *ptr = (unsigned char *)header;
-	for (i = 0; i < sizeof(wav_header_t); i++) {
-		if (i%16 == 0)
-			printf("\n");
-		printf("0x%02x ", ptr[i]);
-	}
-	printf("\n");
+    int i;
+    unsigned char *ptr = (unsigned char *)header;
+    for (i = 0; i < sizeof(wav_header_t); i++) {
+        if (i%16 == 0)
+            printf("\n");
+        printf("0x%02x ", ptr[i]);
+    }
+    printf("\n");
 #endif
 }
 #else
@@ -68,87 +68,87 @@ void dump_wav_header(wav_header_t *header)
 
 int check_wav_header(wav_header_t *header, wav_hw_params_t *hwparams)
 {
-	if (!header)
-		return -1;
+    if (!header)
+        return -1;
 
-	dump_wav_header(header);
+    dump_wav_header(header);
 
-	if (header->riffType != WAV_RIFF)
-		return -1;
-	if (header->waveType != WAV_WAVE)
-		return -1;
+    if (header->riffType != WAV_RIFF)
+        return -1;
+    if (header->waveType != WAV_WAVE)
+        return -1;
 
-	hwparams->rate = header->sampleRate;
-	hwparams->channels = header->numChannels;
-	/* ignore bit endian */
-	switch (header->bitsPerSample) {
-	case 8:
-		hwparams->format = SND_PCM_FORMAT_U8;
-		break;
-	case 16:
-		hwparams->format = SND_PCM_FORMAT_S16_LE;
-		break;
-	case 24:
-		switch (header->blockAlign/header->numChannels) {
-			case 4:
-				hwparams->format = SND_PCM_FORMAT_S24_LE;
-				break;
-			case 3:
-				/*hwparams->format = SND_PCM_FORMAT_S24_3LE;*/
-			default:
-				printf("unknown format..\n");
-				return -1;
-		}
-		break;
-	case 32:
-		hwparams->format = SND_PCM_FORMAT_S32_LE;
-		break;
-	default:
-		break;
-	}
+    hwparams->rate = header->sampleRate;
+    hwparams->channels = header->numChannels;
+    /* ignore bit endian */
+    switch (header->bitsPerSample) {
+    case 8:
+        hwparams->format = SND_PCM_FORMAT_U8;
+        break;
+    case 16:
+        hwparams->format = SND_PCM_FORMAT_S16_LE;
+        break;
+    case 24:
+        switch (header->blockAlign/header->numChannels) {
+            case 4:
+                hwparams->format = SND_PCM_FORMAT_S24_LE;
+                break;
+            case 3:
+                /*hwparams->format = SND_PCM_FORMAT_S24_3LE;*/
+            default:
+                printf("unknown format..\n");
+                return -1;
+        }
+        break;
+    case 32:
+        hwparams->format = SND_PCM_FORMAT_S32_LE;
+        break;
+    default:
+        break;
+    }
 
-	return 0;
+    return 0;
 }
 
 void resize_wav(wav_header_t *header, unsigned int size)
 {
-	header->dataSize = LE_INT(size);
-	header->riffSize = LE_INT(size + 36);
-	dump_wav_header(header);
+    header->dataSize = LE_INT(size);
+    header->riffSize = LE_INT(size + 36);
+    dump_wav_header(header);
 }
 
 void create_wav(wav_header_t *header, unsigned int format, unsigned int rate, unsigned int channels)
 {
-	unsigned int bits = 0, align = 0;
+    unsigned int bits = 0, align = 0;
 
-	memset(header, 0 , sizeof(wav_header_t));
-	switch (format) {
-	case SND_PCM_FORMAT_S16_LE:
-		bits = 16;
-		align = 2;
-		break;
-	case SND_PCM_FORMAT_S24_LE:
-		bits = 24;
-		align = 4;
-		break;
-	case SND_PCM_FORMAT_S32_LE:
-		bits = 32;
-		align = 4;
-		break;
-	}
-	header->riffType = WAV_RIFF;
-	header->riffSize = LE_INT(36);
-	header->waveType = WAV_WAVE;
-	header->formatType = WAV_FMT;
-	header->formatSize = LE_INT(16);
-	/* PCM */
-	header->compressionCode = LE_INT(0x0001);
-	header->numChannels = channels;
-	header->sampleRate = rate;
-	header->bytesPerSecond =
-		rate * snd_pcm_format_physical_width(format) / 8;
-	header->blockAlign = align * channels;
-	header->bitsPerSample = bits;
-	header->dataType = WAV_DATA;
-	header->dataSize = 0;
+    memset(header, 0 , sizeof(wav_header_t));
+    switch (format) {
+    case SND_PCM_FORMAT_S16_LE:
+        bits = 16;
+        align = 2;
+        break;
+    case SND_PCM_FORMAT_S24_LE:
+        bits = 24;
+        align = 4;
+        break;
+    case SND_PCM_FORMAT_S32_LE:
+        bits = 32;
+        align = 4;
+        break;
+    }
+    header->riffType = WAV_RIFF;
+    header->riffSize = LE_INT(36);
+    header->waveType = WAV_WAVE;
+    header->formatType = WAV_FMT;
+    header->formatSize = LE_INT(16);
+    /* PCM */
+    header->compressionCode = LE_INT(0x0001);
+    header->numChannels = channels;
+    header->sampleRate = rate;
+    header->bytesPerSecond =
+        rate * snd_pcm_format_physical_width(format) / 8;
+    header->blockAlign = align * channels;
+    header->bitsPerSample = bits;
+    header->dataType = WAV_DATA;
+    header->dataSize = 0;
 }

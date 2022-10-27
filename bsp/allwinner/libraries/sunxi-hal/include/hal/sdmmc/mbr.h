@@ -54,41 +54,41 @@ typedef struct tag_MBR
     __u8  res[MBR_RESERVED];            // reserved space
 } MBR;
 
-#define     SUNXI_MBR_SIZE			    (16 * 1024)
-#define     SUNXI_MBR_MAX_PART_COUNT	120
+#define     SUNXI_MBR_SIZE              (16 * 1024)
+#define     SUNXI_MBR_MAX_PART_COUNT    120
 /* partition information */
 typedef struct sunxi_partition_t
 {
-	unsigned  int       addrhi;
-	unsigned  int       addrlo;
-	unsigned  int       lenhi;
-	unsigned  int       lenlo;
-	unsigned  char      classname[16];
-	unsigned  char      name[16];
-	unsigned  int       user_type;
-	unsigned  int       keydata;
-	unsigned  int       ro;
-	unsigned  int       sig_verify;
-	unsigned  int       sig_erase;
-	unsigned  int       sig_value[4];
-	unsigned  int       sig_pubkey;
-	unsigned  int       sig_pbumode;
-	unsigned  char      reserved2[36];
+    unsigned  int       addrhi;
+    unsigned  int       addrlo;
+    unsigned  int       lenhi;
+    unsigned  int       lenlo;
+    unsigned  char      classname[16];
+    unsigned  char      name[16];
+    unsigned  int       user_type;
+    unsigned  int       keydata;
+    unsigned  int       ro;
+    unsigned  int       sig_verify;
+    unsigned  int       sig_erase;
+    unsigned  int       sig_value[4];
+    unsigned  int       sig_pubkey;
+    unsigned  int       sig_pbumode;
+    unsigned  char      reserved2[36];
 }__attribute__ ((packed))sunxi_partition;
 
 /* mbr information */
 typedef struct sunxi_mbr
 {
-	unsigned  int       crc32;				        // crc 1k - 4
-	unsigned  int       version;			        // 版本信息， 0x00000100
-	unsigned  char 	    magic[8];			        //"softw311"
-	unsigned  int 	    copy;				        //分数
-	unsigned  int 	    index;				        //第几个MBR备份
-	unsigned  int       PartCount;			        //分区个数
-	unsigned  int       stamp[1];					//对齐
-	sunxi_partition     array[SUNXI_MBR_MAX_PART_COUNT];	//
-	unsigned  int       lockflag;
-	unsigned  char      res[(SUNXI_MBR_SIZE - 32 - 4 - (SUNXI_MBR_MAX_PART_COUNT * sizeof(sunxi_partition)))];
+    unsigned  int       crc32;                      // crc 1k - 4
+    unsigned  int       version;                    // 版本信息， 0x00000100
+    unsigned  char      magic[8];                   //"softw311"
+    unsigned  int       copy;                       //分数
+    unsigned  int       index;                      //第几个MBR备份
+    unsigned  int       PartCount;                  //分区个数
+    unsigned  int       stamp[1];                   //对齐
+    sunxi_partition     array[SUNXI_MBR_MAX_PART_COUNT];    //
+    unsigned  int       lockflag;
+    unsigned  char      res[(SUNXI_MBR_SIZE - 32 - 4 - (SUNXI_MBR_MAX_PART_COUNT * sizeof(sunxi_partition)))];
 }__attribute__ ((packed)) sunxi_mbr_t;
 
 #endif // __MBR_H__

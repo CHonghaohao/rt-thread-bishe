@@ -11,24 +11,24 @@ extern struct regulator_ops axp_regulator_ops;
 
 int hal_regulator_get(unsigned int request_flag, struct regulator_dev *rdev)
 {
-	int rc;
+    int rc;
 
-	rdev->flag = request_flag;
+    rdev->flag = request_flag;
 
-	switch (REGULATOR_TYPE(rdev->flag)) {
-	case AXP2101_REGULATOR:
-		rdev->flag |= (REGULATOR_PMU_ADDR << AXP_ADDR_SHIFT) |
-			      (REGULATOR_TWI_PORT << TWI_PORT_SHIFT);
-		rdev->private = (void *)axp2101_regulators;
-		rdev->ops = &axp_regulator_ops;
-		hal_axp_twi_init(rdev);
-		break;
-	default:
-		goto out;
-	}
+    switch (REGULATOR_TYPE(rdev->flag)) {
+    case AXP2101_REGULATOR:
+        rdev->flag |= (REGULATOR_PMU_ADDR << AXP_ADDR_SHIFT) |
+                  (REGULATOR_TWI_PORT << TWI_PORT_SHIFT);
+        rdev->private = (void *)axp2101_regulators;
+        rdev->ops = &axp_regulator_ops;
+        hal_axp_twi_init(rdev);
+        break;
+    default:
+        goto out;
+    }
 
-	return 0;
+    return 0;
 
 out:
-	return -1;
+    return -1;
 }

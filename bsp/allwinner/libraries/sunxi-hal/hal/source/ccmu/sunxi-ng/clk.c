@@ -43,7 +43,7 @@ hal_clk_status_t clk_put(struct clk *clk)
     }
 
     if (clk->count)
-	    clk->count--;
+        clk->count--;
 
     return 0;
 }
@@ -90,7 +90,7 @@ struct clk *clk_get_parent(struct clk *clk)
     parent = clk_core_get_parent(clk->core);
 
     if (!parent)
-	    return NULL;
+        return NULL;
 
     if (parent->clk)
     {

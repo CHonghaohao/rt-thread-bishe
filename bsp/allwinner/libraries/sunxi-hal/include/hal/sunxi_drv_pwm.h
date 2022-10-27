@@ -40,9 +40,9 @@ extern "C" {
 
 typedef struct sunxi_driver_pwm
 {
-	struct rt_device	base;
-	uint32_t		dev_id;
-	const void		*hal_drv;
+    struct rt_device    base;
+    uint32_t        dev_id;
+    const void      *hal_drv;
 }sunxi_driver_pwm_t;
 
 typedef struct sunxi_hal_pwm_driver

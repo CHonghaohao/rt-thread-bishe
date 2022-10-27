@@ -31,7 +31,7 @@
 typedef struct tag_WEBCAM_DRV
 {
     __u32           mid;
-    __u32           used;               //表示向drv注册了多少个设备节点
+    __u32           used;               //琛ㄧず鍚慸rv娉ㄥ唽浜嗗灏戜釜璁惧鑺傜偣
     __hdle          hReg_WebcamDevHdl;     //hReg;   //webcam_dev_hdl
     __dev_devop_t   webcam_dev_entry;
 }__webcam_drv_t;

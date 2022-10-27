@@ -95,9 +95,9 @@ typedef struct {
 } wav_header_t;
 
 typedef struct {
-	unsigned int rate;
-	snd_pcm_format_t format;
-	unsigned int channels;
+    unsigned int rate;
+    snd_pcm_format_t format;
+    unsigned int channels;
 } wav_hw_params_t;
 
 int check_wav_header(wav_header_t *header, wav_hw_params_t *hwparams);

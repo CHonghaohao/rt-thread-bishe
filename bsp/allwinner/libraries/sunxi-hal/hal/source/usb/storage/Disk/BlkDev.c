@@ -37,11 +37,11 @@
 *
 *
 * Return value:
-*    0  £º³É¹¦
-*   !0  £ºÊ§°Ü
+*    0  ï¼šæˆåŠŸ
+*   !0  ï¼šå¤±è´¥
 *
 * note:
-*    ÎÞ
+*    æ— 
 *
 *******************************************************************************
 */
@@ -78,11 +78,11 @@ static void *DiskOpen(void *open_arg, uint32_t mode)
 *
 *
 * Return value:
-*    0  £º³É¹¦
-*   !0  £ºÊ§°Ü
+*    0  ï¼šæˆåŠŸ
+*   !0  ï¼šå¤±è´¥
 *
 * note:
-*    ÎÞ
+*    æ— 
 *
 *******************************************************************************
 */
@@ -119,11 +119,11 @@ static int32_t DiskClose(void * hDev)
 *
 *
 * Return value:
-*    0  £º³É¹¦
-*   !0  £ºÊ§°Ü
+*    0  ï¼šæˆåŠŸ
+*   !0  ï¼šå¤±è´¥
 *
 * note:
-*    ÎÞ
+*    æ— 
 *
 *******************************************************************************
 */
@@ -131,7 +131,7 @@ static unsigned int __DiskRead(void *pBuffer, unsigned int blk, unsigned int n, 
 {
     __UsbBlkDev_t *BlkDev = NULL;
     __mscLun_t *mscLun = NULL;
-    unsigned int cmd_version = 10;   /* Ä¬ÈÏÎª10 */
+    unsigned int cmd_version = 10;   /* é»˜è®¤ä¸º10 */
     int ret = 0;
 
     if (hDev == NULL)
@@ -155,7 +155,7 @@ static unsigned int __DiskRead(void *pBuffer, unsigned int blk, unsigned int n, 
         return EPDK_FAIL;
     }
 
-    /* Èç¹ûÃ»ÓÐ×¢²ádiskÉè±¸, ¾Í²»ÄÜ¹»¶ÁÊý¾Ý */
+    /* å¦‚æžœæ²¡æœ‰æ³¨å†Œdiskè®¾å¤‡, å°±ä¸èƒ½å¤Ÿè¯»æ•°æ® */
     if (!BlkDev->is_RegDisk)
     {
         hal_log_err("ERR: __DiskRead: Not reged Disk, can not read");
@@ -170,7 +170,7 @@ static unsigned int __DiskRead(void *pBuffer, unsigned int blk, unsigned int n, 
         return EPDK_FAIL;
     }
 
-    /* Èç¹û½éÖÊ²»´æÔÚ, ¾Í²»ÄÜ¹»´ÓÉè±¸¶ÁÊý¾Ý */
+    /* å¦‚æžœä»‹è´¨ä¸å­˜åœ¨, å°±ä¸èƒ½å¤Ÿä»Žè®¾å¤‡è¯»æ•°æ® */
     if (!mscLun->MediaPresent)
     {
         hal_log_err("ERR: __DiskRead: media is not present, __DiskRead failed");
@@ -197,7 +197,7 @@ static unsigned int __DiskRead(void *pBuffer, unsigned int blk, unsigned int n, 
             cmd_version = 10;
         }
     */
-    /* Ä¿Ç°Ëù¼ûµÄUSBÉè±¸ÀïÃæ¶¼Ê¹ÓÃµÄÊÇ10×Ö½ÚÃüÃû£¬¶øÇÒÐ­Òé¹æ¶¨µÄÊÇ10/12×Ö½ÚÃüÁî */
+    /* ç›®å‰æ‰€è§çš„USBè®¾å¤‡é‡Œé¢éƒ½ä½¿ç”¨çš„æ˜¯10å­—èŠ‚å‘½åï¼Œè€Œä¸”åè®®è§„å®šçš„æ˜¯10/12å­—èŠ‚å‘½ä»¤ */
     cmd_version = 10;
     hal_sem_wait(mscLun->Lock);
 
@@ -240,11 +240,11 @@ static unsigned int __DiskRead(void *pBuffer, unsigned int blk, unsigned int n, 
 *
 *
 * Return value:
-*    0  £º³É¹¦
-*   !0  £ºÊ§°Ü
+*    0  ï¼šæˆåŠŸ
+*   !0  ï¼šå¤±è´¥
 *
 * note:
-*    ÎÞ
+*    æ— 
 *
 *******************************************************************************
 */
@@ -252,7 +252,7 @@ static unsigned int __DiskWrite(const void *pBuffer, unsigned int blk, unsigned 
 {
     __UsbBlkDev_t *BlkDev = NULL;
     __mscLun_t *mscLun = NULL;
-    unsigned int cmd_version = 10;   /* Ä¬ÈÏÎª10 */
+    unsigned int cmd_version = 10;   /* é»˜è®¤ä¸º10 */
     int ret = 0;
 
     if (hDev == NULL)
@@ -276,7 +276,7 @@ static unsigned int __DiskWrite(const void *pBuffer, unsigned int blk, unsigned 
         return 0;
     }
 
-    /* Èç¹ûÃ»ÓÐ×¢²ádiskÉè±¸, ¾Í²»ÄÜ¹»¶ÁÊý¾Ý */
+    /* å¦‚æžœæ²¡æœ‰æ³¨å†Œdiskè®¾å¤‡, å°±ä¸èƒ½å¤Ÿè¯»æ•°æ® */
     if (!BlkDev->is_RegDisk)
     {
         hal_log_err("ERR: __DiskWrite: Not reged Disk, can not read");
@@ -291,7 +291,7 @@ static unsigned int __DiskWrite(const void *pBuffer, unsigned int blk, unsigned 
         return 0;
     }
 
-    /* Èç¹û½éÖÊ²»´æÔÚ, ¾Í²»ÄÜ¹»ÍùÉè±¸Ð´Êý¾Ý */
+    /* å¦‚æžœä»‹è´¨ä¸å­˜åœ¨, å°±ä¸èƒ½å¤Ÿå¾€è®¾å¤‡å†™æ•°æ® */
     if (!mscLun->MediaPresent)
     {
         hal_log_err("ERR: __DiskWrite: media is not present, __DiskWrite failed");
@@ -324,7 +324,7 @@ static unsigned int __DiskWrite(const void *pBuffer, unsigned int blk, unsigned 
             cmd_version = 10;
         }
     */
-    /* Ä¿Ç°Ëù¼ûµÄUSBÉè±¸ÀïÃæ¶¼Ê¹ÓÃµÄÊÇ10×Ö½ÚÃüÃû£¬¶øÇÒÐ­Òé¹æ¶¨µÄÊÇ10/12×Ö½ÚÃüÁî */
+    /* ç›®å‰æ‰€è§çš„USBè®¾å¤‡é‡Œé¢éƒ½ä½¿ç”¨çš„æ˜¯10å­—èŠ‚å‘½åï¼Œè€Œä¸”åè®®è§„å®šçš„æ˜¯10/12å­—èŠ‚å‘½ä»¤ */
     cmd_version = 10;
     hal_sem_wait(mscLun->Lock);
 
@@ -362,20 +362,20 @@ static unsigned int __DiskWrite(const void *pBuffer, unsigned int blk, unsigned 
 *                     DiskRead
 *
 * Description:
-*    Éè±¸¶Á
+*    è®¾å¤‡è¯»
 *
 * Parameters:
-*    pBuffer    :  output. ×°ÔØ¶Á»ØÀ´µÄÊý¾Ý
-*    blk        :  input.  ÆðÊ¼ÉÈÇø
-*    n          :  input.  ÉÈÇø¸öÊý
-*    hDev       :  input.  Éè±¸
+*    pBuffer    :  output. è£…è½½è¯»å›žæ¥çš„æ•°æ®
+*    blk        :  input.  èµ·å§‹æ‰‡åŒº
+*    n          :  input.  æ‰‡åŒºä¸ªæ•°
+*    hDev       :  input.  è®¾å¤‡
 *
 * Return value:
-*    0  £º³É¹¦
-*   !0  £ºÊ§°Ü
+*    0  ï¼šæˆåŠŸ
+*   !0  ï¼šå¤±è´¥
 *
 * note:
-*    ÎÞ
+*    æ— 
 *
 *******************************************************************************
 */
@@ -414,8 +414,8 @@ static uint32_t DiskRead(void *pBuffer, uint32_t blk, uint32_t n, void * hDev)
         return 0;
     }
 
-    /* 1¡¢lba0 ²»Ô¤¶Á
-       2¡¢±¾´Î¶ÁÐ´³¤¶È³¬¹ýÁË×î´óÈÝÁ¿£¬²»Ô¤¶Á
+    /* 1ã€lba0 ä¸é¢„è¯»
+       2ã€æœ¬æ¬¡è¯»å†™é•¿åº¦è¶…è¿‡äº†æœ€å¤§å®¹é‡ï¼Œä¸é¢„è¯»
     */
     if ((blk != 0)
         && ((blk + (USBH_TEMP_BUFFER_MAX_LEN / mscLun->disk_info.sector_size)) < mscLun->disk_info.capacity))
@@ -450,20 +450,20 @@ static uint32_t DiskRead(void *pBuffer, uint32_t blk, uint32_t n, void * hDev)
 *                     DiskWrite
 *
 * Description:
-*    Éè±¸Ð´
+*    è®¾å¤‡å†™
 *
 * Parameters:
-*    pBuffer    :  input. ÒªÐ´µÄÊý¾Ý
-*    blk        :  input. ÆðÊ¼ÉÈÇø
-*    n          :  input. ÉÈÇø¸öÊý
-*    hDev       :  input. Éè±¸
+*    pBuffer    :  input. è¦å†™çš„æ•°æ®
+*    blk        :  input. èµ·å§‹æ‰‡åŒº
+*    n          :  input. æ‰‡åŒºä¸ªæ•°
+*    hDev       :  input. è®¾å¤‡
 *
 * Return value:
-*    0  £º³É¹¦
-*   !0  £ºÊ§°Ü
+*    0  ï¼šæˆåŠŸ
+*   !0  ï¼šå¤±è´¥
 *
 * note:
-*    ÎÞ
+*    æ— 
 *
 *******************************************************************************
 */
@@ -502,8 +502,8 @@ static uint32_t DiskWrite(const void *pBuffer, uint32_t blk, uint32_t n, void * 
         return 0;
     }
 
-    /* 1¡¢lba0 ²»Ô¤¶Á
-       2¡¢±¾´Î¶ÁÐ´³¤¶È³¬¹ýÁË×î´óÈÝÁ¿£¬²»Ô¤¶Á
+    /* 1ã€lba0 ä¸é¢„è¯»
+       2ã€æœ¬æ¬¡è¯»å†™é•¿åº¦è¶…è¿‡äº†æœ€å¤§å®¹é‡ï¼Œä¸é¢„è¯»
     */
     if ((blk != 0)
         && ((blk + (USBH_TEMP_BUFFER_MAX_LEN / mscLun->disk_info.sector_size)) < mscLun->disk_info.capacity))
@@ -559,11 +559,11 @@ static unsigned int DiskWrite(const void *pBuffer, unsigned int blk, unsigned in
 *
 *
 * Return value:
-*    0  £º³É¹¦
-*   !0  £ºÊ§°Ü
+*    0  ï¼šæˆåŠŸ
+*   !0  ï¼šå¤±è´¥
 *
 * note:
-*    ÎÞ
+*    æ— 
 *
 *******************************************************************************
 */
@@ -595,7 +595,7 @@ static int32_t DiskIoctl(void * hDev, uint32_t Cmd, long Aux, void *pBuffer)
         return EPDK_FAIL;
     }
 
-    /* ÓÉÓÚ¿éÉè±¸²»Ö§³Ö¹âÇýÉè±¸, Òò´ËÕâÀï¾ÍÖ»ÄÜ×ö¸öÁÙÊ±°æ±¾ */
+    /* ç”±äºŽå—è®¾å¤‡ä¸æ”¯æŒå…‰é©±è®¾å¤‡, å› æ­¤è¿™é‡Œå°±åªèƒ½åšä¸ªä¸´æ—¶ç‰ˆæœ¬ */
     if (mscLun->DeviceType == SCSI_DEVICE_CDROM)
     {
         ret = CDIOCtrl(BlkDev, Cmd, Aux, pBuffer);
@@ -658,16 +658,16 @@ static int32_t DiskIoctl(void * hDev, uint32_t Cmd, long Aux, void *pBuffer)
 *
 *
 * Return value:
-*    0  £º³É¹¦
-*   !0  £ºÊ§°Ü
+*    0  ï¼šæˆåŠŸ
+*   !0  ï¼šå¤±è´¥
 *
 * note:
-*    ÎÞ
+*    æ— 
 *
 *******************************************************************************
 */
 #define  USB_STORAGE_DEV_NAME       "SCSI_DISK"
-#define  USB_CDROM_DEV_NAME         "USB_CDROM" 
+#define  USB_CDROM_DEV_NAME         "USB_CDROM"
 
 __UsbBlkDev_t *UsbBlkDevAllocInit(__mscLun_t *mscLun)
 {
@@ -741,11 +741,11 @@ __UsbBlkDev_t *UsbBlkDevAllocInit(__mscLun_t *mscLun)
 *
 *
 * Return value:
-*    0  £º³É¹¦
-*   !0  £ºÊ§°Ü
+*    0  ï¼šæˆåŠŸ
+*   !0  ï¼šå¤±è´¥
 *
 * note:
-*    ÎÞ
+*    æ— 
 *
 *******************************************************************************
 */
@@ -844,7 +844,7 @@ static void PrintDevStatus(unsigned char *FunName, int status)
 
         default:
             hal_log_info("unkonw status %d", status);
-			break;
+            break;
     }
 
     return ;
@@ -947,7 +947,7 @@ static void WaitForDeviceReady(__UsbBlkDev_t *BlkDev)
             break;
         }
 
-        /* ÅÐ¶ÏmediaµÄ×´Ì¬ */
+        /* åˆ¤æ–­mediaçš„çŠ¶æ€ */
         if (ret != USB_STATUS_SUCCESS)
         {
             mscLun->MediaPresent = 0;
@@ -1035,7 +1035,7 @@ static void ReadCapacity(__UsbBlkDev_t *BlkDev)
 *                     ReadProtectFlag
 *
 * Description:
-*    »ñµÃÉè±¸Ð´±£»¤±êÖ¾Î»
+*    èŽ·å¾—è®¾å¤‡å†™ä¿æŠ¤æ ‡å¿—ä½
 *
 * Parameters:
 *
@@ -1052,7 +1052,7 @@ static void ReadProtectFlag(__UsbBlkDev_t *BlkDev)
 {
     __mscLun_t *mscLun = NULL;
     __BlockDevSpecPara_t *DevSpecPara = NULL;
-    unsigned int cmd_version = 6;   /* Ä¬ÈÏÊ¹ÓÃmode sense 6 */
+    unsigned int cmd_version = 6;   /* é»˜è®¤ä½¿ç”¨mode sense 6 */
     int ret = 0;
     unsigned int ActLen = 0;
     unsigned char  buffer[SCSI_MODE_SENSE_MAX_DATA_LEN];
@@ -1167,7 +1167,7 @@ static void ReadProtectFlag(__UsbBlkDev_t *BlkDev)
 static void ReadCacheType(__UsbBlkDev_t *BlkDev)
 {
     __mscLun_t *mscLun = NULL;
-    unsigned int cmd_version = 6;   /* Ä¬ÈÏÊ¹ÓÃmode sense 6 */
+    unsigned int cmd_version = 6;   /* é»˜è®¤ä½¿ç”¨mode sense 6 */
     int ret = 0;
     unsigned char  buffer[SCSI_MODE_SENSE_MAX_DATA_LEN];
     unsigned int ActLen = 0;
@@ -1288,11 +1288,11 @@ static void ReadCacheType(__UsbBlkDev_t *BlkDev)
 *
 *
 * Return value:
-*    0  £º³É¹¦
-*   !0  £ºÊ§°Ü
+*    0  ï¼šæˆåŠŸ
+*   !0  ï¼šå¤±è´¥
 *
 * note:
-*    ÎÞ
+*    æ— 
 *
 *******************************************************************************
 */
@@ -1337,12 +1337,12 @@ void GetDiskInfo(__UsbBlkDev_t *BlkDev)
 
     /* read capacity */
     ReadCapacity(BlkDev);
-    /* LunÊÇ·ñÐ´±£»¤? */
+    /* Lunæ˜¯å¦å†™ä¿æŠ¤? */
     ReadProtectFlag(BlkDev);
-    /* LunÊÇ·ñ´øcache? */
+    /* Lunæ˜¯å¦å¸¦cache? */
     ReadCacheType(BlkDev);
     Pr__s32DiskInfo(BlkDev);
-//	printf("%s %d %s\n", __FILE__, __LINE__, __func__);
+//  printf("%s %d %s\n", __FILE__, __LINE__, __func__);
     return ;
 }
 
@@ -1402,11 +1402,11 @@ void ShutDown(__UsbBlkDev_t *BlkDev)
 *
 *
 * Return value:
-*    0  £º³É¹¦
-*   !0  £ºÊ§°Ü
+*    0  ï¼šæˆåŠŸ
+*   !0  ï¼šå¤±è´¥
 *
 * note:
-*    ÎÞ
+*    æ— 
 *
 *******************************************************************************
 */
@@ -1421,7 +1421,7 @@ extern unsigned int hub_GetHubNo(struct usb_host_virt_dev *udev);
         return -1;
     }
 
-    //¸üÐÂ±êÖ¾Î»
+    //æ›´æ–°æ ‡å¿—ä½
     BlkDev->Magic = USB_BLK_DEV_MAGIC;
 
     if (RegDisk)
@@ -1438,8 +1438,8 @@ extern unsigned int hub_GetHubNo(struct usb_host_virt_dev *udev);
     strcpy((char *)BlkDev->device_info.DeivceInfo.Product, (char *)BlkDev->Lun->Product);
     strcpy((char *)BlkDev->device_info.DeivceInfo.Serial, (char *)BlkDev->Lun->Revision);
 
-	BlkDev->device_info.DeivceInfo.HubPortNo = (hub_GetHubNo(BlkDev->Lun->mscDev->pusb_dev) & 0x0f)
-	        | ((hub_GetHubSeries(BlkDev->Lun->mscDev->pusb_dev) & 0x0f) << 8);
+    BlkDev->device_info.DeivceInfo.HubPortNo = (hub_GetHubNo(BlkDev->Lun->mscDev->pusb_dev) & 0x0f)
+            | ((hub_GetHubSeries(BlkDev->Lun->mscDev->pusb_dev) & 0x0f) << 8);
 
     if ((BlkDev->Lun->DeviceType == SCSI_DEVICE_DIRECT_ACCESS) && (BlkDev->Lun->RemoveAble == 0))
     {
@@ -1458,14 +1458,14 @@ extern unsigned int hub_GetHubNo(struct usb_host_virt_dev *udev);
         BlkDev->device_info.DeivceInfo.DeviceType = USB_STORAGE_DEVICE_TYPE_UNKOWN;
     }
 
-	printf("Classname  = %s\n", BlkDev->device_info.Classname);
-	printf("DevName  = %s\n", BlkDev->DevName);
-	printf("DeviceName = %s\n", BlkDev->device_info.DeviceName);
-	printf("Vender     = %s\n", BlkDev->device_info.DeivceInfo.Vender);
-	printf("Product    = %s\n", BlkDev->device_info.DeivceInfo.Product);
-	printf("Serial     = %s\n", BlkDev->device_info.DeivceInfo.Serial);
-	printf("HubPortNo  = %d\n", BlkDev->device_info.DeivceInfo.HubPortNo);
-	printf("DeviceType = %d\n", BlkDev->device_info.DeivceInfo.DeviceType);
+    printf("Classname  = %s\n", BlkDev->device_info.Classname);
+    printf("DevName  = %s\n", BlkDev->DevName);
+    printf("DeviceName = %s\n", BlkDev->device_info.DeviceName);
+    printf("Vender     = %s\n", BlkDev->device_info.DeivceInfo.Vender);
+    printf("Product    = %s\n", BlkDev->device_info.DeivceInfo.Product);
+    printf("Serial     = %s\n", BlkDev->device_info.DeivceInfo.Serial);
+    printf("HubPortNo  = %d\n", BlkDev->device_info.DeivceInfo.HubPortNo);
+    printf("DeviceType = %d\n", BlkDev->device_info.DeivceInfo.DeviceType);
     usbh_disk_SaveDeviceInfo(&BlkDev->device_info);
     /* reg disk */
     BlkDev->DevRegHdle = esDEV_DevReg((const char *)ClassName, (const char *)BlkDev->DevName, &(BlkDev->DiskOp), (void *)BlkDev);
@@ -1495,11 +1495,11 @@ extern unsigned int hub_GetHubNo(struct usb_host_virt_dev *udev);
 *
 *
 * Return value:
-*    0  £º³É¹¦
-*   !0  £ºÊ§°Ü
+*    0  ï¼šæˆåŠŸ
+*   !0  ï¼šå¤±è´¥
 *
 * note:
-*    ÎÞ
+*    æ— 
 *
 *******************************************************************************
 */
@@ -1507,7 +1507,7 @@ int UsbBlkDevUnReg(__UsbBlkDev_t *BlkDev)
 {
     if (BlkDev == NULL)
     {
-		hal_log_err("ERR: UsbBlkDevUnReg: input error");
+        hal_log_err("ERR: UsbBlkDevUnReg: input error");
         return -1;
         //return USB_ERR_BAD_ARGUMENTS;
     }
@@ -1533,7 +1533,7 @@ int UsbBlkDevUnReg(__UsbBlkDev_t *BlkDev)
     set_usbh_temp_buff_invalid_by_dev(BlkDev->DevNo);
     BlkDev->Magic = 0;
     return 0;
-	//return USB_ERR_SUCCESS;
+    //return USB_ERR_SUCCESS;
 
 }
 

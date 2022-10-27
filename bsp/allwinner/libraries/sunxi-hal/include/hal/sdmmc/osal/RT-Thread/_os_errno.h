@@ -49,7 +49,7 @@ void rt_set_errno(rt_err_t error);
  */
 static inline int OS_GetErrno(void)
 {
-	return (int)rt_get_errno();
+    return (int)rt_get_errno();
 }
 
 /**
@@ -59,7 +59,7 @@ static inline int OS_GetErrno(void)
  */
 static inline void OS_SetErrno(int err)
 {
-	rt_set_errno((rt_err_t)err);
+    rt_set_errno((rt_err_t)err);
 }
 
 #ifdef __cplusplus

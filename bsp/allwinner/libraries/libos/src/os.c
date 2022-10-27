@@ -2,8 +2,10 @@
 #include <rtthread.h>
 
 #include <rthw.h>
+#ifdef RT_USING_USERSPACE
 #include <mmu.h>
 #include <lwp_arch.h>
+#endif
 #include <cache.h>
 
 #include <hal_atomic.h>
@@ -11,9 +13,83 @@
 #include <ktimer.h>
 #include <typedef.h>
 
-int msleep(unsigned int msecs)
+#define TIMER_FREQ    (24000000)
+
+typedef unsigned long cycles_t;
+
+#ifndef CSR_TIME
+#define CSR_TIME    0xc01
+#endif
+#ifdef __ASSEMBLY__
+#define __ASM_STR(x)    x
+#else
+#define __ASM_STR(x)    #x
+#endif
+#define csr_read(csr)                       \
+    ({                              \
+        register unsigned long __v;             \
+        __asm__ __volatile__ ("csrr %0, " __ASM_STR(csr)    \
+                              : "=r" (__v) :            \
+                              : "memory");          \
+        __v;                            \
+    })
+
+static inline cycles_t get_cycles(void)
+{
+    return csr_read(CSR_TIME);
+}
+
+static inline uint64_t get_cycles64(void)
+{
+    return get_cycles();
+}
+
+static inline uint32_t arch_timer_get_cntfrq(void)
+{
+    uint32_t val = TIMER_FREQ;
+    return val;
+}
+
+static inline uint64_t arch_counter_get_cntpct(void)
+{
+    uint64_t cval;
+
+    cval = get_cycles64();
+    return cval;
+}
+
+RT_WEAK int msleep(unsigned int msecs)
 {
     rt_thread_mdelay(msecs);
+    return 0;
+}
+
+void rt_hw_us_delay(rt_uint32_t us)
+{
+    uint64_t start, target;
+    uint64_t frequency;
+
+    frequency = arch_timer_get_cntfrq();
+    start = arch_counter_get_cntpct();
+    target = frequency / 1000000ULL * us;
+
+    while (arch_counter_get_cntpct() - start <= target) ;
+}
+
+RT_WEAK int usleep(unsigned int usecs)
+{
+    int tickDiv = 1000 * (1000 / CONFIG_HZ);
+    int ticks   = usecs / tickDiv;
+    int msecs   = usecs % tickDiv;
+
+    if (ticks)
+    {
+        rt_thread_delay(ticks);
+    }
+    if (msecs)
+    {
+        rt_hw_us_delay(usecs);
+    }
     return 0;
 }
 
@@ -113,11 +189,17 @@ void awos_arch_flush_icache_all(void)
     rt_hw_cpu_icache_invalidate_all();
 }
 
+RT_WEAK int32_t hal_spi_gpio_cfg_count(const char *secname)
+{
+    rt_kprintf("FUNCTION:%s not implemented.\n", __FUNCTION__);
+    return 0;
+}
+
 int32_t esCFG_GetGPIOSecKeyCount(char *GPIOSecName)
 {
     int id;
 
-    if (!rt_strcmp(GPIOSecName, "pwm2") || !rt_strcmp(GPIOSecName, "pwm7"))
+    if (!rt_strcmp(GPIOSecName, "pwm1") || !rt_strcmp(GPIOSecName, "pwm2") || !rt_strcmp(GPIOSecName, "pwm7"))
     {
         return 1;
     }
@@ -127,13 +209,19 @@ int32_t esCFG_GetGPIOSecKeyCount(char *GPIOSecName)
     }
     else if (!rt_strcmp(GPIOSecName, "spi0"))
     {
-        return 6;
+        return hal_spi_gpio_cfg_count(GPIOSecName);
     }
     else if (sscanf(GPIOSecName, "twi%d", &id) == 1)
     {
         return 2;
     }
     return 0;
+}
+
+RT_WEAK int hal_spi_gpio_cfg_load(user_gpio_set_t *gpio_cfg, int32_t GPIONum, int id)
+{
+    rt_kprintf("FUNCTION:%s not implemented.\n", __FUNCTION__);
+    return -1;
 }
 
 RT_WEAK int hal_i2c_gpio_cfg_load(user_gpio_set_t *gpio_cfg, int32_t GPIONum, int id)
@@ -150,14 +238,24 @@ int32_t esCFG_GetGPIOSecData(char *GPIOSecName, void *pGPIOCfg, int32_t GPIONum)
     int i;
     int id;
 
-    if (!rt_strcmp(GPIOSecName, "pwm2"))
+    if (!rt_strcmp(GPIOSecName, "pwm1"))
     {
-        rt_strncpy(gpio_cfg->gpio_name, "PD18", 5);
+        rt_strncpy(gpio_cfg->gpio_name, "PB6", 4);
         gpio_cfg->data = 0;
         gpio_cfg->drv_level = 3;
         gpio_cfg->mul_sel = 5; // PWM
-        gpio_cfg->port = CFG_GPIO_PORT('D'); // PORT-D
-        gpio_cfg->port_num = 18; // PD18
+        gpio_cfg->port = CFG_GPIO_PORT('B'); // PORT-G
+        gpio_cfg->port_num = 6; // PG13
+        gpio_cfg->pull = 0; // pull disable
+    }
+    else if (!rt_strcmp(GPIOSecName, "pwm2"))
+    {
+        rt_strncpy(gpio_cfg->gpio_name, "PG13", 5);
+        gpio_cfg->data = 0;
+        gpio_cfg->drv_level = 3;
+        gpio_cfg->mul_sel = 5; // PWM
+        gpio_cfg->port = CFG_GPIO_PORT('G'); // PORT-G
+        gpio_cfg->port_num = 13; // PG13
         gpio_cfg->pull = 0; // pull disable
     }
     else if (!rt_strcmp(GPIOSecName, "pwm7"))
@@ -220,33 +318,9 @@ int32_t esCFG_GetGPIOSecData(char *GPIOSecName, void *pGPIOCfg, int32_t GPIONum)
             gpio_cfg++;
         }
     }
-    else if (!rt_strcmp(GPIOSecName, "spi0"))
+    else if (sscanf(GPIOSecName, "spi%d", &id) == 1)
     {
-        /*
-        ;----------------------------------------------------------------------------------
-        ;SPI controller configuration
-        ;----------------------------------------------------------------------------------
-        [spi0]
-        spi0_sclk           = port:PC02<2><0><2><default>
-        spi0_cs             = port:PC03<2><1><2><default>
-        spi0_mosi           = port:PC04<2><0><2><default>
-        spi0_miso           = port:PC05<2><0><2><default>
-        spi0_wp             = port:PC06<2><0><2><default>
-        spi0_hold           = port:PC07<2><0><2><default>
-        */
-        for (i = 0; i < GPIONum; i++)
-        {
-            strcpy(gpio_cfg->gpio_name, GPIOSecName);
-            gpio_cfg->port = CFG_GPIO_PORT('C');
-            gpio_cfg->port_num = 2 + i;
-            gpio_cfg->mul_sel = 2;
-            gpio_cfg->pull = 0;
-            gpio_cfg->drv_level = 2;
-            gpio_cfg->data = 0;
-            gpio_cfg++;
-        }
-        gpio_cfg = (user_gpio_set_t *) pGPIOCfg;
-        gpio_cfg[1].pull = 1;
+        return hal_spi_gpio_cfg_load(gpio_cfg, GPIONum, id);
     }
     else if (sscanf(GPIOSecName, "twi%d", &id) == 1)
     {
@@ -320,11 +394,11 @@ int32_t esCFG_GetKeyValue(char *SecName, char *KeyName, int32_t Value[], int32_t
         */
         if (!rt_strcmp("internal_card", KeyName))
         {
-            *Value = 0x00;
+            *Value = 0x01;
             return 0;
         } else if (!rt_strcmp("used_card_no", KeyName))
         {
-            *Value = 0x01;
+            *Value = 0x03;
             return 0;
         }
     }
@@ -339,4 +413,20 @@ int do_gettimeofday(struct timespec64 *ts)
         ts->tv_nsec = (rt_tick_get() % RT_TICK_PER_SECOND) * (1000000000 / RT_TICK_PER_SECOND);
     }
     return 0;
+}
+
+int eLIBs_printf(const char *fmt, ...)
+{
+    va_list args;
+    rt_size_t length;
+    static char rt_log_buf[RT_CONSOLEBUF_SIZE];
+
+    va_start(args, fmt);
+
+    length = rt_vsnprintf(rt_log_buf, sizeof(rt_log_buf) - 1, fmt, args);
+    if (length > RT_CONSOLEBUF_SIZE - 1)
+        length = RT_CONSOLEBUF_SIZE - 1;
+    va_end(args);
+
+    rt_kputs(rt_log_buf);
 }

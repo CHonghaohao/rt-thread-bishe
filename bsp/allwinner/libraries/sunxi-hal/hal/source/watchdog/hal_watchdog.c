@@ -8,8 +8,8 @@
 #include "sunxi_hal_common.h"
 #include "platform_watchdog.h"
 
-#define writel_wdt	hal_writel
-#define readl_wdt	hal_readl
+#define writel_wdt  hal_writel
+#define readl_wdt   hal_readl
 
 static unsigned long running;
 static unsigned long running_saved;
@@ -32,39 +32,39 @@ static const int wdt_timeout_map[] =
 int hal_watchdog_is_running(void)
 {
 
-	return running_saved;
+    return running_saved;
 }
 
 int hal_watchdog_suspend(int timeout)
 {
 
-	running_saved = running;
+    running_saved = running;
 
-	pr_debug("%s()\n", __func__);
-	if (hal_watchdog_is_running()) {
-		pr_debug("%s()\n", __func__);
-		hal_watchdog_stop(timeout);
-	}
+    pr_debug("%s()\n", __func__);
+    if (hal_watchdog_is_running()) {
+        pr_debug("%s()\n", __func__);
+        hal_watchdog_stop(timeout);
+    }
 
-	return 0;
+    return 0;
 }
 
 int hal_watchdog_resume(int timeout)
 {
 
-	pr_debug("%s()\n", __func__);
-	if (hal_watchdog_is_running()) {
-		pr_debug("%s()\n", __func__);
-		hal_watchdog_start(timeout);
-	}
+    pr_debug("%s()\n", __func__);
+    if (hal_watchdog_is_running()) {
+        pr_debug("%s()\n", __func__);
+        hal_watchdog_start(timeout);
+    }
 
-	return 0;
+    return 0;
 }
 void hal_watchdog_info(void)
 {
     struct hal_sunxi_wdt *wdt = (struct hal_sunxi_wdt *)WDT_BASE;
     printf("mode: 0x%x, cfg=0x%x, ctl=0x%x\n",
-	(unsigned int)(wdt->mode), (unsigned int)(wdt->cfg), (unsigned int)(wdt->ctl));
+    (unsigned int)(wdt->mode), (unsigned int)(wdt->cfg), (unsigned int)(wdt->ctl));
 }
 
 void hal_watchdog_disable(void)

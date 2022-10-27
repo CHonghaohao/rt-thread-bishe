@@ -39,17 +39,17 @@
  */
 OS_Status OS_MutexCreate(OS_Mutex_t *mutex)
 {
-	OS_HANDLE_ASSERT(!OS_MutexIsValid(mutex), mutex->handle);
+    OS_HANDLE_ASSERT(!OS_MutexIsValid(mutex), mutex->handle);
 
-	mutex->handle = rt_mutex_create("os_mtx", RT_IPC_FLAG_PRIO);
-	OS_DBG("%s(), handle %p\n", __func__, mutex->handle);
+    mutex->handle = rt_mutex_create("os_mtx", RT_IPC_FLAG_PRIO);
+    OS_DBG("%s(), handle %p\n", __func__, mutex->handle);
 
-	if (mutex->handle == NULL) {
-		OS_ERR("err %"OS_HANDLE_F"\n", mutex->handle);
-		return OS_FAIL;
-	}
+    if (mutex->handle == NULL) {
+        OS_ERR("err %"OS_HANDLE_F"\n", mutex->handle);
+        return OS_FAIL;
+    }
 
-	return OS_OK;
+    return OS_OK;
 }
 
 /**
@@ -59,17 +59,17 @@ OS_Status OS_MutexCreate(OS_Mutex_t *mutex)
  */
 OS_Status OS_MutexDelete(OS_Mutex_t *mutex)
 {
-	rt_err_t ret;
+    rt_err_t ret;
 
-	OS_HANDLE_ASSERT(OS_MutexIsValid(mutex), mutex->handle);
+    OS_HANDLE_ASSERT(OS_MutexIsValid(mutex), mutex->handle);
 
-	ret = rt_mutex_delete(mutex->handle);
-	if (ret != RT_EOK) {
-		OS_ERR("err %"OS_BASETYPE_F"\n", ret);
-		return OS_FAIL;
-	}
-	OS_MutexSetInvalid(mutex);
-	return OS_OK;
+    ret = rt_mutex_delete(mutex->handle);
+    if (ret != RT_EOK) {
+        OS_ERR("err %"OS_BASETYPE_F"\n", ret);
+        return OS_FAIL;
+    }
+    OS_MutexSetInvalid(mutex);
+    return OS_OK;
 }
 
 /**
@@ -86,17 +86,17 @@ OS_Status OS_MutexDelete(OS_Mutex_t *mutex)
  */
 OS_Status OS_MutexLock(OS_Mutex_t *mutex, OS_Time_t waitMS)
 {
-	rt_err_t ret;
+    rt_err_t ret;
 
-	OS_HANDLE_ASSERT(OS_MutexIsValid(mutex), mutex->handle);
+    OS_HANDLE_ASSERT(OS_MutexIsValid(mutex), mutex->handle);
 
-	ret = rt_mutex_take(mutex->handle, OS_CalcWaitTicks(waitMS));
-	if (ret != RT_EOK) {
-		OS_DBG("%s() fail @ %d, %"OS_TIME_F" ms\n", __func__, __LINE__, (unsigned int)waitMS);
-		return OS_FAIL;
-	}
+    ret = rt_mutex_take(mutex->handle, OS_CalcWaitTicks(waitMS));
+    if (ret != RT_EOK) {
+        OS_DBG("%s() fail @ %d, %"OS_TIME_F" ms\n", __func__, __LINE__, (unsigned int)waitMS);
+        return OS_FAIL;
+    }
 
-	return OS_OK;
+    return OS_OK;
 }
 
 /**
@@ -108,15 +108,15 @@ OS_Status OS_MutexLock(OS_Mutex_t *mutex, OS_Time_t waitMS)
  */
 OS_Status OS_MutexUnlock(OS_Mutex_t *mutex)
 {
-	rt_err_t ret;
+    rt_err_t ret;
 
-	OS_HANDLE_ASSERT(OS_MutexIsValid(mutex), mutex->handle);
+    OS_HANDLE_ASSERT(OS_MutexIsValid(mutex), mutex->handle);
 
-	ret = rt_mutex_release(mutex->handle);
-	if (ret != RT_EOK) {
-		OS_DBG("%s() fail @ %d\n", __func__, __LINE__);
-		return OS_FAIL;
-	}
+    ret = rt_mutex_release(mutex->handle);
+    if (ret != RT_EOK) {
+        OS_DBG("%s() fail @ %d\n", __func__, __LINE__);
+        return OS_FAIL;
+    }
 
-	return OS_OK;
+    return OS_OK;
 }

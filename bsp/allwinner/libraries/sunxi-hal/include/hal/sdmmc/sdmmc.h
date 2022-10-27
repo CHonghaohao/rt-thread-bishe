@@ -81,9 +81,9 @@ extern "C" {
 /*
  * SD_SEND_IF_COND argument format:
  *
- *	[31:12] Reserved (0)
- *	[11:8] Host Voltage Supply Flags
- *	[7:0] Check Pattern (0xAA)
+ *  [31:12] Reserved (0)
+ *  [11:8] Host Voltage Supply Flags
+ *  [7:0] Check Pattern (0xAA)
  */
 
 /*
@@ -188,34 +188,34 @@ extern "C" {
 
 static inline uint32_t mmc_op_multi(uint32_t opcode)
 {
-	return opcode == MMC_WRITE_MULTIPLE_BLOCK ||
-	       opcode == MMC_READ_MULTIPLE_BLOCK;
+    return opcode == MMC_WRITE_MULTIPLE_BLOCK ||
+           opcode == MMC_READ_MULTIPLE_BLOCK;
 }
 
 /*
  * MMC_SWITCH argument format:
  *
- *	[31:26] Always 0
- *	[25:24] Access Mode
- *	[23:16] Location of target Byte in EXT_CSD
- *	[15:08] Value Byte
- *	[07:03] Always 0
- *	[02:00] Command Set
+ *  [31:26] Always 0
+ *  [25:24] Access Mode
+ *  [23:16] Location of target Byte in EXT_CSD
+ *  [15:08] Value Byte
+ *  [07:03] Always 0
+ *  [02:00] Command Set
  */
 
 /*
   MMC status in R1, for native mode (SPI bits are different)
   Type
-	e : error bit
-	s : status bit
-	r : detected and set for the actual command response
-	x : detected and set during command execution. the host must poll
+    e : error bit
+    s : status bit
+    r : detected and set for the actual command response
+    x : detected and set during command execution. the host must poll
             the card by sending status command in order to read these bits.
   Clear condition
-	a : according to the card state
-	b : always related to the previous command. Reception of
+    a : according to the card state
+    b : always related to the previous command. Reception of
             a valid command will clear it (with a delay of one command)
-	c : clear by read
+    c : clear by read
  */
 
 #define R1_OUT_OF_RANGE                 (1 << 31)       /* er, c */

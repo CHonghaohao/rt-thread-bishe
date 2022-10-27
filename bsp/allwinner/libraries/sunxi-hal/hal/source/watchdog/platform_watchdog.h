@@ -37,9 +37,9 @@
 
 /* Base Address */
 #if defined(CONFIG_ARCH_SUN8IW18P1)
-#define WDT_BASE  		0x030090a0  /* @TODO */
+#define WDT_BASE        0x030090a0  /* @TODO */
 #elif defined(CONFIG_ARCH_SUN8IW19)
-#define WDT_BASE  		0x030090a0  /* @TODO */
+#define WDT_BASE        0x030090a0  /* @TODO */
 #elif defined(CONFIG_SOC_SUN20IW1) /* RISC-V */
 #define WDT_BASE                0x020500A0
 #endif

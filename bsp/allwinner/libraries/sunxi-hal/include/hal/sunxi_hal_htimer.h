@@ -39,12 +39,12 @@
 
 
 #ifdef __cplusplus
-	extern "C" {
+    extern "C" {
 #endif
 
 typedef enum {
-	HAL_HRTIMER0,
-	HAL_HRTIMER1
+    HAL_HRTIMER0,
+    HAL_HRTIMER1
 }hal_htimer_id;
 
 /** This enum defines the return type of timer API. */

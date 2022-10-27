@@ -69,18 +69,18 @@ static int nor_get_gpt(char *buf, int len)
 
 typedef struct sbrom_toc1_head_info
 {
-    char name[16]	;	//user can modify
-    uint32_t  magic	;	//must equal TOC_U32_MAGIC
-    uint32_t  add_sum	;
+    char name[16]   ;   //user can modify
+    uint32_t  magic ;   //must equal TOC_U32_MAGIC
+    uint32_t  add_sum   ;
 
-    uint32_t  serial_num	;	//user can modify
-    uint32_t  status		;	//user can modify,such as TOC_MAIN_INFO_STATUS_ENCRYP_NOT_USED
+    uint32_t  serial_num    ;   //user can modify
+    uint32_t  status        ;   //user can modify,such as TOC_MAIN_INFO_STATUS_ENCRYP_NOT_USED
 
-    uint32_t  items_nr;	//total entry number
+    uint32_t  items_nr; //total entry number
     uint32_t  valid_len;
-    uint32_t  version_main;	//only one byte
+    uint32_t  version_main; //only one byte
     uint32_t  version_sub;   //two bytes
-    uint32_t  reserved[3];	//reserved for future
+    uint32_t  reserved[3];  //reserved for future
 
     uint32_t  end;
 }__attribute__((aligned(1))) sbrom_toc1_head_info_t;

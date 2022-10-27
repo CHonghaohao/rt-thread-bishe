@@ -22,12 +22,12 @@ void hal_dcache_invalidate_all(void);
 void hal_dcache_clean_all(void);
 #else
 #include <arch.h>
-#define hal_dcache_clean		cpu_dcache_clean
-#define hal_dcache_clean_invalidate	cpu_dcache_clean_invalidate
-#define hal_dcache_invalidate		cpu_dcache_invalidate
-#define hal_icache_invalidate_all	cpu_icache_invalidate_all
-#define hal_dcache_clean_all		cpu_dcache_clean_all
-#define hal_dcache_invalidate_all	cpu_dcache_invalidate_all
+#define hal_dcache_clean        cpu_dcache_clean
+#define hal_dcache_clean_invalidate cpu_dcache_clean_invalidate
+#define hal_dcache_invalidate       cpu_dcache_invalidate
+#define hal_icache_invalidate_all   cpu_icache_invalidate_all
+#define hal_dcache_clean_all        cpu_dcache_clean_all
+#define hal_dcache_invalidate_all   cpu_dcache_invalidate_all
 
 void cpu_dcache_clean(unsigned long vaddr_start, unsigned long size);
 void cpu_dcache_clean_invalidate(unsigned long vaddr_start, unsigned long size);

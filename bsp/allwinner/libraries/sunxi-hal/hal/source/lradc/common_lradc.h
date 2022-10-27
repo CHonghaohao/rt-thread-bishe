@@ -38,11 +38,11 @@ extern "C" {
 #endif
 
 /* lradc register offset */
-#define LRADC_CTRL_REG       (0x00) 	/* LRADC Control Register */
-#define LRADC_INTC_REG       (0x04) 	/* LRADC Interrupt Control Register */
-#define LRADC_INTS_REG       (0x08) 	/* LRADC Interrupt Status Register */
-#define LRADC_DATA0_REG      (0x0c) 	/* LRADC Data Register */
-#define LRADC_REV_REG        (0x0100) 	/* LRADC Revsion Register */
+#define LRADC_CTRL_REG       (0x00)     /* LRADC Control Register */
+#define LRADC_INTC_REG       (0x04)     /* LRADC Interrupt Control Register */
+#define LRADC_INTS_REG       (0x08)     /* LRADC Interrupt Status Register */
+#define LRADC_DATA0_REG      (0x0c)     /* LRADC Data Register */
+#define LRADC_REV_REG        (0x0100)   /* LRADC Revsion Register */
 
 /* ctrl register */
 #define FIRST_CONCERT_DLY        (0<<24)

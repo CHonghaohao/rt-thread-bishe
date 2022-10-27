@@ -38,20 +38,20 @@
 #include "pcm_route.h"
 
 typedef struct {
-	const char *pcm;
+    const char *pcm;
 #if 1
-	snd_pcm_format_t format;
-	int channels;
-	int rate;
+    snd_pcm_format_t format;
+    int channels;
+    int rate;
 #endif
 } snd_pcm_plug_slave_config_t;
 
 typedef struct {
-	const char *type;
-	snd_pcm_plug_slave_config_t slave;
-	const char *rate_converter;
-	const char *route_policy;
-	snd_pcm_route_ttable_config_t ttable[];
+    const char *type;
+    snd_pcm_plug_slave_config_t slave;
+    const char *rate_converter;
+    const char *route_policy;
+    snd_pcm_route_ttable_config_t ttable[];
 } snd_pcm_plug_config_t;
 
 #endif /* __AW_ALSA_LIB_PCM_PLUG_H */

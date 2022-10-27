@@ -108,7 +108,7 @@ typedef struct sunxi_twi
     twi_msg_t   *msgs;
 
     struct sunxi_dma_chan *dma_chan;
-    hal_sem_t	  dma_complete;
+    hal_sem_t     dma_complete;
 } hal_twi_t;
 
 typedef enum

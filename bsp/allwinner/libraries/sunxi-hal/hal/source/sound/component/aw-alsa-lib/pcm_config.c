@@ -34,70 +34,70 @@
 #include <aw-alsa-lib/pcm_config.h>
 
 int _snd_pcm_hw_open(snd_pcm_t **pcmp, const snd_pcm_config_t *pcm_config,
-		snd_pcm_stream_t stream, int mode);
+        snd_pcm_stream_t stream, int mode);
 int _snd_pcm_dsnoop_open(snd_pcm_t **pcmp, const snd_pcm_config_t *pcm_config,
-		snd_pcm_stream_t stream, int mode);
+        snd_pcm_stream_t stream, int mode);
 int _snd_pcm_dmix_open(snd_pcm_t **pcmp, const snd_pcm_config_t *pcm_config,
-		snd_pcm_stream_t stream, int mode);
+        snd_pcm_stream_t stream, int mode);
 int _snd_pcm_asym_open(snd_pcm_t **pcmp, const snd_pcm_config_t *pcm_config,
-		snd_pcm_stream_t stream, int mode);
+        snd_pcm_stream_t stream, int mode);
 int _snd_pcm_route_open(snd_pcm_t **pcmp, const snd_pcm_config_t *pcm_config,
-		snd_pcm_stream_t stream, int mode);
+        snd_pcm_stream_t stream, int mode);
 int _snd_pcm_softvol_open(snd_pcm_t **pcmp, const snd_pcm_config_t *pcm_config,
-		snd_pcm_stream_t stream, int mode);
+        snd_pcm_stream_t stream, int mode);
 int _snd_pcm_rate_open(snd_pcm_t **pcmp, const snd_pcm_config_t *pcm_config,
-		snd_pcm_stream_t stream, int mode);
+        snd_pcm_stream_t stream, int mode);
 int _snd_pcm_plug_open(snd_pcm_t **pcmp, const snd_pcm_config_t *pcm_config,
-		snd_pcm_stream_t stream, int mode);
+        snd_pcm_stream_t stream, int mode);
 int _snd_pcm_file_open(snd_pcm_t **pcmp, const snd_pcm_config_t *pcm_config,
-		snd_pcm_stream_t stream, int mode);
+        snd_pcm_stream_t stream, int mode);
 int _snd_pcm_multi_open(snd_pcm_t **pcmp, const snd_pcm_config_t *pcm_config,
-		snd_pcm_stream_t stream, int mode);
+        snd_pcm_stream_t stream, int mode);
 
 #ifdef CONFIG_AW_ALSA_PLUGINS_SONA_AUDIOAEF
 int _snd_pcm_sona_audioaef_open(snd_pcm_t **pcmp, const snd_pcm_config_t *pcm_config,
-		snd_pcm_stream_t stream, int mode);
+        snd_pcm_stream_t stream, int mode);
 #endif
 
 static _snd_pcm_open_func_t _snd_pcm_open_funcs[] = {
-	{ "hw", _snd_pcm_hw_open },
-	{ "dsnoop", _snd_pcm_dsnoop_open },
-	{ "dmix", _snd_pcm_dmix_open },
-	{ "asym", _snd_pcm_asym_open },
-	{ "softvol", _snd_pcm_softvol_open },
-	{ "route", _snd_pcm_route_open },
-	{ "rate", _snd_pcm_rate_open },
-	{ "plug", _snd_pcm_plug_open },
-	{ "file", _snd_pcm_file_open },
-	{ "multi", _snd_pcm_multi_open },
+    { "hw", _snd_pcm_hw_open },
+    { "dsnoop", _snd_pcm_dsnoop_open },
+    { "dmix", _snd_pcm_dmix_open },
+    { "asym", _snd_pcm_asym_open },
+    { "softvol", _snd_pcm_softvol_open },
+    { "route", _snd_pcm_route_open },
+    { "rate", _snd_pcm_rate_open },
+    { "plug", _snd_pcm_plug_open },
+    { "file", _snd_pcm_file_open },
+    { "multi", _snd_pcm_multi_open },
 #ifdef CONFIG_AW_ALSA_PLUGINS_SONA_AUDIOAEF
-	{ "sona_audioaef", _snd_pcm_sona_audioaef_open },
+    { "sona_audioaef", _snd_pcm_sona_audioaef_open },
 #endif
 };
 
 const snd_pcm_config_t *snd_pcm_config_get_config(const char *name)
 {
-	const snd_pcm_config_t *pcm_config = NULL;
-	size_t i;
-	for (i = 0; i < _snd_pcm_global_configs_size; ++i) {
-		if (0 == strcmp(name, _snd_pcm_global_configs[i].name)) {
-			pcm_config = &(_snd_pcm_global_configs[i]);
-			break;
-		}
-	}
-	return pcm_config;
+    const snd_pcm_config_t *pcm_config = NULL;
+    size_t i;
+    for (i = 0; i < _snd_pcm_global_configs_size; ++i) {
+        if (0 == strcmp(name, _snd_pcm_global_configs[i].name)) {
+            pcm_config = &(_snd_pcm_global_configs[i]);
+            break;
+        }
+    }
+    return pcm_config;
 }
 
 snd_pcm_open_func_t snd_pcm_config_get_open_func(const char *type)
 {
-	snd_pcm_open_func_t open_func = NULL;
-	size_t size = sizeof(_snd_pcm_open_funcs) / sizeof(_snd_pcm_open_funcs[0]);
-	size_t i;
-	for (i = 0; i < size; ++i) {
-		if (0 == strcmp(type, _snd_pcm_open_funcs[i].type)) {
-			open_func = _snd_pcm_open_funcs[i].func;
-			break;
-		}
-	}
-	return open_func;
+    snd_pcm_open_func_t open_func = NULL;
+    size_t size = sizeof(_snd_pcm_open_funcs) / sizeof(_snd_pcm_open_funcs[0]);
+    size_t i;
+    for (i = 0; i < size; ++i) {
+        if (0 == strcmp(type, _snd_pcm_open_funcs[i].type)) {
+            open_func = _snd_pcm_open_funcs[i].func;
+            break;
+        }
+    }
+    return open_func;
 }

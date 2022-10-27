@@ -2,22 +2,22 @@
 ********************************************************************************
 *                                USB Hid Driver
 *
-*                (c) Copyright 2006-2010, All winners Co,Ld. 
-*                        All Right Reserved 
+*                (c) Copyright 2006-2010, All winners Co,Ld.
+*                        All Right Reserved
 *
-* FileName		:  HidTransport.h
+* FileName      :  HidTransport.h
 *
-* Author		:  Javen
+* Author        :  Javen
 *
-* Date			:  2010/06/02
+* Date          :  2010/06/02
 *
-* Description	:  Hid ´«Êä
+* Description   :  Hid Â´Â«ÃŠÃ¤
 *
-* Others		:  NULL
+* Others        :  NULL
 *
 * History:
-*		<time> 			<author>	 <version >		<desc>
-*	   2010.06.02		Javen			1.0			build this file 
+*       <time>          <author>     <version >     <desc>
+*      2010.06.02       Javen           1.0         build this file
 *
 ********************************************************************************
 */

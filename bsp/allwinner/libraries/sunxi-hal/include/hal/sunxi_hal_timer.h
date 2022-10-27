@@ -38,7 +38,7 @@
 #include <timer/platform_timer.h>
 
 #ifdef __cplusplus
-	extern "C" {
+    extern "C" {
 #endif
 
 /** This enum defines the return type of timer API. */

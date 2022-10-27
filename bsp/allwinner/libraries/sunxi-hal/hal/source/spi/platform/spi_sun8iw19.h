@@ -7,12 +7,12 @@
 *
 * DISCLAIMER
 * THIRD PARTY LICENCES MAY BE REQUIRED TO IMPLEMENT THE SOLUTION/PRODUCT.
-* IF YOU NEED TO INTEGRATE THIRD PARTY¡¯S TECHNOLOGY (SONY, DTS, DOLBY, AVS OR MPEGLA, ETC.)
-* IN ALLWINNERS¡¯SDK OR PRODUCTS, YOU SHALL BE SOLELY RESPONSIBLE TO OBTAIN
+* IF YOU NEED TO INTEGRATE THIRD PARTYÂ¡Â¯S TECHNOLOGY (SONY, DTS, DOLBY, AVS OR MPEGLA, ETC.)
+* IN ALLWINNERSÂ¡Â¯SDK OR PRODUCTS, YOU SHALL BE SOLELY RESPONSIBLE TO OBTAIN
 * ALL APPROPRIATELY REQUIRED THIRD PARTY LICENCES.
 * ALLWINNER SHALL HAVE NO WARRANTY, INDEMNITY OR OTHER OBLIGATIONS WITH RESPECT TO MATTERS
 * COVERED UNDER ANY REQUIRED THIRD PARTY LICENSE.
-* YOU ARE SOLELY RESPONSIBLE FOR YOUR USAGE OF THIRD PARTY¡¯S TECHNOLOGY.
+* YOU ARE SOLELY RESPONSIBLE FOR YOUR USAGE OF THIRD PARTYÂ¡Â¯S TECHNOLOGY.
 *
 *
 * THIS SOFTWARE IS PROVIDED BY ALLWINNER"AS IS" AND TO THE MAXIMUM EXTENT
@@ -43,23 +43,23 @@
 #define SPI_MAX_NUM 3
 #define SPI0_PARAMS \
 {.reg_base = SUNXI_SPI0_PBASE, .irq_num = SUNXI_IRQ_SPI0, .gpio_num = 6, \
-	.gpio_clk = GPIO_PC0, .gpio_mosi = GPIO_PC2, .gpio_miso = GPIO_PC3, \
-	.gpio_cs0 = GPIO_PC1, .gpio_wp = GPIO_PC4, .gpio_hold = GPIO_PC5, \
-	.mux = 4, .driv_level = GPIO_DRIVING_LEVEL2}
+    .gpio_clk = GPIO_PC0, .gpio_mosi = GPIO_PC2, .gpio_miso = GPIO_PC3, \
+    .gpio_cs0 = GPIO_PC1, .gpio_wp = GPIO_PC4, .gpio_hold = GPIO_PC5, \
+    .mux = 4, .driv_level = GPIO_DRIVING_LEVEL2}
 #define SPI1_PARAMS \
 {.reg_base = SUNXI_SPI1_PBASE, .irq_num = SUNXI_IRQ_SPI1, .gpio_num = 4, \
-	.gpio_clk = GPIO_PH0, .gpio_mosi = GPIO_PH1, .gpio_miso = GPIO_PH2, \
-	.gpio_cs0 = GPIO_PH3, .gpio_wp = 0, .gpio_hold = 0, \
-	.mux = 4, .driv_level = GPIO_DRIVING_LEVEL2}
+    .gpio_clk = GPIO_PH0, .gpio_mosi = GPIO_PH1, .gpio_miso = GPIO_PH2, \
+    .gpio_cs0 = GPIO_PH3, .gpio_wp = 0, .gpio_hold = 0, \
+    .mux = 4, .driv_level = GPIO_DRIVING_LEVEL2}
 #define SPI2_PARAMS \
 {.reg_base = SUNXI_SPI2_PBASE, .irq_num = SUNXI_IRQ_SPI2, .gpio_num = 4, \
-	.gpio_clk = GPIO_PE18, .gpio_mosi = GPIO_PE19, .gpio_miso = GPIO_PE20, \
-	.gpio_cs0 = GPIO_PE21, .gpio_wp = 0, .gpio_hold = 0, \
-	.mux = 4, .driv_level = GPIO_DRIVING_LEVEL2}
+    .gpio_clk = GPIO_PE18, .gpio_mosi = GPIO_PE19, .gpio_miso = GPIO_PE20, \
+    .gpio_cs0 = GPIO_PE21, .gpio_wp = 0, .gpio_hold = 0, \
+    .mux = 4, .driv_level = GPIO_DRIVING_LEVEL2}
 
-#define SUNXI_CLK_SPI(x)	HAL_CLK_PERIPH_SPI##x
-#define SUNXI_CLK_BUS_SPI(x)	0
-#define SUNXI_CLK_RST_SPI(x)	0
+#define SUNXI_CLK_SPI(x)    HAL_CLK_PERIPH_SPI##x
+#define SUNXI_CLK_BUS_SPI(x)    0
+#define SUNXI_CLK_RST_SPI(x)    0
 #define SUNXI_CLK_PLL_SPI HAL_CLK_PLL_PERI0
 
 

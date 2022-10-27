@@ -2,7 +2,7 @@
 *********************************************************************************************************
 *                                                AR100 SYSTEM
 *                                     AR100 Software System Develop Kits
-*                                	  	  clock control unit module
+*                                         clock control unit module
 *
 *                                    (c) Copyright 2012-2016, Sunny China
 *                                             All Rights Reserved
@@ -13,7 +13,7 @@
 * Date    : 2012-5-7
 * Descript: clock control unit internal header.
 * Update  : date                auther      ver     notes
-*           2012-5-7 8:40:42	Sunny       1.0     Create this file.
+*           2012-5-7 8:40:42    Sunny       1.0     Create this file.
 *********************************************************************************************************
 */
 
@@ -24,9 +24,9 @@
 #include "ccu_regs.h"
 
 #define R_PRCM_REG_BASE SUNXI_R_PRCM_PBASE
-#define CCU_REG_BASE	SUNXI_CCU_REG_PBASE
+#define CCU_REG_BASE    SUNXI_CCU_REG_PBASE
 // prcm regs
-#define CCU_PLL_CTRL1 	(R_PRCM_REG_BASE + 0x244)
+#define CCU_PLL_CTRL1   (R_PRCM_REG_BASE + 0x244)
 
 // name by pll order
 #define CCU_PLLx_REG(n) (R_PRCM_REG_BASE + 0x1000 + (0x8 * (n - 1)))
@@ -108,15 +108,15 @@
 #define IO_NUM      (2)
 
 /* for sun50iw11 pll define */
-#define CCU_SYS_CLK_CPUX	CCU_SYS_CLK_PLL1
-#define CCU_SYS_CLK_PERI_1X	CCU_SYS_CLK_PLL2
-#define CCU_SYS_CLK_PERI_2X	CCU_SYS_CLK_PLL3
-#define CCU_SYS_CLK_PERI_800M	CCU_SYS_CLK_PLL4
+#define CCU_SYS_CLK_CPUX    CCU_SYS_CLK_PLL1
+#define CCU_SYS_CLK_PERI_1X CCU_SYS_CLK_PLL2
+#define CCU_SYS_CLK_PERI_2X CCU_SYS_CLK_PLL3
+#define CCU_SYS_CLK_PERI_800M   CCU_SYS_CLK_PLL4
 #define CCU_SYS_CLK_AUDIO0_DIV2 CCU_SYS_CLK_PLL5
 #define CCU_SYS_CLK_AUDIO0_DIV5 CCU_SYS_CLK_PLL6
-#define CCU_SYS_CLK_AUDIO1_4X	CCU_SYS_CLK_PLL7
-#define CCU_SYS_CLK_AUDIO1_2X	CCU_SYS_CLK_PLL8
-#define CCU_SYS_CLK_AUDIO1_1X	CCU_SYS_CLK_AUDIO1
+#define CCU_SYS_CLK_AUDIO1_4X   CCU_SYS_CLK_PLL7
+#define CCU_SYS_CLK_AUDIO1_2X   CCU_SYS_CLK_PLL8
+#define CCU_SYS_CLK_AUDIO1_1X   CCU_SYS_CLK_AUDIO1
 
 #define CCU_AHB1_AHB2_SEL_MASK  (3 << 24)
 #define CCU_AHB1_AHB2_M_MASK    (3 << 0)
@@ -166,7 +166,7 @@
 #define BM_ACG_MODE_EN            (1 << 0)
 
 
-#define CCU_R_APBSx_SEL_MASK	(0x7<<24)
+#define CCU_R_APBSx_SEL_MASK    (0x7<<24)
 #define CCU_R_APBSx_SEL_DCXO24M          (0x0<<24)
 #define CCU_R_APBSx_SEL_RTC32K           (0x1<<24)
 #define CCU_R_APBSx_SEL_RC16M            (0x2<<24)

@@ -51,31 +51,31 @@
 #define SUNXI_CLK_UART3 CLK_BUS_UART3
 #define SUNXI_RST_UART3 RST_BUS_UART3
 
-#define SUNXI_IRQ_UART0		(RINTC_IRQ_MASK | 1)
-#define SUNXI_IRQ_UART1		(RINTC_IRQ_MASK | 2)
-#define SUNXI_IRQ_UART2		(RINTC_IRQ_MASK | 3)
-#define SUNXI_IRQ_UART3		(RINTC_IRQ_MASK | 4)
+#define SUNXI_IRQ_UART0     (RINTC_IRQ_MASK | 1)
+#define SUNXI_IRQ_UART1     (RINTC_IRQ_MASK | 2)
+#define SUNXI_IRQ_UART2     (RINTC_IRQ_MASK | 3)
+#define SUNXI_IRQ_UART3     (RINTC_IRQ_MASK | 4)
 
-#define SUNXI_UART0_BASE	(0x02500000)
-#define SUNXI_UART1_BASE	(0x02500400)
-#define SUNXI_UART2_BASE	(0x02500800)
-#define SUNXI_UART3_BASE	(0x02500C00)
+#define SUNXI_UART0_BASE    (0x02500000)
+#define SUNXI_UART1_BASE    (0x02500400)
+#define SUNXI_UART2_BASE    (0x02500800)
+#define SUNXI_UART3_BASE    (0x02500C00)
 
-#define UART_FIFO_SIZE		(64)
+#define UART_FIFO_SIZE      (64)
 
-#define UART0_GPIO_FUNCTION	(3)
-#define UART1_GPIO_FUNCTION	(7)
-#define UART2_GPIO_FUNCTION	(2)
-#define UART3_GPIO_FUNCTION	(5)
+#define UART0_GPIO_FUNCTION (3)
+#define UART1_GPIO_FUNCTION (7)
+#define UART2_GPIO_FUNCTION (2)
+#define UART3_GPIO_FUNCTION (5)
 
-#define UART0_TX		GPIOF(2)
-#define UART0_RX		GPIOF(4)
-#define UART1_TX		GPIOB(8)
-#define UART1_RX		GPIOB(9)
-#define UART2_TX		GPIOC(8)
-#define UART2_RX		GPIOC(9)
-#define UART3_TX		GPIOD(10)
-#define UART3_RX		GPIOD(11)
+#define UART0_TX        GPIOF(2)
+#define UART0_RX        GPIOF(4)
+#define UART1_TX        GPIOB(8)
+#define UART1_RX        GPIOB(9)
+#define UART2_TX        GPIOC(8)
+#define UART2_RX        GPIOC(9)
+#define UART3_TX        GPIOD(10)
+#define UART3_RX        GPIOD(11)
 
 #else
 
@@ -91,42 +91,42 @@
 #define SUNXI_CLK_UART3 CLK_BUS_UART3;
 #define SUNXI_RST_UART3 RST_BUS_UART3;
 
-#define SUNXI_IRQ_UART0		(18)
-#define SUNXI_IRQ_UART1		(19)
-#define SUNXI_IRQ_UART2		(20)
-#define SUNXI_IRQ_UART3		(21)
-#define SUNXI_IRQ_UART4		(22)
-#define SUNXI_IRQ_UART5		(23)
+#define SUNXI_IRQ_UART0     (18)
+#define SUNXI_IRQ_UART1     (19)
+#define SUNXI_IRQ_UART2     (20)
+#define SUNXI_IRQ_UART3     (21)
+#define SUNXI_IRQ_UART4     (22)
+#define SUNXI_IRQ_UART5     (23)
 
 
-#define SUNXI_UART0_BASE	(0x02500000)
-#define SUNXI_UART1_BASE	(0x02500400)
-#define SUNXI_UART2_BASE	(0x02500800)
-#define SUNXI_UART3_BASE	(0x02500c00)
-#define SUNXI_UART4_BASE	(0x02501000)
-#define SUNXI_UART5_BASE	(0x02501400)
+#define SUNXI_UART0_BASE    (0x02500000)
+#define SUNXI_UART1_BASE    (0x02500400)
+#define SUNXI_UART2_BASE    (0x02500800)
+#define SUNXI_UART3_BASE    (0x02500c00)
+#define SUNXI_UART4_BASE    (0x02501000)
+#define SUNXI_UART5_BASE    (0x02501400)
 
 //TODO:UART1~5 FIFO:256
-#define UART_FIFO_SIZE		(64)
+#define UART_FIFO_SIZE      (64)
 
-#define UART0_GPIO_FUNCTION	(6)
-#define UART1_GPIO_FUNCTION	(6)
-#define UART2_GPIO_FUNCTION	(6)
-#define UART3_GPIO_FUNCTION	(6)
+#define UART0_GPIO_FUNCTION (6)
+#define UART1_GPIO_FUNCTION (6)
+#define UART2_GPIO_FUNCTION (6)
+#define UART3_GPIO_FUNCTION (6)
 
 #ifdef BOARD_allwinnerd1
-#define UART0_TX		GPIOB(8)
-#define UART0_RX		GPIOB(9)
+#define UART0_TX        GPIOB(8)
+#define UART0_RX        GPIOB(9)
 #elif defined(BOARD_allwinnerf133)
-#define UART0_TX		GPIOE(2)
-#define UART0_RX		GPIOE(3)
+#define UART0_TX        GPIOE(2)
+#define UART0_RX        GPIOE(3)
 #endif
-#define UART1_TX		GPIOB(10)
-#define UART1_RX		GPIOB(11)
-#define UART2_TX		GPIOL(8)
-#define UART2_RX		GPIOL(9)
-#define UART3_TX		GPIOL(8)
-#define UART3_RX		GPIOL(9)
+#define UART1_TX        GPIOB(10)
+#define UART1_RX        GPIOB(11)
+#define UART2_TX        GPIOL(8)
+#define UART2_RX        GPIOL(9)
+#define UART3_TX        GPIOL(8)
+#define UART3_RX        GPIOL(9)
 
 #endif /* CONFIG_CORE_DSP0 */
 

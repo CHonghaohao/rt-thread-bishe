@@ -38,9 +38,9 @@
 #include <sys/types.h>
 
 typedef struct {
-	const char *type;
-	const char *playback_pcm;
-	const char *capture_pcm;
+    const char *type;
+    const char *playback_pcm;
+    const char *capture_pcm;
 } snd_pcm_asym_config_t;
 
 #endif /* __AW_ALSA_PCM_ASYM_H */

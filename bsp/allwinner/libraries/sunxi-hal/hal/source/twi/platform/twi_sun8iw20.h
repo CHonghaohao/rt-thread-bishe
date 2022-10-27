@@ -66,8 +66,8 @@
 #define TWI_PULL_STATE 1
 #define TWI_DRIVE_STATE 0
 
-#define SUNXI_CLK_TWI(x)	CLK_BUS_I2C##x
-#define SUNXI_CLK_RST_TWI(x)	RST_BUS_I2C##x
+#define SUNXI_CLK_TWI(x)    CLK_BUS_I2C##x
+#define SUNXI_CLK_RST_TWI(x)    RST_BUS_I2C##x
 /*
 #if (defined(CONFIG_ARCH_SUN8IW20) || defined(CONFIG_SOC_SUN20IW1))
 #define S_TWI0_SCK GPIOI(0)

@@ -47,7 +47,7 @@ extern "C" {
 #define HAL_DBG_TIMER   0
 #define HAL_DBG_WDG     0
 #define HAL_DBG_MBOX    0
-#define HAL_DBG_I2C   	0
+#define HAL_DBG_I2C     0
 
 #define HAL_ABORT()     sys_abort()
 
@@ -110,12 +110,12 @@ extern "C" {
 
 #define HAL_IT_WRN(fmt, arg...) HAL_IT_LOG(HAL_WRN_ON, "[HAL WRN] "fmt, ##arg)
 
-#define HAL_IT_ERR(fmt, arg...)                         	\
-    do {                                                	\
-        HAL_IT_LOG(HAL_ERR_ON, "[HAL ERR] %s():%d, "fmt,	\
-            __s_func, __LINE__, ##arg);                 	\
-        if (HAL_ABORT_ON)                               	\
-            HAL_ABORT();                                	\
+#define HAL_IT_ERR(fmt, arg...)                             \
+    do {                                                    \
+        HAL_IT_LOG(HAL_ERR_ON, "[HAL ERR] %s():%d, "fmt,    \
+            __s_func, __LINE__, ##arg);                     \
+        if (HAL_ABORT_ON)                                   \
+            HAL_ABORT();                                    \
     } while (0)
 
 #else /* __CONFIG_XIP_SECTION_FUNC_LEVEL */
@@ -123,7 +123,7 @@ extern "C" {
 #define __s_func        __func__
 #define HAL_IT_DBG      HAL_DBG
 #define HAL_IT_I2C_DBG  HAL_I2C_DBG
-#define HAL_IT_MBOX_DBG	HAL_MBOX_DBG
+#define HAL_IT_MBOX_DBG HAL_MBOX_DBG
 #define HAL_IT_WRN      HAL_WRN
 #define HAL_IT_ERR      HAL_ERR
 

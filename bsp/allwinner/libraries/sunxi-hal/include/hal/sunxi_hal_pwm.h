@@ -66,9 +66,9 @@ extern "C" {
 #define SETMASK(width, shift)   ((width?((-1U) >> (32-width)):0)  << (shift))
 #define CLRMASK(width, shift)   (~(SETMASK(width, shift)))
 #define GET_BITS(shift, width, reg)     \
-	(((reg) & SETMASK(width, shift)) >> (shift))
+    (((reg) & SETMASK(width, shift)) >> (shift))
 #define SET_BITS(shift, width, reg, val) \
-	(((reg) & CLRMASK(width, shift)) | (val << (shift)))
+    (((reg) & CLRMASK(width, shift)) | (val << (shift)))
 
 /* define shift and width */
 #define PWM_CLK_SRC_SHIFT 0x7

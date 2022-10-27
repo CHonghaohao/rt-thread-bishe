@@ -14,11 +14,11 @@
 * Date          : 2010.7.12
 *
 * Description   :
-*     USB Mass Storage Class´«ÊäÈÝ´í¸¨Öú´¦Àí²¿·Ö¡£
+*     USB Mass Storage Classä¼ è¾“å®¹é”™è¾…åŠ©å¤„ç†éƒ¨åˆ†ã€‚
 *
-*     Õâ²¿·ÖÖ÷ÒªÊÇÎªÁË½â¾öUSB¹âÇýÖÐ¹âÅÌÍ»È»µ¯³öÊ±£¬USBÈÝ´íÊ±¼ä¹ý³¤¡£ÆäÔ­ÒòÊÇLunÖÐmediaÒÑ¾­²»´æÔÚ£¬µ«ÊÇlun±¾Éí»¹ÔÚ£¬
-* Ëä²»¿É¶Á/Ð´Êý¾Ý£¬µ«ÊÇ¿ÉÒÔ²Ù×÷Lun¡£Òò´ËÏÖÔÚÔö¼ÓÁËÔÚ¶ÁÐ´²Ù×÷³¬Ê±ºó£¬ÏÈÈ¥test_unit_ready£¬ÅÐ¶ÏLunµÄ×´Ì¬ºó£¬
-* ÔÙ¾ö¶¨ÏÂÒ»²½µÄ²Ù×÷¡£
+*     è¿™éƒ¨åˆ†ä¸»è¦æ˜¯ä¸ºäº†è§£å†³USBå…‰é©±ä¸­å…‰ç›˜çªç„¶å¼¹å‡ºæ—¶ï¼ŒUSBå®¹é”™æ—¶é—´è¿‡é•¿ã€‚å…¶åŽŸå› æ˜¯Lunä¸­mediaå·²ç»ä¸å­˜åœ¨ï¼Œä½†æ˜¯lunæœ¬èº«è¿˜åœ¨ï¼Œ
+* è™½ä¸å¯è¯»/å†™æ•°æ®ï¼Œä½†æ˜¯å¯ä»¥æ“ä½œLunã€‚å› æ­¤çŽ°åœ¨å¢žåŠ äº†åœ¨è¯»å†™æ“ä½œè¶…æ—¶åŽï¼Œå…ˆåŽ»test_unit_readyï¼Œåˆ¤æ–­Lunçš„çŠ¶æ€åŽï¼Œ
+* å†å†³å®šä¸‹ä¸€æ­¥çš„æ“ä½œã€‚
 *
 * History       :
 *

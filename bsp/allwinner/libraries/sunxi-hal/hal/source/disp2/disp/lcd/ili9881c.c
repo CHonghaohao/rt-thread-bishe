@@ -12,7 +12,7 @@
 #include "panels.h"
 
 extern s32 bsp_disp_get_panel_info(u32 screen_id,
-		struct disp_panel_para *info);
+        struct disp_panel_para *info);
 static void LCD_power_on(u32 sel);
 static void LCD_power_off(u32 sel);
 static void LCD_bl_open(u32 sel);
@@ -26,171 +26,171 @@ static void LCD_panel_exit(u32 sel);
 
 static void LCD_cfg_panel_info(struct panel_extend_para *info)
 {
-	u32 i = 0, j = 0;
-	u32 items;
-	u8 lcd_gamma_tbl[][2] = {
-		/*{input value, corrected value} */
-		{0, 0}, {15, 15}, {30, 30}, {45, 45}, {60, 60},
-		{75, 75}, {90, 90}, {105, 105}, {120, 120}, {135, 135},
-		{150, 150}, {165, 165}, {180, 180}, {195, 195}, {210, 210},
-		{225, 225}, {240, 240}, {255, 255},
-	};
+    u32 i = 0, j = 0;
+    u32 items;
+    u8 lcd_gamma_tbl[][2] = {
+        /*{input value, corrected value} */
+        {0, 0}, {15, 15}, {30, 30}, {45, 45}, {60, 60},
+        {75, 75}, {90, 90}, {105, 105}, {120, 120}, {135, 135},
+        {150, 150}, {165, 165}, {180, 180}, {195, 195}, {210, 210},
+        {225, 225}, {240, 240}, {255, 255},
+    };
 
-	u32 lcd_cmap_tbl[2][3][4] = {
-	{
-		{LCD_CMAP_G0, LCD_CMAP_B1, LCD_CMAP_G2, LCD_CMAP_B3},
-		{LCD_CMAP_B0, LCD_CMAP_R1, LCD_CMAP_B2, LCD_CMAP_R3},
-		{LCD_CMAP_R0, LCD_CMAP_G1, LCD_CMAP_R2, LCD_CMAP_G3},
-	},
-	{
-		{LCD_CMAP_B3, LCD_CMAP_G2, LCD_CMAP_B1, LCD_CMAP_G0},
-		{LCD_CMAP_R3, LCD_CMAP_B2, LCD_CMAP_R1, LCD_CMAP_B0},
-		{LCD_CMAP_G3, LCD_CMAP_R2, LCD_CMAP_G1, LCD_CMAP_R0},
-	    },
-	};
+    u32 lcd_cmap_tbl[2][3][4] = {
+    {
+        {LCD_CMAP_G0, LCD_CMAP_B1, LCD_CMAP_G2, LCD_CMAP_B3},
+        {LCD_CMAP_B0, LCD_CMAP_R1, LCD_CMAP_B2, LCD_CMAP_R3},
+        {LCD_CMAP_R0, LCD_CMAP_G1, LCD_CMAP_R2, LCD_CMAP_G3},
+    },
+    {
+        {LCD_CMAP_B3, LCD_CMAP_G2, LCD_CMAP_B1, LCD_CMAP_G0},
+        {LCD_CMAP_R3, LCD_CMAP_B2, LCD_CMAP_R1, LCD_CMAP_B0},
+        {LCD_CMAP_G3, LCD_CMAP_R2, LCD_CMAP_G1, LCD_CMAP_R0},
+        },
+    };
 
-	items = sizeof(lcd_gamma_tbl) / 2;
-	for (i = 0; i < items - 1; i++) {
-		u32 num = lcd_gamma_tbl[i + 1][0] - lcd_gamma_tbl[i][0];
+    items = sizeof(lcd_gamma_tbl) / 2;
+    for (i = 0; i < items - 1; i++) {
+        u32 num = lcd_gamma_tbl[i + 1][0] - lcd_gamma_tbl[i][0];
 
-		for (j = 0; j < num; j++) {
-			u32 value = 0;
+        for (j = 0; j < num; j++) {
+            u32 value = 0;
 
-			value =
-			lcd_gamma_tbl[i][1] +
-			((lcd_gamma_tbl[i + 1][1] - lcd_gamma_tbl[i][1]) *
-			j) /
-				num;
-			info->lcd_gamma_tbl[lcd_gamma_tbl[i][0] + j] =
-			(value << 16) + (value << 8) + value;
-		}
-	}
-	info->lcd_gamma_tbl[255] = (lcd_gamma_tbl[items - 1][1] << 16) +
-				(lcd_gamma_tbl[items - 1][1] << 8) +
-				lcd_gamma_tbl[items - 1][1];
+            value =
+            lcd_gamma_tbl[i][1] +
+            ((lcd_gamma_tbl[i + 1][1] - lcd_gamma_tbl[i][1]) *
+            j) /
+                num;
+            info->lcd_gamma_tbl[lcd_gamma_tbl[i][0] + j] =
+            (value << 16) + (value << 8) + value;
+        }
+    }
+    info->lcd_gamma_tbl[255] = (lcd_gamma_tbl[items - 1][1] << 16) +
+                (lcd_gamma_tbl[items - 1][1] << 8) +
+                lcd_gamma_tbl[items - 1][1];
 
-	memcpy(info->lcd_cmap_tbl, lcd_cmap_tbl, sizeof(lcd_cmap_tbl));
+    memcpy(info->lcd_cmap_tbl, lcd_cmap_tbl, sizeof(lcd_cmap_tbl));
 }
 
 static s32 LCD_open_flow(u32 sel)
 {
-	LCD_OPEN_FUNC(sel, LCD_power_on,
-		100); /* open lcd power, and delay 50ms */
-	LCD_OPEN_FUNC(sel, LCD_panel_init,
-		200); /* open lcd power, than delay 200ms */
-	LCD_OPEN_FUNC(sel, sunxi_lcd_tcon_enable,
-		50); /* open lcd controller, and delay 100ms */
-	LCD_OPEN_FUNC(sel, LCD_bl_open,
-		0); /* open lcd backlight, and delay 0ms */
+    LCD_OPEN_FUNC(sel, LCD_power_on,
+        100); /* open lcd power, and delay 50ms */
+    LCD_OPEN_FUNC(sel, LCD_panel_init,
+        200); /* open lcd power, than delay 200ms */
+    LCD_OPEN_FUNC(sel, sunxi_lcd_tcon_enable,
+        50); /* open lcd controller, and delay 100ms */
+    LCD_OPEN_FUNC(sel, LCD_bl_open,
+        0); /* open lcd backlight, and delay 0ms */
 
-	return 0;
+    return 0;
 }
 
 static s32 LCD_close_flow(u32 sel)
 {
-	LCD_CLOSE_FUNC(sel, LCD_bl_close,
-		200); /* close lcd backlight, and delay 0ms */
-	LCD_CLOSE_FUNC(sel, sunxi_lcd_tcon_disable,
-		20); /* close lcd controller, and delay 0ms */
-	LCD_CLOSE_FUNC(sel, LCD_panel_exit,
-		10); /* open lcd power, than delay 200ms */
-	LCD_CLOSE_FUNC(sel, LCD_power_off,
-		500); /* close lcd power, and delay 500ms */
+    LCD_CLOSE_FUNC(sel, LCD_bl_close,
+        200); /* close lcd backlight, and delay 0ms */
+    LCD_CLOSE_FUNC(sel, sunxi_lcd_tcon_disable,
+        20); /* close lcd controller, and delay 0ms */
+    LCD_CLOSE_FUNC(sel, LCD_panel_exit,
+        10); /* open lcd power, than delay 200ms */
+    LCD_CLOSE_FUNC(sel, LCD_power_off,
+        500); /* close lcd power, and delay 500ms */
 
-	return 0;
+    return 0;
 }
 
 static void LCD_power_on(u32 sel)
 {
-	sunxi_lcd_pin_cfg(sel, 1);
-	sunxi_lcd_power_enable(sel, 0);
-	sunxi_lcd_delay_ms(5);
-	sunxi_lcd_power_enable(sel, 1);
-	sunxi_lcd_delay_ms(5);
-	sunxi_lcd_power_enable(sel, 2);
-	sunxi_lcd_delay_ms(5);
-	power_en(sel, 1);
-	sunxi_lcd_delay_ms(20);
-	panel_reset(sel, 0);
-	sunxi_lcd_delay_ms(10);
-	panel_reset(sel, 1);
+    sunxi_lcd_pin_cfg(sel, 1);
+    sunxi_lcd_power_enable(sel, 0);
+    sunxi_lcd_delay_ms(5);
+    sunxi_lcd_power_enable(sel, 1);
+    sunxi_lcd_delay_ms(5);
+    sunxi_lcd_power_enable(sel, 2);
+    sunxi_lcd_delay_ms(5);
+    power_en(sel, 1);
+    sunxi_lcd_delay_ms(20);
+    panel_reset(sel, 0);
+    sunxi_lcd_delay_ms(10);
+    panel_reset(sel, 1);
 }
 
 static void LCD_power_off(u32 sel)
 {
-	sunxi_lcd_pin_cfg(sel, 0);
-	power_en(sel, 0);
-	sunxi_lcd_delay_ms(20);
-	panel_reset(sel, 0);
-	sunxi_lcd_delay_ms(5);
-	sunxi_lcd_power_disable(
-	sel, 2); /* lcd power2 */
-	sunxi_lcd_delay_ms(5);
-	sunxi_lcd_power_disable(
-	sel, 1); /* lcd power1 */
-	sunxi_lcd_delay_ms(5);
-	sunxi_lcd_power_disable(
-	sel, 0); /* lcd power */
+    sunxi_lcd_pin_cfg(sel, 0);
+    power_en(sel, 0);
+    sunxi_lcd_delay_ms(20);
+    panel_reset(sel, 0);
+    sunxi_lcd_delay_ms(5);
+    sunxi_lcd_power_disable(
+    sel, 2); /* lcd power2 */
+    sunxi_lcd_delay_ms(5);
+    sunxi_lcd_power_disable(
+    sel, 1); /* lcd power1 */
+    sunxi_lcd_delay_ms(5);
+    sunxi_lcd_power_disable(
+    sel, 0); /* lcd power */
 }
 
 static void LCD_bl_open(u32 sel)
 {
-	sunxi_lcd_pwm_enable(sel);
-	sunxi_lcd_delay_ms(50);
-	sunxi_lcd_backlight_enable(sel);
+    sunxi_lcd_pwm_enable(sel);
+    sunxi_lcd_delay_ms(50);
+    sunxi_lcd_backlight_enable(sel);
 }
 
 static void LCD_bl_close(u32 sel)
 {
-	sunxi_lcd_backlight_disable(sel);
-	sunxi_lcd_delay_ms(20);
-	sunxi_lcd_pwm_disable(sel);
+    sunxi_lcd_backlight_disable(sel);
+    sunxi_lcd_delay_ms(20);
+    sunxi_lcd_pwm_disable(sel);
 }
 
 #define REGFLAG_DELAY 0XFE
 #define REGFLAG_END_OF_TABLE 0xFF
 
 struct LCM_setting_table {
-	u8 cmd;
-	u32 count;
-	u8 para_list[64];
+    u8 cmd;
+    u32 count;
+    u8 para_list[64];
 };
 
 enum ili9881c_op {
-	ILI9881C_SWITCH_PAGE,
-	ILI9881C_COMMAND,
+    ILI9881C_SWITCH_PAGE,
+    ILI9881C_COMMAND,
 };
 
 struct ili9881c_instr {
-	enum ili9881c_op op;
+    enum ili9881c_op op;
 
-	union arg {
-		struct cmd {
-			u8	cmd;
-			u8	data;
-		} cmd;
-		u8	page;
-	} arg;
+    union arg {
+        struct cmd {
+            u8  cmd;
+            u8  data;
+        } cmd;
+        u8  page;
+    } arg;
 };
 
-#define ILI9881C_SWITCH_PAGE_INSTR(_page)	\
-	{					\
-		.op = ILI9881C_SWITCH_PAGE,	\
-		.arg = {			\
-			.page = (_page),	\
-		},				\
-	}
+#define ILI9881C_SWITCH_PAGE_INSTR(_page)   \
+    {                   \
+        .op = ILI9881C_SWITCH_PAGE, \
+        .arg = {            \
+            .page = (_page),    \
+        },              \
+    }
 
-#define ILI9881C_COMMAND_INSTR(_cmd, _data)		\
-	{						\
-		.op = ILI9881C_COMMAND,		\
-		.arg = {				\
-			.cmd = {			\
-				.cmd = (_cmd),		\
-				.data = (_data),	\
-			},				\
-		},					\
-	}
+#define ILI9881C_COMMAND_INSTR(_cmd, _data)     \
+    {                       \
+        .op = ILI9881C_COMMAND,     \
+        .arg = {                \
+            .cmd = {            \
+                .cmd = (_cmd),      \
+                .data = (_data),    \
+            },              \
+        },                  \
+    }
 
 static struct ili9881c_instr ili9881c_init[] = {
 ILI9881C_SWITCH_PAGE_INSTR(3),
@@ -1170,115 +1170,115 @@ ILI9881C_COMMAND_INSTR(0x07, 0x01),
 static int ili9881c_switch_page(u32 sel, u8 page)
 {
 #if defined(SUPPORT_DSI)
-	u8 buf[3] = { 0x98, 0x81, page };
-	int ret;
+    u8 buf[3] = { 0x98, 0x81, page };
+    int ret;
 
-	ret = dsi_dcs_wr(sel, 0xff, buf, 3);
-	if (ret < 0)
-		return ret;
+    ret = dsi_dcs_wr(sel, 0xff, buf, 3);
+    if (ret < 0)
+        return ret;
 #endif
-	return 0;
+    return 0;
 }
 
 static int ili9881c_send_cmd_data(u32 sel, u8 cmd, u8 data)
 {
 #if defined(SUPPORT_DSI)
-	u8 buf[1] = { data };
-	int ret;
+    u8 buf[1] = { data };
+    int ret;
 
-	ret = dsi_dcs_wr(sel, cmd, buf, 1);
-	if (ret < 0)
-		return ret;
+    ret = dsi_dcs_wr(sel, cmd, buf, 1);
+    if (ret < 0)
+        return ret;
 #endif
-	return 0;
+    return 0;
 }
 
 /*add panel initialization code*/
 static struct LCM_setting_table LCM_ILI9881C_setting[] = {
-	/*sleep exit*/
-	{0x11, 0, {0x00 } },
-	{REGFLAG_DELAY, REGFLAG_DELAY, {120} },
-	/*display on*/
-	{0x29, 0, {0x00 } },
-	{REGFLAG_DELAY, REGFLAG_DELAY, {10} },
-	{REGFLAG_END_OF_TABLE, REGFLAG_END_OF_TABLE, {} }
+    /*sleep exit*/
+    {0x11, 0, {0x00 } },
+    {REGFLAG_DELAY, REGFLAG_DELAY, {120} },
+    /*display on*/
+    {0x29, 0, {0x00 } },
+    {REGFLAG_DELAY, REGFLAG_DELAY, {10} },
+    {REGFLAG_END_OF_TABLE, REGFLAG_END_OF_TABLE, {} }
 };
 
 static void LCD_panel_init(u32 sel)
 {
-	__u32 i;
+    __u32 i;
 
-	int ret;
-	char model_name[25];
+    int ret;
+    char model_name[25];
 
-	disp_sys_script_get_item("lcd0", "lcd_model_name",
-		(int *)model_name, 25);
-	sunxi_lcd_dsi_clk_enable(sel);
-	sunxi_lcd_delay_ms(20);
+    disp_sys_script_get_item("lcd0", "lcd_model_name",
+        (int *)model_name, 25);
+    sunxi_lcd_dsi_clk_enable(sel);
+    sunxi_lcd_delay_ms(20);
 
-	for (i = 0; i < ARRAY_SIZE(ili9881c_init); i++) {
-		struct ili9881c_instr *instr = &ili9881c_init[i];
+    for (i = 0; i < ARRAY_SIZE(ili9881c_init); i++) {
+        struct ili9881c_instr *instr = &ili9881c_init[i];
 
-		if (instr->op == ILI9881C_SWITCH_PAGE)
-			ret = ili9881c_switch_page(sel, instr->arg.page);
-		else if (instr->op == ILI9881C_COMMAND)
-			ret = ili9881c_send_cmd_data(sel, instr->arg.cmd.cmd,
-					instr->arg.cmd.data);
+        if (instr->op == ILI9881C_SWITCH_PAGE)
+            ret = ili9881c_switch_page(sel, instr->arg.page);
+        else if (instr->op == ILI9881C_COMMAND)
+            ret = ili9881c_send_cmd_data(sel, instr->arg.cmd.cmd,
+                    instr->arg.cmd.data);
 
-		if (ret)
-			return ;
-	}
+        if (ret)
+            return ;
+    }
 
-	ret = ili9881c_switch_page(sel, 0);
-	if (ret)
-		return ;
+    ret = ili9881c_switch_page(sel, 0);
+    if (ret)
+        return ;
 
-	for (i = 0;; i++) {
-		if (LCM_ILI9881C_setting[i].count == REGFLAG_END_OF_TABLE)
-			break;
-		else if (LCM_ILI9881C_setting[i].count == REGFLAG_DELAY)
-			sunxi_lcd_delay_ms(
-			LCM_ILI9881C_setting[i].para_list[0]);
+    for (i = 0;; i++) {
+        if (LCM_ILI9881C_setting[i].count == REGFLAG_END_OF_TABLE)
+            break;
+        else if (LCM_ILI9881C_setting[i].count == REGFLAG_DELAY)
+            sunxi_lcd_delay_ms(
+            LCM_ILI9881C_setting[i].para_list[0]);
 #if defined(SUPPORT_DSI)
-		else
-			dsi_dcs_wr(sel, LCM_ILI9881C_setting[i].cmd,
-				LCM_ILI9881C_setting[i].para_list,
-				LCM_ILI9881C_setting[i].count);
+        else
+            dsi_dcs_wr(sel, LCM_ILI9881C_setting[i].cmd,
+                LCM_ILI9881C_setting[i].para_list,
+                LCM_ILI9881C_setting[i].count);
 #endif
-	}
+    }
 }
 
 static void LCD_panel_exit(u32 sel)
 {
-	sunxi_lcd_dsi_dcs_write_0para(sel, DSI_DCS_SET_DISPLAY_OFF);
-	sunxi_lcd_delay_ms(20);
-	sunxi_lcd_dsi_dcs_write_0para(sel, DSI_DCS_ENTER_SLEEP_MODE);
-	sunxi_lcd_delay_ms(80);
+    sunxi_lcd_dsi_dcs_write_0para(sel, DSI_DCS_SET_DISPLAY_OFF);
+    sunxi_lcd_delay_ms(20);
+    sunxi_lcd_dsi_dcs_write_0para(sel, DSI_DCS_ENTER_SLEEP_MODE);
+    sunxi_lcd_delay_ms(80);
 }
 
 /* sel: 0:lcd0; 1:lcd1 */
 static s32 LCD_user_defined_func(u32 sel, u32 para1, u32 para2, u32 para3)
 {
-	return 0;
+    return 0;
 }
 
 /* sel: 0:lcd0; 1:lcd1 */
 /*static s32 LCD_set_bright(u32 sel, u32 bright)*/
 /*{*/
-	/*sunxi_lcd_dsi_dcs_write_1para(sel,0x51,bright);*/
-	/*return 0;*/
+    /*sunxi_lcd_dsi_dcs_write_1para(sel,0x51,bright);*/
+    /*return 0;*/
 /*}*/
 
 struct __lcd_panel ili9881c_dsi_panel = {
-	/* panel driver name, must mach the name of
-	 * lcd_drv_name in sys_config.fex
-	*/
-	.name = "ili9881c_dsi_panel",
-	.func = {
-	.cfg_panel_info = LCD_cfg_panel_info,
-	.cfg_open_flow = LCD_open_flow,
-	.cfg_close_flow = LCD_close_flow,
-	.lcd_user_defined_func = LCD_user_defined_func,
-	/*.set_bright = LCD_set_bright, */
-	},
+    /* panel driver name, must mach the name of
+     * lcd_drv_name in sys_config.fex
+    */
+    .name = "ili9881c_dsi_panel",
+    .func = {
+    .cfg_panel_info = LCD_cfg_panel_info,
+    .cfg_open_flow = LCD_open_flow,
+    .cfg_close_flow = LCD_close_flow,
+    .lcd_user_defined_func = LCD_user_defined_func,
+    /*.set_bright = LCD_set_bright, */
+    },
 };

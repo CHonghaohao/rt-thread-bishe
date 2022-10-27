@@ -155,10 +155,10 @@ typedef enum
 /** @brief SPI master transaction bit order definition */
 typedef enum
 {
-    HAL_SPI_MASTER_LSB_FIRST =
-        0, /**< Both send and receive data transfer LSB first */
     HAL_SPI_MASTER_MSB_FIRST =
-        1 /**< Both send and receive data transfer MSB first */
+        0, /**< Both send and receive data transfer MSB first */
+    HAL_SPI_MASTER_LSB_FIRST =
+        1 /**< Both send and receive data transfer LSB first */
 } hal_spi_master_bit_order_t;
 
 /** @brief SPI master status. */
@@ -185,6 +185,12 @@ typedef enum
     HAL_SPI_MASTER_IDLE = 1  /**< SPI master is idle. */
 } hal_spi_master_running_status_t;
 
+typedef enum
+{
+    HAL_SPI_MASTER_CS_AUTO = 0,
+    HAL_SPI_MASTER_CS_SOFT = 1,
+} hal_spi_master_cs_mode_t;
+
 typedef struct
 {
     uint32_t clock_frequency; /**< SPI master clock frequency setting. */
@@ -200,6 +206,7 @@ typedef struct
     cpha; /**< SPI master clock phase setting. 0: Phase 0(Leading edge
             for sample data)  1: Phase 1(Leading edge for setup data)
             */
+    hal_spi_master_cs_mode_t csmode;
 } hal_spi_master_config_t;
 
 typedef enum
@@ -214,5 +221,6 @@ spi_master_status_t hal_spi_deinit(hal_spi_master_port_t port);
 spi_master_status_t hal_spi_read(hal_spi_master_port_t port, void *buf, uint32_t size);
 spi_master_status_t hal_spi_xfer(hal_spi_master_port_t port, hal_spi_master_transfer_t *transfer);
 spi_master_status_t hal_spi_hw_config(hal_spi_master_port_t port, hal_spi_master_config_t *spi_config);
+void hal_spi_cs(hal_spi_master_port_t port, uint8_t on_off);
 
 #endif

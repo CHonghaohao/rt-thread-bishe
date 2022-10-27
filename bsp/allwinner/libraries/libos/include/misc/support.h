@@ -146,10 +146,10 @@ static inline int is_power_of_2(unsigned long n)
 
 /* round "x" up/down to next multiple of "align" (which must be a power of 2) */
 #define ROUND_UP(x, align)                                   \
-	(((unsigned long)(x) + ((unsigned long)(align) - 1)) & \
-	 ~((unsigned long)(align) - 1))
+    (((unsigned long)(x) + ((unsigned long)(align) - 1)) & \
+     ~((unsigned long)(align) - 1))
 #define ROUND_DOWN(x, align)                                 \
-	((unsigned long)(x) & ~((unsigned long)(align) - 1))
+    ((unsigned long)(x) & ~((unsigned long)(align) - 1))
 
 //#define DIV_ROUND_UP(n,d)  (((n) + (d) - 1) / (d))
 

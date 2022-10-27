@@ -38,8 +38,8 @@ extern "C"
 #define max(a,b)   ((a) < (b) ? (b) : (a))
 
 /* return value defines */
-#define OK 	(0)
-#define FAIL	(-1)
+#define OK  (0)
+#define FAIL    (-1)
 
 #define CACHELINE_LEN (64)
 
@@ -54,10 +54,10 @@ typedef int8_t   s8;
 #define HAL_ARG_UNUSED(NAME)   (void)(NAME)
 
 /* general function pointer defines */
-typedef s32(*__pCBK_t) (void *p_arg);			/* call-back */
-typedef s32(*__pISR_hdle_t) (int dummy, void *p_arg);	/* ISR */
-typedef s32(*__pNotifier_t) (u32 message, u32 aux);	/* notifer call-back */
-typedef s32(*__pCPUExceptionHandler) (void);		/* cpu exception handler pointer */
+typedef s32(*__pCBK_t) (void *p_arg);           /* call-back */
+typedef s32(*__pISR_hdle_t) (int dummy, void *p_arg);   /* ISR */
+typedef s32(*__pNotifier_t) (u32 message, u32 aux); /* notifer call-back */
+typedef s32(*__pCPUExceptionHandler) (void);        /* cpu exception handler pointer */
 typedef s32(*long_jump_fn) (void *arg);
 typedef s32(*mem_long_jump_fn) (u32 arg);
 

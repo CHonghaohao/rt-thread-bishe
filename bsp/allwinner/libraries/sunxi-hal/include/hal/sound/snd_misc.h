@@ -38,9 +38,9 @@ int snd_pcm_format_physical_width(snd_pcm_format_t format);
 int snd_pcm_format_set_silence(snd_pcm_format_t format, void *data, unsigned int samples);
 
 struct snd_pcm_hw_constraint_list {
-	const unsigned int *list;
-	unsigned int count;
-	unsigned int mask;
+    const unsigned int *list;
+    unsigned int count;
+    unsigned int mask;
 };
 
 extern const struct snd_pcm_hw_constraint_list snd_pcm_known_rates;

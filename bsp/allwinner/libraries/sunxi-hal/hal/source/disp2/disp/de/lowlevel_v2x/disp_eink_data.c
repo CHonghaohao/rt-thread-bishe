@@ -14,7 +14,7 @@
 * By      : libaiao
 * Version : v1.00
 * Data    :
-* Note    : eink Éè±¸¿ØÖÆÊ±ÐòÊý¾ÝºÍwaveformÊý¾Ý
+* Note    : eink è®¾å¤‡æŽ§åˆ¶æ—¶åºæ•°æ®å’Œwaveformæ•°æ®
 ******************************************************************************
 */
 
@@ -28,8 +28,8 @@ const __u32 eink_ctrl_line_index_tbl[EINK_LCD_H + 1] = {
     1,                                      /* line6 */
     2,                                      /* line7 */
     3,                                      /* line8 */
-    3,                                      /* line9(½â¾öÓÒ±ßÉÙÏÔÊ¾Ò»ÐÐµÄÎÊÌâ)*/
-    4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  /* line9--line608,¹²600ÐÐ */
+    3,                                      /* line9(è§£å†³å³è¾¹å°‘æ˜¾ç¤ºä¸€è¡Œçš„é—®é¢˜)*/
+    4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  /* line9--line608,å…±600è¡Œ */
     4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  /* 2 */
     4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  /* 3 */
     4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  /* 4 */
@@ -155,7 +155,7 @@ const __u32 eink_ctrl_line_index_tbl[EINK_LCD_H + 1] = {
     4,  4,                                       /* 1080 */
 
     #endif
-    4, 5,					   /* line609 */
+    4, 5,                      /* line609 */
 
     6,  6,  6,  6,  6,  6,  6,  6,  6,  6,  /* line610--line620 */
 };
@@ -163,7 +163,7 @@ const __u32 eink_ctrl_line_index_tbl[EINK_LCD_H + 1] = {
 /* NEW_CTRL_DATA */
 const __u32 eink_ctrl_tbl_GC16_COMMON[8][EINK_WF_WIDTH] = {
 
-/* line1--line5; ¹²5ÐÐ */
+/* line1--line5; å…±5è¡Œ */
 /* 1         2       3           4       5           6       7       8       9          10 */
 {0xA00000|0xFF030303, 0xA00000|0xFF030303, 0xA00000|0xFF030303, 0xA00000|0xFF030303, 0xA00000|0xFF030303, 0xA00000|0xFF030303, 0xA00000|0xFF030303, 0xA00000|0xFF030303, 0xA00000|0xFF030303,  0xA00000|0xFF030303,
  0xA00000|0xFF030303, 0xA00000|0xFF030303, 0xA00000|0xFF030303, 0xA00000|0xFF030303, 0xA00000|0xFF030303, 0xA00000|0xFF030303, 0xA00000|0xFF030303, 0xA00000|0xFF030303, 0xA00000|0xFF030303,  0xA00000|0xFF030303,
@@ -230,7 +230,7 @@ const __u32 eink_ctrl_tbl_GC16_COMMON[8][EINK_WF_WIDTH] = {
 /* line6 */
 /* 1         2       3           4        5           6       7       8       9          10 */
 {0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303,  0xE08000|0xff030303,
-							      /* $14 */
+                                  /* $14 */
  0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303,  0xE08000|0xff030303,
  0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303,  0xE08000|0xff030303,
  0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303,  0xE08000|0xff030303,
@@ -433,7 +433,7 @@ const __u32 eink_ctrl_tbl_GC16_COMMON[8][EINK_WF_WIDTH] = {
 
 },
 
-/* line9-line608, ¹²600ÐÐ */
+/* line9-line608, å…±600è¡Œ */
 /* 1         2       3           4       5           6       7       8       9          10 */
 {0xE0A000|0xff030303, 0xE0A000|0xff030303, 0xE0A000|0xff030303, 0xE0A000|0xff030303, 0xE0A000|0xff030303, 0xE0A000|0xff030303, 0xE0A000|0xff030303, 0xE0A000|0xff030303, 0xE0A000|0xff030303,  0xE0A000|0xff030303,
 
@@ -504,10 +504,10 @@ const __u32 eink_ctrl_tbl_GC16_COMMON[8][EINK_WF_WIDTH] = {
 
 },
 
-/* ÒÔÉÏÎªÓÐÐ§Êý¾ÝÐÐ */
+/* ä»¥ä¸Šä¸ºæœ‰æ•ˆæ•°æ®è¡Œ */
 
 
-/* ÒÔÏÂÎª³¡½áÊø²¿·Ö */
+/* ä»¥ä¸‹ä¸ºåœºç»“æŸéƒ¨åˆ† */
 /* line609 */
 /* 1         2       3           4       $5           6       7       8       9          10 */
 {0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303,  0xE08000|0xff030303,
@@ -528,31 +528,31 @@ const __u32 eink_ctrl_tbl_GC16_COMMON[8][EINK_WF_WIDTH] = {
  0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303,  0xE08000|0xff030303,
 
 #if (EINK_PANEL_W >= 1024)
-	/* 256 data */
-	0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303,  0xE08000|0xff030303,
-	0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303,  0xE08000|0xff030303,
-	0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303,  0xE08000|0xff030303,
-	0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303,  0xE08000|0xff030303,
-	0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303,  0xE08000|0xff030303,
+    /* 256 data */
+    0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303,  0xE08000|0xff030303,
+    0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303,  0xE08000|0xff030303,
+    0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303,  0xE08000|0xff030303,
+    0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303,  0xE08000|0xff030303,
+    0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303,  0xE08000|0xff030303,
 
-	0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303,
+    0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303,
 #endif
 
 #if (EINK_PANEL_W >= 1440)
-	/* 360 data */
-	0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303,  0xE08000|0xff030303,
-	0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303,  0xE08000|0xff030303,
-	0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303,  0xE08000|0xff030303,
-	0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303,  0xE08000|0xff030303,
-	0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303,  0xE08000|0xff030303,
+    /* 360 data */
+    0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303,  0xE08000|0xff030303,
+    0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303,  0xE08000|0xff030303,
+    0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303,  0xE08000|0xff030303,
+    0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303,  0xE08000|0xff030303,
+    0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303,  0xE08000|0xff030303,
 
-	0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303,  0xE08000|0xff030303,
-	0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303,  0xE08000|0xff030303,
-	0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303,  0xE08000|0xff030303,
-	0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303,  0xE08000|0xff030303,
-	0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303,  0xE08000|0xff030303,
+    0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303,  0xE08000|0xff030303,
+    0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303,  0xE08000|0xff030303,
+    0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303,  0xE08000|0xff030303,
+    0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303,  0xE08000|0xff030303,
+    0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303,  0xE08000|0xff030303,
 
-	0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303,
+    0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303,
 #endif
 
  0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303, 0xE08000|0xff030303,  0xE08000|0xff030303,
@@ -648,87 +648,87 @@ const __u32 eink_ctrl_tbl_GC16_COMMON[8][EINK_WF_WIDTH] = {
 #ifdef TEST_EDMA
 static __s32 load_wavedata(const char *path, char *buf)
 {
-	struct file *fp = NULL;
-	__s32 file_len = 0;
-	__s32 read_len = 0;
-	mm_segment_t fs;
-	loff_t pos;
-	__s32 ret = -EINVAL;
+    struct file *fp = NULL;
+    __s32 file_len = 0;
+    __s32 read_len = 0;
+    mm_segment_t fs;
+    loff_t pos;
+    __s32 ret = -EINVAL;
 
-	if ((path == NULL) || (buf == NULL)) {
-		pr_info("path is null\n");
-		return -EINVAL;
-	}
+    if ((path == NULL) || (buf == NULL)) {
+        pr_info("path is null\n");
+        return -EINVAL;
+    }
 
-	fp = filp_open(path, O_RDONLY, 0);
-	if (IS_ERR(fp))	{
-		pr_info("fail to open waveform file(%s)", path);
-		return -EBADF;
-	}
+    fp = filp_open(path, O_RDONLY, 0);
+    if (IS_ERR(fp)) {
+        pr_info("fail to open waveform file(%s)", path);
+        return -EBADF;
+    }
 
-	fs = get_fs();
-	set_fs(KERNEL_DS);
-	pos = 0;
-	file_len = fp->f_path.dentry->d_inode->i_size;
+    fs = get_fs();
+    set_fs(KERNEL_DS);
+    pos = 0;
+    file_len = fp->f_path.dentry->d_inode->i_size;
 
-	/* pr_info("%s: file-len=%d\n", __func__, file_len); */
+    /* pr_info("%s: file-len=%d\n", __func__, file_len); */
 
-	read_len = vfs_read(fp, (char *)buf, file_len, &pos);
-	if (read_len != file_len) {
-		pr_err("read file(%s) error(read=%d byte, file=%d byte)\n",
-				path, read_len, file_len);
-		ret = -EAGAIN;
-		goto error;
-	}
+    read_len = vfs_read(fp, (char *)buf, file_len, &pos);
+    if (read_len != file_len) {
+        pr_err("read file(%s) error(read=%d byte, file=%d byte)\n",
+                path, read_len, file_len);
+        ret = -EAGAIN;
+        goto error;
+    }
 
-	if (fp) {
-		filp_close(fp, NULL);
-		set_fs(fs);
-	}
+    if (fp) {
+        filp_close(fp, NULL);
+        set_fs(fs);
+    }
 
-	/* pr_info("load wavedata file(%s) successfully\n", path); */
-	return 0;
+    /* pr_info("load wavedata file(%s) successfully\n", path); */
+    return 0;
 
 error:
-	if (fp) {
-		filp_close(fp, NULL);
-		set_fs(fs);
-	}
+    if (fp) {
+        filp_close(fp, NULL);
+        set_fs(fs);
+    }
 
-	return ret;
+    return ret;
 }
 
 
 /*
-Description	: wavedata buffer must call this function to init conctrl data,
-		  this interface is for 8-bits data TCON
-Input		: eink_timing_info -- specify the eink panel timing parameter
-Ouput		: wavedata_buf -- wavedata buffer address(virturl address)
-Return		: 0 -- success, others -- fail
+Description : wavedata buffer must call this function to init conctrl data,
+          this interface is for 8-bits data TCON
+Input       : eink_timing_info -- specify the eink panel timing parameter
+Ouput       : wavedata_buf -- wavedata buffer address(virturl address)
+Return      : 0 -- success, others -- fail
 */
 int init_eink_ctrl_data_8(unsigned long wavedata_buf,
-		struct eink_timing_param *eink_timing_info, unsigned int i)
+        struct eink_timing_param *eink_timing_info, unsigned int i)
 {
-	u8 *point = NULL;
-	/* u8 *dest_point = NULL; */
-	/* u32 buf_size = 258*620*2; */
+    u8 *point = NULL;
+    /* u8 *dest_point = NULL; */
+    /* u32 buf_size = 258*620*2; */
 
-	char path[128] = {0};
-	int ret = -EINVAL;
+    char path[128] = {0};
+    int ret = -EINVAL;
 
-	if ((wavedata_buf == 0) || (eink_timing_info == NULL)) {
-		pr_err("%s: input param is null\n", __func__);
-		return -EINVAL;
-	}
+    if ((wavedata_buf == 0) || (eink_timing_info == NULL)) {
+        pr_err("%s: input param is null\n", __func__);
+        return -EINVAL;
+    }
 
-	point = (u8 *)wavedata_buf;
-	memset(path, 0, sizeof(path));
-	sprintf(path, "%s", "/test/wave_data_frame0.bin");
-	ret = load_wavedata(path, (char *)point);
-	if (ret != 0)
-		pr_err("%s: load wavedata fail, ret = %d\n", __func__, ret);
+    point = (u8 *)wavedata_buf;
+    memset(path, 0, sizeof(path));
+    sprintf(path, "%s", "/test/wave_data_frame0.bin");
+    ret = load_wavedata(path, (char *)point);
+    if (ret != 0)
+        pr_err("%s: load wavedata fail, ret = %d\n", __func__, ret);
 
-	return ret;
+    return ret;
 }
 
 
@@ -737,234 +737,234 @@ int init_eink_ctrl_data_8(unsigned long wavedata_buf,
 
 
 /*
-Description	: wavedata buffer must call this function to init conctrl data,
-		  this interface is for 8-bits data TCON
-Input		: eink_timing_info -- specify the eink panel timing parameter
-Ouput		: wavedata_buf -- wavedata buffer address(virturl address)
-Return		: 0 -- success, others -- fail
+Description : wavedata buffer must call this function to init conctrl data,
+          this interface is for 8-bits data TCON
+Input       : eink_timing_info -- specify the eink panel timing parameter
+Ouput       : wavedata_buf -- wavedata buffer address(virturl address)
+Return      : 0 -- success, others -- fail
 */
 int init_eink_ctrl_data_8(unsigned long wavedata_buf,
-		struct eink_timing_param *eink_timing_info, unsigned int i)
+        struct eink_timing_param *eink_timing_info, unsigned int i)
 {
 
-	u32 row, col = 0, row_temp = 0;
+    u32 row, col = 0, row_temp = 0;
 
-	const u32 *p_ctrl_gc_tbl = NULL;
-	u32 *p_ctrl_line = NULL;
+    const u32 *p_ctrl_gc_tbl = NULL;
+    u32 *p_ctrl_line = NULL;
 
-	u32 wav_width = 0, wav_height = 0;
-	u32 hync_len = 0, vync_len = 0;
-	u32 h_data_len = 0, v_data_len = 0;
+    u32 wav_width = 0, wav_height = 0;
+    u32 hync_len = 0, vync_len = 0;
+    u32 h_data_len = 0, v_data_len = 0;
 
-	u32 *point = NULL;
-	A13_WAVEDATA *global_ctrl_buffer = NULL;
+    u32 *point = NULL;
+    A13_WAVEDATA *global_ctrl_buffer = NULL;
 
-	A13_WAVEDATA *src = NULL;
-	WAVEDATA_8 *dest = NULL;
+    A13_WAVEDATA *src = NULL;
+    WAVEDATA_8 *dest = NULL;
 
-	if ((wavedata_buf == 0) || (eink_timing_info == NULL)) {
-		pr_err("%s: input param is null\n", __func__);
-		return -EINVAL;
-	}
+    if ((wavedata_buf == 0) || (eink_timing_info == NULL)) {
+        pr_err("%s: input param is null\n", __func__);
+        return -EINVAL;
+    }
 
-	hync_len = eink_timing_info->lsl + eink_timing_info->lbl +
-							eink_timing_info->lel;
-	vync_len = eink_timing_info->fsl + eink_timing_info->fbl +
-							eink_timing_info->fel;
-	h_data_len = eink_timing_info->width >> 2;
-	v_data_len = eink_timing_info->height;
-	wav_width = h_data_len + hync_len;
-	wav_height = v_data_len + vync_len;
+    hync_len = eink_timing_info->lsl + eink_timing_info->lbl +
+                            eink_timing_info->lel;
+    vync_len = eink_timing_info->fsl + eink_timing_info->fbl +
+                            eink_timing_info->fel;
+    h_data_len = eink_timing_info->width >> 2;
+    v_data_len = eink_timing_info->height;
+    wav_width = h_data_len + hync_len;
+    wav_height = v_data_len + vync_len;
 
-	global_ctrl_buffer = (A13_WAVEDATA *)kzalloc(wav_width * wav_height *
-					sizeof(A13_WAVEDATA), GFP_KERNEL);
-	if (global_ctrl_buffer == NULL) {
-		pr_err("%s: alloc memory for global control buffer fail, size=0x%x\n", __func__,
-				wav_width * wav_height * sizeof(A13_WAVEDATA));
-		return -ENOMEM;
-	}
+    global_ctrl_buffer = (A13_WAVEDATA *)kzalloc(wav_width * wav_height *
+                    sizeof(A13_WAVEDATA), GFP_KERNEL);
+    if (global_ctrl_buffer == NULL) {
+        pr_err("%s: alloc memory for global control buffer fail, size=0x%x\n", __func__,
+                wav_width * wav_height * sizeof(A13_WAVEDATA));
+        return -ENOMEM;
+    }
 
-	point = (u32 *)global_ctrl_buffer;
-	p_ctrl_gc_tbl = (u32 *)eink_ctrl_tbl_GC16_COMMON[4];
-	p_ctrl_line = (u32 *)eink_ctrl_line_index_tbl;
+    point = (u32 *)global_ctrl_buffer;
+    p_ctrl_gc_tbl = (u32 *)eink_ctrl_tbl_GC16_COMMON[4];
+    p_ctrl_line = (u32 *)eink_ctrl_line_index_tbl;
 
-	/* line1--line8 */
-	for (row = 0; row < (eink_timing_info->fsl +
-					eink_timing_info->fbl); row++) {
-		row_temp = *p_ctrl_line++;
-		for (col = 0; col < wav_width; col++) {
-			*point = eink_ctrl_tbl_GC16_COMMON[row_temp][col];
-			point++;
-		}
-	}
+    /* line1--line8 */
+    for (row = 0; row < (eink_timing_info->fsl +
+                    eink_timing_info->fbl); row++) {
+        row_temp = *p_ctrl_line++;
+        for (col = 0; col < wav_width; col++) {
+            *point = eink_ctrl_tbl_GC16_COMMON[row_temp][col];
+            point++;
+        }
+    }
 
 /*    p_ctrl_line += 600;*/
 /*    point += 600*258;*/
 
-	for (; row < (wav_height - eink_timing_info->fel); row++) {
-		row_temp = *p_ctrl_line++;
-/*		for (col = 0; col < (eink_timing_info->lsl +
- *					eink_timing_info->lbl); col++) {
-			*point = (*(p_ctrl_gc_tbl + col));
-			point++;
-		}
+    for (; row < (wav_height - eink_timing_info->fel); row++) {
+        row_temp = *p_ctrl_line++;
+/*      for (col = 0; col < (eink_timing_info->lsl +
+ *                  eink_timing_info->lbl); col++) {
+            *point = (*(p_ctrl_gc_tbl + col));
+            point++;
+        }
 
-		point += h_data_len;
-		col += h_data_len;
+        point += h_data_len;
+        col += h_data_len;
 */
-		for (col = 0; col < wav_width; col++) {
-			*point = (*(p_ctrl_gc_tbl + col));
-			point++;
-		}
-	}
+        for (col = 0; col < wav_width; col++) {
+            *point = (*(p_ctrl_gc_tbl + col));
+            point++;
+        }
+    }
 
-	for (; row < wav_height; row++) {
-		row_temp = *p_ctrl_line++;
-		for (col = 0; col < wav_width; col++) {
-			*point = eink_ctrl_tbl_GC16_COMMON[row_temp][col];
-			point++;
-		}
-	}
+    for (; row < wav_height; row++) {
+        row_temp = *p_ctrl_line++;
+        for (col = 0; col < wav_width; col++) {
+            *point = eink_ctrl_tbl_GC16_COMMON[row_temp][col];
+            point++;
+        }
+    }
 
-	src = global_ctrl_buffer;
-	dest = (WAVEDATA_8 *)wavedata_buf;
+    src = global_ctrl_buffer;
+    dest = (WAVEDATA_8 *)wavedata_buf;
 
-	for (row = 0; row < wav_height; row++) {
-		for (col = 0; col < wav_width; col++) {
-			dest->bits.mode = src->bits.mode;
-			dest->bits.oeh = src->bits.oeh;
-			dest->bits.leh = src->bits.leh;
-			dest->bits.sth = src->bits.sth;
-			dest->bits.ckv = src->bits.ckv;
-			dest->bits.stv = src->bits.stv;
-			dest->bits.res0 = 3;
-			dest++;
-			src++;
-		}
-	}
+    for (row = 0; row < wav_height; row++) {
+        for (col = 0; col < wav_width; col++) {
+            dest->bits.mode = src->bits.mode;
+            dest->bits.oeh = src->bits.oeh;
+            dest->bits.leh = src->bits.leh;
+            dest->bits.sth = src->bits.sth;
+            dest->bits.ckv = src->bits.ckv;
+            dest->bits.stv = src->bits.stv;
+            dest->bits.res0 = 3;
+            dest++;
+            src++;
+        }
+    }
 
-	if (global_ctrl_buffer != NULL) {
-		disp_sys_free(global_ctrl_buffer);
-		global_ctrl_buffer = NULL;
-	}
+    if (global_ctrl_buffer != NULL) {
+        disp_sys_free(global_ctrl_buffer);
+        global_ctrl_buffer = NULL;
+    }
 
-	return 0;
+    return 0;
 }
 #endif
 
 
 /*
-Description	: wavedata buffer must call this function to init conctrl data,
-		  this interface is for 16-bits data TCON
-Input		: eink_timing_info -- specify the eink panel timing parameter
-Ouput		: wavedata_buf -- wavedata buffer address(virturl address)
-Return		: 0 -- success, others -- fail
+Description : wavedata buffer must call this function to init conctrl data,
+          this interface is for 16-bits data TCON
+Input       : eink_timing_info -- specify the eink panel timing parameter
+Ouput       : wavedata_buf -- wavedata buffer address(virturl address)
+Return      : 0 -- success, others -- fail
 */
 int init_eink_ctrl_data_16(unsigned long wavedata_buf,
-		struct eink_timing_param *eink_timing_info)
+        struct eink_timing_param *eink_timing_info)
 {
-	u32 row, col = 0, row_temp = 0;
+    u32 row, col = 0, row_temp = 0;
 
-	const u32 *p_ctrl_gc_tbl = NULL;
-	u32 *p_ctrl_line = NULL;
+    const u32 *p_ctrl_gc_tbl = NULL;
+    u32 *p_ctrl_line = NULL;
 
-	u32 wav_width = 0, wav_height = 0;
-	u32 hync_len = 0, vync_len = 0;
-	u32 h_data_len = 0, v_data_len = 0;
+    u32 wav_width = 0, wav_height = 0;
+    u32 hync_len = 0, vync_len = 0;
+    u32 h_data_len = 0, v_data_len = 0;
 
-	u32 *point = NULL;
-	A13_WAVEDATA *global_ctrl_buffer = NULL;
+    u32 *point = NULL;
+    A13_WAVEDATA *global_ctrl_buffer = NULL;
 
-	A13_WAVEDATA *src = NULL;
-	WAVEDATA_16 *dest = NULL;
+    A13_WAVEDATA *src = NULL;
+    WAVEDATA_16 *dest = NULL;
 
-	if ((wavedata_buf == 0) || (eink_timing_info == NULL)) {
-		pr_err("%s: input param is null\n", __func__);
-		return -EINVAL;
-	}
+    if ((wavedata_buf == 0) || (eink_timing_info == NULL)) {
+        pr_err("%s: input param is null\n", __func__);
+        return -EINVAL;
+    }
 
-	hync_len = eink_timing_info->lsl + eink_timing_info->lbl +
-							eink_timing_info->lel;
-	vync_len = eink_timing_info->fsl + eink_timing_info->fbl +
-							eink_timing_info->fel;
-	h_data_len = eink_timing_info->width >> 2;
-	v_data_len = eink_timing_info->height;
-	wav_width = h_data_len + hync_len;
-	wav_height = v_data_len + vync_len;
+    hync_len = eink_timing_info->lsl + eink_timing_info->lbl +
+                            eink_timing_info->lel;
+    vync_len = eink_timing_info->fsl + eink_timing_info->fbl +
+                            eink_timing_info->fel;
+    h_data_len = eink_timing_info->width >> 2;
+    v_data_len = eink_timing_info->height;
+    wav_width = h_data_len + hync_len;
+    wav_height = v_data_len + vync_len;
 
-	pr_info("%s: wav_width=%d, wav_height=%d\n", __func__,
-							wav_width, wav_height);
+    pr_info("%s: wav_width=%d, wav_height=%d\n", __func__,
+                            wav_width, wav_height);
 
-	global_ctrl_buffer = (A13_WAVEDATA *)kzalloc(wav_width * wav_height *
-					sizeof(A13_WAVEDATA), GFP_KERNEL);
-	if (global_ctrl_buffer == NULL) {
-		pr_err("%s: alloc memory for global control buffer fail, size=0x%x\n", __func__,
-				wav_width * wav_height * sizeof(A13_WAVEDATA));
-		return -ENOMEM;
-	}
+    global_ctrl_buffer = (A13_WAVEDATA *)kzalloc(wav_width * wav_height *
+                    sizeof(A13_WAVEDATA), GFP_KERNEL);
+    if (global_ctrl_buffer == NULL) {
+        pr_err("%s: alloc memory for global control buffer fail, size=0x%x\n", __func__,
+                wav_width * wav_height * sizeof(A13_WAVEDATA));
+        return -ENOMEM;
+    }
 
-	point = (u32 *)global_ctrl_buffer;
-	p_ctrl_gc_tbl = (u32 *)eink_ctrl_tbl_GC16_COMMON[4];
-	p_ctrl_line = (u32 *)eink_ctrl_line_index_tbl;
+    point = (u32 *)global_ctrl_buffer;
+    p_ctrl_gc_tbl = (u32 *)eink_ctrl_tbl_GC16_COMMON[4];
+    p_ctrl_line = (u32 *)eink_ctrl_line_index_tbl;
 
-	/* line1--line8 */
-	for (row = 0; row < (eink_timing_info->fsl +
-					eink_timing_info->fbl); row++) {
-		row_temp = *p_ctrl_line++;
-		for (col = 0; col < wav_width; col++) {
-			*point = eink_ctrl_tbl_GC16_COMMON[row_temp][col];
-			point++;
-		}
-	}
+    /* line1--line8 */
+    for (row = 0; row < (eink_timing_info->fsl +
+                    eink_timing_info->fbl); row++) {
+        row_temp = *p_ctrl_line++;
+        for (col = 0; col < wav_width; col++) {
+            *point = eink_ctrl_tbl_GC16_COMMON[row_temp][col];
+            point++;
+        }
+    }
 
-/*	  p_ctrl_line += 600;*/
-/*	  point += 600*258;*/
+/*    p_ctrl_line += 600;*/
+/*    point += 600*258;*/
 
-	for (; row < (wav_height - eink_timing_info->fel); row++) {
-		row_temp = *p_ctrl_line++;
-		for (col = 0; col < (eink_timing_info->lsl +
-						eink_timing_info->lbl); col++) {
-			*point = (*(p_ctrl_gc_tbl + col));
-			point++;
-		}
+    for (; row < (wav_height - eink_timing_info->fel); row++) {
+        row_temp = *p_ctrl_line++;
+        for (col = 0; col < (eink_timing_info->lsl +
+                        eink_timing_info->lbl); col++) {
+            *point = (*(p_ctrl_gc_tbl + col));
+            point++;
+        }
 
-		point += h_data_len;
-		col += h_data_len;
+        point += h_data_len;
+        col += h_data_len;
 
-		for (; col < wav_width; col++) {
-			*point = (*(p_ctrl_gc_tbl + col));
-			point++;
-		}
-	}
+        for (; col < wav_width; col++) {
+            *point = (*(p_ctrl_gc_tbl + col));
+            point++;
+        }
+    }
 
-	for (; row < wav_height; row++) {
-		row_temp = *p_ctrl_line++;
-		for (col = 0; col < wav_width; col++) {
-			*point = eink_ctrl_tbl_GC16_COMMON[row_temp][col];
-			point++;
-		}
-	}
+    for (; row < wav_height; row++) {
+        row_temp = *p_ctrl_line++;
+        for (col = 0; col < wav_width; col++) {
+            *point = eink_ctrl_tbl_GC16_COMMON[row_temp][col];
+            point++;
+        }
+    }
 
-	/* convert to new format */
-	src = global_ctrl_buffer;
-	dest = (WAVEDATA_16 *)wavedata_buf;
-	for (row = 0; row < wav_height; row++) {
-		for (col = 0; col < wav_width; col++) {
-			dest->bits.mode = src->bits.mode;
-			dest->bits.oeh = src->bits.oeh;
-			dest->bits.leh = src->bits.leh;
-			dest->bits.sth = src->bits.sth;
-			dest->bits.ckv = src->bits.ckv;
-			dest->bits.stv = src->bits.stv;
-		}
-	}
+    /* convert to new format */
+    src = global_ctrl_buffer;
+    dest = (WAVEDATA_16 *)wavedata_buf;
+    for (row = 0; row < wav_height; row++) {
+        for (col = 0; col < wav_width; col++) {
+            dest->bits.mode = src->bits.mode;
+            dest->bits.oeh = src->bits.oeh;
+            dest->bits.leh = src->bits.leh;
+            dest->bits.sth = src->bits.sth;
+            dest->bits.ckv = src->bits.ckv;
+            dest->bits.stv = src->bits.stv;
+        }
+    }
 
-	if (global_ctrl_buffer != NULL) {
-		disp_sys_free(global_ctrl_buffer);
-		global_ctrl_buffer = NULL;
-	}
+    if (global_ctrl_buffer != NULL) {
+        disp_sys_free(global_ctrl_buffer);
+        global_ctrl_buffer = NULL;
+    }
 
-	return 0;
+    return 0;
 
 }
 

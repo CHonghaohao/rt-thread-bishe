@@ -44,17 +44,17 @@ typedef int snd_ctl_elem_type_t;
 
 /* can't modify this struct */
 typedef struct {
-	unsigned int id;
+    unsigned int id;
         snd_ctl_elem_type_t type;
-	const unsigned char *name;
-	unsigned long value;
-	int min,max;
-	int count;
-	/* for enum */
-	unsigned int items;
-	const char * const *texts;
+    const unsigned char *name;
+    unsigned long value;
+    int min,max;
+    int count;
+    /* for enum */
+    unsigned int items;
+    const char * const *texts;
 
-	const unsigned long *private_data;
+    const unsigned long *private_data;
 } snd_ctl_info_t;
 
 int snd_ctl_num(const char *name);
@@ -64,7 +64,7 @@ int snd_ctl_set(const char *name, const char *elem, unsigned int val);
 int snd_ctl_set_bynum(const char *name, const unsigned int elem_num, unsigned int val);
 int snd_ctl_add(const char *name, snd_ctl_info_t *info);
 int snd_ctl_remove(const char *name, const unsigned int elem_num);
-#define snd_ctl_set_multi_args	ksnd_ctl_set_multi_args
+#define snd_ctl_set_multi_args  ksnd_ctl_set_multi_args
 
 #ifdef __cplusplus
 }

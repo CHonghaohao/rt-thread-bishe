@@ -83,5 +83,5 @@ static const struct gpio_desc *platform_gpio_desc[] =
  */
 const struct gpio_desc **gpio_get_platform_desc(void)
 {
-	return platform_gpio_desc;
+    return platform_gpio_desc;
 }

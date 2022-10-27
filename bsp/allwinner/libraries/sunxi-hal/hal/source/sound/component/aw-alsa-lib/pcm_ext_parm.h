@@ -34,11 +34,11 @@
 #define __AW_ALSA_PCM_EXT_PARM_H
 
 struct snd_ext_parm {
-	unsigned int min, max;
-	unsigned int num_list;
-	unsigned int *list;
-	int active;
-	int integer;
+    unsigned int min, max;
+    unsigned int num_list;
+    unsigned int *list;
+    int active;
+    int integer;
 };
 
 int snd_ext_parm_set_minmax(struct snd_ext_parm *parm, unsigned int min, unsigned int max);

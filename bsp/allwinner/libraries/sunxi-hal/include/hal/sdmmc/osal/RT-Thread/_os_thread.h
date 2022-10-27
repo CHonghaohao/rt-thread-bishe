@@ -74,7 +74,7 @@ OS_Status OS_ThreadDelete(OS_Thread_t *thread);
  */
 static inline int OS_ThreadIsValid(OS_Thread_t *thread)
 {
-	return (thread->handle != OS_INVALID_HANDLE);
+    return (thread->handle != OS_INVALID_HANDLE);
 }
 
 /**
@@ -84,7 +84,7 @@ static inline int OS_ThreadIsValid(OS_Thread_t *thread)
  */
 static inline void OS_ThreadSetInvalid(OS_Thread_t *thread)
 {
-	thread->handle = OS_INVALID_HANDLE;
+    thread->handle = OS_INVALID_HANDLE;
 }
 
 /**
@@ -98,7 +98,7 @@ static inline void OS_ThreadSetInvalid(OS_Thread_t *thread)
  */
 static inline void OS_ThreadSleep(OS_Time_t msec)
 {
-	rt_thread_delay((rt_tick_t)OS_MSecsToTicks(msec));
+    rt_thread_delay((rt_tick_t)OS_MSecsToTicks(msec));
 }
 
 /**
@@ -111,7 +111,7 @@ static inline void OS_ThreadSleep(OS_Time_t msec)
  */
 static inline void OS_ThreadYield(void)
 {
-	rt_thread_yield();
+    rt_thread_yield();
 }
 
 /**
@@ -120,7 +120,7 @@ static inline void OS_ThreadYield(void)
  */
 static inline OS_ThreadHandle_t OS_ThreadGetCurrentHandle(void)
 {
-	return (OS_ThreadHandle_t)rt_thread_self();
+    return (OS_ThreadHandle_t)rt_thread_self();
 }
 
 /**
@@ -135,7 +135,7 @@ static inline OS_ThreadHandle_t OS_ThreadGetCurrentHandle(void)
  */
 static inline void OS_ThreadSuspendScheduler(void)
 {
-	rt_enter_critical();
+    rt_enter_critical();
 }
 
 /**
@@ -149,7 +149,7 @@ static inline void OS_ThreadSuspendScheduler(void)
  */
 static inline void OS_ThreadResumeScheduler(void)
 {
-	rt_exit_critical();
+    rt_exit_critical();
 }
 
 /**
@@ -158,10 +158,10 @@ static inline void OS_ThreadResumeScheduler(void)
  */
 static inline int OS_ThreadIsSchedulerRunning(void)
 {
-	// TODO
-	printf("[ERR] %s() NOT SUPPORT!", __func__);
-	return 1;
-//	return (xTaskGetSchedulerState() == taskSCHEDULER_RUNNING);
+    // TODO
+    printf("[ERR] %s() NOT SUPPORT!", __func__);
+    return 1;
+//  return (xTaskGetSchedulerState() == taskSCHEDULER_RUNNING);
 }
 
 #ifdef __cplusplus

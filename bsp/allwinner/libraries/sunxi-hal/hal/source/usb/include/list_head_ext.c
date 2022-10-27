@@ -38,7 +38,7 @@
 
 #include "usb_list.h"
 #include "list_head_ext.h"
-#include <hal_osal.h> 
+#include <hal_osal.h>
 
 hal_spinlock_t list_lock;
 //从list_header_input中删除某个node

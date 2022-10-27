@@ -201,7 +201,7 @@ Next:
     switch (ScsiCmnd->Result)
     {
         case USB_STOR_TRANSPORT_GOOD:
-			ret = USB_STATUS_SUCCESS;
+            ret = USB_STATUS_SUCCESS;
             break;
 
         case USB_STOR_TRANSPORT_FAILED:
@@ -747,8 +747,8 @@ static int ScsiGetSenseData(__mscLun_t *mscLun)
                     ret = USB_STATUS_NOT_READY_TO_READY_TRANSITION;
                     break;
 
-                /* ¼ûµ½sandiskµÄUÅÌ£¬¾¹È»ÔÚSENSE_UNIT_ATTENTIONÊ±, ËµASC_MEDIUM_NOT_PRESENT¡£
-                   ÎªÁË´¦ÀíÕâÑùµÄUÅÌ, ÕâÀïÒ²¼ì²éASC_MEDIUM_NOT_PRESENT */
+                /* è§åˆ°sandiskçš„Uç›˜ï¼Œç«Ÿç„¶åœ¨SENSE_UNIT_ATTENTIONæ—¶, è¯´ASC_MEDIUM_NOT_PRESENTã€‚
+                   ä¸ºäº†å¤„ç†è¿™æ ·çš„Uç›˜, è¿™é‡Œä¹Ÿæ£€æŸ¥ASC_MEDIUM_NOT_PRESENT */
                 case ASC_MEDIUM_NOT_PRESENT :
                     hal_log_info("ERR: media is not present");
                     mscLun->MediaPresent = 0;
@@ -774,12 +774,12 @@ static int ScsiGetSenseData(__mscLun_t *mscLun)
 *                     ScsiStartStopUnit
 *
 * Description:
-*    ¿ªÊ¼ / Í£Ö¹ Éè±¸¹¤×÷
+*    å¼€å§‹ / åœæ­¢ è®¾å¤‡å·¥ä½œ
 *
 * Parameters:
-*    mscLun  : input.  ÃüÁî·¢ÏòµÄÉè±¸
-*    LoEj    : input.  ¼ÓÔØ/µ¯³ö Ã½Ìå½éÖÊ
-*    Start   : input.  ¿ªÊ¼ / Í£Ö¹ Éè±¸¹¤×÷
+*    mscLun  : input.  å‘½ä»¤å‘å‘çš„è®¾å¤‡
+*    LoEj    : input.  åŠ è½½/å¼¹å‡º åª’ä½“ä»‹è´¨
+*    Start   : input.  å¼€å§‹ / åœæ­¢ è®¾å¤‡å·¥ä½œ
 *
 * Return value:
 *
@@ -1028,19 +1028,19 @@ int ScsiWrite(__mscLun_t *mscLun,
 *                     ScsiPreventAllowMedium
 *
 * Description:
-*     ½ûÖ¹/ÔÊĞí½éÖÊÒÆ¶¯
+*     ç¦æ­¢/å…è®¸ä»‹è´¨ç§»åŠ¨
 *
 * Parameters:
-*    mscLun     :  input. Ä¿±êÉè±¸
-*    Persistent :  input. ½ûÖ¹½éÖÊÊı¾İ´«Êä
-*    Prevent    :  input. ½ûÖ¹½éÖÊÒÆ¶¯
+*    mscLun     :  input. ç›®æ ‡è®¾å¤‡
+*    Persistent :  input. ç¦æ­¢ä»‹è´¨æ•°æ®ä¼ è¾“
+*    Prevent    :  input. ç¦æ­¢ä»‹è´¨ç§»åŠ¨
 *
 *
 * Return value:
-*    ·µ»ØÃüÁîµÄÖ´ĞĞ½á¹û
+*    è¿”å›å‘½ä»¤çš„æ‰§è¡Œç»“æœ
 *
 * note:
-*    PersistentÖ»ÄÜÔÚÉè±¸Ã¶¾ÙµÄÊ±ºòÉèÖÃ, ÔÚÉè±¸²Ù×÷½×¶Î²»ÒªÊ¹ÓÃ¡£
+*    Persistentåªèƒ½åœ¨è®¾å¤‡æšä¸¾çš„æ—¶å€™è®¾ç½®, åœ¨è®¾å¤‡æ“ä½œé˜¶æ®µä¸è¦ä½¿ç”¨ã€‚
 *
 *******************************************************************************
 */
@@ -1082,7 +1082,7 @@ int ScsiPreventAllowMedium(__mscLun_t *mscLun, unsigned int Persistent, unsigned
 *                     ScsiCDPauseResume
 *
 * Description:
-*    Í£Ö¹/»Ö¸´²¥·ÅCD media
+*    åœæ­¢/æ¢å¤æ’­æ”¾CD media
 *
 * Parameters:
 *
@@ -1183,14 +1183,14 @@ int ScsiCDPlayAudio10(__mscLun_t *mscLun, unsigned int Lba, unsigned int Lenght)
 *                     ScsiCDPlayAudioMSF
 *
 * Description:
-*    ²¥·ÅÖ¸¶¨mfsµÄÒôÀÖ¹âµú
+*    æ’­æ”¾æŒ‡å®šmfsçš„éŸ³ä¹å…‰ç¢Ÿ
 *
 * Parameters:
 *    mscLun         :  input. Logic unit
-*    MSF            :  input. ¶àÉÈÇø
+*    MSF            :  input. å¤šæ‰‡åŒº
 *
 * Return value:
-*    ·µ»ØÃüÁîµÄÖ´ĞĞÇé¿ö
+*    è¿”å›å‘½ä»¤çš„æ‰§è¡Œæƒ…å†µ
 *
 * note:
 *
@@ -1239,18 +1239,18 @@ int ScsiCDPlayAudioMSF(__mscLun_t *mscLun, CDROM_PlayAudioMsf_t *MSF)
 *                     ScsiCDReadToc
 *
 * Description:
-*    ¶ÁÈ¡½éÖÊÄÚÈİµÄ·ÖÅä±íĞÅÏ¢
+*    è¯»å–ä»‹è´¨å†…å®¹çš„åˆ†é…è¡¨ä¿¡æ¯
 *
 * Parameters:
 *    mscLun         :  input. Logic unit
-*    MSF            :  input. ¶àÉÈÇø
-*    Format         :  input. Êı¾İ¸ñÊ½»¯Ä£Ê½
-*    StartingNumber :  input. ÆğÊ¼ÉÈÇø
-*    Buffer         :  input. »º³åÇø¡£´æ·ÅÃüÁîÖ´ĞĞµÄ½á¹û
-*    BufferLen      :  input. »º³åÇø´óĞ¡
+*    MSF            :  input. å¤šæ‰‡åŒº
+*    Format         :  input. æ•°æ®æ ¼å¼åŒ–æ¨¡å¼
+*    StartingNumber :  input. èµ·å§‹æ‰‡åŒº
+*    Buffer         :  input. ç¼“å†²åŒºã€‚å­˜æ”¾å‘½ä»¤æ‰§è¡Œçš„ç»“æœ
+*    BufferLen      :  input. ç¼“å†²åŒºå¤§å°
 *
 * Return value:
-*    ·µ»ØÃüÁîµÄÖ´ĞĞÇé¿ö
+*    è¿”å›å‘½ä»¤çš„æ‰§è¡Œæƒ…å†µ
 *
 * note:
 *
@@ -1302,13 +1302,13 @@ int ScsiCDReadToc(__mscLun_t *mscLun,
 *                     ScsiCDStopPlayScan
 *
 * Description:
-*    ÖĞÖ¹É¨Ãè»òÊÇ²¥·Å
+*    ä¸­æ­¢æ‰«ææˆ–æ˜¯æ’­æ”¾
 *
 * Parameters:
 *    mscLun         :  input. Logic unit
 *
 * Return value:
-*    ·µ»ØÃüÁîµÄÖ´ĞĞÇé¿ö
+*    è¿”å›å‘½ä»¤çš„æ‰§è¡Œæƒ…å†µ
 *
 * note:
 *
@@ -1351,15 +1351,15 @@ int ScsiCDStopPlayScan(__mscLun_t *mscLun)
 *                     ScsiCDReadDiskInfo
 *
 * Description:
-*    ¶ÁÈ¡¹âµúµÄĞÅÏ¢
+*    è¯»å–å…‰ç¢Ÿçš„ä¿¡æ¯
 *
 * Parameters:
 *    mscLun         :  input. Logic unit
-*    Buffer         :  input. »º³åÇø¡£´æ·ÅdiskµÄĞÅÏ¢
-*    BufferLen      :  input. ±¾´Î´òËã»ñµÃÊı¾İµÄ³¤¶È
+*    Buffer         :  input. ç¼“å†²åŒºã€‚å­˜æ”¾diskçš„ä¿¡æ¯
+*    BufferLen      :  input. æœ¬æ¬¡æ‰“ç®—è·å¾—æ•°æ®çš„é•¿åº¦
 *
 * Return value:
-*    ·µ»ØÃüÁîµÄÖ´ĞĞÇé¿ö
+*    è¿”å›å‘½ä»¤çš„æ‰§è¡Œæƒ…å†µ
 *
 * note:
 *
@@ -1420,19 +1420,19 @@ int ScsiCDReadDiscInfo(__mscLun_t *mscLun,
 *                     ScsiCDReadTrackInfo
 *
 * Description:
-*    ¶ÁÈ¡¹âµú¹ìµÀµÄĞÅÏ¢
+*    è¯»å–å…‰ç¢Ÿè½¨é“çš„ä¿¡æ¯
 *
 * Parameters:
 *    mscLun             :  input. Logic unit
 *    Open               :  input.
 *    Address_or_Number  :  input.
 *    LogicalBlockAddress:  input.
-*    Buffer             :  input. »º³åÇø¡£´æ·ÅdiskµÄĞÅÏ¢
-*    BufferLen          :  input. ±¾´Î´òËã»ñµÃÊı¾İµÄ³¤¶È
-*    ActLen             :  input. Êµ¼ÊÈ¡µÃµÄ³¤¶È
+*    Buffer             :  input. ç¼“å†²åŒºã€‚å­˜æ”¾diskçš„ä¿¡æ¯
+*    BufferLen          :  input. æœ¬æ¬¡æ‰“ç®—è·å¾—æ•°æ®çš„é•¿åº¦
+*    ActLen             :  input. å®é™…å–å¾—çš„é•¿åº¦
 *
 * Return value:
-*    ·µ»ØÃüÁîµÄÖ´ĞĞÇé¿ö
+*    è¿”å›å‘½ä»¤çš„æ‰§è¡Œæƒ…å†µ
 *
 * note:
 *
@@ -1496,17 +1496,17 @@ int ScsiCDReadTrackInfo(__mscLun_t *mscLun,
 *                     ScsiDvdGetEventStatus
 *
 * Description:
-*    »ñµÃDVDµÄÊÂ¼ş×´Ì¬¡£
+*    è·å¾—DVDçš„äº‹ä»¶çŠ¶æ€ã€‚
 *
 * Parameters:
 *    mscLun         :  input. Logic unit
-*    Immed          :  input. ÊÇ·ñÁ¢¼´·µ»ØÃüÁîµÄÖ´ĞĞ½á¹û
-*    ClassRequest   :  input. ÀàÇëÇó
-*    Buffer         :  input. ´æ·ÅDVDµÄÊÂ¼ş½á¹û
-*    BufferLen      :  input. ±¾´Î´òËã»ñµÃÊı¾İµÄ³¤¶È
+*    Immed          :  input. æ˜¯å¦ç«‹å³è¿”å›å‘½ä»¤çš„æ‰§è¡Œç»“æœ
+*    ClassRequest   :  input. ç±»è¯·æ±‚
+*    Buffer         :  input. å­˜æ”¾DVDçš„äº‹ä»¶ç»“æœ
+*    BufferLen      :  input. æœ¬æ¬¡æ‰“ç®—è·å¾—æ•°æ®çš„é•¿åº¦
 *
 * Return value:
-*    ·µ»ØÃüÁîµÄÖ´ĞĞÇé¿ö
+*    è¿”å›å‘½ä»¤çš„æ‰§è¡Œæƒ…å†µ
 *
 * note:
 *
@@ -1556,17 +1556,17 @@ int ScsiDvdGetEventStatus(__mscLun_t *mscLun,
 *                     ScsiDvdGetEventStatus
 *
 * Description:
-*    ×°ÔØ»òÊÇĞ¶ÔØ¹âµú
+*    è£…è½½æˆ–æ˜¯å¸è½½å…‰ç¢Ÿ
 *
 * Parameters:
 *    mscLun :  input. Logic unit
-*    Immed  :  input. ÊÇ·ñÁ¢¼´·µ»ØÃüÁîµÄÖ´ĞĞ½á¹û
-*    Start  :  input. media¾ÍĞ÷»òÕßÍ£Ö¹
-*    LoUnlo :  input. ×°ÔØ»òÊÇĞ¶ÔØ
+*    Immed  :  input. æ˜¯å¦ç«‹å³è¿”å›å‘½ä»¤çš„æ‰§è¡Œç»“æœ
+*    Start  :  input. mediaå°±ç»ªæˆ–è€…åœæ­¢
+*    LoUnlo :  input. è£…è½½æˆ–æ˜¯å¸è½½
 *    Slot   :  input.
 *
 * Return value:
-*    ·µ»ØÃüÁîµÄÖ´ĞĞÇé¿ö
+*    è¿”å›å‘½ä»¤çš„æ‰§è¡Œæƒ…å†µ
 *
 * note:
 *
@@ -1617,15 +1617,15 @@ int ScsiDvdLoad(__mscLun_t *mscLun,
 *                     ScsiSetSpeed
 *
 * Description:
-*    ÉèÖÃ¹âÇıµÄ¶ÁĞ´ËÙ¶È
+*    è®¾ç½®å…‰é©±çš„è¯»å†™é€Ÿåº¦
 *
 * Parameters:
 *    mscLun     :  input. Logic unit
-*    ReadSpeed  :  input. ¶ÁËÙ¶È. Kbytes/second
-*    WriteSpeed :  input. Ğ´ËÙ¶È. Kbytes/second
+*    ReadSpeed  :  input. è¯»é€Ÿåº¦. Kbytes/second
+*    WriteSpeed :  input. å†™é€Ÿåº¦. Kbytes/second
 *
 * Return value:
-*    ·µ»ØÃüÁîµÄÖ´ĞĞÇé¿ö
+*    è¿”å›å‘½ä»¤çš„æ‰§è¡Œæƒ…å†µ
 *
 * note:
 *
@@ -1670,15 +1670,15 @@ int ScsiCDSetSpeed(__mscLun_t *mscLun, unsigned int ReadSpeed, unsigned int Writ
 *                     ScsiGetConfiguration
 *
 * Description:
-*    ÉèÖÃ¹âÇıµÄ¶ÁĞ´ËÙ¶È
+*    è®¾ç½®å…‰é©±çš„è¯»å†™é€Ÿåº¦
 *
 * Parameters:
 *    mscLun     :  input. Logic unit
-*    ReadSpeed  :  input. ¶ÁËÙ¶È. Kbytes/second
-*    WriteSpeed :  input. Ğ´ËÙ¶È. Kbytes/second
+*    ReadSpeed  :  input. è¯»é€Ÿåº¦. Kbytes/second
+*    WriteSpeed :  input. å†™é€Ÿåº¦. Kbytes/second
 *
 * Return value:
-*    ·µ»ØÃüÁîµÄÖ´ĞĞÇé¿ö
+*    è¿”å›å‘½ä»¤çš„æ‰§è¡Œæƒ…å†µ
 *
 * note:
 *

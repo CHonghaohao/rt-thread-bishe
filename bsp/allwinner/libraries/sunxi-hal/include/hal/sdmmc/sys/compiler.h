@@ -33,12 +33,12 @@
 #if defined(__CC_ARM)
 /* ARM Compiler */
 
-#define inline		__inline
-//#define __inline	__inline
-#define __inline__	__inline
+#define inline      __inline
+//#define __inline  __inline
+#define __inline__  __inline
 
 #ifndef __always_inline
-#define __always_inline	__forceinline
+#define __always_inline __forceinline
 #endif
 
 #ifndef __noinline
@@ -47,36 +47,36 @@
 
 #if defined(__GNUC__)
 /* ARM Compiler support GNU */
-#define __packed	__attribute__((__packed__))
+#define __packed    __attribute__((__packed__))
 #else
-//#define __packed	__packed
+//#define __packed  __packed
 #endif
-//#define __asm		__asm
-//#define __weak	__weak
+//#define __asm     __asm
+//#define __weak    __weak
 
 #elif defined(__GNUC__)
 /* GNU Compiler */
 
 // #include <sys/cdefs.h>
 
-//#define inline	inline
-#define __inline	inline
-#define __inline__	inline
+//#define inline    inline
+#define __inline    inline
+#define __inline__  inline
 
 #ifdef __always_inline
-#undef __always_inline	/* already defined in <sys/cdefs.h> */
-#define __always_inline	inline __attribute__((always_inline))
+#undef __always_inline  /* already defined in <sys/cdefs.h> */
+#define __always_inline inline __attribute__((always_inline))
 #else
-#define __always_inline	inline __attribute__((always_inline))
+#define __always_inline inline __attribute__((always_inline))
 #endif
 
 #ifndef __noinline
-#define __noinline	__attribute__((__noinline__))
+#define __noinline  __attribute__((__noinline__))
 #endif
 
-// #define __packed	__attribute__((__packed__))
-#define __asm		asm
-#define __weak		__attribute__((weak))
+// #define __packed __attribute__((__packed__))
+#define __asm       asm
+#define __weak      __attribute__((weak))
 
 #ifdef __CONFIG_XIP_SECTION_FUNC_LEVEL
 #define __xip_text      __attribute__((section (".xip_text")))

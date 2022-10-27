@@ -43,86 +43,86 @@
 
 static inline void *msgbox_base_get(int *m)
 {
-	void *b = 0;
+    void *b = 0;
 
-	switch (*m) {
-	case MSGBOX_ARM:
-		b = (void *)MSGBOX_ARM_BASE;
-		break;
-	case MSGBOX_DSP:
-		b = (void *)MSGBOX_DSP_BASE;
-		break;
-	case MSGBOX_RISCV:
-		b = (void *)MSGBOX_RISCV_BASE;
-		break;
-	default:
-		break;
-	}
+    switch (*m) {
+    case MSGBOX_ARM:
+        b = (void *)MSGBOX_ARM_BASE;
+        break;
+    case MSGBOX_DSP:
+        b = (void *)MSGBOX_DSP_BASE;
+        break;
+    case MSGBOX_RISCV:
+        b = (void *)MSGBOX_RISCV_BASE;
+        break;
+    default:
+        break;
+    }
 
-	return b;
+    return b;
 }
 
 static inline void *MSGBOX_VER_REG(int m, int n)
 {
-	void *msgbox_base = msgbox_base_get(&m);
+    void *msgbox_base = msgbox_base_get(&m);
 
-	return (msgbox_base + 0x10 + (n)*0x100);
+    return (msgbox_base + 0x10 + (n)*0x100);
 }
 
 static inline void *MSGBOX_RD_IRQ_EN_REG(int m, int n)
 {
-	void *msgbox_base = msgbox_base_get(&m);
+    void *msgbox_base = msgbox_base_get(&m);
 
-	return (msgbox_base + 0x20 + (n)*0x100);
+    return (msgbox_base + 0x20 + (n)*0x100);
 }
 
 static inline void *MSGBOX_RD_IRQ_STA_REG(int m, int n)
 {
-	void *msgbox_base = msgbox_base_get(&m);
+    void *msgbox_base = msgbox_base_get(&m);
 
-	return (msgbox_base + 0x24 + (n)*0x100);
+    return (msgbox_base + 0x24 + (n)*0x100);
 }
 
 static inline void *MSGBOX_WR_IRQ_EN_REG(int m, int n)
 {
-	void *msgbox_base = msgbox_base_get(&m);
+    void *msgbox_base = msgbox_base_get(&m);
 
-	return (msgbox_base + 0x30 + (n)*0x100);
+    return (msgbox_base + 0x30 + (n)*0x100);
 }
 
 static inline void *MSGBOX_WR_IRQ_STA_REG(int m, int n)
 {
-	void *msgbox_base = msgbox_base_get(&m);
+    void *msgbox_base = msgbox_base_get(&m);
 
-	return (msgbox_base + 0x34 + (n)*0x100);
+    return (msgbox_base + 0x34 + (n)*0x100);
 }
 
 static inline void *MSGBOX_DEBUG_REG(int m, int n)
 {
-	void *msgbox_base = msgbox_base_get(&m);
+    void *msgbox_base = msgbox_base_get(&m);
 
-	return (msgbox_base + 0x40 + (n)*0x100);
+    return (msgbox_base + 0x40 + (n)*0x100);
 }
 
 static inline void *MSGBOX_FIFO_STA_REG(int m, int n, int p)
 {
-	void *msgbox_base = msgbox_base_get(&m);
+    void *msgbox_base = msgbox_base_get(&m);
 
-	return (msgbox_base + 0x50 + (n)*0x100 + (p)*0x4);
+    return (msgbox_base + 0x50 + (n)*0x100 + (p)*0x4);
 }
 
 static inline void *MSGBOX_MSG_STA_REG(int m, int n, int p)
 {
-	void *msgbox_base = msgbox_base_get(&m);
+    void *msgbox_base = msgbox_base_get(&m);
 
-	return (msgbox_base + 0x60 + (n)*0x100 + (p)*0x4);
+    return (msgbox_base + 0x60 + (n)*0x100 + (p)*0x4);
 }
 
 static inline void *MSGBOX_MSG_REG(int m, int n, int p)
 {
-	void *msgbox_base = msgbox_base_get(&m);
+    void *msgbox_base = msgbox_base_get(&m);
 
-	return (msgbox_base + 0x70 + (n)*0x100 + (p)*0x4);
+    return (msgbox_base + 0x70 + (n)*0x100 + (p)*0x4);
 }
 
 #define THIS_MSGBOX_USE MSGBOX_DSP

@@ -126,7 +126,7 @@ static void recursively_mark_NOTATTACHED(struct usb_host_virt_dev *udev)
 void kick_khubd(struct usb_hub *hub)
 {
     uint32_t flags;
-	//USB_OS_ENTER_CRITICAL(hub_event_lock);
+    //USB_OS_ENTER_CRITICAL(hub_event_lock);
     flags = hal_spin_lock_irqsave(&hub_event_lock);
 
     if (hub)
@@ -334,7 +334,7 @@ static int hub_port_debounce(struct usb_hub *hub, int port1)
 
     for (total_time = 0; ; total_time += HUB_DEBOUNCE_STEP)
     {
-	hal_log_info("port debounce %d...\n", stable_time);
+    hal_log_info("port debounce %d...\n", stable_time);
         ret = hub_port_status(hub, port1, &portstatus, &portchange);
 
         if (ret < 0)
@@ -395,7 +395,7 @@ static int hub_port_wait_reset(struct usb_hub *hub, int port1,
     {
         /* wait to give the device a chance to reset */
         //msleep(delay);
-	hal_msleep(delay);
+    hal_msleep(delay);
         /* read and decode port status */
         ret = hub_port_status(hub, port1, &portstatus, &portchange);
 
@@ -1389,7 +1389,7 @@ static void hub_port_connect_change(struct usb_hub *hub, u32 port1, u16 portstat
          * recursively_mark_NOTATTACHED() routine.
          */
         //USB_OS_ENTER_CRITICAL(sr);
-	    sr = hal_spin_lock_irqsave(&device_lock);
+        sr = hal_spin_lock_irqsave(&device_lock);
 
         if (hdev->state == USB_STATE_NOTATTACHED)
         {
@@ -1412,7 +1412,7 @@ static void hub_port_connect_change(struct usb_hub *hub, u32 port1, u16 portstat
             if (status)
             {
                 // USB_OS_ENTER_CRITICAL(sr);
-		        sr = hal_spin_lock_irqsave(&device_lock);
+                sr = hal_spin_lock_irqsave(&device_lock);
                 hdev->children[port1 - 1] = NULL;
                 hal_spin_unlock_irqrestore(&device_lock, sr);
             }
@@ -1597,12 +1597,12 @@ static void hub_events(u32 flag)
 
         //--<2>--从hub_event_list里取出设备
         //USB_OS_ENTER_CRITICAL(hub_event_lock);
-	    flags = hal_spin_lock_irqsave(&hub_event_lock);
+        flags = hal_spin_lock_irqsave(&hub_event_lock);
 
         if (usb_list_empty(&hub_event_list))
         {
             //USB_OS_EXIT_CRITICAL(hub_event_lock);
-	        hal_spin_unlock_irqrestore(&hub_event_lock, flags);
+            hal_spin_unlock_irqrestore(&hub_event_lock, flags);
             break;
         }
 
@@ -1629,7 +1629,7 @@ static void hub_events(u32 flag)
         i = hub->resume_root_hub;
         hal_spin_unlock_irqrestore(&hub_event_lock, flags);
 
-	    usb_lock_device(hdev);
+        usb_lock_device(hdev);
         //--<3>--唤醒hub上的设备
         if (i)
         {
@@ -1689,7 +1689,7 @@ static void hub_events(u32 flag)
             //获得port state
             ret = hub_port_status(hub, i, &portstatus, &portchange);
 
-	    hal_log_info("portstatus = 0x%x, portchange = 0x%x\n", portstatus, portchange);
+        hal_log_info("portstatus = 0x%x, portchange = 0x%x\n", portstatus, portchange);
 
             if (ret < 0)
             {
@@ -2214,7 +2214,7 @@ void usb_disconnect(struct usb_host_virt_dev **pdev)
     uint32_t flags;
     hal_spinlock_t lock;
     u8 err;
-        
+
     if (!udev)
     {
         hal_log_err("usb_disconnect() input == NULL ");
@@ -2407,8 +2407,8 @@ static void hub_status_req_complete(struct urb *urb)
 
     if (hub->HubStatusSemi)
     {
-	    //UsbThreadWakeUp(hub->HubStatusSemi);
-	    kthread_wakeup((void *)hub->thread);
+        //UsbThreadWakeUp(hub->HubStatusSemi);
+        kthread_wakeup((void *)hub->thread);
     }
 }
 
@@ -2921,8 +2921,8 @@ descriptor_error:
     hal_log_info("hub_probe--3--");
     /*kthread_create*/
     hub->thread = kthread_create((void *)HubStatusThread,
-				(void *)hub,
-				"hub-status-thread");
+                (void *)hub,
+                "hub-status-thread");
     if (IS_ERR((long)hub->thread))
     {
         ret = PTR_ERR(hub->thread);
@@ -3141,13 +3141,13 @@ static int32_t __usb_gen_hub_thread_exit(struct hub_thread_context *thread_cont)
 
     //等待hub thread结束，然后再del 其内部的同步semi
     //while (USB_OS_THREAD_DELREQ(hub_thread_id) != USB_OS_THREAD_NOT_EXIST)
-	hal_log_info("--usb_gen_hub_thread_exit---1------\n");
+    hal_log_info("--usb_gen_hub_thread_exit---1------\n");
     while (!kthread_stop(hub_thread))
     {
         hal_log_info("--usb_gen_hub_thread_exit---2------\n");
         hub_thread_wakeup(&hub_thread_cont);
         //USB_OS_TIME_DELAY_10MS(10);
-	    hal_msleep(10);
+        hal_msleep(10);
     }
 
     //del complete
@@ -3287,7 +3287,7 @@ int32_t usb_gen_hub_init(void)
         return EPDK_FAIL;
     }
 
-	hal_log_info("--usb_gen_hub_init---2----\n");
+    hal_log_info("--usb_gen_hub_init---2----\n");
     //--<1>--初始化hub drv
     usb_gen_hub_func_drv_init(&hub_driver);
 
@@ -3297,7 +3297,7 @@ int32_t usb_gen_hub_init(void)
         hal_log_err("ERR: usb_host_func_drv_reg failed");
         goto hub_failed_1;
     }
-	hal_log_info("--usb_gen_hub_init---4----\n");
+    hal_log_info("--usb_gen_hub_init---4----\n");
 
     //--<3>--开启hub thread
 //#ifdef CONFIG_SOC_SUN3IW2
@@ -3306,7 +3306,7 @@ int32_t usb_gen_hub_init(void)
 //    ret = USB_OS_THREAD_CREATE(hub_main_thread, NULL, 0x8000, HUB_THREAD_PID_PRIO_LEVEL);
 //#endif
 
-	/*会死机--0829*/
+    /*会死机--0829*/
     hub_thread = kthread_create(hub_main_thread, NULL, "hub-main-thread");
     if (IS_ERR((long)hub_thread))
     {
@@ -3316,7 +3316,7 @@ int32_t usb_gen_hub_init(void)
     }
 
     kthread_start(hub_thread);
-	hal_log_info("--usb_gen_hub_init---5----\n");
+    hal_log_info("--usb_gen_hub_init---5----\n");
 
     return EPDK_OK;
 hub_failed_2:
@@ -3358,7 +3358,7 @@ int32_t usb_gen_hub_exit(void)
         hal_sem_delete(usb_address0_sem);
         usb_address0_sem = NULL;
     }
-    
+
     return EPDK_OK;
 }
 

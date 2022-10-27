@@ -38,41 +38,41 @@
 #include <interrupt.h>
 #include <hal_prcm.h>
 
-#define SUNXI_IRQ_UART0		(RINTC_IRQ_MASK | 10)
+#define SUNXI_IRQ_UART0     (RINTC_IRQ_MASK | 10)
 /* not used */
-#define SUNXI_IRQ_UART1		(0)
-#define SUNXI_IRQ_UART2		(0)
-#define SUNXI_IRQ_UART3		(0)
+#define SUNXI_IRQ_UART1     (0)
+#define SUNXI_IRQ_UART2     (0)
+#define SUNXI_IRQ_UART3     (0)
 
-#define SUNXI_UART0_BASE	(0x07080000)
+#define SUNXI_UART0_BASE    (0x07080000)
 /* not used */
-#define SUNXI_UART1_BASE	(0xffffffff)
-#define SUNXI_UART2_BASE	(0xffffffff)
-#define SUNXI_UART3_BASE	(0xffffffff)
+#define SUNXI_UART1_BASE    (0xffffffff)
+#define SUNXI_UART2_BASE    (0xffffffff)
+#define SUNXI_UART3_BASE    (0xffffffff)
 
-#define UART_FIFO_SIZE		(64)
+#define UART_FIFO_SIZE      (64)
 
-#define UART0_GPIO_FUNCTION	(2)
-#define UART1_GPIO_FUNCTION	(2)
-#define UART2_GPIO_FUNCTION	(2)
-#define UART3_GPIO_FUNCTION	(2)
+#define UART0_GPIO_FUNCTION (2)
+#define UART1_GPIO_FUNCTION (2)
+#define UART2_GPIO_FUNCTION (2)
+#define UART3_GPIO_FUNCTION (2)
 
-#define UART0_TX		GPIOL(8)
-#define UART0_RX		GPIOL(9)
+#define UART0_TX        GPIOL(8)
+#define UART0_RX        GPIOL(9)
 /* not used */
-#define UART1_TX		GPIOL(8)
-#define UART1_RX		GPIOL(9)
-#define UART2_TX		GPIOL(8)
-#define UART2_RX		GPIOL(9)
-#define UART3_TX		GPIOL(8)
-#define UART3_RX		GPIOL(9)
+#define UART1_TX        GPIOL(8)
+#define UART1_RX        GPIOL(9)
+#define UART2_TX        GPIOL(8)
+#define UART2_RX        GPIOL(9)
+#define UART3_TX        GPIOL(8)
+#define UART3_RX        GPIOL(9)
 
 /* for prcm and ccmu compatibility */
-#define HAL_CLK_PERIPH_UART0	CCU_MOD_CLK_R_UART
+#define HAL_CLK_PERIPH_UART0    CCU_MOD_CLK_R_UART
 /* not used */
-#define HAL_CLK_PERIPH_UART1	CCU_MOD_CLK_NONE
-#define HAL_CLK_PERIPH_UART2	CCU_MOD_CLK_NONE
-#define HAL_CLK_PERIPH_UART3	CCU_MOD_CLK_NONE
+#define HAL_CLK_PERIPH_UART1    CCU_MOD_CLK_NONE
+#define HAL_CLK_PERIPH_UART2    CCU_MOD_CLK_NONE
+#define HAL_CLK_PERIPH_UART3    CCU_MOD_CLK_NONE
 #endif /* CONFIG_CORE_DSP0 */
 
 #endif /*__UART_SUN50IW11_H__  */

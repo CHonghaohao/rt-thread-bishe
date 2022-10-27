@@ -31,13 +31,13 @@ extern "C" {
  * clk_info
  */
 struct clk_info_t {
-	char name[20];
-	hal_clk_id_t clk_id;
-	hal_clk_id_t clk_parent_id;
-	hal_reset_id_t rst_id;
-	hal_clk_t clk;
-	hal_clk_t clk_parent;
-	struct reset_control *rst;
+    char name[20];
+    hal_clk_id_t clk_id;
+    hal_clk_id_t clk_parent_id;
+    hal_reset_id_t rst_id;
+    hal_clk_t clk;
+    hal_clk_t clk_parent;
+    struct reset_control *rst;
 };
 
 s32 plat_get_reg_base(u32 index, u32 *data);

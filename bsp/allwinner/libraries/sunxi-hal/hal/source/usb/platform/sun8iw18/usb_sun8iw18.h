@@ -33,8 +33,8 @@
 #ifndef __USB_SUN8IW18_H__
 #define __USB_SUN8IW18_H__
 
-#define USB_MAX_CONTROLLER_COUNT	    0
-#define SUNXI_USB_OTG_PBASE		        0x05100000
+#define USB_MAX_CONTROLLER_COUNT        0
+#define SUNXI_USB_OTG_PBASE             0x05100000
 
 struct platform_usb_config
 {

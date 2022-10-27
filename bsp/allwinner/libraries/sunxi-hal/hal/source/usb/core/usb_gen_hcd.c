@@ -51,7 +51,7 @@
 
 hal_spinlock_t gen_hcd_lock;
 //static USB_OS_KERNEL_EVENT *usb_bus_list_lock;  //用来保护usb virt bus的，虽然目前用不到
-hal_sem_t	usb_bus_list_lock;  //用来保护usb virt bus的，虽然目前用不到
+hal_sem_t   usb_bus_list_lock;  //用来保护usb virt bus的，虽然目前用不到
 //但是当我们支持多个物理hcd的时候必须用
 
 /*
@@ -59,12 +59,12 @@ hal_sem_t	usb_bus_list_lock;  //用来保护usb virt bus的，虽然目前用不
  */
 void usb_hcd_start_port_resume(struct usb_virt_bus *bus, int portnum)
 {
-	unsigned bit = 1 << portnum;
+    unsigned bit = 1 << portnum;
 
-	if (!(bus->resuming_ports & bit)) {
-		bus->resuming_ports |= bit;
-		//pm_runtime_get_noresume(&bus->root_hub->dev);
-	}
+    if (!(bus->resuming_ports & bit)) {
+        bus->resuming_ports |= bit;
+        //pm_runtime_get_noresume(&bus->root_hub->dev);
+    }
 }
 
 /*
@@ -72,12 +72,12 @@ void usb_hcd_start_port_resume(struct usb_virt_bus *bus, int portnum)
  */
 void usb_hcd_end_port_resume(struct usb_virt_bus *bus, int portnum)
 {
-	unsigned bit = 1 << portnum;
+    unsigned bit = 1 << portnum;
 
-	if (bus->resuming_ports & bit) {
-		bus->resuming_ports &= ~bit;
-		//pm_runtime_put_noidle(&bus->root_hub->dev);
-	}
+    if (bus->resuming_ports & bit) {
+        bus->resuming_ports &= ~bit;
+        //pm_runtime_put_noidle(&bus->root_hub->dev);
+    }
 }
 
 /**
@@ -213,7 +213,7 @@ void usb_hcd_giveback_urb(struct hc_gen_dev *hcd, struct urb *urb)
     urb->complete(urb); //如果是rh 的status urb ,这个时候的use_count = 2
     //见hub_status_req_complete()
     // _urb_done_complete_callback
-    
+
     usb_dec32((&urb->use_count));
 
     if (urb->reject)
@@ -388,60 +388,60 @@ void usb_hc_died(struct hc_gen_dev *hcd)
 static int _register_root_hub(struct usb_host_virt_dev *usb_dev,
                               struct hc_gen_dev  *hcd)
 {
-	uint32_t sr = 0;
-	u8 err = 0;
-	const int devnum = 1;
-	int retval = 0;
-	//--<1>--初始化virt_dev
-	usb_dev->devnum = devnum;
-	usb_dev->bus->devnum_next = devnum + 1;
-	memset(&usb_dev->bus->devmap.devicemap, 0, sizeof(struct usb_devmap));
-	usb_set_bit(devnum, usb_dev->bus->devmap.devicemap);
-	usb_set_device_state(usb_dev, USB_STATE_ADDRESS);
+    uint32_t sr = 0;
+    u8 err = 0;
+    const int devnum = 1;
+    int retval = 0;
+    //--<1>--初始化virt_dev
+    usb_dev->devnum = devnum;
+    usb_dev->bus->devnum_next = devnum + 1;
+    memset(&usb_dev->bus->devmap.devicemap, 0, sizeof(struct usb_devmap));
+    usb_set_bit(devnum, usb_dev->bus->devmap.devicemap);
+    usb_set_device_state(usb_dev, USB_STATE_ADDRESS);
 
-	hal_sem_wait(usb_bus_list_lock);
-	usb_dev->bus->root_hub = usb_dev;
-	usb_dev->ep0.desc.wMaxPacketSize = 64;
-	//--<2>--获得rh设备描述符
-	retval = usb_get_device_descriptor(usb_dev, USB_DT_DEVICE_SIZE);
+    hal_sem_wait(usb_bus_list_lock);
+    usb_dev->bus->root_hub = usb_dev;
+    usb_dev->ep0.desc.wMaxPacketSize = 64;
+    //--<2>--获得rh设备描述符
+    retval = usb_get_device_descriptor(usb_dev, USB_DT_DEVICE_SIZE);
 
-	if (retval != sizeof usb_dev->descriptor)
-	{
-		usb_dev->bus->root_hub = NULL;
-		//used when update list of hcds
-		hal_sem_post(usb_bus_list_lock);
-		hal_log_err("can't read %s device descriptor %d", usb_dev->bus->bus_name, retval);
-		return (retval < 0) ? retval : -EMSGSIZE;
-	}
+    if (retval != sizeof usb_dev->descriptor)
+    {
+        usb_dev->bus->root_hub = NULL;
+        //used when update list of hcds
+        hal_sem_post(usb_bus_list_lock);
+        hal_log_err("can't read %s device descriptor %d", usb_dev->bus->bus_name, retval);
+        return (retval < 0) ? retval : -EMSGSIZE;
+    }
 
     //--<3>--创建新设备
     usb_lock_device(usb_dev);
-	retval = usb_new_device(usb_dev);
+    retval = usb_new_device(usb_dev);
     usb_unlock_device(usb_dev);
 
-	if (retval)
-	{
-		usb_dev->bus->root_hub = NULL;
-		hal_log_err("PANIC : can't register root hub for %s, %d",
-			usb_dev->bus->bus_name, retval);
-	}
+    if (retval)
+    {
+        usb_dev->bus->root_hub = NULL;
+        hal_log_err("PANIC : can't register root hub for %s, %d",
+            usb_dev->bus->bus_name, retval);
+    }
 
-	hal_sem_post(usb_bus_list_lock);
+    hal_sem_post(usb_bus_list_lock);
 
-	if (retval == 0)
-	{
-		sr = hal_spin_lock_irqsave(&gen_hcd_lock);
-		hcd->rh_registered = 1;
-		hal_spin_unlock_irqrestore(&gen_hcd_lock, sr);
+    if (retval == 0)
+    {
+        sr = hal_spin_lock_irqsave(&gen_hcd_lock);
+        hcd->rh_registered = 1;
+        hal_spin_unlock_irqrestore(&gen_hcd_lock, sr);
 
-		/* Did the HC die before the root hub was registered? */
-		if (hcd->state == HC_GEN_DEV_STATE_HALT)
-		{
-			usb_hc_died(hcd);    /* This time clean up */
-		}
-	}
+        /* Did the HC die before the root hub was registered? */
+        if (hcd->state == HC_GEN_DEV_STATE_HALT)
+        {
+            usb_hc_died(hcd);    /* This time clean up */
+        }
+    }
 
-	return retval;
+    return retval;
 }
 
 /*
@@ -461,11 +461,11 @@ static int _register_root_hub(struct usb_host_virt_dev *usb_dev,
 struct hc_gen_dev *usb_create_hc_gen_dev(const struct hc_driver *driver, const char *bus_name)
 {
     struct hc_gen_dev *hcd;
-	u8 ret = 0;
+    u8 ret = 0;
 
     //--<1>--初始化host controller device
-	//hcd = kzalloc(sizeof(*hcd) + driver->hcd_priv_size, GFP_KERNEL);
-	hcd = malloc(sizeof(*hcd) + driver->hcd_priv_size);
+    //hcd = kzalloc(sizeof(*hcd) + driver->hcd_priv_size, GFP_KERNEL);
+    hcd = malloc(sizeof(*hcd) + driver->hcd_priv_size);
     if (!hcd)
     {
         hal_log_err("usb_create_hc_gen_dev alloc failed");
@@ -475,21 +475,21 @@ struct hc_gen_dev *usb_create_hc_gen_dev(const struct hc_driver *driver, const c
     memset(hcd, 0, sizeof(*hcd) + driver->hcd_priv_size);
     usb_bus_init(&hcd->self);
     hcd->self.hcpriv        = hcd;
-	hcd->self.bus_name      = bus_name;
-	hcd->self.point_gen_hcd = hcd;
-	//*****************************
-	//创建root hub poll的timer
-	//*****************************
-	//--<2>--create and start timer
-	//USB_HOST_RH_TIMEROUT = 10000, 5s
-	//hcd->rh_timer = OS_TimerCreate(USB_HOST_RH_TIMEROUT,
-	//				USB_TIMER_PERIOD_MORE,
-	//				(USB_TIMER_CALLBACK)rh_timer_func,
-	//				(void *)hcd);
-	/*500ms*/
-	//OS_TimerCreate(hcd->rh_timer, OS_TIMER_PERIODIC, rh_timer_func, hcd, 500);
-	hcd->rh_timer = osal_timer_create("hcd_timer", rh_timer_func, (void*)hcd,
-					500, OSAL_TIMER_FLAG_PERIODIC);
+    hcd->self.bus_name      = bus_name;
+    hcd->self.point_gen_hcd = hcd;
+    //*****************************
+    //创建root hub poll的timer
+    //*****************************
+    //--<2>--create and start timer
+    //USB_HOST_RH_TIMEROUT = 10000, 5s
+    //hcd->rh_timer = OS_TimerCreate(USB_HOST_RH_TIMEROUT,
+    //              USB_TIMER_PERIOD_MORE,
+    //              (USB_TIMER_CALLBACK)rh_timer_func,
+    //              (void *)hcd);
+    /*500ms*/
+    //OS_TimerCreate(hcd->rh_timer, OS_TIMER_PERIODIC, rh_timer_func, hcd, 500);
+    hcd->rh_timer = osal_timer_create("hcd_timer", rh_timer_func, (void*)hcd,
+                    500, OSAL_TIMER_FLAG_PERIODIC);
 
     if (hcd->rh_timer == NULL)
     {
@@ -499,18 +499,18 @@ struct hc_gen_dev *usb_create_hc_gen_dev(const struct hc_driver *driver, const c
 
     ret = osal_timer_start(hcd->rh_timer);
 
-	if (ret)
-	{
-		// it need to add
-		hal_log_err("PANIC : start timer failI.\n");
-		osal_timer_delete(hcd->rh_timer);
-		return NULL;
-	}
+    if (ret)
+    {
+        // it need to add
+        hal_log_err("PANIC : start timer failI.\n");
+        osal_timer_delete(hcd->rh_timer);
+        return NULL;
+    }
 
-	//--<3>--匹配hcd设备的驱动
-	hcd->driver         = driver;
-	hcd->product_desc   = (driver->product_desc) ? driver->product_desc : "USB Host Controller";
-	return hcd;
+    //--<3>--匹配hcd设备的驱动
+    hcd->driver         = driver;
+    hcd->product_desc   = (driver->product_desc) ? driver->product_desc : "USB Host Controller";
+    return hcd;
 }
 
 /*
@@ -540,7 +540,7 @@ s32 usb_add_hc_gen_dev(struct hc_gen_dev *hcd, u32  irqnum, u32 irqflags)
         hal_log_err("PANIC : usb_add_hc_gen_dev() :  can't reset");
         return retval;
     }
-	hal_log_info("----2--usb_add_hc_gen_dev\n");
+    hal_log_info("----2--usb_add_hc_gen_dev\n");
 
     /*version 1, we consider only one host*/
 
@@ -553,7 +553,7 @@ s32 usb_add_hc_gen_dev(struct hc_gen_dev *hcd, u32  irqnum, u32 irqflags)
         return retval;
     }
 
-	hal_log_info("----3--usb_add_hc_gen_dev\n");
+    hal_log_info("----3--usb_add_hc_gen_dev\n");
     //--<2>--此hcd设备支持的速度
     rh_dev->speed = (hcd->driver->flags & HC_DRIVER_FLAG_HCD_USB2) ? USB_SPEED_HIGH : USB_SPEED_FULL;
 
@@ -564,7 +564,7 @@ s32 usb_add_hc_gen_dev(struct hc_gen_dev *hcd, u32  irqnum, u32 irqflags)
         goto err_hcd_driver_start;
     }
 
-	hal_log_info("----4--usb_add_hc_gen_dev\n");
+    hal_log_info("----4--usb_add_hc_gen_dev\n");
     /* hcd->driver->start() reported can_wakeup, probably with
      * assistance from board's boot firmware.
      * NOTE:  normal devices won't enable wakeup by default.
@@ -578,7 +578,7 @@ s32 usb_add_hc_gen_dev(struct hc_gen_dev *hcd, u32  irqnum, u32 irqflags)
 
     hal_log_info("hcd->remote_wakeup=%d\n", hcd->remote_wakeup);
 
-	hal_log_info("----5--usb_add_hc_gen_dev\n");
+    hal_log_info("----5--usb_add_hc_gen_dev\n");
     //--<4>--注册root hub, 即添加一个usb_host_virt_dev
     //linux-4.9 register_root_hub(hcd)
     if ((retval = _register_root_hub(rh_dev, hcd)) != 0)
@@ -592,8 +592,8 @@ s32 usb_add_hc_gen_dev(struct hc_gen_dev *hcd, u32  irqnum, u32 irqflags)
     {
         usb_hcd_poll_rh_status(hcd);
     }
- 
-	hal_log_info("----6--usb_add_hc_gen_dev\n");
+
+    hal_log_info("----6--usb_add_hc_gen_dev\n");
     return retval;
 err_register_root_hub:
     hcd->driver->stop(hcd);
@@ -773,7 +773,7 @@ int hcd_ops_submit_urb(struct urb *urb, unsigned mem_flags)
             case HC_GEN_DEV_STATE_RESUMING:
             {
                 //--<3>--添加到urb_list
-                INIT_LIST_HEAD(&(urb->urb_list));               
+                INIT_LIST_HEAD(&(urb->urb_list));
                 urb->unlinked = 0;
                 list_add_tail(&(urb->urb_list), &(ep->urb_list));
 
@@ -880,7 +880,7 @@ int hcd_ops_unlink_urb(struct urb *urb, int status)
 {
     struct usb_host_virt_endpoint   *ep = NULL;
     struct hc_gen_dev               *hcd = NULL;
-    struct list_head		    *tmp;
+    struct list_head            *tmp;
     s32  retval = 0;
     uint32_t sr;
 
@@ -1254,10 +1254,10 @@ rescan:
 */
 int usb_hcd_link_urb_to_ep(struct hc_gen_dev *hcd, struct urb *urb)
 {
-	int rc = 0;
-	int flags;
+    int rc = 0;
+    int flags;
 
-	flags = hal_spin_lock_irqsave(&gen_hcd_lock);
+    flags = hal_spin_lock_irqsave(&gen_hcd_lock);
 
     if (HC_GEN_DEV_IS_RUNNING(hcd->state))
     {
@@ -1267,7 +1267,7 @@ int usb_hcd_link_urb_to_ep(struct hc_gen_dev *hcd, struct urb *urb)
     {
         rc = -1;
     }
-    
+
     hal_spin_unlock_irqrestore(&gen_hcd_lock, flags);
 
     return rc;
@@ -1275,32 +1275,32 @@ int usb_hcd_link_urb_to_ep(struct hc_gen_dev *hcd, struct urb *urb)
 
 void usb_hcd_unlink_urb_from_ep(struct hc_gen_dev *hcd, struct urb *urb)
 {
-	int flags;
+    int flags;
 
-	flags = hal_spin_lock_irqsave(&gen_hcd_lock);
-	list_del_init(&(urb->urb_list));
-	hal_spin_unlock_irqrestore(&gen_hcd_lock, flags);
+    flags = hal_spin_lock_irqsave(&gen_hcd_lock);
+    list_del_init(&(urb->urb_list));
+    hal_spin_unlock_irqrestore(&gen_hcd_lock, flags);
 }
 
 int usb_hcd_check_unlink_urb(struct hc_gen_dev *hcd, struct urb *urb)
 {
-	struct list_head	*tmp;
+    struct list_head    *tmp;
 
-	/* insist the urb is still queued */
-	list_for_each(tmp, &urb->ep->urb_list) {
-		if (tmp == &urb->urb_list)
-			break;
-	}
-	if (tmp != &urb->urb_list)
-		return -EIDRM;
+    /* insist the urb is still queued */
+    list_for_each(tmp, &urb->ep->urb_list) {
+        if (tmp == &urb->urb_list)
+            break;
+    }
+    if (tmp != &urb->urb_list)
+        return -EIDRM;
 
-	/* Any status except -EINPROGRESS means something already started to
-	 * unlink this URB from the hardware.  So there's no more work to do.
-	 */
-	if (urb->unlinked)
-		return -EBUSY;
-	urb->unlinked = urb->status;
-	return 0;
+    /* Any status except -EINPROGRESS means something already started to
+     * unlink this URB from the hardware.  So there's no more work to do.
+     */
+    if (urb->unlinked)
+        return -EBUSY;
+    urb->unlinked = urb->status;
+    return 0;
 }
 
 
@@ -1349,49 +1349,49 @@ static int hcd_ops_hub_resume(struct usb_bus *bus)
  */
 // int usb_hub_clear_tt_buffer(struct urb *urb)
 // {
-// 	//struct usb_device	*udev = urb->dev;
-// 	struct usb_host_virt_dev	*udev = urb->dev;
-// 	int			pipe = urb->pipe;
-// 	struct usb_tt		*tt = udev->tt;
-// 	unsigned long		flags;
-// 	struct usb_tt_clear	*clear;
+//  //struct usb_device *udev = urb->dev;
+//  struct usb_host_virt_dev    *udev = urb->dev;
+//  int         pipe = urb->pipe;
+//  struct usb_tt       *tt = udev->tt;
+//  unsigned long       flags;
+//  struct usb_tt_clear *clear;
 
-// 	/* we've got to cope with an arbitrary number of pending TT clears,
-// 	 * since each TT has "at least two" buffers that can need it (and
-// 	 * there can be many TTs per hub).  even if they're uncommon.
-// 	 */
-// 	clear = hal_malloc(sizeof *clear);
-// 	if (clear == NULL) {
-// 		hal_log_err("can't save CLEAR_TT_BUFFER state\n");
-// 		/* FIXME recover somehow ... RESET_TT? */
-// 		return -ENOMEM;
-// 	}
+//  /* we've got to cope with an arbitrary number of pending TT clears,
+//   * since each TT has "at least two" buffers that can need it (and
+//   * there can be many TTs per hub).  even if they're uncommon.
+//   */
+//  clear = hal_malloc(sizeof *clear);
+//  if (clear == NULL) {
+//      hal_log_err("can't save CLEAR_TT_BUFFER state\n");
+//      /* FIXME recover somehow ... RESET_TT? */
+//      return -ENOMEM;
+//  }
 
-// 	/* info that CLEAR_TT_BUFFER needs */
-// 	clear->tt = tt->multi ? udev->ttport : 1;
-// 	clear->devinfo = usb_pipeendpoint (pipe);
-// 	clear->devinfo |= udev->devnum << 4;
-// 	clear->devinfo |= usb_pipecontrol(pipe)
-// 			? (USB_ENDPOINT_XFER_CONTROL << 11)
-// 			: (USB_ENDPOINT_XFER_BULK << 11);
-// 	if (usb_pipein(pipe))
-// 		clear->devinfo |= 1 << 15;
+//  /* info that CLEAR_TT_BUFFER needs */
+//  clear->tt = tt->multi ? udev->ttport : 1;
+//  clear->devinfo = usb_pipeendpoint (pipe);
+//  clear->devinfo |= udev->devnum << 4;
+//  clear->devinfo |= usb_pipecontrol(pipe)
+//          ? (USB_ENDPOINT_XFER_CONTROL << 11)
+//          : (USB_ENDPOINT_XFER_BULK << 11);
+//  if (usb_pipein(pipe))
+//      clear->devinfo |= 1 << 15;
 
-// 	/* info for completion callback */
-// 	clear->hcd = bus_to_hcd(udev->bus);
-// 	clear->ep = urb->ep;
+//  /* info for completion callback */
+//  clear->hcd = bus_to_hcd(udev->bus);
+//  clear->ep = urb->ep;
 
-// 	/* tell keventd to clear state for this TT */
-// 	flags = hal_spin_lock_irqsave(&tt->lock);
-// 	list_add_tail(&clear->clear_list, &tt->clear_list);
-// 	// schedule_work(&tt->clear_work);//akira
-// 	hal_spin_unlock_irqrestore(&tt->lock, flags);
-// 	return 0;
+//  /* tell keventd to clear state for this TT */
+//  flags = hal_spin_lock_irqsave(&tt->lock);
+//  list_add_tail(&clear->clear_list, &tt->clear_list);
+//  // schedule_work(&tt->clear_work);//akira
+//  hal_spin_unlock_irqrestore(&tt->lock, flags);
+//  return 0;
 // }
 
 void usb_gen_hcd_init(void)
 {
-	usb_bus_list_lock = hal_sem_create(1);
+    usb_bus_list_lock = hal_sem_create(1);
 }
 
 void usb_gen_hcd_exit(void)

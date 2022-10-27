@@ -42,18 +42,18 @@
  */
 OS_Status OS_QueueCreate(OS_Queue_t *queue, uint32_t queueLen, uint32_t itemSize)
 {
-//	OS_HANDLE_ASSERT(!OS_QueueIsValid(queue), queue->handle);
+//  OS_HANDLE_ASSERT(!OS_QueueIsValid(queue), queue->handle);
 
-	queue->handle = rt_mq_create("os_mq", itemSize, queueLen, RT_IPC_FLAG_FIFO);
+    queue->handle = rt_mq_create("os_mq", itemSize, queueLen, RT_IPC_FLAG_FIFO);
 
-	OS_DBG("%s(), handle %p\n", __func__, queue->handle);
+    OS_DBG("%s(), handle %p\n", __func__, queue->handle);
 
-	if (queue->handle == NULL) {
-		OS_ERR("err %"OS_HANDLE_F"\n", queue->handle);
-		return OS_FAIL;
-	}
-	queue->itemSize = itemSize;
-	return OS_OK;
+    if (queue->handle == NULL) {
+        OS_ERR("err %"OS_HANDLE_F"\n", queue->handle);
+        return OS_FAIL;
+    }
+    queue->itemSize = itemSize;
+    return OS_OK;
 }
 
 /**
@@ -63,18 +63,18 @@ OS_Status OS_QueueCreate(OS_Queue_t *queue, uint32_t queueLen, uint32_t itemSize
  */
 OS_Status OS_QueueDelete(OS_Queue_t *queue)
 {
-	rt_err_t ret;
+    rt_err_t ret;
 
-	OS_HANDLE_ASSERT(OS_QueueIsValid(queue), queue->handle);
-	OS_DBG("%s(), handle %p\n", __func__, queue->handle);
+    OS_HANDLE_ASSERT(OS_QueueIsValid(queue), queue->handle);
+    OS_DBG("%s(), handle %p\n", __func__, queue->handle);
 
-	ret = rt_mq_delete(queue->handle);
-	if (ret != RT_EOK) {
-		OS_ERR("rt_mq_delete(%p) return %ld\n", queue->handle, ret);
-	}
+    ret = rt_mq_delete(queue->handle);
+    if (ret != RT_EOK) {
+        OS_ERR("rt_mq_delete(%p) return %ld\n", queue->handle, ret);
+    }
 
-	OS_QueueSetInvalid(queue);
-	return OS_OK;
+    OS_QueueSetInvalid(queue);
+    return OS_OK;
 }
 
 /**
@@ -92,43 +92,43 @@ OS_Status OS_QueueDelete(OS_Queue_t *queue)
  */
 OS_Status OS_QueueSend(OS_Queue_t *queue, const void *item, OS_Time_t waitMS)
 {
-	rt_err_t ret;
+    rt_err_t ret;
 
-	OS_HANDLE_ASSERT(OS_QueueIsValid(queue), queue->handle);
+    OS_HANDLE_ASSERT(OS_QueueIsValid(queue), queue->handle);
 
-	if (waitMS == 0) {
-		ret = rt_mq_send(queue->handle, item, queue->itemSize);
-		if (ret != RT_EOK) {
-			return OS_FAIL;
-		}
-	} else if (waitMS == OS_WAIT_FOREVER) {
-		while (1) {
-			ret = rt_mq_send(queue->handle, item, queue->itemSize);
-			if (ret == RT_EOK) {
-				break;
-			} else if (ret == -RT_EFULL) {
-				OS_MSleep(1);
-			} else {
-				OS_DBG("%s() fail @ %d\n", __func__, __LINE__);
-				return OS_FAIL;
-			}
-		}
-	} else {
-		rt_tick_t endTick = rt_tick_get() + OS_CalcWaitTicks(waitMS);
-		while (OS_TimeBeforeEqual(rt_tick_get(), endTick)) {
-			ret = rt_mq_send(queue->handle, item, queue->itemSize);
-			if (ret == RT_EOK) {
-				break;
-			} else if (ret == -RT_EFULL) {
-				OS_MSleep(1);
-			} else {
-				OS_DBG("%s() fail @ %d\n", __func__, __LINE__);
-				return OS_FAIL;
-			}
-		}
-	}
+    if (waitMS == 0) {
+        ret = rt_mq_send(queue->handle, item, queue->itemSize);
+        if (ret != RT_EOK) {
+            return OS_FAIL;
+        }
+    } else if (waitMS == OS_WAIT_FOREVER) {
+        while (1) {
+            ret = rt_mq_send(queue->handle, item, queue->itemSize);
+            if (ret == RT_EOK) {
+                break;
+            } else if (ret == -RT_EFULL) {
+                OS_MSleep(1);
+            } else {
+                OS_DBG("%s() fail @ %d\n", __func__, __LINE__);
+                return OS_FAIL;
+            }
+        }
+    } else {
+        rt_tick_t endTick = rt_tick_get() + OS_CalcWaitTicks(waitMS);
+        while (OS_TimeBeforeEqual(rt_tick_get(), endTick)) {
+            ret = rt_mq_send(queue->handle, item, queue->itemSize);
+            if (ret == RT_EOK) {
+                break;
+            } else if (ret == -RT_EFULL) {
+                OS_MSleep(1);
+            } else {
+                OS_DBG("%s() fail @ %d\n", __func__, __LINE__);
+                return OS_FAIL;
+            }
+        }
+    }
 
-	return OS_OK;
+    return OS_OK;
 }
 
 /**
@@ -145,15 +145,15 @@ OS_Status OS_QueueSend(OS_Queue_t *queue, const void *item, OS_Time_t waitMS)
  */
 OS_Status OS_QueueReceive(OS_Queue_t *queue, void *item, OS_Time_t waitMS)
 {
-	rt_err_t ret;
+    rt_err_t ret;
 
-	OS_HANDLE_ASSERT(OS_QueueIsValid(queue), queue->handle);
+    OS_HANDLE_ASSERT(OS_QueueIsValid(queue), queue->handle);
 
-	ret = rt_mq_recv(queue->handle, item, queue->itemSize, OS_CalcWaitTicks(waitMS));
-	if (ret != RT_EOK) {
-		OS_DBG("%s() fail @ %d, %"OS_TIME_F" ms\n", __func__, __LINE__, (unsigned int)waitMS);
-		return OS_FAIL;
-	}
+    ret = rt_mq_recv(queue->handle, item, queue->itemSize, OS_CalcWaitTicks(waitMS));
+    if (ret != RT_EOK) {
+        OS_DBG("%s() fail @ %d, %"OS_TIME_F" ms\n", __func__, __LINE__, (unsigned int)waitMS);
+        return OS_FAIL;
+    }
 
-	return OS_OK;
+    return OS_OK;
 }

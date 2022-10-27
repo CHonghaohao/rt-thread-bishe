@@ -37,23 +37,23 @@
 #include "pcm_local.h"
 
 int _snd_pcm_asym_open(snd_pcm_t **pcmp, const snd_pcm_config_t *pcm_config,
-		snd_pcm_stream_t stream, int mode)
+        snd_pcm_stream_t stream, int mode)
 {
-	int ret;
-	const snd_pcm_asym_config_t *asym_config = (const snd_pcm_asym_config_t *)(pcm_config->config);
-	const snd_pcm_config_t *sconf = NULL;
+    int ret;
+    const snd_pcm_asym_config_t *asym_config = (const snd_pcm_asym_config_t *)(pcm_config->config);
+    const snd_pcm_config_t *sconf = NULL;
 
-	awalsa_debug("\n");
-	if (stream == SND_PCM_STREAM_PLAYBACK)
-		sconf = snd_pcm_config_get_config(asym_config->playback_pcm);
-	else
-		sconf = snd_pcm_config_get_config(asym_config->capture_pcm);
-	if (!sconf) {
-		awalsa_err("can't find asym pcm\n");
-		return -EINVAL;
-	}
+    awalsa_debug("\n");
+    if (stream == SND_PCM_STREAM_PLAYBACK)
+        sconf = snd_pcm_config_get_config(asym_config->playback_pcm);
+    else
+        sconf = snd_pcm_config_get_config(asym_config->capture_pcm);
+    if (!sconf) {
+        awalsa_err("can't find asym pcm\n");
+        return -EINVAL;
+    }
 
-	ret = snd_pcm_open_config(pcmp, sconf, stream, mode);
+    ret = snd_pcm_open_config(pcmp, sconf, stream, mode);
 
-	return ret;
+    return ret;
 }
