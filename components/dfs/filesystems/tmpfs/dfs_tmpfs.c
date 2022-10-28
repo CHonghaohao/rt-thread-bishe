@@ -12,8 +12,11 @@
 #include <dfs.h>
 #include <dfs_fs.h>
 #include <dfs_file.h>
+
+#ifdef RT_USING_LWP
 #include <lwp.h>
 #include <lwp_user_mm.h>
+#endif
 
 #include "dfs_tmpfs.h"
 
@@ -80,6 +83,8 @@ static int _free_subdir(struct tmpfs_file *dfile)
     struct tmpfs_file *file;
     rt_list_t *list, *temp_list;
 
+    RT_DEFINE_SPINLOCK(lock);
+
     RT_ASSERT(dfile->type == TMPFS_TYPE_DIR);
 
     rt_list_for_each_safe(list, temp_list, &dfile->subdirs)
@@ -94,7 +99,9 @@ static int _free_subdir(struct tmpfs_file *dfile)
             /* TODO: fix for rt-smart */
             rt_free(file->data);
         }
+        rt_hw_spin_lock(lock);
         rt_list_remove(&(file->sibling));
+        rt_hw_spin_unlock(lock);
         rt_free(file);
     }
     return 0;
@@ -165,22 +172,26 @@ int dfs_tmpfs_ioctl(struct dfs_fd *file, int cmd, void *args)
 
     switch (cmd)
     {
-        case RT_FIOMMAP2: 
+#ifdef RT_USING_LWP
+    case RT_FIOMMAP2: 
+    {
+        struct dfs_mmap2_args *mmap2 = (struct dfs_mmap2_args *)args;
+        if (mmap2)
         {
-            struct dfs_mmap2_args *mmap2 = (struct dfs_mmap2_args *)args;
-            if (mmap2)
+            if (mmap2->length > file->fnode->size)
             {
-                if (mmap2->length > file->fnode->size)
-                {
-                    return -RT_ENOMEM;
-                }
-
-                LOG_D("tmpfile mmap ptr:%x , size:%d\n", d_file->data, mmap2->length);
-                mmap2->ret = lwp_map_user_phy(lwp_self(), RT_NULL, d_file->data, mmap2->length, 0);
+                return -RT_ENOMEM;
             }
-            return RT_EOK;
-            break;
+
+            LOG_D("tmpfile mmap ptr:%x , size:%d\n", d_file->data, mmap2->length);
+            mmap2->ret = lwp_map_user_phy(lwp_self(), RT_NULL, d_file->data, mmap2->length, 0);
         }
+        return RT_EOK;
+        break;
+    }
+#endif
+    default:
+        break;
     }
     return -EIO;
 }
@@ -193,6 +204,8 @@ struct tmpfs_file *dfs_tmpfs_lookup(struct tmpfs_sb  *superblock,
     char subdir_name[TMPFS_NAME_MAX];
     struct tmpfs_file *file, *curfile;
     rt_list_t *list;
+
+    RT_DEFINE_SPINLOCK(lock);
 
     subpath = path;
     while (*subpath == '/' && *subpath)
@@ -218,6 +231,8 @@ find_subpath:
     memset(subdir_name, 0, TMPFS_NAME_MAX);
     _get_subdir(curpath, subdir_name);
 
+    rt_hw_spin_lock(lock);
+
     rt_list_for_each(list, &curfile->subdirs)
     {
         file = rt_list_entry(list, struct tmpfs_file, sibling);
@@ -226,6 +241,8 @@ find_subpath:
             if (rt_strcmp(file->name, filename) == 0)
             {
                 *size = file->size;
+
+                rt_hw_spin_unlock(lock);
                 return file;
             }
         }
@@ -234,10 +251,11 @@ find_subpath:
             *size = file->size;
             curpath = subpath;
             curfile = file;
+            rt_hw_spin_unlock(lock);
             goto find_subpath;
         }
     }
-
+    rt_hw_spin_unlock(lock);
     /* not found */
     return NULL;
 }
@@ -336,6 +354,8 @@ int dfs_tmpfs_open(struct dfs_fd *file)
     struct dfs_filesystem *fs;
     char parent_path[DFS_PATH_MAX],file_name[TMPFS_NAME_MAX];
 
+    RT_DEFINE_SPINLOCK(lock);
+
     RT_ASSERT(file->fnode->ref_count > 0);
     if (file->fnode->ref_count > 1)
     {
@@ -397,7 +417,9 @@ int dfs_tmpfs_open(struct dfs_fd *file)
         {
             d_file->type = TMPFS_TYPE_FILE;
         }
+        rt_hw_spin_lock(lock);
         rt_list_insert_after(&(p_file->subdirs), &(d_file->sibling));
+        rt_hw_spin_unlock(lock);
     }
     /* Creates a new file.
         * If the file is existing, it is truncated and overwritten.
@@ -534,6 +556,8 @@ int dfs_tmpfs_unlink(struct dfs_filesystem *fs, const char *path)
     struct tmpfs_sb *superblock;
     struct tmpfs_file *d_file;
 
+    RT_DEFINE_SPINLOCK(lock);
+
     superblock = (struct tmpfs_sb *)fs->data;
     RT_ASSERT(superblock != NULL);
 
@@ -541,7 +565,10 @@ int dfs_tmpfs_unlink(struct dfs_filesystem *fs, const char *path)
     if (d_file == NULL)
         return -ENOENT;
 
+    rt_hw_spin_lock(lock);
     rt_list_remove(&(d_file->sibling));
+    rt_hw_spin_unlock(lock);
+
     if (d_file->data != NULL)
         rt_free(d_file->data);
     rt_free(d_file);
@@ -557,6 +584,8 @@ int dfs_tmpfs_rename(struct dfs_filesystem *fs,
     struct tmpfs_sb *superblock;
     rt_size_t size;
     char parent_path[DFS_PATH_MAX],file_name[TMPFS_NAME_MAX];
+
+    RT_DEFINE_SPINLOCK(lock);
 
     superblock = (struct tmpfs_sb *)fs->data;
     RT_ASSERT(superblock != NULL);
@@ -577,10 +606,15 @@ int dfs_tmpfs_rename(struct dfs_filesystem *fs,
     p_file = dfs_tmpfs_lookup(superblock, parent_path, &size);
     RT_ASSERT(p_file != NULL);
 
+    rt_hw_spin_lock(lock);
     rt_list_remove(&(d_file->sibling));
-    
+    rt_hw_spin_unlock(lock);
+
     strncpy(d_file->name, file_name, TMPFS_NAME_MAX);
+
+    rt_hw_spin_lock(lock);
     rt_list_insert_after(&(p_file->subdirs), &(d_file->sibling));
+    rt_hw_spin_unlock(lock);
 
     return RT_EOK;
 }
