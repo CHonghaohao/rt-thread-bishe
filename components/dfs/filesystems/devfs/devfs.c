@@ -181,6 +181,20 @@ int dfs_device_fs_open(struct dfs_fd *file)
 
         return RT_EOK;
     }
+#ifdef RT_USING_DEV_BUS
+    else if (file->flags & O_CREAT)
+    {
+        if (!(file->flags & O_DIRECTORY))
+        {
+            return -ENOSYS;
+        }
+        /* regester bus device */
+        if (rt_device_bus_create(&file->fnode->path[1], 0) == RT_NULL)
+        {
+            return -EEXIST;
+        }
+    }
+#endif
 
     device = rt_device_find(&file->fnode->path[1]);
     if (device == RT_NULL)
@@ -223,6 +237,25 @@ int dfs_device_fs_open(struct dfs_fd *file)
     return -EIO;
 }
 
+int dfs_device_fs_unlink(struct dfs_filesystem *fs, const char *path)
+{
+#ifdef RT_USING_DEV_BUS
+    rt_device_t dev_id;
+
+    dev_id = rt_device_find(&path[1]);
+    if (dev_id == RT_NULL)
+    {
+        return -1;
+    }
+    if (dev_id->type != RT_Device_Class_Bus)
+    {
+        return -1;
+    }
+    rt_device_bus_destroy(dev_id);
+#endif
+    return RT_EOK;
+}
+
 int dfs_device_fs_stat(struct dfs_filesystem *fs, const char *path, struct stat *st)
 {
     /* stat root directory */
@@ -258,6 +291,8 @@ int dfs_device_fs_stat(struct dfs_filesystem *fs, const char *path, struct stat 
                 st->st_mode |= S_IFBLK;
             else if (dev_id->type == RT_Device_Class_Pipe)
                 st->st_mode |= S_IFIFO;
+            else if (dev_id->type == RT_Device_Class_Bus)
+                st->st_mode |= S_IFDIR;
             else
                 st->st_mode |= S_IFREG;
 
@@ -292,7 +327,14 @@ int dfs_device_fs_getdents(struct dfs_fd *file, struct dirent *dirp, uint32_t co
         object = (rt_object_t)root_dirent->devices[root_dirent->read_index + index];
 
         d = dirp + index;
-        d->d_type = DT_REG;
+        if ((((rt_device_t)object)->type) == RT_Device_Class_Bus)
+        {
+            d->d_type = DT_DIR;
+        }
+        else
+        {
+            d->d_type = DT_REG;
+        }
         d->d_namlen = RT_NAME_MAX;
         d->d_reclen = (rt_uint16_t)sizeof(struct dirent);
         rt_strncpy(d->d_name, object->name, RT_NAME_MAX);
@@ -328,20 +370,18 @@ static const struct dfs_filesystem_ops _device_fs =
     "devfs",
     DFS_FS_FLAG_DEFAULT,
     &_device_fops,
-
     dfs_device_fs_mount,
-    RT_NULL,
-    RT_NULL,
-    RT_NULL,
-
-    RT_NULL,
+    RT_NULL, /*unmount*/
+    RT_NULL, /*mkfs*/
+    RT_NULL, /*statfs*/
+    dfs_device_fs_unlink,
     dfs_device_fs_stat,
-    RT_NULL,
+    RT_NULL, /*rename*/
 };
 
 int devfs_init(void)
 {
-    /* register rom file system */
+    /* register device file system */
     dfs_register(&_device_fs);
 
     return 0;
