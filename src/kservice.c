@@ -48,6 +48,40 @@ static volatile int __rt_errno;
 static rt_device_t _console_device = RT_NULL;
 #endif
 
+static const char* rt_errno_strs[] =
+{
+    "OK",
+    "ERROR",
+    "ETIMOUT",
+    "ERSFULL",
+    "ERSEPTY",
+    "ENOMEM",
+    "ENOSYS",
+    "EBUSY",
+    "EIO",
+    "EINTRPT",
+    "EINVAL",
+    "EUNKNOW"
+};
+
+/**
+ * This function return a pointer to a string that contains the
+ * message of error.
+ *
+ * @param error the errorno code
+ * @return a point to error message string
+ */
+const char *rt_strerror(rt_err_t error)
+{
+    if (error < 0)
+        error = -error;
+
+    return (error > RT_EINVAL + 1) ?
+           rt_errno_strs[RT_EINVAL + 1] :
+           rt_errno_strs[error];
+}
+RTM_EXPORT(rt_strerror);
+
 /*
  * This function will get errno
  *
