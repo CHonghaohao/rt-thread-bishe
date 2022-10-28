@@ -62,6 +62,10 @@ config RT_USING_VIRTIO_MMIO_ALIGN
     bool "Open packed attribution, this may caused an error on virtio"
     default n
 
+config ARCH_USING_NEW_CTX_SWITCH
+    bool
+    default y
+
 config __STACKSIZE__
     int "stack size for interrupt"
     default 4096

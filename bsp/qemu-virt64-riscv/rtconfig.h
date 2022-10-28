@@ -298,14 +298,48 @@
 
 /* entertainment: terminal games and other interesting software packages */
 
-#define BOARD_virt
-#define ENABLE_FPU
+
+/* Arduino libraries */
+
+
+/* Projects */
+
+
+/* Sensors */
+
+
+/* Display */
+
+
+/* Timing */
+
+
+/* Data Processing */
+
+
+/* Data Storage */
+
+/* Communication */
+
+
+/* Device Control */
+
+
+/* Other */
+
+/* Signal IO */
+
+
+/* Uncategorized */
 
 /* RISC-V QEMU virt64 configs */
 
 #define RISCV_S_MODE
 #define BSP_USING_VIRTIO_BLK
 #define BSP_USING_VIRTIO_NET
+#define BOARD_QEMU_VIRT_RV64
+#define ENABLE_FPU
+#define ARCH_USING_NEW_CTX_SWITCH
 #define __STACKSIZE__ 16384
 
 #endif

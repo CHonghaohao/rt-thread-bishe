@@ -17,15 +17,13 @@
 #include "encoding.h"
 #include "stackframe.h"
 
-#define ARCH_CHECK_SP
-
     .align 2
     .global trap_entry
     .global debug_check_sp
 trap_entry:
     // distingush exception from kernel or user
     csrrw   sp, sscratch, sp
-    bnez    sp, _from_user
+    bnez    sp, _save_context
 
     // BE REALLY careful with sscratch,
     // if it's wrong, we could looping here forever
@@ -34,20 +32,13 @@ trap_entry:
 _from_kernel:
     csrr    sp, sscratch
     j _save_context
-_from_user:
-    nop
+
 _save_context:
     SAVE_ALL
     // clear sscratch to say 'now in kernel mode'
     csrw    sscratch, zero
 
     RESTORE_SYS_GP
-
-#ifdef ARCH_CHECK_SP
-    mv a0, sp
-    li a1, 1
-    call debug_check_sp
-#endif
 
     // now we are ready to enter interrupt / excepiton handler
 _distinguish_syscall:

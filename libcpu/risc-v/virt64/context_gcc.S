@@ -15,14 +15,6 @@
 #include "cpuport.h"
 #include "stackframe.h"
 
-/**
- * sstatus -> interrupt frame
- * sepc -> interrupt frame
- * sscratch -> ?
- * sp -> TCB
- * tp -> pointer to current TCB
- */
-
 .macro PUSH_8 reg
     addi    sp, sp, -8
     STORE   \reg, (sp)

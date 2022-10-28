@@ -12,6 +12,7 @@
 
 #include "rtconfig.h"
 
+#define __ASSEMBLY__
 #include "cpuport.h"
 #include "encoding.h"
 #include "stackframe.h"
@@ -71,7 +72,7 @@ arch_ret_to_user:
 
 ret_to_user_exit:
     RESTORE_ALL
-    csrw sscratch, zero
+    // `RESTORE_ALL` also reset sp to user sp
     sret
 
 /*#ifdef RT_USING_LWP
@@ -130,7 +131,6 @@ lwp_check_debug_quit:
 //#endif
 */
 
-.global arch_signal_quit
 arch_signal_quit:
     call lwp_signal_restore
     //a0 is user_ctx
@@ -271,7 +271,38 @@ arch_clone_exit:
 
 .global syscall_entry
 syscall_entry:
+#ifndef ARCH_USING_NEW_CTX_SWITCH
+    //swap to thread kernel stack
+    csrr t0, sstatus
+    andi t0, t0, 0x100
+    beqz t0, __restore_sp_from_tcb
 
+__restore_sp_from_sscratch:
+    csrr t0, sscratch
+    j __move_stack_context
+
+__restore_sp_from_tcb:
+    la a0, rt_current_thread
+    LOAD a0, 0(a0)
+    jal get_thread_kernel_stack_top
+    mv t0, a0
+
+__move_stack_context:
+    mv t1, sp//src
+    mv sp, t0//switch stack
+    addi sp, sp, -CTX_REG_NR * REGBYTES
+    //copy context
+    li s0, CTX_REG_NR//cnt
+    mv t2, sp//dst
+
+copy_context_loop:
+    LOAD t0, 0(t1)
+    STORE t0, 0(t2)
+    addi s0, s0, -1
+    addi t1, t1, 8
+    addi t2, t2, 8
+    bnez s0, copy_context_loop
+#endif /* ARCH_USING_NEW_CTX_SWITCH */
     LOAD s0, 7 * REGBYTES(sp)
     addi s0, s0, -0xfe
     beqz s0, arch_signal_quit
@@ -292,7 +323,7 @@ arch_syscall_exit:
     CLOSE_INTERRUPT
 
     #if defined(RT_USING_USERSPACE)
-        LOAD s0, FRAME_OFF_SSTATUS(sp)
+        LOAD s0, 2 * REGBYTES(sp)
         andi s0, s0, 0x100
         bnez s0, dont_ret_to_user
         j arch_ret_to_user
