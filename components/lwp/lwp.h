@@ -121,8 +121,10 @@ struct rt_lwp
     int debug;
     uint32_t bak_first_ins;
 
+#ifdef LWP_ENABLE_ASID
     uint64_t generation;
     unsigned int asid;
+#endif
 };
 
 struct rt_lwp *lwp_self(void);
@@ -296,6 +298,6 @@ rt_channel_t gdb_server_channel(void);
 int dbg_step_type(void);
 void dbg_attach_req(void *pc);
 int dbg_check_suspend(void);
-void set_process_id(int pid);
+void rt_hw_set_process_id(int pid);
 
 #endif

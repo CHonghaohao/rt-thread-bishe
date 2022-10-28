@@ -289,7 +289,6 @@ rt_hw_mmu_switch:
     dsb
     isb
     mov pc, lr
-
 .global rt_hw_mmu_tbl_get
 rt_hw_mmu_tbl_get:
     mrc p15, 0, r0, c2, c0, 0    /* ttbr0 */
@@ -613,8 +612,8 @@ vector_resv:
     b       .
 
 #ifdef RT_USING_SMP
-.global rt_clz
-rt_clz:
+.global rt_hw_clz
+rt_hw_clz:
     clz r0, r0
     bx lr
 

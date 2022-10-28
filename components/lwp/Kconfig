@@ -36,7 +36,8 @@ if RT_USING_LWP
 
     config LWP_ENABLE_ASID
         bool "The switch of ASID feature"
-        default n
+        depends on ARCH_ARM_CORTEX_A
+        default y
 
     if ARCH_MM_MMU
         config RT_LWP_SHM_MAX_NR
