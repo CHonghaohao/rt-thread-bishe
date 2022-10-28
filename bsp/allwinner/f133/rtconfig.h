@@ -61,18 +61,20 @@
 
 /* C++ features */
 
-#define RT_USING_MSH
+
+/* Command shell */
+
 #define RT_USING_FINSH
+#define RT_USING_MSH
 #define FINSH_USING_MSH
 #define FINSH_THREAD_NAME "tshell"
-#define FINSH_THREAD_PRIORITY 20
-#define FINSH_THREAD_STACK_SIZE 8192
 #define FINSH_USING_HISTORY
 #define FINSH_HISTORY_LINES 5
 #define FINSH_USING_SYMTAB
-#define FINSH_CMD_SIZE 80
-#define MSH_USING_BUILT_IN_COMMANDS
 #define FINSH_USING_DESCRIPTION
+#define FINSH_THREAD_PRIORITY 20
+#define FINSH_THREAD_STACK_SIZE 8192
+#define FINSH_CMD_SIZE 80
 #define FINSH_ARG_MAX 10
 
 /* Device virtual file system */
@@ -105,7 +107,7 @@
 #define RT_SYSTEM_WORKQUEUE_STACKSIZE 4096
 #define RT_SYSTEM_WORKQUEUE_PRIORITY 23
 #define RT_USING_SERIAL
-#define RT_USING_SERIAL_V2
+#define RT_SERIAL_RB_BUFSZ 64
 #define RT_USING_TTY
 #define RT_USING_I2C
 #define RT_USING_PIN
@@ -121,7 +123,6 @@
 #define RT_AUDIO_REPLAY_MP_BLOCK_COUNT 2
 #define RT_AUDIO_RECORD_PIPE_SIZE 2048
 #define RT_USING_TOUCH
-#define RT_TOUCH_PIN_IRQ
 #define RT_USING_WIFI
 #define RT_WLAN_DEVICE_STA_NAME "wlan0"
 #define RT_WLAN_DEVICE_AP_NAME "wlan1"
@@ -150,10 +151,6 @@
 
 /* Using USB */
 
-#define RT_USING_FAL
-#define FAL_DEBUG_CONFIG
-#define FAL_DEBUG 1
-#define FAL_PART_HAS_TABLE_CFG
 
 /* POSIX layer and C standard library */
 
@@ -307,6 +304,8 @@
 /* Micrium: Micrium software products porting for RT-Thread */
 
 #define PKG_USING_PARTITION
+#define FAL_DEBUG_CONFIG
+#define FAL_PART_HAS_TABLE_CFG
 
 /* peripheral libraries and drivers */
 
@@ -420,6 +419,10 @@
 /* TWI Devices */
 
 #define DRIVERS_TWI
+
+/* G2D Devices */
+
+#define DRIVERS_G2D
 
 /* CE Devices */
 

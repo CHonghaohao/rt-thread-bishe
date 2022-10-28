@@ -165,6 +165,7 @@ s32 lcd_vsync_event_process(u32 sel)
 static void _framebuffer_rotate_mirror(void *src_buf, void *dst_buf,
                                        const struct rt_device_graphic_info *lcd_info, const struct lcd_cfg_panel_info *_panel_info)
 {
+    lcd_device_t lcd_drv = &_lcd_device;
     memcpy(dst_buf, src_buf, LCD_DRV_FB_SZ);
 }
 
@@ -416,96 +417,6 @@ static rt_err_t rt_lcd_init(rt_device_t dev)
     return RT_EOK;
 }
 
-static rt_err_t rt_lcd_control(rt_device_t dev, int cmd, void *args)
-{
-    struct lcd_device *lcd_drv = (struct lcd_device *)dev;
-
-    switch (cmd)
-    {
-    case RTGRAPHIC_CTRL_RECT_UPDATE:
-    {
-        unsigned long arg[6] = {0};
-        int ret;
-
-        // clean event.
-        rt_event_recv(&lcd_drv->lcd_evt, LCD_EVT_VSYNC, RT_EVENT_FLAG_CLEAR | RT_EVENT_FLAG_OR, 0, NULL);
-
-        // rotate and set refresh_flag
-        if ((lcd_drv->panel) && (lcd_drv->panel->swap_flag != 0))
-        {
-            _framebuffer_rotate_mirror(lcd_drv->framebuffer, lcd_drv->back_buf_info.buff, &lcd_drv->lcd_info, _panel);
-            rt_hw_cpu_dcache_clean(lcd_drv->back_buf_info.buff, LCD_DRV_FB_SZ);
-            atomic_store(&lcd_drv->refresh_flag, 2); // lcd_drv->refresh_flag = 2;
-        }
-        else
-        {
-            atomic_store(&lcd_drv->refresh_flag, 1); // lcd_drv->refresh_flag = 1;
-        }
-
-        // wait irq
-        rt_err_t result = rt_event_recv(&lcd_drv->lcd_evt, LCD_EVT_VSYNC, RT_EVENT_FLAG_CLEAR | RT_EVENT_FLAG_OR, RT_TICK_PER_SECOND / 20, NULL);
-        if (result != RT_EOK)
-        {
-            rt_kprintf("RTGRAPHIC_CTRL_RECT_UPDATE wait LCD_EVT_VSYNC:%d\n", result);
-        }
-
-        break;
-    }
-    case RTGRAPHIC_CTRL_POWERON:
-        if (lcd_status == 0)
-        {
-#ifdef WATCH_APP_FWK_USING_SCREEN_MGT
-            extern void watch_screen_time_update(void);
-            watch_screen_time_update();
-#endif
-            turn_on_lcd_backlight();
-            rt_kprintf("lcd driver control power on.\n");
-            lcd_status = 1;
-        }
-        break;
-    case RTGRAPHIC_CTRL_POWEROFF:
-        if (lcd_status == 1)
-        {
-            lcd_status = 0;
-            turn_down_lcd_backlight();
-            rt_kprintf("lcd driver control power off.\n");
-        }
-        break;
-    case RTGRAPHIC_CTRL_SET_BRIGHTNESS:
-        lcd_bn = *((rt_uint8_t *)args);
-        // TODO::if can SET_BRIGHTNESS
-        set_lcd_backlight(lcd_bn);
-        rt_kprintf("lcd driver control set brightness: %d.\n", lcd_bn);
-        break;
-
-    case RTGRAPHIC_CTRL_GET_BRIGHTNESS:
-        lcd_bn = get_lcd_backlight();
-        *((rt_uint8_t *)args) = lcd_bn;
-        // TODO::if can GET_BRIGHTNESS
-        rt_kprintf("lcd driver control get brightness: %d.\n", lcd_bn);
-        break;
-    case RTGRAPHIC_CTRL_GET_INFO:
-        memcpy(args, &lcd_drv->lcd_info, sizeof(struct rt_device_graphic_info));
-        break;
-    case FBIOGET_FSCREENINFO:
-    {
-        struct fb_fix_screeninfo *info = (struct fb_fix_screeninfo *)args;
-        strncpy(info->id, "lcd", sizeof(info->id));
-        info->smem_len = LCD_DRV_FB_SZ;
-#ifdef RT_USING_USERSPACE
-        info->smem_start = (size_t)lwp_map_user_phy(lwp_self(), RT_NULL, lcd_drv->framebuffer_phy, info->smem_len, 1);
-#else
-        info->smem_start = (size_t)lcd_drv->framebuffer_phy;
-#endif
-        info->line_length = lcd_drv->lcd_info.width * sizeof(rt_uint32_t);
-        memset((void *)info->smem_start, 0, info->smem_len);
-    }
-    case RTGRAPHIC_CTRL_SET_MODE:
-        break;
-    }
-    return RT_EOK;
-}
-
 struct lcd_device *g_lcd = RT_NULL;
 
 void turn_on_lcd_backlight(void)
@@ -607,6 +518,96 @@ rt_uint8_t get_lcd_backlight(void)
     rt_pwm_get(pwm_dev, &cfg);
 
     return cfg.pulse / (10000000 / _panel->bl_pwm_hz);
+}
+
+static rt_err_t rt_lcd_control(rt_device_t dev, int cmd, void *args)
+{
+    struct lcd_device *lcd_drv = (struct lcd_device *)dev;
+
+    switch (cmd)
+    {
+    case RTGRAPHIC_CTRL_RECT_UPDATE:
+    {
+        unsigned long arg[6] = {0};
+        int ret;
+
+        // clean event.
+        rt_event_recv(&lcd_drv->lcd_evt, LCD_EVT_VSYNC, RT_EVENT_FLAG_CLEAR | RT_EVENT_FLAG_OR, 0, NULL);
+
+        // rotate and set refresh_flag
+        if ((lcd_drv->panel) && (lcd_drv->panel->swap_flag != 0))
+        {
+            _framebuffer_rotate_mirror(lcd_drv->framebuffer, lcd_drv->back_buf_info.buff, &lcd_drv->lcd_info, _panel);
+            rt_hw_cpu_dcache_clean(lcd_drv->back_buf_info.buff, LCD_DRV_FB_SZ);
+            atomic_store(&lcd_drv->refresh_flag, 2); // lcd_drv->refresh_flag = 2;
+        }
+        else
+        {
+            atomic_store(&lcd_drv->refresh_flag, 1); // lcd_drv->refresh_flag = 1;
+        }
+
+        // wait irq
+        rt_err_t result = rt_event_recv(&lcd_drv->lcd_evt, LCD_EVT_VSYNC, RT_EVENT_FLAG_CLEAR | RT_EVENT_FLAG_OR, RT_TICK_PER_SECOND / 20, NULL);
+        if (result != RT_EOK)
+        {
+            rt_kprintf("RTGRAPHIC_CTRL_RECT_UPDATE wait LCD_EVT_VSYNC:%d\n", result);
+        }
+
+        break;
+    }
+    case RTGRAPHIC_CTRL_POWERON:
+        if (lcd_status == 0)
+        {
+#ifdef WATCH_APP_FWK_USING_SCREEN_MGT
+            extern void watch_screen_time_update(void);
+            watch_screen_time_update();
+#endif
+            turn_on_lcd_backlight();
+            rt_kprintf("lcd driver control power on.\n");
+            lcd_status = 1;
+        }
+        break;
+    case RTGRAPHIC_CTRL_POWEROFF:
+        if (lcd_status == 1)
+        {
+            lcd_status = 0;
+            turn_down_lcd_backlight();
+            rt_kprintf("lcd driver control power off.\n");
+        }
+        break;
+    case RTGRAPHIC_CTRL_SET_BRIGHTNESS:
+        lcd_bn = *((rt_uint8_t *)args);
+        // TODO::if can SET_BRIGHTNESS
+        set_lcd_backlight(lcd_bn);
+        rt_kprintf("lcd driver control set brightness: %d.\n", lcd_bn);
+        break;
+
+    case RTGRAPHIC_CTRL_GET_BRIGHTNESS:
+        lcd_bn = get_lcd_backlight();
+        *((rt_uint8_t *)args) = lcd_bn;
+        // TODO::if can GET_BRIGHTNESS
+        rt_kprintf("lcd driver control get brightness: %d.\n", lcd_bn);
+        break;
+    case RTGRAPHIC_CTRL_GET_INFO:
+        memcpy(args, &lcd_drv->lcd_info, sizeof(struct rt_device_graphic_info));
+        break;
+    case FBIOGET_FSCREENINFO:
+    {
+        struct fb_fix_screeninfo *info = (struct fb_fix_screeninfo *)args;
+        strncpy(info->id, "lcd", sizeof(info->id));
+        info->smem_len = LCD_DRV_FB_SZ;
+#ifdef RT_USING_USERSPACE
+        info->smem_start = (size_t)lwp_map_user_phy(lwp_self(), RT_NULL, lcd_drv->framebuffer_phy, info->smem_len, 1);
+#else
+        info->smem_start = (size_t)lcd_drv->framebuffer_phy;
+#endif
+        info->line_length = lcd_drv->lcd_info.width * sizeof(rt_uint32_t);
+        memset((void *)info->smem_start, 0, info->smem_len);
+    }
+    case RTGRAPHIC_CTRL_SET_MODE:
+        break;
+    }
+    return RT_EOK;
 }
 
 /* set up the 'lcd_device' and register it */
