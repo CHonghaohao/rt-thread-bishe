@@ -19,6 +19,14 @@ int mnt_init(void)
         return -1;
     }
 
+#if defined(RT_USING_DEV_BUS) && defined(RT_USING_DFS_TMPFS)
+    mkdir("/dev/shm", 0x777);
+    if (dfs_mount(RT_NULL, "/dev/shm", "tmp", 0, 0) != 0)
+    {
+        rt_kprintf("Dir /dev/shm mount failed!\n");
+    }
+#endif
+
     rt_kprintf("file system initialization done!\n");
     return 0;
 }
