@@ -269,12 +269,20 @@ rt_hw_set_process_id:
 
 .global rt_hw_mmu_switch
 rt_hw_mmu_switch:
+    mov r3, #0
+    mcr p15, 0, r3, c13, c0, 1   /* set contextid = 0, for synchronization*/ 
+    isb
+    
     orr r0, #0x18
     mcr p15, 0, r0, c2, c0, 0    /* ttbr0 */
 
-    /* invalid tlb */
-    mov r0, #0
-    mcr p15, 0, r0, c8, c7, 0
+    isb
+    mov r1, r1, LSL #0x8         
+    and r2, r2, #0xff             
+    orr r1, r1, r2                /* contextid.PROCID = pid, contextid.ASID = asid*/
+    mcr p15, 0, r1, c13, c0, 1    /* set contextid = r1*/ 
+    isb
+
     mcr p15, 0, r0, c7, c5, 0    /* iciallu */
     mcr p15, 0, r0, c7, c5, 6    /* bpiall */
 
