@@ -12,6 +12,8 @@
 #include <rtdevice.h>
 #include <string.h>
 
+#include <time.h>
+
 #define DBG_TAG "gt911"
 #define DBG_LVL DBG_INFO
 #include <rtdbg.h>

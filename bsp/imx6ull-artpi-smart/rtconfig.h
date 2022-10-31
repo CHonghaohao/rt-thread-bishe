@@ -70,20 +70,18 @@
 
 /* C++ features */
 
-
-/* Command shell */
-
-#define RT_USING_FINSH
 #define RT_USING_MSH
+#define RT_USING_FINSH
 #define FINSH_USING_MSH
 #define FINSH_THREAD_NAME "tshell"
+#define FINSH_THREAD_PRIORITY 20
+#define FINSH_THREAD_STACK_SIZE 4096
 #define FINSH_USING_HISTORY
 #define FINSH_HISTORY_LINES 5
 #define FINSH_USING_SYMTAB
-#define FINSH_USING_DESCRIPTION
-#define FINSH_THREAD_PRIORITY 20
-#define FINSH_THREAD_STACK_SIZE 4096
 #define FINSH_CMD_SIZE 80
+#define MSH_USING_BUILT_IN_COMMANDS
+#define FINSH_USING_DESCRIPTION
 #define FINSH_ARG_MAX 10
 
 /* Device virtual file system */
@@ -117,6 +115,7 @@
 #define RT_SYSTEM_WORKQUEUE_STACKSIZE 4096
 #define RT_SYSTEM_WORKQUEUE_PRIORITY 23
 #define RT_USING_SERIAL
+#define RT_USING_SERIAL_V1
 #define RT_SERIAL_RB_BUFSZ 64
 #define RT_USING_TTY
 #define RT_USING_CPUTIME
@@ -136,7 +135,9 @@
 #define RT_USING_SPI
 #define RT_USING_WDT
 #define RT_USING_TOUCH
+#define RT_TOUCH_PIN_IRQ
 #define RT_USING_LCD
+#define RT_USING_DEV_BUS
 
 /* Using USB */
 
@@ -258,6 +259,7 @@
 #define RT_CH_MSG_MAX_NR 1024
 #define LWP_CONSOLE_INPUT_BUFFER_SIZE 1024
 #define LWP_TID_MAX_NR 64
+#define LWP_ENABLE_ASID
 #define RT_LWP_SHM_MAX_NR 64
 
 /* RT-Thread online packages */
@@ -281,6 +283,11 @@
 
 /* language packages */
 
+/* JSON: JavaScript Object Notation, a lightweight data-interchange format */
+
+
+/* XML: Extensible Markup Language */
+
 
 /* multimedia packages */
 
@@ -301,9 +308,6 @@
 /* enhanced kernel services */
 
 
-/* POSIX extension functions */
-
-
 /* acceleration: Assembly language or algorithmic acceleration packages */
 
 
@@ -314,6 +318,9 @@
 
 
 /* peripheral libraries and drivers */
+
+
+/* Kendryte SDK */
 
 
 /* AI packages */
@@ -327,6 +334,38 @@
 
 
 /* entertainment: terminal games and other interesting software packages */
+
+
+/* Arduino libraries */
+
+
+/* Projects */
+
+
+/* Sensors */
+
+
+/* Display */
+
+
+/* Timing */
+
+
+/* Data Processing */
+
+
+/* Data Storage */
+
+/* Communication */
+
+/* Device Control */
+
+/* Other */
+
+/* Signal IO */
+
+
+/* Uncategorized */
 
 #define SOC_IMX6ULL
 #define CPU_MCIMX6Y2CVM05
