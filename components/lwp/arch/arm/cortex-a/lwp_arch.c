@@ -87,7 +87,7 @@ int arch_expand_user_stack(void *addr)
     return ret;
 }
 
-
+#ifdef LWP_ENABLE_ASID
 #define MAX_ASID_BITS 8
 #define MAX_ASID (1 << MAX_ASID_BITS)
 static uint64_t global_generation = 1;
@@ -133,5 +133,6 @@ unsigned int arch_get_asid(struct rt_lwp *lwp)
 
     return lwp->asid;
 }
+#endif
 
 #endif
