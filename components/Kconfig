@@ -27,6 +27,8 @@ source "$RTT_DIR/components/dfs/Kconfig"
 
 source "$RTT_DIR/components/drivers/Kconfig"
 
+source "$RTT_DIR/components/fal/Kconfig"
+
 source "$RTT_DIR/components/libc/Kconfig"
 
 source "$RTT_DIR/components/net/Kconfig"

@@ -986,6 +986,7 @@ enum rt_device_class_type
     RT_Device_Class_I2CBUS,                             /**< I2C bus device */
     RT_Device_Class_USBDevice,                          /**< USB slave device */
     RT_Device_Class_USBHost,                            /**< USB host bus */
+    RT_Device_Class_USBOTG,                             /**< USB OTG bus */
     RT_Device_Class_SPIBUS,                             /**< SPI bus device */
     RT_Device_Class_SPIDevice,                          /**< SPI device */
     RT_Device_Class_SDIO,                               /**< SDIO bus device */
@@ -997,10 +998,16 @@ enum rt_device_class_type
     RT_Device_Class_Sensor,                             /**< Sensor device */
     RT_Device_Class_Touch,                              /**< Touch device */
     RT_Device_Class_PHY,                                /**< PHY device */
+    RT_Device_Class_Security,                           /**< Security device */
+    RT_Device_Class_WLAN,                               /**< WLAN device */
+    RT_Device_Class_Pin,                                /**< Pin device */
+    RT_Device_Class_ADC,                                /**< ADC device */
+    RT_Device_Class_DAC,                                /**< DAC device */
+    RT_Device_Class_WDT,                                /**< WDT device */
+    RT_Device_Class_PWM,                                /**< PWM device */
     RT_Device_Class_Bus,                                /**< Bus device */
     RT_Device_Class_Unknown                             /**< unknown device */
 };
-
 /**
  * device flags defitions
  */
@@ -1043,6 +1050,11 @@ enum rt_device_class_type
 #define RT_DEVICE_CTRL_CLR_INT          0x07            /**< clear interrupt */
 #define RT_DEVICE_CTRL_GET_INT          0x08            /**< get interrupt status */
 #define RT_DEVICE_CTRL_MASK             0x1f            /**< mask for contrl commands */
+
+/**
+ * device control
+ */
+#define RT_DEVICE_CTRL_BASE(Type)        (RT_Device_Class_##Type * 0x100)
 
 /**
  * special device commands
@@ -1214,12 +1226,18 @@ struct rt_device_blk_sectors
 /**
  * graphic device control command
  */
-#define RTGRAPHIC_CTRL_RECT_UPDATE      0
-#define RTGRAPHIC_CTRL_POWERON          1
-#define RTGRAPHIC_CTRL_POWEROFF         2
-#define RTGRAPHIC_CTRL_GET_INFO         3
-#define RTGRAPHIC_CTRL_SET_MODE         4
-#define RTGRAPHIC_CTRL_GET_EXT          5
+#define RTGRAPHIC_CTRL_RECT_UPDATE      (RT_DEVICE_CTRL_BASE(Graphic) + 0)
+#define RTGRAPHIC_CTRL_POWERON          (RT_DEVICE_CTRL_BASE(Graphic) + 1)
+#define RTGRAPHIC_CTRL_POWEROFF         (RT_DEVICE_CTRL_BASE(Graphic) + 2)
+#define RTGRAPHIC_CTRL_GET_INFO         (RT_DEVICE_CTRL_BASE(Graphic) + 3)
+#define RTGRAPHIC_CTRL_SET_MODE         (RT_DEVICE_CTRL_BASE(Graphic) + 4)
+#define RTGRAPHIC_CTRL_GET_EXT          (RT_DEVICE_CTRL_BASE(Graphic) + 5)
+#define RTGRAPHIC_CTRL_SET_BRIGHTNESS   (RT_DEVICE_CTRL_BASE(Graphic) + 6)
+#define RTGRAPHIC_CTRL_GET_BRIGHTNESS   (RT_DEVICE_CTRL_BASE(Graphic) + 7)
+#define RTGRAPHIC_CTRL_GET_MODE         (RT_DEVICE_CTRL_BASE(Graphic) + 8)
+#define RTGRAPHIC_CTRL_GET_STATUS       (RT_DEVICE_CTRL_BASE(Graphic) + 9)
+#define RTGRAPHIC_CTRL_PAN_DISPLAY      (RT_DEVICE_CTRL_BASE(Graphic) + 10)
+#define RTGRAPHIC_CTRL_WAIT_VSYNC       (RT_DEVICE_CTRL_BASE(Graphic) + 11)
 
 /* graphic deice */
 enum
