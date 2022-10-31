@@ -20,37 +20,37 @@
 
 
 
-__webcam_mode_all_t webcam_mode_all;//À˘”– π”√ƒ£ Ω
-__webcam_mode_t webcam_mode;//µ±«∞ π”√ƒ£ Ω
+__webcam_mode_all_t webcam_mode_all;//ÊâÄÊúâ‰ΩøÁî®Ê®°Âºè
+__webcam_mode_t webcam_mode;//ÂΩìÂâç‰ΩøÁî®Ê®°Âºè
 
 __s32  webcam_dev_init(void)
 {
-	webcam_mode.color_format	= PIXEL_OTHERFMT;			//PIXEL_OTHERFMT; PIXEL_YUV422;
-	webcam_mode.component_seq	= YUV_SEQ_UVUV;				//YUV_SEQ_UVUV; YUV_SEQ_YUYV;
-	webcam_mode.store_mode		= YUV_MOD_UV_MB_COMBINED;	//YUV_MOD_UV_MB_COMBINED; YUV_MOD_INTERLEAVED;
-	webcam_mode.size.width		= 1280;						//1280; 640;
-	webcam_mode.size.height		= 720;						//720; 480;
-	webcam_mode.frame_rate 		= 25000;					//÷°¬ £¨µ•ŒªHz
-	webcam_mode.frame_period 	= 40000;					//÷°≥§£®=1/÷°¬ £¨µ•Œªus£©
-	webcam_mode.color_space 		= BT601;					//…´≤ ø’º‰
-	//webcam_mode.csi_buf_scrab_mode = CSI0_FULL;
+    webcam_mode.color_format    = PIXEL_OTHERFMT;           //PIXEL_OTHERFMT; PIXEL_YUV422;
+    webcam_mode.component_seq   = YUV_SEQ_UVUV;             //YUV_SEQ_UVUV; YUV_SEQ_YUYV;
+    webcam_mode.store_mode      = YUV_MOD_UV_MB_COMBINED;   //YUV_MOD_UV_MB_COMBINED; YUV_MOD_INTERLEAVED;
+    webcam_mode.size.width      = 1280;                     //1280; 640;
+    webcam_mode.size.height     = 720;                      //720; 480;
+    webcam_mode.frame_rate      = 25000;                    //Â∏ßÁéáÔºåÂçï‰ΩçHz
+    webcam_mode.frame_period    = 40000;                    //Â∏ßÈïøÔºà=1/Â∏ßÁéáÔºåÂçï‰ΩçusÔºâ
+    webcam_mode.color_space         = BT601;                    //Ëâ≤ÂΩ©Á©∫Èó¥
+    //webcam_mode.csi_buf_scrab_mode = CSI0_FULL;
 
-	webcam_mode_all.number = 2;
-	webcam_mode_all.webcam_mode[0] = webcam_mode;
-	webcam_mode_all.webcam_mode[1] = webcam_mode;
+    webcam_mode_all.number = 2;
+    webcam_mode_all.webcam_mode[0] = webcam_mode;
+    webcam_mode_all.webcam_mode[1] = webcam_mode;
 
-	
-	return EPDK_OK;
+
+    return EPDK_OK;
 }
 
 __s32  webcam_dev_exit(void)
 {
-	return EPDK_OK;
+    return EPDK_OK;
 }
 
 __s32 webcam_dev_set_mode(__u32 mode)
 {
-	return EPDK_OK;
+    return EPDK_OK;
 }
 
 

@@ -87,13 +87,13 @@ extern "C" {
 #define SDXC_DES_MODE                   (0)             /* 0-chain mode, 1-fix length skip */
 
 struct scatterlist {
-	void *buffer;
-	uint32_t len;
+    void *buffer;
+    uint32_t len;
 };
 
 /* IDMC structure */
 typedef struct {
-	uint32_t config;
+    uint32_t config;
 
 #define SDXC_IDMAC_DES0_DIC             BIT(1) /* disable interrupt on completion */
 #define SDXC_IDMAC_DES0_LD              BIT(2) /* 1-this data buffer is the last buffer */
@@ -103,83 +103,83 @@ typedef struct {
 #define SDXC_IDMAC_DES0_CES             BIT(30) /* transfer error flag */
 #define SDXC_IDMAC_DES0_OWN             BIT(31) /* des owner:1-idma owns it, 0-host owns it */
 
-	uint32_t data_buf1_sz   :16,
-	         data_buf2_sz   :16;
+    uint32_t data_buf1_sz   :16,
+             data_buf2_sz   :16;
 
-	uint32_t buf_addr_ptr1;
-	uint32_t buf_addr_ptr2;
+    uint32_t buf_addr_ptr1;
+    uint32_t buf_addr_ptr2;
 } smc_idma_des;
 
 #ifdef SDC_DES_ADDR_SHIFT
-#define SDXC_IDMAC_DES_ADDR(a) 	((a)>>SDC_DES_ADDR_SHIFT) 
+#define SDXC_IDMAC_DES_ADDR(a)  ((a)>>SDC_DES_ADDR_SHIFT)
 #else
-#define SDXC_IDMAC_DES_ADDR(a) 	((a)>>0) 
+#define SDXC_IDMAC_DES_ADDR(a)  ((a)>>0)
 #endif
 
 typedef enum
 {
-	SDC_STATE_RESET        = 0x00, /* Peripheral is not yet Initialized */
-	SDC_STATE_READY        = 0x02, /* Peripheral Initialized and ready for use */
-	SDC_STATE_BUSY         = 0x04, /* An internal process is ongoing */
-	SDC_STATE_ERROR        = 0x08  /* Error */
+    SDC_STATE_RESET        = 0x00, /* Peripheral is not yet Initialized */
+    SDC_STATE_READY        = 0x02, /* Peripheral Initialized and ready for use */
+    SDC_STATE_BUSY         = 0x04, /* An internal process is ongoing */
+    SDC_STATE_ERROR        = 0x08  /* Error */
 } SDC_StateTypeDef;
 
 struct __mci_ctrl_regs {
-	uint32_t gctrl;
-	uint32_t clkc;
-	uint32_t timeout;
-	uint32_t buswid;
-	uint32_t waterlvl;
-	uint32_t funcsel;
-	uint32_t idmacc;
+    uint32_t gctrl;
+    uint32_t clkc;
+    uint32_t timeout;
+    uint32_t buswid;
+    uint32_t waterlvl;
+    uint32_t funcsel;
+    uint32_t idmacc;
 };
 
 struct mmc_bus_ops {
-	int (*suspend)(struct mmc_host *);
-	int (*resume)(struct mmc_host *);
+    int (*suspend)(struct mmc_host *);
+    int (*resume)(struct mmc_host *);
 };
 
 struct mmc_host {
-	volatile void   *reg_base;      /* Mapped address */
-	uint8_t         sdc_id;
-	uint8_t         pin_ref;
-	uint16_t        ref;
-	uint16_t        debug_mask;
-	uint16_t        dma_use;
-	struct mmc_card *card;
+    volatile void   *reg_base;      /* Mapped address */
+    uint8_t         sdc_id;
+    uint8_t         pin_ref;
+    uint16_t        ref;
+    uint16_t        debug_mask;
+    uint16_t        dma_use;
+    struct mmc_card *card;
 #ifdef CONFIG_SDC_SUPPORT_1V8
-	uint32_t        voltage;
+    uint32_t        voltage;
 #define SDC_WOLTAGE_3V3 (0)
 #define SDC_WOLTAGE_1V8 (1)
 #define SDC_WOLTAGE_1V2 (2)
 #define SDC_WOLTAGE_OFF (3)
 #define SDC_WOLTAGE_ON  (4)
-	uint32_t        voltage_switching;
+    uint32_t        voltage_switching;
 #endif
-	volatile uint32_t present;
-	uint16_t        power_on;
-	uint16_t        suspend;
-	uint32_t        int_err;       /* for Interrupt Controller */
+    volatile uint32_t present;
+    uint16_t        power_on;
+    uint16_t        suspend;
+    uint32_t        int_err;       /* for Interrupt Controller */
 
-	uint32_t        int_use;       /* Control */
-	uint32_t        int_sum;       /* interrupt summary */
-	uint16_t        trans_done;
-	uint16_t        dma_done;
-	uint32_t        buswidth;      /* current card bus width */
-	uint32_t        blkcnt;
+    uint32_t        int_use;       /* Control */
+    uint32_t        int_sum;       /* interrupt summary */
+    uint16_t        trans_done;
+    uint16_t        dma_done;
+    uint32_t        buswidth;      /* current card bus width */
+    uint32_t        blkcnt;
 
-	/* NOTE: define idma_des here for aligned8! */
-	smc_idma_des    *idma_des;
-	smc_idma_des    *dma_hdle;
-	int8_t		*align_dma_buf;
+    /* NOTE: define idma_des here for aligned8! */
+    smc_idma_des    *idma_des;
+    smc_idma_des    *dma_hdle;
+    int8_t      *align_dma_buf;
 
-	/* host specific block data */
-	uint32_t        max_seg_size;   /* see blk_queue_max_segment_size */
-	uint32_t        max_segs;       /* see blk_queue_max_segments */
-	uint32_t        max_req_size;   /* maximum number of bytes in one req */
-	uint32_t        max_blk_size;   /* maximum size of one mmc block */
-	uint32_t        max_blk_count;  /* maximum number of blocks in one req */
-	uint32_t        ocr_avail;
+    /* host specific block data */
+    uint32_t        max_seg_size;   /* see blk_queue_max_segment_size */
+    uint32_t        max_segs;       /* see blk_queue_max_segments */
+    uint32_t        max_req_size;   /* maximum number of bytes in one req */
+    uint32_t        max_blk_size;   /* maximum size of one mmc block */
+    uint32_t        max_blk_count;  /* maximum number of blocks in one req */
+    uint32_t        ocr_avail;
 
 #define MMC_VDD_165_195         0x00000080      /* VDD voltage 1.65 - 1.95 */
 #define MMC_VDD_20_21           0x00000100      /* VDD voltage 2.0 ~ 2.1 */
@@ -199,7 +199,7 @@ struct mmc_host {
 #define MMC_VDD_34_35           0x00400000      /* VDD voltage 3.4 ~ 3.5 */
 #define MMC_VDD_35_36           0x00800000      /* VDD voltage 3.5 ~ 3.6 */
 
-	uint32_t        caps;                   /* Host capabilities */
+    uint32_t        caps;                   /* Host capabilities */
 
 #define MMC_CAP_4_BIT_DATA      (1 << 0)        /* Can the host do 4 bit transfers */
 #define MMC_CAP_MMC_HIGHSPEED   (1 << 1)        /* Can do MMC high-speed timing */
@@ -253,24 +253,24 @@ struct mmc_host {
 
 
 #ifdef CONFIG_SDC_OS_USED
-	SDC_Semaphore           lock;
-	SDC_Mutex               thread_lock;
+    SDC_Semaphore           lock;
+    SDC_Mutex               thread_lock;
 #ifdef CONFIG_DETECT_CARD
-	SDC_Timer               cd_timer;
+    SDC_Timer               cd_timer;
 #endif
 #ifdef CONFIG_SDC_EXCLUSIVE_HOST
-	SDC_Semaphore           exclusive_lock; /* lock for claim and bus ops */
+    SDC_Semaphore           exclusive_lock; /* lock for claim and bus ops */
 #endif
 #endif
 
-	//uint8_t                 bus_width;         /* data bus width */
-	uint32_t                clk;
+    //uint8_t                 bus_width;         /* data bus width */
+    uint32_t                clk;
 
 #define MMC_BUS_WIDTH_1         0
 #define MMC_BUS_WIDTH_4         2
 #define MMC_BUS_WIDTH_8         3
 
-	struct mmc_request      *mrq;
+    struct mmc_request      *mrq;
 
 #define SDC_WAIT_NONE                   BIT(0)
 #define SDC_WAIT_CMD_DONE               BIT(1)
@@ -283,57 +283,57 @@ struct mmc_host {
 #define SDC_WAIT_RXAUTOCMD_DONE         (SDC_WAIT_AUTOCMD_DONE|SDC_WAIT_IDMA_DONE)
 #define SDC_WAIT_SWITCH1V8              BIT(7)
 #define SDC_WAIT_FINALIZE               BIT(8)
-	volatile uint32_t       smc_cmd;
+    volatile uint32_t       smc_cmd;
 
-	uint32_t                wait;
+    uint32_t                wait;
 //#ifdef CONFIG_SDIO_IRQ_SUPPORT
-	uint32_t                sdio_int;
-	unsigned int		sdio_irqs;
-	OS_Thread_t	sdio_irq_thread;
-	uint32_t			sdio_irq_pending;
-	//atomic_t		sdio_irq_thread_abort;
-	uint32_t sdio_irq_thread_abort;
-	uint32_t sdio_irq_thread_stop;
-	SDC_Semaphore   sdio_irq_stop_wait;
-	SDC_Semaphore   sdio_irq_signal;
+    uint32_t                sdio_int;
+    unsigned int        sdio_irqs;
+    OS_Thread_t sdio_irq_thread;
+    uint32_t            sdio_irq_pending;
+    //atomic_t      sdio_irq_thread_abort;
+    uint32_t sdio_irq_thread_abort;
+    uint32_t sdio_irq_thread_stop;
+    SDC_Semaphore   sdio_irq_stop_wait;
+    SDC_Semaphore   sdio_irq_signal;
 //#endif
 #ifdef CONFIG_SD_PM
-	struct __mci_ctrl_regs  regs_back;
-	const struct mmc_bus_ops *bus_ops;      /* current bus driver */
-	uint32_t                pm_flags;       /* requested pm features */
-	uint32_t                pm_caps;        /* supported pm features */
+    struct __mci_ctrl_regs  regs_back;
+    const struct mmc_bus_ops *bus_ops;      /* current bus driver */
+    uint32_t                pm_flags;       /* requested pm features */
+    uint32_t                pm_caps;        /* supported pm features */
 #endif
 #ifdef __CONFIG_ARCH_APP_CORE
-	SDC_InitTypeDef         param;
-	GPIO_Port               cd_port;
-	GPIO_Pin                cd_pin;
-	uint32_t                cd_irq;
-	gpio_pin_t		cd_gpio_pin;
-	irq_handler_t		cd_gpio_isr;
-	uint16_t                cd_delay;       /* delay interval (in ms) to wait power stable */
-	uint8_t                 wait_voltage_stable;	/* card voltage stable*/
-	GPIO_PinState           cd_pin_present_val;
+    SDC_InitTypeDef         param;
+    GPIO_Port               cd_port;
+    GPIO_Pin                cd_pin;
+    uint32_t                cd_irq;
+    gpio_pin_t      cd_gpio_pin;
+    irq_handler_t       cd_gpio_isr;
+    uint16_t                cd_delay;       /* delay interval (in ms) to wait power stable */
+    uint8_t                 wait_voltage_stable;    /* card voltage stable*/
+    GPIO_PinState           cd_pin_present_val;
 #endif
 #ifdef CONFIG_SDC_READONLY_USED
-	uint32_t                read_only;
-	GPIO_PinMuxParam        ro_gpio;
+    uint32_t                read_only;
+    GPIO_PinMuxParam        ro_gpio;
 #endif
-	SDC_StateTypeDef        State;
-	uint32_t                sdio_irq_mask;
+    SDC_StateTypeDef        State;
+    uint32_t                sdio_irq_mask;
 
 #ifdef SD_PERF_TRACE_ON
-	uint64_t                start_sdio_irq_times_ns;
-	uint64_t                sdio_irq_count;
-	uint64_t                sdio_irq_times_ns;
+    uint64_t                start_sdio_irq_times_ns;
+    uint64_t                sdio_irq_count;
+    uint64_t                sdio_irq_times_ns;
 
 
-	uint64_t                start_times_us;
-	uint64_t                rbytes;
-	uint64_t                wbytes;
-	uint64_t		rcount;
-	uint64_t		rtimes_us;
-	uint64_t		wtimes_us;
-	uint64_t		wcount;
+    uint64_t                start_times_us;
+    uint64_t                rbytes;
+    uint64_t                wbytes;
+    uint64_t        rcount;
+    uint64_t        rtimes_us;
+    uint64_t        wtimes_us;
+    uint64_t        wcount;
 #endif
 
 };
@@ -545,12 +545,12 @@ struct mmc_host {
 #ifdef CONFIG_SD_PM
 static inline int mmc_card_keep_power(struct mmc_host *host)
 {
-	return host->pm_flags & MMC_PM_KEEP_POWER;
+    return host->pm_flags & MMC_PM_KEEP_POWER;
 }
 
 static inline int mmc_card_wake_sdio_irq(struct mmc_host *host)
 {
-	return host->pm_flags & MMC_PM_WAKE_SDIO_IRQ;
+    return host->pm_flags & MMC_PM_WAKE_SDIO_IRQ;
 }
 #endif
 
@@ -572,22 +572,22 @@ static inline void HAL_SDC_Release_Host(struct mmc_host *host) { ; }
 #include "rom/ram_table.h"
 
 #define HAL_SDC_Update_Clk \
-	RAM_TBL_FUN(int32_t (*)(struct mmc_host *host, uint32_t clk), HAL_SDC_Update_Clk)
+    RAM_TBL_FUN(int32_t (*)(struct mmc_host *host, uint32_t clk), HAL_SDC_Update_Clk)
 
 #define HAL_SDC_Clk_PWR_Opt \
-	RAM_TBL_FUN(int32_t (*)(struct mmc_host *host, uint32_t oclk_en, uint32_t pwr_save), HAL_SDC_Clk_PWR_Opt)
+    RAM_TBL_FUN(int32_t (*)(struct mmc_host *host, uint32_t oclk_en, uint32_t pwr_save), HAL_SDC_Clk_PWR_Opt)
 
 #define HAL_SDC_PowerOn \
-	RAM_TBL_FUN(int32_t (*)(struct mmc_host *host), HAL_SDC_PowerOn)
+    RAM_TBL_FUN(int32_t (*)(struct mmc_host *host), HAL_SDC_PowerOn)
 
 #define HAL_SDC_PowerOff \
-	RAM_TBL_FUN(int32_t (*)(struct mmc_host *host), HAL_SDC_PowerOff)
+    RAM_TBL_FUN(int32_t (*)(struct mmc_host *host), HAL_SDC_PowerOff)
 
 #define HAL_SDC_Request \
-	RAM_TBL_FUN(int32_t (*)(struct mmc_host *host, struct mmc_request *mrq), HAL_SDC_Request)
+    RAM_TBL_FUN(int32_t (*)(struct mmc_host *host, struct mmc_request *mrq), HAL_SDC_Request)
 
 #define HAL_SDC_Enable_Sdio_Irq \
-	RAM_TBL_FUN(void (*)(struct mmc_host *host, int enable), HAL_SDC_Enable_Sdio_Irq)
+    RAM_TBL_FUN(void (*)(struct mmc_host *host, int enable), HAL_SDC_Enable_Sdio_Irq)
 
 #else
 
@@ -601,11 +601,11 @@ extern void HAL_SDC_Enable_Sdio_Irq(struct mmc_host *host, int enable);
 
 
 
-#define rom_HAL_SDC_Update_Clk		HAL_SDC_Update_Clk
-#define rom_HAL_SDC_Clk_PWR_Opt		HAL_SDC_Clk_PWR_Opt
-#define rom_HAL_SDC_PowerOn		HAL_SDC_PowerOn
-#define rom_HAL_SDC_PowerOff		HAL_SDC_PowerOff
-#define rom_HAL_SDC_Request		HAL_SDC_Request
+#define rom_HAL_SDC_Update_Clk      HAL_SDC_Update_Clk
+#define rom_HAL_SDC_Clk_PWR_Opt     HAL_SDC_Clk_PWR_Opt
+#define rom_HAL_SDC_PowerOn     HAL_SDC_PowerOn
+#define rom_HAL_SDC_PowerOff        HAL_SDC_PowerOff
+#define rom_HAL_SDC_Request     HAL_SDC_Request
 #define rom_HAL_SDC_Enable_Sdio_Irq HAL_SDC_Enable_Sdio_Irq
 
 #endif /* __CONFIG_ROM */

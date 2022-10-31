@@ -48,7 +48,7 @@ extern "C" {
 
 #if (configNUM_THREAD_LOCAL_STORAGE_POINTERS != 0)
 
-#define OS_ERRNO_LOCATION_IDX		0
+#define OS_ERRNO_LOCATION_IDX       0
 
 /**
  * @brief Get error number of the current thread
@@ -56,7 +56,7 @@ extern "C" {
  */
 static __always_inline int OS_GetErrno(void)
 {
-	return (int)pvTaskGetThreadLocalStoragePointer(NULL, OS_ERRNO_LOCATION_IDX);
+    return (int)pvTaskGetThreadLocalStoragePointer(NULL, OS_ERRNO_LOCATION_IDX);
 }
 
 /**
@@ -66,7 +66,7 @@ static __always_inline int OS_GetErrno(void)
  */
 static __always_inline void OS_SetErrno(int err)
 {
-	vTaskSetThreadLocalStoragePointer(NULL, OS_ERRNO_LOCATION_IDX, (void *)err);
+    vTaskSetThreadLocalStoragePointer(NULL, OS_ERRNO_LOCATION_IDX, (void *)err);
 }
 
 #endif /* configNUM_THREAD_LOCAL_STORAGE_POINTERS */

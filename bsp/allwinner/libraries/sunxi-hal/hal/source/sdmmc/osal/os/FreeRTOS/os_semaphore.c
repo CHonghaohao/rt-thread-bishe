@@ -49,16 +49,16 @@
  */
 OS_Status OS_SemaphoreCreate(OS_Semaphore_t *sem, uint32_t initCount, uint32_t maxCount)
 {
-//	OS_HANDLE_ASSERT(!OS_SemaphoreIsValid(sem), sem->handle);
+//  OS_HANDLE_ASSERT(!OS_SemaphoreIsValid(sem), sem->handle);
 
-	sem->handle = xSemaphoreCreateCounting(maxCount, initCount);
-	if (sem->handle == NULL) {
-		OS_ERR("err %"OS_HANDLE_F"\n", sem->handle);
-		return OS_FAIL;
-	}
-	OS_DBG("%s,%d\n", __FUNCTION__,__LINE__);
+    sem->handle = xSemaphoreCreateCounting(maxCount, initCount);
+    if (sem->handle == NULL) {
+        OS_ERR("err %"OS_HANDLE_F"\n", sem->handle);
+        return OS_FAIL;
+    }
+    OS_DBG("%s,%d\n", __FUNCTION__,__LINE__);
 
-	return OS_OK;
+    return OS_OK;
 }
 
 /**
@@ -70,15 +70,15 @@ OS_Status OS_SemaphoreCreate(OS_Semaphore_t *sem, uint32_t initCount, uint32_t m
  */
 OS_Status OS_SemaphoreCreateBinary(OS_Semaphore_t *sem)
 {
-//	OS_HANDLE_ASSERT(!OS_SemaphoreIsValid(sem), sem->handle);
+//  OS_HANDLE_ASSERT(!OS_SemaphoreIsValid(sem), sem->handle);
 
-	sem->handle = xSemaphoreCreateBinary();
-	if (sem->handle == NULL) {
-		OS_ERR("err %"OS_HANDLE_F"\n", sem->handle);
-		return OS_FAIL;
-	}
+    sem->handle = xSemaphoreCreateBinary();
+    if (sem->handle == NULL) {
+        OS_ERR("err %"OS_HANDLE_F"\n", sem->handle);
+        return OS_FAIL;
+    }
 
-	return OS_OK;
+    return OS_OK;
 }
 
 /**
@@ -88,11 +88,11 @@ OS_Status OS_SemaphoreCreateBinary(OS_Semaphore_t *sem)
  */
 OS_Status OS_SemaphoreDelete(OS_Semaphore_t *sem)
 {
-	OS_HANDLE_ASSERT(OS_SemaphoreIsValid(sem), sem->handle);
+    OS_HANDLE_ASSERT(OS_SemaphoreIsValid(sem), sem->handle);
 
-	vSemaphoreDelete(sem->handle);
-	OS_SemaphoreSetInvalid(sem);
-	return OS_OK;
+    vSemaphoreDelete(sem->handle);
+    OS_SemaphoreSetInvalid(sem);
+    return OS_OK;
 }
 
 /**
@@ -106,32 +106,32 @@ OS_Status OS_SemaphoreDelete(OS_Semaphore_t *sem)
  */
 OS_Status OS_SemaphoreWait(OS_Semaphore_t *sem, OS_Time_t waitMS)
 {
-	BaseType_t ret;
-	BaseType_t taskWoken;
+    BaseType_t ret;
+    BaseType_t taskWoken;
 
-	OS_HANDLE_ASSERT(OS_SemaphoreIsValid(sem), sem->handle);
+    OS_HANDLE_ASSERT(OS_SemaphoreIsValid(sem), sem->handle);
 
-	if (OS_IsISRContext()) {
-		if (waitMS != 0) {
-			OS_ERR("%s() in ISR, wait %u ms\n", __func__, waitMS);
-			return OS_E_ISR;
-		}
-		taskWoken = pdFALSE;
-		ret = xSemaphoreTakeFromISR(sem->handle, &taskWoken);
-		if (ret != pdPASS) {
-			OS_DBG("%s() fail @ %d\n", __func__, __LINE__);
-			return OS_E_TIMEOUT;
-		}
-		portEND_SWITCHING_ISR(taskWoken);
-	} else {
-		ret = xSemaphoreTake(sem->handle, OS_CalcWaitTicks(waitMS));
-		if (ret != pdPASS) {
-			OS_DBG("%s() fail @ %d, %"OS_TIME_F" ms\n", __func__, __LINE__, waitMS);
-			return OS_E_TIMEOUT;
-		}
-	}
+    if (OS_IsISRContext()) {
+        if (waitMS != 0) {
+            OS_ERR("%s() in ISR, wait %u ms\n", __func__, waitMS);
+            return OS_E_ISR;
+        }
+        taskWoken = pdFALSE;
+        ret = xSemaphoreTakeFromISR(sem->handle, &taskWoken);
+        if (ret != pdPASS) {
+            OS_DBG("%s() fail @ %d\n", __func__, __LINE__);
+            return OS_E_TIMEOUT;
+        }
+        portEND_SWITCHING_ISR(taskWoken);
+    } else {
+        ret = xSemaphoreTake(sem->handle, OS_CalcWaitTicks(waitMS));
+        if (ret != pdPASS) {
+            OS_DBG("%s() fail @ %d, %"OS_TIME_F" ms\n", __func__, __LINE__, waitMS);
+            return OS_E_TIMEOUT;
+        }
+    }
 
-	return OS_OK;
+    return OS_OK;
 }
 
 /**
@@ -141,32 +141,32 @@ OS_Status OS_SemaphoreWait(OS_Semaphore_t *sem, OS_Time_t waitMS)
  */
 OS_Status OS_SemaphoreRelease(OS_Semaphore_t *sem)
 {
-	BaseType_t ret;
-	BaseType_t taskWoken;
-	
-
-	OS_HANDLE_ASSERT(OS_SemaphoreIsValid(sem), sem->handle);
-	
+    BaseType_t ret;
+    BaseType_t taskWoken;
 
 
-	if (OS_IsISRContext()) {
-		taskWoken = pdFALSE;
-		ret = xSemaphoreGiveFromISR(sem->handle, &taskWoken);
-		if (ret != pdPASS) {
-			OS_DBG("%s() fail @ %d\n", __func__, __LINE__);
-			return OS_FAIL;
-		}
-		portEND_SWITCHING_ISR(taskWoken);
-	} else {
-		ret = xSemaphoreGive(sem->handle);
-		if (ret != pdPASS) {
-			OS_DBG("%s() fail @ %d\n", __func__, __LINE__);
-			return OS_FAIL;
-		}
-	}
+    OS_HANDLE_ASSERT(OS_SemaphoreIsValid(sem), sem->handle);
 
 
-	return OS_OK;
+
+    if (OS_IsISRContext()) {
+        taskWoken = pdFALSE;
+        ret = xSemaphoreGiveFromISR(sem->handle, &taskWoken);
+        if (ret != pdPASS) {
+            OS_DBG("%s() fail @ %d\n", __func__, __LINE__);
+            return OS_FAIL;
+        }
+        portEND_SWITCHING_ISR(taskWoken);
+    } else {
+        ret = xSemaphoreGive(sem->handle);
+        if (ret != pdPASS) {
+            OS_DBG("%s() fail @ %d\n", __func__, __LINE__);
+            return OS_FAIL;
+        }
+    }
+
+
+    return OS_OK;
 }
 
 /**
@@ -176,12 +176,12 @@ OS_Status OS_SemaphoreRelease(OS_Semaphore_t *sem)
 */
 OS_Status OS_SemaphoreReset(OS_Semaphore_t *sem)
 {
-	hal_sem_t *tmp_sem = (hal_sem_t *)sem;
+    hal_sem_t *tmp_sem = (hal_sem_t *)sem;
 
-	OS_HANDLE_ASSERT(OS_SemaphoreIsValid(sem), sem->handle);
+    OS_HANDLE_ASSERT(OS_SemaphoreIsValid(sem), sem->handle);
 
-	hal_sem_clear(*tmp_sem);
+    hal_sem_clear(*tmp_sem);
 
-	return OS_OK;
+    return OS_OK;
 }
 

@@ -59,7 +59,7 @@ int ksnd_pcm_sync_ptr(void *substream_handle, void *status, void *control, unsig
 int ksnd_pcm_delay(void *substream_handle, void *delay);
 int ksnd_pcm_channel_info(void *substream_handle, void *info_wrapper);
 void ksnd_pcm_hw_mmap_dcache_update(void *substream_handle, snd_pcm_uframes_t offset,
-		snd_pcm_uframes_t size);
+        snd_pcm_uframes_t size);
 int ksnd_pcm_wait(void *substream_handle, int index, int timeout);
 int ksnd_pcm_rewind(snd_pcm_substream_t *substream, snd_pcm_uframes_t frames);
 int ksnd_pcm_dsleep_init(void *substream_handle);

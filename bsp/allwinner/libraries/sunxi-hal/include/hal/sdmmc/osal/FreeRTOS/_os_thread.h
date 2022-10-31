@@ -75,7 +75,7 @@ OS_Status OS_ThreadDelete(OS_Thread_t *thread);
  */
 static __always_inline int OS_ThreadIsValid(OS_Thread_t *thread)
 {
-	return (thread->handle != OS_INVALID_HANDLE);
+    return (thread->handle != OS_INVALID_HANDLE);
 }
 
 /**
@@ -85,7 +85,7 @@ static __always_inline int OS_ThreadIsValid(OS_Thread_t *thread)
  */
 static __always_inline void OS_ThreadSetInvalid(OS_Thread_t *thread)
 {
-	thread->handle = OS_INVALID_HANDLE;
+    thread->handle = OS_INVALID_HANDLE;
 }
 
 /**
@@ -112,7 +112,7 @@ static __always_inline void OS_ThreadSleep(OS_Time_t msec)
  */
 static __always_inline void OS_ThreadYield(void)
 {
-	taskYIELD();
+    taskYIELD();
 }
 
 /**
@@ -121,7 +121,7 @@ static __always_inline void OS_ThreadYield(void)
  */
 static __always_inline OS_ThreadHandle_t OS_ThreadGetCurrentHandle(void)
 {
-	return (OS_ThreadHandle_t)xTaskGetCurrentTaskHandle();
+    return (OS_ThreadHandle_t)xTaskGetCurrentTaskHandle();
 }
 
 /**
@@ -130,7 +130,7 @@ static __always_inline OS_ThreadHandle_t OS_ThreadGetCurrentHandle(void)
  */
 static __always_inline void OS_ThreadStartScheduler(void)
 {
-	vTaskStartScheduler();
+    vTaskStartScheduler();
 }
 
 /**
@@ -145,7 +145,7 @@ static __always_inline void OS_ThreadStartScheduler(void)
  */
 static __always_inline void OS_ThreadSuspendScheduler(void)
 {
-	vTaskSuspendAll();
+    vTaskSuspendAll();
 }
 
 /**
@@ -159,7 +159,7 @@ static __always_inline void OS_ThreadSuspendScheduler(void)
  */
 static __always_inline void OS_ThreadResumeScheduler(void)
 {
-	xTaskResumeAll();
+    xTaskResumeAll();
 }
 
 /**
@@ -168,7 +168,7 @@ static __always_inline void OS_ThreadResumeScheduler(void)
  */
 static __always_inline int OS_ThreadIsSchedulerRunning(void)
 {
-	return (xTaskGetSchedulerState() == taskSCHEDULER_RUNNING);
+    return (xTaskGetSchedulerState() == taskSCHEDULER_RUNNING);
 }
 
 #if INCLUDE_uxTaskGetStackHighWaterMark

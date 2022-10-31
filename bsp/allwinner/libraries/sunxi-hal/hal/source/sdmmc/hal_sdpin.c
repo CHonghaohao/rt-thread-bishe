@@ -59,38 +59,38 @@ static sdmmc_pin_t sunxi_sdmmc_pin[4];
 int32_t sdmmc_pinctl_set_from_cfg(struct mmc_host *host, char *sdc_str, uint32_t pin_num)
 {
 #ifdef HAL_SetPin
-	int32_t ret = 0;
-	user_gpio_set_t gpiocfg[SDC_MAX_PIN_NUM] = {0};
-	int i = 0;
-	int gpio_num = 0;
-	if (pin_num > SDC_MAX_PIN_NUM) {
-		SDC_LOGE("pin num over %d\n", SDC_MAX_PIN_NUM);
-		return ret;
-	}
+    int32_t ret = 0;
+    user_gpio_set_t gpiocfg[SDC_MAX_PIN_NUM] = {0};
+    int i = 0;
+    int gpio_num = 0;
+    if (pin_num > SDC_MAX_PIN_NUM) {
+        SDC_LOGE("pin num over %d\n", SDC_MAX_PIN_NUM);
+        return ret;
+    }
 
-	ret = Hal_Cfg_GetGPIOSecData(sdc_str, gpiocfg, pin_num);
-	if(ret < 0) {
-		SDC_LOGE("%s not has pin setting on sys_config.fex\n", sdc_str);
-		return ret;
-	}
+    ret = Hal_Cfg_GetGPIOSecData(sdc_str, gpiocfg, pin_num);
+    if(ret < 0) {
+        SDC_LOGE("%s not has pin setting on sys_config.fex\n", sdc_str);
+        return ret;
+    }
 
-	for (i = 0;i < pin_num; i++) {
-		SDC_LOGD("name %s,port %d,port_num %d,mul_sel %d, pull %d, drv_level %d\n",\
-				gpiocfg[i].gpio_name, gpiocfg[i].port, gpiocfg[i].port_num, \
-				gpiocfg[i].mul_sel, gpiocfg[i].pull, gpiocfg[i].drv_level);
-	}
+    for (i = 0;i < pin_num; i++) {
+        SDC_LOGD("name %s,port %d,port_num %d,mul_sel %d, pull %d, drv_level %d\n",\
+                gpiocfg[i].gpio_name, gpiocfg[i].port, gpiocfg[i].port_num, \
+                gpiocfg[i].mul_sel, gpiocfg[i].pull, gpiocfg[i].drv_level);
+    }
 
-	for(i = 0; i< pin_num; i++ ) {
-	 	gpio_num = (gpiocfg[i].port - 1) * PINS_PER_BANK + gpiocfg[i].port_num;	
-     	ret = hal_gpio_pinmux_set_function(gpio_num, gpiocfg[i].mul_sel);
+    for(i = 0; i< pin_num; i++ ) {
+        gpio_num = (gpiocfg[i].port - 1) * PINS_PER_BANK + gpiocfg[i].port_num;
+        ret = hal_gpio_pinmux_set_function(gpio_num, gpiocfg[i].mul_sel);
         if (ret) {
             SDC_LOGE(
                 "[sdmmc %s] PIN%lu set function failed! return %d\n",
                 sdc_str, gpio_num, ret);
             return -1;
         }
-    
-		ret = hal_gpio_set_driving_level(gpio_num, gpiocfg[i].drv_level);
+
+        ret = hal_gpio_set_driving_level(gpio_num, gpiocfg[i].drv_level);
         if (ret) {
             SDC_LOGE(
                 "[sdmmc %s] PIN%lu set driving level failed! return %d\n",
@@ -98,17 +98,17 @@ int32_t sdmmc_pinctl_set_from_cfg(struct mmc_host *host, char *sdc_str, uint32_t
             return -1;
         }
         ret = hal_gpio_set_pull(gpio_num, gpiocfg[i].pull);
-		if (ret) {
+        if (ret) {
             SDC_LOGE(
                 "[sdmmc %s] PIN%lu set driving level failed! return %d\n",
                 sdc_str, gpio_num, ret);
             return -1;
         }
-	}
-	return ret;
+    }
+    return ret;
 #else
     SDC_LOGN("unsupport sys fex %d\n");
-	return -1;
+    return -1;
 #endif
 }
 
@@ -119,50 +119,50 @@ uint32_t sdmmc_pinctrl_init(struct mmc_host *host)
     uint32_t flags = 0;
     int ret;
     uint32_t host_id = host->sdc_id;
-	
+
     switch (host_id) {
         case 0:
-			ret = sdmmc_pinctl_set_from_cfg(host, "sdc0", SDC0_NUM);
-			if(ret < 0) {
-				sunxi_sdmmc_pin[host_id].pin_num = SDC0_NUM;
-				sunxi_sdmmc_pin[host_id].pin_mux = SDMMC_MUXSEL;
-				sunxi_sdmmc_pin[host_id].pin_drv = SDMMC_DRVSEL;
-				sunxi_sdmmc_pin[host_id].pin = malloc(sizeof(uint32_t) * SDC0_NUM);
-				sunxi_sdmmc_pin[host_id].pin[0] = SDC0_CLK;
-				sunxi_sdmmc_pin[host_id].pin[1] = SDC0_CMD;
-				sunxi_sdmmc_pin[host_id].pin[2] = SDC0_D0;
-				sunxi_sdmmc_pin[host_id].pin[3] = SDC0_D1;
-				sunxi_sdmmc_pin[host_id].pin[4] = SDC0_D2;
-				sunxi_sdmmc_pin[host_id].pin[5] = SDC0_D3;
-				SDC_LOGE("sdmmc%ld use default pin setting\n", host_id);	
-			} else {
-				SDC_LOGD("sdmmc%ld use pin setting on sys_config.fex\n", host_id);
-				goto out;
-			}	
-			break;
+            ret = sdmmc_pinctl_set_from_cfg(host, "sdc0", SDC0_NUM);
+            if(ret < 0) {
+                sunxi_sdmmc_pin[host_id].pin_num = SDC0_NUM;
+                sunxi_sdmmc_pin[host_id].pin_mux = SDMMC_MUXSEL;
+                sunxi_sdmmc_pin[host_id].pin_drv = SDMMC_DRVSEL;
+                sunxi_sdmmc_pin[host_id].pin = malloc(sizeof(uint32_t) * SDC0_NUM);
+                sunxi_sdmmc_pin[host_id].pin[0] = SDC0_CLK;
+                sunxi_sdmmc_pin[host_id].pin[1] = SDC0_CMD;
+                sunxi_sdmmc_pin[host_id].pin[2] = SDC0_D0;
+                sunxi_sdmmc_pin[host_id].pin[3] = SDC0_D1;
+                sunxi_sdmmc_pin[host_id].pin[4] = SDC0_D2;
+                sunxi_sdmmc_pin[host_id].pin[5] = SDC0_D3;
+                SDC_LOGE("sdmmc%ld use default pin setting\n", host_id);
+            } else {
+                SDC_LOGD("sdmmc%ld use pin setting on sys_config.fex\n", host_id);
+                goto out;
+            }
+            break;
         case 1:
-			if (host->param.pwr_mode == POWER_MODE_330) {
-				hal_gpio_sel_vol_mode(SDC1_D0, POWER_MODE_330);
-			} else {
-				hal_gpio_sel_vol_mode(SDC1_D0, POWER_MODE_180);
-			}
-			ret = sdmmc_pinctl_set_from_cfg(host, "sdc1", SDC1_NUM);
-			if(ret < 0) {
-							sunxi_sdmmc_pin[host_id].pin_num = SDC1_NUM;
-							sunxi_sdmmc_pin[host_id].pin_mux = SDMMC_MUXSEL;
-							sunxi_sdmmc_pin[host_id].pin_drv = SDMMC_DRVSEL;
-							sunxi_sdmmc_pin[host_id].pin = malloc(sizeof(uint32_t) * SDC1_NUM);
-							sunxi_sdmmc_pin[host_id].pin[0] = SDC1_CLK;
-							sunxi_sdmmc_pin[host_id].pin[1] = SDC1_CMD;
-							sunxi_sdmmc_pin[host_id].pin[2] = SDC1_D0;
-							sunxi_sdmmc_pin[host_id].pin[3] = SDC1_D1;
-							sunxi_sdmmc_pin[host_id].pin[4] = SDC1_D2;
-							sunxi_sdmmc_pin[host_id].pin[5] = SDC1_D3;
-				SDC_LOGE("sdmmc%ld use default pin setting\n", host_id);	
-			} else {
-				SDC_LOGD("sdmmc%ld use pin setting on sys_config.fex\n", host_id);		
-				goto out;
-			}
+            if (host->param.pwr_mode == POWER_MODE_330) {
+                hal_gpio_sel_vol_mode(SDC1_D0, POWER_MODE_330);
+            } else {
+                hal_gpio_sel_vol_mode(SDC1_D0, POWER_MODE_180);
+            }
+            ret = sdmmc_pinctl_set_from_cfg(host, "sdc1", SDC1_NUM);
+            if(ret < 0) {
+                            sunxi_sdmmc_pin[host_id].pin_num = SDC1_NUM;
+                            sunxi_sdmmc_pin[host_id].pin_mux = SDMMC_MUXSEL;
+                            sunxi_sdmmc_pin[host_id].pin_drv = SDMMC_DRVSEL;
+                            sunxi_sdmmc_pin[host_id].pin = malloc(sizeof(uint32_t) * SDC1_NUM);
+                            sunxi_sdmmc_pin[host_id].pin[0] = SDC1_CLK;
+                            sunxi_sdmmc_pin[host_id].pin[1] = SDC1_CMD;
+                            sunxi_sdmmc_pin[host_id].pin[2] = SDC1_D0;
+                            // sunxi_sdmmc_pin[host_id].pin[3] = SDC1_D1;
+                            // sunxi_sdmmc_pin[host_id].pin[4] = SDC1_D2;
+                            // sunxi_sdmmc_pin[host_id].pin[5] = SDC1_D3;
+                SDC_LOGE("sdmmc%ld use default pin setting\n", host_id);
+            } else {
+                SDC_LOGD("sdmmc%ld use pin setting on sys_config.fex\n", host_id);
+                goto out;
+            }
             break;
         default:
             SDC_LOGE("sdmmc%ld is invalid\n", host_id);
@@ -191,8 +191,8 @@ uint32_t sdmmc_pinctrl_init(struct mmc_host *host)
         ret = hal_gpio_set_pull(sunxi_sdmmc_pin[host_id].pin[i], GPIO_PULL_UP);
         // ret = drv_gpio_set_pull_state(sunxi_sdmmc_pin[host_id].pin[i], DRV_GPIO_PULL_DOWN_DISABLE);
     }
-out: 
-	return 0;
+out:
+    return 0;
 }
 
 int mmc_gpiod_request_cd_irq(struct mmc_host *host)

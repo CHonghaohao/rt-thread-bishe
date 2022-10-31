@@ -36,8 +36,8 @@
 #include <aw-alsa-lib/pcm.h>
 
 typedef struct {
-	const char *card_name;
-	int device_num;
+    const char *card_name;
+    int device_num;
 } snd_pcm_hw_config_t;
 
 #endif /* __AW_ALSA_LIB_PCM_HW_H */

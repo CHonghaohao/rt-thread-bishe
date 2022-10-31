@@ -89,10 +89,10 @@ typedef struct _MSF_LBA
     unsigned int lba;
 } __attribute__((packed)) MSF_LBA_t;
 
-/* Ä³¸ö track µÄ Toc entry */
+/* æŸä¸ª track çš„ Toc entry */
 typedef struct _CDROM_TocEntry
 {
-    unsigned int TrackNumber;      /* Toc ËùÊôµÄ track     */
+    unsigned int TrackNumber;      /* Toc æ‰€å±çš„ track     */
     unsigned int Format;           /* CD-ROM address types */
     unsigned int Adr   : 4;        /* The type of information encode in the Q sub-channel of this blocks */
     unsigned int Ctrl  : 4;        /* attributes of the track */
@@ -103,28 +103,28 @@ typedef struct _CDROM_TocEntry
 
 typedef struct _CD_Rom
 {
-    /* ¹âÇıµÄĞÅÏ¢ */
-    unsigned int DriveType;                    /* ¹âÇıµÄĞÍºÅ               */
-    unsigned int MaxSpeed;                     /* ¹âÇı×î´óµÄËÙ¶È           */
-    unsigned int CurrentSpeed;                 /* ¹âÇıµ±Ç°µÄËÙ¶È           */
+    /* å…‰é©±çš„ä¿¡æ¯ */
+    unsigned int DriveType;                    /* å…‰é©±çš„å‹å·               */
+    unsigned int MaxSpeed;                     /* å…‰é©±æœ€å¤§çš„é€Ÿåº¦           */
+    unsigned int CurrentSpeed;                 /* å…‰é©±å½“å‰çš„é€Ÿåº¦           */
     unsigned int Readcd_cdda;                  /* reading audio data using READ_CD */
-    unsigned int WriteAble;                    /* ¹âÇıÊÇ·ñÖ§³ÖĞ´²Ù×÷       */
-    CDROM_Capitilities_t Capitilities;  /* ¹âÇıµÄÇı¶¯ÄÜÁ¦           */
-    unsigned int Eject;                        /* ÊÇ·ñÖ§³Ö¹âÇıÍË³ö         */
-    unsigned int PowerStatus;                  /* ¹âÇıµçÔ´×´Ì¬. Active, Idle, Standby ? */
+    unsigned int WriteAble;                    /* å…‰é©±æ˜¯å¦æ”¯æŒå†™æ“ä½œ       */
+    CDROM_Capitilities_t Capitilities;  /* å…‰é©±çš„é©±åŠ¨èƒ½åŠ›           */
+    unsigned int Eject;                        /* æ˜¯å¦æ”¯æŒå…‰é©±é€€å‡º         */
+    unsigned int PowerStatus;                  /* å…‰é©±ç”µæºçŠ¶æ€. Active, Idle, Standby ? */
 
-    /* ¹âµúĞÅÏ¢ */
-    unsigned int DiscType;                     /* ¹âµúµÄĞÍºÅ               */
-    unsigned int DoubleDisc;                   /* ÊÇ·ñÊÇË«Ãæ¹âµú?          */
-    unsigned int LastWriteSector;              /* µ«Ç°ÒÑ¾­Ğ´µÄ×îºóÒ»¸öÉÈÇø */
-    unsigned int MultiSession;                 /* ¶àÇø¶Î                   */
-    unsigned int NumberOfSUinitPerMUnit;       /* MSFÖĞÃ¿M±£»¤µÄs¸öÊı      */
-    unsigned int NumberOfFUinitPerSUnit;       /* MSFÖĞÃ¿S±£»¤µÄF¸öÊı      */
+    /* å…‰ç¢Ÿä¿¡æ¯ */
+    unsigned int DiscType;                     /* å…‰ç¢Ÿçš„å‹å·               */
+    unsigned int DoubleDisc;                   /* æ˜¯å¦æ˜¯åŒé¢å…‰ç¢Ÿ?          */
+    unsigned int LastWriteSector;              /* ä½†å‰å·²ç»å†™çš„æœ€åä¸€ä¸ªæ‰‡åŒº */
+    unsigned int MultiSession;                 /* å¤šåŒºæ®µ                   */
+    unsigned int NumberOfSUinitPerMUnit;       /* MSFä¸­æ¯Mä¿æŠ¤çš„sä¸ªæ•°      */
+    unsigned int NumberOfFUinitPerSUnit;       /* MSFä¸­æ¯Sä¿æŠ¤çš„Fä¸ªæ•°      */
     unsigned int InactivityTimeMultiPlier;     /*                          */
 
-    /* ¹âÇı¹ÜÀí */
-    unsigned int DriveStatus;                  /* ¹âÇı×´Ì¬                 */
-    unsigned int IsMeduimPrevent;              /* ÊÇ·ñÉèÖÃ½ûÖ¹½éÖÊÒÆ¶¯     */
+    /* å…‰é©±ç®¡ç† */
+    unsigned int DriveStatus;                  /* å…‰é©±çŠ¶æ€                 */
+    unsigned int IsMeduimPrevent;              /* æ˜¯å¦è®¾ç½®ç¦æ­¢ä»‹è´¨ç§»åŠ¨     */
 } CD_Rom_t;
 
 /*
@@ -132,7 +132,7 @@ typedef struct _CD_Rom
 *                     lba_to_msf
 *
 * Description:
-*    LBA×ª»»Îªmsf
+*    LBAè½¬æ¢ä¸ºmsf
 *
 * Parameters:
 *    lba    :  input.
@@ -141,10 +141,10 @@ typedef struct _CD_Rom
 *    f      :  input.
 *
 * Return value:
-*    ÎŞ
+*    æ— 
 *
 * note:
-*    ÎŞ
+*    æ— 
 *
 *******************************************************************************
 */
@@ -163,7 +163,7 @@ static inline void lba_to_msf(int lba, u8 *m, u8 *s, u8 *f)
 *                     msf_to_lba
 *
 * Description:
-*    msf×ª»»ÎªLBA
+*    msfè½¬æ¢ä¸ºLBA
 *
 * Parameters:
 *    m      :  input.
@@ -173,7 +173,7 @@ static inline void lba_to_msf(int lba, u8 *m, u8 *s, u8 *f)
 * Return value:
 *
 * note:
-*    ÎŞ
+*    æ— 
 *
 *******************************************************************************
 */

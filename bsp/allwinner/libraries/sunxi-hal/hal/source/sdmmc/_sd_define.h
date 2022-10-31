@@ -39,8 +39,8 @@
 extern "C" {
 #endif
 
-#define SD_DEBUG        CONFIG_LOG_DEFAULT_LEVEL
-#define SDC_DEBUG       CONFIG_LOG_DEFAULT_LEVEL
+#define SD_DEBUG        0 /* CONFIG_LOG_DEFAULT_LEVEL */
+#define SDC_DEBUG       0 /* CONFIG_LOG_DEFAULT_LEVEL */
 #define SD_ABORT_ON     0
 //#define SD_PERF_TRACE_ON 1/*Use to trace transfer performance*/
 /*if test sdio,you should set SD_PERF_TRACE_COUNT As big as possible,such as 3000
@@ -105,15 +105,15 @@ extern "C" {
 
 /* debug in interrupt handler */
 #ifdef __CONFIG_SECTION_ATTRIBUTE_NONXIP
-#define SDC_IT_LOGD(fmt, arg...)	ROM_IT_DBG(0, fmt, ##arg)
-#define SDC_IT_LOGN(fmt, arg...)	ROM_IT_WRN(SDC_DEBUG, fmt, ##arg)
-#define SDC_IT_LOGE(fmt, arg...)	ROM_IT_ERR(SDC_DEBUG, fmt, ##arg)
-#define SDC_IT_LOGE_RAW(mask, fmt, arg...)	ROM_IT_ERR(mask, fmt, ##arg)
+#define SDC_IT_LOGD(fmt, arg...)    ROM_IT_DBG(0, fmt, ##arg)
+#define SDC_IT_LOGN(fmt, arg...)    ROM_IT_WRN(SDC_DEBUG, fmt, ##arg)
+#define SDC_IT_LOGE(fmt, arg...)    ROM_IT_ERR(SDC_DEBUG, fmt, ##arg)
+#define SDC_IT_LOGE_RAW(mask, fmt, arg...)  ROM_IT_ERR(mask, fmt, ##arg)
 #else /* __CONFIG_SECTION_ATTRIBUTE_NONXIP */
-#define SDC_IT_LOGD	SDC_LOGD
-#define SDC_IT_LOGN	SDC_LOGN
-#define SDC_IT_LOGE	SDC_LOGE
-#define SDC_IT_LOGE_RAW	SDC_LOGE_RAW
+#define SDC_IT_LOGD SDC_LOGD
+#define SDC_IT_LOGN SDC_LOGN
+#define SDC_IT_LOGE SDC_LOGE
+#define SDC_IT_LOGE_RAW SDC_LOGE_RAW
 #endif /* __CONFIG_SECTION_ATTRIBUTE_NONXIP */
 
 #define SDC_Memset(d, c, l) HAL_Memset(d, c, l)
@@ -154,9 +154,9 @@ extern "C" {
 #define SDC_IT_ModTimer(t, ms)          SDC_ModTimer(t, ms)
 #endif
 
-#define SDC_CacheAlignBuff(bytes)	(dma_alloc_coherent(bytes))
+#define SDC_CacheAlignBuff(bytes)   (dma_alloc_coherent(bytes))
 
-#define SDC_CACHE_ALIGN_BYTES	(64)
+#define SDC_CACHE_ALIGN_BYTES   (64)
 #ifndef CONFIG_SDC_DMA_BUF_SIZE
 #define SDC_ALIGN_DMA_BUF_SIZE  (64*1024)
 #else

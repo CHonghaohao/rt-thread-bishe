@@ -42,9 +42,9 @@ extern "C" {
 #define SUNXI_GPIO_R_PBASE 0x07022000
 
 #if defined(CONFIG_DRIVERS_INTC)
-#define SUNXI_IRQ_R_GPIOL	(RINTC_IRQ_MASK | 6)
-#define SUNXI_IRQ_R_GPIOM	(RINTC_IRQ_MASK | 7)
-#define SUNXI_IRQ_R_GPION	(RINTC_IRQ_MASK | 8)
+#define SUNXI_IRQ_R_GPIOL   (RINTC_IRQ_MASK | 6)
+#define SUNXI_IRQ_R_GPIOM   (RINTC_IRQ_MASK | 7)
+#define SUNXI_IRQ_R_GPION   (RINTC_IRQ_MASK | 8)
 #endif
 
 typedef enum

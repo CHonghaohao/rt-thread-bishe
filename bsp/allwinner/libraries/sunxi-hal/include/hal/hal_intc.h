@@ -11,8 +11,8 @@ extern "C" {
 
 /* INTC HAL API return status */
 typedef enum {
-	HAL_INTC_STATUS_OK = 0,
-	HAL_INTC_STATUS_FAIL = -1,
+    HAL_INTC_STATUS_OK = 0,
+    HAL_INTC_STATUS_FAIL = -1,
 } hal_intc_status_t;
 
 

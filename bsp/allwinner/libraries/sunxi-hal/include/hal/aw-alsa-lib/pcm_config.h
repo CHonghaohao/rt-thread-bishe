@@ -37,9 +37,9 @@
 #include <aw-alsa-lib/pcm.h>
 
 typedef struct _snd_pcm_config {
-	const char *name;
-	const char *type;
-	void *config;
+    const char *name;
+    const char *type;
+    void *config;
 } snd_pcm_config_t;
 
 extern const snd_pcm_config_t *_snd_pcm_global_configs;
@@ -47,24 +47,24 @@ extern const size_t _snd_pcm_global_configs_size;
 
 #define SND_PCM_CONFIG(xname, xtype, xconfig) \
 { \
-	.name = xname, \
-	.type = xtype, \
-	.config = (void *)xconfig, \
+    .name = xname, \
+    .type = xtype, \
+    .config = (void *)xconfig, \
 }
 
 #define REGISTER_SND_PCM_GLOBAL_CONFIGS(configs_array) \
-	const size_t _snd_pcm_global_configs_size = \
-		sizeof(configs_array) / sizeof(configs_array[0]); \
-	const snd_pcm_config_t *_snd_pcm_global_configs = configs_array;
+    const size_t _snd_pcm_global_configs_size = \
+        sizeof(configs_array) / sizeof(configs_array[0]); \
+    const snd_pcm_config_t *_snd_pcm_global_configs = configs_array;
 
 const snd_pcm_config_t *snd_pcm_config_get_config(const char *name);
 
 typedef int (*snd_pcm_open_func_t)(snd_pcm_t **pcmp, const snd_pcm_config_t *pcm_config,
-		snd_pcm_stream_t stream, int mode);
+        snd_pcm_stream_t stream, int mode);
 
 typedef struct {
-	const char *type;
-	snd_pcm_open_func_t func;
+    const char *type;
+    snd_pcm_open_func_t func;
 } _snd_pcm_open_func_t;
 
 snd_pcm_open_func_t snd_pcm_config_get_open_func(const char *type);

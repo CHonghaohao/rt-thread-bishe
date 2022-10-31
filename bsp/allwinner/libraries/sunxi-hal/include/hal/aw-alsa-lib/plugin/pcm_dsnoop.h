@@ -38,9 +38,9 @@
 #include <sys/types.h>
 
 typedef struct {
-	const char *type;
-	key_t ipc_key;
-	snd_pcm_direct_slave_config_t slave;
+    const char *type;
+    key_t ipc_key;
+    snd_pcm_direct_slave_config_t slave;
 } snd_pcm_dsnoop_config_t;
 
 #endif /* __AW_ALSA_PCM_DSNOOP_H */

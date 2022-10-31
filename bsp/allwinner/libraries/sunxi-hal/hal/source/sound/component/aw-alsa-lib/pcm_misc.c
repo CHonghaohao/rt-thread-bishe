@@ -34,110 +34,110 @@
 
 int snd_pcm_format_signed(snd_pcm_format_t format)
 {
-	switch (format) {
-	case SND_PCM_FORMAT_S8:
-	case SND_PCM_FORMAT_S16_LE:
-	case SND_PCM_FORMAT_S16_BE:
-	case SND_PCM_FORMAT_S24_LE:
-	case SND_PCM_FORMAT_S24_BE:
-	case SND_PCM_FORMAT_S32_LE:
-	case SND_PCM_FORMAT_S32_BE:
-		return 1;
-	case SND_PCM_FORMAT_U8:
-	case SND_PCM_FORMAT_U16_LE:
-	case SND_PCM_FORMAT_U16_BE:
-	case SND_PCM_FORMAT_U24_LE:
-	case SND_PCM_FORMAT_U24_BE:
-	case SND_PCM_FORMAT_U32_LE:
-	case SND_PCM_FORMAT_U32_BE:
-		return 0;
-	default:
-		return -EINVAL;
-	}
+    switch (format) {
+    case SND_PCM_FORMAT_S8:
+    case SND_PCM_FORMAT_S16_LE:
+    case SND_PCM_FORMAT_S16_BE:
+    case SND_PCM_FORMAT_S24_LE:
+    case SND_PCM_FORMAT_S24_BE:
+    case SND_PCM_FORMAT_S32_LE:
+    case SND_PCM_FORMAT_S32_BE:
+        return 1;
+    case SND_PCM_FORMAT_U8:
+    case SND_PCM_FORMAT_U16_LE:
+    case SND_PCM_FORMAT_U16_BE:
+    case SND_PCM_FORMAT_U24_LE:
+    case SND_PCM_FORMAT_U24_BE:
+    case SND_PCM_FORMAT_U32_LE:
+    case SND_PCM_FORMAT_U32_BE:
+        return 0;
+    default:
+        return -EINVAL;
+    }
 }
 
 int snd_pcm_format_unsigned(snd_pcm_format_t format)
 {
-	int val;
+    int val;
 
-	val = snd_pcm_format_signed(format);
-	if (val < 0)
-		return val;
-	return !val;
+    val = snd_pcm_format_signed(format);
+    if (val < 0)
+        return val;
+    return !val;
 }
 
 int snd_pcm_format_linear(snd_pcm_format_t format)
 {
-	return snd_pcm_format_signed(format) >= 0;
+    return snd_pcm_format_signed(format) >= 0;
 }
 
 int snd_pcm_format_little_endian(snd_pcm_format_t format)
 {
-	switch (format) {
-	case SND_PCM_FORMAT_S16_LE:
-	case SND_PCM_FORMAT_U16_LE:
-	case SND_PCM_FORMAT_S24_LE:
-	case SND_PCM_FORMAT_U24_LE:
-	case SND_PCM_FORMAT_S32_LE:
-	case SND_PCM_FORMAT_U32_LE:
-		return 1;
-	case SND_PCM_FORMAT_S16_BE:
-	case SND_PCM_FORMAT_U16_BE:
-	case SND_PCM_FORMAT_S24_BE:
-	case SND_PCM_FORMAT_U24_BE:
-	case SND_PCM_FORMAT_S32_BE:
-	case SND_PCM_FORMAT_U32_BE:
-		return 0;
-	default:
-		return -EINVAL;
-	}
+    switch (format) {
+    case SND_PCM_FORMAT_S16_LE:
+    case SND_PCM_FORMAT_U16_LE:
+    case SND_PCM_FORMAT_S24_LE:
+    case SND_PCM_FORMAT_U24_LE:
+    case SND_PCM_FORMAT_S32_LE:
+    case SND_PCM_FORMAT_U32_LE:
+        return 1;
+    case SND_PCM_FORMAT_S16_BE:
+    case SND_PCM_FORMAT_U16_BE:
+    case SND_PCM_FORMAT_S24_BE:
+    case SND_PCM_FORMAT_U24_BE:
+    case SND_PCM_FORMAT_S32_BE:
+    case SND_PCM_FORMAT_U32_BE:
+        return 0;
+    default:
+        return -EINVAL;
+    }
 }
 
 int snd_pcm_format_big_endian(snd_pcm_format_t format)
 {
-	int val;
+    int val;
 
-	val = snd_pcm_format_little_endian(format);
-	if (val < 0)
-		return val;
-	return !val;
+    val = snd_pcm_format_little_endian(format);
+    if (val < 0)
+        return val;
+    return !val;
 }
 
 int snd_pcm_format_width(snd_pcm_format_t format)
 {
-	switch (format) {
-	case SND_PCM_FORMAT_S8:
-	case SND_PCM_FORMAT_U8:
-		return 8;
-	case SND_PCM_FORMAT_S16_LE:
-	case SND_PCM_FORMAT_S16_BE:
-	case SND_PCM_FORMAT_U16_LE:
-	case SND_PCM_FORMAT_U16_BE:
-		return 16;
-	case SND_PCM_FORMAT_S24_LE:
-	case SND_PCM_FORMAT_S24_BE:
-	case SND_PCM_FORMAT_U24_LE:
-	case SND_PCM_FORMAT_U24_BE:
-		return 24;
-	case SND_PCM_FORMAT_S32_LE:
-	case SND_PCM_FORMAT_S32_BE:
-	case SND_PCM_FORMAT_U32_LE:
-	case SND_PCM_FORMAT_U32_BE:
-		return 32;
-	default:
-		return -EINVAL;
-	}
+    switch (format) {
+    case SND_PCM_FORMAT_S8:
+    case SND_PCM_FORMAT_U8:
+        return 8;
+    case SND_PCM_FORMAT_S16_LE:
+    case SND_PCM_FORMAT_S16_BE:
+    case SND_PCM_FORMAT_U16_LE:
+    case SND_PCM_FORMAT_U16_BE:
+        return 16;
+    case SND_PCM_FORMAT_S24_LE:
+    case SND_PCM_FORMAT_S24_BE:
+    case SND_PCM_FORMAT_U24_LE:
+    case SND_PCM_FORMAT_U24_BE:
+        return 24;
+    case SND_PCM_FORMAT_S32_LE:
+    case SND_PCM_FORMAT_S32_BE:
+    case SND_PCM_FORMAT_U32_LE:
+    case SND_PCM_FORMAT_U32_BE:
+        return 32;
+    default:
+        return -EINVAL;
+    }
 }
 
 static const int linear_formats[4][2][2] = {
-	{ { SND_PCM_FORMAT_S8, SND_PCM_FORMAT_S8 },
-	  { SND_PCM_FORMAT_U8, SND_PCM_FORMAT_U8 } },
-	{ { SND_PCM_FORMAT_S16_LE, SND_PCM_FORMAT_S16_BE },
-	  { SND_PCM_FORMAT_U16_LE, SND_PCM_FORMAT_U16_BE } },
-	{ { SND_PCM_FORMAT_S24_LE, SND_PCM_FORMAT_S24_BE },
-	  { SND_PCM_FORMAT_U24_LE, SND_PCM_FORMAT_U24_BE } },
-	{ { SND_PCM_FORMAT_S32_LE, SND_PCM_FORMAT_S32_BE },
-	  { SND_PCM_FORMAT_U32_LE, SND_PCM_FORMAT_U32_BE } }
+    { { SND_PCM_FORMAT_S8, SND_PCM_FORMAT_S8 },
+      { SND_PCM_FORMAT_U8, SND_PCM_FORMAT_U8 } },
+    { { SND_PCM_FORMAT_S16_LE, SND_PCM_FORMAT_S16_BE },
+      { SND_PCM_FORMAT_U16_LE, SND_PCM_FORMAT_U16_BE } },
+    { { SND_PCM_FORMAT_S24_LE, SND_PCM_FORMAT_S24_BE },
+      { SND_PCM_FORMAT_U24_LE, SND_PCM_FORMAT_U24_BE } },
+    { { SND_PCM_FORMAT_S32_LE, SND_PCM_FORMAT_S32_BE },
+      { SND_PCM_FORMAT_U32_LE, SND_PCM_FORMAT_U32_BE } }
 };
 
 /**
@@ -150,42 +150,42 @@ static const int linear_formats[4][2][2] = {
  */
 snd_pcm_format_t snd_pcm_build_linear_format(int width, int pwidth, int unsignd, int big_endian)
 {
-	if (pwidth == 24) {
+    if (pwidth == 24) {
 #if 0
-		switch (width) {
-		case 24:
-			width = 0;
-			break;
-		case 20:
-			width = 1;
-			break;
-		case 18:
-			width = 2;
-			break;
-		default:
-			return SND_PCM_FORMAT_UNKNOWN;
-		}
-		return linear24_formats[width][!!unsignd][!!big_endian];
+        switch (width) {
+        case 24:
+            width = 0;
+            break;
+        case 20:
+            width = 1;
+            break;
+        case 18:
+            width = 2;
+            break;
+        default:
+            return SND_PCM_FORMAT_UNKNOWN;
+        }
+        return linear24_formats[width][!!unsignd][!!big_endian];
 #else
-		return SND_PCM_FORMAT_UNKNOWN;
+        return SND_PCM_FORMAT_UNKNOWN;
 #endif
-	} else {
-		switch (width) {
-		case 8:
-			width = 0;
-			break;
-		case 16:
-			width = 1;
-			break;
-		case 24:
-			width = 2;
-			break;
-		case 32:
-			width = 3;
-			break;
-		default:
-			return SND_PCM_FORMAT_UNKNOWN;
-		}
-		return linear_formats[width][!!unsignd][!!big_endian];
-	}
+    } else {
+        switch (width) {
+        case 8:
+            width = 0;
+            break;
+        case 16:
+            width = 1;
+            break;
+        case 24:
+            width = 2;
+            break;
+        case 32:
+            width = 3;
+            break;
+        default:
+            return SND_PCM_FORMAT_UNKNOWN;
+        }
+        return linear_formats[width][!!unsignd][!!big_endian];
+    }
 }

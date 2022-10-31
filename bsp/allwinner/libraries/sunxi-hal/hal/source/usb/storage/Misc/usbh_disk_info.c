@@ -13,7 +13,7 @@
 *
 * Date          : 2009.08.18
 *
-* Description   : hostÖ§³Öº£Á¿´æ´¢ÀàÊ±ºòµÄ¶ÁÐ´×´¿ö»ñÈ¡
+* Description   : hostæ”¯æŒæµ·é‡å­˜å‚¨ç±»æ—¶å€™çš„è¯»å†™çŠ¶å†µèŽ·å–
 *
 * History       :
 *
@@ -44,7 +44,7 @@ static int usbh_disk_GetDeviceInfo(usbh_disk_info_t *disk_info,
 * Returns:
 *    void
 * note:
-*    ÎÞ
+*    æ— 
 *
 *********************************************************************
 */
@@ -67,7 +67,7 @@ void set_usbh_disk_status(unsigned int status)
 * Returns:
 *    void
 * note:
-*    ÎÞ
+*    æ— 
 *
 *********************************************************************
 */
@@ -197,7 +197,7 @@ static int32_t usbh_disk_info_ioctrl(void * hDev, uint32_t Cmd, long Aux, void *
 
     switch (Cmd)
     {
-        case USB_DEVICE_INFO_USER_CMD_GET_DISK_STATUS:  //read¶ÁÈ¡µ±Ç°ËùÓÐlunµÄ¶ÁÐ´×´Ì¬
+        case USB_DEVICE_INFO_USER_CMD_GET_DISK_STATUS:  //readè¯»å–å½“å‰æ‰€æœ‰lunçš„è¯»å†™çŠ¶æ€
         {
             unsigned int *p_status = (unsigned int *)pBuffer;
 
@@ -257,7 +257,7 @@ void usbh_disk_SaveDeviceInfo(usbh_disk_device_info_t *device_info)
 
     if (device_info == NULL)
     {
-		hal_log_err("ERR: input error\n");
+        hal_log_err("ERR: input error\n");
         return ;
     }
     list_head_malloc_and_add((void *)device_info, &(disk_info->device_list));
@@ -338,7 +338,7 @@ static int usbh_disk_GetDeviceInfo(usbh_disk_info_t *disk_info,
 
         if (device_info)
         {
-            /* ÕÒµ½¶ÔÓ¦µÄÉè±¸ */
+            /* æ‰¾åˆ°å¯¹åº”çš„è®¾å¤‡ */
             if (strcmp(DeviceName, device_info->DeviceName) == 0)
             {
                 memcpy(usbhDeivceInfo, &device_info->DeivceInfo, sizeof(usbhDeivceInfo_t));
@@ -362,7 +362,7 @@ static int usbh_disk_GetDeviceInfo(usbh_disk_info_t *disk_info,
 *                     usbh_disk_info_open
 *
 * Description:
-*     sdÐÅÏ¢Éè±¸£¬Ä¿Ç°Ö÷ÒªÓÃÓÚ¼à²âsdÉè±¸µÄ¶ÁÐ´Çé¿ö
+*     sdä¿¡æ¯è®¾å¤‡ï¼Œç›®å‰ä¸»è¦ç”¨äºŽç›‘æµ‹sdè®¾å¤‡çš„è¯»å†™æƒ…å†µ
 * Arguments:
 *
 * Returns:
@@ -378,7 +378,7 @@ int usbh_disk_info_reg(void)
     usb_disk_status = 0;
     memset(info, 0, sizeof(usbh_disk_info_t));
     USB_INIT_LIST_HEAD(&info->device_list);
-	info->reghandle = esDEV_DevReg(DEV_CLASS_USERDEF, USB_DEVICE_INFO_NAME, &usbh_disk_info_op, NULL);
+    info->reghandle = esDEV_DevReg(DEV_CLASS_USERDEF, USB_DEVICE_INFO_NAME, &usbh_disk_info_op, NULL);
 
     if (info->reghandle == NULL)
     {
@@ -394,7 +394,7 @@ int usbh_disk_info_reg(void)
 *                     usbh_disk_info_open
 *
 * Description:
-*     sdÐÅÏ¢Éè±¸£¬Ä¿Ç°Ö÷ÒªÓÃÓÚ¼à²âsdÉè±¸µÄ¶ÁÐ´Çé¿ö
+*     sdä¿¡æ¯è®¾å¤‡ï¼Œç›®å‰ä¸»è¦ç”¨äºŽç›‘æµ‹sdè®¾å¤‡çš„è¯»å†™æƒ…å†µ
 * Arguments:
 *
 * Returns:
@@ -415,7 +415,7 @@ int usbh_disk_info_unreg(void)
         return -1;
     }
 
-	ret = esDEV_DevUnreg(info->reghandle);
+    ret = esDEV_DevUnreg(info->reghandle);
     memset(info, 0, sizeof(usbh_disk_info_t));
     return ret;
 }

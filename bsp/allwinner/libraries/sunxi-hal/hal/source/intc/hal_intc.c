@@ -6,26 +6,26 @@
 
 static irqreturn_t intc_dispatcher(int dev, void *arg)
 {
-	interrupt_entry();
+    interrupt_entry();
 
-	return IRQ_HANDLED;
+    return IRQ_HANDLED;
 }
 
 hal_intc_status_t hal_intc_init(uint32_t irq_no)
 {
-	hal_intc_status_t ret = HAL_INTC_STATUS_OK;
+    hal_intc_status_t ret = HAL_INTC_STATUS_OK;
 
-	/* initialize interrupt manager */
-	interrupt_init();
+    /* initialize interrupt manager */
+    interrupt_init();
 
-	/* register intc main dispatcher handler */
-	if (request_irq(irq_no, intc_dispatcher, 0, NULL, NULL) < 0) {
-		ret = HAL_INTC_STATUS_FAIL;
-		goto end;
-	}
+    /* register intc main dispatcher handler */
+    if (request_irq(irq_no, intc_dispatcher, 0, NULL, NULL) < 0) {
+        ret = HAL_INTC_STATUS_FAIL;
+        goto end;
+    }
 
-	enable_irq(irq_no);
+    enable_irq(irq_no);
 
 end:
-	return ret;
+    return ret;
 }

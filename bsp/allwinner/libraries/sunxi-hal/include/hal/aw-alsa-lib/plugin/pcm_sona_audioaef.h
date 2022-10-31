@@ -34,18 +34,18 @@
 #define __AW_ALSA_PCM_SONA_AUDIOAEF_H
 
 typedef struct {
-	const char *pcm;
+    const char *pcm;
 } snd_pcm_sona_audioaef_slave_config_t;
 
 typedef struct {
-	const char *type;
-	snd_pcm_sona_audioaef_slave_config_t slave;
-	const char *config_name;
-	const char *config_file;
-	int max_frames;
-	int runtime_config;
-	int save_runtime_config;
-	int debug_log;
+    const char *type;
+    snd_pcm_sona_audioaef_slave_config_t slave;
+    const char *config_name;
+    const char *config_file;
+    int max_frames;
+    int runtime_config;
+    int save_runtime_config;
+    int debug_log;
 } snd_pcm_sona_audioaef_config_t;
 
 #endif /* __AW_ALSA_PCM_SONA_AUDIOAEF_H */

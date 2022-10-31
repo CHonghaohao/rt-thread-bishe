@@ -1,12 +1,12 @@
 #ifndef __USB_DEVICE_DRIVER_H__
 #define __USB_DEVICE_DRIVER_H__
-#ifdef	CONFIG_USB_STORAGE
+#ifdef  CONFIG_USB_STORAGE
 #include "usb_msc.h"
 #endif
-#ifdef	CONFIG_USB_HID
+#ifdef  CONFIG_USB_HID
 #include "Hid.h"
 #endif
-#ifdef	CONFIG_USB_CAMERA
+#ifdef  CONFIG_USB_CAMERA
 #include "UVC.h"
 #endif
 

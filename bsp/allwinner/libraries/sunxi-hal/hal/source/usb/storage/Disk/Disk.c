@@ -37,10 +37,10 @@
 *
 *
 * Return value:
-*    ÎÞ
+*    æ— 
 *
 * note:
-*    ÎÞ
+*    æ— 
 *
 *******************************************************************************
 */
@@ -71,13 +71,13 @@ static void DiskMediaChange(__mscLun_t *mscLun)
     {
         case USB_STATUS_SUCCESS:
 
-            /* Ã»ÓÐ×¢²ádiskÉè±¸, ¾ÍÈ¥×¢²ádiskÉè±¸ */
+            /* æ²¡æœ‰æ³¨å†Œdiskè®¾å¤‡, å°±åŽ»æ³¨å†Œdiskè®¾å¤‡ */
             if (!BlkDev->is_RegDisk)
             {
-                /* »ñµÃ´ÅÅÌÐÅÏ¢ */
+                /* èŽ·å¾—ç£ç›˜ä¿¡æ¯ */
                 GetDiskInfo(BlkDev);
 
-                /* ×¢²á¿éÉè±¸ */
+                /* æ³¨å†Œå—è®¾å¤‡ */
                 if (mscLun->MediaPresent)
                 {
                     UsbBlkDevUnReg(BlkDev);
@@ -135,11 +135,11 @@ static void DiskMediaChange(__mscLun_t *mscLun)
 *
 *
 * Return value:
-*    0  £º³É¹¦
-*   !0  £ºÊ§°Ü
+*    0  ï¼šæˆåŠŸ
+*   !0  ï¼šå¤±è´¥
 *
 * note:
-*    ÎÞ
+*    æ— 
 *
 *******************************************************************************
 */
@@ -155,7 +155,7 @@ int DiskProbe(__mscLun_t *mscLun)
         return -1;
     }
 
-    /* ³õÊ¼»¯Ò»¸ö¿éÉè±¸ */
+    /* åˆå§‹åŒ–ä¸€ä¸ªå—è®¾å¤‡ */
     BlkDev = UsbBlkDevAllocInit(mscLun);
 
     if (BlkDev == NULL)
@@ -179,10 +179,10 @@ int DiskProbe(__mscLun_t *mscLun)
     printf("mscLun->LunNo=%d\n", mscLun->LunNo);
     printf("mscLun->mscDev->MaxLun=%d\n", mscLun->mscDev->MaxLun);
     printf("BlkDev->last_lun=%d\n", BlkDev->last_lun);
-    /* »ñµÃ´ÅÅÌÐÅÏ¢ */
+    /* èŽ·å¾—ç£ç›˜ä¿¡æ¯ */
     GetDiskInfo(BlkDev);
 
-    /* ×¢²á¿éÉè±¸ */
+    /* æ³¨å†Œå—è®¾å¤‡ */
     if (!mscLun->MediaPresent)
     {
         ret = UsbBlkDevReg(BlkDev, DEV_CLASS_USERDEF, 0);
@@ -198,17 +198,17 @@ int DiskProbe(__mscLun_t *mscLun)
         return USB_ERR_REG_BLK_DEV_FAILED;
     }
 
-    /* ¸æËßusb_monitor, scsi diskÊ¶±ðÉè±¸³É¹¦ */
+    /* å‘Šè¯‰usb_monitor, scsi diskè¯†åˆ«è®¾å¤‡æˆåŠŸ */
     {
         u32 is_reg = 1;
         //usbm_sendcmd(DEV_IOC_USR_HWSC_USBH_MSC_DEV_REG_SET, &is_reg);
     }
     /*
-         Ö»ÓÐ¿ÉÒÆ¶¯Éè±¸²ÅÐèÒª¼ì²éMediaChange£¬µ«ÊÇÔÚSata×ªUSB½Ó¿ÚµÄÉè±¸Àï£¬
-     Éè±¸±ê³Æ×Ô¼ºÊÇ²»¿ÉÒÆ¶¯Éè±¸£¬ÔÚhostÃ»ÓÐ·ÃÎÊËüµÄÊ±ºò£¬Éè±¸»á½øÈëµÍ¹¦ºÄÄ£Ê½£¬
-     Éè±¸µÄµç»ú²»×ªÁË¡£µ±host¶ÁÉè±¸Ê±£¬Éè±¸µÄµç»ú¿ªÊ¼¹¤×÷£¬ÔÚ´«ÊäÊý¾ÝÊ±£¬²úÉúepstall£¬
-     ¶ÔÉè±¸½øÐÐ¸´Î»ºó£¬Éè±¸Í»È»¶Ï¿ª¡£Òò´ËÖ»ÄÜÒ»Ö±¸øËü·¢test_unit_readyÃüÁî£¬²»ÈÃÆä
-     ½øÈëµÍ¹¦ºÄÄ£Ê½¡£
+         åªæœ‰å¯ç§»åŠ¨è®¾å¤‡æ‰éœ€è¦æ£€æŸ¥MediaChangeï¼Œä½†æ˜¯åœ¨Sataè½¬USBæŽ¥å£çš„è®¾å¤‡é‡Œï¼Œ
+     è®¾å¤‡æ ‡ç§°è‡ªå·±æ˜¯ä¸å¯ç§»åŠ¨è®¾å¤‡ï¼Œåœ¨hostæ²¡æœ‰è®¿é—®å®ƒçš„æ—¶å€™ï¼Œè®¾å¤‡ä¼šè¿›å…¥ä½ŽåŠŸè€—æ¨¡å¼ï¼Œ
+     è®¾å¤‡çš„ç”µæœºä¸è½¬äº†ã€‚å½“hostè¯»è®¾å¤‡æ—¶ï¼Œè®¾å¤‡çš„ç”µæœºå¼€å§‹å·¥ä½œï¼Œåœ¨ä¼ è¾“æ•°æ®æ—¶ï¼Œäº§ç”Ÿepstallï¼Œ
+     å¯¹è®¾å¤‡è¿›è¡Œå¤ä½åŽï¼Œè®¾å¤‡çªç„¶æ–­å¼€ã€‚å› æ­¤åªèƒ½ä¸€ç›´ç»™å®ƒå‘test_unit_readyå‘½ä»¤ï¼Œä¸è®©å…¶
+     è¿›å…¥ä½ŽåŠŸè€—æ¨¡å¼ã€‚
      */
     ENTER_CRITICAL(cpu_sr);
     mscLun->MediaChange = DiskMediaChange;
@@ -227,11 +227,11 @@ int DiskProbe(__mscLun_t *mscLun)
 *
 *
 * Return value:
-*    0  £º³É¹¦
-*   !0  £ºÊ§°Ü
+*    0  ï¼šæˆåŠŸ
+*   !0  ï¼šå¤±è´¥
 *
 * note:
-*    ÎÞ
+*    æ— 
 *
 *******************************************************************************
 */
@@ -254,15 +254,15 @@ int DiskRemove(__mscLun_t *mscLun)
         return -1;
     }
 
-    /* ×¢Ïú¿éÉè±¸ */
+    /* æ³¨é”€å—è®¾å¤‡ */
     UsbBlkDevUnReg(BlkDev);
-    /* ¸æËßusb_monitor scsi diskÉè±¸ÒÑ¾­×¢Ïú */
+    /* å‘Šè¯‰usb_monitor scsi diskè®¾å¤‡å·²ç»æ³¨é”€ */
     {
         u32 is_reg = 0;
         //usbm_sendcmd(DEV_IOC_USR_HWSC_USBH_MSC_DEV_REG_SET, &is_reg);
     }
     ShutDown(BlkDev);
-    /* media changeÏß³ÌÒÑ¾­Í£Ö¹ÁË, ËùÒÔÏÖÔÚ¿ÉÒÔÖ±½ÓÉ¾³ýMediaChange */
+    /* media changeçº¿ç¨‹å·²ç»åœæ­¢äº†, æ‰€ä»¥çŽ°åœ¨å¯ä»¥ç›´æŽ¥åˆ é™¤MediaChange */
     ENTER_CRITICAL(cpu_sr);
     mscLun->MediaChange = NULL;
     EXIT_CRITICAL(cpu_sr);

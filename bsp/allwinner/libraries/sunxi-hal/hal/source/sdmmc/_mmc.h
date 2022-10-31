@@ -37,14 +37,14 @@ extern "C" {
 #endif
 
 enum {
-	CT_NULL,
-	CT_SDSC1x,
-	CT_SDSC20,
-	CT_SDHC20,
-	CT_SDXC30,
-	CT_SDIO,
-	CT_MMC,
-	CT_CEATA
+    CT_NULL,
+    CT_SDSC1x,
+    CT_SDSC20,
+    CT_SDHC20,
+    CT_SDXC30,
+    CT_SDIO,
+    CT_MMC,
+    CT_CEATA
 };
 
 extern int mmc_attach_mmc(struct mmc_card *card, struct mmc_host *host);

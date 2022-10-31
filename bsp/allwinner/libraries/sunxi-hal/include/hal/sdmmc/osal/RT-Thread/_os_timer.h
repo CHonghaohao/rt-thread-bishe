@@ -54,7 +54,7 @@ typedef rt_timer_t OS_TimerHandle_t;
 
 typedef struct OS_Timer
 {
-	rt_timer_t	handle;
+    rt_timer_t  handle;
 } OS_Timer_t;
 
 
@@ -72,7 +72,7 @@ OS_Status OS_TimerStop(OS_Timer_t *timer);
  */
 static inline int OS_TimerIsValid(OS_Timer_t *timer)
 {
-	return (timer->handle != OS_INVALID_HANDLE);
+    return (timer->handle != OS_INVALID_HANDLE);
 }
 
 /**
@@ -82,7 +82,7 @@ static inline int OS_TimerIsValid(OS_Timer_t *timer)
  */
 static inline void OS_TimerSetInvalid(OS_Timer_t *timer)
 {
-	timer->handle = OS_INVALID_HANDLE;
+    timer->handle = OS_INVALID_HANDLE;
 }
 
 /**
@@ -98,7 +98,7 @@ static inline void OS_TimerSetInvalid(OS_Timer_t *timer)
  */
 static inline int OS_TimerIsActive(OS_Timer_t *timer)
 {
-	return ((timer->handle->parent.flag & RT_TIMER_FLAG_ACTIVATED) ? 1 : 0);
+    return ((timer->handle->parent.flag & RT_TIMER_FLAG_ACTIVATED) ? 1 : 0);
 }
 
 #ifdef __cplusplus

@@ -1,12 +1,3 @@
-/*
- * Copyright (c) 2006-2021, RT-Thread Development Team
- *
- * SPDX-License-Identifier: Apache-2.0
- *
- * Change Logs:
- * 2021-11-19     songchao     first version
- */
-
 #include <rthw.h>
 #include <rtdevice.h>
 #include <hal_gpio.h>
@@ -22,12 +13,16 @@ static void hal_pin_mode(struct rt_device *device, rt_base_t pin, rt_base_t mode
             hal_gpio_set_direction(pin,GPIO_DIRECTION_INPUT);
             break;
         case PIN_MODE_INPUT_PULLDOWN:
-            hal_gpio_set_pull(pin,GPIO_PULL_DOWN);
+            hal_gpio_set_pull(pin, GPIO_PULL_DOWN);
+            hal_gpio_set_direction(pin,GPIO_DIRECTION_INPUT);
             break;
         case PIN_MODE_INPUT_PULLUP:
             hal_gpio_set_pull(pin,GPIO_PULL_UP);
+            hal_gpio_set_direction(pin,GPIO_DIRECTION_INPUT);
             break;
         case PIN_MODE_OUTPUT_OD:
+            hal_gpio_set_pull(pin, GPIO_PULL_DOWN_DISABLED);
+            hal_gpio_set_direction(pin,GPIO_DIRECTION_OUTPUT);
             break;
     }
 }
@@ -60,6 +55,7 @@ static rt_err_t hal_pin_attach_irq(struct rt_device *device, rt_int32_t pin,
     }
 
     level = rt_hw_interrupt_disable();
+    hal_gpio_set_debounce(pin, 1); // enable debounce 24Mhz
     ret = hal_gpio_irq_attach(irq, hdr, mode + 1, args);
     if (ret < 0)
     {

@@ -93,7 +93,7 @@ struct usb_drv_dev_match_table
 #define USB_DEVICE_ID_MATCH_INT_INFO \
     (USB_DEVICE_ID_MATCH_INT_CLASS | USB_DEVICE_ID_MATCH_INT_SUBCLASS | USB_DEVICE_ID_MATCH_INT_PROTOCOL)
 #define USB_DEVICE_ID_MATCH_DEVICE \
-			(USB_DEVICE_ID_MATCH_VENDOR | USB_DEVICE_ID_MATCH_PRODUCT)
+            (USB_DEVICE_ID_MATCH_VENDOR | USB_DEVICE_ID_MATCH_PRODUCT)
 
 
 struct usb_host_virt_dev;
@@ -140,7 +140,7 @@ struct usb_virt_bus
 
     void *hcpriv;               /* 其实是指向usb_hcd,hc_gen_dev */
 
-    unsigned resuming_ports;	/* bit array: resuming root-hub ports */
+    unsigned resuming_ports;    /* bit array: resuming root-hub ports */
 
     int32_t bandwidth_allocated;
 
@@ -289,7 +289,7 @@ struct urb
     int32_t status;                                 //(return) non-ISO status
     uint32_t transfer_flags;                         // (in) URB_SHORT_NOT_OK | ...
 
-    struct usb_host_virt_endpoint *ep;		/* (internal) pointer to endpoint */
+    struct usb_host_virt_endpoint *ep;      /* (internal) pointer to endpoint */
     void *transfer_buffer;                      //要发送的data 的buff
 
     unsigned long transfer_dma;                           //dma addr,不支持的时候为0

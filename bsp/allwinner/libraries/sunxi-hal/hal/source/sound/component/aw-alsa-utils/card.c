@@ -41,64 +41,64 @@
 
 static void card_list(void)
 {
-	int num, i;
-	num = snd_card_num();
-	if (num < 0) {
-		printf("no registered card...\n");
-		return;
-	}
-	printf("Sound Card list:\n");
-	printf("%8s%20s\n", "card_num", "card_name");
-	for (i = 0; i < num; i++) {
-		if (i != snd_card_index(snd_card_name(i))) {
-			printf("card_num%d not equal index convert"
-				"from name:%s\n", i, snd_card_name(i));
-			return;
-		}
-		printf("%8d%20s\n", i, snd_card_name(i));
-	}
+    int num, i;
+    num = snd_card_num();
+    if (num < 0) {
+        printf("no registered card...\n");
+        return;
+    }
+    printf("Sound Card list:\n");
+    printf("%8s%20s\n", "card_num", "card_name");
+    for (i = 0; i < num; i++) {
+        if (i != snd_card_index(snd_card_name(i))) {
+            printf("card_num%d not equal index convert"
+                "from name:%s\n", i, snd_card_name(i));
+            return;
+        }
+        printf("%8d%20s\n", i, snd_card_name(i));
+    }
 }
 
 
 static void usage(void)
 {
-	printf("Usage: soundcard [option]\n");
-	printf("-c,          sound card number\n");
-	printf("-l,          sound card list\n");
-	printf("-i,          sound card info\n");
-	printf("-s,          sound card pcm stream info, 0-playback; 1-capture\n");
-	printf("\n");
+    printf("Usage: soundcard [option]\n");
+    printf("-c,          sound card number\n");
+    printf("-l,          sound card list\n");
+    printf("-i,          sound card info\n");
+    printf("-s,          sound card pcm stream info, 0-playback; 1-capture\n");
+    printf("\n");
 }
 
 int cmd_soundcard(int argc, char *argv[])
 {
-	int c;
-	int card_num = -1;
-	int stream = -1;
+    int c;
+    int card_num = -1;
+    int stream = -1;
 
-	while ((c = getopt(argc, argv, "c:lis:h")) != -1) {
-		switch (c) {
-		case 'c':
-			card_num = atoi(optarg);
-			break;
-		case 'l':
-			card_list();
-			return 0;
-		case 'i':
-			return snd_card_info(card_num);
-		case 's':
-			stream = atoi(optarg);
-			if (stream != 0 && stream != 1) {
-				printf("unknown stream:%d\n", stream);
-			}
-			return snd_card_pcm_info(card_num, 0, stream);
-		default:
-			usage();
-			return 0;
-		}
-	}
+    while ((c = getopt(argc, argv, "c:lis:h")) != -1) {
+        switch (c) {
+        case 'c':
+            card_num = atoi(optarg);
+            break;
+        case 'l':
+            card_list();
+            return 0;
+        case 'i':
+            return snd_card_info(card_num);
+        case 's':
+            stream = atoi(optarg);
+            if (stream != 0 && stream != 1) {
+                printf("unknown stream:%d\n", stream);
+            }
+            return snd_card_pcm_info(card_num, 0, stream);
+        default:
+            usage();
+            return 0;
+        }
+    }
 
-	return 0;
+    return 0;
 }
 
 FINSH_FUNCTION_EXPORT_CMD(cmd_soundcard, soundcard, soundcard info);

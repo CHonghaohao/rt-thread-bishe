@@ -49,9 +49,9 @@ extern "C" {
  */
 static __always_inline uint32_t HAL_GetHFClock(void)
 {
-//	return HAL_PRCM_GetHFClock();
-	printf("%s,%d Warning Use fix value 24000000\n", __FUNCTION__,__LINE__);
-	return 24*1000*1000;
+//  return HAL_PRCM_GetHFClock();
+    // printf("%s,%d Warning Use fix value 24000000\n", __FUNCTION__,__LINE__);
+    return 24*1000*1000;
 }
 
 /**
@@ -60,9 +60,9 @@ static __always_inline uint32_t HAL_GetHFClock(void)
  */
 static __always_inline uint32_t HAL_GetLFClock(void)
 {
-	//return HAL_PRCM_GetLFClock();
-	printf("********%s, %d Error:Empty implementation*******\n", __FUNCTION__,__LINE__);
-	return 24*1000*1000;
+    //return HAL_PRCM_GetLFClock();
+    printf("********%s, %d Error:Empty implementation*******\n", __FUNCTION__,__LINE__);
+    return 24*1000*1000;
 }
 
 /**
@@ -71,9 +71,9 @@ static __always_inline uint32_t HAL_GetLFClock(void)
  */
 static __always_inline uint32_t HAL_GetCPUClock(void)
 {
-	//return HAL_PRCM_GetCPUAClk();
-	printf("********%s, %d Error:Empty implementation*******\n", __FUNCTION__,__LINE__);
-	return 24*1000*1000;
+    //return HAL_PRCM_GetCPUAClk();
+    printf("********%s, %d Error:Empty implementation*******\n", __FUNCTION__,__LINE__);
+    return 24*1000*1000;
 }
 
 /**
@@ -82,13 +82,13 @@ static __always_inline uint32_t HAL_GetCPUClock(void)
  */
 static __always_inline uint32_t HAL_GetDevClock(void)
 {
-//	return HAL_PRCM_GetDevClock();
-#ifndef SDC_PLL_CLK  
+//  return HAL_PRCM_GetDevClock();
+#ifndef SDC_PLL_CLK
     printf("%s,%d Warning Use fix value 1200000000\n", __FUNCTION__,__LINE__);
-	return 1200*1000*1000;
+    return 1200*1000*1000;
 #else
- printf("%s,%d Warning Use fix value %d\n", __FUNCTION__,__LINE__, SDC_PLL_CLK);
-	return SDC_PLL_CLK;
+//  printf("%s,%d Warning Use fix value %d\n", __FUNCTION__,__LINE__, SDC_PLL_CLK);
+    return SDC_PLL_CLK;
 #endif
 }
 
@@ -98,9 +98,9 @@ static __always_inline uint32_t HAL_GetDevClock(void)
  */
 static __always_inline uint32_t HAL_GetAHB1Clock(void)
 {
-	//return HAL_CCM_BusGetAHB1Clock();
-	printf("********%s, %d Error:Empty implementation*******\n", __FUNCTION__,__LINE__);
-	return 24*1000*1000;
+    //return HAL_CCM_BusGetAHB1Clock();
+    printf("********%s, %d Error:Empty implementation*******\n", __FUNCTION__,__LINE__);
+    return 24*1000*1000;
 }
 
 /**
@@ -109,9 +109,9 @@ static __always_inline uint32_t HAL_GetAHB1Clock(void)
  */
 static __always_inline uint32_t HAL_GetAHB2Clock(void)
 {
-	//return HAL_CCM_BusGetAHB2Clock();
-	printf("********%s, %d Error:Empty implementation*******\n", __FUNCTION__,__LINE__);
-	return 24*1000*1000;
+    //return HAL_CCM_BusGetAHB2Clock();
+    printf("********%s, %d Error:Empty implementation*******\n", __FUNCTION__,__LINE__);
+    return 24*1000*1000;
 }
 
 /**
@@ -120,9 +120,9 @@ static __always_inline uint32_t HAL_GetAHB2Clock(void)
  */
 static __always_inline uint32_t HAL_GetAPBClock(void)
 {
-	//return HAL_CCM_BusGetAPBClock();
-	printf("********%s, %d Error:Empty implementation*******\n", __FUNCTION__,__LINE__);
-	return 24*1000*1000;
+    //return HAL_CCM_BusGetAPBClock();
+    printf("********%s, %d Error:Empty implementation*******\n", __FUNCTION__,__LINE__);
+    return 24*1000*1000;
 }
 
 #ifdef __cplusplus

@@ -133,16 +133,16 @@ s32 sunxi_lcd_dsi_dcs_write_0para(u32 scree_id, u8 command);
 s32 sunxi_lcd_dsi_dcs_write_1para(u32 scree_id, u8 command, u8 para1);
 s32 sunxi_lcd_dsi_dcs_write_2para(u32 scree_id, u8 command, u8 para1, u8 para2);
 s32 sunxi_lcd_dsi_dcs_write_3para(u32 scree_id, u8 command, u8 para1, u8 para2,
-				  u8 para3);
+                  u8 para3);
 s32 sunxi_lcd_dsi_dcs_write_4para(u32 scree_id, u8 command, u8 para1, u8 para2,
-				  u8 para3, u8 para4);
+                  u8 para3, u8 para4);
 s32 sunxi_lcd_dsi_dcs_write_5para(u32 scree_id, u8 command, u8 para1, u8 para2,
-				  u8 para3, u8 para4, u8 para5);
+                  u8 para3, u8 para4, u8 para5);
 
 s32 sunxi_lcd_dsi_gen_short_read0p(u32 screen_id, u8 *result);
 s32 sunxi_lcd_dsi_gen_short_read1p(u32 screen_id, u8 para0, u8 *result);
 s32 sunxi_lcd_dsi_gen_short_read2p(u32 screen_id, u8 para0, u8 para1,
-				   u8 *result);
+                   u8 *result);
 /**
  * @name       :sunxi_lcd_dsi_dcs_read
  * @brief      :dcs read
@@ -181,13 +181,13 @@ s32 sunxi_lcd_dsi_gen_write_0para(u32 scree_id, u8 command);
 s32 sunxi_lcd_dsi_gen_write_1para(u32 scree_id, u8 command, u8 para1);
 s32 sunxi_lcd_dsi_gen_write_2para(u32 scree_id, u8 command, u8 para1, u8 para2);
 s32 sunxi_lcd_dsi_gen_write_3para(u32 scree_id, u8 command, u8 para1, u8 para2,
-				  u8 para3);
+                  u8 para3);
 s32 sunxi_lcd_dsi_gen_write_4para(u32 scree_id, u8 command, u8 para1, u8 para2,
-				  u8 para3, u8 para4);
+                  u8 para3, u8 para4);
 s32 sunxi_lcd_dsi_gen_write_5para(u32 scree_id, u8 command, u8 para1, u8 para2,
-				  u8 para3, u8 para4, u8 para5);
+                  u8 para3, u8 para4, u8 para5);
 s32 sunxi_lcd_dsi_dcs_write_6para(u32 screen_id, u8 command, u8 para1, u8 para2,
-				  u8 para3, u8 para4, u8 para5, u8 para6);
+                  u8 para3, u8 para4, u8 para5, u8 para6);
 /**
  * sunxi_lcd_dsi_clk_enable - enable dsi clk.
  * @scree_id: The index of screen.

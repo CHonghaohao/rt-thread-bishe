@@ -43,9 +43,9 @@ extern "C" {
 #endif
 
 #if (defined(configUSE_TIMER_ID_AS_CALLBACK_ARG) && configUSE_TIMER_ID_AS_CALLBACK_ARG == 1)
-#define OS_TIMER_USE_FREERTOS_ORIG_CALLBACK	0
+#define OS_TIMER_USE_FREERTOS_ORIG_CALLBACK 0
 #else
-#define OS_TIMER_USE_FREERTOS_ORIG_CALLBACK	1
+#define OS_TIMER_USE_FREERTOS_ORIG_CALLBACK 1
 #endif
 
 /**
@@ -80,7 +80,7 @@ typedef struct OS_TimerCallbackData {
 typedef struct OS_Timer {
     TimerHandle_t           handle;
 #if OS_TIMER_USE_FREERTOS_ORIG_CALLBACK
-    OS_TimerCallbackData_t  *priv;	/* private data for internally usage */
+    OS_TimerCallbackData_t  *priv;  /* private data for internally usage */
 #endif
 } OS_Timer_t;
 
@@ -99,7 +99,7 @@ OS_Status OS_TimerStop(OS_Timer_t *timer);
  */
 static __always_inline int OS_TimerIsValid(OS_Timer_t *timer)
 {
-	return (timer->handle != OS_INVALID_HANDLE);
+    return (timer->handle != OS_INVALID_HANDLE);
 }
 
 /**
@@ -109,7 +109,7 @@ static __always_inline int OS_TimerIsValid(OS_Timer_t *timer)
  */
 static __always_inline void OS_TimerSetInvalid(OS_Timer_t *timer)
 {
-	timer->handle = OS_INVALID_HANDLE;
+    timer->handle = OS_INVALID_HANDLE;
 }
 
 /**
@@ -125,7 +125,7 @@ static __always_inline void OS_TimerSetInvalid(OS_Timer_t *timer)
  */
 static __always_inline int OS_TimerIsActive(OS_Timer_t *timer)
 {
-	return (xTimerIsTimerActive(timer->handle) != pdFALSE);
+    return (xTimerIsTimerActive(timer->handle) != pdFALSE);
 }
 
 #ifdef __cplusplus

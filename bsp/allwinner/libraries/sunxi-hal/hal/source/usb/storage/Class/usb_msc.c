@@ -614,7 +614,7 @@ static void GetDeviceInfo(__mscDev_t *mscDev, unsigned int index)
 */
 static int GetTransport(__mscDev_t *mscDev)
 {
-//	printf("%s %d %s Protocol:%x\n", __FILE__, __LINE__, __func__, mscDev->Protocol);
+//  printf("%s %d %s Protocol:%x\n", __FILE__, __LINE__, __func__, mscDev->Protocol);
     switch (mscDev->Protocol)
     {
         case USBMSC_INTERFACE_PROTOCOL_BOT:
@@ -1004,8 +1004,8 @@ int mscDevQueueCmnd(__mscLun_t *mscLun, __ScsiCmnd_t *ScsiCmnd)
 {
     __mscDev_t *mscDev = NULL;
     unsigned int sr = 0 ;
-	int val = 0;
-	
+    int val = 0;
+
     if (ScsiCmnd == NULL)
     {
         hal_log_err("ERR: invalid argment");
@@ -1044,10 +1044,10 @@ int mscDevQueueCmnd(__mscLun_t *mscLun, __ScsiCmnd_t *ScsiCmnd)
     EXIT_CRITICAL(sr);
     /* wakeup mscDev main thread */
     //UsbThreadWakeUp(mscDev->ThreadSemi);
-	if (!hal_sem_getvalue(mscDev->ThreadSemi, &val))
-	{
-	    hal_sem_post(mscDev->ThreadSemi);
-	}
+    if (!hal_sem_getvalue(mscDev->ThreadSemi, &val))
+    {
+        hal_sem_post(mscDev->ThreadSemi);
+    }
     return USB_ERR_SUCCESS;
 }
 
@@ -1159,8 +1159,8 @@ static void mscMainThread(void *p_arg)
         //TryTo//KillThreadSelf("mscMainThread");
         /* sleep */
         //UsbThreadSleep(mscDev->ThreadSemi);
-	//		kthread_stop(mscDev->MainThreadId);
-		hal_sem_wait(mscDev->ThreadSemi);
+    //      kthread_stop(mscDev->MainThreadId);
+        hal_sem_wait(mscDev->ThreadSemi);
         /* cmd_list is empty?
          * mscDevQueueCmnd��cmd�ӵ�cmd_list���պ�����mscMainThread�������������
          * forѭ����⵽cmd_list���վͻ�ȥִ����һ�����ִ����Ϻ�cmd_list���ˡ�
@@ -1232,7 +1232,7 @@ static int32_t mscDevProbe(struct usb_interface *intf, const struct usb_drv_dev_
     unsigned char err  = 0;
     struct rt_thread *mscDev_Scan_Id = 0;
 
-	hal_log_info("mscDevProbe begin");
+    hal_log_info("mscDevProbe begin");
     if (intf == NULL || table_item == NULL)
     {
         hal_log_err("ERR: mscDevProbe: input error");
@@ -1310,7 +1310,7 @@ static int32_t mscDevProbe(struct usb_interface *intf, const struct usb_drv_dev_
                                            (void *)mscDev,
                                            "MscMainThread");
 
-	if (IS_ERR((unsigned long)mscDev->MainThreadId))
+    if (IS_ERR((unsigned long)mscDev->MainThreadId))
     {
         hal_log_err("ERR: create MainThreadId failed");
         ret = -1;
@@ -1321,9 +1321,9 @@ static int32_t mscDevProbe(struct usb_interface *intf, const struct usb_drv_dev_
     /* mscDev scan thread */
     mscDev_Scan_Id = kthread_run((void *)mscDevScanThread,
                                      (void *)mscDev,
-									 "mscDevScanThread");
+                                     "mscDevScanThread");
 
-	if (IS_ERR((unsigned long)mscDev_Scan_Id))
+    if (IS_ERR((unsigned long)mscDev_Scan_Id))
     {
         hal_log_err("ERR: create mscDevScanThread failed");
         ret = -1;

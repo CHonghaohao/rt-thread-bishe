@@ -38,10 +38,10 @@
 *
 *
 * Return value:
-*    ÎÞ
+*    æ— 
 *
 * note:
-*    ÎÞ
+*    æ— 
 *
 *******************************************************************************
 */
@@ -158,13 +158,13 @@ static void print_CD_Disc_info(CDROM_DiscInfo_t *DiscInfo)
 *
 *
 * Parameters:
-*    CD     : input. ¼ÇÂ¼¹âµúµÄÐÅÏ¢
+*    CD     : input. è®°å½•å…‰ç¢Ÿçš„ä¿¡æ¯
 *
 * Return value:
-*    ÎÞ
+*    æ— 
 *
 * note:
-*    ÎÞ
+*    æ— 
 *
 *******************************************************************************
 */
@@ -203,7 +203,7 @@ static void PrintCDInfo(CD_Rom_t *CD)
 
         default:
             //DMSG_INFO("DiscType is unkown(%x)\n", CD->DiscType);
-			break;
+            break;
     }
 
     //DMSG_INFO("DoubleDisc               = %d\n", CD->DoubleDisc);
@@ -221,16 +221,16 @@ static void PrintCDInfo(CD_Rom_t *CD)
 *                     CdLastWriteSector
 *
 * Description:
-*    »ñµÃ¿ÉÐ´¹âµúµÄ×îºóÐ´µÄÎ»ÖÃ¡£
+*    èŽ·å¾—å¯å†™å…‰ç¢Ÿçš„æœ€åŽå†™çš„ä½ç½®ã€‚
 *
 * Parameters:
-*    mscLun  :  input. Ä¿±êÉè±¸
+*    mscLun  :  input. ç›®æ ‡è®¾å¤‡
 *
 * Return value:
-*    ÎÞ
+*    æ— 
 *
 * note:
-*    ÎÞ
+*    æ— 
 *
 *******************************************************************************
 */
@@ -260,16 +260,16 @@ unsigned int CdIOCtrlLastWriteSector(__UsbBlkDev_t *BlkDev)
 *                     CdMultiSession
 *
 * Description:
-*    »ñµÃ¹âµú¶àÉÈÇøµÄÎ»ÖÃ¡£
+*    èŽ·å¾—å…‰ç¢Ÿå¤šæ‰‡åŒºçš„ä½ç½®ã€‚
 *
 * Parameters:
-*    mscLun  :  input. Ä¿±êÉè±¸
+*    mscLun  :  input. ç›®æ ‡è®¾å¤‡
 *
 * Return value:
-*    ÎÞ
+*    æ— 
 *
 * note:
-*    ÎÞ
+*    æ— 
 *
 *******************************************************************************
 */
@@ -283,16 +283,16 @@ unsigned int CdIOCtrlMultiSession(__UsbBlkDev_t *BlkDev)
 *                     GetCdLastWriteSector
 *
 * Description:
-*    »ñµÃ¿ÉÐ´¹âµúµÄ×îºóÐ´µÄÎ»ÖÃ¡£
+*    èŽ·å¾—å¯å†™å…‰ç¢Ÿçš„æœ€åŽå†™çš„ä½ç½®ã€‚
 *
 * Parameters:
-*    mscLun  :  input. Ä¿±êÉè±¸
+*    mscLun  :  input. ç›®æ ‡è®¾å¤‡
 *
 * Return value:
-*    ÎÞ
+*    æ— 
 *
 * note:
-*    ÎÞ
+*    æ— 
 *
 *******************************************************************************
 */
@@ -304,7 +304,7 @@ static int GetCdLastWriteSector(__mscLun_t *mscLun, CD_Rom_t *CD)
     CDROM_TrackMSF_t  *TrackMSF;
     __u8 buffer[MAXIMUM_CDROM_SIZE];
     unsigned int ActLen    = 0;
-    unsigned int LastTrack = 0;  /* ×îºóÒ»¸öÉÈÇø */
+    unsigned int LastTrack = 0;  /* æœ€åŽä¸€ä¸ªæ‰‡åŒº */
     int ret       = 0;
 
     if (mscLun == NULL || CD == NULL)
@@ -468,7 +468,7 @@ int CDIOCtrl(__UsbBlkDev_t *BlkDev, unsigned int Cmd, int Aux, void *pBuffer)
         case USB_STORAGE_USER_CTRL_CMD_CDROM_EJECT:
             //DMSG_INFO("USB_STORAGE_USER_CTRL_CMD_CDROM_EJECT\n");
 
-            /* ÏÈÔÊÐí½éÖÊÒÆ¶¯£¬ÔÙÈ¥µ¯³ö½éÖÊ */
+            /* å…ˆå…è®¸ä»‹è´¨ç§»åŠ¨ï¼Œå†åŽ»å¼¹å‡ºä»‹è´¨ */
             if (ScsiPreventAllowMedium(mscLun, 0, 0) == USB_STATUS_SUCCESS)
             {
                 //DMSG_INFO("[CD_ROM]: Allow medium removal\n");
@@ -485,7 +485,7 @@ int CDIOCtrl(__UsbBlkDev_t *BlkDev, unsigned int Cmd, int Aux, void *pBuffer)
         case USB_STORAGE_USER_CTRL_CMD_CDROM_LOAD:
             //DMSG_INFO("USB_STORAGE_USER_CTRL_CMD_CDROM_LOCK\n");
 
-            /* ÏÈÔÊÐí½éÖÊÒÆ¶¯£¬ÔÙÈ¥¼ÓÔØ½éÖÊ */
+            /* å…ˆå…è®¸ä»‹è´¨ç§»åŠ¨ï¼Œå†åŽ»åŠ è½½ä»‹è´¨ */
             if (ScsiPreventAllowMedium(mscLun, 0, 0) == USB_STATUS_SUCCESS)
             {
                 //DMSG_INFO("[CD_ROM]: Allow medium removal\n");
@@ -543,7 +543,7 @@ int CDIOCtrl(__UsbBlkDev_t *BlkDev, unsigned int Cmd, int Aux, void *pBuffer)
 
         default:
             //DMSG_PANIC("Wrn: unkown Block cmd(%x)\n", Cmd);
-			break;
+            break;
     }
 
     return EPDK_FAIL;
@@ -554,17 +554,17 @@ int CDIOCtrl(__UsbBlkDev_t *BlkDev, unsigned int Cmd, int Aux, void *pBuffer)
 *                     GetCDDriveCapabilites
 *
 * Description:
-*    »ñµÃ¹âÇýµÄÇý¶¯ÄÜÁ¦
+*    èŽ·å¾—å…‰é©±çš„é©±åŠ¨èƒ½åŠ›
 *
 * Parameters:
-*    mscLun : input. Ä¿±êÉè±¸
-*    CD     : input. ¼ÇÂ¼¹âµúµÄÐÅÏ¢
+*    mscLun : input. ç›®æ ‡è®¾å¤‡
+*    CD     : input. è®°å½•å…‰ç¢Ÿçš„ä¿¡æ¯
 *
 * Return value:
-*    ÎÞ
+*    æ— 
 *
 * note:
-*    ÎÞ
+*    æ— 
 *
 *******************************************************************************
 */
@@ -574,7 +574,7 @@ static void GetCDDriveCapabilites(__mscLun_t *mscLun, CD_Rom_t *CD)
     __u8  buffer[SCSI_MODE_SENSE_MAX_DATA_LEN];
     unsigned int ActLen        = 0;
     int ret           = 0;
-    unsigned int pageAddr      = 0;   /* CapitilitiesÒ³ÆðÊ¼µØÖ· */
+    unsigned int pageAddr      = 0;   /* Capitilitiesé¡µèµ·å§‹åœ°å€ */
     __ModeSense10Header_t *Header = NULL;
     unsigned int DiscType = 0;
 
@@ -749,17 +749,17 @@ static void GetCDDriveCapabilites(__mscLun_t *mscLun, CD_Rom_t *CD)
 *                     GetCDDiscTpye
 *
 * Description:
-*    »ñµÃ¹âµúµÄÐÅÏ¢
+*    èŽ·å¾—å…‰ç¢Ÿçš„ä¿¡æ¯
 *
 * Parameters:
-*    mscLun : input. Ä¿±êÉè±¸
-*    CD     : input. ¼ÇÂ¼¹âµúµÄÐÅÏ¢
+*    mscLun : input. ç›®æ ‡è®¾å¤‡
+*    CD     : input. è®°å½•å…‰ç¢Ÿçš„ä¿¡æ¯
 *
 * Return value:
-*    ÎÞ
+*    æ— 
 *
 * note:
-*    ÎÞ
+*    æ— 
 *
 *******************************************************************************
 */
@@ -769,7 +769,7 @@ static void GetCDDiscTpye(__mscLun_t *mscLun, CD_Rom_t *CD)
     __u8  buffer[SCSI_MODE_SENSE_MAX_DATA_LEN];
     unsigned int ActLen        = 0;
     int ret           = 0;
-    unsigned int pageAddr      = 0;   /* CDROM page Ò³ÆðÊ¼µØÖ· */
+    unsigned int pageAddr      = 0;   /* CDROM page é¡µèµ·å§‹åœ°å€ */
     __ModeSense10Header_t *Header = NULL;
 
     if (mscLun == NULL || CD == NULL)
@@ -822,17 +822,17 @@ static void GetCDDiscTpye(__mscLun_t *mscLun, CD_Rom_t *CD)
 *                     GetCDDiscInfo
 *
 * Description:
-*    »ñµÃ¹âµúµÄÐÅÏ¢
+*    èŽ·å¾—å…‰ç¢Ÿçš„ä¿¡æ¯
 *
 * Parameters:
-*    mscLun : input. Ä¿±êÉè±¸
-*    CD     : input. ¼ÇÂ¼¹âµúµÄÐÅÏ¢
+*    mscLun : input. ç›®æ ‡è®¾å¤‡
+*    CD     : input. è®°å½•å…‰ç¢Ÿçš„ä¿¡æ¯
 *
 * Return value:
-*    ÎÞ
+*    æ— 
 *
 * note:
-*    ÎÞ
+*    æ— 
 *
 *******************************************************************************
 */
@@ -847,17 +847,17 @@ static void GetCDDiscInfo(__mscLun_t *mscLun, CD_Rom_t *CD)
 *                     GetCDRomInfo
 *
 * Description:
-*    »ñµÃ¹âµúµÄÐÅÏ¢
+*    èŽ·å¾—å…‰ç¢Ÿçš„ä¿¡æ¯
 *
 * Parameters:
-*    mscLun : input. Ä¿±êÉè±¸
-*    CD     : input. ¼ÇÂ¼¹âµúµÄÐÅÏ¢
+*    mscLun : input. ç›®æ ‡è®¾å¤‡
+*    CD     : input. è®°å½•å…‰ç¢Ÿçš„ä¿¡æ¯
 *
 * Return value:
-*    ÎÞ
+*    æ— 
 *
 * note:
-*    ÎÞ
+*    æ— 
 *
 *******************************************************************************
 */
@@ -869,9 +869,9 @@ static void GetCDRomInfo(__mscLun_t *mscLun, CD_Rom_t *CD)
         return ;
     }
 
-    /* »ñµÃ¹âÇýµÄÐÅÏ¢ */
+    /* èŽ·å¾—å…‰é©±çš„ä¿¡æ¯ */
     GetCDDriveCapabilites(mscLun, CD);
-    /* »ñµÃ¹âµúµÄÐÅÏ¢ */
+    /* èŽ·å¾—å…‰ç¢Ÿçš„ä¿¡æ¯ */
     GetCDDiscInfo(mscLun, CD);
     PrintCDInfo(CD);
 }
@@ -881,17 +881,17 @@ static void GetCDRomInfo(__mscLun_t *mscLun, CD_Rom_t *CD)
 *                     GetCDRomPowerEvent
 *
 * Description:
-*    »ñµÃ¹âÇýµçÔ´µÄÐÅÏ¢
+*    èŽ·å¾—å…‰é©±ç”µæºçš„ä¿¡æ¯
 *
 * Parameters:
-*    mscLun : input. Ä¿±êÉè±¸
-*    CD     : input. ¼ÇÂ¼¹âµúµÄÐÅÏ¢
+*    mscLun : input. ç›®æ ‡è®¾å¤‡
+*    CD     : input. è®°å½•å…‰ç¢Ÿçš„ä¿¡æ¯
 *
 * Return value:
-*    ÎÞ
+*    æ— 
 *
 * note:
-*    ÎÞ
+*    æ— 
 *
 *******************************************************************************
 */
@@ -944,17 +944,17 @@ static int GetCDRomPowerEvent(__mscLun_t *mscLun, CD_Rom_t *CD, CDROM_PowerStatu
 *                     GetCDRomMediaEvent
 *
 * Description:
-*    »ñµÃ¹âÇý¹âµúµÄÐÅÏ¢
+*    èŽ·å¾—å…‰é©±å…‰ç¢Ÿçš„ä¿¡æ¯
 *
 * Parameters:
-*    mscLun : input. Ä¿±êÉè±¸
-*    CD     : input. ¼ÇÂ¼¹âµúµÄÐÅÏ¢
+*    mscLun : input. ç›®æ ‡è®¾å¤‡
+*    CD     : input. è®°å½•å…‰ç¢Ÿçš„ä¿¡æ¯
 *
 * Return value:
-*    ÎÞ
+*    æ— 
 *
 * note:
-*    ÎÞ
+*    æ— 
 *
 *******************************************************************************
 */
@@ -1005,19 +1005,19 @@ static int GetCDRomMediaEvent(__mscLun_t *mscLun, CD_Rom_t *CD, CDROM_MediaStatu
 *                     GetCDRomMediaEvent
 *
 * Description:
-*    »ñµÃ¹âÇýµÄ×´Ì¬
+*    èŽ·å¾—å…‰é©±çš„çŠ¶æ€
 *
 * Parameters:
-*    mscLun : input. Ä¿±êÉè±¸
-*    CD     : input. ¼ÇÂ¼¹âµúµÄÐÅÏ¢
+*    mscLun : input. ç›®æ ‡è®¾å¤‡
+*    CD     : input. è®°å½•å…‰ç¢Ÿçš„ä¿¡æ¯
 *
 * Return value:
-*    ÎÞ
+*    æ— 
 *
 * note:
-*    ·¢ËÍTest Unit ReadyÃüÁî»ñµÃÉè±¸µÄ×´Ì¬¡£ÃüÁî·¢ËÍ³É¹¦£¬Ö±½Ó·µ»Ø¡£Èç¹ûÃüÁîÊ§°Ü
-* ¾ÍÈ¥»ñµÃ¹âÇýµÄ×´Ì¬¡£Èç¹û·¢ËÍget MediaEventÃüÁîÊ§°Ü£¬ÄÇÃ´¾ÍÖ»ÄÜÍ¨¹ýTest Unit Ready
-* ÃüÁîµÄ½á¹ûÅÐ¶ÏÉè±¸µÄ×´Ì¬¡£
+*    å‘é€Test Unit Readyå‘½ä»¤èŽ·å¾—è®¾å¤‡çš„çŠ¶æ€ã€‚å‘½ä»¤å‘é€æˆåŠŸï¼Œç›´æŽ¥è¿”å›žã€‚å¦‚æžœå‘½ä»¤å¤±è´¥
+* å°±åŽ»èŽ·å¾—å…‰é©±çš„çŠ¶æ€ã€‚å¦‚æžœå‘é€get MediaEventå‘½ä»¤å¤±è´¥ï¼Œé‚£ä¹ˆå°±åªèƒ½é€šè¿‡Test Unit Ready
+* å‘½ä»¤çš„ç»“æžœåˆ¤æ–­è®¾å¤‡çš„çŠ¶æ€ã€‚
 *
 *******************************************************************************
 */
@@ -1093,19 +1093,19 @@ static int GetCDRomDriveEvent(__mscLun_t *mscLun, CD_Rom_t *CD)
 *                     ReadCDDA
 *
 * Description:
-*    ¶ÁÈ¡ÒôÀÖcdµÄÄÚÈÝ
+*    è¯»å–éŸ³ä¹cdçš„å†…å®¹
 *
 * Parameters:
-*    mscLun     : input.  Ä¿±êÉè±¸
-*    Lba        : input.  ÆðÊ¼ÉÈÇø
-*    nFrames    : input.  Ö¡Êý
-*    Buffer     : input.  ´æ·Å¶ÁÈ¡µÄÊý¾Ý
+*    mscLun     : input.  ç›®æ ‡è®¾å¤‡
+*    Lba        : input.  èµ·å§‹æ‰‡åŒº
+*    nFrames    : input.  å¸§æ•°
+*    Buffer     : input.  å­˜æ”¾è¯»å–çš„æ•°æ®
 *
 * Return value:
-*    ÎÞ
+*    æ— 
 *
 * note:
-*    ÎÞ
+*    æ— 
 *
 *******************************************************************************
 */
@@ -1119,16 +1119,16 @@ unsigned int ReadCDDA(__mscLun_t *mscLun, unsigned int Lba, unsigned int nFrames
 *                     CDMediaChange
 *
 * Description:
-*    ÊµÊ±¼ì²â¹âÇýµÄ±ä»¯
+*    å®žæ—¶æ£€æµ‹å…‰é©±çš„å˜åŒ–
 *
 * Parameters:
 *
 *
 * Return value:
-*    ÎÞ
+*    æ— 
 *
 * note:
-*    ÎÞ
+*    æ— 
 *
 *******************************************************************************
 */
@@ -1195,14 +1195,14 @@ static void __CDMediaChange(__mscLun_t *mscLun)
 
         case USBH_CDROM_DRIVE_STATUS_DISK_OK:
 
-            /* Ã»ÓÐ×¢²ádiskÉè±¸, ¾ÍÈ¥×¢²ádiskÉè±¸ */
+            /* æ²¡æœ‰æ³¨å†Œdiskè®¾å¤‡, å°±åŽ»æ³¨å†Œdiskè®¾å¤‡ */
             if (!BlkDev->is_RegDisk)
             {
-                /* »ñµÃ´ÅÅÌÐÅÏ¢ */
+                /* èŽ·å¾—ç£ç›˜ä¿¡æ¯ */
                 GetDiskInfo(BlkDev);
                 GetCDRomInfo(mscLun, CD);
 
-                /* ×¢²á¿éÉè±¸ */
+                /* æ³¨å†Œå—è®¾å¤‡ */
                 if (mscLun->MediaPresent && CD->DiscType != USBH_MEDIUM_CD_AUDIO_ONLY)
                 {
                     UsbBlkDevUnReg(BlkDev);
@@ -1269,7 +1269,7 @@ static void CDMediaChange(__mscLun_t *mscLun)
         return;
     }
 
-    /* Èç¹û½éÖÊ±»½ûÖ¹ÒÆ¶¯, ²¢ÇÒÒÑ¾­×¢²áDiskÉè±¸, ÄÇÃ´¾Í²»ÓÃÊµÊ±¼ì²âÁË */
+    /* å¦‚æžœä»‹è´¨è¢«ç¦æ­¢ç§»åŠ¨, å¹¶ä¸”å·²ç»æ³¨å†ŒDiskè®¾å¤‡, é‚£ä¹ˆå°±ä¸ç”¨å®žæ—¶æ£€æµ‹äº† */
     if (CD->IsMeduimPrevent && BlkDev->is_RegDisk == 1)
     {
         /* nothing to do */
@@ -1298,16 +1298,16 @@ static void CDMediaChange(__mscLun_t *mscLun)
 *                     CDProbe
 *
 * Description:
-*    ¹âÇýÊ¶±ð
+*    å…‰é©±è¯†åˆ«
 *
 * Parameters:
-*    mscLun  :  Ä¿±êÉè±¸
+*    mscLun  :  ç›®æ ‡è®¾å¤‡
 *
 * Return value:
-*    ÎÞ
+*    æ— 
 *
 * note:
-*    ÎÞ
+*    æ— 
 *
 *******************************************************************************
 */
@@ -1324,7 +1324,7 @@ int CDProbe(__mscLun_t *mscLun)
         return USB_ERR_BAD_ARGUMENTS;
     }
 
-    /* ³õÊ¼»¯Ò»¸ö¿éÉè±¸ */
+    /* åˆå§‹åŒ–ä¸€ä¸ªå—è®¾å¤‡ */
     BlkDev = UsbBlkDevAllocInit(mscLun);
 
     if (BlkDev == NULL)
@@ -1358,11 +1358,11 @@ int CDProbe(__mscLun_t *mscLun)
     memset(CD, 0, sizeof(CD_Rom_t));
     mscLun->sdev_data = (void *)BlkDev;
     BlkDev->Extern    = CD;
-    /* »ñµÃ´ÅÅÌÐÅÏ¢ */
+    /* èŽ·å¾—ç£ç›˜ä¿¡æ¯ */
     GetDiskInfo(BlkDev);
     GetCDRomInfo(mscLun, CD);
 
-    /* ×¢²á¿éÉè±¸ */
+    /* æ³¨å†Œå—è®¾å¤‡ */
     if (mscLun->MediaPresent && CD->DiscType != USBH_MEDIUM_CD_AUDIO_ONLY)
     {
         ret = UsbBlkDevReg(BlkDev, DEV_CLASS_DISK, 1);
@@ -1382,7 +1382,7 @@ int CDProbe(__mscLun_t *mscLun)
         return USB_ERR_REG_BLK_DEV_FAILED;
     }
 
-    /* ¸æËßusb_monitor, scsi diskÊ¶±ðÉè±¸³É¹¦ */
+    /* å‘Šè¯‰usb_monitor, scsi diskè¯†åˆ«è®¾å¤‡æˆåŠŸ */
     {
         u32 is_reg = 1;
         //usbm_sendcmd(DEV_IOC_USR_HWSC_USBH_MSC_DEV_REG_SET, &is_reg);
@@ -1399,16 +1399,16 @@ int CDProbe(__mscLun_t *mscLun)
 *                     CDRemove
 *
 * Description:
-*    ¹âÇýÇý¶¯Ð¶ÔØ
+*    å…‰é©±é©±åŠ¨å¸è½½
 *
 * Parameters:
-*    mscLun  :  Ä¿±êÉè±¸
+*    mscLun  :  ç›®æ ‡è®¾å¤‡
 *
 * Return value:
-*    ÎÞ
+*    æ— 
 *
 * note:
-*    ÎÞ
+*    æ— 
 *
 *******************************************************************************
 */
@@ -1431,15 +1431,15 @@ int CDRemove(__mscLun_t *mscLun)
         return -1;
     }
 
-    /* ×¢Ïú¿éÉè±¸ */
+    /* æ³¨é”€å—è®¾å¤‡ */
     UsbBlkDevUnReg(BlkDev);
-    /* ¸æËßusb_monitor scsi diskÉè±¸ÒÑ¾­×¢Ïú */
+    /* å‘Šè¯‰usb_monitor scsi diskè®¾å¤‡å·²ç»æ³¨é”€ */
     {
         u32 is_reg = 0;
         ////usbm_sendcmd(DEV_IOC_USR_HWSC_USBH_MSC_DEV_REG_SET, &is_reg);
     }
     ShutDown(BlkDev);
-    /* media changeÏß³ÌÒÑ¾­Í£Ö¹ÁË, ËùÒÔÏÖÔÚ¿ÉÒÔÖ±½ÓÉ¾³ýMediaChange */
+    /* media changeçº¿ç¨‹å·²ç»åœæ­¢äº†, æ‰€ä»¥çŽ°åœ¨å¯ä»¥ç›´æŽ¥åˆ é™¤MediaChange */
     ENTER_CRITICAL(cpu_sr);
     mscLun->MediaChange = NULL;
     mscLun->sdev_data = NULL;

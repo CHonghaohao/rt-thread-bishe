@@ -41,25 +41,25 @@
 #define USBMSC_INTERFACE_PROTOCOL_CBT   0x01    /* Control/Bulk w/o interrupt   */
 #define USBMSC_INTERFACE_PROTOCOL_BOT   0x50    /* bulk only                    */
 
-/* Ô¤¶¨Òå */
+/* é¢„å®šä¹‰ */
 struct __mscDev;
 struct __ScsiCmnd;
 struct __mscLun;
 
 
-#define  MSC_MAX_LUN            15      /* mscĞ­Òé¹æ¶¨×î´óÖ§³Ö15¸öLun       */
-#define  SCSI_INQUERY_LEN       36      /* ±ê×¼inqueryÃüÁî·µ»ØµÄ¶¼ÊÇ36×Ö½Ú  */
-#define  SCSI_MAX_INQUERY_LEN   44      /* ±ê×¼inqueryÃüÁî·µ»ØµÄ¶¼ÊÇ36×Ö½Ú  */
+#define  MSC_MAX_LUN            15      /* mscåè®®è§„å®šæœ€å¤§æ”¯æŒ15ä¸ªLun       */
+#define  SCSI_INQUERY_LEN       36      /* æ ‡å‡†inqueryå‘½ä»¤è¿”å›çš„éƒ½æ˜¯36å­—èŠ‚  */
+#define  SCSI_MAX_INQUERY_LEN   44      /* æ ‡å‡†inqueryå‘½ä»¤è¿”å›çš„éƒ½æ˜¯36å­—èŠ‚  */
 #define  MSC_IOBUF_SIZE         64
 
 
-/* mscDev×´Ì¬ */
+/* mscDevçŠ¶æ€ */
 typedef enum __mscDev_state
 {
-    MSC_DEV_OFFLINE = 0,        /* mscDevÒÑ¾­°Î³ö       */
-    MSC_DEV_ONLINE,             /* mscDevÒÑ¾­Ìí¼Ó       */
-    MSC_DEV_DIED,               /* mscDev²»¿ÉÓÃ         */
-    MSC_DEV_RESET               /* mscDevÕıÔÚ±»reset    */
+    MSC_DEV_OFFLINE = 0,        /* mscDevå·²ç»æ‹”å‡º       */
+    MSC_DEV_ONLINE,             /* mscDevå·²ç»æ·»åŠ        */
+    MSC_DEV_DIED,               /* mscDevä¸å¯ç”¨         */
+    MSC_DEV_RESET               /* mscDevæ­£åœ¨è¢«reset    */
 } mscDev_state_t;
 
 typedef int(* msc_ResetRecovery)(struct __mscDev *mscDev);
@@ -68,35 +68,35 @@ typedef int(* msc_StopTransport)(struct __mscDev *mscDev);
 typedef int(* msc_ProtocolHandler)(struct __mscDev *mscDev, struct __ScsiCmnd *ScsiCmnd);
 
 
-/* mscDevµÄ³éÏó, ÃèÊöÁËÒ»¸ömscDevÓµÓĞµÄ×ÊÔ´ */
+/* mscDevçš„æŠ½è±¡, æè¿°äº†ä¸€ä¸ªmscDevæ‹¥æœ‰çš„èµ„æº */
 typedef struct __mscDev
 {
-    struct usb_host_virt_dev *pusb_dev; /* mscDev ¶ÔÓ¦µÄPublic USB Device   */
+    struct usb_host_virt_dev *pusb_dev; /* mscDev å¯¹åº”çš„Public USB Device   */
     struct usb_interface    *pusb_intf; /* Public usb interface             */
 
     /* device information */
-    unsigned char InterfaceNo;           /* ½Ó¿ÚºÅ                               */
-    unsigned char *transport_name;       /* ´«ÊäĞ­ÒéµÄÃû³Æ                       */
-    unsigned char *Protocol_name;        /* ÃüÁî¼¯°æ±¾                           */
-    unsigned char SubClass;              /* ×ÓÀà                                 */
-    unsigned char Protocol;              /* ´«ÊäĞ­Òé                             */
-    unsigned char MaxLun;                /* ×î´óLun¸öÊı                          */
-    unsigned int mscDevNo;             /* mscDevµÄ±àºÅ                         */
-    unsigned int lun_num;              /* mscDevÓµÓĞµÄlunµÄ¸öÊı                */
+    unsigned char InterfaceNo;           /* æ¥å£å·                               */
+    unsigned char *transport_name;       /* ä¼ è¾“åè®®çš„åç§°                       */
+    unsigned char *Protocol_name;        /* å‘½ä»¤é›†ç‰ˆæœ¬                           */
+    unsigned char SubClass;              /* å­ç±»                                 */
+    unsigned char Protocol;              /* ä¼ è¾“åè®®                             */
+    unsigned char MaxLun;                /* æœ€å¤§Lunä¸ªæ•°                          */
+    unsigned int mscDevNo;             /* mscDevçš„ç¼–å·                         */
+    unsigned int lun_num;              /* mscDevæ‹¥æœ‰çš„lunçš„ä¸ªæ•°                */
 
     /* device manager */
-    struct __mscLun *Lun[MSC_MAX_LUN];      /* ´æ·ÅËùÓĞµÄLun                */
-    struct usb_list_head cmd_list;              /* ÃüÁî¶ÓÁĞ                     */
-    hal_sem_t scan_lock;         /* ÓÃÀ´ÊµÏÖscan ºÍremoveµÄ»¥³â  */
-    hal_sem_t DevLock;           /* Í¬Ò»Ê±¼äÖ»ÔÊĞíÒ»¸öÈË·ÃÎÊmscDev*/
-    hal_sem_t ThreadSemi;        /* Ïß³ÌĞÅºÅÁ¿                   */
-    hal_sem_t notify_complete;   /* Í¬²½thread´´½¨/É¾³ı          */
-    mscDev_state_t state;                   /* mscDevµ±Ç°Ëù´¦µÄÁ¬½Ó×´Ì¬     */
+    struct __mscLun *Lun[MSC_MAX_LUN];      /* å­˜æ”¾æ‰€æœ‰çš„Lun                */
+    struct usb_list_head cmd_list;              /* å‘½ä»¤é˜Ÿåˆ—                     */
+    hal_sem_t scan_lock;         /* ç”¨æ¥å®ç°scan å’Œremoveçš„äº’æ–¥  */
+    hal_sem_t DevLock;           /* åŒä¸€æ—¶é—´åªå…è®¸ä¸€ä¸ªäººè®¿é—®mscDev*/
+    hal_sem_t ThreadSemi;        /* çº¿ç¨‹ä¿¡å·é‡                   */
+    hal_sem_t notify_complete;   /* åŒæ­¥threadåˆ›å»º/åˆ é™¤          */
+    mscDev_state_t state;                   /* mscDevå½“å‰æ‰€å¤„çš„è¿æ¥çŠ¶æ€     */
 
-    struct rt_thread *MainThreadId;                     /* Ö÷Ïß³ÌID                     */
-    struct rt_thread *MediaChangeId;                        /* media change´¦ÀíÏß³ÌID       */
+    struct rt_thread *MainThreadId;                     /* ä¸»çº¿ç¨‹ID                     */
+    struct rt_thread *MediaChangeId;                        /* media changeå¤„ç†çº¿ç¨‹ID       */
 
-    unsigned int SuspendTime;                      /* SuspendÉè±¸ËùĞèµÄÊ±¼ä        */
+    unsigned int SuspendTime;                      /* Suspendè®¾å¤‡æ‰€éœ€çš„æ—¶é—´        */
 
     /* command transport */
     unsigned int BulkIn;                           /* bulk in  pipe                */
@@ -104,84 +104,84 @@ typedef struct __mscDev
     unsigned int CtrlIn;                           /* ctrl in  pipe                */
     unsigned int CtrlOut;                          /* ctrl out pipe                */
     unsigned int IntIn;                            /* interrupt in pipe            */
-    unsigned char  EpInterval;                       /* int ´«ÊäÖ÷»ú²éÑ¯Éè±¸µÄÖÜÆÚ£¬Bulk´«ÊäºöÂÔ´ËÖµ */
+    unsigned char  EpInterval;                       /* int ä¼ è¾“ä¸»æœºæŸ¥è¯¢è®¾å¤‡çš„å‘¨æœŸï¼ŒBulkä¼ è¾“å¿½ç•¥æ­¤å€¼ */
 
     unsigned int Tag;                              /* SCSI-II queued command tag   */
-    unsigned int busy;                             /* Ö÷»úÊÇ·ñÕıÔÚ´¦ÀíÃüÁî         */
+    unsigned int busy;                             /* ä¸»æœºæ˜¯å¦æ­£åœ¨å¤„ç†å‘½ä»¤         */
     struct __ScsiCmnd *ScsiCmnd;            /* current srb                  */
     struct urb *CurrentUrb;                 /* USB requests                 */
     hal_sem_t UrbWait;           /* wait for Urb done            */
     struct usb_ctrlrequest *CtrlReq;        /* control requests             */
-    unsigned char *iobuf;                            /* mscDev»º³åÇø, CBWºÍCSW¶¼ÓÃµÃµ½*/
+    unsigned char *iobuf;                            /* mscDevç¼“å†²åŒº, CBWå’ŒCSWéƒ½ç”¨å¾—åˆ°*/
 
-    osal_timer_t TimerHdle;    /* timer ¾ä±ú                   */
+    osal_timer_t TimerHdle;    /* timer å¥æŸ„                   */
 
     msc_ResetRecovery   ResetRecovery;      /* USB Controller reset         */
-    msc_Transport       Transport;          /* mscÉè±¸Ö§³ÖµÄ´«Êä·½Ê½        */
-    msc_StopTransport   StopTransport;      /* ÖĞÖ¹msc´«Êä                  */
-    msc_ProtocolHandler ProtocolHandler;    /* msc´«Êä                      */
+    msc_Transport       Transport;          /* mscè®¾å¤‡æ”¯æŒçš„ä¼ è¾“æ–¹å¼        */
+    msc_StopTransport   StopTransport;      /* ä¸­æ­¢mscä¼ è¾“                  */
+    msc_ProtocolHandler ProtocolHandler;    /* mscä¼ è¾“                      */
 } __mscDev_t;
 
 typedef struct __disk_info_t
 {
-    unsigned int capacity;             /* Éè±¸µÄÈİÁ¿£¬ÒÔÉÈÇøÎªµ¥Î»         */
-    unsigned int sector_size;          /* ÉÈÇøµÄ´óĞ¡                       */
+    unsigned int capacity;             /* è®¾å¤‡çš„å®¹é‡ï¼Œä»¥æ‰‡åŒºä¸ºå•ä½         */
+    unsigned int sector_size;          /* æ‰‡åŒºçš„å¤§å°                       */
 } disk_info_t;
 
 typedef enum __mscLun_state
 {
-    MSC_LUN_DEL = 0,        /* mscDev²»¿ÉÓÃ     */
-    MSC_LUN_ADD,            /* mscDevÒÑ¾­Ìí¼Ó   */
-    MSC_LUN_CANCEL          /* mscDevÒÑ¾­°Î³ö   */
+    MSC_LUN_DEL = 0,        /* mscDevä¸å¯ç”¨     */
+    MSC_LUN_ADD,            /* mscDevå·²ç»æ·»åŠ    */
+    MSC_LUN_CANCEL          /* mscDevå·²ç»æ‹”å‡º   */
 } mscLun_state_t;
 
 
-typedef int(* LunProbe)(struct __mscLun *);       /* lunÊ¶±ğ  */
-typedef int(* LunRemove)(struct __mscLun *);      /* lunĞ¶ÔØ  */
-typedef void (* LunMediaChange)(struct __mscLun *); /* media changeºóµÄ´¦Àí */
+typedef int(* LunProbe)(struct __mscLun *);       /* lunè¯†åˆ«  */
+typedef int(* LunRemove)(struct __mscLun *);      /* lunå¸è½½  */
+typedef void (* LunMediaChange)(struct __mscLun *); /* media changeåçš„å¤„ç† */
 
 
-/* LunµÄ³éÏó, ÃèÊöÁËÒ»¸öLunÓµÓĞµÄ×ÊÔ´ */
+/* Lunçš„æŠ½è±¡, æè¿°äº†ä¸€ä¸ªLunæ‹¥æœ‰çš„èµ„æº */
 typedef struct __mscLun
 {
-    __mscDev_t *mscDev;             /* LunËùÊôµÄmscDev                      */
-    unsigned int LunNo;                    /* lunµÄ±àºÅ                            */
+    __mscDev_t *mscDev;             /* Lunæ‰€å±çš„mscDev                      */
+    unsigned int LunNo;                    /* lunçš„ç¼–å·                            */
 
     /* device information */
-    unsigned int DeviceType;               /* Éè±¸µÄÀàĞÍ                           */
-    unsigned int MediumType;               /* ½éÖÊÀàĞÍ£¬CD_ROMÃ¶¾ÙÊ±ÓĞÓÃ           */
-    unsigned char  DiskSubClass;             /* ÃüÁîÀàĞÍ                             */
-    unsigned int ScsiLevel;                /* scsiÃüÁî¼¯°æ±¾                       */
-    unsigned char Inquiry[SCSI_MAX_INQUERY_LEN]; /* ´æ·ÅinquireÃüÁî»ñµÃµÄÉè±¸ĞÅÏ¢        */
-    unsigned char *Vendor;                   /* ¹©Ó¦ÉÌ                               */
-    unsigned char *Product;                  /* ²úÆ·ĞÅÏ¢                             */
-    unsigned char *Revision;                 /* ²úÆ·ĞòÁĞºÅ                           */
+    unsigned int DeviceType;               /* è®¾å¤‡çš„ç±»å‹                           */
+    unsigned int MediumType;               /* ä»‹è´¨ç±»å‹ï¼ŒCD_ROMæšä¸¾æ—¶æœ‰ç”¨           */
+    unsigned char  DiskSubClass;             /* å‘½ä»¤ç±»å‹                             */
+    unsigned int ScsiLevel;                /* scsiå‘½ä»¤é›†ç‰ˆæœ¬                       */
+    unsigned char Inquiry[SCSI_MAX_INQUERY_LEN]; /* å­˜æ”¾inquireå‘½ä»¤è·å¾—çš„è®¾å¤‡ä¿¡æ¯        */
+    unsigned char *Vendor;                   /* ä¾›åº”å•†                               */
+    unsigned char *Product;                  /* äº§å“ä¿¡æ¯                             */
+    unsigned char *Revision;                 /* äº§å“åºåˆ—å·                           */
 
-    /* Lun¹ÜÀí */
-    disk_info_t disk_info;          /* ´ÅÅÌĞÅÏ¢                             */
+    /* Lunç®¡ç† */
+    disk_info_t disk_info;          /* ç£ç›˜ä¿¡æ¯                             */
 
-    unsigned int WriteProtect: 1;          /* ÊÇ·ñÊÇ¿ÉĞ´Éè±¸                       */
-    unsigned int RemoveAble: 1;            /* ÊÇ·ñÊÇ¿ÉÒÆ¶¯Éè±¸                     */
-    unsigned int Changed: 1;               /* Éè±¸ÊÇ·ñ¸Ä±ä¹ı                       */
-    unsigned int MediaPresent: 1;          /* Éè±¸½éÖÊÊÇ·ñ´æÔÚ                     */
-    unsigned int WCE: 1;                   /* cacheĞ´ÔÊĞí                          */
-    unsigned int RCD: 1;                   /* cache¶ÁÔÊĞí                          */
+    unsigned int WriteProtect: 1;          /* æ˜¯å¦æ˜¯å¯å†™è®¾å¤‡                       */
+    unsigned int RemoveAble: 1;            /* æ˜¯å¦æ˜¯å¯ç§»åŠ¨è®¾å¤‡                     */
+    unsigned int Changed: 1;               /* è®¾å¤‡æ˜¯å¦æ”¹å˜è¿‡                       */
+    unsigned int MediaPresent: 1;          /* è®¾å¤‡ä»‹è´¨æ˜¯å¦å­˜åœ¨                     */
+    unsigned int WCE: 1;                   /* cacheå†™å…è®¸                          */
+    unsigned int RCD: 1;                   /* cacheè¯»å…è®¸                          */
     unsigned int use_10_for_rw: 1;         /* first try 10-byte read / write       */
     unsigned int use_10_for_ms: 1;         /* first try 10-byte mode sense/select  */
     unsigned int skip_ms_page_8: 1;        /* do not use MODE SENSE page 0x08      */
     unsigned int skip_ms_page_3f: 1;       /* do not use MODE SENSE page 0x3f      */
     unsigned int use_192_bytes_for_3f: 1;  /* ask for 192 bytes from page 0x3f     */
 
-    hal_sem_t Lock;      /* ĞÅºÅÁ¿£¬Ã¿´ÎÖµ±£Ö¤Ò»¸öÓÃÔÚ¶Á»òĞ´ */
+    hal_sem_t Lock;      /* ä¿¡å·é‡ï¼Œæ¯æ¬¡å€¼ä¿è¯ä¸€ä¸ªç”¨åœ¨è¯»æˆ–å†™ */
 
     LunProbe        Probe;
     LunRemove       Remove;
     LunMediaChange  MediaChange;
 
-    void *sdev_data;                /* Ö¸Ïòtop levelµÄscsi diskµÈÊı¾İ½á¹¹   */
+    void *sdev_data;                /* æŒ‡å‘top levelçš„scsi diskç­‰æ•°æ®ç»“æ„   */
 } __mscLun_t;
 
-/* ÃüÁîÊı¾İµÄ·½Ïò */
+/* å‘½ä»¤æ•°æ®çš„æ–¹å‘ */
 typedef enum scsi_data_direction
 {
     DATA_NONE = 0,          /* No Data                  */
@@ -189,7 +189,7 @@ typedef enum scsi_data_direction
     DATA_FROM_DEVICE,       /* Data in. device->host    */
 } scsi_data_direction_t;
 
-/* command blockµÄ³éÏó */
+/* command blockçš„æŠ½è±¡ */
 typedef struct __scsi_transport_cmd
 {
     scsi_data_direction_t data_direction;   /* IN - DATA_IN or DATA_OUT         */
@@ -200,34 +200,34 @@ typedef struct __scsi_transport_cmd
     void *CommandBlock;             /* IN - Pointer to the command block buffer.*/
 } __scsi_transport_cmd_t;
 
-typedef void (*LunDone)(struct __ScsiCmnd *);   /* mscDevµ÷ÓÃ£¬Lun cmd´¦ÀíÍê±Ï  */
+typedef void (*LunDone)(struct __ScsiCmnd *);   /* mscDevè°ƒç”¨ï¼ŒLun cmdå¤„ç†å®Œæ¯•  */
 
-/* ScsiCmndµÄ³éÏó, ÃèÊöÁËÒ»¸öScsiCmndÓµÓĞµÄ×ÊÔ´ */
+/* ScsiCmndçš„æŠ½è±¡, æè¿°äº†ä¸€ä¸ªScsiCmndæ‹¥æœ‰çš„èµ„æº */
 typedef struct __ScsiCmnd
 {
-    __mscLun_t *sc_lun;                     /* ÃüÁîËùÊôµÄÉè±¸                       */
-    //  struct list_head list;                  /* ´ËÃüÁîÔÚdeviceµÄcmd_listÖĞµÄÎ»ÖÃ     */
+    __mscLun_t *sc_lun;                     /* å‘½ä»¤æ‰€å±çš„è®¾å¤‡                       */
+    //  struct list_head list;                  /* æ­¤å‘½ä»¤åœ¨deviceçš„cmd_listä¸­çš„ä½ç½®     */
 
     __scsi_transport_cmd_t cmnd;            /* Command Block                */
-    unsigned int retries;                          /* µ±Ç°retryµÄ´ÎÊı              */
-    unsigned int allowed;                          /* ÔÊĞíretryµÄ´ÎÊı              */
+    unsigned int retries;                          /* å½“å‰retryçš„æ¬¡æ•°              */
+    unsigned int allowed;                          /* å…è®¸retryçš„æ¬¡æ•°              */
 
     void *buffer;                           /* Data buffer                  */
     unsigned int DataTransferLength;               /* Size of data buffer          */
     unsigned int ActualLength;                     /* actual transport length      */
 
-    hal_sem_t complete;          /* µÈ´ıLun cmd´¦ÀíÍê±Ï          */
+    hal_sem_t complete;          /* ç­‰å¾…Lun cmdå¤„ç†å®Œæ¯•          */
     LunDone Done;
 
-    unsigned int Result;                           /* ÃüÁîµÄÖ´ĞĞ½á¹û               */
+    unsigned int Result;                           /* å‘½ä»¤çš„æ‰§è¡Œç»“æœ               */
 } __ScsiCmnd_t;
 
 //-------------------------------------------------------------------
 //
 //-------------------------------------------------------------------
-#define  USB_STOR_TRANSPORT_GOOD        0   /* Ã»ÓĞ´íÎó                 */
-#define  USB_STOR_TRANSPORT_FAILED      1   /* ´«Êä³É¹¦£¬ÃüÁîÖ´ĞĞÊ§°Ü   */
-#define  USB_STOR_TRANSPORT_ERROR       2   /* ´«ÊäÊ§°Ü                 */
+#define  USB_STOR_TRANSPORT_GOOD        0   /* æ²¡æœ‰é”™è¯¯                 */
+#define  USB_STOR_TRANSPORT_FAILED      1   /* ä¼ è¾“æˆåŠŸï¼Œå‘½ä»¤æ‰§è¡Œå¤±è´¥   */
+#define  USB_STOR_TRANSPORT_ERROR       2   /* ä¼ è¾“å¤±è´¥                 */
 
 
 //-------------------------------------------------------------------

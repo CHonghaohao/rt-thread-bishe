@@ -20,40 +20,40 @@ static void (*__usb_hw_scan)(struct usb_scan_info *);
 extern int thread_suspend_flag;
 static unsigned int PIODataIn_debounce(usb_gpio_t *usb_gpio, gpio_data_t *value)
 {
-	unsigned int retry  = 0;
-	unsigned int time   = 10;
-	unsigned int temp1  = 0;
-	unsigned int cnt    = 0;
-	unsigned int change = 0;	/* if have shake */
+    unsigned int retry  = 0;
+    unsigned int time   = 10;
+    unsigned int temp1  = 0;
+    unsigned int cnt    = 0;
+    unsigned int change = 0;    /* if have shake */
 
-	/**
-	 * try 10 times, if value is the same,
-	 * then current read is valid; otherwise invalid.
-	 */
-	if (usb_gpio->valid) {
-		retry = time;
-		while (retry--) {
-			hal_gpio_get_data(usb_gpio->gpio_set.gpio, (gpio_data_t *)&temp1);
-			if (temp1) {
-				cnt++;
-			}
-		}
+    /**
+     * try 10 times, if value is the same,
+     * then current read is valid; otherwise invalid.
+     */
+    if (usb_gpio->valid) {
+        retry = time;
+        while (retry--) {
+            hal_gpio_get_data(usb_gpio->gpio_set.gpio, (gpio_data_t *)&temp1);
+            if (temp1) {
+                cnt++;
+            }
+        }
 
-		/* 10 times, the value is all 0 or 1 */
-		if ((cnt == time) || (cnt == 0)) {
-			change = 0;
-		} else {
-			change = 1;
-		}
-	} else {
-		change = 1;
-	}
+        /* 10 times, the value is all 0 or 1 */
+        if ((cnt == time) || (cnt == 0)) {
+            change = 0;
+        } else {
+            change = 1;
+        }
+    } else {
+        change = 1;
+    }
 
-	if (!change) {
-		*value = temp1;
-	}
-	Usb_Manager_Debug("usb_gpio->valid = %x, cnt = %x, change= %d, temp1 = %x\n", usb_gpio->valid, cnt, change, temp1);
-	return change;
+    if (!change) {
+        *value = temp1;
+    }
+    Usb_Manager_Debug("usb_gpio->valid = %x, cnt = %x, change= %d, temp1 = %x\n", usb_gpio->valid, cnt, change, temp1);
+    return change;
 }
 
 static u32 get_id_state(struct usb_scan_info *info)
@@ -63,7 +63,7 @@ static u32 get_id_state(struct usb_scan_info *info)
 
     if (!PIODataIn_debounce((usb_gpio_t *)&info->cfg->port.id, &pin_data))
     {
-		Usb_Manager_Debug("%s pin_data:%d\n", KEY_USB_ID_GPIO, pin_data);
+        Usb_Manager_Debug("%s pin_data:%d\n", KEY_USB_ID_GPIO, pin_data);
         if (pin_data)
         {
             id_state = USB_DEVICE_MODE;
@@ -78,8 +78,8 @@ static u32 get_id_state(struct usb_scan_info *info)
     {
         id_state = info->id_old_state;
     }
-	Usb_Manager_Debug("%s id_state:%d\n", KEY_USB_ID_GPIO, id_state);
-	Usb_Manager_Debug("%s id_old_state:%d\n", KEY_USB_ID_GPIO, info->id_old_state);
+    Usb_Manager_Debug("%s id_state:%d\n", KEY_USB_ID_GPIO, id_state);
+    Usb_Manager_Debug("%s id_old_state:%d\n", KEY_USB_ID_GPIO, info->id_old_state);
     return id_state;
 }
 static u32 get_detect_vbus_state(struct usb_scan_info *info)
@@ -89,7 +89,7 @@ static u32 get_detect_vbus_state(struct usb_scan_info *info)
 
     if (!PIODataIn_debounce((usb_gpio_t *)&info->cfg->port.det_vbus, &pin_data))
     {
-		Usb_Manager_Debug("%s pin_data:%d\n", KEY_USB_DETVBUS_GPIO, pin_data);
+        Usb_Manager_Debug("%s pin_data:%d\n", KEY_USB_DETVBUS_GPIO, pin_data);
         if (pin_data)
         {
             det_vbus_state = USB_DET_VBUS_VALID;
@@ -105,8 +105,8 @@ static u32 get_detect_vbus_state(struct usb_scan_info *info)
     {
         det_vbus_state = info->det_vbus_old_state;
     }
-	Usb_Manager_Debug("%s id_state:%d\n", KEY_USB_DETVBUS_GPIO, det_vbus_state);
-	Usb_Manager_Debug("%s id_old_state:%d\n", KEY_USB_DETVBUS_GPIO, info->det_vbus_old_state);
+    Usb_Manager_Debug("%s id_state:%d\n", KEY_USB_DETVBUS_GPIO, det_vbus_state);
+    Usb_Manager_Debug("%s id_old_state:%d\n", KEY_USB_DETVBUS_GPIO, info->det_vbus_old_state);
     return det_vbus_state;
 }
 static u32 get_dp_dm_status(struct usb_scan_info *info)
@@ -142,7 +142,7 @@ static void do_switch_to_null(struct usb_scan_info *info)
     device_insmod_delay = 0;
     info->host_insmod_delay   = 0;
 
-	Usb_Manager_Debug("role:%d\n", role);
+    Usb_Manager_Debug("role:%d\n", role);
     switch (role)
     {
         case USB_ROLE_NULL:
@@ -170,7 +170,7 @@ static void do_switch_to_host(struct usb_scan_info *info)
     role = get_usb_role();
     device_insmod_delay = 0;
 
-	Usb_Manager_Debug("role:%d\n", role);
+    Usb_Manager_Debug("role:%d\n", role);
     switch (role)
     {
         case USB_ROLE_NULL:
@@ -211,7 +211,7 @@ static void do_switch_to_device(struct usb_scan_info *info)
     role = get_usb_role();
     info->host_insmod_delay = 0;
 
-	Usb_Manager_Debug("role:%d\n", role);
+    Usb_Manager_Debug("role:%d\n", role);
     switch (role)
     {
         case USB_ROLE_NULL:
@@ -273,13 +273,13 @@ static void vbus_id_hw_scan(struct usb_scan_info *info)
     vbus_id_state = get_vbus_id_state(info);
     switch (vbus_id_state)
     {
-		case  0x00:
+        case  0x00:
         case  0x02:
             do_switch_to_host(info);
             break;
-		case  0x01:
-//			do_switch_to_null(info);
-//			break;
+        case  0x01:
+//          do_switch_to_null(info);
+//          break;
         case  0x03:
             do_switch_to_device(info);
             break;
@@ -310,7 +310,7 @@ int usb_hw_scan_init(usb_cfg_t *cfg)
 
     device_insmod_delay = 0;
     port_info = (struct usb_port_info *)&cfg->port;
-	Usb_Manager_Debug("port_info->port.port_type:%d\n", port_info->port_type);
+    Usb_Manager_Debug("port_info->port.port_type:%d\n", port_info->port_type);
     switch (port_info->port_type)
     {
         case USB_PORT_TYPE_DEVICE:
@@ -321,32 +321,32 @@ int usb_hw_scan_init(usb_cfg_t *cfg)
         {
             if (port_info->detect_type == USB_DETECT_TYPE_VBUS_ID)
             {
-				Usb_Manager_Debug("set %s mul_sel:%d\n", KEY_USB_ID_GPIO, port_info->id.gpio_set.mul_sel);
-				Usb_Manager_Debug("set %s drv_level:%d\n", KEY_USB_ID_GPIO, port_info->id.gpio_set.drv_level);
-				Usb_Manager_Debug("set %s pull:%d\n", KEY_USB_ID_GPIO, port_info->id.gpio_set.pull);
-				Usb_Manager_Debug("set %s data:%d\n", KEY_USB_ID_GPIO, port_info->id.gpio_set.data);
+                Usb_Manager_Debug("set %s mul_sel:%d\n", KEY_USB_ID_GPIO, port_info->id.gpio_set.mul_sel);
+                Usb_Manager_Debug("set %s drv_level:%d\n", KEY_USB_ID_GPIO, port_info->id.gpio_set.drv_level);
+                Usb_Manager_Debug("set %s pull:%d\n", KEY_USB_ID_GPIO, port_info->id.gpio_set.pull);
+                Usb_Manager_Debug("set %s data:%d\n", KEY_USB_ID_GPIO, port_info->id.gpio_set.data);
                 hal_gpio_pinmux_set_function(port_info->id.gpio_set.gpio, port_info->id.gpio_set.mul_sel);
                 hal_gpio_set_driving_level(port_info->id.gpio_set.gpio, port_info->id.gpio_set.drv_level);
                 hal_gpio_set_pull(port_info->id.gpio_set.gpio, port_info->id.gpio_set.pull);
                 hal_gpio_set_data(port_info->id.gpio_set.gpio, port_info->id.gpio_set.data);
 
-				Usb_Manager_Debug("set %s mul_sel:%d\n", KEY_USB_DETVBUS_GPIO, port_info->det_vbus.gpio_set.mul_sel);
-				Usb_Manager_Debug("set %s drv_level:%d\n", KEY_USB_DETVBUS_GPIO, port_info->det_vbus.gpio_set.drv_level);
-				Usb_Manager_Debug("set %s pull:%d\n", KEY_USB_DETVBUS_GPIO, port_info->det_vbus.gpio_set.pull);
-				Usb_Manager_Debug("set %s data:%d\n", KEY_USB_DETVBUS_GPIO, port_info->det_vbus.gpio_set.data);
+                Usb_Manager_Debug("set %s mul_sel:%d\n", KEY_USB_DETVBUS_GPIO, port_info->det_vbus.gpio_set.mul_sel);
+                Usb_Manager_Debug("set %s drv_level:%d\n", KEY_USB_DETVBUS_GPIO, port_info->det_vbus.gpio_set.drv_level);
+                Usb_Manager_Debug("set %s pull:%d\n", KEY_USB_DETVBUS_GPIO, port_info->det_vbus.gpio_set.pull);
+                Usb_Manager_Debug("set %s data:%d\n", KEY_USB_DETVBUS_GPIO, port_info->det_vbus.gpio_set.data);
                 hal_gpio_pinmux_set_function(port_info->det_vbus.gpio_set.gpio, port_info->det_vbus.gpio_set.mul_sel);
                 hal_gpio_set_driving_level(port_info->det_vbus.gpio_set.gpio, port_info->det_vbus.gpio_set.drv_level);
                 hal_gpio_set_pull(port_info->det_vbus.gpio_set.gpio, port_info->det_vbus.gpio_set.pull);
                 hal_gpio_set_data(port_info->id.gpio_set.gpio, port_info->det_vbus.gpio_set.data);
-				
-				Usb_Manager_Debug("set %s mul_sel:%d\n", KEY_USB_DRVVBUS_GPIO, port_info->drv_vbus.gpio_set.mul_sel);
-				Usb_Manager_Debug("set %s drv_level:%d\n", KEY_USB_DRVVBUS_GPIO, port_info->drv_vbus.gpio_set.drv_level);
-				Usb_Manager_Debug("set %s pull:%d\n", KEY_USB_DRVVBUS_GPIO, port_info->drv_vbus.gpio_set.pull);
-				Usb_Manager_Debug("set %s data:%d\n", KEY_USB_DRVVBUS_GPIO, port_info->drv_vbus.gpio_set.data);
+
+                Usb_Manager_Debug("set %s mul_sel:%d\n", KEY_USB_DRVVBUS_GPIO, port_info->drv_vbus.gpio_set.mul_sel);
+                Usb_Manager_Debug("set %s drv_level:%d\n", KEY_USB_DRVVBUS_GPIO, port_info->drv_vbus.gpio_set.drv_level);
+                Usb_Manager_Debug("set %s pull:%d\n", KEY_USB_DRVVBUS_GPIO, port_info->drv_vbus.gpio_set.pull);
+                Usb_Manager_Debug("set %s data:%d\n", KEY_USB_DRVVBUS_GPIO, port_info->drv_vbus.gpio_set.data);
                 hal_gpio_pinmux_set_function(port_info->drv_vbus.gpio_set.gpio, port_info->drv_vbus.gpio_set.mul_sel);
                 hal_gpio_set_driving_level(port_info->drv_vbus.gpio_set.gpio, port_info->drv_vbus.gpio_set.drv_level);
                 hal_gpio_set_pull(port_info->drv_vbus.gpio_set.gpio, port_info->drv_vbus.gpio_set.pull);
-				hal_gpio_set_data(port_info->drv_vbus.gpio_set.gpio, port_info->drv_vbus.gpio_set.data);
+                hal_gpio_set_data(port_info->drv_vbus.gpio_set.gpio, port_info->drv_vbus.gpio_set.data);
             }
             else
             {

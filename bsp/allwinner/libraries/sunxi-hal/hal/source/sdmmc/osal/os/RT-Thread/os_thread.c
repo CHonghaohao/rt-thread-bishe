@@ -54,22 +54,22 @@ OS_Status OS_ThreadCreate(OS_Thread_t *thread, const char *name,
                           OS_ThreadEntry_t entry, void *arg,
                           OS_Priority priority, uint32_t stackSize)
 {
-	OS_HANDLE_ASSERT(!OS_ThreadIsValid(thread), thread->handle);
+    OS_HANDLE_ASSERT(!OS_ThreadIsValid(thread), thread->handle);
 
-	thread->handle = rt_thread_create(name, entry, arg, stackSize,
-	                                  priority, 20);
+    thread->handle = rt_thread_create(name, entry, arg, stackSize,
+                                      priority, 20);
 
-	OS_DBG("%s(), name \"%s\", priority %d, stackSize %u, handle %p\n",
-	       __func__, name, priority, (unsigned int)stackSize, thread->handle);
+    OS_DBG("%s(), name \"%s\", priority %d, stackSize %u, handle %p\n",
+           __func__, name, priority, (unsigned int)stackSize, thread->handle);
 
-	if (thread->handle == NULL) {
-		OS_ERR("rt_thread_create() failed!\n");
-		OS_ThreadSetInvalid(thread);
-		return OS_FAIL;
-	} else {
-		rt_thread_startup(thread->handle);
-	}
-	return OS_OK;
+    if (thread->handle == NULL) {
+        OS_ERR("rt_thread_create() failed!\n");
+        OS_ThreadSetInvalid(thread);
+        return OS_FAIL;
+    } else {
+        rt_thread_startup(thread->handle);
+    }
+    return OS_OK;
 }
 
 /**
@@ -86,33 +86,33 @@ OS_Status OS_ThreadCreate(OS_Thread_t *thread, const char *name,
  */
 OS_Status OS_ThreadDelete(OS_Thread_t *thread)
 {
-	rt_thread_t handle;
-	rt_thread_t curHandle;
+    rt_thread_t handle;
+    rt_thread_t curHandle;
 
-	OS_DBG("%s(), handle %p\n", __func__, thread->handle);
+    OS_DBG("%s(), handle %p\n", __func__, thread->handle);
 
-	if (thread == NULL) {
-//		vTaskDelete(NULL); /* delete self */
-//		OS_ERR("thread == NULL, %s delete self NC\n", __FUNCTION__);
-		return OS_OK;
-	}
+    if (thread == NULL) {
+//      vTaskDelete(NULL); /* delete self */
+//      OS_ERR("thread == NULL, %s delete self NC\n", __FUNCTION__);
+        return OS_OK;
+    }
 
-	OS_HANDLE_ASSERT(OS_ThreadIsValid(thread), thread->handle);
+    OS_HANDLE_ASSERT(OS_ThreadIsValid(thread), thread->handle);
 
-	handle = thread->handle;
-	curHandle = OS_ThreadGetCurrentHandle();
-	if (handle == curHandle) {
-		/* delete self */
-		OS_ThreadSetInvalid(thread);
-//		vTaskDelete(NULL);
-//		OS_ERR("%s delete self NC\r\n", __FUNCTION__);
-	} else {
-		/* delete other thread */
-		OS_WRN("thread %"OS_HANDLE_F" delete %"OS_HANDLE_F"\n", curHandle, handle);
-//		vTaskDelete(handle);
-		rt_thread_delete(handle);
-		OS_ThreadSetInvalid(thread);
-	}
+    handle = thread->handle;
+    curHandle = OS_ThreadGetCurrentHandle();
+    if (handle == curHandle) {
+        /* delete self */
+        OS_ThreadSetInvalid(thread);
+//      vTaskDelete(NULL);
+//      OS_ERR("%s delete self NC\r\n", __FUNCTION__);
+    } else {
+        /* delete other thread */
+        OS_WRN("thread %"OS_HANDLE_F" delete %"OS_HANDLE_F"\n", curHandle, handle);
+//      vTaskDelete(handle);
+        rt_thread_delete(handle);
+        OS_ThreadSetInvalid(thread);
+    }
 
-	return OS_OK;
+    return OS_OK;
 }

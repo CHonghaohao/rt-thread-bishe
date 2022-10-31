@@ -26,35 +26,35 @@ extern "C" {
 #endif
 
 enum proerty_type {
-	PROPERTY_UNDEFINED = 0,
-	PROPERTY_INTGER,
-	PROPERTY_STRING,
-	/*for the pins which function is GPIO(IN or OUT)*/
-	PROPERTY_GPIO,
-	/*for the pins which function is not GPIO*/
-	PROPERTY_PIN,
-	/*for axp power*/
-	PROPERTY_POWER,
+    PROPERTY_UNDEFINED = 0,
+    PROPERTY_INTGER,
+    PROPERTY_STRING,
+    /*for the pins which function is GPIO(IN or OUT)*/
+    PROPERTY_GPIO,
+    /*for the pins which function is not GPIO*/
+    PROPERTY_PIN,
+    /*for axp power*/
+    PROPERTY_POWER,
 };
 
 /**
  * pro
  */
 struct property_t {
-	char name[40];
-	enum proerty_type type;
-	union value_t {
-		u32 value;
-		char str[40];
-		struct disp_gpio_set_t gpio_list;
-		struct disp_power_t power;
-	} v;
+    char name[40];
+    enum proerty_type type;
+    union value_t {
+        u32 value;
+        char str[40];
+        struct disp_gpio_set_t gpio_list;
+        struct disp_power_t power;
+    } v;
 };
 
 u32 disp_get_property_value(const char *main_name, const char *sub_name, void *value);
 
 struct disp_gpio_set_t *disp_get_all_pin_property(const char *main_name,
-					     u32 *list_len);
+                         u32 *list_len);
 
 #ifdef __cplusplus
 }

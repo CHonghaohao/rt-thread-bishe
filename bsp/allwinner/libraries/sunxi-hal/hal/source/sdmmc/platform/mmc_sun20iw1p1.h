@@ -14,7 +14,7 @@
 
 #define __GIC_SRC_MMC0        56 // (78)
 #define __GIC_SRC_MMC1        57 // (79)
-#define __GIC_SRC_MMC2	      58 // (80)
+#define __GIC_SRC_MMC2        58 // (80)
 
 #define  SDC0_IRQn  __GIC_SRC_MMC0
 #define  SDC1_IRQn  __GIC_SRC_MMC1
@@ -36,13 +36,13 @@
 #define SDC0_DET    GPIO_PF6
 
 /*sdc1 pin*/
-#define SDC1_NUM 6
+#define SDC1_NUM 3
 #define SDC1_CLK    GPIO_PG0
 #define SDC1_CMD    GPIO_PG1
 #define SDC1_D0    GPIO_PG2
-#define SDC1_D1    GPIO_PG3
-#define SDC1_D2    GPIO_PG4
-#define SDC1_D3    GPIO_PG5
+// #define SDC1_D1    GPIO_PG3
+// #define SDC1_D2    GPIO_PG4
+// #define SDC1_D3    GPIO_PG5
 
 #define SDC_DES_ADDR_SHIFT (2)
 

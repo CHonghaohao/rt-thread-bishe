@@ -131,8 +131,8 @@ typedef enum
     RTC_SET_TIME = 1,
     RTC_GET_ALARM = 2,
     RTC_SET_ALARM = 3,
-	RTC_CALLBACK = 4,
-	RTC_IRQENABLE = 5
+    RTC_CALLBACK = 4,
+    RTC_IRQENABLE = 5
 } hal_rtc_transfer_cmd_t;
 
 void hal_rtc_set_fel_flag(void);

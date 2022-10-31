@@ -38,57 +38,57 @@ static struct de_reg_blocks ase_block[DE_NUM][CHN_NUM];
 
 int de_ase_set_reg_base(unsigned int sel, unsigned int chno, void *base)
 {
-	ase_dev[sel][chno] = (struct __ase_reg_t *) base;
+    ase_dev[sel][chno] = (struct __ase_reg_t *) base;
 
-	return 0;
+    return 0;
 }
 
 int de_ase_update_regs(unsigned int sel, unsigned int chno)
 {
-	if (ase_block[sel][chno].dirty == 0x1) {
-		regwrite((void *)ase_block[sel][chno].off,
-			ase_block[sel][chno].val, ase_block[sel][chno].size);
-		ase_block[sel][chno].dirty = 0x0;
-	}
+    if (ase_block[sel][chno].dirty == 0x1) {
+        regwrite((void *)ase_block[sel][chno].off,
+            ase_block[sel][chno].val, ase_block[sel][chno].size);
+        ase_block[sel][chno].dirty = 0x0;
+    }
 
-	return 0;
+    return 0;
 }
 
 int de_ase_init(unsigned int sel, unsigned int chno, uintptr_t reg_base)
 {
-	uintptr_t base;
-	void *memory;
+    uintptr_t base;
+    void *memory;
 
-	base = reg_base + (sel + 1) * 0x00100000 + ASE_OFST;
+    base = reg_base + (sel + 1) * 0x00100000 + ASE_OFST;
 #if defined(CONFIG_ARCH_SUN50IW10)
-	if (sel)
-		base = base - 0x00100000;
+    if (sel)
+        base = base - 0x00100000;
 #endif
-	/*FIXME  display path offset should be defined*/
-	DE_INF("sel %d, ase_base[%d]=0x%p\n", sel, chno, (void *)base);
+    /*FIXME  display path offset should be defined*/
+    DE_INF("sel %d, ase_base[%d]=0x%p\n", sel, chno, (void *)base);
 
-	memory = disp_sys_malloc(sizeof(struct __ase_reg_t));
-	if (memory == NULL) {
-		DE_WRN("disp_sys_malloc ase[%d][%d] memory fail! size=0x%x\n", sel, chno,
-			(unsigned int)sizeof(struct __ase_reg_t));
-		return -1;
-	}
+    memory = disp_sys_malloc(sizeof(struct __ase_reg_t));
+    if (memory == NULL) {
+        DE_WRN("disp_sys_malloc ase[%d][%d] memory fail! size=0x%x\n", sel, chno,
+            (unsigned int)sizeof(struct __ase_reg_t));
+        return -1;
+    }
 
-	ase_block[sel][chno].off = base;
-	ase_block[sel][chno].val = memory;
-	ase_block[sel][chno].size = 0x14;
-	ase_block[sel][chno].dirty = 0;
+    ase_block[sel][chno].off = base;
+    ase_block[sel][chno].val = memory;
+    ase_block[sel][chno].size = 0x14;
+    ase_block[sel][chno].dirty = 0;
 
-	de_ase_set_reg_base(sel, chno, memory);
+    de_ase_set_reg_base(sel, chno, memory);
 
-	return 0;
+    return 0;
 }
 
 int de_ase_exit(unsigned int sel, unsigned int chno)
 {
-	disp_sys_free(ase_block[sel][chno].val);
+    disp_sys_free(ase_block[sel][chno].val);
 
-	return 0;
+    return 0;
 }
 
 /*****************************************************************************
@@ -104,9 +104,9 @@ int de_ase_exit(unsigned int sel, unsigned int chno)
  ******************************************************************************/
 int de_ase_enable(unsigned int sel, unsigned int chno, unsigned int en)
 {
-	ase_dev[sel][chno]->ctrl.bits.en = en;
-	ase_block[sel][chno].dirty = 1;
-	return 0;
+    ase_dev[sel][chno]->ctrl.bits.en = en;
+    ase_block[sel][chno].dirty = 1;
+    return 0;
 }
 
 /*****************************************************************************
@@ -122,12 +122,12 @@ int de_ase_enable(unsigned int sel, unsigned int chno, unsigned int en)
  *                     success
  ******************************************************************************/
 int de_ase_set_size(unsigned int sel, unsigned int chno, unsigned int width,
-				unsigned int height)
+                unsigned int height)
 {
-	ase_dev[sel][chno]->size.bits.width = width - 1;
-	ase_dev[sel][chno]->size.bits.height = height - 1;
-	ase_block[sel][chno].dirty = 1;
-	return 0;
+    ase_dev[sel][chno]->size.bits.width = width - 1;
+    ase_dev[sel][chno]->size.bits.height = height - 1;
+    ase_block[sel][chno].dirty = 1;
+    return 0;
 }
 
 /*****************************************************************************
@@ -144,19 +144,19 @@ int de_ase_set_size(unsigned int sel, unsigned int chno, unsigned int width,
  *                  success
  ******************************************************************************/
 int de_ase_set_window(unsigned int sel, unsigned int chno,
-					unsigned int win_enable,
-					struct de_rect window)
+                    unsigned int win_enable,
+                    struct de_rect window)
 {
-	ase_dev[sel][chno]->ctrl.bits.win_en = win_enable;
+    ase_dev[sel][chno]->ctrl.bits.win_en = win_enable;
 
-	if (win_enable) {
-		ase_dev[sel][chno]->win0.bits.left = window.x;
-		ase_dev[sel][chno]->win0.bits.top = window.y;
-		ase_dev[sel][chno]->win1.bits.right = window.x + window.w - 1;
-		ase_dev[sel][chno]->win1.bits.bot = window.y + window.h - 1;
-	}
-	ase_block[sel][chno].dirty = 1;
-	return 0;
+    if (win_enable) {
+        ase_dev[sel][chno]->win0.bits.left = window.x;
+        ase_dev[sel][chno]->win0.bits.top = window.y;
+        ase_dev[sel][chno]->win1.bits.right = window.x + window.w - 1;
+        ase_dev[sel][chno]->win1.bits.bot = window.y + window.h - 1;
+    }
+    ase_block[sel][chno].dirty = 1;
+    return 0;
 }
 
 /*****************************************************************************
@@ -172,9 +172,9 @@ int de_ase_set_window(unsigned int sel, unsigned int chno,
  ******************************************************************************/
 int de_ase_set_para(unsigned int sel, unsigned int chno, unsigned int gain)
 {
-	ase_dev[sel][chno]->gain.bits.gain = gain;
-	ase_block[sel][chno].dirty = 1;
-	return 0;
+    ase_dev[sel][chno]->gain.bits.gain = gain;
+    ase_block[sel][chno].dirty = 1;
+    return 0;
 }
 
 /**
@@ -188,17 +188,17 @@ int de_ase_set_para(unsigned int sel, unsigned int chno, unsigned int gain)
  *                  success
  */
 int de_ase_info2para(unsigned int auto_color, struct de_rect window,
-				 struct __ase_config_data *para)
+                 struct __ase_config_data *para)
 {
-	int ase_mode;
-	int ase_para[ASE_PARA_NUM][ASE_MODE_NUM] = {
-		{0, 12, 16, 20}
-	};
+    int ase_mode;
+    int ase_para[ASE_PARA_NUM][ASE_MODE_NUM] = {
+        {0, 12, 16, 20}
+    };
 
-	ase_mode = ((auto_color >> 4) & 0xf) ? 1 : 0;
-	para->ase_en = ase_mode ? 1 : 0;
-	para->gain = ase_para[0][ase_mode];
+    ase_mode = ((auto_color >> 4) & 0xf) ? 1 : 0;
+    para->ase_en = ase_mode ? 1 : 0;
+    para->gain = ase_para[0][ase_mode];
 
-	return 0;
+    return 0;
 }
 #endif

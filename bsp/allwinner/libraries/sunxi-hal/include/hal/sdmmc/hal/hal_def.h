@@ -74,27 +74,27 @@ extern "C" {
 /* Wait forever timeout value */
 #define HAL_WAIT_FOREVER    OS_WAIT_FOREVER
 
-#define HAL_SIZE_T 		(unsigned long)
-#define HAL_PT_TO_U(v)		(HAL_SIZE_T(v))
+#define HAL_SIZE_T      (unsigned long)
+#define HAL_PT_TO_U(v)      (HAL_SIZE_T(v))
 
 /*use to prinf and sscanf function to avoid compiler error*/
-#define HAL_PR_SZ_L(v)		(HAL_SIZE_T(v))
-#define HAL_PR_SZ(v)		((unsigned int)(v))
-#define HAL_PR_SZ_P(v)		((unsigned int *)(v))
+#define HAL_PR_SZ_L(v)      (HAL_SIZE_T(v))
+#define HAL_PR_SZ(v)        ((unsigned int)(v))
+#define HAL_PR_SZ_P(v)      ((unsigned int *)(v))
 
 
-#define HAL_WMB() 		{dsb(0xf);}
+#define HAL_WMB()       {dsb(0xf);}
 
 /**
  * @brief HAL Status value
  */
 typedef enum
 {
-    HAL_OK      = 0,	/* success */
-    HAL_ERROR   = -1,	/* general error */
-    HAL_BUSY    = -2,	/* device or resource busy */
-    HAL_TIMEOUT = -3,	/* wait timeout */
-    HAL_INVALID = -4	/* invalid argument */
+    HAL_OK      = 0,    /* success */
+    HAL_ERROR   = -1,   /* general error */
+    HAL_BUSY    = -2,   /* device or resource busy */
+    HAL_TIMEOUT = -3,   /* wait timeout */
+    HAL_INVALID = -4    /* invalid argument */
 } HAL_Status;
 
 #ifdef __cplusplus

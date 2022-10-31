@@ -37,21 +37,21 @@
 #include <sys/types.h>
 
 typedef struct {
-	const char *control_name;
-	const char *card_name;
-	int count;
+    const char *control_name;
+    const char *card_name;
+    int count;
 } snd_pcm_softvol_control_t;
 
 typedef struct {
-	const char *pcm;
+    const char *pcm;
 } snd_pcm_softvol_slave_config_t;
 
 typedef struct {
-	const char *type;
-	snd_pcm_softvol_control_t control;
-	int resolution;
-	double min_dB, max_dB;
-	snd_pcm_softvol_slave_config_t slave;
+    const char *type;
+    snd_pcm_softvol_control_t control;
+    int resolution;
+    double min_dB, max_dB;
+    snd_pcm_softvol_slave_config_t slave;
 } snd_pcm_softvol_config_t;
 
 #endif /* __AW_ALSA_PCM_SOFTVOL_H */

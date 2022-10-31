@@ -357,15 +357,15 @@ int32_t _usb_core_func_drv_probe_interface(struct usb_host_virt_sub_dev *sub_dev
         __err("PANIC : virt_dev->state == USB_STATE_SUSPENDED");
         return -EHOSTUNREACH;
     }
-	hal_log_info("---usb_core_func_drv_probe----1---\n");
+    hal_log_info("---usb_core_func_drv_probe----1---\n");
     id = usb_match_id(intf, func_drv->match_table);
 
     if (id)
     {
         intf->condition = USB_INTERFACE_BINDING;
-	hal_log_info("---usb_core_func_drv_probe----2---\n");
+    hal_log_info("---usb_core_func_drv_probe----2---\n");
         error = func_drv->probe(intf, id);
-	hal_log_info("---usb_core_func_drv_probe----3---\n");
+    hal_log_info("---usb_core_func_drv_probe----3---\n");
         intf->condition = error ? USB_INTERFACE_UNBOUND : USB_INTERFACE_BOUND;
         return error;
     }

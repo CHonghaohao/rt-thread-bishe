@@ -43,7 +43,7 @@ static void rmmod_host_driver(struct usb_msg_center_info *center_info)
 static void insmod_device_driver(struct usb_msg_center_info *center_info)
 {
 #ifdef CONFIG_COMPONENT_ADBD
-	extern int adbd_main(void);
+    extern int adbd_main(void);
 #endif
     Usb_Manager_Err(" adbd_main\n");
     set_usb_role(center_info, USB_ROLE_DEVICE);
@@ -55,14 +55,14 @@ static void insmod_device_driver(struct usb_msg_center_info *center_info)
 static void rmmod_device_driver(struct usb_msg_center_info *center_info)
 {
 #ifdef CONFIG_COMPONENT_ADBD
-	extern int adbd_exit(void);
+    extern int adbd_exit(void);
 #endif
     Usb_Manager_Err("\n");
     set_usb_role(center_info, USB_ROLE_NULL);
 #ifdef CONFIG_COMPONENT_ADBD
-	adbd_exit();
+    adbd_exit();
 #endif
-	Usb_Manager_Err("\n");
+    Usb_Manager_Err("\n");
 }
 
 static void do_usb_role_null(struct usb_msg_center_info *center_info)
@@ -137,7 +137,7 @@ void usb_msg_center(usb_cfg_t *cfg)
     modify_msg(&center_info->msg);
     /* execute cmd */
     role = get_usb_role();
-   	Usb_Manager_Debug("role=%d\n", get_usb_role());
+    Usb_Manager_Debug("role=%d\n", get_usb_role());
     switch (role)
     {
         case USB_ROLE_NULL:

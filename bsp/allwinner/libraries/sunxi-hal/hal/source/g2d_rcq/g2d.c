@@ -24,7 +24,7 @@
 #include <hal_clk.h>
 #include <hal_reset.h>
 #include <hal_timer.h>
-#include <melis/standby/standby.h>
+// #include <melis/standby/standby.h>
 
 #include "g2d_driver_i.h"
 #include "g2d_top.h"
@@ -616,12 +616,12 @@ int sunxi_g2d_control(int cmd, void *arg)
 		}
 	case G2D_CMD_TASK_APPLY:
 		{
-		
+
 
 		unsigned long *karg;
 		karg = arg;
 
-		
+
 		struct g2d_mixer_task *p_task = NULL;
 		p_task = g2d_mixer_get_inst((int)karg[0]);
 		ret = p_task->apply(p_task, (struct mixer_para *)karg[1]);
@@ -632,7 +632,7 @@ int sunxi_g2d_control(int cmd, void *arg)
 		}
 	case G2D_CMD_TASK_DESTROY:
 		{
-		
+
 			struct g2d_mixer_task *p_task = NULL;
 			p_task = g2d_mixer_get_inst((int)(unsigned long)arg);
 			ret = p_task->destory(p_task);
@@ -644,13 +644,13 @@ int sunxi_g2d_control(int cmd, void *arg)
 			unsigned long *karg;
 			karg = arg;
 			struct g2d_mixer_task *p_task = NULL;
-			
+
 			p_task = g2d_mixer_get_inst((int)karg[0]);
 			if(!p_task) {
 				ret = -EFAULT;
 				goto err_noput;
 			}
-				
+
 			karg[1] = (unsigned long)(p_task->p_para);
 			ret = 0;
 			break;

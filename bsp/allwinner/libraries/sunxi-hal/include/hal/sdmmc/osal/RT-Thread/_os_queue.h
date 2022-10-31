@@ -56,7 +56,7 @@ OS_Status OS_QueueReceive(OS_Queue_t *queue, void *item, OS_Time_t waitMS);
  */
 static inline int OS_QueueIsValid(OS_Queue_t *queue)
 {
-	return (queue->handle != OS_INVALID_HANDLE);
+    return (queue->handle != OS_INVALID_HANDLE);
 }
 
 /**
@@ -66,7 +66,7 @@ static inline int OS_QueueIsValid(OS_Queue_t *queue)
  */
 static inline void OS_QueueSetInvalid(OS_Queue_t *queue)
 {
-	queue->handle = OS_INVALID_HANDLE;
+    queue->handle = OS_INVALID_HANDLE;
 }
 
 /**
@@ -80,7 +80,7 @@ static inline void OS_QueueSetInvalid(OS_Queue_t *queue)
  */
 static inline OS_Status OS_MsgQueueCreate(OS_Queue_t *queue, uint32_t queueLen)
 {
-	return OS_QueueCreate(queue, queueLen, sizeof(void *));
+    return OS_QueueCreate(queue, queueLen, sizeof(void *));
 }
 
 /**
@@ -90,7 +90,7 @@ static inline OS_Status OS_MsgQueueCreate(OS_Queue_t *queue, uint32_t queueLen)
  */
 static inline OS_Status OS_MsgQueueDelete(OS_Queue_t *queue)
 {
-	return OS_QueueDelete(queue);
+    return OS_QueueDelete(queue);
 }
 
 /**
@@ -105,7 +105,7 @@ static inline OS_Status OS_MsgQueueDelete(OS_Queue_t *queue)
  */
 static inline OS_Status OS_MsgQueueSend(OS_Queue_t *queue, void *msg, OS_Time_t waitMS)
 {
-	return OS_QueueSend(queue, &msg, waitMS);
+    return OS_QueueSend(queue, &msg, waitMS);
 }
 
 /**
@@ -122,7 +122,7 @@ static inline OS_Status OS_MsgQueueSend(OS_Queue_t *queue, void *msg, OS_Time_t 
  */
 static inline OS_Status OS_MsgQueueReceive(OS_Queue_t *queue, void **msg, OS_Time_t waitMS)
 {
-	return OS_QueueReceive(queue, msg, waitMS);
+    return OS_QueueReceive(queue, msg, waitMS);
 }
 
 #ifdef __cplusplus

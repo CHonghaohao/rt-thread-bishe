@@ -37,21 +37,21 @@ struct intc_regs *pintc_regs;
 */
 s32 intc_init(void)
 {
-	pintc_regs = (struct intc_regs *)(SUNXI_R_INTC_PBASE);
+    pintc_regs = (struct intc_regs *)(SUNXI_R_INTC_PBASE);
 
-	/*initialize interrupt controller */
-	pintc_regs->enable = 0x0;
-	pintc_regs->mask = 0x0;
-	pintc_regs->pending = 0xffffffff;
+    /*initialize interrupt controller */
+    pintc_regs->enable = 0x0;
+    pintc_regs->mask = 0x0;
+    pintc_regs->pending = 0xffffffff;
 
-	pintc_regs->enable1 = 0x0;
-	pintc_regs->mask1 = 0x0;
-	pintc_regs->pending1 = 0xffffffff;
+    pintc_regs->enable1 = 0x0;
+    pintc_regs->mask1 = 0x0;
+    pintc_regs->pending1 = 0xffffffff;
 
-	pintc_regs->enable2 = 0x0;
-	pintc_regs->mask2 = 0x0;
-	pintc_regs->pending2 = 0xffffffff;
-	return OK;
+    pintc_regs->enable2 = 0x0;
+    pintc_regs->mask2 = 0x0;
+    pintc_regs->pending2 = 0xffffffff;
+    return OK;
 }
 
 /*
@@ -69,9 +69,9 @@ s32 intc_init(void)
 */
 s32 intc_exit(void)
 {
-	pintc_regs = NULL;
+    pintc_regs = NULL;
 
-	return OK;
+    return OK;
 }
 
 /*
@@ -89,26 +89,26 @@ s32 intc_exit(void)
 */
 s32 intc_enable_interrupt(u32 intno)
 {
-	/*intno can't beyond then IRQ_SOURCE_MAX */
-	/* ASSERT(intno < IRQ_SOUCE_MAX); */
+    /*intno can't beyond then IRQ_SOURCE_MAX */
+    /* ASSERT(intno < IRQ_SOUCE_MAX); */
 
-	/*
-	 * NMI interrupt should clear before enable.
-	 * by sunny at 2012-6-12 19:30:22.
-	 */
-	if (intno == SUNXI_RINTC_IRQ_NMI) {
-		pintc_regs->pending = (1 << intno);
-	}
+    /*
+     * NMI interrupt should clear before enable.
+     * by sunny at 2012-6-12 19:30:22.
+     */
+    if (intno == SUNXI_RINTC_IRQ_NMI) {
+        pintc_regs->pending = (1 << intno);
+    }
 
-	/*enable interrupt which number is intno */
-	if (intno <= 31)
-		pintc_regs->enable |= (1 << intno);
-	else if (intno > 31 && intno <= 63)
-		pintc_regs->enable1 |= (1 << (intno - 32));
-	else
-		pintc_regs->enable2 |= (1 << (intno - 64));
+    /*enable interrupt which number is intno */
+    if (intno <= 31)
+        pintc_regs->enable |= (1 << intno);
+    else if (intno > 31 && intno <= 63)
+        pintc_regs->enable1 |= (1 << (intno - 32));
+    else
+        pintc_regs->enable2 |= (1 << (intno - 64));
 
-	return OK;
+    return OK;
 }
 
 /*
@@ -126,18 +126,18 @@ s32 intc_enable_interrupt(u32 intno)
 */
 s32 intc_disable_interrupt(u32 intno)
 {
-	/*intno can't beyond then IRQ_SOURCE_MAX */
-	/* ASSERT(intno < IRQ_SOUCE_MAX); */
+    /*intno can't beyond then IRQ_SOURCE_MAX */
+    /* ASSERT(intno < IRQ_SOUCE_MAX); */
 
-	/*enable interrupt which number is intno */
-	if (intno <= 31)
-		pintc_regs->enable &= ~(1 << intno);
-	else if (intno > 31 && intno <= 63)
-		pintc_regs->enable1 &= ~(1 << (intno - 32));
-	else
-		pintc_regs->enable2 &= ~(1 << (intno - 64));
+    /*enable interrupt which number is intno */
+    if (intno <= 31)
+        pintc_regs->enable &= ~(1 << intno);
+    else if (intno > 31 && intno <= 63)
+        pintc_regs->enable1 &= ~(1 << (intno - 32));
+    else
+        pintc_regs->enable2 &= ~(1 << (intno - 64));
 
-	return OK;
+    return OK;
 }
 
 /*
@@ -155,48 +155,48 @@ s32 intc_disable_interrupt(u32 intno)
 */
 u32 intc_get_current_interrupt(void)
 {
-	volatile u32 interrupt;
+    volatile u32 interrupt;
 
-	interrupt = (u32) ((pintc_regs->vector) >> 2);
+    interrupt = (u32) ((pintc_regs->vector) >> 2);
 
-	return interrupt;
+    return interrupt;
 }
 
 s32 intc_set_mask(u32 intno, u32 mask)
 {
-	/* intno can't beyond then IRQ_SOURCE_MAX */
-	/* ASSERT(intno < IRQ_SOUCE_MAX); */
+    /* intno can't beyond then IRQ_SOURCE_MAX */
+    /* ASSERT(intno < IRQ_SOUCE_MAX); */
 
-	/* enable interrupt which number is intno */
-	if (intno <= 31) {
-		pintc_regs->mask &= ~(1 << intno);
-		pintc_regs->mask |= (mask << intno);
-	} else if (intno > 31 && intno <= 63) {
-		pintc_regs->mask1 &= ~(1 << (intno - 32));
-		pintc_regs->mask1 |= (mask << intno);
-	} else {
-		pintc_regs->mask2 &= ~(1 << (intno - 64));
-		pintc_regs->mask2 |= (mask << intno);
-	}
+    /* enable interrupt which number is intno */
+    if (intno <= 31) {
+        pintc_regs->mask &= ~(1 << intno);
+        pintc_regs->mask |= (mask << intno);
+    } else if (intno > 31 && intno <= 63) {
+        pintc_regs->mask1 &= ~(1 << (intno - 32));
+        pintc_regs->mask1 |= (mask << intno);
+    } else {
+        pintc_regs->mask2 &= ~(1 << (intno - 64));
+        pintc_regs->mask2 |= (mask << intno);
+    }
 
-	return OK;
+    return OK;
 }
 
 s32 intc_set_group_config(u32 grp_irq_num, u32 mask)
 {
-	if (grp_irq_num <= 31) {
-		pintc_regs->group_config0 &= ~(1 << grp_irq_num);
-		pintc_regs->group_config0 |= (mask << grp_irq_num);
-	} else if (grp_irq_num > 31 && grp_irq_num <= 63) {
-		pintc_regs->group_config1 &= ~(1 << (grp_irq_num - 32));
-		pintc_regs->group_config1 |= (mask << grp_irq_num);
-	} else if (grp_irq_num > 63 && grp_irq_num <= 95) {
-		pintc_regs->group_config2 &= ~(1 << (grp_irq_num - 64));
-		pintc_regs->group_config2 |= (mask << grp_irq_num);
-	} else {
-		pintc_regs->group_config3 &= ~(1 << (grp_irq_num - 64));
-		pintc_regs->group_config3 |= (mask << grp_irq_num);
-	}
+    if (grp_irq_num <= 31) {
+        pintc_regs->group_config0 &= ~(1 << grp_irq_num);
+        pintc_regs->group_config0 |= (mask << grp_irq_num);
+    } else if (grp_irq_num > 31 && grp_irq_num <= 63) {
+        pintc_regs->group_config1 &= ~(1 << (grp_irq_num - 32));
+        pintc_regs->group_config1 |= (mask << grp_irq_num);
+    } else if (grp_irq_num > 63 && grp_irq_num <= 95) {
+        pintc_regs->group_config2 &= ~(1 << (grp_irq_num - 64));
+        pintc_regs->group_config2 |= (mask << grp_irq_num);
+    } else {
+        pintc_regs->group_config3 &= ~(1 << (grp_irq_num - 64));
+        pintc_regs->group_config3 |= (mask << grp_irq_num);
+    }
 
-	return OK;
+    return OK;
 }

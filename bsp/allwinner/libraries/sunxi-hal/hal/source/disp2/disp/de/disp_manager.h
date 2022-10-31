@@ -21,10 +21,10 @@ extern void sunxi_enable_device_iommu(unsigned int mastor_id, bool flag);
 #endif
 
 extern s32 __disp_config_transfer2inner(
-	struct disp_layer_config_inner *config_inner,
-	struct disp_layer_config *config);
+    struct disp_layer_config_inner *config_inner,
+    struct disp_layer_config *config);
 extern s32 __disp_config2_transfer2inner(
-	struct disp_layer_config_inner *config_inner,
-	struct disp_layer_config2 *config);
+    struct disp_layer_config_inner *config_inner,
+    struct disp_layer_config2 *config);
 
 #endif

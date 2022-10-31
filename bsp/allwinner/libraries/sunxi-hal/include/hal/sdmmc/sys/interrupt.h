@@ -46,13 +46,13 @@
  */
 static __always_inline unsigned long arch_irq_save(void)
 {
-	unsigned long flags;
+    unsigned long flags;
 
-	__asm {
-		mrs	flags, IRQMASK_REG_NAME_R
-		cpsid	i
-	}
-	return flags;
+    __asm {
+        mrs flags, IRQMASK_REG_NAME_R
+        cpsid   i
+    }
+    return flags;
 }
 
 /*
@@ -60,28 +60,28 @@ static __always_inline unsigned long arch_irq_save(void)
  */
 static __always_inline void arch_irq_restore(unsigned long flags)
 {
-	__asm { msr	IRQMASK_REG_NAME_W, flags }
+    __asm { msr IRQMASK_REG_NAME_W, flags }
 }
 
 /*
  * Enable IRQs
  */
-#define arch_irq_enable()	__enable_irq()
+#define arch_irq_enable()   __enable_irq()
 
 /*
  * Disable IRQs
  */
-#define arch_irq_disable()	__disable_irq()
+#define arch_irq_disable()  __disable_irq()
 
 /*
  * Enable FIQs
  */
-#define arch_fiq_enable()	__enable_fiq()
+#define arch_fiq_enable()   __enable_fiq()
 
 /*
  * Disable FIQs
  */
-#define arch_fiq_disable()	__disable_fiq()
+#define arch_fiq_disable()  __disable_fiq()
 
 #elif defined(__GNUC__)
 /* GNU Compiler */
@@ -91,22 +91,22 @@ static __always_inline void arch_irq_restore(unsigned long flags)
 /*
  * Save the current interrupt enable state & disable IRQs
  */
-#define arch_irq_save(void)	rt_hw_interrupt_disable()
+#define arch_irq_save(void) rt_hw_interrupt_disable()
 
 /*
  * restore saved IRQ state
  */
-#define arch_irq_restore(flags)	rt_hw_interrupt_enable(flags)
+#define arch_irq_restore(flags) rt_hw_interrupt_enable(flags)
 
 /*
  * Enable IRQs
  */
-#define arch_irq_enable()	rt_hw_interrupt_enable(__irq_level)
+#define arch_irq_enable()   rt_hw_interrupt_enable(__irq_level)
 
 /*
  * Disable IRQs
  */
-#define arch_irq_disable()	rt_base_t __irq_level = rt_hw_interrupt_disable()
+#define arch_irq_disable()  rt_base_t __irq_level = rt_hw_interrupt_disable()
 
 #else /* __CONFIG_OS_RTTHREAD */
 
@@ -121,13 +121,13 @@ static __always_inline void arch_irq_restore(unsigned long flags)
  */
 static __always_inline unsigned long arch_irq_save(void)
 {
-	unsigned long flags;
+    unsigned long flags;
 
-	__asm volatile(
-		"mrs	%0, " IRQMASK_REG_NAME_R "\n"
-		"cpsid	i"
-		: "=r" (flags) : : "memory", "cc");
-	return flags;
+    __asm volatile(
+        "mrs    %0, " IRQMASK_REG_NAME_R "\n"
+        "cpsid  i"
+        : "=r" (flags) : : "memory", "cc");
+    return flags;
 }
 
 /*
@@ -135,11 +135,11 @@ static __always_inline unsigned long arch_irq_save(void)
  */
 static __always_inline void arch_irq_restore(unsigned long flags)
 {
-	__asm volatile(
-		"msr	" IRQMASK_REG_NAME_W ", %0"
-		:
-		: "r" (flags)
-		: "memory", "cc");
+    __asm volatile(
+        "msr    " IRQMASK_REG_NAME_W ", %0"
+        :
+        : "r" (flags)
+        : "memory", "cc");
 }
 
 /*
@@ -147,34 +147,34 @@ static __always_inline void arch_irq_restore(unsigned long flags)
  */
 static __always_inline unsigned long arch_irq_get_flags(void)
 {
-	unsigned long flags;
+    unsigned long flags;
 
-	__asm volatile(
-		"mrs	%0, " IRQMASK_REG_NAME_R "\n"
-		: "=r" (flags) : : "memory", "cc");
-	return flags;
+    __asm volatile(
+        "mrs    %0, " IRQMASK_REG_NAME_R "\n"
+        : "=r" (flags) : : "memory", "cc");
+    return flags;
 
 }
 
 /*
  * Enable IRQs
  */
-#define arch_irq_enable()	__asm volatile("cpsie i" : : : "memory", "cc")
+#define arch_irq_enable()   __asm volatile("cpsie i" : : : "memory", "cc")
 
 /*
  * Disable IRQs
  */
-#define arch_irq_disable()	__asm volatile("cpsid i" : : : "memory", "cc")
+#define arch_irq_disable()  __asm volatile("cpsid i" : : : "memory", "cc")
 
 /*
  * Enable FIQs
  */
-#define arch_fiq_enable()	__asm volatile("cpsie f" : : : "memory", "cc")
+#define arch_fiq_enable()   __asm volatile("cpsie f" : : : "memory", "cc")
 
 /*
  * Disable FIQs
  */
-#define arch_fiq_disable()	__asm volatile("cpsid f" : : : "memory", "cc")
+#define arch_fiq_disable()  __asm volatile("cpsid f" : : : "memory", "cc")
 
 #endif /* __CONFIG_OS_RTTHREAD */
 

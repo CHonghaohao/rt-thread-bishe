@@ -25,49 +25,49 @@
 
 /*interrput controller registers Offset*/
 typedef struct intc_regs {
-	/*offset 0x00 */
-	volatile u32 vector;
-	volatile u32 base_addr;
-	volatile u32 reserved0;
-	volatile u32 control;
+    /*offset 0x00 */
+    volatile u32 vector;
+    volatile u32 base_addr;
+    volatile u32 reserved0;
+    volatile u32 control;
 
-	/*offset 0x10 */
-	volatile u32 pending;
-	volatile u32 pending1;
-	volatile u32 pending2;
-	volatile u32 reserved1[9];
+    /*offset 0x10 */
+    volatile u32 pending;
+    volatile u32 pending1;
+    volatile u32 pending2;
+    volatile u32 reserved1[9];
 
-	/*offset 0x40 */
-	volatile u32 enable;
-	volatile u32 enable1;
-	volatile u32 enable2;
-	volatile u32 reserved2[1];
+    /*offset 0x40 */
+    volatile u32 enable;
+    volatile u32 enable1;
+    volatile u32 enable2;
+    volatile u32 reserved2[1];
 
-	/*offset 0x50 */
-	volatile u32 mask;
-	volatile u32 mask1;
-	volatile u32 mask2;
-	volatile u32 reserved3[5];
+    /*offset 0x50 */
+    volatile u32 mask;
+    volatile u32 mask1;
+    volatile u32 mask2;
+    volatile u32 reserved3[5];
 
-	/*offset 0x70 */
-	volatile u32 fast_forcing;
-	volatile u32 reserved4[3];
+    /*offset 0x70 */
+    volatile u32 fast_forcing;
+    volatile u32 reserved4[3];
 
-	/*offset 0x80 */
-	volatile u32 priority0;
-	volatile u32 priority1;
-	volatile u32 reserved5[14];
+    /*offset 0x80 */
+    volatile u32 priority0;
+    volatile u32 priority1;
+    volatile u32 reserved5[14];
 
-	/*offset 0xc0 */
-	volatile u32 group_config0;
-	volatile u32 group_config1;
-	volatile u32 group_config2;
-	volatile u32 group_config3;
+    /*offset 0xc0 */
+    volatile u32 group_config0;
+    volatile u32 group_config1;
+    volatile u32 group_config2;
+    volatile u32 group_config3;
 } intc_regs_t;
 
 struct int_isr_node {
-	__pISR_hdle_t pisr;		/*ISR process handler */
-	void *parg;		/*argument for isr process */
+    __pISR_hdle_t pisr;     /*ISR process handler */
+    void *parg;     /*argument for isr process */
 };
 
 /*local functions*/

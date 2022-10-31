@@ -61,39 +61,39 @@ extern hal_spinlock_t sdmmc_lock;
 //#define HAL_ExitCriticalSection(flags)  arch_irq_restore(flags)
 #define HAL_EnterCriticalSection()  ({hal_spin_lock_irqsave(&sdmmc_lock);})
 #define HAL_ExitCriticalSection(f)  ({hal_spin_unlock_irqrestore(&sdmmc_lock, f);})
-#define HAL_ATMOTIC_SET(a,v)			({int flags = HAL_EnterCriticalSection();\
-										a = v;HAL_ExitCriticalSection(flags);})
-#define HAL_ATMOTIC_READ(a)			({int flags=0;int v=0; flags = HAL_EnterCriticalSection();v=a;HAL_ExitCriticalSection(flags);v;})
+#define HAL_ATMOTIC_SET(a,v)            ({int flags = HAL_EnterCriticalSection();\
+                                        a = v;HAL_ExitCriticalSection(flags);})
+#define HAL_ATMOTIC_READ(a)         ({int flags=0;int v=0; flags = HAL_EnterCriticalSection();v=a;HAL_ExitCriticalSection(flags);v;})
 
 #define HAL_FlushDcacheRegion(s,len)            (hal_dcache_clean_invalidate(s,len))
-#define HAL_InvalidDcacheRegion(s,len)		(hal_dcache_invalidate(s, len))
+#define HAL_InvalidDcacheRegion(s,len)      (hal_dcache_invalidate(s, len))
 
 #if 0
-#define HAL_GetTimeMs()				(aos_now_ms())
-#define HAL_GetTimeUs()				(aos_now()/1000)
-//#define HAL_GetTimeUs()			(OS_GetTime()*1000)
-#define HAL_GetTimeNs()				(aos_now())
+#define HAL_GetTimeMs()             (aos_now_ms())
+#define HAL_GetTimeUs()             (aos_now()/1000)
+//#define HAL_GetTimeUs()           (OS_GetTime()*1000)
+#define HAL_GetTimeNs()             (aos_now())
 #else
 #if 0
-#define HAL_GetTimeMs()				((rt_tick_get()*1000)/CONFIG_HZ)
-#define HAL_GetTimeUs()				((rt_tick_get()*1000*1000)/CONFIG_HZ)
-#define HAL_GetTimeNs()				((rt_tick_get()*1000*1000)/CONFIG_HZ)
+#define HAL_GetTimeMs()             ((rt_tick_get()*1000)/CONFIG_HZ)
+#define HAL_GetTimeUs()             ((rt_tick_get()*1000*1000)/CONFIG_HZ)
+#define HAL_GetTimeNs()             ((rt_tick_get()*1000*1000)/CONFIG_HZ)
 #endif
-#define HAL_GetTimeMs()				({\
-							struct timeval tv;\
-							gettimeofday(&tv, NULL);\
-							(tv.tv_usec + tv.tv_sec * 1000000ll)/1000;\
-						})
-#define HAL_GetTimeUs()				({\
-							struct timeval tv;\
-							gettimeofday(&tv, NULL);\
-							(tv.tv_usec + tv.tv_sec * 1000000ll);\
-						})
-#define HAL_GetTimeNs()				({\
-							struct timespec64  sdmmc_timeval;\
-							do_gettimeofday(&sdmmc_timeval);\
-							(sdmmc_timeval.tv_sec*1000ll*1000*1000ll + sdmmc_timeval.tv_nsec);\
-						})
+#define HAL_GetTimeMs()             ({\
+                            struct timeval tv;\
+                            gettimeofday(&tv, NULL);\
+                            (tv.tv_usec + tv.tv_sec * 1000000ll)/1000;\
+                        })
+#define HAL_GetTimeUs()             ({\
+                            struct timeval tv;\
+                            gettimeofday(&tv, NULL);\
+                            (tv.tv_usec + tv.tv_sec * 1000000ll);\
+                        })
+#define HAL_GetTimeNs()             ({\
+                            struct timespec64  sdmmc_timeval;\
+                            do_gettimeofday(&sdmmc_timeval);\
+                            (sdmmc_timeval.tv_sec*1000ll*1000*1000ll + sdmmc_timeval.tv_nsec);\
+                        })
 #endif
 
 
@@ -117,10 +117,10 @@ typedef OS_Semaphore_t HAL_Semaphore;
     (OS_SemaphoreRelease(sem) == OS_OK ? HAL_OK : HAL_ERROR)
 
 #define HAL_SemaphoreIsValid(sem) \
-	OS_SemaphoreIsValid(sem)
+    OS_SemaphoreIsValid(sem)
 
 #define HAL_SemaphoreSetInvalid(sem) \
-	OS_SemaphoreSetInvalid(sem)
+    OS_SemaphoreSetInvalid(sem)
 
 /* Mutex */
 typedef OS_Mutex_t HAL_Mutex;
@@ -141,10 +141,10 @@ typedef OS_Mutex_t HAL_Mutex;
 #define HAL_ThreadSuspendScheduler()    OS_ThreadSuspendScheduler()
 #define HAL_ThreadResumeScheduler()     OS_ThreadResumeScheduler()
 #define HAL_ThreadIsSchedulerRunning()  OS_ThreadIsSchedulerRunning()
-#define HAL_ThreadEnd(s)				(HAL_ATMOTIC_SET(s,0))
-#define HAL_ThreadStop(s)				(HAL_ATMOTIC_SET(s,1))
-#define HAL_Thread_Should_Stop(s)		(HAL_ATMOTIC_READ(s))
-#define HAL_ThreadDelete(w)			(OS_ThreadDelete(NULL))
+#define HAL_ThreadEnd(s)                (HAL_ATMOTIC_SET(s,0))
+#define HAL_ThreadStop(s)               (HAL_ATMOTIC_SET(s,1))
+#define HAL_Thread_Should_Stop(s)       (HAL_ATMOTIC_READ(s))
+#define HAL_ThreadDelete(w)         (OS_ThreadDelete(NULL))
 
 
 /* Keep system alive, eg. feed watchdog */
@@ -174,28 +174,28 @@ typedef OS_Mutex_t HAL_Mutex;
 
 static inline void *malloc_align_buf(size_t size)
 {
-	void *fake_ptr = NULL;
-	void *malloc_ptr = NULL;
+    void *fake_ptr = NULL;
+    void *malloc_ptr = NULL;
 
-	/*malloc_ptr = krhino_mm_alloc(size + OS_CACHE_ALIGN_BYTES);*/
-	malloc_ptr = hal_malloc(size + OS_CACHE_ALIGN_BYTES);
-	if (HAL_PT_TO_U(malloc_ptr) & 0x3) {
-		printf("error: krhino_mm_alloc not align to 4 byte\r\n");
-	}
-	fake_ptr = (void *)(HAL_PT_TO_U(malloc_ptr + OS_CACHE_ALIGN_BYTES) & (~(OS_CACHE_ALIGN_BYTES -1)));
-	*(uint32_t *)((uint32_t *)fake_ptr - 1) = HAL_PT_TO_U(malloc_ptr);
+    /*malloc_ptr = krhino_mm_alloc(size + OS_CACHE_ALIGN_BYTES);*/
+    malloc_ptr = hal_malloc(size + OS_CACHE_ALIGN_BYTES);
+    if (HAL_PT_TO_U(malloc_ptr) & 0x3) {
+        printf("error: krhino_mm_alloc not align to 4 byte\r\n");
+    }
+    fake_ptr = (void *)(HAL_PT_TO_U(malloc_ptr + OS_CACHE_ALIGN_BYTES) & (~(OS_CACHE_ALIGN_BYTES -1)));
+    *(uint32_t *)((uint32_t *)fake_ptr - 1) = HAL_PT_TO_U(malloc_ptr);
 
-	return fake_ptr;
+    return fake_ptr;
 }
 
 static inline void free_align_buf(void *addr)
 {
-	void *malloc_ptr = NULL;
-	if (!addr)
-		return;
-	malloc_ptr = (void *)HAL_PT_TO_U(*(uint32_t *)((uint32_t *)addr - 1));
-	/*krhino_mm_free(malloc_ptr);*/
-	hal_free(malloc_ptr);
+    void *malloc_ptr = NULL;
+    if (!addr)
+        return;
+    malloc_ptr = (void *)HAL_PT_TO_U(*(uint32_t *)((uint32_t *)addr - 1));
+    /*krhino_mm_free(malloc_ptr);*/
+    hal_free(malloc_ptr);
 }
 
 

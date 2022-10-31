@@ -5,13 +5,13 @@
 
 int cir_test(int argc, char *argv[])
 {
-	cir_port_t port = CIR_MASTER_0;
-	cir_status_t ret = 0;
+    cir_port_t port = CIR_MASTER_0;
+    cir_status_t ret = 0;
 
-	ret = hal_cir_master_init(port);
-	printf("ret:%d\n", ret);
+    ret = hal_cir_master_init(port);
+    printf("ret:%d\n", ret);
 
-	return ret;
+    return ret;
 }
 
 FINSH_FUNCTION_EXPORT_CMD(cir_test, cirtest, test r-ir-tx);

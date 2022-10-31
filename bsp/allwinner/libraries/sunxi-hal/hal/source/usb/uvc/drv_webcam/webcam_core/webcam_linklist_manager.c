@@ -20,19 +20,19 @@
 #include "hal_log.h"
 #include "webcam_linklist_manager.h"
 
-//Á´±íÊµÏÖ·½Ê½2
+//é“¾è¡¨å®žçŽ°æ–¹å¼2
 /*******************************************************************************
-¹ØÓÚ Á´±íÊµÏÖ·½Ê½2 µÄËµÃ÷:
-(1). Ò»¸öÏß³Ìvdrv_task() ºÍÒ»¸öÖÐ¶Ï´¦Àí³ÌÐòwebcam_irq_handle()»á²Ù×÷2¸öÁ´±ífull2ºÍfree2
-     Òò´ËÐèÒª×ö»¥³â¡£
-(2). ¿¼ÂÇµ½ISRÊÇ²»»á±»´ò¶ÏµÄ£¬ËùÒÔÖ»ÐèÒª¶Ôvdrv_task()²Ù×÷Éæ¼°µÄº¯Êý×ö»¥³â´¦Àí¾ÍÐÐÁË
+å…³äºŽ é“¾è¡¨å®žçŽ°æ–¹å¼2 çš„è¯´æ˜Ž:
+(1). ä¸€ä¸ªçº¿ç¨‹vdrv_task() å’Œä¸€ä¸ªä¸­æ–­å¤„ç†ç¨‹åºwebcam_irq_handle()ä¼šæ“ä½œ2ä¸ªé“¾è¡¨full2å’Œfree2
+     å› æ­¤éœ€è¦åšäº’æ–¥ã€‚
+(2). è€ƒè™‘åˆ°ISRæ˜¯ä¸ä¼šè¢«æ‰“æ–­çš„ï¼Œæ‰€ä»¥åªéœ€è¦å¯¹vdrv_task()æ“ä½œæ¶‰åŠçš„å‡½æ•°åšäº’æ–¥å¤„ç†å°±è¡Œäº†
     full2_insert( isr ), wt
     full2_delete( vdrv_task ), rd
     free2_insert( vdrv_task ), wt
     free2_delete( isr ), rd
 
-    ËùÒÔ£¬Ö»ÐèÒª¶Ôfull2_delete()ºÍfree2_insert()×ö»¥³â´¦Àí¾ÍÐÐÁË¡£ËùÎ½»¥³â£¬Ò²¾ÍÊÇ
-    ÔÚ´¦ÀíÇ°£¬°ÑÒ»Ð©¿ÉÄÜ»á±»¸Ä±äµÄ±äÁ¿¼ÇÏÂÀ´¶øÒÑ¡£
+    æ‰€ä»¥ï¼Œåªéœ€è¦å¯¹full2_delete()å’Œfree2_insert()åšäº’æ–¥å¤„ç†å°±è¡Œäº†ã€‚æ‰€è°“äº’æ–¥ï¼Œä¹Ÿå°±æ˜¯
+    åœ¨å¤„ç†å‰ï¼ŒæŠŠä¸€äº›å¯èƒ½ä¼šè¢«æ”¹å˜çš„å˜é‡è®°ä¸‹æ¥è€Œå·²ã€‚
 *******************************************************************************/
 void Impl_initial_webcam_linklist_manager(__webcam_linklist_manager_t *thiz, WEBCAM_LINKLIST_TYPE type)
 {
@@ -43,23 +43,23 @@ void Impl_initial_webcam_linklist_manager(__webcam_linklist_manager_t *thiz, WEB
 }
 __s32 Impl_webcam_linklist_manager_exit(__webcam_linklist_manager_t *thiz)
 {
-	memset(thiz, 0, sizeof(__webcam_linklist_manager_t));
-	hal_log_info("%s %d %s thiz:%x!\n", __FILE__, __LINE__, __func__, thiz);
+    memset(thiz, 0, sizeof(__webcam_linklist_manager_t));
+    hal_log_info("%s %d %s thiz:%x!\n", __FILE__, __LINE__, __func__, thiz);
     hal_free(thiz);
     return 0;
 }
 
 /*******************************************************************************
 Function name: full2_insert
-Description: 
-    Õë¶Ô×°ÂúÖ¡µÄÊý×é×ö²åÈë²Ù×÷¡£
-    isrµ÷ÓÃ
-    ÐÞ¸Äwt
-    rdÓÉvdrv_task()ÐÞ¸Ä
-Parameters: 
-    1. idx:¾ÍÊÇÊý×é__webcam_frame_t webcam_frame[WEBCAM_BUFFER_NUM]µÄ frame_id
-Return: 
-    
+Description:
+    é’ˆå¯¹è£…æ»¡å¸§çš„æ•°ç»„åšæ’å…¥æ“ä½œã€‚
+    isrè°ƒç”¨
+    ä¿®æ”¹wt
+    rdç”±vdrv_task()ä¿®æ”¹
+Parameters:
+    1. idx:å°±æ˜¯æ•°ç»„__webcam_frame_t webcam_frame[WEBCAM_BUFFER_NUM]çš„ frame_id
+Return:
+
 Time: 2010/7/12
 *******************************************************************************/
 __s32 Impl_webcam_linklist_manager_insert(__webcam_linklist_manager_t *thiz, __s32 frame_id)
@@ -70,7 +70,7 @@ __s32 Impl_webcam_linklist_manager_insert(__webcam_linklist_manager_t *thiz, __s
     //__s32 uTmpRd;
     //__s32 uNextRd;
     __s32 uTmpWt = thiz->wt + 1;
-    
+
     uTmpWt %= FRMID_CNT;
     if(thiz->rd == uTmpWt)
     {
@@ -79,21 +79,21 @@ __s32 Impl_webcam_linklist_manager_insert(__webcam_linklist_manager_t *thiz, __s
 
     thiz->frmid_array[thiz->wt] = frame_id;
     thiz->wt = uTmpWt;
-    
+
     return EPDK_OK;
 }
 /*******************************************************************************
 Function name: full2_delete
-Description: 
-    È¡Ò»¸öÔªËØ³öÀ´£¬
-    vdrv_task()µ÷ÓÃ¡£¿ÉÄÜ»áÃ»ÓÐÔªËØ¡£
-    ÐÞ¸Ärd,
-    wtÓÉISRÐÞ¸Ä
-Parameters: 
-    
-Return: 
-    1.Èç¹ûÃ»ÓÐÔªËØ, ·µ»Ø-1
-    2.Èç¹ûÓÐ£¬·µ»ØidºÅ¡£
+Description:
+    å–ä¸€ä¸ªå…ƒç´ å‡ºæ¥ï¼Œ
+    vdrv_task()è°ƒç”¨ã€‚å¯èƒ½ä¼šæ²¡æœ‰å…ƒç´ ã€‚
+    ä¿®æ”¹rd,
+    wtç”±ISRä¿®æ”¹
+Parameters:
+
+Return:
+    1.å¦‚æžœæ²¡æœ‰å…ƒç´ , è¿”å›ž-1
+    2.å¦‚æžœæœ‰ï¼Œè¿”å›židå·ã€‚
 Time: 2010/7/12
 *******************************************************************************/
 __s32 Impl_webcam_linklist_manager_delete(__webcam_linklist_manager_t *thiz)
@@ -112,14 +112,14 @@ __s32 Impl_webcam_linklist_manager_delete(__webcam_linklist_manager_t *thiz)
         frame_id = thiz->frmid_array[nTmpRd++];
         nTmpRd %= FRMID_CNT;
         thiz->rd = nTmpRd;
-        
+
         return frame_id;
     }
 }
 __webcam_linklist_manager_t* webcam_linklist_manager_init()
 {
     __webcam_linklist_manager_t *p = (__webcam_linklist_manager_t*)hal_malloc(sizeof(__webcam_linklist_manager_t));
-	printf("%s %d %s!\n", __FILE__, __LINE__, __func__);
+    printf("%s %d %s!\n", __FILE__, __LINE__, __func__);
     if(NULL == p)
     {
         hal_log_info("malloc __webcam_linklist_manager_t fail\n");

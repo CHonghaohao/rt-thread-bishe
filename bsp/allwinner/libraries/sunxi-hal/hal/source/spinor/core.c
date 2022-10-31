@@ -396,8 +396,8 @@ static int nor_factory_register(void)
     nor_register_factory_esmt();
     nor_register_factory_fm();
     nor_register_factory_xmc();
-	nor_register_factory_puya();
-	nor_register_factory_zetta();
+    nor_register_factory_puya();
+    nor_register_factory_zetta();
     return 0;
 }
 
@@ -596,7 +596,7 @@ int nor_deinit(void)
         if (nor->addr_width == 4)
             nor_set_4byte(0);
         nor_spi_master_deinit(&nor->spim);
-	nor->info = NULL;
+    nor->info = NULL;
     }
 
     /* we do not unlock nor in case other task using nor after deinit */

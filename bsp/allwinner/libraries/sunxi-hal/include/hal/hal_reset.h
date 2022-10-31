@@ -11,9 +11,9 @@
 #include <platform_rst.h>
 
 typedef enum {
-	HAL_SUNXI_RESET = 0,
-	HAL_SUNXI_R_RESET,
-	HAL_SUNXI_RESET_NUMBER,
+    HAL_SUNXI_RESET = 0,
+    HAL_SUNXI_R_RESET,
+    HAL_SUNXI_RESET_NUMBER,
 } hal_reset_type_t;
 
 typedef u32 hal_reset_id_t;
@@ -30,10 +30,10 @@ struct reset_control_dev;
  * @status: return the status of the reset line, if supported
  */
 struct reset_control_ops {
-	int (*reset)(struct reset_control_dev *rcdev, hal_reset_id_t id);
-	int (*assert)(struct reset_control_dev *rcdev, hal_reset_id_t id);
-	int (*deassert)(struct reset_control_dev *rcdev, hal_reset_id_t id);
-	int (*status)(struct reset_control_dev *rcdev, hal_reset_id_t id);
+    int (*reset)(struct reset_control_dev *rcdev, hal_reset_id_t id);
+    int (*assert)(struct reset_control_dev *rcdev, hal_reset_id_t id);
+    int (*deassert)(struct reset_control_dev *rcdev, hal_reset_id_t id);
+    int (*status)(struct reset_control_dev *rcdev, hal_reset_id_t id);
 };
 /**
  * struct reset_control - reset controller entity that might
@@ -50,16 +50,16 @@ struct reset_control_ops {
  * @nr_resets: number of reset controls in this reset controller device
  */
 struct reset_control_dev {
-	const struct reset_control_ops *ops;
-	hal_reset_type_t type;
-	u32	nr_resets;
-	struct list_head node;
+    const struct reset_control_ops *ops;
+    hal_reset_type_t type;
+    u32 nr_resets;
+    struct list_head node;
 };
 
 struct reset_control {
-	struct reset_control_dev *rcdev;
-	u32 enable_count;
-	hal_reset_id_t id;
+    struct reset_control_dev *rcdev;
+    u32 enable_count;
+    hal_reset_id_t id;
 };
 
 int reset_control_register(struct reset_control_dev *rcdev); //for reset system

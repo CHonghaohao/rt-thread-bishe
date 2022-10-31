@@ -59,18 +59,18 @@ OS_Status OS_ThreadCreate(OS_Thread_t *thread, const char *name,
                           OS_ThreadEntry_t entry, void *arg,
                           OS_Priority priority, uint32_t stackSize)
 {
-	BaseType_t ret;
+    BaseType_t ret;
 
-	OS_HANDLE_ASSERT(!OS_ThreadIsValid(thread), thread->handle);
+    OS_HANDLE_ASSERT(!OS_ThreadIsValid(thread), thread->handle);
 
-	ret = xTaskCreate(entry, name, stackSize / sizeof(StackType_t), arg,
-	                  priority, &thread->handle);
-	if (ret != pdPASS) {
-		OS_ERR("err %"OS_BASETYPE_F"\n", ret);
-		OS_ThreadSetInvalid(thread);
-		return OS_FAIL;
-	}
-	return OS_OK;
+    ret = xTaskCreate(entry, name, stackSize / sizeof(StackType_t), arg,
+                      priority, &thread->handle);
+    if (ret != pdPASS) {
+        OS_ERR("err %"OS_BASETYPE_F"\n", ret);
+        OS_ThreadSetInvalid(thread);
+        return OS_FAIL;
+    }
+    return OS_OK;
 }
 
 /**
@@ -87,30 +87,30 @@ OS_Status OS_ThreadCreate(OS_Thread_t *thread, const char *name,
  */
 OS_Status OS_ThreadDelete(OS_Thread_t *thread)
 {
-	TaskHandle_t handle;
-	TaskHandle_t curHandle;
+    TaskHandle_t handle;
+    TaskHandle_t curHandle;
 
-	if (thread == NULL) {
-		vTaskDelete(NULL); /* delete self */
-		return OS_OK;
-	}
+    if (thread == NULL) {
+        vTaskDelete(NULL); /* delete self */
+        return OS_OK;
+    }
 
-	OS_HANDLE_ASSERT(OS_ThreadIsValid(thread), thread->handle);
+    OS_HANDLE_ASSERT(OS_ThreadIsValid(thread), thread->handle);
 
-	handle = thread->handle;
-	curHandle = xTaskGetCurrentTaskHandle();
-	if (handle == curHandle) {
-		/* delete self */
-		OS_ThreadSetInvalid(thread);
-		vTaskDelete(NULL);
-	} else {
-		/* delete other thread */
-		OS_WRN("thread %"OS_HANDLE_F" delete %"OS_HANDLE_F"\n", curHandle, handle);
-		vTaskDelete(handle);
-		OS_ThreadSetInvalid(thread);
-	}
+    handle = thread->handle;
+    curHandle = xTaskGetCurrentTaskHandle();
+    if (handle == curHandle) {
+        /* delete self */
+        OS_ThreadSetInvalid(thread);
+        vTaskDelete(NULL);
+    } else {
+        /* delete other thread */
+        OS_WRN("thread %"OS_HANDLE_F" delete %"OS_HANDLE_F"\n", curHandle, handle);
+        vTaskDelete(handle);
+        OS_ThreadSetInvalid(thread);
+    }
 
-	return OS_OK;
+    return OS_OK;
 }
 
 #if INCLUDE_uxTaskGetStackHighWaterMark
@@ -125,10 +125,10 @@ OS_Status OS_ThreadDelete(OS_Thread_t *thread)
  */
 uint32_t OS_ThreadGetStackMinFreeSize(OS_Thread_t *thread)
 {
-	TaskHandle_t handle;
+    TaskHandle_t handle;
 
-	handle =  thread ? thread->handle : NULL;
-	return (uxTaskGetStackHighWaterMark(handle) * sizeof(StackType_t));
+    handle =  thread ? thread->handle : NULL;
+    return (uxTaskGetStackHighWaterMark(handle) * sizeof(StackType_t));
 }
 #endif
 
@@ -136,8 +136,8 @@ uint32_t OS_ThreadGetStackMinFreeSize(OS_Thread_t *thread)
 /*
 void vApplicationStackOverflowHook(TaskHandle_t xTask, char *pcTaskName)
 {
-	OS_ERR("task %p(%s) stack over flow\n", xTask, pcTaskName);
-	OS_ABORT();
+    OS_ERR("task %p(%s) stack over flow\n", xTask, pcTaskName);
+    OS_ABORT();
 }
 */
 #endif
@@ -146,55 +146,55 @@ void vApplicationStackOverflowHook(TaskHandle_t xTask, char *pcTaskName)
 void OS_ThreadList(void)
 {
 #if 0
-	TaskStatus_t *taskStatusArray;
-	UBaseType_t taskNum, i;
-	char state;
+    TaskStatus_t *taskStatusArray;
+    UBaseType_t taskNum, i;
+    char state;
 
-	taskNum = uxTaskGetNumberOfTasks();
-	taskStatusArray = OS_Malloc(taskNum * sizeof(TaskStatus_t));
-	if (taskStatusArray == NULL) {
-		OS_ERR("no mem\n");
-		return;
-	}
+    taskNum = uxTaskGetNumberOfTasks();
+    taskStatusArray = OS_Malloc(taskNum * sizeof(TaskStatus_t));
+    if (taskStatusArray == NULL) {
+        OS_ERR("no mem\n");
+        return;
+    }
 
-	i = uxTaskGetSystemState(taskStatusArray, taskNum, NULL);
-	if (i != taskNum) {
-		OS_WRN("task num %lu != %lu\n", i, taskNum);
-	}
+    i = uxTaskGetSystemState(taskStatusArray, taskNum, NULL);
+    if (i != taskNum) {
+        OS_WRN("task num %lu != %lu\n", i, taskNum);
+    }
 
-	OS_LOG(1, "%*sState Pri Idx StkCur     StkBot     StkFree StkFreeMin\n",
-	       -configMAX_TASK_NAME_LEN, "Name");
-	for (i = 0; i < taskNum; ++i) {
-		OS_LOG(1, "%*.*s", -configMAX_TASK_NAME_LEN, configMAX_TASK_NAME_LEN,
-		       taskStatusArray[i].pcTaskName);
+    OS_LOG(1, "%*sState Pri Idx StkCur     StkBot     StkFree StkFreeMin\n",
+           -configMAX_TASK_NAME_LEN, "Name");
+    for (i = 0; i < taskNum; ++i) {
+        OS_LOG(1, "%*.*s", -configMAX_TASK_NAME_LEN, configMAX_TASK_NAME_LEN,
+               taskStatusArray[i].pcTaskName);
 
-		switch (taskStatusArray[i].eCurrentState) {
-		case eReady: 		state = 'R'; break;
-		case eBlocked:		state = 'B'; break;
-		case eSuspended:	state = 'S'; break;
-		case eDeleted:		state = 'D'; break;
-		default:			state = '?'; break;
-		}
-		OS_LOG(1, "%-5c %-3lu %-3lu  %-u\n",
-		          state,
-		          taskStatusArray[i].uxCurrentPriority,
-		          taskStatusArray[i].xTaskNumber,
-		          //taskStatusArray[i].pxTopOfStack,
-		          //taskStatusArray[i].pxStack,
-		          //(taskStatusArray[i].pxTopOfStack - taskStatusArray[i].pxStack) * sizeof(StackType_t),
-		          taskStatusArray[i].usStackHighWaterMark * sizeof(StackType_t));
-	/*
-		OS_LOG(1, "%-5c %-3lu %-3lu %-10p %-10p %-7u %-u\n",
-		          state,
-		          taskStatusArray[i].uxCurrentPriority,
-		          taskStatusArray[i].xTaskNumber,
-		          taskStatusArray[i].pxTopOfStack,
-		          taskStatusArray[i].pxStack,
-		          (taskStatusArray[i].pxTopOfStack - taskStatusArray[i].pxStack) * sizeof(StackType_t),
-		          taskStatusArray[i].usStackHighWaterMark * sizeof(StackType_t));
-	*/
-	}
-	OS_Free(taskStatusArray);
+        switch (taskStatusArray[i].eCurrentState) {
+        case eReady:        state = 'R'; break;
+        case eBlocked:      state = 'B'; break;
+        case eSuspended:    state = 'S'; break;
+        case eDeleted:      state = 'D'; break;
+        default:            state = '?'; break;
+        }
+        OS_LOG(1, "%-5c %-3lu %-3lu  %-u\n",
+                  state,
+                  taskStatusArray[i].uxCurrentPriority,
+                  taskStatusArray[i].xTaskNumber,
+                  //taskStatusArray[i].pxTopOfStack,
+                  //taskStatusArray[i].pxStack,
+                  //(taskStatusArray[i].pxTopOfStack - taskStatusArray[i].pxStack) * sizeof(StackType_t),
+                  taskStatusArray[i].usStackHighWaterMark * sizeof(StackType_t));
+    /*
+        OS_LOG(1, "%-5c %-3lu %-3lu %-10p %-10p %-7u %-u\n",
+                  state,
+                  taskStatusArray[i].uxCurrentPriority,
+                  taskStatusArray[i].xTaskNumber,
+                  taskStatusArray[i].pxTopOfStack,
+                  taskStatusArray[i].pxStack,
+                  (taskStatusArray[i].pxTopOfStack - taskStatusArray[i].pxStack) * sizeof(StackType_t),
+                  taskStatusArray[i].usStackHighWaterMark * sizeof(StackType_t));
+    */
+    }
+    OS_Free(taskStatusArray);
 #endif
 }
 #endif

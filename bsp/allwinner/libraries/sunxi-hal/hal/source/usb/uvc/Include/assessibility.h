@@ -5,19 +5,19 @@
 *                (c) Copyright 2010-2015, All winners Co,Ld.
 *                        All Right Reserved
 *
-* FileName		:  assessibility.h
+* FileName      :  assessibility.h
 *
-* Author		:  Kingvan.Tong
+* Author        :  Kingvan.Tong
 *
-* Date			:  2013.03.26
+* Date          :  2013.03.26
 *
-* Description	:  USB Webcam
+* Description   :  USB Webcam
 *
-* Others		:  NULL
+* Others        :  NULL
 *
 * History:
-*		<time> 		<version >		<author>	 	    <desc>
-*	   2013.03.26	   1.0			 Kingvan.Tong		build this file
+*       <time>      <version >      <author>            <desc>
+*      2013.03.26      1.0           Kingvan.Tong       build this file
 *
 ********************************************************************************
 */

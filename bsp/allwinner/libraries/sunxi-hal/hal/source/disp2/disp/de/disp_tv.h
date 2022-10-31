@@ -14,31 +14,31 @@
 
 #include "disp_private.h"
 
-s32 disp_init_tv(void);		/* call by disp_display */
+s32 disp_init_tv(void);     /* call by disp_display */
 s32 disp_tv_set_func(struct disp_device *ptv, struct disp_tv_func *func);
 s32 disp_tv_set_hpd(struct disp_device *ptv, u32 state);
 
 struct disp_device_private_data {
-	u32 enabled;
-	bool suspended;
+    u32 enabled;
+    bool suspended;
 
-	enum disp_tv_mode tv_mode;
+    enum disp_tv_mode tv_mode;
 
-	struct disp_tv_func tv_func;
+    struct disp_tv_func tv_func;
 
-	struct disp_video_timings *video_info;
+    struct disp_video_timings *video_info;
 
-	struct disp_clk_info lcd_clk;
+    struct disp_clk_info lcd_clk;
 
-	struct clk *clk;
+    struct clk *clk;
 
-	struct clk *clk_parent;
+    struct clk *clk_parent;
 
-	u32 irq_no;
+    u32 irq_no;
 
-	u32 frame_per_sec;
-	u32 usec_per_line;
-	u32 judge_line;
+    u32 frame_per_sec;
+    u32 usec_per_line;
+    u32 judge_line;
 };
 
 s32 disp_tv_suspend(struct disp_device *ptv);

@@ -20,17 +20,17 @@ extern s32 dsi_dcs_wr_1para(u32 sel, u8 cmd, u8 para);
 extern s32 dsi_dcs_wr_2para(u32 sel, u8 cmd, u8 para1, u8 para2);
 extern s32 dsi_dcs_wr_3para(u32 sel, u8 cmd, u8 para1, u8 para2, u8 para3);
 extern s32 dsi_dcs_wr_4para(u32 sel, u8 cmd, u8 para1, u8 para2, u8 para3,
-			    u8 para4);
+                u8 para4);
 extern s32 dsi_dcs_wr_5para(u32 sel, u8 cmd, u8 para1, u8 para2, u8 para3,
-			    u8 para4, u8 para5);
+                u8 para4, u8 para5);
 extern s32 dsi_gen_wr_0para(u32 sel, u8 cmd);
 extern s32 dsi_gen_wr_1para(u32 sel, u8 cmd, u8 para);
 extern s32 dsi_gen_wr_2para(u32 sel, u8 cmd, u8 para1, u8 para2);
 extern s32 dsi_gen_wr_3para(u32 sel, u8 cmd, u8 para1, u8 para2, u8 para3);
 extern s32 dsi_gen_wr_4para(u32 sel, u8 cmd, u8 para1, u8 para2, u8 para3,
-			    u8 para4);
+                u8 para4);
 extern s32 dsi_gen_wr_5para(u32 sel, u8 cmd, u8 para1, u8 para2, u8 para3,
-			    u8 para4, u8 para5);
+                u8 para4, u8 para5);
 
 extern s32 bsp_disp_get_panel_info(u32 screen_id, struct disp_panel_para *info);
 #endif

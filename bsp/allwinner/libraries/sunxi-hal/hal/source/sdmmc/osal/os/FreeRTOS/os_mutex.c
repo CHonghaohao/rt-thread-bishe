@@ -44,15 +44,15 @@
  */
 OS_Status OS_MutexCreate(OS_Mutex_t *mutex)
 {
-	OS_HANDLE_ASSERT(!OS_MutexIsValid(mutex), mutex->handle);
+    OS_HANDLE_ASSERT(!OS_MutexIsValid(mutex), mutex->handle);
 
-	mutex->handle = xSemaphoreCreateMutex();
-	if (mutex->handle == NULL) {
-		OS_ERR("err %"OS_HANDLE_F"\n", mutex->handle);
-		return OS_FAIL;
-	}
+    mutex->handle = xSemaphoreCreateMutex();
+    if (mutex->handle == NULL) {
+        OS_ERR("err %"OS_HANDLE_F"\n", mutex->handle);
+        return OS_FAIL;
+    }
 
-	return OS_OK;
+    return OS_OK;
 }
 
 /**
@@ -62,11 +62,11 @@ OS_Status OS_MutexCreate(OS_Mutex_t *mutex)
  */
 OS_Status OS_MutexDelete(OS_Mutex_t *mutex)
 {
-	OS_HANDLE_ASSERT(OS_MutexIsValid(mutex), mutex->handle);
+    OS_HANDLE_ASSERT(OS_MutexIsValid(mutex), mutex->handle);
 
-	vSemaphoreDelete(mutex->handle);
-	OS_MutexSetInvalid(mutex);
-	return OS_OK;
+    vSemaphoreDelete(mutex->handle);
+    OS_MutexSetInvalid(mutex);
+    return OS_OK;
 }
 
 /**
@@ -83,17 +83,17 @@ OS_Status OS_MutexDelete(OS_Mutex_t *mutex)
  */
 OS_Status OS_MutexLock(OS_Mutex_t *mutex, OS_Time_t waitMS)
 {
-	BaseType_t ret;
+    BaseType_t ret;
 
-	OS_HANDLE_ASSERT(OS_MutexIsValid(mutex), mutex->handle);
+    OS_HANDLE_ASSERT(OS_MutexIsValid(mutex), mutex->handle);
 
-	ret = xSemaphoreTake(mutex->handle, OS_CalcWaitTicks(waitMS));
-	if (ret != pdPASS) {
-		OS_DBG("%s() fail @ %d, %"OS_TIME_F" ms\n", __func__, __LINE__, waitMS);
-		return OS_FAIL;
-	}
+    ret = xSemaphoreTake(mutex->handle, OS_CalcWaitTicks(waitMS));
+    if (ret != pdPASS) {
+        OS_DBG("%s() fail @ %d, %"OS_TIME_F" ms\n", __func__, __LINE__, waitMS);
+        return OS_FAIL;
+    }
 
-	return OS_OK;
+    return OS_OK;
 }
 
 /**
@@ -105,17 +105,17 @@ OS_Status OS_MutexLock(OS_Mutex_t *mutex, OS_Time_t waitMS)
  */
 OS_Status OS_MutexUnlock(OS_Mutex_t *mutex)
 {
-	BaseType_t ret;
+    BaseType_t ret;
 
-	OS_HANDLE_ASSERT(OS_MutexIsValid(mutex), mutex->handle);
+    OS_HANDLE_ASSERT(OS_MutexIsValid(mutex), mutex->handle);
 
-	ret = xSemaphoreGive(mutex->handle);
-	if (ret != pdPASS) {
-		OS_DBG("%s() fail @ %d\n", __func__, __LINE__);
-		return OS_FAIL;
-	}
+    ret = xSemaphoreGive(mutex->handle);
+    if (ret != pdPASS) {
+        OS_DBG("%s() fail @ %d\n", __func__, __LINE__);
+        return OS_FAIL;
+    }
 
-	return OS_OK;
+    return OS_OK;
 }
 
 /**
@@ -128,15 +128,15 @@ OS_Status OS_MutexUnlock(OS_Mutex_t *mutex)
  */
 OS_Status OS_RecursiveMutexCreate(OS_Mutex_t *mutex)
 {
-	OS_HANDLE_ASSERT(!OS_MutexIsValid(mutex), mutex->handle);
+    OS_HANDLE_ASSERT(!OS_MutexIsValid(mutex), mutex->handle);
 
-	mutex->handle = xSemaphoreCreateRecursiveMutex();
-	if (mutex->handle == NULL) {
-		OS_ERR("err %"OS_HANDLE_F"\n", mutex->handle);
-		return OS_FAIL;
-	}
+    mutex->handle = xSemaphoreCreateRecursiveMutex();
+    if (mutex->handle == NULL) {
+        OS_ERR("err %"OS_HANDLE_F"\n", mutex->handle);
+        return OS_FAIL;
+    }
 
-	return OS_OK;
+    return OS_OK;
 }
 
 /**
@@ -153,17 +153,17 @@ OS_Status OS_RecursiveMutexCreate(OS_Mutex_t *mutex)
  */
 OS_Status OS_RecursiveMutexLock(OS_Mutex_t *mutex, OS_Time_t waitMS)
 {
-	BaseType_t ret;
+    BaseType_t ret;
 
-	OS_HANDLE_ASSERT(OS_MutexIsValid(mutex), mutex->handle);
+    OS_HANDLE_ASSERT(OS_MutexIsValid(mutex), mutex->handle);
 
-	ret = xSemaphoreTakeRecursive(mutex->handle, OS_CalcWaitTicks(waitMS));
-	if (ret != pdPASS) {
-		OS_DBG("%s() fail @ %d, %"OS_TIME_F" ms\n", __func__, __LINE__, waitMS);
-		return OS_FAIL;
-	}
+    ret = xSemaphoreTakeRecursive(mutex->handle, OS_CalcWaitTicks(waitMS));
+    if (ret != pdPASS) {
+        OS_DBG("%s() fail @ %d, %"OS_TIME_F" ms\n", __func__, __LINE__, waitMS);
+        return OS_FAIL;
+    }
 
-	return OS_OK;
+    return OS_OK;
 }
 
 /**
@@ -176,15 +176,15 @@ OS_Status OS_RecursiveMutexLock(OS_Mutex_t *mutex, OS_Time_t waitMS)
  */
 OS_Status OS_RecursiveMutexUnlock(OS_Mutex_t *mutex)
 {
-	BaseType_t ret;
+    BaseType_t ret;
 
-	OS_HANDLE_ASSERT(OS_MutexIsValid(mutex), mutex->handle);
+    OS_HANDLE_ASSERT(OS_MutexIsValid(mutex), mutex->handle);
 
-	ret = xSemaphoreGiveRecursive(mutex->handle);
-	if (ret != pdPASS) {
-		OS_DBG("%s() fail @ %d\n", __func__, __LINE__);
-		return OS_FAIL;
-	}
+    ret = xSemaphoreGiveRecursive(mutex->handle);
+    if (ret != pdPASS) {
+        OS_DBG("%s() fail @ %d\n", __func__, __LINE__);
+        return OS_FAIL;
+    }
 
-	return OS_OK;
+    return OS_OK;
 }

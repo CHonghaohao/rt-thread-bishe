@@ -22,7 +22,7 @@
 #ifndef  __MSCTRANSPORT_H__
 #define  __MSCTRANSPORT_H__
 
-/* 传输错误号 */
+/* 麓芦脢盲麓铆脦贸潞脜 */
 #define  USB_STOR_XFER_GOOD             0
 #define  USB_STOR_XFER_ERROR            1
 #define  USB_STOR_XFER_SHORT            2
@@ -31,8 +31,8 @@
 #define  USB_STOR_XFER_TIME_OUT         5
 
 /* mass storage transport time out */
-#define  USB_STOR_REST_TIME             8000    //4s, 复位请求
-#define  USB_STOR_CTRL_MSG_TIME         8000    //4s, 控制命令
+#define  USB_STOR_REST_TIME             8000    //4s, 赂麓脦禄脟毛脟贸
+#define  USB_STOR_CTRL_MSG_TIME         8000    //4s, 驴脴脰脝脙眉脕卯
 #define  USB_STOR_CBW_CSW_TIME          8000    //4s, cbw, csw
 
 #define  MAX_CBWCB_SIZE                 16

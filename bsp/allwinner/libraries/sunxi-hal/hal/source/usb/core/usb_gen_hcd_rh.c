@@ -586,7 +586,7 @@ static int rh_call_control(struct hc_gen_dev *hcd, struct urb *urb)
                 }
 
                 //直接调用具体的hub驱动
-		//hal_log_info("-----rh_call_control---1\n");
+        //hal_log_info("-----rh_call_control---1\n");
                 status = hcd->driver->hub_control(hcd,
                                                   typeReq,
                                                   wValue,
@@ -654,19 +654,19 @@ int rh_urb_enqueue(struct hc_gen_dev *hcd, struct urb *urb)
 {
     /* 查询rh的status，其实就是开启timer直接查询hc_driver的
        hub_status_data(),获得root_hub的当前状态 */
-	//hal_log_info("----rh_urb_ehqueue\n");
+    //hal_log_info("----rh_urb_ehqueue\n");
     if (usb_pipeint(urb->pipe))
     {
-	//hal_log_info("----rh_urb_ehqueue--1\n");
+    //hal_log_info("----rh_urb_ehqueue--1\n");
         return rh_queue_status(hcd, urb);
-	//hal_log_info("----rh_urb_ehqueue--2\n");
+    //hal_log_info("----rh_urb_ehqueue--2\n");
     }
 
     if (usb_pipecontrol(urb->pipe))
     {
-	//hal_log_info("----rh_urb_ehqueue---3\n");
+    //hal_log_info("----rh_urb_ehqueue---3\n");
         return rh_call_control(hcd, urb);
-	//hal_log_info("----rh_urb_ehqueue--4\n");
+    //hal_log_info("----rh_urb_ehqueue--4\n");
     }
 
     return -EINVAL;
@@ -680,11 +680,11 @@ int rh_urb_enqueue(struct hc_gen_dev *hcd, struct urb *urb)
 int rh_urb_dequeue(struct hc_gen_dev *hcd, struct urb *urb)
 {
     uint32_t sr;
-	int		rc;
+    int     rc;
 
-	rc = usb_hcd_check_unlink_urb(hcd, urb);
-	if (rc)
-		goto done;
+    rc = usb_hcd_check_unlink_urb(hcd, urb);
+    if (rc)
+        goto done;
 
     if (usb_pipeendpoint(urb->pipe) == 0)   /* Control URB */
     {
@@ -692,14 +692,14 @@ int rh_urb_dequeue(struct hc_gen_dev *hcd, struct urb *urb)
                 if (in_interrupt())
                     return 0;       //nothing to do
         */
-	    sr = hal_spin_lock_irqsave(&urb->lock_urb);
+        sr = hal_spin_lock_irqsave(&urb->lock_urb);
         ++urb->reject;
         hal_spin_unlock_irqrestore(&urb->lock_urb, sr);
         /*
                 wait_event(usb_kill_urb_queue,
                         atomic_read(&urb->use_count) == 0);
         */
-	    sr = hal_spin_lock_irqsave(&urb->lock_urb);
+        sr = hal_spin_lock_irqsave(&urb->lock_urb);
         --urb->reject;
         hal_spin_unlock_irqrestore(&urb->lock_urb, sr);
     }
@@ -708,7 +708,7 @@ int rh_urb_dequeue(struct hc_gen_dev *hcd, struct urb *urb)
         //      if (!hcd->uses_new_polling){
         //          del_timer_sync (&hcd->rh_timer);
         //      }
-	    sr = hal_spin_lock_irqsave(&lock);
+        sr = hal_spin_lock_irqsave(&lock);
 
         if (urb == hcd->status_urb)
         {

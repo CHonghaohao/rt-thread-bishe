@@ -34,7 +34,7 @@
 #include "sys/interrupt.h"
 
 #ifdef __CONFIG_OS_RTTHREAD
-	/*#define sys_abort()	while (1)*/
+    /*#define sys_abort()   while (1)*/
 #else
 
 #if defined(__CC_ARM)

@@ -36,122 +36,122 @@
 #include <sound/snd_pcm.h>
 
 static struct snd_dai_ops dummy_codec_dai_ops = {
-	.hw_params	= NULL,
-	.shutdown	= NULL,
-	.startup	= NULL,
-	.trigger	= NULL,
-	.prepare	= NULL,
+    .hw_params  = NULL,
+    .shutdown   = NULL,
+    .startup    = NULL,
+    .trigger    = NULL,
+    .prepare    = NULL,
 };
 
 static struct snd_dai dummy_codec_dai[] = {
-	{
-		.name		= "dummy-codecdai",
-		.playback	= {
-			.stream_name	= "Playback",
-			.channels_min	= 1,
-			.channels_max	= 16,
-			.rates		= SNDRV_PCM_RATE_8000_192000
-					| SNDRV_PCM_RATE_KNOT,
-			.formats	= SNDRV_PCM_FMTBIT_S16_LE
-					| SNDRV_PCM_FMTBIT_S24_LE
-					| SNDRV_PCM_FMTBIT_S32_LE,
-			.rate_min       = 8000,
-			.rate_max       = 192000,
-		},
-		.capture	= {
-			.stream_name	= "Capture",
-			.channels_min	= 1,
-			.channels_max	= 16,
-			.rates		= SNDRV_PCM_RATE_8000_192000
-					| SNDRV_PCM_RATE_KNOT,
-			.formats	= SNDRV_PCM_FMTBIT_S16_LE
-					| SNDRV_PCM_FMTBIT_S24_LE
-					| SNDRV_PCM_FMTBIT_S32_LE,
-			.rate_min       = 8000,
-			.rate_max       = 192000,
-		},
-		.ops		= &dummy_codec_dai_ops,
-	},
+    {
+        .name       = "dummy-codecdai",
+        .playback   = {
+            .stream_name    = "Playback",
+            .channels_min   = 1,
+            .channels_max   = 16,
+            .rates      = SNDRV_PCM_RATE_8000_192000
+                    | SNDRV_PCM_RATE_KNOT,
+            .formats    = SNDRV_PCM_FMTBIT_S16_LE
+                    | SNDRV_PCM_FMTBIT_S24_LE
+                    | SNDRV_PCM_FMTBIT_S32_LE,
+            .rate_min       = 8000,
+            .rate_max       = 192000,
+        },
+        .capture    = {
+            .stream_name    = "Capture",
+            .channels_min   = 1,
+            .channels_max   = 16,
+            .rates      = SNDRV_PCM_RATE_8000_192000
+                    | SNDRV_PCM_RATE_KNOT,
+            .formats    = SNDRV_PCM_FMTBIT_S16_LE
+                    | SNDRV_PCM_FMTBIT_S24_LE
+                    | SNDRV_PCM_FMTBIT_S32_LE,
+            .rate_min       = 8000,
+            .rate_max       = 192000,
+        },
+        .ops        = &dummy_codec_dai_ops,
+    },
 };
 
 struct snd_codec dummy_codec = {
-	.name		= "dummy_codec",
-	.codec_dai	= dummy_codec_dai,
-	.codec_dai_num  = ARRAY_SIZE(dummy_codec_dai),
-	.private_data	= NULL,
-	.probe          = NULL,
-	.remove         = NULL,
+    .name       = "dummy_codec",
+    .codec_dai  = dummy_codec_dai,
+    .codec_dai_num  = ARRAY_SIZE(dummy_codec_dai),
+    .private_data   = NULL,
+    .probe          = NULL,
+    .remove         = NULL,
 };
 
 static struct snd_dai dmic_codec_dai[] = {
-	{
-		.name		= "dmic-codecdai",
-		.capture	= {
-			.stream_name	= "Capture",
-			.channels_min	= 1,
-			.channels_max	= 8,
-			.rates		= SNDRV_PCM_RATE_8000_48000
-					| SNDRV_PCM_RATE_KNOT,
-			.formats	= SNDRV_PCM_FMTBIT_S16_LE
-					| SNDRV_PCM_FMTBIT_S24_LE
-					| SNDRV_PCM_FMTBIT_S32_LE,
-			.rate_min       = 8000,
-			.rate_max       = 48000,
-		},
-		.ops		= &dummy_codec_dai_ops,
-	},
+    {
+        .name       = "dmic-codecdai",
+        .capture    = {
+            .stream_name    = "Capture",
+            .channels_min   = 1,
+            .channels_max   = 8,
+            .rates      = SNDRV_PCM_RATE_8000_48000
+                    | SNDRV_PCM_RATE_KNOT,
+            .formats    = SNDRV_PCM_FMTBIT_S16_LE
+                    | SNDRV_PCM_FMTBIT_S24_LE
+                    | SNDRV_PCM_FMTBIT_S32_LE,
+            .rate_min       = 8000,
+            .rate_max       = 48000,
+        },
+        .ops        = &dummy_codec_dai_ops,
+    },
 };
 
 struct snd_codec dmic_codec = {
-	.name		= "dmic_codec",
-	.capture_only = 1,
-	.codec_dai	= dmic_codec_dai,
-	.codec_dai_num  = ARRAY_SIZE(dmic_codec_dai),
-	.private_data	= NULL,
-	.probe          = NULL,
-	.remove         = NULL,
-	.read           = NULL,
-	.write          = NULL,
+    .name       = "dmic_codec",
+    .capture_only = 1,
+    .codec_dai  = dmic_codec_dai,
+    .codec_dai_num  = ARRAY_SIZE(dmic_codec_dai),
+    .private_data   = NULL,
+    .probe          = NULL,
+    .remove         = NULL,
+    .read           = NULL,
+    .write          = NULL,
 };
 
 static struct snd_dai spdif_codec_dai[] = {
-	{
-		.name		= "spdif-codecdai",
-		.playback	= {
-			.stream_name	= "Playback",
-			.channels_min	= 1,
-			.channels_max	= 2,
-			.rates		= SNDRV_PCM_RATE_8000_192000
-					| SNDRV_PCM_RATE_KNOT,
-			.formats	= SNDRV_PCM_FMTBIT_S16_LE
-					| SNDRV_PCM_FMTBIT_S24_LE
-					| SNDRV_PCM_FMTBIT_S32_LE,
-			.rate_min       = 8000,
-			.rate_max       = 192000,
-		},
-		.capture	= {
-			.stream_name	= "Capture",
-			.channels_min	= 1,
-			.channels_max	= 2,
-			.rates		= SNDRV_PCM_RATE_8000_192000
-					| SNDRV_PCM_RATE_KNOT,
-			.formats	= SNDRV_PCM_FMTBIT_S16_LE
-					| SNDRV_PCM_FMTBIT_S24_LE
-					| SNDRV_PCM_FMTBIT_S32_LE,
-			.rate_min       = 8000,
-			.rate_max       = 192000,
-		},
-		.ops		= &dummy_codec_dai_ops,
-	},
+    {
+        .name       = "spdif-codecdai",
+        .playback   = {
+            .stream_name    = "Playback",
+            .channels_min   = 1,
+            .channels_max   = 2,
+            .rates      = SNDRV_PCM_RATE_8000_192000
+                    | SNDRV_PCM_RATE_KNOT,
+            .formats    = SNDRV_PCM_FMTBIT_S16_LE
+                    | SNDRV_PCM_FMTBIT_S24_LE
+                    | SNDRV_PCM_FMTBIT_S32_LE,
+            .rate_min       = 8000,
+            .rate_max       = 192000,
+        },
+        .capture    = {
+            .stream_name    = "Capture",
+            .channels_min   = 1,
+            .channels_max   = 2,
+            .rates      = SNDRV_PCM_RATE_8000_192000
+                    | SNDRV_PCM_RATE_KNOT,
+            .formats    = SNDRV_PCM_FMTBIT_S16_LE
+                    | SNDRV_PCM_FMTBIT_S24_LE
+                    | SNDRV_PCM_FMTBIT_S32_LE,
+            .rate_min       = 8000,
+            .rate_max       = 192000,
+        },
+        .ops        = &dummy_codec_dai_ops,
+    },
 };
 
 struct snd_codec spdif_codec = {
-	.name		= "spdif_codec",
-	.codec_dai	= spdif_codec_dai,
-	.codec_dai_num  = ARRAY_SIZE(spdif_codec_dai),
-	.private_data	= NULL,
-	.probe          = NULL,
-	.remove         = NULL,
-	.read           = NULL,
-	.write          = NULL,
+    .name       = "spdif_codec",
+    .codec_dai  = spdif_codec_dai,
+    .codec_dai_num  = ARRAY_SIZE(spdif_codec_dai),
+    .private_data   = NULL,
+    .probe          = NULL,
+    .remove         = NULL,
+    .read           = NULL,
+    .write          = NULL,
 };

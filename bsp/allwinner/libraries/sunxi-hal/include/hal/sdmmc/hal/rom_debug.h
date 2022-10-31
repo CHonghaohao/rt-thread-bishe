@@ -65,25 +65,25 @@
 
 #if ROM_DUMP_ON
 #define ROM_DUMP_BYTES(level, addr, len)                \
-	do {                                            \
-		if (level & ROM_DUMP_MASK)              \
-			print_hex_dump_bytes(addr, len);\
-	} while (0)
+    do {                                            \
+        if (level & ROM_DUMP_MASK)              \
+            print_hex_dump_bytes(addr, len);\
+    } while (0)
 #define ROM_DUMP_WORDS(level, addr, len)                \
-	do {                                            \
-		if (level & ROM_DUMP_MASK)              \
-			print_hex_dump_words(addr, len);\
-	} while (0)
+    do {                                            \
+        if (level & ROM_DUMP_MASK)              \
+            print_hex_dump_words(addr, len);\
+    } while (0)
 #else
 #define ROM_DUMP_BYTES(level, addr, len)
 #define ROM_DUMP_WORDS(level, addr, len)
 #endif
 
 #define ROM_LOG(level, mask, expand, fmt, arg...)       \
-	do {                                            \
-		if (level & mask)                       \
-			ROM_SYSLOG(expand fmt, ##arg);  \
-	} while (0)
+    do {                                            \
+        if (level & mask)                       \
+            ROM_SYSLOG(expand fmt, ##arg);  \
+    } while (0)
 
 #if ROM_DBG_ON
 #define ROM_DBG(level, fmt, arg...) ROM_LOG(level, ROM_DBG_MASK, "[DBG]", fmt, ##arg)
@@ -105,23 +105,23 @@
 
 #if ROM_ERR_ON
 #define ROM_ERR(level, fmt, arg...)                     \
-	do {                                            \
-		if (level & ROM_ERR_MASK)               \
-			ROM_SYSLOG("[ERR] "fmt, ##arg); \
-		if (level & ROM_ABORT_ON) {               \
-			ROM_ABORT();			\
-		}                    \
-	} while (0)
+    do {                                            \
+        if (level & ROM_ERR_MASK)               \
+            ROM_SYSLOG("[ERR] "fmt, ##arg); \
+        if (level & ROM_ABORT_ON) {               \
+            ROM_ABORT();            \
+        }                    \
+    } while (0)
 #else
 #define ROM_ERR(level, fmt, arg...)
 #endif
 
 #if ROM_ANY_ON
 #define ROM_ANY(level, fmt, arg...)                     \
-	do {				                \
-		if (level & ROM_ANY_MASK)               \
-			ROM_SYSLOG(fmt, ##arg);         \
-	} while (0)
+    do {                                \
+        if (level & ROM_ANY_MASK)               \
+            ROM_SYSLOG(fmt, ##arg);         \
+    } while (0)
 #else
 #define ROM_ANY(level, fmt, arg...)
 #endif
@@ -162,26 +162,26 @@
     } while (0)
 
 #define ROM_IT_DBG(mask, fmt, arg...)                   \
-	do {					        \
-	    if (mask & ROM_DBG_MASK) {			   \
-		__nonxip_rodata static const char __fmt[] = fmt;  \
-		ROM_SYSLOG(__fmt, ##arg);		    \
-	    }						    \
-	} while (0)
+    do {                            \
+        if (mask & ROM_DBG_MASK) {             \
+        __nonxip_rodata static const char __fmt[] = fmt;  \
+        ROM_SYSLOG(__fmt, ##arg);           \
+        }                           \
+    } while (0)
 
 #define ROM_IT_WRN(mask, fmt, arg...) \
-	do {						\
-	    if (mask & ROM_WRN_MASK) {			   \
-		__nonxip_rodata static const char __fmt[] = "[WRN] "fmt; \
-		ROM_SYSLOG(__fmt, ##arg);		    \
-	    }						    \
-	} while (0)
+    do {                        \
+        if (mask & ROM_WRN_MASK) {             \
+        __nonxip_rodata static const char __fmt[] = "[WRN] "fmt; \
+        ROM_SYSLOG(__fmt, ##arg);           \
+        }                           \
+    } while (0)
 
-#define ROM_IT_ERR(mask, fmt, arg...)                         	\
-    do {                                                	\
-        if (mask & ROM_ERR_MASK) {			   \
-            __nonxip_rodata static const char __fmt[] = "[ERR] %s():%d, "fmt;	\
-            ROM_SYSLOG(__fmt, __s_func, __LINE__, ##arg);	   \
+#define ROM_IT_ERR(mask, fmt, arg...)                           \
+    do {                                                    \
+        if (mask & ROM_ERR_MASK) {             \
+            __nonxip_rodata static const char __fmt[] = "[ERR] %s():%d, "fmt;   \
+            ROM_SYSLOG(__fmt, __s_func, __LINE__, ##arg);      \
         }                                                   \
         if (mask & ROM_ABORT_MASK)                          \
             ROM_ABORT();                                \

@@ -6,12 +6,12 @@
 
  * DISCLAIMER
  * THIRD PARTY LICENCES MAY BE REQUIRED TO IMPLEMENT THE SOLUTION/PRODUCT.
- * IF YOU NEED TO INTEGRATE THIRD PARTY¡¯S TECHNOLOGY (SONY, DTS, DOLBY, AVS OR MPEGLA, ETC.)
- * IN ALLWINNERS¡¯SDK OR PRODUCTS, YOU SHALL BE SOLELY RESPONSIBLE TO OBTAIN
+ * IF YOU NEED TO INTEGRATE THIRD PARTYÂ¡Â¯S TECHNOLOGY (SONY, DTS, DOLBY, AVS OR MPEGLA, ETC.)
+ * IN ALLWINNERSÂ¡Â¯SDK OR PRODUCTS, YOU SHALL BE SOLELY RESPONSIBLE TO OBTAIN
  * ALL APPROPRIATELY REQUIRED THIRD PARTY LICENCES.
  * ALLWINNER SHALL HAVE NO WARRANTY, INDEMNITY OR OTHER OBLIGATIONS WITH RESPECT TO MATTERS
  * COVERED UNDER ANY REQUIRED THIRD PARTY LICENSE.
- * YOU ARE SOLELY RESPONSIBLE FOR YOUR USAGE OF THIRD PARTY¡¯S TECHNOLOGY.
+ * YOU ARE SOLELY RESPONSIBLE FOR YOUR USAGE OF THIRD PARTYÂ¡Â¯S TECHNOLOGY.
 
 
  * THIS SOFTWARE IS PROVIDED BY ALLWINNER"AS IS" AND TO THE MAXIMUM EXTENT
@@ -38,30 +38,30 @@ hal_gpadc_t hal_gpadc;
 #if defined(CONFIG_SOC_SUN20IW1)
 static hal_gpadc_status_t hal_gpadc_clk_init(hal_gpadc_t *gpadc)
 {
-	hal_clk_type_t clk_type = HAL_SUNXI_CCU;
-	hal_clk_id_t gpadc_clk_id = gpadc->bus_clk;
-	hal_clk_t mclk;
+    hal_clk_type_t clk_type = HAL_SUNXI_CCU;
+    hal_clk_id_t gpadc_clk_id = gpadc->bus_clk;
+    hal_clk_t mclk;
 
-	hal_reset_type_t reset_type = HAL_SUNXI_RESET;
-	hal_reset_id_t gpadc_reset_id = gpadc->rst_clk;
-	struct reset_control *reset;
+    hal_reset_type_t reset_type = HAL_SUNXI_RESET;
+    hal_reset_id_t gpadc_reset_id = gpadc->rst_clk;
+    struct reset_control *reset;
 
-	mclk = hal_clock_get(clk_type, gpadc_clk_id);
-	if(hal_clock_enable(mclk))
-	{
-		GPADC_ERR("gpadc clk enable failed!\n");
-		return GPADC_ERROR;
-	}
-	gpadc->mbus_clk = mclk;
+    mclk = hal_clock_get(clk_type, gpadc_clk_id);
+    if(hal_clock_enable(mclk))
+    {
+        GPADC_ERR("gpadc clk enable failed!\n");
+        return GPADC_ERROR;
+    }
+    gpadc->mbus_clk = mclk;
 
-	reset = hal_reset_control_get(reset_type, gpadc_reset_id);
-	if (hal_reset_control_deassert(reset))
-	{
-		GPADC_ERR("gpadc reset deassert failed!\n");
-		return GPADC_ERROR;
-	}
-	hal_reset_control_put(reset);
-	return GPADC_OK;
+    reset = hal_reset_control_get(reset_type, gpadc_reset_id);
+    if (hal_reset_control_deassert(reset))
+    {
+        GPADC_ERR("gpadc reset deassert failed!\n");
+        return GPADC_ERROR;
+    }
+    hal_reset_control_put(reset);
+    return GPADC_OK;
 }
 #else
 static hal_gpadc_status_t hal_gpadc_clk_init(hal_gpadc_t *gpadc)

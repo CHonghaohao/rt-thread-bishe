@@ -150,8 +150,8 @@ static int mscUsbTransport(__mscDev_t *mscDev, unsigned int TimeOut)
     mscDev->CurrentUrb->error_count   = 0;
     mscDev->CurrentUrb->status        = 0;
     /* ����buffer���䷽ʽ, �������msc��buff, �Ͳ���ʹ��DMA�� ��Ϊbuffer, Ҫpalloc������ */
-	mscDev->CurrentUrb->transfer_flags = URB_ASYNC_UNLINK;
-//	  mscDev->CurrentUrb->transfer_flags = URB_ASYNC_UNLINK | URB_NO_SETUP_DMA_MAP;
+    mscDev->CurrentUrb->transfer_flags = URB_ASYNC_UNLINK;
+//    mscDev->CurrentUrb->transfer_flags = URB_ASYNC_UNLINK | URB_NO_SETUP_DMA_MAP;
 
 //    if (mscDev->CurrentUrb->transfer_buffer == mscDev->iobuf)
 //    {
@@ -164,17 +164,17 @@ static int mscUsbTransport(__mscDev_t *mscDev, unsigned int TimeOut)
     /* create timer */
     if (TimeOut)
     {
-		// unsigned long time_interval = rt_tick_from_millisecond(TimeOut);
-		mscDev->TimerHdle = osal_timer_create("mscTime_timer",
-		                       (timeout_func)mscTimeOut,
-		                       (void *)mscDev,
-		                       TimeOut / (1000 / CONFIG_HZ),
-		                       OSAL_TIMER_FLAG_ONE_SHOT);
-		if (mscDev->TimerHdle == NULL)
-		{
-			hal_log_err("PANIC : create timer for urb false\n");
-			return -1;
-		}
+        // unsigned long time_interval = rt_tick_from_millisecond(TimeOut);
+        mscDev->TimerHdle = osal_timer_create("mscTime_timer",
+                               (timeout_func)mscTimeOut,
+                               (void *)mscDev,
+                               TimeOut / (1000 / CONFIG_HZ),
+                               OSAL_TIMER_FLAG_ONE_SHOT);
+        if (mscDev->TimerHdle == NULL)
+        {
+            hal_log_err("PANIC : create timer for urb false\n");
+            return -1;
+        }
     }
     /* set mscDev busy */
     mscDev->busy = 1;
@@ -185,7 +185,7 @@ static int mscUsbTransport(__mscDev_t *mscDev, unsigned int TimeOut)
         hal_log_err("ERR: submit urb failed. ret = %d", ret);
         if (mscDev->TimerHdle)
         {
-		    osal_timer_delete(mscDev->TimerHdle);
+            osal_timer_delete(mscDev->TimerHdle);
             mscDev->TimerHdle = NULL;
         }
 
@@ -196,7 +196,7 @@ static int mscUsbTransport(__mscDev_t *mscDev, unsigned int TimeOut)
     /* start timer */
     if (mscDev->TimerHdle)
     {
-    	osal_timer_start(mscDev->TimerHdle);
+        osal_timer_start(mscDev->TimerHdle);
     }
 
     /* wait urb done */
@@ -207,8 +207,8 @@ static int mscUsbTransport(__mscDev_t *mscDev, unsigned int TimeOut)
     /* kill timer */
     if (mscDev->TimerHdle)
     {
-		osal_timer_stop(mscDev->TimerHdle);
-		osal_timer_delete(mscDev->TimerHdle);
+        osal_timer_stop(mscDev->TimerHdle);
+        osal_timer_delete(mscDev->TimerHdle);
         mscDev->TimerHdle = NULL;
     }
 
@@ -264,7 +264,7 @@ static int mscSendCtrlReq(__mscDev_t *mscDev,
     mscDev->CtrlReq->wIndex       = cpu_to_le16(Index);
     mscDev->CtrlReq->wLength      = cpu_to_le16(BufferLen);
     /* fill and submit the Urb */
-	memset(mscDev->CurrentUrb, 0x00, sizeof(struct urb));
+    memset(mscDev->CurrentUrb, 0x00, sizeof(struct urb));
     usb_fill_control_urb(mscDev->CurrentUrb,
                          mscDev->pusb_dev,
                          Pipe,
@@ -463,7 +463,7 @@ static int mscSendBulkReq(__mscDev_t *mscDev,
                             unsigned int TimeOut)
 {
     /* fill urb */
-	memset(mscDev->CurrentUrb, 0x00, sizeof(struct urb));
+    memset(mscDev->CurrentUrb, 0x00, sizeof(struct urb));
     usb_fill_bulk_urb(mscDev->CurrentUrb,
                       mscDev->pusb_dev,
                       Pipe,
@@ -929,8 +929,8 @@ int mscBoStopTransport(__mscDev_t *mscDev)
 
     if (mscDev->TimerHdle)
     {
-		osal_timer_stop(mscDev->TimerHdle);
-		osal_timer_delete(mscDev->TimerHdle);
+        osal_timer_stop(mscDev->TimerHdle);
+        osal_timer_delete(mscDev->TimerHdle);
         mscDev->TimerHdle = NULL;
     }
 

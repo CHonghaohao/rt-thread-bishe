@@ -47,18 +47,18 @@ typedef enum
 
 typedef enum
 {
-	DATA_X = 0,
-	DATA_Y,
-	DATA_UP,
+    DATA_X = 0,
+    DATA_Y,
+    DATA_UP,
 } data_flag_t;
 
 typedef enum
 {
-	TP_CH_0 = 0,
-	TP_CH_1,
-	TP_CH_2,
-	TP_CH_3,
-	TP_CH_MAX,
+    TP_CH_0 = 0,
+    TP_CH_1,
+    TP_CH_2,
+    TP_CH_3,
+    TP_CH_MAX,
 } tp_channel_id;
 
 typedef int (*tpadc_usercallback_t)(uint32_t data, data_flag_t flag);
@@ -73,9 +73,9 @@ typedef struct hal_tpadc
     hal_clk_id_t bus_clk_id;
     hal_clk_id_t mod_clk_id;
     hal_reset_id_t rst_clk_id;
-    hal_clk_t	bus_clk;
-    hal_clk_t	mod_clk;
-    struct reset_control	*rst_clk;
+    hal_clk_t   bus_clk;
+    hal_clk_t   mod_clk;
+    struct reset_control    *rst_clk;
     tpadc_usercallback_t callback;
     tpadc_adc_usercallback_t adc_callback[TP_CH_MAX];
 } hal_tpadc_t;

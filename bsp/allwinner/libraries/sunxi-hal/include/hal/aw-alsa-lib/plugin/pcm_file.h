@@ -37,17 +37,17 @@
 #include <sys/types.h>
 
 typedef struct {
-	const char *pcm;
+    const char *pcm;
 } snd_pcm_file_slave_config_t;
 
 typedef struct {
-	const char *type;
-	snd_pcm_file_slave_config_t slave;
-	const char *format;
-	const char *mode;
-	int port;
-	const char *server;
-	int debug;
+    const char *type;
+    snd_pcm_file_slave_config_t slave;
+    const char *format;
+    const char *mode;
+    int port;
+    const char *server;
+    int debug;
 } snd_pcm_file_config_t;
 
 #endif /* __AW_ALSA_PCM_FILE_H */

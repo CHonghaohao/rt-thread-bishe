@@ -14,10 +14,10 @@
 #include "disp_private.h"
 
 static s32 disp_enhance_shadow_protect(struct disp_enhance *enhance,
-				       bool protect);
+                       bool protect);
 s32 disp_init_enhance(struct disp_bsp_init_para *para);
 
 s32 disp_enhance_set_para(struct disp_enhance *enhance,
-			  struct disp_enhance_para *para);
+              struct disp_enhance_para *para);
 
 #endif

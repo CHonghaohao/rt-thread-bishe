@@ -156,7 +156,7 @@ __s32 mscLunAdd(__mscLun_t *mscLun)
 
     if (mscLun == NULL)
     {
-		hal_log_err("ERR: MscLunAdd: input error");
+        hal_log_err("ERR: MscLunAdd: input error");
         return USB_ERR_BAD_ARGUMENTS;
     }
 
@@ -168,7 +168,7 @@ __s32 mscLunAdd(__mscLun_t *mscLun)
         return -1;
     }
 
-    /* 获得LUN信息 */
+    /* 鑾峰緱LUN淇℃伅 */
     for (i = 0; i < 3; i++)
     {
         hal_sem_wait(mscLun->Lock);
@@ -187,7 +187,7 @@ __s32 mscLunAdd(__mscLun_t *mscLun)
         return USB_ERR_COMMAND_EXECUTE_FAILED;
     }
 
-    /* 识别LUN */
+    /* 璇嗗埆LUN */
     InquiryData = (__InquiryData_t *)mscLun->Inquiry;
     print_inquiry(InquiryData);
     mscLun->DeviceType  = InquiryData->Device_Type;
@@ -214,7 +214,7 @@ __s32 mscLunAdd(__mscLun_t *mscLun)
             return USB_ERR_UNKOWN_DEVICE;
     }
 
-    /* LUN探测 */
+    /* LUN鎺㈡祴 */
     if (mscLun->Probe)
     {
         ret = mscLun->Probe(mscLun);

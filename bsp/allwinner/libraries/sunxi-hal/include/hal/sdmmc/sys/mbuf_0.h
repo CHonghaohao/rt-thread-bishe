@@ -1,6 +1,6 @@
 /*-
  * Copyright (c) 1982, 1986, 1988, 1993
- *	The Regents of the University of California.
+ *  The Regents of the University of California.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -27,7 +27,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  *
- *	@(#)mbuf.h	8.5 (Berkeley) 2/19/95
+ *  @(#)mbuf.h  8.5 (Berkeley) 2/19/95
  * $FreeBSD: releng/10.1/sys/sys/mbuf.h 269047 2014-07-24 06:03:45Z kevlo $
  */
 
@@ -49,8 +49,8 @@ extern "C" {
  * Callback structure
  */
 struct m_cb {
-	void *func;
-	void *arg;
+    void *func;
+    void *arg;
 };
 
 /*
@@ -58,23 +58,23 @@ struct m_cb {
  * Size : 24
  */
 struct pkthdr {
-	void    *rcvif; /* rcv interface */
-	int32_t len;    /* total packet length */
+    void    *rcvif; /* rcv interface */
+    int32_t len;    /* total packet length */
 
-	union {
-		uint8_t   eigth[8];
-		uint16_t  sixteen[4];
-		uint32_t  thirtytwo[2];
-		uint64_t  sixtyfour[1];
-		uintptr_t unintptr[1];
-		void      *ptr;
-	} PH_per;
+    union {
+        uint8_t   eigth[8];
+        uint16_t  sixteen[4];
+        uint32_t  thirtytwo[2];
+        uint64_t  sixtyfour[1];
+        uintptr_t unintptr[1];
+        void      *ptr;
+    } PH_per;
 
-	struct m_cb cb;
+    struct m_cb cb;
 };
 
 struct ext_info {
-	uint8_t eigth[32];
+    uint8_t eigth[32];
 };
 
 #define ether_vtag  PH_per.sixteen[0]
@@ -89,22 +89,22 @@ struct ext_info {
  * purposes.
  */
 struct mbuf { // Size : 48 + 32 = 80
-	/*
-	 * Header present at the beginning of every mbuf.
-	 * Size : 24
-	 */
-	uint8_t       *m_buf;         /* a continuous buffer */ // useless now
-	struct mbuf   *m_nextpkt;     /* next chain in queue/record */
-	uint8_t       *m_data;        /* location of data */
-	int32_t       m_len;          /* amount of data in this mbuf */
-	uint16_t      m_headspace;    /* empty space available at the head */
-	uint16_t      m_tailspace;    /* empty space available at the tail */
-	uint32_t      m_type  :8,     /* type of data in this mbuf */ // use as flag
-	              m_flags :24;    /* flags; see below */
-	/*** End of the mbuf header ***/
+    /*
+     * Header present at the beginning of every mbuf.
+     * Size : 24
+     */
+    uint8_t       *m_buf;         /* a continuous buffer */ // useless now
+    struct mbuf   *m_nextpkt;     /* next chain in queue/record */
+    uint8_t       *m_data;        /* location of data */
+    int32_t       m_len;          /* amount of data in this mbuf */
+    uint16_t      m_headspace;    /* empty space available at the head */
+    uint16_t      m_tailspace;    /* empty space available at the tail */
+    uint32_t      m_type  :8,     /* type of data in this mbuf */ // use as flag
+                  m_flags :24;    /* flags; see below */
+    /*** End of the mbuf header ***/
 
-	struct pkthdr m_pkthdr;	/* M_PKTHDR always set */
-	struct ext_info m_ext_info;   /* extend info */
+    struct pkthdr m_pkthdr; /* M_PKTHDR always set */
+    struct ext_info m_ext_info;   /* extend info */
 };
 
 #if (defined(__CONFIG_ARCH_NET_CORE) || !defined(__CONFIG_ARCH_DUAL_CORE))
@@ -145,7 +145,7 @@ struct mbuf { // Size : 48 + 32 = 80
 /*
  * Flags to purge when crossing layers.
  */
-#define	M_PROTOFLAGS \
+#define M_PROTOFLAGS \
     (M_PROTO1|M_PROTO2|M_PROTO3|M_PROTO4|M_PROTO5|M_PROTO6|M_PROTO7|M_PROTO8|\
      M_PROTO9|M_PROTO10|M_PROTO11|M_PROTO12)
 
@@ -159,14 +159,14 @@ struct mbuf { // Size : 48 + 32 = 80
 /*
  * Mbuf flag description for use with printf(9) %b identifier.
  */
-#define	M_FLAG_BITS \
+#define M_FLAG_BITS \
     "\20\1M_EXT\2M_PKTHDR\3M_EOR\4M_RDONLY\5M_BCAST\6M_MCAST" \
     "\7M_PROMISC\10M_VLANTAG\11M_FLOWID"
-#define	M_FLAG_PROTOBITS \
+#define M_FLAG_PROTOBITS \
     "\15M_PROTO1\16M_PROTO2\17M_PROTO3\20M_PROTO4\21M_PROTO5" \
     "\22M_PROTO6\23M_PROTO7\24M_PROTO8\25M_PROTO9\26M_PROTO10" \
     "\27M_PROTO11\30M_PROTO12"
-#define	M_FLAG_PRINTF (M_FLAG_BITS M_FLAG_PROTOBITS)
+#define M_FLAG_PRINTF (M_FLAG_BITS M_FLAG_PROTOBITS)
 
 
 /*
@@ -263,7 +263,7 @@ int mb_reserve(struct mbuf *m, int len, uint16_t headspace, uint16_t tailspace);
  * Macro for type conversion: convert mbuf pointer to data pointer of correct
  * type:
  *
- * mtod(m, t)	-- Convert mbuf pointer to data pointer of correct type.
+ * mtod(m, t)   -- Convert mbuf pointer to data pointer of correct type.
  */
 #define mtod(m, t)          ((t)((m)->m_data))
 
@@ -304,7 +304,7 @@ int mb_reserve(struct mbuf *m, int len, uint16_t headspace, uint16_t tailspace);
 
 static __inline void m_clrprotoflags(struct mbuf *m)
 {
-	m->m_flags &= ~M_PROTOFLAGS;
+    m->m_flags &= ~M_PROTOFLAGS;
 }
 
 /* option of limiting memory usage */
@@ -331,8 +331,8 @@ void mb_mem_get_limit(uint32_t *tx, uint32_t *rx, uint32_t *txrx);
 #endif /* MBUF_OPT_LIMIT_MEM */
 
 #if 0 // only for test, no need to implement
-#define MCLSHIFT	11		/* convert bytes to mbuf clusters */
-#define MCLBYTES	(1 << MCLSHIFT)	/* size of an mbuf cluster */
+#define MCLSHIFT    11      /* convert bytes to mbuf clusters */
+#define MCLBYTES    (1 << MCLSHIFT) /* size of an mbuf cluster */
 
 /*
  * Concatenate mbuf chain n to m.

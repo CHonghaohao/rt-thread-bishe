@@ -47,15 +47,15 @@
  */
 OS_Status OS_QueueCreate(OS_Queue_t *queue, uint32_t queueLen, uint32_t itemSize)
 {
-//	OS_HANDLE_ASSERT(!OS_QueueIsValid(queue), queue->handle);
+//  OS_HANDLE_ASSERT(!OS_QueueIsValid(queue), queue->handle);
 
-	queue->handle = xQueueCreate(queueLen, itemSize);
-	if (queue->handle == NULL) {
-		OS_ERR("err %"OS_HANDLE_F"\n", queue->handle);
-		return OS_FAIL;
-	}
+    queue->handle = xQueueCreate(queueLen, itemSize);
+    if (queue->handle == NULL) {
+        OS_ERR("err %"OS_HANDLE_F"\n", queue->handle);
+        return OS_FAIL;
+    }
 
-	return OS_OK;
+    return OS_OK;
 }
 
 /**
@@ -65,19 +65,19 @@ OS_Status OS_QueueCreate(OS_Queue_t *queue, uint32_t queueLen, uint32_t itemSize
  */
 OS_Status OS_QueueDelete(OS_Queue_t *queue)
 {
-	UBaseType_t ret;
+    UBaseType_t ret;
 
-	OS_HANDLE_ASSERT(OS_QueueIsValid(queue), queue->handle);
+    OS_HANDLE_ASSERT(OS_QueueIsValid(queue), queue->handle);
 
-	ret = uxQueueMessagesWaiting(queue->handle);
-	if (ret > 0) {
-		OS_ERR("queue %"OS_HANDLE_F" is not empty\n", queue->handle);
-		return OS_FAIL;
-	}
+    ret = uxQueueMessagesWaiting(queue->handle);
+    if (ret > 0) {
+        OS_ERR("queue %"OS_HANDLE_F" is not empty\n", queue->handle);
+        return OS_FAIL;
+    }
 
-	vQueueDelete(queue->handle);
-	OS_QueueSetInvalid(queue);
-	return OS_OK;
+    vQueueDelete(queue->handle);
+    OS_QueueSetInvalid(queue);
+    return OS_OK;
 }
 
 /**
@@ -95,28 +95,28 @@ OS_Status OS_QueueDelete(OS_Queue_t *queue)
  */
 OS_Status OS_QueueSend(OS_Queue_t *queue, const void *item, OS_Time_t waitMS)
 {
-	BaseType_t ret;
-	BaseType_t taskWoken;
+    BaseType_t ret;
+    BaseType_t taskWoken;
 
-	OS_HANDLE_ASSERT(OS_QueueIsValid(queue), queue->handle);
+    OS_HANDLE_ASSERT(OS_QueueIsValid(queue), queue->handle);
 
-	if (OS_IsISRContext()) {
-		taskWoken = pdFALSE;
-		ret = xQueueSendFromISR(queue->handle, item, &taskWoken);
-		if (ret != pdPASS) {
-			OS_DBG("%s() fail @ %d\n", __func__, __LINE__);
-			return OS_FAIL;
-		}
-		portEND_SWITCHING_ISR(taskWoken);
-	} else {
-		ret = xQueueSend(queue->handle, item, OS_CalcWaitTicks(waitMS));
-		if (ret != pdPASS) {
-			OS_DBG("%s() fail @ %d, %"OS_TIME_F" ms\n", __func__, __LINE__, waitMS);
-			return OS_FAIL;
-		}
-	}
+    if (OS_IsISRContext()) {
+        taskWoken = pdFALSE;
+        ret = xQueueSendFromISR(queue->handle, item, &taskWoken);
+        if (ret != pdPASS) {
+            OS_DBG("%s() fail @ %d\n", __func__, __LINE__);
+            return OS_FAIL;
+        }
+        portEND_SWITCHING_ISR(taskWoken);
+    } else {
+        ret = xQueueSend(queue->handle, item, OS_CalcWaitTicks(waitMS));
+        if (ret != pdPASS) {
+            OS_DBG("%s() fail @ %d, %"OS_TIME_F" ms\n", __func__, __LINE__, waitMS);
+            return OS_FAIL;
+        }
+    }
 
-	return OS_OK;
+    return OS_OK;
 }
 
 /**
@@ -133,26 +133,26 @@ OS_Status OS_QueueSend(OS_Queue_t *queue, const void *item, OS_Time_t waitMS)
  */
 OS_Status OS_QueueReceive(OS_Queue_t *queue, void *item, OS_Time_t waitMS)
 {
-	BaseType_t ret;
-	BaseType_t taskWoken;
+    BaseType_t ret;
+    BaseType_t taskWoken;
 
-	OS_HANDLE_ASSERT(OS_QueueIsValid(queue), queue->handle);
+    OS_HANDLE_ASSERT(OS_QueueIsValid(queue), queue->handle);
 
-	if (OS_IsISRContext()) {
-		taskWoken = pdFALSE;
-		ret = xQueueReceiveFromISR(queue->handle, item, &taskWoken);
-		if (ret != pdPASS) {
-			OS_DBG("%s() fail @ %d\n", __func__, __LINE__);
-			return OS_FAIL;
-		}
-		portEND_SWITCHING_ISR(taskWoken);
-	} else {
-		ret = xQueueReceive(queue->handle, item, OS_CalcWaitTicks(waitMS));
-		if (ret != pdPASS) {
-			OS_DBG("%s() fail @ %d, %"OS_TIME_F" ms\n", __func__, __LINE__, waitMS);
-			return OS_FAIL;
-		}
-	}
+    if (OS_IsISRContext()) {
+        taskWoken = pdFALSE;
+        ret = xQueueReceiveFromISR(queue->handle, item, &taskWoken);
+        if (ret != pdPASS) {
+            OS_DBG("%s() fail @ %d\n", __func__, __LINE__);
+            return OS_FAIL;
+        }
+        portEND_SWITCHING_ISR(taskWoken);
+    } else {
+        ret = xQueueReceive(queue->handle, item, OS_CalcWaitTicks(waitMS));
+        if (ret != pdPASS) {
+            OS_DBG("%s() fail @ %d, %"OS_TIME_F" ms\n", __func__, __LINE__, waitMS);
+            return OS_FAIL;
+        }
+    }
 
-	return OS_OK;
+    return OS_OK;
 }

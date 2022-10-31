@@ -9,10 +9,10 @@
 #define max(a,b)   ((a) < (b) ? (b) : (a))
 
 /* return value defines */
-#define	OK	(0)
-#define	FAIL	(-1)
-#define TRUE	(1)
-#define	FALSE	(0)
+#define OK  (0)
+#define FAIL    (-1)
+#define TRUE    (1)
+#define FALSE   (0)
 #define true     1
 #define false    0
 
@@ -21,7 +21,7 @@
 #endif
 
 /* general data type defines */
-typedef	void * 		    HANDLE;
+typedef void *          HANDLE;
 typedef unsigned long long  u64;
 //typedef unsigned int        u32;
 typedef unsigned short      u16;

@@ -10,18 +10,23 @@ extern "C"
 #include <stddef.h>
 #include <interrupt.h>
 
+typedef enum hal_irqreturn {
+    HAL_IRQ_OK      = (0 << 0),
+    HAL_IRQ_ERR     = (1 << 0),
+} hal_irqreturn_t;
+
 #ifdef CONFIG_KERNEL_FREERTOS
 enum irqreturn
 {
-	IRQ_NONE		= (0 << 0),
-	IRQ_HANDLED		= (1 << 0),
-	IRQ_WAKE_THREAD		= (1 << 1),
+    IRQ_NONE        = (0 << 0),
+    IRQ_HANDLED     = (1 << 0),
+    IRQ_WAKE_THREAD     = (1 << 1),
 };
 typedef enum irqreturn irqreturn_t;
 typedef irqreturn_t (*irq_handler_t)(int, void *);
 
 int request_irq(unsigned int irq, irq_handler_t handler,
-		unsigned long flags, const char *name, void *dev);
+        unsigned long flags, const char *name, void *dev);
 
 void *free_irq(unsigned int irq, void *data);
 

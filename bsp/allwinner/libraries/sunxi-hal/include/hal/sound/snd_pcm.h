@@ -44,8 +44,8 @@
 #define SND_SOC_DAIFMT_MSB              SND_SOC_DAIFMT_LEFT_J
 #define SND_SOC_DAIFMT_LSB              SND_SOC_DAIFMT_RIGHT_J
 
-#define	SND_SOC_DAIFMT_SIG_SHIFT		8
-#define	SND_SOC_DAIFMT_MASTER_SHIFT		12
+#define SND_SOC_DAIFMT_SIG_SHIFT        8
+#define SND_SOC_DAIFMT_MASTER_SHIFT     12
 
 #define SND_SOC_DAIFMT_NB_NF            (1 << 8) /* normal bit clock + frame */
 #define SND_SOC_DAIFMT_NB_IF            (2 << 8) /* normal BCLK + inv FRM */
@@ -103,20 +103,20 @@
 #define SNDRV_PCM_RATE_8000_192000      (SNDRV_PCM_RATE_8000_96000|SNDRV_PCM_RATE_176400|\
                                          SNDRV_PCM_RATE_192000)
 
-#define	SNDRV_PCM_FORMAT_S8	((snd_pcm_format_t) 0)
-#define	SNDRV_PCM_FORMAT_U8	((snd_pcm_format_t) 1)
-#define	SNDRV_PCM_FORMAT_S16_LE	((snd_pcm_format_t) 2)
-#define	SNDRV_PCM_FORMAT_S16_BE	((snd_pcm_format_t) 3)
-#define	SNDRV_PCM_FORMAT_U16_LE	((snd_pcm_format_t) 4)
-#define	SNDRV_PCM_FORMAT_U16_BE	((snd_pcm_format_t) 5)
-#define	SNDRV_PCM_FORMAT_S24_LE	((snd_pcm_format_t) 6)
-#define	SNDRV_PCM_FORMAT_S24_BE	((snd_pcm_format_t) 7)
-#define	SNDRV_PCM_FORMAT_U24_LE	((snd_pcm_format_t) 8)
-#define	SNDRV_PCM_FORMAT_U24_BE	((snd_pcm_format_t) 9)
-#define	SNDRV_PCM_FORMAT_S32_LE	((snd_pcm_format_t) 10)
-#define	SNDRV_PCM_FORMAT_S32_BE	((snd_pcm_format_t) 11)
-#define	SNDRV_PCM_FORMAT_U32_LE	((snd_pcm_format_t) 12)
-#define	SNDRV_PCM_FORMAT_U32_BE	((snd_pcm_format_t) 13)
+#define SNDRV_PCM_FORMAT_S8 ((snd_pcm_format_t) 0)
+#define SNDRV_PCM_FORMAT_U8 ((snd_pcm_format_t) 1)
+#define SNDRV_PCM_FORMAT_S16_LE ((snd_pcm_format_t) 2)
+#define SNDRV_PCM_FORMAT_S16_BE ((snd_pcm_format_t) 3)
+#define SNDRV_PCM_FORMAT_U16_LE ((snd_pcm_format_t) 4)
+#define SNDRV_PCM_FORMAT_U16_BE ((snd_pcm_format_t) 5)
+#define SNDRV_PCM_FORMAT_S24_LE ((snd_pcm_format_t) 6)
+#define SNDRV_PCM_FORMAT_S24_BE ((snd_pcm_format_t) 7)
+#define SNDRV_PCM_FORMAT_U24_LE ((snd_pcm_format_t) 8)
+#define SNDRV_PCM_FORMAT_U24_BE ((snd_pcm_format_t) 9)
+#define SNDRV_PCM_FORMAT_S32_LE ((snd_pcm_format_t) 10)
+#define SNDRV_PCM_FORMAT_S32_BE ((snd_pcm_format_t) 11)
+#define SNDRV_PCM_FORMAT_U32_LE ((snd_pcm_format_t) 12)
+#define SNDRV_PCM_FORMAT_U32_BE ((snd_pcm_format_t) 13)
 
 #define _SNDRV_PCM_FMTBIT(fmt)          (1ULL << (int)SND_PCM_FORMAT_##fmt)
 #define SNDRV_PCM_FMTBIT_S8             _SNDRV_PCM_FMTBIT(S8)
@@ -160,74 +160,74 @@
 
 static inline snd_pcm_sframes_t bytes_to_frames(struct snd_pcm_runtime *runtime, ssize_t size)
 {
-	return size * 8 / runtime->frame_bits;
+    return size * 8 / runtime->frame_bits;
 }
 
 static inline ssize_t frames_to_bytes(struct snd_pcm_runtime *runtime, snd_pcm_sframes_t size)
 {
-	return size * runtime->frame_bits / 8;
+    return size * runtime->frame_bits / 8;
 }
 
 static inline size_t snd_pcm_lib_buffer_bytes(struct snd_pcm_substream *substream)
 {
-	struct snd_pcm_runtime *runtime = substream->runtime;
-	return frames_to_bytes(runtime, runtime->buffer_size);
+    struct snd_pcm_runtime *runtime = substream->runtime;
+    return frames_to_bytes(runtime, runtime->buffer_size);
 }
 
 static inline size_t snd_pcm_lib_period_bytes(struct snd_pcm_substream *substream)
 {
-	struct snd_pcm_runtime *runtime = substream->runtime;
-	return frames_to_bytes(runtime, runtime->period_size);
+    struct snd_pcm_runtime *runtime = substream->runtime;
+    return frames_to_bytes(runtime, runtime->period_size);
 }
 
 /* Get the available(readable) space for capture */
 static inline snd_pcm_uframes_t snd_pcm_capture_avail(struct snd_pcm_runtime *runtime)
 {
-	snd_pcm_sframes_t avail = runtime->status->hw_ptr - runtime->control->appl_ptr;
-	if (avail < 0)
-		avail += runtime->boundary;
-	return avail;
+    snd_pcm_sframes_t avail = runtime->status->hw_ptr - runtime->control->appl_ptr;
+    if (avail < 0)
+        avail += runtime->boundary;
+    return avail;
 }
 
 /* Get the available(writeable) space for playback */
 static inline snd_pcm_uframes_t snd_pcm_playback_avail(struct snd_pcm_runtime *runtime)
 {
-	snd_pcm_sframes_t avail = runtime->status->hw_ptr + runtime->buffer_size - runtime->control->appl_ptr;
+    snd_pcm_sframes_t avail = runtime->status->hw_ptr + runtime->buffer_size - runtime->control->appl_ptr;
 
-	if (avail < 0)
-		avail += runtime->boundary;
-	else if ((snd_pcm_uframes_t) avail >= runtime->boundary)
-		avail -= runtime->boundary;
+    if (avail < 0)
+        avail += runtime->boundary;
+    else if ((snd_pcm_uframes_t) avail >= runtime->boundary)
+        avail -= runtime->boundary;
 
-	return avail;
+    return avail;
 }
 
 /* Get the queued space(has been written) for playback */
 static inline snd_pcm_sframes_t snd_pcm_playback_hw_avail(struct snd_pcm_runtime *runtime)
 {
-	return runtime->buffer_size - snd_pcm_playback_avail(runtime);
+    return runtime->buffer_size - snd_pcm_playback_avail(runtime);
 }
 
 /* Get the free space for capture */
 static inline snd_pcm_sframes_t snd_pcm_capture_hw_avail(struct snd_pcm_runtime *runtime)
 {
-	return runtime->buffer_size - snd_pcm_capture_avail(runtime);
+    return runtime->buffer_size - snd_pcm_capture_avail(runtime);
 }
 
 static inline int snd_pcm_playback_data(struct snd_pcm_substream *substream)
 {
-	struct snd_pcm_runtime *runtime = substream->runtime;
+    struct snd_pcm_runtime *runtime = substream->runtime;
 
-	if (runtime->stop_threshold >= runtime->boundary)
-		return 1;
+    if (runtime->stop_threshold >= runtime->boundary)
+        return 1;
 
-	return snd_pcm_playback_avail(runtime) < runtime->buffer_size;
+    return snd_pcm_playback_avail(runtime) < runtime->buffer_size;
 }
 
 static inline int snd_pcm_playback_empty(struct snd_pcm_substream *substream)
 {
-	struct snd_pcm_runtime *runtime = substream->runtime;
-	return snd_pcm_playback_avail(runtime) >= runtime->buffer_size;
+    struct snd_pcm_runtime *runtime = substream->runtime;
+    return snd_pcm_playback_avail(runtime) >= runtime->buffer_size;
 }
 
 #endif /* __SOUND_PCM_H */

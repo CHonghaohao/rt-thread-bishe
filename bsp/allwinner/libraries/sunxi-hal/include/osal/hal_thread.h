@@ -35,13 +35,13 @@ int kthread_suspend(void *thread);
  * Description: Convenient wrapper for kthread_create() followed by
  * wake_up_process().  Returns the kthread or ERR_PTR(-ENOMEM).
  */
-#define kthread_run(threadfn, data, namefmt, ...)			   \
-({									   \
-	struct rt_thread *__k						   \
-		= kthread_create(threadfn, data, namefmt, ## __VA_ARGS__); \
-	if (!IS_ERR((unsigned long)__k))				   \
-		rt_thread_startup(__k);					   \
-	__k;								   \
+#define kthread_run(threadfn, data, namefmt, ...)              \
+({                                     \
+    struct rt_thread *__k                          \
+        = kthread_create(threadfn, data, namefmt, ## __VA_ARGS__); \
+    if (!IS_ERR((unsigned long)__k))                   \
+        rt_thread_startup(__k);                    \
+    __k;                                   \
 })
 
 //#define in_interrupt(...)   rt_interrupt_get_nest()

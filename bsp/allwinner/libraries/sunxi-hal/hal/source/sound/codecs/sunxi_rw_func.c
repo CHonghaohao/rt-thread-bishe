@@ -37,45 +37,45 @@
 /*#define TEST_MODE*/
 
 #ifndef u32
-#define u32	unsigned int
+#define u32 unsigned int
 #endif
 
-#define ADDR_WIDTH	0x3f
+#define ADDR_WIDTH  0x3f
 
 u32 read_prcm_wvalue(u32 addr, void *ADDA_PR_CFG_REG);
 void write_prcm_wvalue(u32 addr, u32 val, void *ADDA_PR_CFG_REG);
 
 unsigned int sunxi_codec_read(struct snd_codec *codec, unsigned int reg)
 {
-	/* struct sunxi_codec_info *sunxi_codec = codec->private_data; */
-	unsigned int reg_val;
+    /* struct sunxi_codec_info *sunxi_codec = codec->private_data; */
+    unsigned int reg_val;
 
-	if (reg >= SUNXI_PR_CFG) {
-		reg = reg - SUNXI_PR_CFG;
-		return read_prcm_wvalue(reg, codec->codec_base_addr + SUNXI_PR_CFG);
-	} else {
+    if (reg >= SUNXI_PR_CFG) {
+        reg = reg - SUNXI_PR_CFG;
+        return read_prcm_wvalue(reg, codec->codec_base_addr + SUNXI_PR_CFG);
+    } else {
 #ifdef TEST_MODE
-		reg_val = 0x1;
+        reg_val = 0x1;
 #else
-		reg_val = snd_readl(codec->codec_base_addr + reg);
+        reg_val = snd_readl(codec->codec_base_addr + reg);
 #endif
-	}
-	return reg_val;
+    }
+    return reg_val;
 }
 
 unsigned int sunxi_codec_write(struct snd_codec *codec, unsigned int reg, unsigned int val)
 {
-	/* struct sunxi_codec_info *sunxi_codec = codec->private_data; */
+    /* struct sunxi_codec_info *sunxi_codec = codec->private_data; */
 
-	if (reg >= SUNXI_PR_CFG) {
-		reg = reg - SUNXI_PR_CFG;
-		write_prcm_wvalue(reg, val, codec->codec_base_addr + SUNXI_PR_CFG);
-	} else {
+    if (reg >= SUNXI_PR_CFG) {
+        reg = reg - SUNXI_PR_CFG;
+        write_prcm_wvalue(reg, val, codec->codec_base_addr + SUNXI_PR_CFG);
+    } else {
 #ifndef TEST_MODE
-		snd_writel(val, codec->codec_base_addr + reg);
+        snd_writel(val, codec->codec_base_addr + reg);
 #endif
-	}
-	return 0;
+    }
+    return 0;
 }
 
 u32 read_prcm_wvalue(u32 addr, void *ADDA_PR_CFG_REG)
@@ -140,7 +140,7 @@ __attribute__((weak)) void sunxi_audiocodec_reg_dump(void)
 
 int cmd_audiocodec_dump(int argc, char *argv[])
 {
-	/*TODO, add read,write function */
-	sunxi_audiocodec_reg_dump();
+    /*TODO, add read,write function */
+    sunxi_audiocodec_reg_dump();
 }
 FINSH_FUNCTION_EXPORT_CMD(cmd_audiocodec_dump, audiocodec, audiocodec dump reg);

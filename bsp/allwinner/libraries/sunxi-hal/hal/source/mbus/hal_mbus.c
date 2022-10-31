@@ -6,12 +6,12 @@
 
  * DISCLAIMER
  * THIRD PARTY LICENCES MAY BE REQUIRED TO IMPLEMENT THE SOLUTION/PRODUCT.
- * IF YOU NEED TO INTEGRATE THIRD PARTY¡¯S TECHNOLOGY (SONY, DTS, DOLBY, AVS OR MPEGLA, ETC.)
- * IN ALLWINNERS¡¯SDK OR PRODUCTS, YOU SHALL BE SOLELY RESPONSIBLE TO OBTAIN
+ * IF YOU NEED TO INTEGRATE THIRD PARTYÂ¡Â¯S TECHNOLOGY (SONY, DTS, DOLBY, AVS OR MPEGLA, ETC.)
+ * IN ALLWINNERSÂ¡Â¯SDK OR PRODUCTS, YOU SHALL BE SOLELY RESPONSIBLE TO OBTAIN
  * ALL APPROPRIATELY REQUIRED THIRD PARTY LICENCES.
  * ALLWINNER SHALL HAVE NO WARRANTY, INDEMNITY OR OTHER OBLIGATIONS WITH RESPECT TO MATTERS
  * COVERED UNDER ANY REQUIRED THIRD PARTY LICENSE.
- * YOU ARE SOLELY RESPONSIBLE FOR YOUR USAGE OF THIRD PARTY¡¯S TECHNOLOGY.
+ * YOU ARE SOLELY RESPONSIBLE FOR YOUR USAGE OF THIRD PARTYÂ¡Â¯S TECHNOLOGY.
 
 
  * THIS SOFTWARE IS PROVIDED BY ALLWINNER"AS IS" AND TO THE MAXIMUM EXTENT
@@ -37,56 +37,56 @@
 
 hal_mbus_status_t hal_mbus_pmu_get_value(enum mbus_pmu type, unsigned int *value)
 {
-	switch (type) {
-		case MBUS_PMU_CPU :
-			*value = mbus_get_cpu_ddr();
-			break;
-		case MBUS_PMU_GPU :
-			*value = mbus_get_gpu_ddr();
-			break;
-		case MBUS_PMU_VE :
-			*value = mbus_get_ve_ddr();
-			break;
-		case MBUS_PMU_DISP :
-			*value = mbus_get_de_ddr();
-			break;
-		case MBUS_PMU_OTH :
-			*value = mbus_get_oth_ddr();
-			break;
-		case MBUS_PMU_TOTAL :
-			*value = mbus_get_total_ddr();
-			break;
-		case MBUS_PMU_DI :
-			*value = mbus_get_di_ddr();
-			break;
-		case MBUS_PMU_CSI :
-			*value = mbus_get_csi_ddr();
-			break;
-		case MBUS_PMU_TVD :
-			*value = mbus_get_tvd_ddr();
-			break;
-		case MBUS_PMU_G2D :
-			*value = mbus_get_g2d_ddr();
-			break;
-		case MBUS_PMU_IOMMU :
-			*value = mbus_get_iommu_ddr();
-			break;
-		case MBUS_PMU_RV_SYS :
-			*value = mbus_get_rv_sys_ddr();
-			break;
-		default :
-			mbus_err("not support mbus type, %d\n", type);
-			return HAL_MBUS_STATUS_ERROR_PARAMETER;
-	}
+    switch (type) {
+        case MBUS_PMU_CPU :
+            *value = mbus_get_cpu_ddr();
+            break;
+        case MBUS_PMU_GPU :
+            *value = mbus_get_gpu_ddr();
+            break;
+        case MBUS_PMU_VE :
+            *value = mbus_get_ve_ddr();
+            break;
+        case MBUS_PMU_DISP :
+            *value = mbus_get_de_ddr();
+            break;
+        case MBUS_PMU_OTH :
+            *value = mbus_get_oth_ddr();
+            break;
+        case MBUS_PMU_TOTAL :
+            *value = mbus_get_total_ddr();
+            break;
+        case MBUS_PMU_DI :
+            *value = mbus_get_di_ddr();
+            break;
+        case MBUS_PMU_CSI :
+            *value = mbus_get_csi_ddr();
+            break;
+        case MBUS_PMU_TVD :
+            *value = mbus_get_tvd_ddr();
+            break;
+        case MBUS_PMU_G2D :
+            *value = mbus_get_g2d_ddr();
+            break;
+        case MBUS_PMU_IOMMU :
+            *value = mbus_get_iommu_ddr();
+            break;
+        case MBUS_PMU_RV_SYS :
+            *value = mbus_get_rv_sys_ddr();
+            break;
+        default :
+            mbus_err("not support mbus type, %d\n", type);
+            return HAL_MBUS_STATUS_ERROR_PARAMETER;
+    }
 
-	return HAL_MBUS_STATUS_OK;
+    return HAL_MBUS_STATUS_OK;
 }
 
 hal_mbus_status_t hal_mbus_pmu_enable(void)
 {
-	mbus_pmu_enable();
+    mbus_pmu_enable();
 
-	return HAL_MBUS_STATUS_OK;
+    return HAL_MBUS_STATUS_OK;
 }
 
 

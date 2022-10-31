@@ -35,13 +35,13 @@
 
 #define SND_PCM_HW_CONFIG(name, device) \
 { \
-	.card_name	= #name,  \
-	.device_num	= device, \
+    .card_name  = #name,  \
+    .device_num = device, \
 }
 
 #define DEFINE_SND_PCM_HW_CONFIG(name, device) \
-	const snd_pcm_hw_config_t snd_##name##_hw_config = \
-				SND_PCM_HW_CONFIG(name, device);
+    const snd_pcm_hw_config_t snd_##name##_hw_config = \
+                SND_PCM_HW_CONFIG(name, device);
 
 static DEFINE_SND_PCM_HW_CONFIG(audiocodec, 0);
 static DEFINE_SND_PCM_HW_CONFIG(snddaudio0, 0);
@@ -52,163 +52,163 @@ static DEFINE_SND_PCM_HW_CONFIG(snddmic, 0);
 static DEFINE_SND_PCM_HW_CONFIG(sndspdif, 0);
 
 static const snd_pcm_softvol_config_t snd_pcm_softvol_config1 = {
-	.type		= "softvol",
-	.slave = {
-		.pcm		= "PlaybackDmix",
-	},
-	.control = {
-		.control_name	= "Soft Volume Control1",
-		.card_name	= "audiocodec",
-	},
-	.min_dB			= -51.0,
-	.max_dB			= 0.0,
-	.resolution		= 256,
+    .type       = "softvol",
+    .slave = {
+        .pcm        = "PlaybackDmix",
+    },
+    .control = {
+        .control_name   = "Soft Volume Control1",
+        .card_name  = "audiocodec",
+    },
+    .min_dB         = -51.0,
+    .max_dB         = 0.0,
+    .resolution     = 256,
 };
 
 static const snd_pcm_softvol_config_t snd_pcm_softvol_config2 = {
-	.type		= "softvol",
-	.slave = {
-		.pcm		= "PlaybackDmix",
-	},
-	.control = {
-		.control_name	= "Soft Volume Control2",
-		.card_name	= "audiocodec",
-	},
-	.min_dB			= -51.0,
-	.max_dB			= 0.0,
-	.resolution		= 100,
+    .type       = "softvol",
+    .slave = {
+        .pcm        = "PlaybackDmix",
+    },
+    .control = {
+        .control_name   = "Soft Volume Control2",
+        .card_name  = "audiocodec",
+    },
+    .min_dB         = -51.0,
+    .max_dB         = 0.0,
+    .resolution     = 100,
 };
 
 static const snd_pcm_dsnoop_config_t snd_pcm_dsnoop_config = {
-	.type		= "dsnoop",
-	.ipc_key	= 1111,
-	.slave = {
-		.pcm		= "audiocodec",
-		.format		= SND_PCM_FORMAT_S16_LE,
-		.rate		= 16000,
-		.channels	= 4,
-		.period_size	= 2048,
-		.periods	= 8,
-	},
+    .type       = "dsnoop",
+    .ipc_key    = 1111,
+    .slave = {
+        .pcm        = "audiocodec",
+        .format     = SND_PCM_FORMAT_S16_LE,
+        .rate       = 16000,
+        .channels   = 4,
+        .period_size    = 2048,
+        .periods    = 8,
+    },
 };
 
 static const snd_pcm_dmix_config_t snd_pcm_dmix_config = {
-	.type		= "dmix",
-	.ipc_key	= 2222,
-	.slave = {
-		.pcm		= "audiocodec",
-		.format		= SND_PCM_FORMAT_S16_LE,
-		.rate		= 48000,
-		.channels	= 2,
-		.period_size	= 1024,
-		.periods	= 8,
-	},
+    .type       = "dmix",
+    .ipc_key    = 2222,
+    .slave = {
+        .pcm        = "audiocodec",
+        .format     = SND_PCM_FORMAT_S16_LE,
+        .rate       = 48000,
+        .channels   = 2,
+        .period_size    = 1024,
+        .periods    = 8,
+    },
 };
 
 
 #define DEFINE_SND_PCM_RATE_CONFIG(name, formats, rates, converters) \
-	const snd_pcm_rate_config_t snd_##name##_rate_config = { \
-		.type		= "rate", \
-		.slave = { \
-			.pcm		= #name, \
-			.format		= formats, \
-			.rate		= rates, \
-		}, \
-		.converter  = #converters, \
-	}
+    const snd_pcm_rate_config_t snd_##name##_rate_config = { \
+        .type       = "rate", \
+        .slave = { \
+            .pcm        = #name, \
+            .format     = formats, \
+            .rate       = rates, \
+        }, \
+        .converter  = #converters, \
+    }
 
 static DEFINE_SND_PCM_RATE_CONFIG(audiocodec, SND_PCM_FORMAT_S16_LE, 48000, speexrate);
 
 static const snd_pcm_asym_config_t snd_pcm_asym_config = {
-	.type		= "asym",
-	.playback_pcm	= "PlaybackPlug",
-	.capture_pcm	= "CaptureDsnoop",
+    .type       = "asym",
+    .playback_pcm   = "PlaybackPlug",
+    .capture_pcm    = "CaptureDsnoop",
 };
 
 static const snd_pcm_route_config_t snd_pcm_route_config = {
-	.type = "route",
-	.slave = {
-		.pcm = "audiocodec",
-		.channels = 1,
-	},
-	.ttable = {
-		{0, 0, 0.5},
-		{1, 0, 0.5},
-		TTABLE_CONFIG_END
-	},
+    .type = "route",
+    .slave = {
+        .pcm = "audiocodec",
+        .channels = 1,
+    },
+    .ttable = {
+        {0, 0, 0.5},
+        {1, 0, 0.5},
+        TTABLE_CONFIG_END
+    },
 };
 
 static const snd_pcm_plug_config_t snd_pcm_plug_config = {
-	.type           = "plug",
-	.slave          = {
-		.pcm		= "PlaybackDmix",
-		.format         = SND_PCM_FORMAT_S16_LE,
-		.channels       = 2,
-		.rate           = 48000,
-	},
-	.rate_converter = "speexrate",
-	.route_policy   = "default",
-	.ttable         = {
-		TTABLE_CONFIG_END
-	},
+    .type           = "plug",
+    .slave          = {
+        .pcm        = "PlaybackDmix",
+        .format         = SND_PCM_FORMAT_S16_LE,
+        .channels       = 2,
+        .rate           = 48000,
+    },
+    .rate_converter = "speexrate",
+    .route_policy   = "default",
+    .ttable         = {
+        TTABLE_CONFIG_END
+    },
 };
 
 #ifdef CONFIG_AW_ALSA_PLUGINS_SONA_AUDIOAEF
 static const snd_pcm_sona_audioaef_config_t snd_pcm_sona_audioaef_config = {
-	.type = "sona_audioaef",
-	.slave = {
-		.pcm = "hw:audiocodec",
-	},
-	.config_name = "sona_audioaef_example",
-	.config_file = NULL,
-	.max_frames = 0,
-	.runtime_config = 0,
+    .type = "sona_audioaef",
+    .slave = {
+        .pcm = "hw:audiocodec",
+    },
+    .config_name = "sona_audioaef_example",
+    .config_file = NULL,
+    .max_frames = 0,
+    .runtime_config = 0,
 };
 #endif
 
 static const snd_pcm_file_config_t snd_pcm_file_pb_config = {
-	.type 		= "file",
-	.slave 		= {
-		.pcm 		= "PlaybackDmix",
-	},
-	.format 	= "raw",
-	.mode 		= "adb",
-	.port 		= 20190,
+    .type       = "file",
+    .slave      = {
+        .pcm        = "PlaybackDmix",
+    },
+    .format     = "raw",
+    .mode       = "adb",
+    .port       = 20190,
 };
 
 static const snd_pcm_file_config_t snd_pcm_file_cap_config = {
-	.type 		= "file",
-	.slave 		= {
-		.pcm 		= "CaptureDsnoop",
-	},
-	.format 	= "raw",
-	.mode 		= "adb",
-	.port 		= 20191,
+    .type       = "file",
+    .slave      = {
+        .pcm        = "CaptureDsnoop",
+    },
+    .format     = "raw",
+    .mode       = "adb",
+    .port       = 20191,
 };
 
 const snd_pcm_config_t snd_pcm_global_configs[] = {
-	SND_PCM_CONFIG("CaptureDsnoop", "dsnoop", &snd_pcm_dsnoop_config),
-	SND_PCM_CONFIG("PlaybackDmix", "dmix", &snd_pcm_dmix_config),
-	SND_PCM_CONFIG("Playbackrate", "rate", &snd_audiocodec_rate_config),
-	SND_PCM_CONFIG("audiocodec", "hw", &snd_audiocodec_hw_config),
+    SND_PCM_CONFIG("CaptureDsnoop", "dsnoop", &snd_pcm_dsnoop_config),
+    SND_PCM_CONFIG("PlaybackDmix", "dmix", &snd_pcm_dmix_config),
+    SND_PCM_CONFIG("Playbackrate", "rate", &snd_audiocodec_rate_config),
+    SND_PCM_CONFIG("audiocodec", "hw", &snd_audiocodec_hw_config),
         SND_PCM_CONFIG("snddaudio0", "hw", &snd_snddaudio0_hw_config),
         SND_PCM_CONFIG("snddaudio1", "hw", &snd_snddaudio1_hw_config),
         SND_PCM_CONFIG("snddaudio2", "hw", &snd_snddaudio2_hw_config),
         SND_PCM_CONFIG("snddaudio3", "hw", &snd_snddaudio3_hw_config),
         SND_PCM_CONFIG("snddmic", "hw", &snd_snddmic_hw_config),
         SND_PCM_CONFIG("sndspdif", "hw", &snd_sndspdif_hw_config),
-	/* SND_PCM_CONFIG("default", "hw", &snd_pcm_asym_config), */
-	SND_PCM_CONFIG("default", "asym", &snd_pcm_asym_config), //pcm.!default
-	SND_PCM_CONFIG("ctl.!default", "hw", &snd_audiocodec_hw_config), //ctl.!default
-	SND_PCM_CONFIG("PlaybackSoftVol1", "softvol", &snd_pcm_softvol_config1),
-	SND_PCM_CONFIG("PlaybackSoftVol2", "softvol", &snd_pcm_softvol_config2),
-	SND_PCM_CONFIG("PlaybackRoute", "route", &snd_pcm_route_config),
-	SND_PCM_CONFIG("PlaybackPlug", "plug", &snd_pcm_plug_config),
+    /* SND_PCM_CONFIG("default", "hw", &snd_pcm_asym_config), */
+    SND_PCM_CONFIG("default", "asym", &snd_pcm_asym_config), //pcm.!default
+    SND_PCM_CONFIG("ctl.!default", "hw", &snd_audiocodec_hw_config), //ctl.!default
+    SND_PCM_CONFIG("PlaybackSoftVol1", "softvol", &snd_pcm_softvol_config1),
+    SND_PCM_CONFIG("PlaybackSoftVol2", "softvol", &snd_pcm_softvol_config2),
+    SND_PCM_CONFIG("PlaybackRoute", "route", &snd_pcm_route_config),
+    SND_PCM_CONFIG("PlaybackPlug", "plug", &snd_pcm_plug_config),
 #ifdef CONFIG_AW_ALSA_PLUGINS_SONA_AUDIOAEF
-	SND_PCM_CONFIG("PlaybackSona", "sona_audioaef", &snd_pcm_sona_audioaef_config),
+    SND_PCM_CONFIG("PlaybackSona", "sona_audioaef", &snd_pcm_sona_audioaef_config),
 #endif
-	SND_PCM_CONFIG("PlaybackFile", "file", &snd_pcm_file_pb_config),
-	SND_PCM_CONFIG("CaptureFile", "file", &snd_pcm_file_cap_config),
+    SND_PCM_CONFIG("PlaybackFile", "file", &snd_pcm_file_pb_config),
+    SND_PCM_CONFIG("CaptureFile", "file", &snd_pcm_file_cap_config),
 };
 
 REGISTER_SND_PCM_GLOBAL_CONFIGS(snd_pcm_global_configs);

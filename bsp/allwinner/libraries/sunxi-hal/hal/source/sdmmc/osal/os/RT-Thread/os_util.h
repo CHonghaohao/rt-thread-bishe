@@ -41,23 +41,23 @@
 /* check if in ISR context or not */
 static __always_inline int OS_IsISRContext(void)
 {
-	//return __get_IPSR();
-	return in_interrupt();
+    //return __get_IPSR();
+    return in_interrupt();
 }
 
 static __always_inline rt_tick_t OS_CalcWaitTicks(OS_Time_t msec)
 {
-	rt_tick_t tick;
-	if (msec == OS_WAIT_FOREVER) {
-		tick = RT_TICK_MAX;
-	} else if (msec != 0) {
-		tick = OS_MSecsToTicks(msec);
-		if (tick == 0)
-			tick = 1;
-	} else {
-		tick = 0;
-	}
-	return tick;
+    rt_tick_t tick;
+    if (msec == OS_WAIT_FOREVER) {
+        tick = RT_TICK_MAX;
+    } else if (msec != 0) {
+        tick = OS_MSecsToTicks(msec);
+        if (tick == 0)
+            tick = 1;
+    } else {
+        tick = 0;
+    }
+    return tick;
 }
 
 /* memory */

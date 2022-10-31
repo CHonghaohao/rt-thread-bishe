@@ -47,28 +47,28 @@ extern "C" {
 #endif
 
 struct mmc_data {
-	uint32_t blksz; 	/* data block size */
-	uint32_t blocks;	/* number of blocks */
-	uint32_t flags;
+    uint32_t blksz;     /* data block size */
+    uint32_t blocks;    /* number of blocks */
+    uint32_t flags;
 
 #define MMC_DATA_WRITE          (1 << 8)
 #define MMC_DATA_READ           (1 << 9)
 #define MMC_DATA_STREAM         (1 << 10)
 
-	uint32_t                bytes_xfered;
-	uint32_t                sg_len;         /* size of scatter list */
-	struct scatterlist      *sg;            /* I/O scatter list */
+    uint32_t                bytes_xfered;
+    uint32_t                sg_len;         /* size of scatter list */
+    struct scatterlist      *sg;            /* I/O scatter list */
 };
 
 struct mmc_command {
-	uint32_t opcode;
-	uint32_t arg;
-	uint32_t resp[4];
-	uint32_t flags;                         /* expected response type */
-	/* data transfer */
-	volatile uint32_t stop        :1,
-	                  boot        :1,
-	                  vol_switch  :1;
+    uint32_t opcode;
+    uint32_t arg;
+    uint32_t resp[4];
+    uint32_t flags;                         /* expected response type */
+    /* data transfer */
+    volatile uint32_t stop        :1,
+                      boot        :1,
+                      vol_switch  :1;
 
 #define MMC_RSP_MASK            (0x1f << 0)
 #define MMC_RSP_PRESENT         (1 << 0)
@@ -121,49 +121,49 @@ struct mmc_command {
 #define mmc_cmd_type(cmd)       ((cmd)->flags & MMC_CMD_MASK)
 
 #if ((defined CONFIG_USE_SD) || (defined CONFIG_USE_MMC))
-	uint32_t retries;               /* max number of retries */
+    uint32_t retries;               /* max number of retries */
 
-	/* Standard errno values are used for errors, but some have specific
-	 * meaning in the MMC layer:
-	 *
-	 * ETIMEDOUT    Card took too long to respond
-	 * EILSEQ       Basic format problem with the received or sent data
-	 *              (e.g. CRC check failed, incorrect opcode in response
-	 *              or bad end bit)
-	 * EINVAL       Request cannot be performed because of restrictions
-	 *              in hardware and/or the driver
-	 * ENOMEDIUM    Host can determine that the slot is empty and is
-	 *              actively failing requests
-	 */
-	uint32_t erase_timeout;         /* in milliseconds */
+    /* Standard errno values are used for errors, but some have specific
+     * meaning in the MMC layer:
+     *
+     * ETIMEDOUT    Card took too long to respond
+     * EILSEQ       Basic format problem with the received or sent data
+     *              (e.g. CRC check failed, incorrect opcode in response
+     *              or bad end bit)
+     * EINVAL       Request cannot be performed because of restrictions
+     *              in hardware and/or the driver
+     * ENOMEDIUM    Host can determine that the slot is empty and is
+     *              actively failing requests
+     */
+    uint32_t erase_timeout;         /* in milliseconds */
 #endif
 
-	struct mmc_data         *data;          /* data segment associated with cmd */
+    struct mmc_data         *data;          /* data segment associated with cmd */
 };
 
 struct mmc_request {
-	//struct mmc_command    *sbc;           /* SET_BLOCK_COUNT for multiblock */
-	struct mmc_command      *cmd;
-	struct mmc_data         *data;
-	//struct mmc_command    *stop;
+    //struct mmc_command    *sbc;           /* SET_BLOCK_COUNT for multiblock */
+    struct mmc_command      *cmd;
+    struct mmc_data         *data;
+    //struct mmc_command    *stop;
 
-	//struct completion     completion;
-	//void                  (*done)(struct mmc_request *); /* completion function */
+    //struct completion     completion;
+    //void                  (*done)(struct mmc_request *); /* completion function */
 };
 
 #define UNSTUFF_BITS(resp,start,size)                                   \
-	({                                                              \
-		const int32_t __size = size;                            \
-		const uint32_t __mask = (__size < 32 ? 1 << __size : 0) - 1;    \
-		const int32_t __off = 3 - ((start) / 32);                       \
-		const int32_t __shft = (start) & 31;                    \
-		uint32_t __res;                                         \
-		                                                        \
-		__res = resp[__off] >> __shft;                          \
-		if (__size + __shft > 32)                               \
-			__res |= resp[__off-1] << ((32 - __shft) % 32); \
-		__res & __mask;                                         \
-	})
+    ({                                                              \
+        const int32_t __size = size;                            \
+        const uint32_t __mask = (__size < 32 ? 1 << __size : 0) - 1;    \
+        const int32_t __off = 3 - ((start) / 32);                       \
+        const int32_t __shft = (start) & 31;                    \
+        uint32_t __res;                                         \
+                                                                \
+        __res = resp[__off] >> __shft;                          \
+        if (__size + __shft > 32)                               \
+            __res |= resp[__off-1] << ((32 - __shft) % 32); \
+        __res & __mask;                                         \
+    })
 
 #ifdef CONFIG_USE_MMC_QUIRK
 
@@ -175,20 +175,20 @@ struct mmc_request {
  */
 
 struct mmc_fixup {
-	/* CID-specific fields. */
-	const char *name;
+    /* CID-specific fields. */
+    const char *name;
 
-	/* Valid revision range */
-	uint64_t rev_start, rev_end;
+    /* Valid revision range */
+    uint64_t rev_start, rev_end;
 
-	int32_t manfid;
-	int16_t oemid;
+    int32_t manfid;
+    int16_t oemid;
 
-	/* SDIO-specfic fields. You can use SDIO_ANY_ID here of course */
-	uint16_t cis_vendor, cis_device;
+    /* SDIO-specfic fields. You can use SDIO_ANY_ID here of course */
+    uint16_t cis_vendor, cis_device;
 
-	void (*vendor_fixup)(struct mmc_card *card, int32_t data);
-	int32_t data;
+    void (*vendor_fixup)(struct mmc_card *card, int32_t data);
+    int32_t data;
 };
 
 #define CID_MANFID_ANY (-1u)
@@ -197,56 +197,56 @@ struct mmc_fixup {
 
 #define END_FIXUP { 0 }
 
-#define _FIXUP_EXT(_name, _manfid, _oemid, _rev_start, _rev_end,	\
-		   _cis_vendor, _cis_device,				\
-		   _fixup, _data)					\
-	{						   \
-		.name = (_name),			   \
-		.manfid = (_manfid),			   \
-		.oemid = (_oemid),			   \
-		.rev_start = (_rev_start),		   \
-		.rev_end = (_rev_end),			   \
-		.cis_vendor = (_cis_vendor),		   \
-		.cis_device = (_cis_device),		   \
-		.vendor_fixup = (_fixup),		   \
-		.data = (_data),			   \
-	 }
+#define _FIXUP_EXT(_name, _manfid, _oemid, _rev_start, _rev_end,    \
+           _cis_vendor, _cis_device,                \
+           _fixup, _data)                   \
+    {                          \
+        .name = (_name),               \
+        .manfid = (_manfid),               \
+        .oemid = (_oemid),             \
+        .rev_start = (_rev_start),         \
+        .rev_end = (_rev_end),             \
+        .cis_vendor = (_cis_vendor),           \
+        .cis_device = (_cis_device),           \
+        .vendor_fixup = (_fixup),          \
+        .data = (_data),               \
+     }
 
-#define SDIO_FIXUP(_vendor, _device, _fixup, _data)	\
-	_FIXUP_EXT(CID_NAME_ANY, CID_MANFID_ANY,	\
-		    CID_OEMID_ANY, 0, -1ull,		\
-		   _vendor, _device,			\
-		   _fixup, _data)			\
+#define SDIO_FIXUP(_vendor, _device, _fixup, _data) \
+    _FIXUP_EXT(CID_NAME_ANY, CID_MANFID_ANY,    \
+            CID_OEMID_ANY, 0, -1ull,        \
+           _vendor, _device,            \
+           _fixup, _data)           \
 
-#define cid_rev(hwrev, fwrev, year, month)	\
-	(((uint64_t) hwrev) << 40 |		     \
-	 ((uint64_t) fwrev) << 32 |		     \
-	 ((uint64_t) year) << 16 |		     \
-	 ((uint64_t) month))
+#define cid_rev(hwrev, fwrev, year, month)  \
+    (((uint64_t) hwrev) << 40 |          \
+     ((uint64_t) fwrev) << 32 |          \
+     ((uint64_t) year) << 16 |           \
+     ((uint64_t) month))
 
-#define cid_rev_card(card)		  \
-	cid_rev(card->cid.hwrev,	  \
-		    card->cid.fwrev,	  \
-		    card->cid.year,	  \
-		    card->cid.month)
+#define cid_rev_card(card)        \
+    cid_rev(card->cid.hwrev,      \
+            card->cid.fwrev,      \
+            card->cid.year,   \
+            card->cid.month)
 
 /*
  * This hook just adds a quirk for all sdio devices
  */
 static void add_quirk_for_sdio_devices(struct mmc_card *card, int32_t data)
 {
-	if (mmc_card_sdio(card))
-		card->quirks |= data;
+    if (mmc_card_sdio(card))
+        card->quirks |= data;
 }
 
 static inline void add_quirk(struct mmc_card *card, int32_t data)
 {
-	card->quirks |= data;
+    card->quirks |= data;
 }
 
 static inline void remove_quirk(struct mmc_card *card, int32_t data)
 {
-	card->quirks &= ~data;
+    card->quirks &= ~data;
 }
 
 /*
@@ -255,15 +255,15 @@ static inline void remove_quirk(struct mmc_card *card, int32_t data)
 
 static inline void add_quirk_mmc(struct mmc_card *card, int data)
 {
-	if (mmc_card_mmc(card))
-		card->quirks |= data;
+    if (mmc_card_mmc(card))
+        card->quirks |= data;
 }
 
 static inline void remove_quirk_mmc(struct mmc_card *card,
-						   int data)
+                           int data)
 {
-	if (mmc_card_mmc(card))
-		card->quirks &= ~data;
+    if (mmc_card_mmc(card))
+        card->quirks &= ~data;
 }
 
 /*
@@ -272,47 +272,47 @@ static inline void remove_quirk_mmc(struct mmc_card *card,
 
 static inline void add_quirk_sd(struct mmc_card *card, int data)
 {
-	if (mmc_card_sd(card))
-		card->quirks |= data;
+    if (mmc_card_sd(card))
+        card->quirks |= data;
 }
 
 static inline void remove_quirk_sd(struct mmc_card *card,
-						   int data)
+                           int data)
 {
-	if (mmc_card_sd(card))
-		card->quirks &= ~data;
+    if (mmc_card_sd(card))
+        card->quirks &= ~data;
 }
 
 static inline int mmc_card_lenient_fn0(const struct mmc_card *c)
 {
-	return c->quirks & MMC_QUIRK_LENIENT_FN0;
+    return c->quirks & MMC_QUIRK_LENIENT_FN0;
 }
 
 static inline int mmc_blksz_for_byte_mode(const struct mmc_card *c)
 {
-	return c->quirks & MMC_QUIRK_BLKSZ_FOR_BYTE_MODE;
+    return c->quirks & MMC_QUIRK_BLKSZ_FOR_BYTE_MODE;
 }
 
 /*
 static inline int mmc_card_disable_cd(const struct mmc_card *c)
 {
-	return c->quirks & MMC_QUIRK_DISABLE_CD;
+    return c->quirks & MMC_QUIRK_DISABLE_CD;
 }
 */
 
 static inline int mmc_card_nonstd_func_interface(const struct mmc_card *c)
 {
-	return c->quirks & MMC_QUIRK_NONSTD_FUNC_IF;
+    return c->quirks & MMC_QUIRK_NONSTD_FUNC_IF;
 }
 
 static inline int mmc_card_broken_byte_mode_512(const struct mmc_card *c)
 {
-	return c->quirks & MMC_QUIRK_BROKEN_BYTE_MODE_512;
+    return c->quirks & MMC_QUIRK_BROKEN_BYTE_MODE_512;
 }
 
 static inline int mmc_card_long_read_time(const struct mmc_card *c)
 {
-	return c->quirks & MMC_QUIRK_LONG_READ_TIME;
+    return c->quirks & MMC_QUIRK_LONG_READ_TIME;
 }
 
 #endif
@@ -347,9 +347,9 @@ extern void mmc_fixup_device(struct mmc_card *card, const struct mmc_fixup *tabl
 static inline int mmc_card_disable_cd(const struct mmc_card *c)
 {
 #ifdef CONFIG_USE_MMC_QUIRK
-	return c->quirks & MMC_QUIRK_DISABLE_CD;
+    return c->quirks & MMC_QUIRK_DISABLE_CD;
 #else
-	return 0;
+    return 0;
 #endif
 }
 
@@ -362,7 +362,7 @@ static inline int mmc_card_disable_cd(const struct mmc_card *c)
  */
 static inline void mmc_claim_host(struct mmc_host *host)
 {
-	HAL_SDC_Claim_Host(host);
+    HAL_SDC_Claim_Host(host);
 }
 
 /**
@@ -374,7 +374,7 @@ static inline void mmc_claim_host(struct mmc_host *host)
  */
 static inline void mmc_release_host(struct mmc_host *host)
 {
-	HAL_SDC_Release_Host(host);
+    HAL_SDC_Release_Host(host);
 }
 
 #ifdef __cplusplus

@@ -29,7 +29,7 @@ static int nor_puya_quad_mode(struct nor_flash *unused)
     int ret;
     unsigned char cmd[3];
     char reg[2] = {0};
-	
+
     cmd[0] = NOR_PUYA_CMD_RDSR2;
     ret = nor_transfer(1, cmd, 1, reg, 2);
     if (ret) {
@@ -57,8 +57,8 @@ static int nor_puya_quad_mode(struct nor_flash *unused)
         return -EBUSY;
     }
 
-	reg[0] = 0;
-	reg[1] = 0;
+    reg[0] = 0;
+    reg[1] = 0;
     cmd[0] = NOR_PUYA_CMD_RDSR2;
     ret = nor_transfer(1, cmd, 1, reg, 2);
     if (ret) {

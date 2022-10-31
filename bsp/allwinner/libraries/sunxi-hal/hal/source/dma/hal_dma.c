@@ -129,8 +129,8 @@ static void sunxi_dump_lli(struct sunxi_dma_chan *chan, struct sunxi_dma_lli *ll
            "\t\tlli: v- 0x%08x v_lln - 0x%08x s - 0x%08x d - 0x%08x\n"
            "\t\tlen - 0x%08x para - 0x%08x p_lln - 0x%08x\n",
            chan->chan_count,
-	   (uint32_t)chan->desc, (uint32_t)chan->desc->p_lln, (uint32_t)chan->desc->vlln,
-	   (uint32_t)lli, (uint32_t)lli->vlln, (uint32_t)lli->src,
+       (uint32_t)chan->desc, (uint32_t)chan->desc->p_lln, (uint32_t)chan->desc->vlln,
+       (uint32_t)lli, (uint32_t)lli->vlln, (uint32_t)lli->src,
            (uint32_t)lli->dst, (uint32_t)lli->len, (uint32_t)lli->para, (uint32_t)lli->p_lln);
 #endif
 }
@@ -309,24 +309,24 @@ static int sunxi_dma_clk_init(bool enable)
     reset_id = SUNXI_RST_DMA;
     if (enable)
     {
-	reset = hal_reset_control_get(reset_type, reset_id);
-	hal_reset_control_deassert(reset);
-	hal_reset_control_put(reset);
+    reset = hal_reset_control_get(reset_type, reset_id);
+    hal_reset_control_deassert(reset);
+    hal_reset_control_put(reset);
 
-	hal_clock_enable(hal_clock_get(clk_type, SUNXI_CLK_MBUS_DMA));
-	clk = hal_clock_get(clk_type, clk_id);
-	ret = hal_clock_enable(clk);
-	if (ret != HAL_CLK_STATUS_OK)
-	    DMA_ERR("DMA clock enable failed.\n");
+    hal_clock_enable(hal_clock_get(clk_type, SUNXI_CLK_MBUS_DMA));
+    clk = hal_clock_get(clk_type, clk_id);
+    ret = hal_clock_enable(clk);
+    if (ret != HAL_CLK_STATUS_OK)
+        DMA_ERR("DMA clock enable failed.\n");
     }
     else
     {
-	clk = hal_clock_get(clk_type, clk_id);
-	ret = hal_clock_disable(clk);
-	if (ret != HAL_CLK_STATUS_OK)
-	    DMA_ERR("DMA clock disable failed.\n");
-	hal_clock_disable(hal_clock_get(clk_type, SUNXI_CLK_MBUS_DMA));
-	hal_clock_put(clk);
+    clk = hal_clock_get(clk_type, clk_id);
+    ret = hal_clock_disable(clk);
+    if (ret != HAL_CLK_STATUS_OK)
+        DMA_ERR("DMA clock disable failed.\n");
+    hal_clock_disable(hal_clock_get(clk_type, SUNXI_CLK_MBUS_DMA));
+    hal_clock_put(clk);
     }
 
     return ret;
@@ -371,7 +371,7 @@ hal_dma_chan_status_t hal_dma_chan_request(struct sunxi_dma_chan **dma_chan)
             chan->used = 1;
             chan->chan_count = i;
             hal_spin_unlock_irqrestore(&dma_lock, __cpsr);
-	    *dma_chan = &dma_chan_source[i];
+        *dma_chan = &dma_chan_source[i];
             return HAL_DMA_CHAN_STATUS_FREE;
         }
         hal_spin_unlock_irqrestore(&dma_lock, __cpsr);
@@ -381,7 +381,7 @@ hal_dma_chan_status_t hal_dma_chan_request(struct sunxi_dma_chan **dma_chan)
 }
 
 hal_dma_status_t hal_dma_prep_memcpy(struct sunxi_dma_chan *chan,
-				       uint32_t dest, uint32_t src, uint32_t len)
+                       uint32_t dest, uint32_t src, uint32_t len)
 {
     struct sunxi_dma_lli *l_item = NULL;
     struct dma_slave_config *config = NULL;
@@ -399,7 +399,7 @@ hal_dma_status_t hal_dma_prep_memcpy(struct sunxi_dma_chan *chan,
     if (!l_item)
     {
         hal_spin_unlock_irqrestore(&dma_lock, __cpsr);
-	return HAL_DMA_STATUS_NO_MEM;
+    return HAL_DMA_STATUS_NO_MEM;
     }
     memset(l_item, 0, sizeof(struct sunxi_dma_lli));
 
@@ -423,8 +423,8 @@ hal_dma_status_t hal_dma_prep_memcpy(struct sunxi_dma_chan *chan,
 }
 
 hal_dma_status_t hal_dma_prep_device(struct sunxi_dma_chan *chan,
-				       uint32_t dest, uint32_t src,
-				       uint32_t len, enum dma_transfer_direction dir)
+                       uint32_t dest, uint32_t src,
+                       uint32_t len, enum dma_transfer_direction dir)
 {
     struct sunxi_dma_lli *l_item = NULL;
     struct dma_slave_config *config = NULL;
@@ -436,15 +436,14 @@ hal_dma_status_t hal_dma_prep_device(struct sunxi_dma_chan *chan,
         return HAL_DMA_STATUS_INVALID_PARAMETER;
     }
 
-    __cpsr = hal_spin_lock_irqsave(&dma_lock);
-
     l_item = (struct sunxi_dma_lli *)dma_alloc_coherent(sizeof(struct sunxi_dma_lli));
     if (!l_item)
     {
-        hal_spin_unlock_irqrestore(&dma_lock, __cpsr);
-	return HAL_DMA_STATUS_NO_MEM;
+        return HAL_DMA_STATUS_NO_MEM;
     }
     memset(l_item, 0, sizeof(struct sunxi_dma_lli));
+
+    __cpsr = hal_spin_lock_irqsave(&dma_lock);
 
     config = &chan->cfg;
 
@@ -485,8 +484,8 @@ hal_dma_status_t hal_dma_prep_device(struct sunxi_dma_chan *chan,
 }
 
 hal_dma_status_t hal_dma_prep_cyclic(struct sunxi_dma_chan *chan,
-				     uint32_t buf_addr, uint32_t buf_len,
-				     uint32_t period_len, enum dma_transfer_direction dir)
+                     uint32_t buf_addr, uint32_t buf_len,
+                     uint32_t period_len, enum dma_transfer_direction dir)
 {
     struct sunxi_dma_lli *l_item = NULL, *prev = NULL;
     uint32_t periods = buf_len / period_len;
@@ -519,12 +518,13 @@ hal_dma_status_t hal_dma_prep_cyclic(struct sunxi_dma_chan *chan,
     config = &chan->cfg;
     for (i = 0; i < periods; i++)
     {
+        hal_spin_unlock_irqrestore(&dma_lock, __cpsr);
         l_item = (struct sunxi_dma_lli *)dma_alloc_coherent(sizeof(struct sunxi_dma_lli));
         if (!l_item)
         {
-            hal_spin_unlock_irqrestore(&dma_lock, __cpsr);
-	    return HAL_DMA_STATUS_NO_MEM;
+            return HAL_DMA_STATUS_NO_MEM;
         }
+        __cpsr = hal_spin_lock_irqsave(&dma_lock);
         memset(l_item, 0, sizeof(struct sunxi_dma_lli));
         if (dir == DMA_MEM_TO_DEV)
         {
@@ -571,8 +571,8 @@ hal_dma_status_t hal_dma_prep_cyclic(struct sunxi_dma_chan *chan,
 }
 
 hal_dma_status_t hal_dma_callback_install(struct sunxi_dma_chan *chan,
-					  dma_callback callback,
-					  void *callback_param)
+                      dma_callback callback,
+                      void *callback_param)
 {
     if (NULL == chan)
     {
@@ -599,7 +599,7 @@ hal_dma_status_t hal_dma_callback_install(struct sunxi_dma_chan *chan,
 }
 
 hal_dma_status_t hal_dma_slave_config(struct sunxi_dma_chan *chan,
-				      struct dma_slave_config *config)
+                      struct dma_slave_config *config)
 {
     uint32_t __cpsr;
 
@@ -791,9 +791,10 @@ hal_dma_status_t hal_dma_chan_free(struct sunxi_dma_chan *chan)
     irq_val &= ~(SHIFT_IRQ_MASK(chan->irq_type, chan->chan_count));
     hal_writel(irq_val, DMA_IRQ_EN(high));
 
-    sunxi_dma_free_ill(chan);
     chan->used = 0;
     hal_spin_unlock_irqrestore(&dma_lock, __cpsr);
+
+    sunxi_dma_free_ill(chan);
 
     return HAL_DMA_STATUS_OK;
 }
@@ -803,8 +804,8 @@ hal_dma_status_t hal_dma_chan_desc_free(struct sunxi_dma_chan *chan)
     /* FIXME: Interrupt context cannot release memory in melis OS. */
     if (hal_interrupt_get_nest() <= 0)
     {
-	sunxi_dma_free_ill(chan);
-	return HAL_DMA_STATUS_OK;
+        sunxi_dma_free_ill(chan);
+        return HAL_DMA_STATUS_OK;
     }
     /* Freeing memory in interrupt is not allowed */
     return HAL_DMA_STATUS_ERR_PERM;

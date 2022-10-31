@@ -5,19 +5,19 @@
 *                (c) Copyright 2006-2010, All winners Co,Ld.
 *                        All Right Reserved
 *
-* FileName		:  uvc_video.h
+* FileName      :  uvc_video.h
 *
-* Author		:  Kingvan
+* Author        :  Kingvan
 *
-* Date			:  2013/03/26
+* Date          :  2013/03/26
 *
-* Description	:  USB VIDEO CONTROL Driver÷–∂‘USBΩ”ø⁄…Ë±∏µƒ¥¶¿Ì
+* Description   :  USB VIDEO CONTROL Driver‰∏≠ÂØπUSBÊé•Âè£ËÆæÂ§áÁöÑÂ§ÑÁêÜ
 *
-* Others		:  NULL
+* Others        :  NULL
 *
 * History:
-*		<time> 			<author>	 <version >		<desc>
-*	   2013.03.26		Kingvan			1.0			build this file
+*       <time>          <author>     <version >     <desc>
+*      2013.03.26       Kingvan         1.0         build this file
 *
 ********************************************************************************
 */

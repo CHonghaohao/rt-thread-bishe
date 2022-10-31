@@ -51,10 +51,10 @@ extern "C" {
  * SDIO function CIS tuple (unknown to the core)
  */
 struct sdio_func_tuple {
-	struct sdio_func_tuple *next;
-	unsigned char code;
-	unsigned char size;
-	unsigned char data[0];
+    struct sdio_func_tuple *next;
+    unsigned char code;
+    unsigned char size;
+    unsigned char data[0];
 };
 
 //#define SDIO_DEBUG
@@ -95,16 +95,16 @@ struct sdio_func_tuple {
 /*
   SDIO status in R5
   Type
-	e : error bit
-	s : status bit
-	r : detected and set for the actual command response
-	x : detected and set during command execution. the host must poll
+    e : error bit
+    s : status bit
+    r : detected and set for the actual command response
+    x : detected and set during command execution. the host must poll
             the card by sending status command in order to read these bits.
   Clear condition
-	a : according to the card state
-	b : always related to the previous command. Reception of
+    a : according to the card state
+    b : always related to the previous command. Reception of
             a valid command will clear it (with a delay of one command)
-	c : clear by read
+    c : clear by read
  */
 
 #define R5_COM_CRC_ERROR                (1 << 15)       /* er, b */
@@ -274,50 +274,50 @@ sdio_writeb(struct mmc_card *card, uint32_t func_num, const uint8_t b,
             uint32_t addr, int32_t  *err_ret);
 
 /**
- *	sdio_readw - read a 16 bit integer from a SDIO function
- *	@func: SDIO function to access
- *	@addr: address to read
- *	@err_ret: optional status value from transfer
+ *  sdio_readw - read a 16 bit integer from a SDIO function
+ *  @func: SDIO function to access
+ *  @addr: address to read
+ *  @err_ret: optional status value from transfer
  *
- *	Reads a 16 bit integer from the address space of a given SDIO
- *	function. If there is a problem reading the address, 0xffff
- *	is returned and @err_ret will contain the error code.
+ *  Reads a 16 bit integer from the address space of a given SDIO
+ *  function. If there is a problem reading the address, 0xffff
+ *  is returned and @err_ret will contain the error code.
  */
 extern uint16_t sdio_readw(struct sdio_func *func, unsigned int addr, int *err_ret);
 /**
- *	sdio_writew - write a 16 bit integer to a SDIO function
- *	@func: SDIO function to access
- *	@b: integer to write
- *	@addr: address to write to
- *	@err_ret: optional status value from transfer
+ *  sdio_writew - write a 16 bit integer to a SDIO function
+ *  @func: SDIO function to access
+ *  @b: integer to write
+ *  @addr: address to write to
+ *  @err_ret: optional status value from transfer
  *
- *	Writes a 16 bit integer to the address space of a given SDIO
- *	function. @err_ret will contain the status of the actual
- *	transfer.
+ *  Writes a 16 bit integer to the address space of a given SDIO
+ *  function. @err_ret will contain the status of the actual
+ *  transfer.
  */
 extern void sdio_writew(struct sdio_func *func, uint16_t b, unsigned int addr, int *err_ret);
 /**
- *	sdio_readl - read a 32 bit integer from a SDIO function
- *	@func: SDIO function to access
- *	@addr: address to read
- *	@err_ret: optional status value from transfer
+ *  sdio_readl - read a 32 bit integer from a SDIO function
+ *  @func: SDIO function to access
+ *  @addr: address to read
+ *  @err_ret: optional status value from transfer
  *
- *	Reads a 32 bit integer from the address space of a given SDIO
- *	function. If there is a problem reading the address,
- *	0xffffffff is returned and @err_ret will contain the error
- *	code.
+ *  Reads a 32 bit integer from the address space of a given SDIO
+ *  function. If there is a problem reading the address,
+ *  0xffffffff is returned and @err_ret will contain the error
+ *  code.
  */
 extern uint32_t sdio_readl(struct sdio_func *func, unsigned int addr, int *err_ret);
 /**
- *	sdio_writel - write a 32 bit integer to a SDIO function
- *	@func: SDIO function to access
- *	@b: integer to write
- *	@addr: address to write to
- *	@err_ret: optional status value from transfer
+ *  sdio_writel - write a 32 bit integer to a SDIO function
+ *  @func: SDIO function to access
+ *  @b: integer to write
+ *  @addr: address to write to
+ *  @err_ret: optional status value from transfer
  *
- *	Writes a 32 bit integer to the address space of a given SDIO
- *	function. @err_ret will contain the status of the actual
- *	transfer.
+ *  Writes a 32 bit integer to the address space of a given SDIO
+ *  function. @err_ret will contain the status of the actual
+ *  transfer.
  */
 extern void sdio_writel(struct sdio_func *func, uint32_t b, unsigned int addr, int *err_ret);
 

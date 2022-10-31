@@ -55,7 +55,7 @@ static int clk_factor_set_rate(struct clk_hw *hw, unsigned long rate,
         unsigned long p_rate;
 
         p_rate = (rate / fix->mult) * fix->div;
-	return clk_hw_set_rate(clk_hw_get_parent(hw), p_rate);
+    return clk_hw_set_rate(clk_hw_get_parent(hw), p_rate);
 
     }
 

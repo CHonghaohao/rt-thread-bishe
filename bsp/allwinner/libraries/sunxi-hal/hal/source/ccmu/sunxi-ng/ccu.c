@@ -38,7 +38,7 @@ static LIST_HEAD(clk_root_list);
 const char *clk_hw_get_name(const struct clk_hw *hw)
 {
     if (!hw || !hw->core)
-	return NULL;
+    return NULL;
 
     return hw->core->name;
 }
@@ -46,7 +46,7 @@ const char *clk_hw_get_name(const struct clk_hw *hw)
 unsigned long clk_hw_get_flags(const struct clk_hw *hw)
 {
     if (!hw || !hw->core)
-	return 0;
+    return 0;
 
     return hw->core->flags;
 }
@@ -54,7 +54,7 @@ unsigned long clk_hw_get_flags(const struct clk_hw *hw)
 struct clk_core *clk_hw_get_core(const struct clk_hw *hw)
 {
     if (!hw || !hw->core)
-	return NULL;
+    return NULL;
 
     return hw->core;
 }
@@ -635,7 +635,7 @@ int clk_hw_register(struct clk_hw *hw)
     if (!core->clk)
     {
         hal_log_err("out of memory\n");
-	goto fail_clk;
+    goto fail_clk;
     }
     core->clk->core = core;
     core->clk->name = core->name;
@@ -692,8 +692,8 @@ int clk_hw_unregister(struct clk_hw *hw)
         }
         list_del(&core->node);
         free(core->clk);
-	free(core);
-	return 0;
+    free(core);
+    return 0;
     }
 
     return 0;
@@ -972,7 +972,7 @@ struct clk_core *clk_core_get_parent(struct clk_core *core)
     }
 
     if (!core->parent)
-	core->parent = __clk_init_parent(core);
+    core->parent = __clk_init_parent(core);
 
     return core->parent;
 }

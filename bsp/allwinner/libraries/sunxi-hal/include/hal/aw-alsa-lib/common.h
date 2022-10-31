@@ -41,49 +41,49 @@ extern "C" {
 /* Other */
 static inline int snd_card_index(const char *name)
 {
-	return ksnd_card_index(name);
+    return ksnd_card_index(name);
 }
 
 static inline const char *snd_card_name(int index)
 {
-	return ksnd_card_name(index);
+    return ksnd_card_name(index);
 }
 
 static inline int snd_card_num(void)
 {
-	return ksnd_card_num();
+    return ksnd_card_num();
 }
 
 static inline int snd_card_info(int card_num)
 {
-	return ksnd_card_info(card_num);
+    return ksnd_card_info(card_num);
 }
 
 static inline int snd_card_pcm_info(int card_num, int device_num, int stream)
 {
-	return ksnd_pcm_stream_info(card_num, device_num, stream);
+    return ksnd_pcm_stream_info(card_num, device_num, stream);
 }
 
 static inline void asound_list(void)
 {
         int i, ret = 0;
 
-	ret = snd_card_num();
-	if (ret < 0) {
-		printf("no registered card...\n");
-		return;
-	}
-	printf("============= Sound Card list =============\n");
-	printf("%8s%20s\n", "card_num", "card_name");
-	for (i = 0; i < ret; i++) {
-		if (i != snd_card_index(snd_card_name(i))) {
-			printf("card_num%d not equal index convert"
-				"from name:%s\n", i, snd_card_name(i));
-			return;
-		}
-		printf("%8d%20s\n", i, snd_card_name(i));
-	}
-	printf("\n");
+    ret = snd_card_num();
+    if (ret < 0) {
+        printf("no registered card...\n");
+        return;
+    }
+    printf("============= Sound Card list =============\n");
+    printf("%8s%20s\n", "card_num", "card_name");
+    for (i = 0; i < ret; i++) {
+        if (i != snd_card_index(snd_card_name(i))) {
+            printf("card_num%d not equal index convert"
+                "from name:%s\n", i, snd_card_name(i));
+            return;
+        }
+        printf("%8d%20s\n", i, snd_card_name(i));
+    }
+    printf("\n");
 }
 
 #endif

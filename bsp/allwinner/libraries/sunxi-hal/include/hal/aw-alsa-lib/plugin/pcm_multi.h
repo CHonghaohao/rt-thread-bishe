@@ -37,22 +37,22 @@
 #include <sys/types.h>
 
 typedef struct {
-	const char *pcm_alias;
-	const char *pcm;
-	int channels;
+    const char *pcm_alias;
+    const char *pcm;
+    int channels;
 } snd_pcm_multi_slave_config_t;
 
 typedef struct {
-	int cchannel;
-	const char *pcm_alias;
-	int schannel;
+    int cchannel;
+    const char *pcm_alias;
+    int schannel;
 } snd_pcm_multi_binding_config_t;
 
-#define ALSA_PCM_MULTI_SLAVES_MAX	(5)
+#define ALSA_PCM_MULTI_SLAVES_MAX   (5)
 typedef struct {
-	const char *type;
-	snd_pcm_multi_slave_config_t slaves[ALSA_PCM_MULTI_SLAVES_MAX];
-	snd_pcm_multi_binding_config_t bindings[];
+    const char *type;
+    snd_pcm_multi_slave_config_t slaves[ALSA_PCM_MULTI_SLAVES_MAX];
+    snd_pcm_multi_binding_config_t bindings[];
 } snd_pcm_multi_config_t;
 
 #endif /* __AW_ALSA_PCM_MULTI_H */

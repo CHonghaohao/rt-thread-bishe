@@ -107,7 +107,7 @@ static void sunxi_timer_setup(uint32_t tick, uint32_t timer)
 
 int sunxi_timer_set_oneshot(uint32_t delay_us, uint32_t timer, timer_callback callback, void *callback_param)
 {
-    uint32_t tick = delay_us * 25;
+    uint32_t tick = delay_us * 24;
 
     if (tick < g_timer[timer].min_delta_ticks || tick > g_timer[timer].max_delta_ticks)
     {
@@ -131,7 +131,7 @@ int sunxi_timer_set_oneshot(uint32_t delay_us, uint32_t timer, timer_callback ca
 
 int sunxi_timer_set_periodic(uint32_t delay_us, uint32_t timer, timer_callback callback, void *callback_param)
 {
-    uint32_t tick = delay_us * 25;
+    uint32_t tick = delay_us * 24;
 
     if (tick < g_timer[timer].min_delta_ticks || tick > g_timer[timer].max_delta_ticks)
     {
@@ -174,7 +174,7 @@ void sunxi_timer_init(hal_timer_id_t id)
 
     if (request_irq(g_timer[id].irq, sunxi_timer_irq_handle, 0, "timer-ctl", &g_timer[id]) < 0)
     {
-	return ;
+    return ;
     }
 
     /*enable timer irq*/

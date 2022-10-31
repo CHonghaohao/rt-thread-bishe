@@ -35,13 +35,13 @@
 
 uint32_t mbus_get_cpu_ddr(void)
 {
-	return MBUS_PMU->MC_CPU_BWCR;
+    return MBUS_PMU->MC_CPU_BWCR;
 }
 
 uint32_t mbus_get_gpu_ddr(void)
 {
 #ifdef CONFIG_DRIVERS_MBUS_GPU_BW
-	return MBUS_PMU->MC_GPU_BWCR;
+    return MBUS_PMU->MC_GPU_BWCR;
 #else
     return 0;
 #endif
@@ -50,7 +50,7 @@ uint32_t mbus_get_gpu_ddr(void)
 uint32_t mbus_get_rv_sys_ddr(void)
 {
 #ifdef CONFIG_DRIVERS_MBUS_RV_SYS_BW
-	return MBUS_PMU->MC_RV_SYS_BWCR;
+    return MBUS_PMU->MC_RV_SYS_BWCR;
 #else
     return 0;
 #endif
@@ -59,7 +59,7 @@ uint32_t mbus_get_rv_sys_ddr(void)
 uint32_t mbus_get_mahb_ddr(void)
 {
 #ifdef CONFIG_DRIVERS_MBUS_MAHB_BW
-	return MBUS_PMU->MC_MAHB_BWCR;
+    return MBUS_PMU->MC_MAHB_BWCR;
 #else
     return 0;
 #endif
@@ -68,7 +68,7 @@ uint32_t mbus_get_mahb_ddr(void)
 uint32_t mbus_get_dma_ddr(void)
 {
 #ifdef CONFIG_DRIVERS_MBUS_DMA_BW
-	return MBUS_PMU->MC_DMA_BWCR;
+    return MBUS_PMU->MC_DMA_BWCR;
 #else
     return 0;
 #endif
@@ -77,7 +77,7 @@ uint32_t mbus_get_dma_ddr(void)
 uint32_t mbus_get_ce_ddr(void)
 {
 #ifdef CONFIG_DRIVERS_MBUS_CE_BW
-	return MBUS_PMU->MC_CE_BWCR;
+    return MBUS_PMU->MC_CE_BWCR;
 #else
     return 0;
 #endif
@@ -86,7 +86,7 @@ uint32_t mbus_get_ce_ddr(void)
 uint32_t mbus_get_tvd_ddr(void)
 {
 #ifdef CONFIG_DRIVERS_MBUS_TVD_BW
-	return MBUS_PMU->MC_TVD_BWCR;
+    return MBUS_PMU->MC_TVD_BWCR;
 #else
     return 0;
 #endif
@@ -95,7 +95,7 @@ uint32_t mbus_get_tvd_ddr(void)
 uint32_t mbus_get_csi_ddr(void)
 {
 #ifdef CONFIG_DRIVERS_MBUS_CSI_BW
-	return MBUS_PMU->MC_CSI_BWCR;
+    return MBUS_PMU->MC_CSI_BWCR;
 #else
     return 0;
 #endif
@@ -104,7 +104,7 @@ uint32_t mbus_get_csi_ddr(void)
 uint32_t mbus_get_dsp_sys_ddr(void)
 {
 #ifdef CONFIG_DRIVERS_MBUS_DSP_SYS_BW
-	return MBUS_PMU->MC_DSP_SYS_BWCR;
+    return MBUS_PMU->MC_DSP_SYS_BWCR;
 #else
     return 0;
 #endif
@@ -113,7 +113,7 @@ uint32_t mbus_get_dsp_sys_ddr(void)
 uint32_t mbus_get_g2d_ddr(void)
 {
 #ifdef CONFIG_DRIVERS_MBUS_G2D_BW
-	return MBUS_PMU->MC_G2D_BWCR;
+    return MBUS_PMU->MC_G2D_BWCR;
 #else
     return 0;
 #endif
@@ -122,7 +122,7 @@ uint32_t mbus_get_g2d_ddr(void)
 uint32_t mbus_get_di_ddr(void)
 {
 #ifdef CONFIG_DRIVERS_MBUS_DI_BW
-	return MBUS_PMU->MC_DI_BWCR;
+    return MBUS_PMU->MC_DI_BWCR;
 #else
     return 0;
 #endif
@@ -131,7 +131,7 @@ uint32_t mbus_get_di_ddr(void)
 uint32_t mbus_get_iommu_ddr(void)
 {
 #ifdef CONFIG_DRIVERS_MBUS_DI_BW
-	return MBUS_PMU->MC_IOMMU_BWCR;
+    return MBUS_PMU->MC_IOMMU_BWCR;
 #else
     return 0;
 #endif
@@ -139,26 +139,26 @@ uint32_t mbus_get_iommu_ddr(void)
 
 uint32_t mbus_get_ve_ddr(void)
 {
-	return MBUS_PMU->MC_VE_BWCR;
+    return MBUS_PMU->MC_VE_BWCR;
 }
 
 uint32_t mbus_get_de_ddr(void)
 {
-	return MBUS_PMU->MC_DE_BWCR;
+    return MBUS_PMU->MC_DE_BWCR;
 }
 
 uint32_t mbus_get_oth_ddr(void)
 {
-	return MBUS_PMU->MC_OTHER_BWCR;
+    return MBUS_PMU->MC_OTHER_BWCR;
 }
 
 uint32_t mbus_get_total_ddr(void)
 {
-	return MBUS_PMU->MC_TOTAL_BWCR;
+    return MBUS_PMU->MC_TOTAL_BWCR;
 }
 
 void mbus_pmu_enable(void)
 {
-	//unit : 1Byte.
-	MBUS_PMU->MC_MCGCR = 0x10000001;
+    //unit : 1Byte.
+    MBUS_PMU->MC_MCGCR = 0x10000001;
 }

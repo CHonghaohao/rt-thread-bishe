@@ -39,19 +39,19 @@ struct int_isr_node isr_table[SUNXI_RINTC_IRQ_SOURCE_MAX];
 */
 s32 interrupt_init(void)
 {
-	s32 index;
+    s32 index;
 
-	/*initialize interrupt controller */
-	intc_init();
+    /*initialize interrupt controller */
+    intc_init();
 
-	/*initialize ISR table */
-	for (index = 0; index < SUNXI_RINTC_IRQ_SOURCE_MAX; index++) {
-		isr_table[index].pisr = isr_default;
-		isr_table[index].parg = NULL;
-	}
+    /*initialize ISR table */
+    for (index = 0; index < SUNXI_RINTC_IRQ_SOURCE_MAX; index++) {
+        isr_table[index].pisr = isr_default;
+        isr_table[index].parg = NULL;
+    }
 
-	/*interrupt manager initialize succeeded */
-	return OK;
+    /*interrupt manager initialize succeeded */
+    return OK;
 }
 
 /*
@@ -67,9 +67,9 @@ s32 interrupt_init(void)
 */
 s32 interrupt_exit(void)
 {
-	intc_exit();
+    intc_exit();
 
-	return OK;
+    return OK;
 }
 
 /*
@@ -85,7 +85,7 @@ s32 interrupt_exit(void)
 */
 s32 interrupt_enable(u32 intno)
 {
-	return intc_enable_interrupt(intno);
+    return intc_enable_interrupt(intno);
 }
 
 /*
@@ -101,7 +101,7 @@ s32 interrupt_enable(u32 intno)
 */
 s32 interrupt_disable(u32 intno)
 {
-	return intc_disable_interrupt(intno);
+    return intc_disable_interrupt(intno);
 }
 
 /*
@@ -117,26 +117,26 @@ s32 interrupt_disable(u32 intno)
 */
 s32 interrupt_set_nmi_trigger(u32 type)
 {
-	u32 value;
+    u32 value;
 
-	pintc_regs->control = type;
+    pintc_regs->control = type;
 
-	/*mask cpus nmi irq */
-	value = pintc_regs->mask;
-	value |= 0x1;
-	pintc_regs->mask = value;
+    /*mask cpus nmi irq */
+    value = pintc_regs->mask;
+    value |= 0x1;
+    pintc_regs->mask = value;
 
-	return OK;
+    return OK;
 }
 
 s32 interrupt_set_mask(u32 intno, u32 mask)
 {
-	return intc_set_mask(intno, mask);
+    return intc_set_mask(intno, mask);
 }
 
 s32 interrupt_set_group_config(u32 grp_irq_num, u32 mask)
 {
-	return intc_set_group_config(grp_irq_num, mask);
+    return intc_set_group_config(grp_irq_num, mask);
 }
 
 /*
@@ -156,14 +156,14 @@ s32 interrupt_set_group_config(u32 grp_irq_num, u32 mask)
 */
 s32 install_isr(u32 intno, __pISR_hdle_t pisr, void *parg)
 {
-	/*intno can't beyond then IRQ_SOURCE_MAX */
-	/* ASSERT(intno < IRQ_SOUCE_MAX); */
+    /*intno can't beyond then IRQ_SOURCE_MAX */
+    /* ASSERT(intno < IRQ_SOUCE_MAX); */
 
-	/*default isr, install directly */
-	isr_table[intno].pisr = pisr;
-	isr_table[intno].parg = parg;
+    /*default isr, install directly */
+    isr_table[intno].pisr = pisr;
+    isr_table[intno].parg = parg;
 
-	return OK;
+    return OK;
 }
 
 /*
@@ -180,22 +180,22 @@ s32 install_isr(u32 intno, __pISR_hdle_t pisr, void *parg)
 */
 s32 uninstall_isr(u32 intno, __pISR_hdle_t pisr)
 {
-	/*intno can't beyond then IRQ_SOURCE_MAX */
-	/* ASSERT(intno < IRQ_SOUCE_MAX); */
+    /*intno can't beyond then IRQ_SOURCE_MAX */
+    /* ASSERT(intno < IRQ_SOUCE_MAX); */
 
-	if (isr_table[intno].pisr == pisr) {
-		/*uninstall isr */
-		isr_table[intno].pisr = isr_default;
-		isr_table[intno].parg = NULL;
-	} else {
-		/*
-		 * don't support shared interrupt now,
-		 * by sunny at 2012-5-3 11:20:28.
-		 */
-		return -1;
-	}
+    if (isr_table[intno].pisr == pisr) {
+        /*uninstall isr */
+        isr_table[intno].pisr = isr_default;
+        isr_table[intno].parg = NULL;
+    } else {
+        /*
+         * don't support shared interrupt now,
+         * by sunny at 2012-5-3 11:20:28.
+         */
+        return -1;
+    }
 
-	return OK;
+    return OK;
 }
 
 /*
@@ -211,52 +211,52 @@ s32 uninstall_isr(u32 intno, __pISR_hdle_t pisr)
 */
 s32 interrupt_entry(void)
 {
-	u32 intno = intc_get_current_interrupt();
+    u32 intno = intc_get_current_interrupt();
 
-	/*intno can't beyond then IRQ_SOURCE_MAX */
-	/* ASSERT(intno < IRQ_SOUCE_MAX); */
+    /*intno can't beyond then IRQ_SOURCE_MAX */
+    /* ASSERT(intno < IRQ_SOUCE_MAX); */
 
-	/*
-	 * process interrupt by call isr,
-	 * not support shared intterrupt.
-	 */
-	(isr_table[intno].pisr) (0, isr_table[intno].parg);
+    /*
+     * process interrupt by call isr,
+     * not support shared intterrupt.
+     */
+    (isr_table[intno].pisr) (0, isr_table[intno].parg);
 
-	return OK;
+    return OK;
 }
 
 s32 interrupt_query_pending(u32 intno)
 {
-	volatile u32 pending;
+    volatile u32 pending;
 
-	if (intno <= 31)
-		pending = pintc_regs->pending & (1 << intno);
-	else if (intno > 31 && intno <= 63)
-		pending = pintc_regs->pending1 & (1 << (intno - 32));
-	else
-		pending = pintc_regs->pending2 & (1 << (intno - 64));
-	return pending;
+    if (intno <= 31)
+        pending = pintc_regs->pending & (1 << intno);
+    else if (intno > 31 && intno <= 63)
+        pending = pintc_regs->pending1 & (1 << (intno - 32));
+    else
+        pending = pintc_regs->pending2 & (1 << (intno - 64));
+    return pending;
 }
 
 s32 interrupt_clear_pending(u32 intno)
 {
-	if (intno <= 31)
-		pintc_regs->pending = (1 << intno);
-	else if (intno > 31 && intno <= 63)
-		pintc_regs->pending = (1 << (intno - 32));
-	else
-		pintc_regs->pending = (1 << (intno - 64));
-	return OK;
+    if (intno <= 31)
+        pintc_regs->pending = (1 << intno);
+    else if (intno > 31 && intno <= 63)
+        pintc_regs->pending = (1 << (intno - 32));
+    else
+        pintc_regs->pending = (1 << (intno - 64));
+    return OK;
 }
 
 s32 isr_default(int dummy, void *arg)
 {
-	return true;
+    return true;
 }
 
 u32 interrupt_get_current_intno(void)
 {
-	return intc_get_current_interrupt();
+    return intc_get_current_interrupt();
 }
 
 /*the backup of enable and mask register*/
@@ -265,39 +265,39 @@ u32 intc_mask[3];
 
 s32 interrupt_standby_enter(void)
 {
-	/*backup registers */
-	intc_enable[0] = pintc_regs->enable;
-	intc_enable[1] = pintc_regs->enable1;
-	intc_enable[2] = pintc_regs->enable2;
-	intc_mask[0] = pintc_regs->mask;
-	intc_mask[1] = pintc_regs->mask1;
-	intc_mask[2] = pintc_regs->mask2;
+    /*backup registers */
+    intc_enable[0] = pintc_regs->enable;
+    intc_enable[1] = pintc_regs->enable1;
+    intc_enable[2] = pintc_regs->enable2;
+    intc_mask[0] = pintc_regs->mask;
+    intc_mask[1] = pintc_regs->mask1;
+    intc_mask[2] = pintc_regs->mask2;
 
-	/*disable all interrupt */
-	pintc_regs->enable = 0;
-	pintc_regs->enable1 = 0;
-	pintc_regs->enable2 = 0;
-	pintc_regs->mask = 0;
-	pintc_regs->mask1 = 0;
-	pintc_regs->mask2 = 0;
+    /*disable all interrupt */
+    pintc_regs->enable = 0;
+    pintc_regs->enable1 = 0;
+    pintc_regs->enable2 = 0;
+    pintc_regs->mask = 0;
+    pintc_regs->mask1 = 0;
+    pintc_regs->mask2 = 0;
 
-	return OK;
+    return OK;
 }
 
 s32 interrupt_standby_exit(void)
 {
-	/*clear standby pendings */
-	pintc_regs->pending = 0xffffffff;
-	pintc_regs->pending1 = 0xffffffff;
-	pintc_regs->pending2 = 0xffffffff;
+    /*clear standby pendings */
+    pintc_regs->pending = 0xffffffff;
+    pintc_regs->pending1 = 0xffffffff;
+    pintc_regs->pending2 = 0xffffffff;
 
-	/*restore registers */
-	pintc_regs->enable = intc_enable[0];
-	pintc_regs->enable1 = intc_enable[1];
-	pintc_regs->enable2 = intc_enable[2];
-	pintc_regs->mask = intc_mask[0];
-	pintc_regs->mask1 = intc_mask[1];
-	pintc_regs->mask2 = intc_mask[2];
+    /*restore registers */
+    pintc_regs->enable = intc_enable[0];
+    pintc_regs->enable1 = intc_enable[1];
+    pintc_regs->enable2 = intc_enable[2];
+    pintc_regs->mask = intc_mask[0];
+    pintc_regs->mask1 = intc_mask[1];
+    pintc_regs->mask2 = intc_mask[2];
 
-	return OK;
+    return OK;
 }

@@ -128,13 +128,13 @@ int32_t usb_virt_bus_drv_reg(struct usb_host_func_drv *drv)
         return 0;
     }
 
-	hal_log_info("--usb_virt_bus_drv_reg---1-2--\n");
+    hal_log_info("--usb_virt_bus_drv_reg---1-2--\n");
     //UsbLock(my_usb_virt_bus.BusLock);
     hal_sem_wait(my_usb_virt_bus.BusLock);
 
     /* 将driver添加到bus上 */
     list_head_malloc_and_add(drv, &(my_usb_virt_bus.drv_list));
-	hal_log_info("--usb_virt_bus_drv_reg---1-3--\n");
+    hal_log_info("--usb_virt_bus_drv_reg---1-3--\n");
     /* 先前可能已经有device连上bus了, 这里就去寻找bus上与之匹配的deivce */
     list_start = &(my_usb_virt_bus.dev_list);
     list_now = list_start->next;
@@ -158,7 +158,7 @@ int32_t usb_virt_bus_drv_reg(struct usb_host_func_drv *drv)
         {
             /* 事先尝试bind到一起 */
             dev->func_drv = drv;
-		    hal_log_info("---usb_virt_bus_drv_reg----1---\n");
+            hal_log_info("---usb_virt_bus_drv_reg----1---\n");
             if (drv->func_drv_ext.probe_ext(dev) == 0)
             {
                 /* device 和 driver 匹配成功, 就将 device 添加到 driver 的virt_dev_list中*/
@@ -169,7 +169,7 @@ int32_t usb_virt_bus_drv_reg(struct usb_host_func_drv *drv)
                 /* 匹配失败, 就清空。device无人认领 */
                 dev->func_drv = NULL;
             }
-		    hal_log_info("---usb_virt_bus_drv_reg----2---\n");
+            hal_log_info("---usb_virt_bus_drv_reg----2---\n");
         }
 
         //UsbUnLock(dev->usb_virt_sub_dev_semi);
@@ -326,7 +326,7 @@ int32_t usb_virt_bus_dev_add(struct usb_host_virt_sub_dev *dev)
         hal_sem_wait(dev->usb_virt_sub_dev_semi);
         list_start = &(my_usb_virt_bus.drv_list);
         list_now = list_start->next;
-		hal_log_info("--usb_virt_bus_dev_add---0\n");
+        hal_log_info("--usb_virt_bus_dev_add---0\n");
 
         while (list_start != list_now)
         {
@@ -334,12 +334,12 @@ int32_t usb_virt_bus_dev_add(struct usb_host_virt_sub_dev *dev)
             list_now = list_now->next;
             /* 事先尝试bind到一起 */
             dev->func_drv = func_drv;
-		    hal_log_info("--usb_virt_bus_dev_add---1\n");
+            hal_log_info("--usb_virt_bus_dev_add---1\n");
             if (func_drv->func_drv_ext.probe_ext(dev) == 0)
             {
                 /* add 到drv的 dev list中 */
                 //USB_OS_ENTER_CRITICAL(sr);
-		        sr = hal_spin_lock_irqsave(&device_lock);
+                sr = hal_spin_lock_irqsave(&device_lock);
                 list_head_malloc_and_add(dev, &(func_drv->virt_dev_list));
                 hal_spin_unlock_irqrestore(&device_lock, sr);
                 //USB_OS_EXIT_CRITICAL(sr);
@@ -349,7 +349,7 @@ int32_t usb_virt_bus_dev_add(struct usb_host_virt_sub_dev *dev)
             {
                 dev->func_drv = NULL; /* 失败则清空 */
             }
-		hal_log_info("--usb_virt_bus_dev_add---2\n");
+        hal_log_info("--usb_virt_bus_dev_add---2\n");
         }
 
         //UsbUnLock(dev->usb_virt_sub_dev_semi);
@@ -359,7 +359,7 @@ int32_t usb_virt_bus_dev_add(struct usb_host_virt_sub_dev *dev)
 
     /* 将dev添加到supper bus */
     //USB_OS_ENTER_CRITICAL(sr);
-	sr = hal_spin_lock_irqsave(&device_lock);
+    sr = hal_spin_lock_irqsave(&device_lock);
     list_head_malloc_and_add(dev, &(my_usb_virt_bus.dev_list));
     hal_spin_unlock_irqrestore(&device_lock, sr);
     hal_sem_post(my_usb_virt_bus.BusLock);

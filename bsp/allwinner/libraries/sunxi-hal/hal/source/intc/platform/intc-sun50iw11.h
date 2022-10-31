@@ -37,12 +37,12 @@
 #if defined(CONFIG_CORE_DSP0)
 #include <irqs.h>
 
-#define SUNXI_R_INTC_PBASE	(0x07021000)
+#define SUNXI_R_INTC_PBASE  (0x07021000)
 
-#define SUNXI_DSP_IRQ_R_INTC		20
+#define SUNXI_DSP_IRQ_R_INTC        20
 
-#define SUNXI_RINTC_IRQ_NMI		(RINTC_IRQ_MASK | 0) /* not use */
-#define SUNXI_RINTC_IRQ_SOURCE_MAX	87	/* FIXME: can be decreased */
+#define SUNXI_RINTC_IRQ_NMI     (RINTC_IRQ_MASK | 0) /* not use */
+#define SUNXI_RINTC_IRQ_SOURCE_MAX  87  /* FIXME: can be decreased */
 #endif /* CONFIG_CORE_DSP0 */
 
 #endif /*__INTC_SUN50IW11_H__  */

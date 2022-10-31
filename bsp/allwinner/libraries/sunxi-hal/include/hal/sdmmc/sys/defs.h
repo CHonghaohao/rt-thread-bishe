@@ -4,7 +4,7 @@
 
 /*-
  * Copyright (c) 1991, 1993
- *	The Regents of the University of California.  All rights reserved.
+ *  The Regents of the University of California.  All rights reserved.
  *
  * This code is derived from software contributed to Berkeley by
  * Berkeley Software Design, Inc.
@@ -33,7 +33,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  *
- *	@(#)cdefs.h	8.8 (Berkeley) 1/9/95
+ *  @(#)cdefs.h 8.8 (Berkeley) 1/9/95
  * $FreeBSD$
  */
 
@@ -49,16 +49,16 @@
 
 #ifndef offsetof
 #define offsetof(type, field) \
-	((size_t)(uintptr_t)((const volatile void *)&((type *)0)->field))
+    ((size_t)(uintptr_t)((const volatile void *)&((type *)0)->field))
 #endif
 
 #ifndef __offsetof
-#define __offsetof(type, field)	offsetof(type, field)
+#define __offsetof(type, field) offsetof(type, field)
 #endif
 
 #ifndef __containerof
 #define __containerof(ptr, type, field) \
-	__DEQUALIFY(type *, (const volatile char *)(ptr) - offsetof(type, field))
+    __DEQUALIFY(type *, (const volatile char *)(ptr) - offsetof(type, field))
 #endif
 
 #ifndef container_of

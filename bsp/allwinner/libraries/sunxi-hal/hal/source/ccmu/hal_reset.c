@@ -71,7 +71,7 @@ struct reset_control *hal_reset_control_get(hal_reset_type_t type, hal_reset_id_
 int hal_reset_control_put(struct reset_control *reset)
 {
     if (!reset)
-	return 0;
+    return 0;
 
     free(reset);
     return 0;
