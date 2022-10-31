@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2018, RT-Thread Development Team
+ * Copyright (c) 2006-2022, RT-Thread Development Team
  *
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -24,7 +24,7 @@ static float cortexm_cputime_getres(void)
     return ret;
 }
 
-static uint32_t cortexm_cputime_gettime(void)
+static uint64_t cortexm_cputime_gettime(void)
 {
     return DWT->CYCCNT;
 }

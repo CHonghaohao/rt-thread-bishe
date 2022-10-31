@@ -10,6 +10,7 @@
  */
 
 #include <rtdevice.h>
+#include <time.h>
 #include "clock_time.h"
 
 static struct timeval _timevalue;
@@ -88,6 +89,7 @@ int clock_getres(clockid_t clockid, struct timespec *res)
         break;
 
 #ifdef RT_USING_CPUTIME
+    case CLOCK_MONOTONIC:
     case CLOCK_CPUTIME_ID:
         res->tv_sec  = 0;
         res->tv_nsec = clock_cpu_getres();
@@ -127,6 +129,7 @@ int clock_gettime(clockid_t clockid, struct timespec *tp)
         break;
 
 #ifdef RT_USING_CPUTIME
+    case CLOCK_MONOTONIC:
     case CLOCK_CPUTIME_ID:
         {
             float unit = 0;

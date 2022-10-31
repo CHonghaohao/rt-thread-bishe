@@ -95,6 +95,12 @@ if RT_USING_CPUTIME
         help
             Some Cortex-M3/4/7 MCU has Data Watchpoint and Trace Register, use
             the cycle counter in DWT for CPU time.
+    config RT_USING_CPUTIME_RISCV
+        bool "Use rdtime instructions for CPU time"
+        default y
+        depends on ARCH_RISCV64
+        help
+            Some RISCV64 MCU Use rdtime instructions read CPU time.
 endif
 
 config RT_USING_I2C
