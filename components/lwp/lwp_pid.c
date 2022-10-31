@@ -336,6 +336,12 @@ struct rt_lwp* lwp_new(void)
     }
     lwp->pid = pid;
     lwp_pid_set_lwp(pid, lwp);
+
+#ifdef LWP_ENABLE_ASID
+    lwp->generation = 0;
+    lwp->asid = 0;
+#endif
+
 out:
     rt_hw_interrupt_enable(level);
     return lwp;

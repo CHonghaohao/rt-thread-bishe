@@ -87,4 +87,51 @@ int arch_expand_user_stack(void *addr)
     return ret;
 }
 
+
+#define MAX_ASID_BITS 8
+#define MAX_ASID (1 << MAX_ASID_BITS)
+static uint64_t global_generation = 1;
+static char asid_valid_bitmap[MAX_ASID];
+unsigned int arch_get_asid(struct rt_lwp *lwp)
+{
+    if (lwp == RT_NULL)
+    {
+        // kernel
+        return 0;
+    }
+
+    if (lwp->generation == global_generation)
+    {
+        return lwp->asid;
+    }
+
+    if (lwp->asid && !asid_valid_bitmap[lwp->asid])
+    {
+        asid_valid_bitmap[lwp->asid] = 1;
+        return lwp->asid;
+    }
+
+    for (unsigned i = 1; i < MAX_ASID; i++)
+    {
+        if (asid_valid_bitmap[i] == 0)
+        {
+            asid_valid_bitmap[i] = 1;
+            lwp->generation = global_generation;
+            lwp->asid = i;
+            return lwp->asid;
+        }
+    }
+
+    global_generation++;
+    memset(asid_valid_bitmap, 0, MAX_ASID * sizeof(char));
+
+    asid_valid_bitmap[1] = 1;
+    lwp->generation = global_generation;
+    lwp->asid = 1;
+
+    asm volatile ("mcr p15, 0, r0, c8, c7, 0\ndsb\nisb" ::: "memory");
+
+    return lwp->asid;
+}
+
 #endif

@@ -120,6 +120,11 @@ struct rt_lwp
     char working_directory[DFS_PATH_MAX];
     int debug;
     uint32_t bak_first_ins;
+
+#ifdef LWP_ENABLE_ASID
+    uint64_t generation;
+    unsigned int asid;
+#endif
 };
 
 struct rt_lwp *lwp_self(void);

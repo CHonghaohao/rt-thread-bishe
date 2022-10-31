@@ -88,7 +88,7 @@
 
 #define RT_USING_DFS
 #define DFS_USING_WORKDIR
-#define DFS_FILESYSTEMS_MAX 4
+#define DFS_FILESYSTEMS_MAX 6
 #define DFS_FILESYSTEM_TYPES_MAX 8
 #define DFS_FD_MAX 32
 #define RT_USING_DFS_ELMFAT
@@ -106,6 +106,7 @@
 #define RT_USING_DFS_DEVFS
 #define RT_USING_DFS_ROMFS
 #define RT_USING_DFS_RAMFS
+#define RT_USING_DFS_TMPFS
 
 /* Device Drivers */
 
@@ -143,6 +144,7 @@
 #define RT_SFUD_USING_FLASH_INFO_TABLE
 #define RT_SFUD_SPI_MAX_HZ 50000000
 #define RT_USING_WDT
+#define RT_USING_DEV_BUS
 
 /* Using USB */
 
@@ -200,13 +202,20 @@
 #define RT_LWIP_TCP
 #define RT_LWIP_RAW
 #define RT_MEMP_NUM_NETCONN 8
+#define RT_MEMP_NUM_TCPIP_MSG_API 16
+#define RT_MEMP_NUM_TCPIP_MSG_INPKT 16
 #define RT_LWIP_PBUF_NUM 16
+#define RT_LWIP_PBUF_STRUCT_NUM 16
+#define RT_LWIP_NETBUF_NUM 16
 #define RT_LWIP_RAW_PCB_NUM 4
 #define RT_LWIP_UDP_PCB_NUM 4
+#define RT_UDP_RECVMBOX_SIZE 16
+#define RT_RECV_BUFSIZE_DEFAULT 64
 #define RT_LWIP_TCP_PCB_NUM 4
 #define RT_LWIP_TCP_SEG_NUM 40
 #define RT_LWIP_TCP_SND_BUF 8196
 #define RT_LWIP_TCP_WND 8196
+#define RT_TCP_RECVMBOX_SIZE 16
 #define RT_LWIP_TCPTHREAD_PRIORITY 10
 #define RT_LWIP_TCPTHREAD_MBOX_SIZE 8
 #define RT_LWIP_TCPTHREAD_STACKSIZE 2048
@@ -261,6 +270,11 @@
 
 /* language packages */
 
+/* JSON: JavaScript Object Notation, a lightweight data-interchange format */
+
+
+/* XML: Extensible Markup Language */
+
 
 /* multimedia packages */
 
@@ -293,15 +307,54 @@
 /* peripheral libraries and drivers */
 
 
+/* Kendryte SDK */
+
+
 /* AI packages */
 
 
 /* miscellaneous packages */
 
+/* project laboratory */
+
 /* samples: kernel and components samples */
 
 
 /* entertainment: terminal games and other interesting software packages */
+
+
+/* Arduino libraries */
+
+
+/* Projects */
+
+
+/* Sensors */
+
+
+/* Display */
+
+
+/* Timing */
+
+
+/* Data Processing */
+
+
+/* Data Storage */
+
+/* Communication */
+
+
+/* Device Control */
+
+
+/* Other */
+
+/* Signal IO */
+
+
+/* Uncategorized */
 
 #define SOC_VEXPRESS_A9
 #define RT_USING_UART0

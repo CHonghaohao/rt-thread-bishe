@@ -155,6 +155,10 @@ extern "C" {
 #include "drivers/lcd.h"
 #endif
 
+#ifdef RT_USING_DEV_BUS
+#include "drivers/rt_dev_bus.h"
+#endif
+
 #ifdef __cplusplus
 }
 #endif
