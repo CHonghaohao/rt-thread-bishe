@@ -50,6 +50,9 @@ struct rt_hw_stack_frame
 #ifdef ENABLE_FPU
     rt_ubase_t f[CTX_FPU_REG_NR];      /* f0~f31 */
 #endif
+#ifdef ENABLE_VECTOR
+    rt_ubase_t v[CTX_VECTOR_REG_NR];
+#endif
 };
 
 #endif

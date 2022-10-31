@@ -12,6 +12,7 @@
 #define RT_THREAD_PRIORITY_32
 #define RT_THREAD_PRIORITY_MAX 32
 #define RT_TICK_PER_SECOND 100
+#define RT_USING_OVERFLOW_CHECK
 #define RT_USING_HOOK
 #define RT_USING_IDLE_HOOK
 #define RT_IDLE_HOOK_LIST_SIZE 4
@@ -71,11 +72,11 @@
 #define FINSH_USING_MSH
 #define FINSH_THREAD_NAME "tshell"
 #define FINSH_USING_HISTORY
-#define FINSH_HISTORY_LINES 5
+#define FINSH_HISTORY_LINES 10
 #define FINSH_USING_SYMTAB
 #define FINSH_USING_DESCRIPTION
 #define FINSH_THREAD_PRIORITY 20
-#define FINSH_THREAD_STACK_SIZE 4096
+#define FINSH_THREAD_STACK_SIZE 16384
 #define FINSH_CMD_SIZE 80
 #define FINSH_ARG_MAX 10
 
@@ -297,14 +298,48 @@
 
 /* entertainment: terminal games and other interesting software packages */
 
-#define BOARD_virt
-#define ENABLE_FPU
+
+/* Arduino libraries */
+
+
+/* Projects */
+
+
+/* Sensors */
+
+
+/* Display */
+
+
+/* Timing */
+
+
+/* Data Processing */
+
+
+/* Data Storage */
+
+/* Communication */
+
+
+/* Device Control */
+
+
+/* Other */
+
+/* Signal IO */
+
+
+/* Uncategorized */
 
 /* RISC-V QEMU virt64 configs */
 
 #define RISCV_S_MODE
 #define BSP_USING_VIRTIO_BLK
 #define BSP_USING_VIRTIO_NET
+#define BOARD_QEMU_VIRT_RV64
+#define ENABLE_FPU
+#define ARCH_USING_NEW_CTX_SWITCH
 #define __STACKSIZE__ 16384
 
 #endif

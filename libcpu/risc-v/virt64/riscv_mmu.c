@@ -30,10 +30,10 @@ void mmu_set_pagetable(rt_ubase_t addr)
 
 void mmu_enable_user_page_access()
 {
-    set_csr(sstatus, SSTATUS_PUM);
+    set_csr(sstatus, SSTATUS_SUM);
 }
 
 void mmu_disable_user_page_access()
 {
-    clear_csr(sstatus, SSTATUS_PUM);
+    clear_csr(sstatus, SSTATUS_SUM);
 }

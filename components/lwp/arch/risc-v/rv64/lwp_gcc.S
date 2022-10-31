@@ -25,6 +25,8 @@
 .global arch_start_umode
 .type arch_start_umode, % function
 arch_start_umode:
+    // load kstack for user process
+    csrw sscratch, a3
     li t0, SSTATUS_SPP | SSTATUS_SIE    // set as user mode, close interrupt
     csrc sstatus, t0 
     li t0, SSTATUS_SPIE // enable interrupt when return to user mode
@@ -57,18 +59,20 @@ arch_crt_start_umode:
     mv sp, a0//user_sp
     mv ra, a0//return address
     mv a0, s0//args
+
+    csrw sscratch, s3
     sret//enter user mode
 
 .global arch_ret_to_user
 arch_ret_to_user:
     call lwp_signal_check
     beqz a0, ret_to_user_exit
-    RESTORE_ALL
-    //now sp is user sp
+    // now sp is user sp
     J user_do_signal
 
 ret_to_user_exit:
     RESTORE_ALL
+    // `RESTORE_ALL` also reset sp to user sp
     sret
 
 /*#ifdef RT_USING_LWP
@@ -127,23 +131,27 @@ lwp_check_debug_quit:
 //#endif
 */
 
-.global arch_signal_quit
 arch_signal_quit:
     call lwp_signal_restore
     //a0 is user_ctx
     mv sp, a0
     RESTORE_ALL
+    csrw sscratch, zero
     sret
 
 user_do_signal:
-    //now sp is user sp
-    //save context to user sp
+    csrw sscratch, sp
+    RESTORE_ALL
+    // now sp is user sp
+    // and in interrupt close
     SAVE_ALL
-    //ensure original user sp correct
+
+    // save user sp in SAVE_ALL frame
     mv t0, sp
     addi t0, t0, CTX_REG_NR * REGBYTES
-    STORE t0, CTX_REG_NR * REGBYTES(sp)
-    OPEN_INTERRUPT
+    STORE t0, 32 * REGBYTES(sp)
+
+    // save lwp_sigreturn in user memory
     mv s0, sp
     la t0, lwp_sigreturn//t0 = src
     la t1, lwp_sigreturn_end
@@ -159,25 +167,53 @@ lwp_sigreturn_copy_loop:
     mv t1, t2
     bnez t1, lwp_sigreturn_copy_loop
 
-    mv a0, sp//sp
-    li a1, 0//pc
-    li a2, 0//flag
+    // restore kernel stack
+    csrrw sp, sscratch, s0
+
+    /**
+     * a0: user sp
+     * a1: user_pc (not used)
+     * a2: user_flag (not used)
+     */ 
+    csrr a0, sscratch
+    mv a1, zero
+    mv a2, zero
     call lwp_signal_backup
-    //a0 = signal id
-    mv sp, s0//update new sp
-    mv s2, a0//signal id backup
-    call lwp_sighandler_get//need a0 returned by lwp_signal_backup
-    mv ra, s0//lwp_sigreturn func addr
-    mv s1, s0//if func = 0,s1 = lwp_sigreturn func
+    // a0 <- signal id
+
+    // restore kernel sp to initial, and load `sp` to user stack
+
+    // s2 <- signal id(a0)
+    mv s2, a0
+    call lwp_sighandler_get
+    // a0 <- signal_handler
+
+    // ra <- lwp_sigreturn
+    mv ra, s0
+
+    mv s1, s0
     beqz a0, skip_user_signal_handler
+    // a0 <- signal_handler
     mv s1, a0
 
 skip_user_signal_handler:
-    li t0, 0x100
-    csrc sstatus, t0
+    // enter user mode and enable interrupt when return to user mode
+    li t0, SSTATUS_SPP
+    csrc sstatus, t0 
+    li t0, SSTATUS_SPIE
+    csrs sstatus, t0
+
+    /**
+     * sp <- user sp
+     * sscratch <- kernel sp
+     */
+    csrrw sp, sscratch, sp
+
+    // sepc <- signal_handler
     csrw sepc, s1
-    mv a0, s2//signal id as arg 0
-    sret//enter lwp signal handler
+    // a0 <- signal id
+    mv a0, s2
+    sret
 
 .align 3
 lwp_debugreturn:
@@ -235,6 +271,7 @@ arch_clone_exit:
 
 .global syscall_entry
 syscall_entry:
+#ifndef ARCH_USING_NEW_CTX_SWITCH
     //swap to thread kernel stack
     csrr t0, sstatus
     andi t0, t0, 0x100
@@ -265,7 +302,7 @@ copy_context_loop:
     addi t1, t1, 8
     addi t2, t2, 8
     bnez s0, copy_context_loop
-
+#endif /* ARCH_USING_NEW_CTX_SWITCH */
     LOAD s0, 7 * REGBYTES(sp)
     addi s0, s0, -0xfe
     beqz s0, arch_signal_quit
@@ -289,10 +326,9 @@ arch_syscall_exit:
         LOAD s0, 2 * REGBYTES(sp)
         andi s0, s0, 0x100
         bnez s0, dont_ret_to_user
-        li s0, 0
         j arch_ret_to_user
-        dont_ret_to_user:
     #endif
+dont_ret_to_user:
 
 #ifdef RT_USING_USERSPACE
     /* restore setting when syscall exit */
@@ -305,5 +341,6 @@ arch_syscall_exit:
 
     //restore context
     RESTORE_ALL
+    csrw sscratch, zero
     sret
 

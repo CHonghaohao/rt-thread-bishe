@@ -20,6 +20,7 @@
 #define REGBYTES                8
 #else
 // error here, not portable
+#error "Not supported XLEN"
 #endif
 
 /* 33 general register */
@@ -32,8 +33,21 @@
 #define CTX_FPU_REG_NR  0
 #endif
 
+#ifdef ENABLE_VECTOR
+
+#if defined(ARCH_VECTOR_VLEN_128)
+#define CTX_VECTOR_REGS 64
+#elif defined(ARCH_VECTOR_VLEN_256)
+#define CTX_VECTOR_REGS 128
+#endif
+
+#define CTX_VECTOR_REG_NR  (CTX_VECTOR_REGS + 4)
+#else
+#define CTX_VECTOR_REG_NR  0
+#endif
+
 /* all context registers */
-#define CTX_REG_NR  (CTX_GENERAL_REG_NR + CTX_FPU_REG_NR)
+#define CTX_REG_NR  (CTX_GENERAL_REG_NR + CTX_FPU_REG_NR + CTX_VECTOR_REG_NR)
 
 #ifndef __ASSEMBLY__
 rt_inline void rt_hw_dsb()
