@@ -3748,15 +3748,7 @@ int sys_pipe(int fd[2])
 
 int sys_clock_settime(clockid_t clk, const struct timespec *ts)
 {
-    rt_device_t device;
-    time_t now;
-
-    device = rt_device_find("rtc");
-    if (device == RT_NULL)
-    {
-        return -ENODEV;
-    }
-
+    int ret = 0;
 #ifdef RT_USING_USERSPACE
     size_t size = sizeof(struct timespec);
     struct timespec *kts = NULL;
@@ -3773,32 +3765,21 @@ int sys_clock_settime(clockid_t clk, const struct timespec *ts)
     }
 
     lwp_get_from_user(kts, (void *)ts, size);
-    now = kts->tv_sec;
-
+    ret = clock_settime(clk, kts);
     kmem_put(kts);
 #else
     if (!lwp_user_accessable((void *)ts, sizeof(struct timespec)))
     {
         return -EFAULT;
     }
-    now = ts->tv_sec;
+    ret = clock_settime(clk, ts);
 #endif
-    return rt_device_control(device, RT_DEVICE_CTRL_RTC_SET_TIME, &now);
+    return (ret < 0 ? GET_ERRNO() : ret);
 }
 
 int sys_clock_gettime(clockid_t clk, struct timespec *ts)
 {
     int ret = 0;
-    rt_device_t device;
-    time_t now;
-
-    device = rt_device_find("rtc");
-    if (device == RT_NULL)
-    {
-        return -ENODEV;
-    }
-    ret = rt_device_control(device, RT_DEVICE_CTRL_RTC_GET_TIME, &now);
-
 #ifdef RT_USING_USERSPACE
     size_t size = sizeof(struct timespec);
     struct timespec *kts = NULL;
@@ -3814,9 +3795,9 @@ int sys_clock_gettime(clockid_t clk, struct timespec *ts)
         return -ENOMEM;
     }
 
-    kts->tv_sec = now;
-    kts->tv_nsec = 0;
-    lwp_put_to_user(ts, kts, size);
+    ret = clock_gettime(clk, kts);
+    if (ret != -1)
+        lwp_put_to_user(ts, kts, size);
 
     kmem_put(kts);
 #else
@@ -3824,14 +3805,14 @@ int sys_clock_gettime(clockid_t clk, struct timespec *ts)
     {
         return -EFAULT;
     }
-    ts->tv_sec = now;
-    ts->tv_nsec = 0;
+    ret = clock_gettime(clk, ts);
 #endif
     return (ret < 0 ? GET_ERRNO() : ret);
 }
 
 int sys_clock_getres(clockid_t clk, struct timespec *ts)
 {
+    int ret = 0;
 #ifdef RT_USING_USERSPACE
     struct timespec kts;
     size_t size = sizeof(struct timespec);
@@ -3841,18 +3822,18 @@ int sys_clock_getres(clockid_t clk, struct timespec *ts)
         return -EFAULT;
     }
 
-    kts.tv_sec = 1;
-    kts.tv_nsec = 0;
-    lwp_put_to_user(ts, &kts, size);
+    ret = clock_getres(clk, &kts);
+
+    if (ret != -1)
+        lwp_put_to_user(ts, &kts, size);
 #else
     if (!lwp_user_accessable((void *)ts, sizeof(struct timespec)))
     {
         return -EFAULT;
     }
-    ts->tv_sec = 1;
-    ts->tv_nsec = 0;
+    ret = clock_getres(clk, ts);
 #endif
-    return 0;
+    return (ret < 0 ? GET_ERRNO() : ret);
 }
 
 int sys_rename(const char *oldpath, const char *newpath)
