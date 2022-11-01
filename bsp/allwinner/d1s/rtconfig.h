@@ -273,8 +273,6 @@
 
 /* XML: Extensible Markup Language */
 
-#define PKG_USING_EZXML
-#define PKG_USING_EZXML_LATEST_VERSION
 
 /* multimedia packages */
 

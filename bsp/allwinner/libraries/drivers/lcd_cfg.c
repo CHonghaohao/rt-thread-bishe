@@ -8,13 +8,11 @@
 #include "disp_board_config.h"
 
 #include <rtthread.h>
-#include "ezxml.h"
 
 #include "lcd_cfg.h"
 
 struct property_t *g_lcd0_config = NULL;
 static struct lcd_cfg_panel_info _panel_info = DEFAULT_LCD_CONFIG;
-// struct property_t *cur = NULL;
 
 struct property_t g_lcd0_config_rgb[] = {
     {
@@ -30,12 +28,12 @@ struct property_t g_lcd0_config_rgb[] = {
     {
         .name = "lcd_if",
         .type = PROPERTY_INTGER,
-        .v.value = 0,    /* LCD_IF_HV */
+        .v.value = 0, /* LCD_IF_HV */
     },
     {
         .name = "lcd_hv_if",
         .type = PROPERTY_INTGER,
-        .v.value = 0,    /* LCD_HV_IF_PRGB_1CYC */
+        .v.value = 0, /* LCD_HV_IF_PRGB_1CYC */
     },
     {
         .name = "lcd_x",
@@ -189,7 +187,7 @@ struct property_t g_lcd0_config_rgb[] = {
             .data = 1,
         },
     },
-    //gpio
+    // gpio
     {
         .name = "LCD0_D2",
         .type = PROPERTY_PIN,
@@ -409,8 +407,7 @@ struct property_t g_lcd0_config_rgb[] = {
             .pull = 0,
             .drv_level = 3,
         },
-    }
-};
+    }};
 
 struct property_t g_lcd0_config_mipi[] = {
     {
@@ -441,7 +438,7 @@ struct property_t g_lcd0_config_mipi[] = {
     {
         .name = "lcd_y",
         .type = PROPERTY_INTGER,
-        .v.value = 960,//1280
+        .v.value = 960, // 1280
     },
     {
         .name = "lcd_width",
@@ -584,7 +581,6 @@ struct property_t g_lcd0_config_mipi[] = {
         .v.value = 1000,
     },
 
-
     // backlight enable
     /*
     {
@@ -611,7 +607,7 @@ struct property_t g_lcd0_config_mipi[] = {
     //      .data = 1,
     //  },
     // },
-    //gpio
+    // gpio
     {
         .name = "LCD0_D0",
         .type = PROPERTY_PIN,
@@ -712,129 +708,6 @@ struct property_t g_lcd0_config_mipi[] = {
             .drv_level = 3,
         },
     },
-
-#if 0
-    {
-        .name = "LCD0_D10",
-        .type = PROPERTY_PIN,
-        .v.gpio_list = {
-            .gpio = GPIOD(10),
-            .mul_sel = 2,
-            .pull = 0,
-            .drv_level = 3,
-        },
-    },
-    {
-        .name = "LCD0_D11",
-        .type = PROPERTY_PIN,
-        .v.gpio_list = {
-            .gpio = GPIOD(11),
-            .mul_sel = 2,
-            .pull = 0,
-            .drv_level = 3,
-        },
-    },
-    {
-        .name = "LCD0_D12",
-        .type = PROPERTY_PIN,
-        .v.gpio_list = {
-            .gpio = GPIOD(12),
-            .mul_sel = 2,
-            .pull = 0,
-            .drv_level = 3,
-        },
-    },
-    {
-        .name = "LCD0_D13",
-        .type = PROPERTY_PIN,
-        .v.gpio_list = {
-            .gpio = GPIOD(13),
-            .mul_sel = 2,
-            .pull = 0,
-            .drv_level = 3,
-        },
-    },
-    {
-        .name = "LCD0_D14",
-        .type = PROPERTY_PIN,
-        .v.gpio_list = {
-            .gpio = GPIOD(14),
-            .mul_sel = 2,
-            .pull = 0,
-            .drv_level = 3,
-        },
-    },
-    {
-        .name = "LCD0_D15",
-        .type = PROPERTY_PIN,
-        .v.gpio_list = {
-            .gpio = GPIOD(15),
-            .mul_sel = 2,
-            .pull = 0,
-            .drv_level = 3,
-        },
-    },
-    {
-        .name = "LCD0_D16",
-        .type = PROPERTY_PIN,
-        .v.gpio_list = {
-            .gpio = GPIOD(16),
-            .mul_sel = 2,
-            .pull = 0,
-            .drv_level = 3,
-        },
-    },
-    {
-        .name = "LCD0_D17",
-        .type = PROPERTY_PIN,
-        .v.gpio_list = {
-            .gpio = GPIOD(17),
-            .mul_sel = 2,
-            .pull = 0,
-            .drv_level = 3,
-        },
-    },
-    {
-        .name = "LCD0_CLK",
-        .type = PROPERTY_PIN,
-        .v.gpio_list = {
-            .gpio = GPIOD(18),
-            .mul_sel = 2,
-            .pull = 0,
-            .drv_level = 3,
-        },
-    },
-    {
-        .name = "LCD0_DE",
-        .type = PROPERTY_PIN,
-        .v.gpio_list = {
-            .gpio = GPIOD(19),
-            .mul_sel = 2,
-            .pull = 0,
-            .drv_level = 3,
-        },
-    },
-    {
-        .name = "LCD0_HSYNC",
-        .type = PROPERTY_PIN,
-        .v.gpio_list = {
-            .gpio = GPIOD(20),
-            .mul_sel = 2,
-            .pull = 0,
-            .drv_level = 3,
-        },
-    },
-    {
-        .name = "LCD0_VSYNC",
-        .type = PROPERTY_PIN,
-        .v.gpio_list = {
-            .gpio = GPIOD(21),
-            .mul_sel = 2,
-            .pull = 0,
-            .drv_level = 3,
-        },
-    },
-#endif
 };
 
 struct property_t g_lcd0_config_lvds[] = {
@@ -881,7 +754,7 @@ struct property_t g_lcd0_config_lvds[] = {
     {
         .name = "lcd_dclk_freq",
         .type = PROPERTY_INTGER,
-        .v.value = 71*2, // dual lvds, freq=single*2.
+        .v.value = 71 * 2, // dual lvds, freq=single*2.
     },
     {
         .name = "lcd_rb_swap",
@@ -916,12 +789,12 @@ struct property_t g_lcd0_config_lvds[] = {
     {
         .name = "lcd_hbp",
         .type = PROPERTY_INTGER,
-        .v.value = 90,// P19: Tblk(h) period 74-90-140
+        .v.value = 90, // P19: Tblk(h) period 74-90-140
     },
     {
         .name = "lcd_ht",
         .type = PROPERTY_INTGER,
-        .v.value = (960+90)*2,// x+hbp P19: Th period 1034-1050-1100
+        .v.value = (960 + 90) * 2, // x+hbp P19: Th period 1034-1050-1100
     },
     {
         .name = "lcd_hspw",
@@ -936,7 +809,7 @@ struct property_t g_lcd0_config_lvds[] = {
     {
         .name = "lcd_vt",
         .type = PROPERTY_INTGER,
-        .v.value = (1080+50)+50, // y+vbp P19: Tv period 1092-1130-1818
+        .v.value = (1080 + 50) + 50, // y+vbp P19: Tv period 1092-1130-1818
     },
     {
         .name = "lcd_vspw",
@@ -1009,8 +882,7 @@ struct property_t g_lcd0_config_lvds[] = {
         .v.value = 90,
     },
 
-
-//gpio
+    // gpio
     {
         .name = "LCD0_D0",
         .type = PROPERTY_PIN,
@@ -1212,26 +1084,6 @@ struct property_t g_lcd0_config_lvds[] = {
             .drv_level = 3,
         },
     },
-    // {
-    //  .name = "LCD0_HSYNC",
-    //  .type = PROPERTY_PIN,
-    //  .v.gpio_list = {
-    //      .gpio = GPIOD(20),
-    //      .mul_sel = 2,
-    //      .pull = 0,
-    //      .drv_level = 3,
-    //  },
-    // },
-    // {
-    //  .name = "LCD0_VSYNC",
-    //  .type = PROPERTY_PIN,
-    //  .v.gpio_list = {
-    //      .gpio = GPIOD(21),
-    //      .mul_sel = 2,
-    //      .pull = 0,
-    //      .drv_level = 3,
-    //  },
-    // },
 #endif
 
 };
@@ -1253,12 +1105,12 @@ struct property_t g_disp_config[] = {
     {
         .name = "disp_mode",
         .type = PROPERTY_INTGER,
-        .v.value = 0,    /* DISP_INIT_MODE_SCREEN0 */
+        .v.value = 0, /* DISP_INIT_MODE_SCREEN0 */
     },
     {
         .name = "screen0_output_type",
         .type = PROPERTY_INTGER,
-        .v.value = 1,    /* DISP_OUTPUT_TYPE_LCD */
+        .v.value = 1, /* DISP_OUTPUT_TYPE_LCD */
     },
     {
         .name = "screen0_output_mode",
@@ -1311,34 +1163,6 @@ u32 g_lcd0_config_len = sizeof(g_lcd0_config_rgb) / sizeof(struct property_t);
 u32 g_lcd1_config_len = sizeof(g_lcd1_config) / sizeof(struct property_t);
 u32 g_disp_config_len = sizeof(g_disp_config) / sizeof(struct property_t);
 
-
-
-// #define LCD_CONFIG_XML_1V1MAP
-#ifdef LCD_CONFIG_XML_1V1MAP
-
-static void _load_xml_attr(ezxml_t xml, struct property_t *_config, const u32 config_len)
-{
-    const char *p_str;
-    u32 i;
-
-    for (i = 0; i < config_len; i++)
-    {
-        if (_config[i].type != PROPERTY_INTGER)
-        {
-            continue;
-        }
-
-        p_str = ezxml_attr(xml, _config[i].name);
-        if (p_str != NULL)
-        {
-            _config[i].v.value = atoi(p_str);
-            rt_kprintf("lcd config '%s':%u\n", _config[i].name, _config[i].v.value);
-        }
-    }
-}
-
-#else
-
 static struct property_t *_lcd_property_find(const char *name, struct property_t *_config, const u32 config_len)
 {
     u32 i;
@@ -1359,217 +1183,15 @@ static struct property_t *_lcd_property_find(const char *name, struct property_t
     return NULL;
 }
 
-static void _get_xml_attr_type(ezxml_t xml)
-{
-    const char *p_str;
-    p_str = ezxml_attr(xml,"type");
-    if (p_str != RT_NULL) strcpy(_panel_info.type, p_str);
-}
-
-static void _load_xml_attr(ezxml_t xml, struct property_t *_config, const u32 config_len)
-{
-#if defined(RT_USING_DFS) && defined(PKG_USING_EZXML)
-    {
-        const char *p_str;
-        struct property_t *_config_item;
-        const char *_attr_table[][2] = {
-            {"x", "lcd_x"},
-            {"y", "lcd_y"},
-            {"dclk_freq", "lcd_dclk_freq"},
-            {"hbp", "lcd_hbp"},
-            {"vbp", "lcd_vbp"},
-            {"hspw", "lcd_hspw"},
-            {"vspw", "lcd_vspw"},
-        };
-        size_t i;
-        int hv_pol = 0;
-        int clk_pha = 0;
-
-        for (i = 0; i < sizeof(_attr_table) / sizeof(_attr_table[0]); i++)
-        {
-            p_str = ezxml_attr(xml, _attr_table[i][0]);
-            if (p_str != RT_NULL)
-            {
-                _config_item = _lcd_property_find(_attr_table[i][1], _config, config_len);
-                if (_config_item)
-                {
-                    _config_item->v.value = atoi(p_str);
-                }
-            }
-        }
-
-        /* lcd_ht = lcd_x + lcd_hspw + lcd_hbp + lcd_hfp */
-        p_str = ezxml_attr(xml, "hfp");
-        if (p_str != RT_NULL)
-        {
-            struct property_t *lcd_ht;
-            struct property_t *lcd_x;
-            struct property_t *lcd_hspw;
-            struct property_t *lcd_hbp;
-
-            lcd_ht = _lcd_property_find("lcd_ht", _config, config_len);
-            lcd_x = _lcd_property_find("lcd_x", _config, config_len);
-            lcd_hspw = _lcd_property_find("lcd_hspw", _config, config_len);
-            lcd_hbp = _lcd_property_find("lcd_hbp", _config, config_len);
-
-            if (lcd_ht && lcd_x && lcd_hspw && lcd_hbp)
-            {
-                int hfp;
-
-                hfp = atoi(p_str);
-
-                lcd_ht->v.value = lcd_x->v.value + lcd_hspw->v.value + lcd_hbp->v.value + hfp;
-            }
-        }
-
-        /* lcd_vt = lcd_y + lcd_vspw + lcd_vbp + lcd_vfp */
-        p_str = ezxml_attr(xml, "vfp");
-        if (p_str != RT_NULL)
-        {
-            struct property_t *lcd_vt;
-            struct property_t *lcd_y;
-            struct property_t *lcd_vspw;
-            struct property_t *lcd_vbp;
-
-            lcd_vt = _lcd_property_find("lcd_vt", _config, config_len);
-            lcd_y = _lcd_property_find("lcd_y", _config, config_len);
-            lcd_vspw = _lcd_property_find("lcd_vspw", _config, config_len);
-            lcd_vbp = _lcd_property_find("lcd_vbp", _config, config_len);
-
-            if (lcd_vt && lcd_y && lcd_vspw && lcd_vbp)
-            {
-                int vfp;
-
-                vfp = atoi(p_str);
-
-                lcd_vt->v.value = lcd_y->v.value + lcd_vspw->v.value + lcd_vbp->v.value + vfp;
-            }
-        }
-
-        p_str = ezxml_attr(xml, "ht");
-        if (p_str != RT_NULL)
-        {
-            struct property_t *lcd_ht;
-
-            lcd_ht = _lcd_property_find("lcd_ht", _config, config_len);
-            if (lcd_ht)
-            {
-                lcd_ht->v.value = atoi(p_str);
-            }
-        }
-
-        p_str = ezxml_attr(xml, "vt");
-        if (p_str != RT_NULL)
-        {
-            struct property_t *lcd_vt;
-
-            lcd_vt = _lcd_property_find("lcd_vt", _config, config_len);
-            if (lcd_vt)
-            {
-                lcd_vt->v.value = atoi(p_str);
-            }
-        }
-
-        p_str = ezxml_attr(xml, "h_sync_active");
-        if (p_str != RT_NULL)
-        {
-            hv_pol |= 1;
-        }
-
-        p_str = ezxml_attr(xml, "v_sync_active");
-        if (p_str != RT_NULL)
-        {
-            hv_pol |= 2;
-        }
-
-        if (hv_pol != 0)
-        {
-            struct property_t *lcd_hv_sync_polarity;
-
-            lcd_hv_sync_polarity = _lcd_property_find("lcd_hv_sync_polarity", _config, config_len);
-
-            if (lcd_hv_sync_polarity)
-            {
-                lcd_hv_sync_polarity->v.value = hv_pol;
-            }
-        }
-
-        p_str = ezxml_attr(xml, "den_active");
-        if (p_str != RT_NULL)
-        {
-            struct property_t *lcd_de_polarity;
-
-            lcd_de_polarity = _lcd_property_find("lcd_de_polarity", _config, config_len);
-
-            if (lcd_de_polarity)
-            {
-                lcd_de_polarity->v.value = atoi(p_str);
-            }
-        }
-
-        p_str = ezxml_attr(xml, "clk_active");
-        if (p_str != RT_NULL)
-        {
-            clk_pha |= 2;
-        }
-
-        if (clk_pha != 0)
-        {
-            struct property_t *lcd_de_polarity;
-
-            lcd_de_polarity = _lcd_property_find("lcd_hv_clk_phase", _config, config_len);
-
-            if (lcd_de_polarity)
-            {
-                lcd_de_polarity->v.value = clk_pha;
-            }
-        }
-
-        p_str = ezxml_attr(xml,"x");
-        if (p_str != RT_NULL) _panel_info.width =                atoi(p_str);
-        p_str = ezxml_attr(xml,"y");
-        if (p_str != RT_NULL) _panel_info.height =               atoi(p_str);
-        p_str = ezxml_attr(xml,"lane");
-        if (p_str != RT_NULL) _panel_info.lane =                 atoi(p_str);
-        p_str = ezxml_attr(xml,"swap_flag");
-        if (p_str != RT_NULL) _panel_info.swap_flag =            atoi(p_str);
-        p_str = ezxml_attr(xml,"ctp_flag");
-        if (p_str != RT_NULL) _panel_info.ctp_flag =             atoi(p_str);
-        p_str = ezxml_attr(xml,"bl_mode");
-        if (p_str != RT_NULL) _panel_info.bl_mode =              atoi(p_str);
-        p_str = ezxml_attr(xml,"bl_gpio_pin");
-        if (p_str != RT_NULL) _panel_info.bl_gpio_pin =          atoi(p_str);
-        p_str = ezxml_attr(xml,"bl_gpio_level");
-        if (p_str != RT_NULL) _panel_info.bl_gpio_level =        atoi(p_str);
-        p_str = ezxml_attr(xml,"bl_pwm_name");
-        if (p_str != RT_NULL) strcpy(_panel_info.bl_pwm_name, p_str);
-        p_str = ezxml_attr(xml,"bl_pwm_hz");
-        if (p_str != RT_NULL) _panel_info.bl_pwm_hz =            atoi(p_str);
-        p_str = ezxml_attr(xml,"bl_pwm_val");
-        if (p_str != RT_NULL) _panel_info.bl_pwm_val =           atoi(p_str);
-        p_str = ezxml_attr(xml,"bl_pin");
-        if (p_str != RT_NULL) _panel_info.bl_pin =               atoi(p_str);
-        p_str = ezxml_attr(xml,"bl_level");
-        if (p_str != RT_NULL) _panel_info.bl_level =             atoi(p_str);
-        p_str = ezxml_attr(xml,"pwr_pin");
-        if (p_str != RT_NULL) _panel_info.pwr_pin =              atoi(p_str);
-        p_str = ezxml_attr(xml,"pwr_level");
-        if (p_str != RT_NULL) _panel_info.pwr_level =            atoi(p_str);
-    }
-#endif /* RT_USING_DFS && PKG_USING_EZXML */
-}
-#endif /* LCD_CONFIG_XML_1V1MAP */
-
 #ifndef LCD_XML_CONFIG_FILE
 #define LCD_CONFIG_FILE "/etc/lcd_config.xml"
 #else
 #define LCD_CONFIG_FILE LCD_XML_CONFIG_FILE
 #endif
-const struct lcd_cfg_panel_info* load_lcd_config_from_xml(void)
+const struct lcd_cfg_panel_info *load_lcd_config_from_xml(void)
 {
     struct property_t *_config_item;
     static rt_uint8_t init_state = 0;
-
 
     rt_enter_critical();
     if (init_state == 0)
@@ -1590,51 +1212,6 @@ const struct lcd_cfg_panel_info* load_lcd_config_from_xml(void)
 
     g_lcd0_config = g_lcd0_config_rgb;
     g_lcd0_config_len = sizeof(g_lcd0_config_rgb) / sizeof(struct property_t);
-
-#if defined(RT_USING_DFS) && defined(PKG_USING_EZXML)
-    {
-        ezxml_t xml;
-        const char *p_str;
-        int i;
-
-        if (access(LCD_CONFIG_FILE,0) != 0)
-        {
-            rt_kprintf("Can not found %s\r\nLCD setting the default configuration\r\n", LCD_CONFIG_FILE);
-            goto _RET;
-        }
-        xml = ezxml_parse_file(LCD_CONFIG_FILE);
-        if (xml == RT_NULL)
-        {
-            rt_kprintf("parse failed %s\r\nLCD setting the default configuration\r\n", LCD_CONFIG_FILE);
-            goto _RET;
-        }
-
-        _get_xml_attr_type(xml);
-
-        if(strstr(_panel_info.type, "rgb"))
-        {
-
-        }
-        else if(strstr(_panel_info.type, "lvds"))
-        {
-            g_lcd0_config = g_lcd0_config_lvds;
-            g_lcd0_config_len = sizeof(g_lcd0_config_lvds) / sizeof(struct property_t);
-        }
-        else if(strstr(_panel_info.type, "mipi"))
-        {
-            g_lcd0_config = g_lcd0_config_mipi;
-            g_lcd0_config_len = sizeof(g_lcd0_config_mipi) / sizeof(struct property_t);
-        }
-
-        _load_xml_attr(xml, g_lcd0_config, g_lcd0_config_len);
-#ifdef LCD_CONFIG_XML_1V1MAP
-        _load_xml_attr(xml, g_lcd1_config, g_lcd1_config_len);
-        _load_xml_attr(xml, g_disp_config, g_disp_config_len);
-#endif
-
-    }
-#endif
-
 _RET:
 
     init_state = 2;
