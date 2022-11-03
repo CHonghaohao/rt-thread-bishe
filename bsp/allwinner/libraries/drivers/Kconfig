@@ -266,13 +266,8 @@ menuconfig BSP_USING_FS
     select FAL_PART_HAS_TABLE_CFG
     default y
 
-config BSP_USING_G2D
-    bool "Enable G2D"
-    default n
-
 menuconfig BSP_USING_LCD
     bool "Enable LCD"
-    select BSP_USING_G2D
     select BSP_USING_PWM
     default n
 
