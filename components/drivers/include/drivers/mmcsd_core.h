@@ -33,7 +33,6 @@ struct rt_mmcsd_data
     rt_uint32_t  blksize;
     rt_uint32_t  blks;
     rt_uint32_t  *buf;
-    void *dma_addr;
     rt_int32_t  err;
     rt_uint32_t  flags;
 #define DATA_DIR_WRITE  (1 << 0)
@@ -47,7 +46,11 @@ struct rt_mmcsd_data
 
     rt_uint32_t  timeout_ns;
     rt_uint32_t  timeout_clks;
-    long host_cookie;   /* host driver private data */
+
+    void *sg; /* scatter list */
+    rt_uint16_t sg_len; /* size of scatter list */
+    rt_int16_t sg_count; /* mapped sg entries */
+    rt_ubase_t host_cookie; /* host driver private data */
 };
 
 struct rt_mmcsd_cmd
