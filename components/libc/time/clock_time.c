@@ -5,7 +5,7 @@
  *
  * Change Logs:
  * Date           Author       Notes
- * 2012-12-08     Bernard      fix the issue of _timevalue.tv_usec initialization, 
+ * 2012-12-08     Bernard      fix the issue of _timevalue.tv_usec initialization,
  *                             which found by Rob <rdent@iinet.net.au>
  */
 
@@ -41,7 +41,7 @@ INIT_COMPONENT_EXPORT(clock_time_system_init);
 int clock_time_to_tick(const struct timespec *time)
 {
     int tick;
-    int nsecond, second;
+    long nsecond, second;
     struct timespec tp;
 
     RT_ASSERT(time != RT_NULL);
@@ -54,7 +54,7 @@ int clock_time_to_tick(const struct timespec *time)
 
         if ((time->tv_nsec - tp.tv_nsec) < 0)
         {
-            nsecond = NANOSECOND_PER_SECOND - (tp.tv_nsec - time->tv_nsec);
+            nsecond = (long)NANOSECOND_PER_SECOND - (tp.tv_nsec - time->tv_nsec);
             second  = time->tv_sec - tp.tv_sec - 1;
         }
         else
@@ -63,7 +63,11 @@ int clock_time_to_tick(const struct timespec *time)
             second  = time->tv_sec - tp.tv_sec;
         }
 
-        tick = second * RT_TICK_PER_SECOND + nsecond * RT_TICK_PER_SECOND / NANOSECOND_PER_SECOND;
+        /*
+        * Warning: NANOSECOND_PER_SECOND is unsigned long, division method instruction will be `divu`.
+        *          so then result is overflow undefined behavior.
+        */
+        tick = (int)(second * RT_TICK_PER_SECOND + (long)(nsecond * RT_TICK_PER_SECOND) / (long)NANOSECOND_PER_SECOND);
         if (tick < 0) tick = 0;
     }
 
@@ -121,7 +125,7 @@ int clock_gettime(clockid_t clockid, struct timespec *tp)
     case CLOCK_REALTIME:
         {
             /* get tick */
-            int tick = rt_tick_get();
+            rt_tick_t tick = rt_tick_get();
 
             tp->tv_sec  = _timevalue.tv_sec + tick / RT_TICK_PER_SECOND;
             tp->tv_nsec = (_timevalue.tv_usec + (tick % RT_TICK_PER_SECOND) * MICROSECOND_PER_TICK) * 1000;
