@@ -8,11 +8,16 @@
  * 2018-12-10     Jesven       first version
  * 2021-02-03     lizhirui     port to riscv64
  * 2021-02-19     lizhirui     port to new version of rt-smart
+ * 2022-11-08     Wangxiaoyao  Cleanup codes;
+ *                             Support new context switch
  */
 
 #include "rtconfig.h"
 
+#ifndef __ASSEMBLY__
 #define __ASSEMBLY__
+#endif /* __ASSEMBLY__ */
+
 #include "cpuport.h"
 #include "encoding.h"
 #include "stackframe.h"
@@ -46,7 +51,7 @@ arch_crt_start_umode:
     csrc sstatus, t0
     li t0, SSTATUS_SPIE // enable interrupt when return to user mode
     csrs sstatus, t0
-    
+
     csrw sepc, a1
     mv s0, a0
     mv s1, a1
@@ -63,77 +68,39 @@ arch_crt_start_umode:
     csrw sscratch, s3
     sret//enter user mode
 
+/**
+ * Unify exit point from kernel mode to enter user space
+ * we handle following things here:
+ * 1. restoring user mode debug state (not support yet)
+ * 2. handling thread's exit request
+ * 3. handling POSIX signal
+ * 4. restoring user context
+ * 5. jump to user mode
+ */
 .global arch_ret_to_user
 arch_ret_to_user:
+    // TODO: we don't support kernel gdb server in risc-v yet
+    // so we don't check debug state here and handle debugging bussiness
+
+    call lwp_check_exit_request
+    beqz a0, 1f
+    mv a0, x0
+    call sys_exit
+
+1:
     call lwp_signal_check
     beqz a0, ret_to_user_exit
-    // now sp is user sp
     J user_do_signal
 
 ret_to_user_exit:
     RESTORE_ALL
-    // `RESTORE_ALL` also reset sp to user sp
+    // `RESTORE_ALL` also reset sp to user sp, and setup sscratch
     sret
-
-/*#ifdef RT_USING_LWP
-.global lwp_check_exit
-lwp_check_exit:
-    push {r0 - r12, lr}
-    bl lwp_check_exit_request
-    cmp r0, #0
-    beq 1f
-    mov r0, #0
-    bl sys_exit
-1:
-    pop {r0 - r12, pc}
-#endif*/
-
-/*#ifdef RT_USING_GDBSERVER
-.global lwp_check_debug
-lwp_check_debug:
-    push {r0 - r12, lr}
-    bl lwp_check_debug_suspend
-    cmp r0, #0
-    beq lwp_check_debug_quit
-
-    cps #Mode_SYS
-    sub sp, #8
-    ldr r0, =lwp_debugreturn
-    ldr r1, [r0]
-    str r1, [sp]
-    ldr r1, [r0, #4]
-    str r1, [sp, #4]
-    mov r0, #0
-    mcr p15, 0, r0, c7, c5, 0   ;//iciallu
-    dsb
-    isb
-    mov r0, sp // lwp_debugreturn
-    cps #Mode_SVC
-
-    mrs r1, spsr
-    push {r1}
-    mov r1, #Mode_USR
-    msr spsr_cxsf, r1
-    movs pc, r0
-ret_from_user:
-    cps #Mode_SYS
-    add sp, #8
-    cps #Mode_SVC*/
-    /*
-    pop {r0 - r3, r12}
-    pop {r4 - r6, lr}
-    */
-    /*add sp, #(4*9)
-    pop {r4}
-    msr spsr_cxsf, r4
-lwp_check_debug_quit:
-    pop {r0 - r12, pc}
-//#endif
-*/
 
 arch_signal_quit:
     call lwp_signal_restore
-    //a0 is user_ctx
+    call arch_get_usp_from_uctx
+    // return value is user sp
     mv sp, a0
     RESTORE_ALL
     csrw sscratch, zero
@@ -167,30 +134,49 @@ lwp_sigreturn_copy_loop:
     mv t1, t2
     bnez t1, lwp_sigreturn_copy_loop
 
-    // restore kernel stack
-    csrrw sp, sscratch, s0
+    /**
+     * 1. clear sscratch & restore kernel sp to 
+     *    enter kernel mode routine
+     * 2. storage exp frame address to restore context, 
+     *    by calling to lwp_signal_backup
+     * 3. storage lwp_sigreturn entry address
+     * 4. get signal id as param for signal handler
+     */
+    mv a0, sp
+
+    csrrw sp, sscratch, x0
 
     /**
      * a0: user sp
      * a1: user_pc (not used)
      * a2: user_flag (not used)
-     */ 
-    csrr a0, sscratch
+     */
     mv a1, zero
     mv a2, zero
     call lwp_signal_backup
-    // a0 <- signal id
 
-    // restore kernel sp to initial, and load `sp` to user stack
-
-    // s2 <- signal id(a0)
+    // s2 <- signal id (a0/return value)
     mv s2, a0
+    /**
+     * WARN: lwp_sighandler_get can be a exit point
+     * a0: signal id
+     */
     call lwp_sighandler_get
     // a0 <- signal_handler
 
     // ra <- lwp_sigreturn
     mv ra, s0
 
+    /**
+     * restore user sp in sscratch
+     * now ready to enter user mode
+     */
+    csrw sscratch, s0
+
+    /**
+     * signal handler entry point may be 
+     * lwp_sigreturn or real signal handler
+     */
     mv s1, s0
     beqz a0, skip_user_signal_handler
     // a0 <- signal_handler
@@ -199,7 +185,7 @@ lwp_sigreturn_copy_loop:
 skip_user_signal_handler:
     // enter user mode and enable interrupt when return to user mode
     li t0, SSTATUS_SPP
-    csrc sstatus, t0 
+    csrc sstatus, t0
     li t0, SSTATUS_SPIE
     csrs sstatus, t0
 
@@ -239,21 +225,9 @@ lwp_thread_return:
 .global lwp_thread_return_end
 lwp_thread_return_end:
 
-.global check_vfp
-check_vfp:
-    //don't use fpu temporarily
-    li a0, 0
-    ret
-
-.global get_vfp
-get_vfp:
-    //don't use fpu temporarily
-    li a0, 0
-    ret
-
 .globl arch_get_tidr
 arch_get_tidr:
-    mv a0, tp 
+    mv a0, tp
     ret
 
 .global arch_set_thread_area
@@ -303,9 +277,11 @@ copy_context_loop:
     addi t2, t2, 8
     bnez s0, copy_context_loop
 #endif /* ARCH_USING_NEW_CTX_SWITCH */
-    LOAD s0, 7 * REGBYTES(sp)
-    addi s0, s0, -0xfe
-    beqz s0, arch_signal_quit
+
+    /* fetch SYSCALL ID */
+    LOAD a7, 17 * REGBYTES(sp)
+    addi a7, a7, -0xfe
+    beqz a7, arch_signal_quit
 
 #ifdef RT_USING_USERSPACE
     /* save setting when syscall enter */
@@ -343,4 +319,3 @@ dont_ret_to_user:
     RESTORE_ALL
     csrw sscratch, zero
     sret
-
