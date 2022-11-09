@@ -97,38 +97,52 @@ ret_to_user_exit:
     // `RESTORE_ALL` also reset sp to user sp, and setup sscratch
     sret
 
+/**
+ * Restore user context from exception frame stroraged in ustack
+ * And handle pending signals;
+ * 
+ */
 arch_signal_quit:
     call lwp_signal_restore
     call arch_get_usp_from_uctx
     // return value is user sp
     mv sp, a0
-    RESTORE_ALL
-    csrw sscratch, zero
-    sret
 
-user_do_signal:
-    csrw sscratch, sp
+    // restore user sp before enter trap
+    addi a0, sp, CTX_REG_NR * REGBYTES 
+    csrw sscratch, a0
+
     RESTORE_ALL
-    // now sp is user sp
-    // and in interrupt close
+    SAVE_ALL
+    j arch_ret_to_user
+
+/**
+ * Prepare and enter user signal handler
+ * Move user exception frame and setup signal return
+ * routine in user stack
+ */
+user_do_signal:
+    /** restore and backup kernel sp carefully to avoid leaking */
+    addi t0, sp, CTX_REG_NR * REGBYTES
+    csrw sscratch, t0
+
+    RESTORE_ALL
     SAVE_ALL
 
-    // save user sp in SAVE_ALL frame
-    mv t0, sp
-    addi t0, t0, CTX_REG_NR * REGBYTES
-    STORE t0, 32 * REGBYTES(sp)
-
-    // save lwp_sigreturn in user memory
+    /**
+     * save lwp_sigreturn in user memory
+     */
     mv s0, sp
-    la t0, lwp_sigreturn//t0 = src
+    la t0, lwp_sigreturn
     la t1, lwp_sigreturn_end
-    sub t1, t1, t0//t1 = size
-    sub s0, s0, t1//s0 = dst
-
+    // t1 <- size
+    sub t1, t1, t0
+    // s0 <- dst
+    sub s0, s0, t1
 lwp_sigreturn_copy_loop:
-    addi t2, t1, -1//t2 = memory index
-    add t3, t0, t2//t3 = src addr
-    add t4, s0, t2//t4 = dst addr
+    addi t2, t1, -1
+    add t3, t0, t2
+    add t4, s0, t2
     lb t5, 0(t3)
     sb t5, 0(t4)
     mv t1, t2
@@ -147,7 +161,10 @@ lwp_sigreturn_copy_loop:
     csrrw sp, sscratch, x0
 
     /**
-     * a0: user sp
+     * backup user sp (point to saved exception frame, skip sigreturn routine)
+     * And get signal id
+
+     * a0: user sp 
      * a1: user_pc (not used)
      * a2: user_flag (not used)
      */
@@ -155,31 +172,27 @@ lwp_sigreturn_copy_loop:
     mv a2, zero
     call lwp_signal_backup
 
-    // s2 <- signal id (a0/return value)
+    /**
+     * backup signal id in s2, 
+     * and get sighandler by signal id
+     */
     mv s2, a0
-    /**
-     * WARN: lwp_sighandler_get can be a exit point
-     * a0: signal id
-     */
     call lwp_sighandler_get
-    // a0 <- signal_handler
-
-    // ra <- lwp_sigreturn
-    mv ra, s0
 
     /**
-     * restore user sp in sscratch
-     * now ready to enter user mode
+     * set regiter RA to user signal handler
+     * set sp to user sp & save kernel sp in sscratch
      */
-    csrw sscratch, s0
+    mv ra, s0
+    csrw sscratch, sp
+    mv sp, s0
 
     /**
-     * signal handler entry point may be 
-     * lwp_sigreturn or real signal handler
+     * a0 is signal_handler,
+     * s1 = s0 == NULL ? lwp_sigreturn : s0;
      */
     mv s1, s0
     beqz a0, skip_user_signal_handler
-    // a0 <- signal_handler
     mv s1, a0
 
 skip_user_signal_handler:
@@ -188,12 +201,6 @@ skip_user_signal_handler:
     csrc sstatus, t0
     li t0, SSTATUS_SPIE
     csrs sstatus, t0
-
-    /**
-     * sp <- user sp
-     * sscratch <- kernel sp
-     */
-    csrrw sp, sscratch, sp
 
     // sepc <- signal_handler
     csrw sepc, s1
@@ -251,11 +258,11 @@ syscall_entry:
     andi t0, t0, 0x100
     beqz t0, __restore_sp_from_tcb
 
-__restore_sp_from_sscratch:
+__restore_sp_from_sscratch: // from kernel
     csrr t0, sscratch
     j __move_stack_context
 
-__restore_sp_from_tcb:
+__restore_sp_from_tcb: // from user
     la a0, rt_current_thread
     LOAD a0, 0(a0)
     jal get_thread_kernel_stack_top
