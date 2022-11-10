@@ -34,7 +34,7 @@
  * 2013-09-14     Grissiom     add an option check in rt_event_recv
  * 2018-10-02     Bernard      add 64bit support for mailbox
  * 2019-09-16     tyx          add send wait support for message queue
- * 2020-07-29     Meco Man     fix thread->event_set/event_info when received an 
+ * 2020-07-29     Meco Man     fix thread->event_set/event_info when received an
  *                             event without pending
  * 2020-10-11     Meco Man     add value overflow-check code
  */
@@ -128,7 +128,7 @@ rt_inline rt_err_t rt_ipc_list_suspend(rt_list_t        *list,
         break;
 
     default:
-        break;  
+        break;
     }
 
     return RT_EOK;
@@ -2018,6 +2018,7 @@ rt_err_t rt_mq_init(rt_mq_t     mq,
 {
     struct rt_mq_message *head;
     register rt_base_t temp;
+    register rt_size_t msg_align_size;
 
     /* parameter check */
     RT_ASSERT(mq != RT_NULL);
@@ -2035,8 +2036,14 @@ rt_err_t rt_mq_init(rt_mq_t     mq,
     mq->msg_pool = msgpool;
 
     /* get correct message size */
-    mq->msg_size = RT_ALIGN(msg_size, RT_ALIGN_SIZE);
-    mq->max_msgs = pool_size / (mq->msg_size + sizeof(struct rt_mq_message));
+    msg_align_size = RT_ALIGN(msg_size, RT_ALIGN_SIZE);
+    mq->msg_size = msg_size;
+    mq->max_msgs = pool_size / (msg_align_size + sizeof(struct rt_mq_message));
+
+    if (0 == mq->max_msgs)
+    {
+        return -RT_EINVAL;
+    }
 
     /* initialize message list */
     mq->msg_queue_head = RT_NULL;
@@ -2047,7 +2054,7 @@ rt_err_t rt_mq_init(rt_mq_t     mq,
     for (temp = 0; temp < mq->max_msgs; temp ++)
     {
         head = (struct rt_mq_message *)((rt_uint8_t *)mq->msg_pool +
-                                        temp * (mq->msg_size + sizeof(struct rt_mq_message)));
+                                        temp * (msg_align_size + sizeof(struct rt_mq_message)));
         head->next = (struct rt_mq_message *)mq->msg_queue_free;
         mq->msg_queue_free = head;
     }
@@ -2107,6 +2114,7 @@ rt_mq_t rt_mq_create(const char *name,
     struct rt_messagequeue *mq;
     struct rt_mq_message *head;
     register rt_base_t temp;
+    register rt_size_t msg_align_size;
 
     RT_DEBUG_NOT_IN_INTERRUPT;
 
@@ -2124,11 +2132,12 @@ rt_mq_t rt_mq_create(const char *name,
     /* initialize message queue */
 
     /* get correct message size */
-    mq->msg_size = RT_ALIGN(msg_size, RT_ALIGN_SIZE);
+    msg_align_size = RT_ALIGN(msg_size, RT_ALIGN_SIZE);
+    mq->msg_size = msg_size;
     mq->max_msgs = max_msgs;
 
     /* allocate message pool */
-    mq->msg_pool = RT_KERNEL_MALLOC((mq->msg_size + sizeof(struct rt_mq_message)) * mq->max_msgs);
+    mq->msg_pool = RT_KERNEL_MALLOC((msg_align_size + sizeof(struct rt_mq_message)) * mq->max_msgs);
     if (mq->msg_pool == RT_NULL)
     {
         rt_object_delete(&(mq->parent.parent));
@@ -2145,7 +2154,7 @@ rt_mq_t rt_mq_create(const char *name,
     for (temp = 0; temp < mq->max_msgs; temp ++)
     {
         head = (struct rt_mq_message *)((rt_uint8_t *)mq->msg_pool +
-                                        temp * (mq->msg_size + sizeof(struct rt_mq_message)));
+                                        temp * (msg_align_size + sizeof(struct rt_mq_message)));
         head->next = (struct rt_mq_message *)mq->msg_queue_free;
         mq->msg_queue_free = head;
     }
