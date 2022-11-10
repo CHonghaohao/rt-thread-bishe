@@ -655,11 +655,16 @@ char *dfs_normalize_path(const char *directory, const char *filename)
         continue;
 
 up_one:
-        dst--;
-        if (dst < dst0)
+        /* keep the topmost root directory */
+        if (dst - dst0 != 1 || dst[-1] != '/')
         {
-            rt_free(fullpath);
-            return NULL;
+            dst--;
+
+            if (dst < dst0)
+            {
+                rt_free(fullpath);
+                return NULL;
+            }
         }
         while (dst0 < dst && dst[-1] != '/')
             dst--;
