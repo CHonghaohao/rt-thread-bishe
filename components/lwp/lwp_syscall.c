@@ -923,7 +923,12 @@ int sys_nanosleep(const struct timespec *rqtp, struct timespec *rmtp)
     if (ret != -1 && rmtp && lwp_user_accessable((void *)rmtp, sizeof *rmtp))
         lwp_put_to_user(rmtp, (void *)&rmtp_k, sizeof rmtp_k);
 #else
-    ret = nanosleep(rqtp, rmtp);
+    if (rmtp)
+    {
+        if (!lwp_user_accessable((void *)rmtp, sizeof *rmtp))
+            return -EFAULT;
+        ret = nanosleep(rqtp, rmtp);
+    }
 #endif
     return (ret < 0 ? GET_ERRNO() : ret);
 }
@@ -3773,6 +3778,32 @@ int sys_clock_gettime(clockid_t clk, struct timespec *ts)
     return (ret < 0 ? GET_ERRNO() : ret);
 }
 
+int sys_clock_nanosleep(clockid_t clk, int flags, const struct timespec *rqtp, struct timespec *rmtp)
+{
+    int ret = 0;
+    dbg_log(DBG_LOG, "sys_nanosleep\n");
+    if (!lwp_user_accessable((void *)rqtp, sizeof *rqtp))
+        return -EFAULT;
+
+#ifdef RT_USING_USERSPACE
+    struct timespec rqtp_k;
+    struct timespec rmtp_k;
+
+    lwp_get_from_user(&rqtp_k, (void *)rqtp, sizeof rqtp_k);
+    ret = clock_nanosleep(clk, flags, &rqtp_k, &rmtp_k);
+    if (ret != -1 && rmtp && lwp_user_accessable((void *)rmtp, sizeof *rmtp))
+        lwp_put_to_user(rmtp, (void *)&rmtp_k, sizeof rmtp_k);
+#else
+    if (rmtp)
+    {
+        if (!lwp_user_accessable((void *)rmtp, sizeof *rmtp))
+            return -EFAULT;
+        ret = clock_nanosleep(clk, flags, rqtp, rmtp);
+    }
+#endif
+    return (ret < 0 ? GET_ERRNO() : ret);
+}
+
 int sys_clock_getres(clockid_t clk, struct timespec *ts)
 {
     int ret = 0;
@@ -4271,7 +4302,8 @@ const static void* func_table[] =
     SYSCALL_SIGN(sys_sched_setscheduler),
     SYSCALL_SIGN(sys_sched_getscheduler),
     SYSCALL_SIGN(sys_setaffinity),
-    SYSCALL_SIGN(sys_fsync)
+    SYSCALL_SIGN(sys_fsync),
+    SYSCALL_SIGN(sys_clock_nanosleep),
 };
 
 const void *lwp_get_sys_api(rt_uint32_t number)

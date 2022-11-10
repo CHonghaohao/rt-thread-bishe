@@ -192,6 +192,73 @@ int clock_settime(clockid_t clockid, const struct timespec *tp)
 }
 RTM_EXPORT(clock_settime);
 
+int clock_nanosleep(clockid_t clockid, int flags, const struct timespec *rqtp, struct timespec *rmtp)
+{
+    if (rqtp->tv_sec < 0 || rqtp->tv_nsec < 0 || rqtp->tv_nsec >= 1000000000)
+    {
+        rt_set_errno(EINVAL);
+        return -1;
+    }
+    switch (clockid)
+    {
+    case CLOCK_REALTIME:
+    {
+        rt_tick_t tick;
+        if (flags & TIMER_ABSTIME == TIMER_ABSTIME)
+        {
+            tick = (rqtp->tv_sec - _timevalue.tv_sec) * RT_TICK_PER_SECOND + ((uint64_t)(rqtp->tv_nsec - _timevalue.tv_usec) * RT_TICK_PER_SECOND) / 1000000000;
+            rt_tick_t rt_tick = rt_tick_get();
+            tick = tick < rt_tick ? 0 : tick - rt_tick;
+        }
+        else
+        {
+            tick = rqtp->tv_sec * RT_TICK_PER_SECOND + ((uint64_t)(rqtp->tv_nsec) * RT_TICK_PER_SECOND) / 1000000000;
+        }
+        rt_thread_delay(tick);
+        if (rmtp)
+        {
+            tick = rt_tick_get() - tick;
+            rmtp->tv_sec = tick / RT_TICK_PER_SECOND;
+            rmtp->tv_nsec = (tick % RT_TICK_PER_SECOND) * (1000000000 / RT_TICK_PER_SECOND);
+        }
+    }
+    break;
+
+#ifdef RT_USING_CPUTIME
+    case CLOCK_MONOTONIC:
+    case CLOCK_CPUTIME_ID:
+    {
+        uint64_t cpu_tick, cpu_tick_old;
+        cpu_tick_old = clock_cpu_gettime();
+        rt_tick_t tick;
+        float unit = clock_cpu_getres();
+
+        cpu_tick = (rqtp->tv_sec * NANOSECOND_PER_SECOND + ((uint64_t)rqtp->tv_nsec * NANOSECOND_PER_SECOND) / 1000000000) / unit;
+        if (flags & TIMER_ABSTIME == TIMER_ABSTIME)
+            cpu_tick = cpu_tick < cpu_tick_old ? 0 : cpu_tick - cpu_tick_old;
+        tick = cpu_tick / (NANOSECOND_PER_SECOND / RT_TICK_PER_SECOND);
+        rt_thread_delay(tick);
+
+        if (rmtp)
+        {
+            uint64_t rmtp_cpu_tick = clock_cpu_gettime() - tick * (NANOSECOND_PER_SECOND / RT_TICK_PER_SECOND);
+            rmtp->tv_sec = ((int)(rmtp_cpu_tick * unit)) / NANOSECOND_PER_SECOND;
+            rmtp->tv_nsec = ((int)(rmtp_cpu_tick * unit)) % NANOSECOND_PER_SECOND;
+        }
+
+        while (clock_cpu_gettime() - cpu_tick_old < cpu_tick);
+    }
+    break;
+#endif
+    default:
+        rt_set_errno(EINVAL);
+        return -1;
+    }
+
+    return 0;
+}
+RTM_EXPORT(clock_nanosleep);
+
 int nanosleep(const struct timespec *rqtp, struct timespec *rmtp)
 {
     if (rqtp->tv_sec < 0 || rqtp->tv_nsec < 0 || rqtp->tv_nsec >= 1000000000)
