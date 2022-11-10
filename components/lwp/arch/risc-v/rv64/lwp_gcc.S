@@ -100,7 +100,6 @@ ret_to_user_exit:
 /**
  * Restore user context from exception frame stroraged in ustack
  * And handle pending signals;
- * 
  */
 arch_signal_quit:
     call lwp_signal_restore
@@ -139,6 +138,7 @@ user_do_signal:
     sub t1, t1, t0
     // s0 <- dst
     sub s0, s0, t1
+    mv s2, t1
 lwp_sigreturn_copy_loop:
     addi t2, t1, -1
     add t3, t0, t2
@@ -156,18 +156,27 @@ lwp_sigreturn_copy_loop:
      * 3. storage lwp_sigreturn entry address
      * 4. get signal id as param for signal handler
      */
-    mv a0, sp
-
+    mv s1, sp
     csrrw sp, sscratch, x0
+
+    /**
+     * synchronize dcache & icache if target is
+     * a Harvard Architecture machine, otherwise
+     * do nothing
+     */
+    mv a0, s0
+    mv a1, s2
+    call rt_hw_sync_cache_local
 
     /**
      * backup user sp (point to saved exception frame, skip sigreturn routine)
      * And get signal id
 
      * a0: user sp 
-     * a1: user_pc (not used)
-     * a2: user_flag (not used)
+     * a1: user_pc (not used, marked as 0 to avoid abuse)
+     * a2: user_flag (not used, marked as 0 to avoid abuse)
      */
+    mv a0, s1
     mv a1, zero
     mv a2, zero
     call lwp_signal_backup
