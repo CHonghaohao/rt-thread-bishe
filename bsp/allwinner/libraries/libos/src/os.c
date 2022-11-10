@@ -142,7 +142,7 @@ void awos_arch_mems_clean_dcache_region(unsigned long start, unsigned long len)
 
 void awos_arch_mems_clean_flush_dcache_region(unsigned long start, unsigned long len)
 {
-    rt_hw_cpu_dcache_clean_flush((void *)start, len);
+    rt_hw_cpu_dcache_clean_invalidate((void *)start, len);
 }
 
 void awos_arch_mems_flush_dcache_region(unsigned long start, unsigned long len)
