@@ -31,15 +31,17 @@
 #if (defined(RT_USING_SAL) && defined(SAL_USING_POSIX))
 #include <sys/socket.h>
 
-#define SYSCALL_NET(f)      ((void *)(f))
+#include "syscall_data.h"
+
+#define SYSCALL_NET(f)      f
 #else
-#define SYSCALL_NET(f)      ((void *)sys_notimpl)
+#define SYSCALL_NET(f)      SYSCALL_SIGN(sys_notimpl)
 #endif
 
 #if defined(RT_USING_DFS) && defined(RT_USING_USERSPACE)
-#define SYSCALL_USPACE(f)   ((void *)(f))
+#define SYSCALL_USPACE(f)   f
 #else
-#define SYSCALL_USPACE(f)   ((void *)sys_notimpl)
+#define SYSCALL_USPACE(f)   SYSCALL_SIGN(sys_notimpl)
 #endif
 
 #define DBG_TAG    "SYSCALL"
@@ -52,6 +54,7 @@
 
 #include <sal_netdb.h>
 #include <sal.h>
+#include <sys/socket.h>
 #endif /* RT_USING_SAL */
 
 #include <tty.h>
@@ -4115,200 +4118,200 @@ int sys_fsync(int fd)
 
 const static void* func_table[] =
 {
-    (void *)sys_exit,            /* 01 */
-    (void *)sys_read,
-    (void *)sys_write,
-    (void *)sys_lseek,
-    (void *)sys_open,            /* 05 */
-    (void *)sys_close,
-    (void *)sys_ioctl,
-    (void *)sys_fstat,
-    (void *)sys_poll,
-    (void *)sys_nanosleep,       /* 10 */
-    (void *)sys_gettimeofday,
-    (void *)sys_settimeofday,
-    (void *)sys_exec,
-    (void *)sys_kill,
-    (void *)sys_getpid,          /* 15 */
-    (void *)sys_getpriority,
-    (void *)sys_setpriority,
-    (void *)sys_sem_create,
-    (void *)sys_sem_delete,
-    (void *)sys_sem_take,        /* 20 */
-    (void *)sys_sem_release,
-    (void *)sys_mutex_create,
-    (void *)sys_mutex_delete,
-    (void *)sys_mutex_take,
-    (void *)sys_mutex_release,   /* 25 */
-    (void *)sys_event_create,
-    (void *)sys_event_delete,
-    (void *)sys_event_send,
-    (void *)sys_event_recv,
-    (void *)sys_mb_create,       /* 30 */
-    (void *)sys_mb_delete,
-    (void *)sys_mb_send,
-    (void *)sys_mb_send_wait,
-    (void *)sys_mb_recv,
-    (void *)sys_mq_create,       /* 35 */
-    (void *)sys_mq_delete,
-    (void *)sys_mq_send,
-    (void *)sys_mq_urgent,
-    (void *)sys_mq_recv,
-    (void *)sys_thread_create,   /* 40 */
-    (void *)sys_thread_delete,
-    (void *)sys_thread_startup,
-    (void *)sys_thread_self,
-    (void *)sys_channel_open,
-    (void *)sys_channel_close,   /* 45 */
-    (void *)sys_channel_send,
-    (void *)sys_channel_send_recv_timeout,
-    (void *)sys_channel_reply,
-    (void *)sys_channel_recv_timeout,
-    (void *)sys_enter_critical,  /* 50 */
-    (void *)sys_exit_critical,
+    SYSCALL_SIGN(sys_exit),            /* 01 */
+    SYSCALL_SIGN(sys_read),
+    SYSCALL_SIGN(sys_write),
+    SYSCALL_SIGN(sys_lseek),
+    SYSCALL_SIGN(sys_open),            /* 05 */
+    SYSCALL_SIGN(sys_close),
+    SYSCALL_SIGN(sys_ioctl),
+    SYSCALL_SIGN(sys_fstat),
+    SYSCALL_SIGN(sys_poll),
+    SYSCALL_SIGN(sys_nanosleep),       /* 10 */
+    SYSCALL_SIGN(sys_gettimeofday),
+    SYSCALL_SIGN(sys_settimeofday),
+    SYSCALL_SIGN(sys_exec),
+    SYSCALL_SIGN(sys_kill),
+    SYSCALL_SIGN(sys_getpid),          /* 15 */
+    SYSCALL_SIGN(sys_getpriority),
+    SYSCALL_SIGN(sys_setpriority),
+    SYSCALL_SIGN(sys_sem_create),
+    SYSCALL_SIGN(sys_sem_delete),
+    SYSCALL_SIGN(sys_sem_take),        /* 20 */
+    SYSCALL_SIGN(sys_sem_release),
+    SYSCALL_SIGN(sys_mutex_create),
+    SYSCALL_SIGN(sys_mutex_delete),
+    SYSCALL_SIGN(sys_mutex_take),
+    SYSCALL_SIGN(sys_mutex_release),   /* 25 */
+    SYSCALL_SIGN(sys_event_create),
+    SYSCALL_SIGN(sys_event_delete),
+    SYSCALL_SIGN(sys_event_send),
+    SYSCALL_SIGN(sys_event_recv),
+    SYSCALL_SIGN(sys_mb_create),       /* 30 */
+    SYSCALL_SIGN(sys_mb_delete),
+    SYSCALL_SIGN(sys_mb_send),
+    SYSCALL_SIGN(sys_mb_send_wait),
+    SYSCALL_SIGN(sys_mb_recv),
+    SYSCALL_SIGN(sys_mq_create),       /* 35 */
+    SYSCALL_SIGN(sys_mq_delete),
+    SYSCALL_SIGN(sys_mq_send),
+    SYSCALL_SIGN(sys_mq_urgent),
+    SYSCALL_SIGN(sys_mq_recv),
+    SYSCALL_SIGN(sys_thread_create),   /* 40 */
+    SYSCALL_SIGN(sys_thread_delete),
+    SYSCALL_SIGN(sys_thread_startup),
+    SYSCALL_SIGN(sys_thread_self),
+    SYSCALL_SIGN(sys_channel_open),
+    SYSCALL_SIGN(sys_channel_close),   /* 45 */
+    SYSCALL_SIGN(sys_channel_send),
+    SYSCALL_SIGN(sys_channel_send_recv_timeout),
+    SYSCALL_SIGN(sys_channel_reply),
+    SYSCALL_SIGN(sys_channel_recv_timeout),
+    SYSCALL_SIGN(sys_enter_critical),  /* 50 */
+    SYSCALL_SIGN(sys_exit_critical),
 
-    SYSCALL_USPACE(sys_brk),
-    SYSCALL_USPACE(sys_mmap2),
-    SYSCALL_USPACE(sys_munmap),
+    SYSCALL_USPACE(SYSCALL_SIGN(sys_brk)),
+    SYSCALL_USPACE(SYSCALL_SIGN(sys_mmap2)),
+    SYSCALL_USPACE(SYSCALL_SIGN(sys_munmap)),
 #ifdef ARCH_MM_MMU
-    SYSCALL_USPACE(sys_shmget), /* 55 */
-    SYSCALL_USPACE(sys_shmrm),
-    SYSCALL_USPACE(sys_shmat),
-    SYSCALL_USPACE(sys_shmdt),
+    SYSCALL_USPACE(SYSCALL_SIGN(sys_shmget)), /* 55 */
+    SYSCALL_USPACE(SYSCALL_SIGN(sys_shmrm)),
+    SYSCALL_USPACE(SYSCALL_SIGN(sys_shmat)),
+    SYSCALL_USPACE(SYSCALL_SIGN(sys_shmdt)),
 #else
 #ifdef RT_LWP_USING_SHM
-    (void *)sys_shm_alloc,      /* 55 */
-    (void *)sys_shm_free,
-    (void *)sys_shm_retain,
-    (void *)sys_notimpl,
+    SYSCALL_SIGN(sys_shm_alloc),      /* 55 */
+    SYSCALL_SIGN(sys_shm_free),
+    SYSCALL_SIGN(sys_shm_retain),
+    SYSCALL_SIGN(sys_notimpl),
 #else
-    (void *)sys_notimpl,      /* 55 */
-    (void *)sys_notimpl,
-    (void *)sys_notimpl,
-    (void *)sys_notimpl,
+    SYSCALL_SIGN(sys_notimpl),      /* 55 */
+    SYSCALL_SIGN(sys_notimpl),
+    SYSCALL_SIGN(sys_notimpl),
+    SYSCALL_SIGN(sys_notimpl),
 #endif /* RT_LWP_USING_SHM */
 #endif /* ARCH_MM_MMU */
-    (void *)sys_device_init,
-    (void *)sys_device_register, /* 60 */
-    (void *)sys_device_control,
-    (void *)sys_device_find,
-    (void *)sys_device_open,
-    (void *)sys_device_close,
-    (void *)sys_device_read,    /* 65 */
-    (void *)sys_device_write,
+    SYSCALL_SIGN(sys_device_init),
+    SYSCALL_SIGN(sys_device_register), /* 60 */
+    SYSCALL_SIGN(sys_device_control),
+    SYSCALL_SIGN(sys_device_find),
+    SYSCALL_SIGN(sys_device_open),
+    SYSCALL_SIGN(sys_device_close),
+    SYSCALL_SIGN(sys_device_read),    /* 65 */
+    SYSCALL_SIGN(sys_device_write),
 
-    (void *)sys_stat,
-    (void *)sys_thread_find,
+    SYSCALL_SIGN(sys_stat),
+    SYSCALL_SIGN(sys_thread_find),
 
-    SYSCALL_NET(sys_accept),
-    SYSCALL_NET(sys_bind),      /* 70 */
-    SYSCALL_NET(sys_shutdown),
-    SYSCALL_NET(sys_getpeername),
-    SYSCALL_NET(sys_getsockname),
-    SYSCALL_NET(sys_getsockopt),
-    SYSCALL_NET(sys_setsockopt), /* 75 */
-    SYSCALL_NET(sys_connect),
-    SYSCALL_NET(sys_listen),
-    SYSCALL_NET(sys_recv),
-    SYSCALL_NET(sys_recvfrom),
-    SYSCALL_NET(sys_send),      /* 80 */
-    SYSCALL_NET(sys_sendto),
-    SYSCALL_NET(sys_socket),
+    SYSCALL_NET(SYSCALL_SIGN(sys_accept)),
+    SYSCALL_NET(SYSCALL_SIGN(sys_bind)),      /* 70 */
+    SYSCALL_NET(SYSCALL_SIGN(sys_shutdown)),
+    SYSCALL_NET(SYSCALL_SIGN(sys_getpeername)),
+    SYSCALL_NET(SYSCALL_SIGN(sys_getsockname)),
+    SYSCALL_NET(SYSCALL_SIGN(sys_getsockopt)),
+    SYSCALL_NET(SYSCALL_SIGN(sys_setsockopt)), /* 75 */
+    SYSCALL_NET(SYSCALL_SIGN(sys_connect)),
+    SYSCALL_NET(SYSCALL_SIGN(sys_listen)),
+    SYSCALL_NET(SYSCALL_SIGN(sys_recv)),
+    SYSCALL_NET(SYSCALL_SIGN(sys_recvfrom)),
+    SYSCALL_NET(SYSCALL_SIGN(sys_send)),      /* 80 */
+    SYSCALL_NET(SYSCALL_SIGN(sys_sendto)),
+    SYSCALL_NET(SYSCALL_SIGN(sys_socket)),
 
-    SYSCALL_NET(sys_closesocket),
-    SYSCALL_NET(sys_getaddrinfo),
-    SYSCALL_NET(sys_gethostbyname2_r), /* 85 */
+    SYSCALL_NET(SYSCALL_SIGN(sys_closesocket)),
+    SYSCALL_NET(SYSCALL_SIGN(sys_getaddrinfo)),
+    SYSCALL_NET(SYSCALL_SIGN(sys_gethostbyname2_r)), /* 85 */
 
-    (void *)sys_notimpl,    //(void *)network,
-    (void *)sys_notimpl,    //(void *)network,
-    (void *)sys_notimpl,    //(void *)network,
-    (void *)sys_notimpl,    //(void *)network,
-    (void *)sys_notimpl,    //(void *)network, /* 90 */
-    (void *)sys_notimpl,    //(void *)network,
-    (void *)sys_notimpl,    //(void *)network,
-    (void *)sys_notimpl,    //(void *)network,
+    SYSCALL_SIGN(sys_notimpl),    //network,
+    SYSCALL_SIGN(sys_notimpl),    //network,
+    SYSCALL_SIGN(sys_notimpl),    //network,
+    SYSCALL_SIGN(sys_notimpl),    //network,
+    SYSCALL_SIGN(sys_notimpl),    //network, /* 90 */
+    SYSCALL_SIGN(sys_notimpl),    //network,
+    SYSCALL_SIGN(sys_notimpl),    //network,
+    SYSCALL_SIGN(sys_notimpl),    //network,
 
 #ifdef RT_USING_DFS
-    (void *)sys_select,
+    SYSCALL_SIGN(sys_select),
 #else
-    (void *)sys_notimpl,
+    SYSCALL_SIGN(sys_notimpl),
 #endif
 
-    (void *)sys_notimpl,    //(void *)sys_hw_interrupt_disable, /* 95 */
-    (void *)sys_notimpl,    //(void *)sys_hw_interrupt_enable,
+    SYSCALL_SIGN(sys_notimpl),    //SYSCALL_SIGN(sys_hw_interrupt_disable), /* 95 */
+    SYSCALL_SIGN(sys_notimpl),    //SYSCALL_SIGN(sys_hw_interrupt_enable),
 
-    (void *)sys_tick_get,
-    (void *)sys_exit_group,
+    SYSCALL_SIGN(sys_tick_get),
+    SYSCALL_SIGN(sys_exit_group),
 
-    (void *)sys_notimpl,    //(void *)rt_delayed_work_init,
-    (void *)sys_notimpl,    //(void *)rt_work_submit,           /* 100 */
-    (void *)sys_notimpl,    //(void *)rt_wqueue_wakeup,
-    (void *)sys_thread_mdelay,
-    (void *)sys_sigaction,
-    (void *)sys_sigprocmask,
-    (void *)sys_tkill,             /* 105 */
-    (void *)sys_thread_sigprocmask,
+    SYSCALL_SIGN(sys_notimpl),    //rt_delayed_work_init,
+    SYSCALL_SIGN(sys_notimpl),    //rt_work_submit,           /* 100 */
+    SYSCALL_SIGN(sys_notimpl),    //rt_wqueue_wakeup,
+    SYSCALL_SIGN(sys_thread_mdelay),
+    SYSCALL_SIGN(sys_sigaction),
+    SYSCALL_SIGN(sys_sigprocmask),
+    SYSCALL_SIGN(sys_tkill),             /* 105 */
+    SYSCALL_SIGN(sys_thread_sigprocmask),
 #ifdef ARCH_MM_MMU
-    (void *)sys_cacheflush,
-    (void *)sys_notimpl,
-    (void *)sys_notimpl,
+    SYSCALL_SIGN(sys_cacheflush),
+    SYSCALL_SIGN(sys_notimpl),
+    SYSCALL_SIGN(sys_notimpl),
 #else
-    (void *)sys_notimpl,
-    (void *)sys_lwp_sighandler_set,
-    (void *)sys_thread_sighandler_set,
+    SYSCALL_SIGN(sys_notimpl),
+    SYSCALL_SIGN(sys_lwp_sighandler_set),
+    SYSCALL_SIGN(sys_thread_sighandler_set),
 #endif
-    (void *)sys_waitpid,          /* 110 */
+    SYSCALL_SIGN(sys_waitpid),          /* 110 */
 
-    (void *)sys_timer_create,
-    (void *)sys_timer_delete,
-    (void *)sys_timer_start,
-    (void *)sys_timer_stop,
-    (void *)sys_timer_control,  /* 115 */
-    (void *)sys_getcwd,
-    (void *)sys_chdir,
-    (void *)sys_unlink,
-    (void *)sys_mkdir,
-    (void *)sys_rmdir,          /* 120 */
-    (void *)sys_getdents,
-    (void *)sys_get_errno,
+    SYSCALL_SIGN(sys_timer_create),
+    SYSCALL_SIGN(sys_timer_delete),
+    SYSCALL_SIGN(sys_timer_start),
+    SYSCALL_SIGN(sys_timer_stop),
+    SYSCALL_SIGN(sys_timer_control),  /* 115 */
+    SYSCALL_SIGN(sys_getcwd),
+    SYSCALL_SIGN(sys_chdir),
+    SYSCALL_SIGN(sys_unlink),
+    SYSCALL_SIGN(sys_mkdir),
+    SYSCALL_SIGN(sys_rmdir),          /* 120 */
+    SYSCALL_SIGN(sys_getdents),
+    SYSCALL_SIGN(sys_get_errno),
 #ifdef ARCH_MM_MMU
-    (void *)sys_set_thread_area,
-    (void *)sys_set_tid_address,
+    SYSCALL_SIGN(sys_set_thread_area),
+    SYSCALL_SIGN(sys_set_tid_address),
 #else
-    (void *)sys_notimpl,
-    (void *)sys_notimpl,
+    SYSCALL_SIGN(sys_notimpl),
+    SYSCALL_SIGN(sys_notimpl),
 #endif
-    (void *)sys_access,         /* 125 */
-    (void *)sys_pipe,
-    (void *)sys_clock_settime,
-    (void *)sys_clock_gettime,
-    (void *)sys_clock_getres,
-    SYSCALL_USPACE(sys_clone),           /* 130 */
-    SYSCALL_USPACE(sys_futex),
-    SYSCALL_USPACE(sys_pmutex),
-    (void *)sys_dup,
-    (void *)sys_dup2,
-    (void *)sys_rename,         /* 135 */
-    SYSCALL_USPACE(sys_fork),
-    SYSCALL_USPACE(sys_execve),
-    SYSCALL_USPACE(sys_vfork),
-    (void *)sys_gettid,
-    (void *)sys_prlimit64,      /* 140 */
-    (void *)sys_getrlimit,
-    (void *)sys_setrlimit,
-    (void *)sys_setsid,
-    (void *)sys_getrandom,
-    (void *)sys_notimpl,    // (void *)sys_readlink     /* 145 */
-    SYSCALL_USPACE(sys_mremap),
-    SYSCALL_USPACE(sys_madvise),
-    (void *)sys_sched_setparam,
-    (void *)sys_sched_getparam,
-    (void *)sys_sched_get_priority_max,
-    (void *)sys_sched_get_priority_min,
-    (void *)sys_sched_setscheduler,
-    (void *)sys_sched_getscheduler,
-    (void *)sys_setaffinity,
-    (void *)sys_fsync
+    SYSCALL_SIGN(sys_access),         /* 125 */
+    SYSCALL_SIGN(sys_pipe),
+    SYSCALL_SIGN(sys_clock_settime),
+    SYSCALL_SIGN(sys_clock_gettime),
+    SYSCALL_SIGN(sys_clock_getres),
+    SYSCALL_USPACE(SYSCALL_SIGN(sys_clone)),           /* 130 */
+    SYSCALL_USPACE(SYSCALL_SIGN(sys_futex)),
+    SYSCALL_USPACE(SYSCALL_SIGN(sys_pmutex)),
+    SYSCALL_SIGN(sys_dup),
+    SYSCALL_SIGN(sys_dup2),
+    SYSCALL_SIGN(sys_rename),         /* 135 */
+    SYSCALL_USPACE(SYSCALL_SIGN(sys_fork)),
+    SYSCALL_USPACE(SYSCALL_SIGN(sys_execve)),
+    SYSCALL_USPACE(SYSCALL_SIGN(sys_vfork)),
+    SYSCALL_SIGN(sys_gettid),
+    SYSCALL_SIGN(sys_prlimit64),      /* 140 */
+    SYSCALL_SIGN(sys_getrlimit),
+    SYSCALL_SIGN(sys_setrlimit),
+    SYSCALL_SIGN(sys_setsid),
+    SYSCALL_SIGN(sys_getrandom),
+    SYSCALL_SIGN(sys_notimpl),    // SYSCALL_SIGN(sys_readlink)     /* 145 */
+    SYSCALL_USPACE(SYSCALL_SIGN(sys_mremap)),
+    SYSCALL_USPACE(SYSCALL_SIGN(sys_madvise)),
+    SYSCALL_SIGN(sys_sched_setparam),
+    SYSCALL_SIGN(sys_sched_getparam),
+    SYSCALL_SIGN(sys_sched_get_priority_max),
+    SYSCALL_SIGN(sys_sched_get_priority_min),
+    SYSCALL_SIGN(sys_sched_setscheduler),
+    SYSCALL_SIGN(sys_sched_getscheduler),
+    SYSCALL_SIGN(sys_setaffinity),
+    SYSCALL_SIGN(sys_fsync)
 };
 
 const void *lwp_get_sys_api(rt_uint32_t number)
@@ -4322,11 +4325,32 @@ const void *lwp_get_sys_api(rt_uint32_t number)
     else
     {
         number -= 1;
-        if (number < sizeof(func_table) / sizeof(func_table[0]))
+        if (number < sizeof(func_table) / sizeof(func_table[0]) / 2)
         {
-            func = func_table[number];
+            func = func_table[number << 1];
         }
     }
 
     return func;
+}
+
+const char *lwp_get_syscall_name(rt_uint32_t number)
+{
+    const char *name = "sys_notimpl";
+
+    if (number == 0xff)
+    {
+        name = "sys_log";
+    }
+    else
+    {
+        number -= 1;
+        if (number < sizeof(func_table) / sizeof(func_table[0]) / 2)
+        {
+            name = (char*)func_table[(number << 1) + 1];
+        }
+    }
+
+    // skip sys_
+    return name + 4;
 }
