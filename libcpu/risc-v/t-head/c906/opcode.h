@@ -76,4 +76,10 @@
 #define OPC_ICACHE_IVA(rs1)     __OPC_INSN_FORMAT_CACHE(0x1, x16, rs1)
 #endif /* _TOOLCHAIN_NOT_SUPP_THEAD_ISA_ */
 
+#ifdef _TOOLCHAIN_SUPP_ZIFENCEI_ISA_
+#define OPC_FENCE_I             "fence.i"
+#else /* !_TOOLCHAIN_SUPP_ZIFENCEI_ISA_ */
+#define OPC_FENCE_I             ".long 0x0000100F"
+#endif /* _TOOLCHAIN_SUPP_ZIFENCEI_ISA_ */
+
 #endif /* __OPCODE_H__ */

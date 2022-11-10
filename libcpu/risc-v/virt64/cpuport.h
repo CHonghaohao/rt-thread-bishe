@@ -62,7 +62,7 @@ rt_inline void rt_hw_dmb()
 
 rt_inline void rt_hw_isb()
 {
-    asm volatile("fence.i":::"memory");
+    asm volatile(".long 0x0000100F":::"memory");
 }
 
 #endif

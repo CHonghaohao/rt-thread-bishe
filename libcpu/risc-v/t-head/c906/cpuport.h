@@ -12,6 +12,7 @@
 #define CPUPORT_H__
 
 #include <rtconfig.h>
+#include <opcode.h>
 
 /* bytes of register width  */
 #ifdef ARCH_CPU_64BIT
@@ -48,7 +49,7 @@ rt_inline void rt_hw_dmb()
 
 rt_inline void rt_hw_isb()
 {
-    asm volatile("fence.i":::"memory");
+    asm volatile(OPC_FENCE_I:::"memory");
 }
 
 int rt_hw_cpu_id(void);
