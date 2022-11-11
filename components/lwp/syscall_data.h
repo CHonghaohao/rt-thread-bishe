@@ -10,8 +10,7 @@
 #ifndef __SYSCALL_DATA_H__
 #define __SYSCALL_DATA_H__
 
-#define xstr(x...)	#x
-#define str(x...)	xstr(x)
+#include <rtthread.h>
 
 /**
  * @brief signature for syscall, used to locate syscall metadata.
@@ -28,6 +27,6 @@
  */
 #define SYSCALL_SIGN(func) \
     (void *)func,          \
-        str(func)
+        RT_STRINGIFY(func)
 
 #endif /* __SYSCALL_DATA_H__ */

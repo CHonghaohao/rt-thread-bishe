@@ -28,10 +28,10 @@
 #include <dfs_select.h>
 #endif
 
+#include "syscall_data.h"
+
 #if (defined(RT_USING_SAL) && defined(SAL_USING_POSIX))
 #include <sys/socket.h>
-
-#include "syscall_data.h"
 
 #define SYSCALL_NET(f)      f
 #else

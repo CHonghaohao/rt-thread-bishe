@@ -18,10 +18,6 @@
  * It's painful to port this file, and should be really careful.
  */
 
-#define ___TOSTR(str) #str
-#define __TOSTR(str) ___TOSTR(str)
-#define _TOSTR(str) __TOSTR(str)
-
 /**
  * @brief RISC-V instruction formats
  */
@@ -35,7 +31,7 @@
  * 31      25    20    15      12   7        0
  */
 #define __OPC_INSN_FORMAT_R(opcode, func3, func7, rd, rs1, rs2) \
-    ".insn r "_TOSTR(opcode)","_TOSTR(func3)","_TOSTR(func7)","_TOSTR(rd)","_TOSTR(rs1)","_TOSTR(rs2)
+    ".insn r "RT_STRINGIFY(opcode)","RT_STRINGIFY(func3)","RT_STRINGIFY(func7)","RT_STRINGIFY(rd)","RT_STRINGIFY(rs1)","RT_STRINGIFY(rs2)
 
 /**
  * @brief Xuantie T-HEAD extension ISA format
@@ -54,11 +50,11 @@
 
 #define OPC_ICACHE_IALL         "icache.iall"
 
-#define OPC_DCACHE_CVA(rs1)     "dcache.cva "_TOSTR(rs1)
-#define OPC_DCACHE_IVA(rs1)     "dcache.iva "_TOSTR(rs1)
-#define OPC_DCACHE_CIVA(rs1)    "dcache.civa "_TOSTR(rs1)
+#define OPC_DCACHE_CVA(rs1)     "dcache.cva "RT_STRINGIFY(rs1)
+#define OPC_DCACHE_IVA(rs1)     "dcache.iva "RT_STRINGIFY(rs1)
+#define OPC_DCACHE_CIVA(rs1)    "dcache.civa "RT_STRINGIFY(rs1)
 
-#define OPC_ICACHE_IVA(rs1)     "icache.iva "_TOSTR(rs1)
+#define OPC_ICACHE_IVA(rs1)     "icache.iva "RT_STRINGIFY(rs1)
 #else /* !_TOOLCHAIN_NOT_SUPP_THEAD_ISA_ */
 #define OPC_SYNC                ".long 0x0180000B"
 #define OPC_SYNC_I              ".long 0x01A0000B"
