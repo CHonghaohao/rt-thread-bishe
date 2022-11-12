@@ -7,12 +7,18 @@
  * Date           Author       Notes
  * 2021-01-29     lizhirui     first version
  * 2021-11-05     JasonHu      add c906 cache inst
+ * 2022-11-09     WangXiaoyao  Support cache coherence operations;
+ *                             improve portability and make
+ *                             no assumption on undefined behavior
  */
 
 #include <rthw.h>
 #include <rtdef.h>
 #include <board.h>
 #include <riscv.h>
+
+#include "opcode.h"
+#include "cache.h"
 
 #define L1_CACHE_BYTES (64)
 
@@ -25,60 +31,35 @@ static void dcache_inv_range(unsigned long start, unsigned long end) __attribute
 static void dcache_wbinv_range(unsigned long start, unsigned long end) __attribute__((optimize("O0")));
 static void icache_inv_range(unsigned long start, unsigned long end) __attribute__((optimize("O0")));
 
+#define CACHE_OP_RS1 %0
+#define CACHE_OP_RANGE(instr)                                  \
+    {                                                          \
+        register rt_ubase_t i = start & ~(L1_CACHE_BYTES - 1); \
+        for (; i < end; i += L1_CACHE_BYTES)                   \
+        {                                                      \
+            __asm__ volatile(instr ::"r"(i)                    \
+                             : "memory");                      \
+        }                                                      \
+    }
+
 static void dcache_wb_range(unsigned long start, unsigned long end)
 {
-    unsigned long i = start & ~(L1_CACHE_BYTES - 1);
-
-    for (; i < end; i += L1_CACHE_BYTES)
-    {
-        /* asm volatile("dcache.cva %0\n"::"r"(i):"memory"); */
-        /*
-         * compiler always use a5 = i.
-         * a6 not used, so we use a6 here.
-         */
-        asm volatile("mv a6, %0\n"::"r"(i):"memory");   /* a6 = a5(i) */
-        asm volatile(".long 0x0257800b");               /* dcache.cva a6 */
-    }
-    asm volatile(".long 0x01b0000b");   /* sync.is */
+    CACHE_OP_RANGE(OPC_DCACHE_CVA(CACHE_OP_RS1));
 }
 
 static void dcache_inv_range(unsigned long start, unsigned long end)
 {
-    unsigned long i = start & ~(L1_CACHE_BYTES - 1);
-
-    for (; i < end; i += L1_CACHE_BYTES)
-    {
-        /* asm volatile("dcache.iva %0\n"::"r"(i):"memory"); */
-        asm volatile("mv a6, %0\n"::"r"(i):"memory");   /* a6 = a5(i) */
-        asm volatile(".long 0x0268000b");               /* dcache.iva a6 */
-    }
-    asm volatile(".long 0x01b0000b");
+    CACHE_OP_RANGE(OPC_DCACHE_IVA(CACHE_OP_RS1));
 }
 
 static void dcache_wbinv_range(unsigned long start, unsigned long end)
 {
-    unsigned long i = start & ~(L1_CACHE_BYTES - 1);
-
-    for (; i < end; i += L1_CACHE_BYTES)
-    {
-        /* asm volatile("dcache.civa %0\n"::"r"(i):"memory"); */
-        asm volatile("mv a6, %0\n"::"r"(i):"memory");   /* a6 = a5(i) */
-        asm volatile(".long 0x0278000b");               /* dcache.civa a6 */
-    }
-    asm volatile(".long 0x01b0000b");
+    CACHE_OP_RANGE(OPC_DCACHE_CIVA(CACHE_OP_RS1));
 }
 
 static void icache_inv_range(unsigned long start, unsigned long end)
 {
-    unsigned long i = start & ~(L1_CACHE_BYTES - 1);
-
-    for (; i < end; i += L1_CACHE_BYTES)
-    {
-        /* asm volatile("icache.iva %0\n"::"r"(i):"memory"); */
-        asm volatile("mv a6, %0\n"::"r"(i):"memory");   /* a6 = a5(i) */
-        asm volatile(".long 0x0308000b");               /* icache.iva a6 */
-    }
-    asm volatile(".long 0x01b0000b");
+    CACHE_OP_RANGE(OPC_ICACHE_IVA(CACHE_OP_RS1));
 }
 
 rt_inline rt_uint32_t rt_cpu_icache_line_size(void)
@@ -91,65 +72,89 @@ rt_inline rt_uint32_t rt_cpu_dcache_line_size(void)
     return L1_CACHE_BYTES;
 }
 
-void rt_hw_cpu_icache_invalidate(void *addr,int size)
+void rt_hw_cpu_icache_invalidate_local(void *addr, int size)
 {
     icache_inv_range((unsigned long)addr, (unsigned long)((unsigned char *)addr + size));
+    rt_hw_cpu_sync_i();
 }
 
-void rt_hw_cpu_dcache_invalidate(void *addr,int size)
+void rt_hw_cpu_dcache_invalidate_local(void *addr, int size)
 {
     dcache_inv_range((unsigned long)addr, (unsigned long)((unsigned char *)addr + size));
+    rt_hw_cpu_sync();
 }
 
-void rt_hw_cpu_dcache_clean(void *addr,int size)
+void rt_hw_cpu_dcache_clean_local(void *addr, int size)
 {
     dcache_wb_range((unsigned long)addr, (unsigned long)((unsigned char *)addr + size));
+    rt_hw_cpu_sync();
 }
 
-void rt_hw_cpu_dcache_clean_flush(void *addr,int size)
+void rt_hw_cpu_dcache_clean_invalidate_local(void *addr, int size)
 {
     dcache_wbinv_range((unsigned long)addr, (unsigned long)((unsigned char *)addr + size));
+    rt_hw_cpu_sync();
 }
 
-void rt_hw_cpu_icache_ops(int ops,void *addr,int size)
+/**
+ * =====================================================
+ * Architecture Independent API
+ * =====================================================
+ */
+
+void rt_hw_cpu_icache_ops(int ops, void *addr, int size)
 {
-    if(ops == RT_HW_CACHE_INVALIDATE)
+    if (ops == RT_HW_CACHE_INVALIDATE)
     {
-        rt_hw_cpu_icache_invalidate(addr, size);
+        rt_hw_cpu_icache_invalidate_local(addr, size);
     }
 }
 
-void rt_hw_cpu_dcache_ops(int ops,void *addr,int size)
+void rt_hw_cpu_dcache_ops(int ops, void *addr, int size)
 {
-    if(ops == RT_HW_CACHE_FLUSH)
+    if (ops == RT_HW_CACHE_FLUSH)
     {
-        rt_hw_cpu_dcache_clean(addr, size);
+        rt_hw_cpu_dcache_clean_local(addr, size);
     }
     else
     {
-        rt_hw_cpu_dcache_invalidate(addr, size);
+        rt_hw_cpu_dcache_invalidate_local(addr, size);
     }
 }
 
-void rt_hw_cpu_dcache_clean_all(void)
+void rt_hw_sync_cache_local(void *addr, int size)
 {
-    /* asm volatile("dcache.call\n":::"memory"); */
-    asm volatile(".long 0x0010000b\n":::"memory");
+    rt_hw_cpu_dcache_clean_local(addr, size);
+    rt_hw_cpu_icache_invalidate_local(addr, size);
 }
 
-void rt_hw_cpu_dcache_invalidate_all(void)
-{
-    /* asm volatile("dcache.ciall\n":::"memory"); */
-    asm volatile(".long 0x0030000b\n":::"memory");
-}
+#ifdef RT_USING_LWP
+#include <lwp_arch.h>
+#define ICACHE (1 << 0)
+#define DCACHE (1 << 1)
+#define BCACHE (ICACHE | DCACHE)
 
-void rt_hw_cpu_icache_invalidate_all(void)
-{
-    /* asm volatile("icache.iall\n":::"memory"); */
-    asm volatile(".long 0x0100000b\n":::"memory");
-}
-
+/**
+ * TODO moving syscall to kernel
+ */
 int sys_cacheflush(void *addr, int size, int cache)
 {
-    return 0;
+    /* must in user space */
+    if ((size_t)addr >= USER_VADDR_START && (size_t)addr + size < USER_VADDR_TOP)
+    {
+        /**
+         * we DO NOT check argument 'cache' invalid error
+         */
+        if ((cache & DCACHE) != 0)
+        {
+            rt_hw_cpu_dcache_clean_invalidate_local(addr, size);
+        }
+        if ((cache & ICACHE) != 0)
+        {
+            rt_hw_cpu_icache_invalidate_local(addr, size);
+        }
+        return 0;
+    }
+    return -RT_ERROR;
 }
+#endif

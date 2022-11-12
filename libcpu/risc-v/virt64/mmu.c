@@ -15,6 +15,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <lwp_mm.h>
+#include <cache.h>
 
 #define DBG_TAG "mmu"
 #define DBG_LVL DBG_INFO
@@ -25,9 +26,6 @@
 #include "mmu.h"
 
 void *current_mmu_table = RT_NULL;
-void rt_hw_cpu_icache_invalidate_all();
-void rt_hw_cpu_dcache_flush_all();
-void rt_hw_cpu_dcache_clean(void *addr, rt_size_t size);
 
 volatile rt_ubase_t MMUTable[__SIZE(VPN2_BIT)] __attribute__((aligned(4 * 1024)));
 
@@ -48,7 +46,7 @@ void rt_hw_mmu_switch(void *mmu_table)
     current_mmu_table = mmu_table;
     RT_ASSERT(__CHECKALIGN(mmu_table, PAGE_OFFSET_BIT));
     mmu_set_pagetable((rt_ubase_t)mmu_table);
-    rt_hw_cpu_dcache_flush_all();
+    rt_hw_cpu_dcache_clean_all();
     rt_hw_cpu_icache_invalidate_all();
 }
 

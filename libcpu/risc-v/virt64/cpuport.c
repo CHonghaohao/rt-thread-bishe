@@ -36,6 +36,27 @@ volatile rt_ubase_t rt_interrupt_to_thread = 0;
  */
 volatile rt_ubase_t rt_thread_switch_interrupt_flag = 0;
 
+void *_rt_hw_stack_init(rt_ubase_t *sp, rt_ubase_t ra, rt_ubase_t sstatus)
+{
+    (*--sp) = 0;                                /* tp */
+    (*--sp) = ra;                               /* ra */
+    (*--sp) = 0;                                /* s0(fp) */
+    (*--sp) = 0;                                /* s1 */
+    (*--sp) = 0;                                /* s2 */
+    (*--sp) = 0;                                /* s3 */
+    (*--sp) = 0;                                /* s4 */
+    (*--sp) = 0;                                /* s5 */
+    (*--sp) = 0;                                /* s6 */
+    (*--sp) = 0;                                /* s7 */
+    (*--sp) = 0;                                /* s8 */
+    (*--sp) = 0;                                /* s9 */
+    (*--sp) = 0;                                /* s10 */
+    (*--sp) = 0;                                /* s11 */
+    (*--sp) = sstatus;                          /* sstatus */
+
+    return (void *)sp;
+}
+
 /**
  * This function will initialize thread stack, we assuming
  * when scheduler restore this new thread, context will restore
@@ -64,23 +85,7 @@ rt_uint8_t *rt_hw_stack_init(void *tentry,
 
     /* compatible to RESTORE_CONTEXT */
     extern void _rt_thread_entry(void);
-    (*--sp) = 0;                                /* tp */
-    (*--sp) = (rt_ubase_t)_rt_thread_entry;     /* ra */
-    (*--sp) = 0;                                /* s0(fp) */
-    (*--sp) = 0;                                /* s1 */
-    (*--sp) = 0;                                /* s2 */
-    (*--sp) = 0;                                /* s3 */
-    (*--sp) = 0;                                /* s4 */
-    (*--sp) = 0;                                /* s5 */
-    (*--sp) = 0;                                /* s6 */
-    (*--sp) = 0;                                /* s7 */
-    (*--sp) = 0;                                /* s8 */
-    (*--sp) = 0;                                /* s9 */
-    (*--sp) = 0;                                /* s10 */
-    (*--sp) = 0;                                /* s11 */
-    (*--sp) = K_SSTATUS_DEFAULT;                /* sstatus */
-
-    return (rt_uint8_t *)sp;
+    return (rt_uint8_t *)_rt_hw_stack_init(sp, (rt_ubase_t)_rt_thread_entry, K_SSTATUS_DEFAULT);
 }
 
 /*

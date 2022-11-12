@@ -58,13 +58,13 @@ void rt_hw_backtrace(rt_uint32_t *ffp, rt_ubase_t sepc)
         }
 
         ra = fp - 1;
-        if (!rt_hw_mmu_v2p(&mmu_info, ra) || *ra < vas || *ra > vae)
+        if (!_rt_hw_mmu_v2p(&mmu_info, ra) || *ra < vas || *ra > vae)
             break;
 
         rt_kprintf(" %p", *ra - 0x04);
 
         fp = fp - 2;
-        if (!rt_hw_mmu_v2p(&mmu_info, fp))
+        if (!_rt_hw_mmu_v2p(&mmu_info, fp))
             break;
         fp = (rt_ubase_t *)(*fp);
         if (!fp)
@@ -76,6 +76,7 @@ void rt_hw_backtrace(rt_uint32_t *ffp, rt_ubase_t sepc)
 
 static void _assert_backtrace_cb(const char *ex, const char *func, rt_size_t line)
 {
+    rt_hw_interrupt_disable();
     rt_kprintf("(%s) assertion failed at function:%s, line number:%d \n", ex, func, line);
 
     rt_hw_backtrace(0, 0);

@@ -12,6 +12,7 @@
 #include <rtdef.h>
 #include <board.h>
 #include <riscv.h>
+#include <cache.h>
 
 rt_inline rt_uint32_t rt_cpu_icache_line_size()
 {
@@ -23,52 +24,27 @@ rt_inline rt_uint32_t rt_cpu_dcache_line_size()
     return 0;
 }
 
-void rt_hw_cpu_icache_invalidate(void *addr,int size)
+void rt_hw_cpu_icache_ops(int ops, void *addr, int size)
 {
-
-}
-
-void rt_hw_cpu_dcache_invalidate(void *addr,int size)
-{
-
-}
-
-void rt_hw_cpu_dcache_clean(void *addr,int size)
-{
-
-}
-
-void rt_hw_cpu_icache_ops(int ops,void *addr,int size)
-{
-    if(ops == RT_HW_CACHE_INVALIDATE)
+    if (ops == RT_HW_CACHE_INVALIDATE)
     {
-        rt_hw_cpu_icache_invalidate(addr,size);
+        rt_hw_cpu_icache_invalidate(addr, size);
     }
 }
 
-void rt_hw_cpu_dcache_ops(int ops,void *addr,int size)
+void rt_hw_cpu_dcache_ops(int ops, void *addr, int size)
 {
-    if(ops == RT_HW_CACHE_FLUSH)
+    if (ops == RT_HW_CACHE_FLUSH)
     {
-        rt_hw_cpu_dcache_clean(addr,size);
+        rt_hw_cpu_dcache_clean(addr, size);
     }
     else
     {
-        rt_hw_cpu_dcache_invalidate(addr,size);
+        rt_hw_cpu_dcache_invalidate(addr, size);
     }
 }
 
-void rt_hw_cpu_dcache_flush_all()
-{
-
-}
-
-void rt_hw_cpu_icache_invalidate_all()
-{
-
-}
-
-rt_base_t rt_hw_cpu_icache_status()
+rt_base_t rt_hw_cpu_icache_status_local()
 {
     return 0;
 }
@@ -76,6 +52,10 @@ rt_base_t rt_hw_cpu_icache_status()
 rt_base_t rt_hw_cpu_dcache_status()
 {
     return 0;
+}
+
+void rt_hw_sync_cache_local(void *addr, int size)
+{
 }
 
 int sys_cacheflush(void *addr, int size, int cache)

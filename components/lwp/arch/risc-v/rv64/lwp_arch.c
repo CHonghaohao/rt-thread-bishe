@@ -195,6 +195,14 @@ int arch_set_thread_context(void (*exit)(void), void *new_thread_stack,
     rt_thread_t thread = rt_container_of((unsigned long)thread_sp, struct rt_thread, sp);
     syscall_frame->tp = (rt_ubase_t)thread->thread_idr;
 
+#ifdef ARCH_USING_NEW_CTX_SWITCH
+    extern void *_rt_hw_stack_init(rt_ubase_t *sp, rt_ubase_t ra, rt_ubase_t sstatus);
+    rt_ubase_t sstatus = read_csr(sstatus) | SSTATUS_SPP;
+    sstatus &= ~SSTATUS_SIE;
+
+    /* compatible to RESTORE_CONTEXT */
+    stk = (void *)_rt_hw_stack_init((rt_ubase_t *)stk, (rt_ubase_t)exit, sstatus);
+#else
     /* build temp thread context */
     stk -= sizeof(struct rt_hw_stack_frame);
 
@@ -216,6 +224,7 @@ int arch_set_thread_context(void (*exit)(void), void *new_thread_stack,
     /* set stack as syscall stack */
     thread_frame->user_sp_exc_stack = (rt_ubase_t)syscall_stk;
 
+#endif /* ARCH_USING_NEW_CTX_SWITCH */
     /* save new stack top */
     *thread_sp = (void *)stk;
 
@@ -247,4 +256,9 @@ void lwp_exec_user(void *args, void *kernel_stack, void *user_entry)
     arch_start_umode(args, user_entry, (void*)USER_STACK_VEND, kernel_stack);
 }
 
-#endif
+void *arch_get_usp_from_uctx(struct rt_user_context *uctx)
+{
+    return uctx->sp;
+}
+
+#endif /* RT_USING_USERSPACE */
