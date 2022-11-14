@@ -1,6 +1,8 @@
 /*
- * COPYRIGHT (C) 2012-2022, Shanghai Real-Thread Technology Co., Ltd
- * All rights reserved.
+ * Copyright (c) 2006-2022, RT-Thread Development Team
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ *
  * Change Logs:
  * Date           Author       Notes
  * 2018-12-04     RT-Thread    the first version
