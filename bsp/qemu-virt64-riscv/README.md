@@ -1,5 +1,7 @@
 # RT-Smart QEMU SYSTEM RISC-V RV64 BSP
 
+English | [中文](./README_ch.md)
+
 ## 1. Introduction
 
 QEMU can emulate both 32-bit and 64-bit RISC-V CPUs. Use the qemu-system-riscv64 executable to simulate a 64-bit RISC-V machine, qemu-system-riscv32 executable to simulate a 32-bit RISC-V machine.
