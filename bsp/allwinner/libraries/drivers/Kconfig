@@ -17,7 +17,7 @@ menuconfig BSP_USING_UART0
     if BSP_USING_UART0
         choice
             prompt "UART0 TX PIN"
-            default UART0_TX_USING_GPIOE2 if BOARD_allwinnerf133
+            default UART0_TX_USING_GPIOE2 if BOARD_allwinnerd1s
             default UART0_TX_USING_GPIOB8 if BOARD_allwinnerd1
 
             if BOARD_allwinnerd1
@@ -31,7 +31,7 @@ menuconfig BSP_USING_UART0
         endchoice
         choice
             prompt "UART0 RX PIN"
-            default UART0_RX_USING_GPIOE3 if BOARD_allwinnerf133
+            default UART0_RX_USING_GPIOE3 if BOARD_allwinnerd1s
             default UART0_RX_USING_GPIOB9 if BOARD_allwinnerd1
 
             if BOARD_allwinnerd1

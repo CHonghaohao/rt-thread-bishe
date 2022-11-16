@@ -458,10 +458,10 @@ static void geth_pinctrl_init(void)
     hal_gpio_pinmux_set_function(GPIO_PE15, 8);
 #endif /* BOARD_allwinnerd1 */
 
-#ifdef BOARD_allwinnerf133
+#ifdef BOARD_allwinnerd1s
     hal_gpio_pinmux_set_function(GPIO_PG9, 4);
     hal_gpio_pinmux_set_function(GPIO_PG10, 4);
-#endif /* BOARD_allwinnerf133 */
+#endif /* BOARD_allwinnerd1s */
 
 #endif /* GMAC_USING_RGMII */
 #endif /* GMAC_USING_GPIOE */

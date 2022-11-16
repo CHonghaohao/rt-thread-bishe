@@ -15,6 +15,7 @@
 
 #include "interrupt.h"
 #include "mmu.h"
+#include "cache.h"
 
 #ifdef BSP_USING_LCD
 
@@ -506,6 +507,22 @@ void set_lcd_backlight(rt_uint8_t value)
     rt_pwm_enable(pwm_dev, LCD_PWM_DEV_CHANNEL);
 }
 
+rt_err_t rt_pwm_get(struct rt_device_pwm *device, int channel)
+{
+    rt_err_t result = RT_EOK;
+    struct rt_pwm_configuration configuration = {0};
+
+    if (!device)
+    {
+        return -RT_EIO;
+    }
+
+    configuration.channel = channel;
+    result = rt_device_control(&device->parent, PWM_CMD_GET, &configuration);
+
+    return result;
+}
+
 rt_uint8_t get_lcd_backlight(void)
 {
     int result = 0;
@@ -514,8 +531,7 @@ rt_uint8_t get_lcd_backlight(void)
 
     pwm_dev = (struct rt_device_pwm *)rt_device_find(_panel->bl_pwm_name);
     cfg.channel = LCD_PWM_DEV_CHANNEL;
-    extern rt_err_t rt_pwm_get(struct rt_device_pwm * device, struct rt_pwm_configuration * cfg);
-    rt_pwm_get(pwm_dev, &cfg);
+    rt_pwm_get(pwm_dev, LCD_PWM_DEV_CHANNEL);
 
     return cfg.pulse / (10000000 / _panel->bl_pwm_hz);
 }
