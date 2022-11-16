@@ -198,12 +198,49 @@ struct dtb_node *dtb_node_get_by_phandle(uint phandle)
 
 int dtb_node_read_size(const struct dtb_node *node, const char *propname)
 {
-    struct dtb_property *prop = dtb_node_get_dtb_node_property( node, propname, NULL);
+    struct dtb_property *prop = dtb_node_get_dtb_node_property(node, propname, NULL);
 
     if (prop)
         return prop->size;
 
     return -EINVAL;
+}
+
+int dtb_node_get_addr_and_size_by_index(const struct dtb_node *node, int index, size_t *addr, size_t *size)
+{
+    const uint32_t *prop;
+    int psize;
+    int onesize, na, ns;
+
+    na = dtb_node_n_addr_cells(node);
+    ns = dtb_node_n_size_cells(node);
+
+    prop = dtb_node_get_dtb_node_property_value(node, "reg", &psize);
+    if (prop == NULL)
+    {
+        return -1;
+    }
+
+    psize /= 4;
+    onesize = na + ns;
+
+    if (psize >= (index + 1) * onesize)
+    {
+        prop += index * onesize;
+
+        if (addr)
+        {
+            *addr = dtb_node_read_number(prop, na);
+        }
+        if (size)
+        {
+            *size = dtb_node_read_number(prop + na, ns);
+        }
+
+        return 0;
+    }
+
+    return -1;
 }
 
 size_t dtb_node_get_addr_index(const struct dtb_node *node, int index)
@@ -229,14 +266,12 @@ size_t dtb_node_get_addr(const struct dtb_node *node)
     return dtb_node_get_addr_index(node, 0);
 }
 
-int dtb_node_stringlist_search(const struct dtb_node *node, const char *property,
-                 const char *string)
+int dtb_node_stringlist_search(const struct dtb_node *node, const char *property, const char *string)
 {
     return dtb_node_property_match_string(node, property, string);
 }
 
-int dtb_node_read_string_index(const struct dtb_node *node, const char *property, int index,
-                 const char **outp)
+int dtb_node_read_string_index(const struct dtb_node *node, const char *property, int index, const char **outp)
 {
     return dtb_node_property_read_string_index(node, property, index, outp);
 }
@@ -283,8 +318,7 @@ rt_bool_t dtb_node_is_available(const struct dtb_node *node)
     return dtb_node_device_is_available(node);
 }
 
-size_t dtb_node_get_addr_size(const struct dtb_node *node, const char *property,
-                size_t *sizep)
+size_t dtb_node_get_addr_size(const struct dtb_node *node, const char *property, size_t *sizep)
 {
     int na, ns;
     int psize;
@@ -314,12 +348,12 @@ int dtb_node_find_all_compatible_node(const struct dtb_node *from, const char *c
 {
     const struct dtb_node *dn;
     int num = 0;
+
     for_each_of_allnodes_from(from, dn)
     {
         if (dtb_node_get_dtb_node_compatible_match(dn, compatible) &&
             dtb_node_get(dn))
         {
-
             num++;
             *node_table = (struct dtb_node *)dn;
             node_table++;
@@ -418,63 +452,61 @@ int dtb_node_set_enabled(const struct dtb_node *node, rt_bool_t value)
  */
 static struct dtb_node *dtb_node_irq_find_parent(struct dtb_node *child)
 {
-	struct dtb_node *p;
-	phandle parent;
+    struct dtb_node *p;
+    phandle parent;
 
-	if (!dtb_node_get(child))
-		return NULL;
-	do
+    if (!dtb_node_get(child))
+        return NULL;
+    do
     {
-		if (dtb_node_read_u32_array(child, "interrupt-parent", &parent, 1))
+        if (dtb_node_read_u32_array(child, "interrupt-parent", &parent, 1))
         {
-			p = dtb_node_get_parent(child);
-		}
+            p = dtb_node_get_parent(child);
+        }
         else
         {
-			p = dtb_node_get_by_phandle(parent);         
-		}
-		dtb_node_put(child);
-		child = p;
-	} while (p && dtb_node_get_property(p, "#interrupt-cells", NULL) == NULL);
+            p = dtb_node_get_by_phandle(parent);
+        }
+        dtb_node_put(child);
+        child = p;
+    } while (p && dtb_node_get_property(p, "#interrupt-cells", NULL) == NULL);
 
-	return p;
+    return p;
 }
 
 int dtb_node_irq_get(struct dtb_node *dev, int index)
 {
-	int rc = 0;
-	struct fdt_phandle_args out_irq;
+    int rc = 0;
+    struct fdt_phandle_args out_irq;
     struct dtb_node *p;
-	uint32_t intsize;
-	int res, i;
+    uint32_t intsize;
+    int res, i;
 
-	p = dtb_node_irq_find_parent(dev);
-	if (p == NULL)
-		return -EINVAL;
-	/* Get size of interrupt specifier */
-	if (dtb_node_read_u32_array(p, "#interrupt-cells", &intsize, 1))
+    p = dtb_node_irq_find_parent(dev);
+    if (p == NULL)
+        return -EINVAL;
+    /* Get size of interrupt specifier */
+    if (dtb_node_read_u32_array(p, "#interrupt-cells", &intsize, 1))
     {
-		res = -EINVAL;
-		goto out;
-	}
+        res = -EINVAL;
+        goto out;
+    }
 
-	debug(" path:%s, parent=%pOF, intsize=%d\n", p->path,p, intsize);
-    
-	/* Copy intspec into irq structure */
-	out_irq.np = p;
-	out_irq.args_count = intsize;
-	for (i = 0; i < intsize; i++)
+    debug(" path:%s, parent=%pOF, intsize=%d\n", p->path, p, intsize);
+
+    /* Copy intspec into irq structure */
+    out_irq.np = p;
+    out_irq.args_count = intsize;
+    for (i = 0; i < intsize; i++)
     {
-		res = dtb_node_read_u32_index(dev, "interrupts",
-						 (index * 3 + i),
-						 out_irq.args + i);
-		if (res)
-			goto out;
-	}
+        res = dtb_node_read_u32_index(dev, "interrupts", (index * 3 + i), out_irq.args + i);
+        if (res)
+            goto out;
+    }
     rc = out_irq.args[1];
  out:
-	dtb_node_put(p);
-	return rc;
+    dtb_node_put(p);
+    return rc;
 
 }
 
@@ -489,16 +521,16 @@ int dtb_node_irq_get(struct dtb_node *dev, int index)
  */
 int dtb_node_irq_get_byname(struct dtb_node *dev, const char *name)
 {
-	int index;
+    int index;
 
-	if (!name)
-		return -EINVAL;
+    if (!name)
+        return -EINVAL;
 
-	index = dtb_node_stringlist_search(dev, "interrupt-names", name);
-	if (index < 0)
-		return index;
+    index = dtb_node_stringlist_search(dev, "interrupt-names", name);
+    if (index < 0)
+        return index;
 
-	return dtb_node_irq_get(dev, index);
+    return dtb_node_irq_get(dev, index);
 }
 
 /**
@@ -508,21 +540,21 @@ int dtb_node_irq_get_byname(struct dtb_node *dev, const char *name)
 int dtb_node_irq_count(struct dtb_node *device)
 {
     struct dtb_node *p;
-	uint32_t intsize;
-	int nr = 0, res = 0;
+    uint32_t intsize;
+    int nr = 0, res = 0;
 
-	p = dtb_node_irq_find_parent(device);
-	if (p == NULL)
-		return -EINVAL;
+    p = dtb_node_irq_find_parent(device);
+    if (p == NULL)
+        return -EINVAL;
 
-	/* Get size of interrupt specifier */
-	if (dtb_node_read_u32_array(p, "#interrupt-cells", &intsize, 1))
+    /* Get size of interrupt specifier */
+    if (dtb_node_read_u32_array(p, "#interrupt-cells", &intsize, 1))
     {
-		res = -EINVAL;
-		goto out;
-	}
+        res = -EINVAL;
+        goto out;
+    }
 
-	debug(" path:%s, parent=%pOF, intsize=%d\n", p->path,p, intsize);
+    debug(" path:%s, parent=%pOF, intsize=%d\n", p->path, p, intsize);
 
     res = dtb_node_read_size(device, "interrupts");
     if (res < 0)
@@ -531,7 +563,7 @@ int dtb_node_irq_count(struct dtb_node *device)
     }
     nr = res / (intsize * 4);
  out:
-	dtb_node_put(p);
+    dtb_node_put(p);
 
-	return nr;
+    return nr;
 }
