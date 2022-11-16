@@ -920,7 +920,7 @@ int sys_nanosleep(const struct timespec *rqtp, struct timespec *rmtp)
     
     lwp_get_from_user(&rqtp_k, (void *)rqtp, sizeof rqtp_k);
     ret = nanosleep(&rqtp_k, &rmtp_k);
-    if (ret != -1 && rmtp && lwp_user_accessable((void *)rmtp, sizeof *rmtp))
+    if ((ret != -1 || rt_get_errno() == EINTR) && rmtp && lwp_user_accessable((void *)rmtp, sizeof *rmtp))
         lwp_put_to_user(rmtp, (void *)&rmtp_k, sizeof rmtp_k);
 #else
     if (rmtp)
@@ -1231,38 +1231,79 @@ static void timer_timeout_callback(void *parameter)
     rt_sem_release(sem);
 }
 
-rt_timer_t sys_timer_create(const char *name,
-        void *data,
-        rt_tick_t   time,
-        rt_uint8_t  flag)
+rt_err_t sys_timer_create(clockid_t clockid, struct sigevent *restrict sevp, timer_t *restrict timerid)
 {
-    rt_timer_t timer = rt_timer_create(name, timer_timeout_callback, (void *)data, time, flag);
-    if (lwp_user_object_add(lwp_self(), (rt_object_t)timer) != 0)
+    int ret = 0;
+#ifdef RT_USING_USERSPACE
+    struct sigevent sevp_k;
+    timer_t timerid_k;
+    struct sigevent evp_default;
+    if (sevp == NULL)
     {
-        rt_timer_delete(timer);
-        timer = NULL;
+        sevp_k.sigev_notify = SIGEV_SIGNAL;
+        sevp_k.sigev_signo = SIGALRM;
+        sevp = &sevp_k;
     }
-    return timer;
+    else
+        lwp_get_from_user(&sevp_k, (void *)sevp, sizeof sevp_k);
+    lwp_get_from_user(&timerid_k, (void *)timerid, sizeof timerid_k);
+    ret = timer_create(clockid, &sevp_k, &timerid_k);
+    if (ret != -RT_ERROR){
+        lwp_put_to_user(sevp, (void *)&sevp_k, sizeof sevp_k);
+        lwp_put_to_user(timerid, (void *)&timerid_k, sizeof timerid_k);
+    }
+#else
+    ret = timer_create(clockid, sevp, timerid);
+#endif
+    return (ret < 0 ? GET_ERRNO() : ret);
 }
 
-rt_err_t sys_timer_delete(rt_timer_t timer)
+rt_err_t sys_timer_delete(timer_t timerid)
 {
-    return lwp_user_object_delete(lwp_self(), (rt_object_t)timer);
+    int ret = timer_delete(timerid);
+    return (ret < 0 ? GET_ERRNO() : ret);
 }
 
-rt_err_t sys_timer_start(rt_timer_t timer)
+rt_err_t sys_timer_settime(timer_t timerid, int flags,
+                           const struct itimerspec *restrict new_value,
+                           struct itimerspec *restrict old_value)
 {
-    return rt_timer_start(timer);
+    int ret = 0;
+#ifdef RT_USING_USERSPACE
+    struct itimerspec new_value_k;
+    struct itimerspec old_value_k;
+
+    lwp_get_from_user(&new_value_k, (void *)new_value, sizeof new_value_k);
+    lwp_get_from_user(&old_value_k, (void *)timerid, sizeof old_value_k);
+    ret = timer_settime(timerid, flags, &new_value_k, &old_value_k);
+    lwp_put_to_user(old_value, (void *)&old_value_k, sizeof old_value_k);
+
+#else
+    ret = timer_settime(timerid, flags, new_value, old_value);
+#endif
+    return (ret < 0 ? GET_ERRNO() : ret);
 }
 
-rt_err_t sys_timer_stop(rt_timer_t timer)
+rt_err_t sys_timer_gettime(timer_t timerid, struct itimerspec *curr_value)
 {
-    return rt_timer_stop(timer);
+    int ret = 0;
+#ifdef RT_USING_USERSPACE
+
+    struct itimerspec curr_value_k;
+    lwp_get_from_user(&curr_value_k, (void *)curr_value, sizeof curr_value_k);
+    ret = timer_gettime(timerid, &curr_value_k);
+    lwp_put_to_user(curr_value, (void *)&curr_value_k, sizeof curr_value_k);
+#else
+    ret = timer_gettime(timerid, curr_value);
+#endif
+    return (ret < 0 ? GET_ERRNO() : ret);
 }
 
-rt_err_t sys_timer_control(rt_timer_t timer, int cmd, void *arg)
+rt_err_t sys_timer_getoverrun(timer_t timerid)
 {
-    return rt_timer_control(timer, cmd, arg);
+    int ret = 0;
+    ret = timer_getoverrun(timerid);
+    return (ret < 0 ? GET_ERRNO() : ret);
 }
 
 rt_thread_t sys_thread_create(void *arg[])
@@ -1579,7 +1620,7 @@ static int lwp_copy_files(struct rt_lwp *dst, struct rt_lwp *src)
         dfs_fd_unlock();
         return 0;
     }
-    return -1;
+    return -RT_ERROR;
 }
 
 int _sys_fork(void)
@@ -1848,7 +1889,7 @@ static char *_load_script(const char *filename, struct lwp_args_info *args)
 {
     void *page = NULL;
     char *new_page;
-    int fd = -1;
+    int fd = -RT_ERROR;
     int len;
     char interp[INTERP_BUF_SIZE];
     char *cp;
@@ -3791,7 +3832,7 @@ int sys_clock_nanosleep(clockid_t clk, int flags, const struct timespec *rqtp, s
 
     lwp_get_from_user(&rqtp_k, (void *)rqtp, sizeof rqtp_k);
     ret = clock_nanosleep(clk, flags, &rqtp_k, &rmtp_k);
-    if (ret != -1 && rmtp && lwp_user_accessable((void *)rmtp, sizeof *rmtp))
+    if ((ret != -1 || rt_get_errno() == EINTR) && rmtp && lwp_user_accessable((void *)rmtp, sizeof *rmtp))
         lwp_put_to_user(rmtp, (void *)&rmtp_k, sizeof rmtp_k);
 #else
     if (rmtp)
@@ -4255,9 +4296,9 @@ const static void* func_table[] =
 
     SYSCALL_SIGN(sys_timer_create),
     SYSCALL_SIGN(sys_timer_delete),
-    SYSCALL_SIGN(sys_timer_start),
-    SYSCALL_SIGN(sys_timer_stop),
-    SYSCALL_SIGN(sys_timer_control),  /* 115 */
+    SYSCALL_SIGN(sys_timer_settime),
+    SYSCALL_SIGN(sys_timer_gettime),
+    SYSCALL_SIGN(sys_timer_getoverrun),  /* 115 */
     SYSCALL_SIGN(sys_getcwd),
     SYSCALL_SIGN(sys_chdir),
     SYSCALL_SIGN(sys_unlink),
