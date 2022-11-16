@@ -86,6 +86,9 @@ rt_cpu_vector_set_base:
     RET
 
 
+/**
+ * unsigned long rt_hw_ffz(unsigned long x)
+ */
 .global rt_hw_ffz
 rt_hw_ffz:
     mvn x1, x0
