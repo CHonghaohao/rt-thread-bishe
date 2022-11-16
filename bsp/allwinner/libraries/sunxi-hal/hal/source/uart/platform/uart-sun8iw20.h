@@ -117,7 +117,7 @@
 #ifdef BOARD_allwinnerd1
 #define UART0_TX        GPIOB(8)
 #define UART0_RX        GPIOB(9)
-#elif defined(BOARD_allwinnerf133)
+#elif defined(BOARD_allwinnerd1s)
 #define UART0_TX        GPIOE(2)
 #define UART0_RX        GPIOE(3)
 #endif

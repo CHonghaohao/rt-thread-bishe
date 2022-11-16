@@ -44,14 +44,9 @@ int sd_check_thread_entry(void *p)
         /* 挂载sd1分区 */
         if (RT_NULL != rt_device_find("sd0p1"))
         {
-            if (access("/data", 0) != 0)
+            if (dfs_mount("sd0p1", "/", "elm", 0, 0) == 0)
             {
-                mkdir("/data", 0777);
-            }
-
-            if (dfs_mount("sd0p1", "/data", "elm", 0, 0) == 0)
-            {
-                rt_kprintf("Mount \"sd0p1\" on \"/data\" success\n");
+                rt_kprintf("Mount \"sd0p1\" on \"/\" success\n");
             }
             else
             {
