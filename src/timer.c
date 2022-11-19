@@ -529,6 +529,10 @@ rt_err_t rt_timer_control(rt_timer_t timer, int cmd, void *arg)
         timer->parameter = arg;
         break;
 
+    case RT_TIMER_CTRL_GET_REMAIN_TIME:
+        *(rt_tick_t *)arg = timer->timeout_tick;
+        break;
+
     default:
         break;
     }

@@ -41,6 +41,21 @@ extern "C" {
 #define CLOCK_MONOTONIC     4
 #endif
 
+#define ACTIVE 1
+#define NOT_ACTIVE 0
+struct timer_obj
+{
+    struct rt_timer timer;
+    void (*sigev_notify_function)(union sigval val);
+    union sigval val;
+    struct timespec interval;              /* Reload value */
+    struct timespec value;              /* Reload value */
+    rt_uint32_t reload;                    /* Reload value in ms */
+    rt_uint32_t status;
+    int sigev_signo;
+    pid_t pid;
+};
+
 int clock_getres  (clockid_t clockid, struct timespec *res);
 int clock_gettime (clockid_t clockid, struct timespec *tp);
 int clock_settime (clockid_t clockid, const struct timespec *tp);

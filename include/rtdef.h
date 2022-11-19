@@ -462,6 +462,7 @@ struct rt_object_information
 #define RT_TIMER_CTRL_SET_FUNC          0x6             /**< set timer timeout func  */
 #define RT_TIMER_CTRL_GET_PARM          0x7             /**< get timer parameter  */
 #define RT_TIMER_CTRL_SET_PARM          0x8             /**< get timer parameter  */
+#define RT_TIMER_CTRL_GET_REMAIN_TIME   0x9             /**< get timer remain time  */
 
 #ifndef RT_TIMER_SKIP_LIST_LEVEL
 #define RT_TIMER_SKIP_LIST_LEVEL          1
