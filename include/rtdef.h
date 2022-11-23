@@ -698,6 +698,12 @@ struct rt_thread
 #endif
     rt_uint32_t number_mask;
 
+#ifdef RT_USING_MUTEX
+    /* object for IPC */
+    rt_list_t taken_object_list;
+    rt_object_t pending_object;
+#endif
+
 #if defined(RT_USING_EVENT)
     /* thread event */
     rt_uint32_t event_set;
@@ -819,12 +825,13 @@ struct rt_mutex
 {
     struct rt_ipc_object parent;                        /**< inherit from ipc_object */
 
-    rt_uint16_t          value;                         /**< value of mutex */
-
-    rt_uint8_t           original_priority;             /**< priority of last thread hold the mutex */
+    rt_uint8_t           ceiling_priority;              /**< the priority ceiling of mutexe */
+    rt_uint8_t           priority;                      /**< the maximal priority for pending thread */
     rt_uint8_t           hold;                          /**< numbers of thread hold the mutex */
+    rt_uint8_t           reserved;                      /**< reserved field */
 
     struct rt_thread    *owner;                         /**< current owner of mutex */
+    rt_list_t           taken_list;                     /**< the object list taken by thread */
 };
 typedef struct rt_mutex *rt_mutex_t;
 #endif

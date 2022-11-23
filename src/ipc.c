@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2018, RT-Thread Development Team
+ * Copyright (c) 2006-2022, RT-Thread Development Team
  *
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -565,6 +565,83 @@ RTM_EXPORT(rt_sem_control);
 #endif /* end of RT_USING_SEMAPHORE */
 
 #ifdef RT_USING_MUTEX
+rt_inline rt_uint8_t _mutex_update_priority(struct rt_mutex *mutex)
+{
+    struct rt_thread *thread;
+
+    if (!rt_list_isempty(&mutex->parent.suspend_thread))
+    {
+        thread = rt_list_entry(mutex->parent.suspend_thread.next, struct rt_thread, tlist);
+        mutex->priority = thread->current_priority;
+    }
+    else
+    {
+        mutex->priority = 0xff;
+    }
+
+    return mutex->priority;
+}
+
+rt_inline rt_uint8_t _thread_get_mutex_priority(struct rt_thread* thread)
+{
+    rt_list_t *node = RT_NULL;
+    struct rt_mutex *mutex = RT_NULL;
+    rt_uint8_t priority = thread->init_priority;
+
+    rt_list_for_each(node, &(thread->taken_object_list))
+    {
+        mutex = rt_list_entry(node, struct rt_mutex, taken_list);
+        if (priority > mutex->priority)
+        {
+            priority = mutex->priority;
+        }
+    }
+
+    return priority;
+}
+
+rt_inline void _thread_update_priority(struct rt_thread *thread, rt_uint8_t priority, int suspend_flag)
+{
+    RT_DEBUG_LOG(RT_DEBUG_IPC,
+            ("thread:%s priority -> %d\n", thread->name, priority));
+
+    /* change priority of the thread */
+    rt_thread_control(thread,
+                      RT_THREAD_CTRL_CHANGE_PRIORITY,
+                      &priority);
+
+    if ((thread->stat & RT_THREAD_STAT_MASK) == RT_THREAD_SUSPEND)
+    {
+        /* whether change the priority of taken mutex */
+        struct rt_object* pending_obj = thread->pending_object;
+
+        if (pending_obj && rt_object_get_type(pending_obj) == RT_Object_Class_Mutex)
+        {
+            rt_uint8_t mutex_priority;
+            struct rt_mutex* pending_mutex = (struct rt_mutex *)pending_obj;
+
+            /* re-insert thread to suspended thread list */
+            rt_list_remove(&(thread->tlist));
+            rt_ipc_list_suspend(&(pending_mutex->parent.suspend_thread),
+                                thread,
+                                pending_mutex->parent.parent.flag,suspend_flag);
+
+            /* update priority */
+            _mutex_update_priority(pending_mutex);
+            /* change the priority of mutex owner thread */
+            RT_DEBUG_LOG(RT_DEBUG_IPC,
+                    ("mutex: %s priority -> %d\n", pending_mutex->parent.parent.name,
+                    pending_mutex->priority));
+
+            mutex_priority = _thread_get_mutex_priority(pending_mutex->owner);
+            if (mutex_priority != pending_mutex->owner->current_priority)
+            {
+                _thread_update_priority(pending_mutex->owner, mutex_priority, suspend_flag);
+            }
+        }
+    }
+}
+
 /**
  * This function will initialize a mutex and put it under control of resource
  * management.
@@ -575,7 +652,7 @@ RTM_EXPORT(rt_sem_control);
  *
  * @return the operation status, RT_EOK on successful
  */
-rt_err_t rt_mutex_init(rt_mutex_t mutex, const char *name, rt_uint8_t flag)
+rt_err_t rt_mutex_init(rt_mutex_t mutex, const char *name, rt_uint8_t flag RT_UNUSED)
 {
     /* parameter check */
     RT_ASSERT(mutex != RT_NULL);
@@ -586,13 +663,14 @@ rt_err_t rt_mutex_init(rt_mutex_t mutex, const char *name, rt_uint8_t flag)
     /* initialize ipc object */
     rt_ipc_object_init(&(mutex->parent));
 
-    mutex->value = 1;
-    mutex->owner = RT_NULL;
-    mutex->original_priority = 0xFF;
-    mutex->hold  = 0;
+    mutex->owner    = RT_NULL;
+    mutex->priority = 0xFF;
+    mutex->hold     = 0;
+    mutex->ceiling_priority = 0xFF;
+    rt_list_init(&(mutex->taken_list));
 
-    /* set flag */
-    mutex->parent.parent.flag = flag;
+    /* flag can only be RT_IPC_FLAG_PRIO. RT_IPC_FLAG_FIFO cannot solve the unbounded priority inversion problem */
+    mutex->parent.parent.flag = RT_IPC_FLAG_PRIO;
 
     return RT_EOK;
 }
@@ -609,20 +687,123 @@ RTM_EXPORT(rt_mutex_init);
  */
 rt_err_t rt_mutex_detach(rt_mutex_t mutex)
 {
+    rt_ubase_t level;
+
     /* parameter check */
     RT_ASSERT(mutex != RT_NULL);
     RT_ASSERT(rt_object_get_type(&mutex->parent.parent) == RT_Object_Class_Mutex);
     RT_ASSERT(rt_object_is_systemobject(&mutex->parent.parent));
 
+    level = rt_hw_interrupt_disable();
     /* wakeup all suspended threads */
     rt_ipc_list_resume_all(&(mutex->parent.suspend_thread));
+    /* remove mutex from thread's taken list */
+    rt_list_remove(&mutex->taken_list);
+    rt_hw_interrupt_enable(level);
 
-    /* detach semaphore object */
+    /* detach mutex object */
     rt_object_detach(&(mutex->parent.parent));
 
     return RT_EOK;
 }
 RTM_EXPORT(rt_mutex_detach);
+
+/* drop a thread from the suspend list of mutex */
+
+/**
+ * @brief drop a thread from the suspend list of mutex
+ *
+ * @param mutex is a pointer to a mutex object.
+ * @param thread is the thread should be dropped from mutex.
+ */
+void rt_mutex_drop_thread(rt_mutex_t mutex, rt_thread_t thread)
+{
+    rt_uint8_t priority;
+    rt_bool_t need_update = RT_FALSE;
+
+    rt_list_remove(&(thread->tlist));
+
+    /* should change the priority of mutex owner thread */
+    if (mutex->owner->current_priority == thread->current_priority)
+        need_update = RT_TRUE;
+
+    /* update the priority of mutex */
+    if (!rt_list_isempty(&mutex->parent.suspend_thread))
+    {
+        /* more thread suspended in the list */
+        struct rt_thread *th;
+
+        th = rt_list_entry(mutex->parent.suspend_thread.next,
+                                struct rt_thread,
+                                tlist);
+        /* update the priority of mutex */
+        mutex->priority = th->current_priority;
+    }
+    else
+    {
+        /* set mutex priority to maximal priority */
+        mutex->priority = 0xff;
+    }
+
+    /* try to change the priority of mutex owner thread */
+    if (need_update)
+    {
+        /* get the maximal priority of mutex in thread */
+        priority = _thread_get_mutex_priority(mutex->owner);
+        if (priority != mutex->owner->current_priority)
+        {
+            _thread_update_priority(mutex->owner, priority,RT_UNINTERRUPTIBLE);
+        }
+    }
+}
+
+
+/**
+ * @brief set the prioceiling attribute of the mutex.
+ *
+ * @param mutex is a pointer to a mutex object.
+ * @param priority is the priority should be set to mutex.
+ *
+ * @return return the old priority ceiling
+ */
+rt_uint8_t rt_mutex_setprioceiling(rt_mutex_t mutex, rt_uint8_t priority)
+{
+    rt_uint8_t ret_priority = 0xFF;
+
+    if ((mutex) && (priority < RT_THREAD_PRIORITY_MAX))
+    {
+        ret_priority = mutex->ceiling_priority;
+        mutex->ceiling_priority = priority;
+    }
+    else
+    {
+        rt_set_errno(-RT_EINVAL);
+    }
+
+    return ret_priority;
+}
+RTM_EXPORT(rt_mutex_setprioceiling);
+
+
+/**
+ * @brief set the prioceiling attribute of the mutex.
+ *
+ * @param mutex is a pointer to a mutex object.
+ *
+ * @return return the current priority ceiling of the mutex.
+ */
+rt_uint8_t rt_mutex_getprioceiling(rt_mutex_t mutex)
+{
+    rt_uint8_t prio = 0xFF;
+
+    if (mutex)
+    {
+        prio = mutex->ceiling_priority;
+    }
+
+    return prio;
+}
+RTM_EXPORT(rt_mutex_getprioceiling);
 
 #ifdef RT_USING_HEAP
 /**
@@ -635,7 +816,7 @@ RTM_EXPORT(rt_mutex_detach);
  *
  * @see rt_mutex_init
  */
-rt_mutex_t rt_mutex_create(const char *name, rt_uint8_t flag)
+rt_mutex_t rt_mutex_create(const char *name, rt_uint8_t flag RT_UNUSED)
 {
     struct rt_mutex *mutex;
 
@@ -649,13 +830,14 @@ rt_mutex_t rt_mutex_create(const char *name, rt_uint8_t flag)
     /* initialize ipc object */
     rt_ipc_object_init(&(mutex->parent));
 
-    mutex->value              = 1;
-    mutex->owner              = RT_NULL;
-    mutex->original_priority  = 0xFF;
-    mutex->hold               = 0;
+    mutex->owner    = RT_NULL;
+    mutex->priority = 0xFF;
+    mutex->hold     = 0;
+    mutex->ceiling_priority = 0xFF;
+    rt_list_init(&(mutex->taken_list));
 
-    /* set flag */
-    mutex->parent.parent.flag = flag;
+    /* flag can only be RT_IPC_FLAG_PRIO. RT_IPC_FLAG_FIFO cannot solve the unbounded priority inversion problem */
+    mutex->parent.parent.flag = RT_IPC_FLAG_PRIO;
 
     return mutex;
 }
@@ -672,15 +854,21 @@ RTM_EXPORT(rt_mutex_create);
  */
 rt_err_t rt_mutex_delete(rt_mutex_t mutex)
 {
-    RT_DEBUG_NOT_IN_INTERRUPT;
+    rt_ubase_t level;
 
     /* parameter check */
     RT_ASSERT(mutex != RT_NULL);
     RT_ASSERT(rt_object_get_type(&mutex->parent.parent) == RT_Object_Class_Mutex);
     RT_ASSERT(rt_object_is_systemobject(&mutex->parent.parent) == RT_FALSE);
 
+    RT_DEBUG_NOT_IN_INTERRUPT;
+
+    level = rt_hw_interrupt_disable();
     /* wakeup all suspended threads */
     rt_ipc_list_resume_all(&(mutex->parent.suspend_thread));
+    /* remove mutex from thread's taken list */
+    rt_list_remove(&mutex->taken_list);
+    rt_hw_interrupt_enable(level);
 
     /* delete mutex object */
     rt_object_delete(&(mutex->parent.parent));
@@ -699,14 +887,15 @@ RTM_EXPORT(rt_mutex_delete);
  *
  * @return the error code
  */
-static rt_err_t _rt_mutex_take(rt_mutex_t mutex, rt_int32_t time, int suspend_flag)
+static rt_err_t _rt_mutex_take(rt_mutex_t mutex, rt_int32_t timeout, int suspend_flag)
 {
-    register rt_base_t temp;
+    rt_base_t level;
     struct rt_thread *thread;
     rt_err_t ret;
 
     /* this function must not be used in interrupt even if time = 0 */
-    RT_DEBUG_IN_THREAD_CONTEXT;
+    /* current context checking */
+    RT_DEBUG_NOT_IN_INTERRUPT;
 
     /* parameter check */
     RT_ASSERT(mutex != RT_NULL);
@@ -716,16 +905,16 @@ static rt_err_t _rt_mutex_take(rt_mutex_t mutex, rt_int32_t time, int suspend_fl
     thread = rt_thread_self();
 
     /* disable interrupt */
-    temp = rt_hw_interrupt_disable();
+    level = rt_hw_interrupt_disable();
 
     RT_OBJECT_HOOK_CALL(rt_object_trytake_hook, (&(mutex->parent.parent)));
 
     RT_DEBUG_LOG(RT_DEBUG_IPC,
-                 ("mutex_take: current thread %s, mutex value: %d, hold: %d\n",
-                  thread->name, mutex->value, mutex->hold));
+                 ("mutex_take: current thread %s, hold: %d\n",
+                  thread->name, mutex->hold));
 
     /* reset thread error */
-    thread->error = -RT_EINTR;
+    thread->error = RT_EOK;
 
     if (mutex->owner == thread)
     {
@@ -736,60 +925,52 @@ static rt_err_t _rt_mutex_take(rt_mutex_t mutex, rt_int32_t time, int suspend_fl
         }
         else
         {
-            rt_hw_interrupt_enable(temp); /* enable interrupt */
+            rt_hw_interrupt_enable(level); /* enable interrupt */
             return -RT_EFULL; /* value overflowed */
         }
     }
     else
     {
-        /* The value of mutex is 1 in initial status. Therefore, if the
-         * value is great than 0, it indicates the mutex is avaible.
-         */
-        if (mutex->value > 0)
+        /* whether the mutex has owner thread. */
+        if (mutex->owner == RT_NULL)
         {
-            /* mutex is available */
-            mutex->value --;
-
             /* set mutex owner and original priority */
             mutex->owner             = thread;
-            mutex->original_priority = thread->current_priority;
-            if(mutex->hold < RT_MUTEX_HOLD_MAX)
+            mutex->priority = 0xff;
+            mutex->hold     = 1;
+
+            if (mutex->ceiling_priority != 0xFF)
             {
-                mutex->hold ++;
+                /* set the priority of thread to the ceiling priority */
+                if (mutex->ceiling_priority < mutex->owner->current_priority)
+                    _thread_update_priority(mutex->owner, mutex->ceiling_priority, suspend_flag);
             }
             else
             {
-                rt_hw_interrupt_enable(temp); /* enable interrupt */
-                return -RT_EFULL; /* value overflowed */
+                /* insert mutex to thread's taken object list */
+                rt_list_insert_after(&thread->taken_object_list, &mutex->taken_list);
             }
         }
         else
         {
             /* no waiting, return with timeout */
-            if (time == 0)
+            if (timeout == 0)
             {
                 /* set error as timeout */
                 thread->error = -RT_ETIMEOUT;
 
                 /* enable interrupt */
-                rt_hw_interrupt_enable(temp);
+                rt_hw_interrupt_enable(level);
 
                 return -RT_ETIMEOUT;
             }
             else
             {
+                rt_uint8_t priority = thread->current_priority;
+
                 /* mutex is unavailable, push to suspend list */
                 RT_DEBUG_LOG(RT_DEBUG_IPC, ("mutex_take: suspend thread: %s\n",
                                             thread->name));
-
-                /* change the owner thread priority of mutex */
-                if (thread->current_priority < mutex->owner->current_priority)
-                {
-                    /* change the owner thread priority */
-                    rt_thread_control(mutex->owner,
-                                      RT_THREAD_CTRL_CHANGE_PRIORITY,
-                                      &thread->current_priority);
-                }
 
                 /* suspend current thread */
                 ret = rt_ipc_list_suspend(&(mutex->parent.suspend_thread),
@@ -798,12 +979,24 @@ static rt_err_t _rt_mutex_take(rt_mutex_t mutex, rt_int32_t time, int suspend_fl
                                     suspend_flag);
                 if (ret != RT_EOK)
                 {
-                    rt_hw_interrupt_enable(temp);
+                    rt_hw_interrupt_enable(level);
                     return ret;
+                }
+                /* set pending object in thread to this mutex */
+               thread->pending_object = &(mutex->parent.parent);
+
+                /* update the priority level of mutex */
+                if (priority < mutex->priority)
+                {
+                    mutex->priority = priority;
+                    if (mutex->priority < mutex->owner->current_priority)
+                    {
+                        _thread_update_priority(mutex->owner, priority, suspend_flag);
+                    }
                 }
 
                 /* has waiting time, start thread timer */
-                if (time > 0)
+                if (timeout > 0)
                 {
                     RT_DEBUG_LOG(RT_DEBUG_IPC,
                                  ("mutex_take: start the timer of thread:%s\n",
@@ -812,33 +1005,74 @@ static rt_err_t _rt_mutex_take(rt_mutex_t mutex, rt_int32_t time, int suspend_fl
                     /* reset the timeout of thread timer and start it */
                     rt_timer_control(&(thread->thread_timer),
                                      RT_TIMER_CTRL_SET_TIME,
-                                     &time);
+                                     &timeout);
                     rt_timer_start(&(thread->thread_timer));
                 }
 
                 /* enable interrupt */
-                rt_hw_interrupt_enable(temp);
+                rt_hw_interrupt_enable(level);
 
                 /* do schedule */
                 rt_schedule();
 
-                if (thread->error != RT_EOK)
+                /* disable interrupt */
+                level = rt_hw_interrupt_disable();
+
+                if (thread->error == RT_EOK)
                 {
-                    /* return error */
-                    return thread->error;
+                    /* get mutex successfully */
                 }
                 else
                 {
-                    /* the mutex is taken successfully. */
-                    /* disable interrupt */
-                    temp = rt_hw_interrupt_disable();
+                    /* the mutex has not been taken and thread has detach from the pending list. */
+
+                    rt_bool_t need_update = RT_FALSE;
+
+                    /* should change the priority of mutex owner thread */
+                    if (mutex->owner->current_priority == thread->current_priority)
+                        need_update = RT_TRUE;
+
+                    /* update the priority of mutex */
+                    if (!rt_list_isempty(&mutex->parent.suspend_thread))
+                    {
+                        /* more thread suspended in the list */
+                        struct rt_thread *th;
+
+                        th = rt_list_entry(mutex->parent.suspend_thread.next,
+                                                struct rt_thread,
+                                                tlist);
+                        /* update the priority of mutex */
+                        mutex->priority = th->current_priority;
+                    }
+                    else
+                    {
+                        /* set mutex priority to maximal priority */
+                        mutex->priority = 0xff;
+                    }
+
+                    /* try to change the priority of mutex owner thread */
+                    if (need_update)
+                    {
+                        /* get the maximal priority of mutex in thread */
+                        priority = _thread_get_mutex_priority(mutex->owner);
+                        if (priority != mutex->owner->current_priority)
+                        {
+                            _thread_update_priority(mutex->owner, priority, suspend_flag);
+                        }
+                    }
+
+                    /* enable interrupt */
+                    rt_hw_interrupt_enable(level);
+
+                    /* return error */
+                    return thread->error;
                 }
             }
         }
     }
 
     /* enable interrupt */
-    rt_hw_interrupt_enable(temp);
+    rt_hw_interrupt_enable(level);
 
     RT_OBJECT_HOOK_CALL(rt_object_take_hook, (&(mutex->parent.parent)));
 
@@ -873,7 +1107,7 @@ RTM_EXPORT(rt_mutex_take_killable);
  */
 rt_err_t rt_mutex_release(rt_mutex_t mutex)
 {
-    register rt_base_t temp;
+    rt_base_t level;
     struct rt_thread *thread;
     rt_bool_t need_schedule;
 
@@ -890,11 +1124,11 @@ rt_err_t rt_mutex_release(rt_mutex_t mutex)
     thread = rt_thread_self();
 
     /* disable interrupt */
-    temp = rt_hw_interrupt_disable();
+    level = rt_hw_interrupt_disable();
 
     RT_DEBUG_LOG(RT_DEBUG_IPC,
-                 ("mutex_release:current thread %s, mutex value: %d, hold: %d\n",
-                  thread->name, mutex->value, mutex->hold));
+                 ("mutex_release:current thread %s, hold: %d\n",
+                  thread->name, mutex->hold));
 
     RT_OBJECT_HOOK_CALL(rt_object_put_hook, (&(mutex->parent.parent)));
 
@@ -904,7 +1138,7 @@ rt_err_t rt_mutex_release(rt_mutex_t mutex)
         thread->error = -RT_ERROR;
 
         /* enable interrupt */
-        rt_hw_interrupt_enable(temp);
+        rt_hw_interrupt_enable(level);
 
         return -RT_ERROR;
     }
@@ -914,64 +1148,75 @@ rt_err_t rt_mutex_release(rt_mutex_t mutex)
     /* if no hold */
     if (mutex->hold == 0)
     {
-        /* change the owner thread to original priority */
-        if (mutex->original_priority != mutex->owner->current_priority)
+        /* remove mutex from thread's taken list */
+        rt_list_remove(&mutex->taken_list);
+
+        /* whether change the thread priority */
+        if ((mutex->ceiling_priority != 0xFF) || (thread->current_priority == mutex->priority))
         {
-            rt_thread_control(mutex->owner,
+            rt_uint8_t priority = 0xff;
+
+            /* get the highest priority in the taken list of thread */
+            priority = _thread_get_mutex_priority(thread);
+
+            rt_thread_control(thread,
                               RT_THREAD_CTRL_CHANGE_PRIORITY,
-                              &(mutex->original_priority));
+                              &priority);
+
+            need_schedule = RT_TRUE;
         }
 
         /* wakeup suspended thread */
         if (!rt_list_isempty(&mutex->parent.suspend_thread))
         {
-            /* get suspended thread */
-            thread = rt_list_entry(mutex->parent.suspend_thread.next,
+            /* get the first suspended thread */
+            struct rt_thread *next_thread = rt_list_entry(mutex->parent.suspend_thread.next,
                                    struct rt_thread,
                                    tlist);
 
             RT_DEBUG_LOG(RT_DEBUG_IPC, ("mutex_release: resume thread: %s\n",
-                                        thread->name));
+                    next_thread->name));
 
-            /* set new owner and priority */
-            mutex->owner             = thread;
-            mutex->original_priority = thread->current_priority;
-            if(mutex->hold < RT_MUTEX_HOLD_MAX)
+            /* remove the thread from the suspended list of mutex */
+            rt_list_remove(&(next_thread->tlist));
+
+            /* set new owner and put mutex into taken list of thread */
+            mutex->owner = next_thread;
+            mutex->hold  = 1;
+            rt_list_insert_after(&next_thread->taken_object_list, &mutex->taken_list);
+            /* cleanup pending object */
+            next_thread->pending_object = RT_NULL;
+
+            /* resume thread */
+            rt_thread_resume(next_thread);
+
+            /* update mutex priority */
+            if (!rt_list_isempty(&(mutex->parent.suspend_thread)))
             {
-                mutex->hold ++;
+                struct rt_thread *th;
+
+                th = rt_list_entry(mutex->parent.suspend_thread.next,
+                        struct rt_thread,
+                        tlist);
+                mutex->priority = th->current_priority;
             }
             else
             {
-                rt_hw_interrupt_enable(temp); /* enable interrupt */
-                return -RT_EFULL; /* value overflowed */
+                mutex->priority = 0xff;
             }
-
-            /* resume thread */
-            rt_ipc_list_resume(&(mutex->parent.suspend_thread));
 
             need_schedule = RT_TRUE;
         }
         else
         {
-            if(mutex->value < RT_MUTEX_VALUE_MAX)
-            {
-                /* increase value */
-                mutex->value ++;
-            }
-            else
-            {
-                rt_hw_interrupt_enable(temp); /* enable interrupt */
-                return -RT_EFULL; /* value overflowed */
-            }
-
             /* clear owner */
             mutex->owner             = RT_NULL;
-            mutex->original_priority = 0xff;
+            mutex->priority = 0xff;
         }
     }
 
     /* enable interrupt */
-    rt_hw_interrupt_enable(temp);
+    rt_hw_interrupt_enable(level);
 
     /* perform a schedule */
     if (need_schedule == RT_TRUE)
