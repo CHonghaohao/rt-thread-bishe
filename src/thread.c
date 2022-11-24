@@ -153,6 +153,12 @@ static rt_err_t _rt_thread_init(struct rt_thread *thread,
     thread->current_priority = priority;
 
     thread->number_mask = 0;
+
+#ifdef RT_USING_MUTEX
+    rt_list_init(&thread->taken_object_list);
+    thread->pending_object = RT_NULL;
+#endif
+
 #if RT_THREAD_PRIORITY_MAX > 32
     thread->number = 0;
     thread->high_mask = 0;
@@ -361,6 +367,16 @@ rt_err_t rt_thread_detach(rt_thread_t thread)
     /* change stat */
     thread->stat = RT_THREAD_CLOSE;
 
+#ifdef RT_USING_MUTEX
+    if ((thread->pending_object) &&
+        (rt_object_get_type(thread->pending_object) == RT_Object_Class_Mutex))
+    {
+        struct rt_mutex *mutex = (struct rt_mutex*)thread->pending_object;
+        rt_mutex_drop_thread(mutex, thread);
+        thread->pending_object = RT_NULL;
+    }
+#endif
+
     if ((rt_object_is_systemobject((rt_object_t)thread) == RT_TRUE) &&
         thread->cleanup == RT_NULL)
     {
@@ -457,14 +473,24 @@ rt_err_t rt_thread_delete(rt_thread_t thread)
         rt_schedule_remove_thread(thread);
     }
 
-    /* release thread timer */
-    rt_timer_detach(&(thread->thread_timer));
-
     /* disable interrupt */
     lock = rt_hw_interrupt_disable();
 
+    /* release thread timer */
+    rt_timer_detach(&(thread->thread_timer));
+
     /* change stat */
     thread->stat = RT_THREAD_CLOSE;
+
+#ifdef RT_USING_MUTEX
+    if ((thread->pending_object) &&
+        (rt_object_get_type(thread->pending_object) == RT_Object_Class_Mutex))
+    {
+        struct rt_mutex *mutex = (struct rt_mutex*)thread->pending_object;
+        rt_mutex_drop_thread(mutex, thread);
+        thread->pending_object = RT_NULL;
+    }
+#endif
 
     /* insert to defunct thread list */
     rt_thread_defunct_enqueue(thread);

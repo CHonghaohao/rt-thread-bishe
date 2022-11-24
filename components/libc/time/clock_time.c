@@ -41,14 +41,13 @@ INIT_COMPONENT_EXPORT(clock_time_system_init);
 
 int clock_time_to_tick(const struct timespec *time)
 {
-    int tick;
+    int tick = 0;
     long nsecond, second;
     struct timespec tp;
 
     RT_ASSERT(time != RT_NULL);
 
-    tick = RT_WAITING_FOREVER;
-    if (time != RT_NULL)
+    if (time->tv_sec != 0 && time->tv_nsec != 0)
     {
         /* get current tp */
         clock_gettime(CLOCK_REALTIME, &tp);
