@@ -4059,7 +4059,7 @@ ssize_t sys_readlink(char* path, char *buf, size_t bufsz)
 
     if (err != 1)
     {
-        lOG_E("readlink: path not is /proc/self/fd/* , call by musl __procfdname()?");
+        LOG_E("readlink: path not is /proc/self/fd/* , call by musl __procfdname()?");
         return -EINVAL;
     }
 
