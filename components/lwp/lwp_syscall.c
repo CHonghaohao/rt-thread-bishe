@@ -2491,6 +2491,10 @@ int sys_log(const char* log, int size)
 int sys_stat(const char *file, struct stat *buf)
 {
     int ret = 0;
+    int err;
+    size_t len;
+    size_t copy_len;
+    char *copy_path;
     struct stat statbuff;
 
     if (!lwp_user_accessable((void *)buf, sizeof(struct stat)))
@@ -2498,7 +2502,28 @@ int sys_stat(const char *file, struct stat *buf)
         return -EFAULT;
     }
 
-    ret = stat(file, &statbuff);
+    len = lwp_user_strlen(file, &err);
+    if (err)
+    {
+        return -EFAULT;
+    }
+
+    copy_path = (char*)rt_malloc(len + 1);
+    if (!copy_path)
+    {
+        return -ENOMEM;
+    }
+
+    copy_len = lwp_get_from_user(copy_path, (void*)file, len);
+    if (copy_len == 0)
+    {
+        rt_free(copy_path);
+        return -EFAULT;
+    }
+    copy_path[copy_len] = '\0';
+
+    ret = stat(copy_path, &statbuff);
+    rt_free(copy_path);
 
     if (ret == 0)
     {
