@@ -628,46 +628,6 @@ RTM_EXPORT(rt_show_version);
 /* private function */
 #define _ISDIGIT(c)  ((unsigned)((c) - '0') < 10)
 
-#ifdef RT_PRINTF_LONGLONG
-rt_inline int divide(long long *n, int base)
-{
-    int res = 0;
-
-    /* optimized for processor which does not support divide instructions. */
-    if (base == 10)
-    {
-        res = (int)(((unsigned long long)*n) % 10U);
-        *n = (long long)(((unsigned long long)*n) / 10U);
-    }
-    else
-    {
-        res = (int)(((unsigned long long)*n) % 16U);
-        *n = (long long)(((unsigned long long)*n) / 16U);
-    }
-
-    return res;
-}
-#else
-rt_inline int divide(long *n, int base)
-{
-    int res = 0;
-
-    /* optimized for processor which does not support divide instructions. */
-    if (base == 10)
-    {
-        res = (int)(((unsigned long)*n) % 10U);
-        *n = (long)(((unsigned long)*n) / 10U);
-    }
-    else
-    {
-        res = (int)(((unsigned long)*n) % 16U);
-        *n = (long)(((unsigned long)*n) / 16U);
-    }
-
-    return res;
-}
-#endif
-
 rt_inline int skip_atoi(const char **s)
 {
     register int i = 0;
@@ -691,11 +651,12 @@ rt_inline int skip_atoi(const char **s)
 static char *print_number(char *buf,
                           char *end,
 #ifdef RT_PRINTF_LONGLONG
-                          long long  num,
+                          unsigned long long  num,
 #else
-                          long  num,
+                          unsigned long  num,
 #endif
                           int   base,
+                          int   qualifier,
                           int   s,
                           int   precision,
                           int   type)
@@ -703,11 +664,12 @@ static char *print_number(char *buf,
 static char *print_number(char *buf,
                           char *end,
 #ifdef RT_PRINTF_LONGLONG
-                          long long  num,
+                          unsigned long long  num,
 #else
-                          long  num,
+                          unsigned long  num,
 #endif
                           int   base,
+                          int   qualifier,
                           int   s,
                           int   type)
 #endif
@@ -716,7 +678,7 @@ static char *print_number(char *buf,
 #ifdef RT_PRINTF_LONGLONG
     char tmp[32] = {0};
 #else
-    char tmp[16] = {0};
+    char tmp[24] = {0};
 #endif
     int precision_bak = precision;
     const char *digits = RT_NULL;
@@ -739,18 +701,43 @@ static char *print_number(char *buf,
     sign = 0;
     if (type & SIGN)
     {
-        if (num < 0)
+        switch (qualifier)
         {
-            sign = '-';
-            num = -num;
+        case 'h':
+            if ((rt_int16_t)num < 0)
+            {
+                sign = '-';
+                num = -(rt_int16_t)num;
+            }
+            break;
+        case 'L':
+        case 'l':
+            if ((long)num < 0)
+            {
+                sign = '-';
+                num = -(long)num;
+            }
+            break;
+        case 0:
+        default:
+            if ((rt_int32_t)num < 0)
+            {
+                sign = '-';
+                num = -(rt_int32_t)num;
+            }
+            break;
         }
-        else if (type & PLUS)
+
+        if (sign != '-')
         {
-            sign = '+';
-        }
-        else if (type & SPACE)
-        {
-            sign = ' ';
+            if (type & PLUS)
+            {
+                sign = '+';
+            }
+            else if (type & SPACE)
+            {
+                sign = ' ';
+            }
         }
     }
 
@@ -777,7 +764,8 @@ static char *print_number(char *buf,
     {
         while (num != 0)
         {
-            tmp[i++] = digits[divide(&num, base)];
+            tmp[i++] = digits[num % base];
+            num /= base;
         }
     }
 
@@ -906,7 +894,7 @@ rt_int32_t rt_vsnprintf(char       *buf,
 #ifdef RT_PRINTF_LONGLONG
     unsigned long long num = 0;
 #else
-    long num = 0;
+    unsigned long num = 0;
 #endif
     int i = 0, len = 0;
     char *str = RT_NULL, *end = RT_NULL, c = 0;
@@ -1091,16 +1079,16 @@ rt_int32_t rt_vsnprintf(char       *buf,
             if (field_width == -1)
             {
                 field_width = sizeof(void *) << 1;
-                flags |= ZEROPAD;
+                flags |= ZEROPAD | SPECIAL;
             }
 #ifdef RT_PRINTF_PRECISION
             str = print_number(str, end,
-                               (long)va_arg(args, void *),
-                               16, field_width, precision, flags);
+                               (unsigned long long)va_arg(args, void *),
+                               16, qualifier, field_width, precision, flags);
 #else
             str = print_number(str, end,
-                               (long)va_arg(args, void *),
-                               16, field_width, flags);
+                               (unsigned long)va_arg(args, void *),
+                               16, qualifier, field_width, flags);
 #endif
             continue;
 
@@ -1154,18 +1142,14 @@ rt_int32_t rt_vsnprintf(char       *buf,
 #ifdef RT_PRINTF_LONGLONG
         if (qualifier == 'L')
         {
-            num = va_arg(args, long long);
+            num = va_arg(args, unsigned long long);
         }
         else if (qualifier == 'l')
 #else
         if (qualifier == 'l')
 #endif
         {
-            num = va_arg(args, long);
-            if (flags & SIGN)
-            {
-                num = (rt_int32_t)num;
-            }
+            num = va_arg(args, unsigned long);
         }
         else if (qualifier == 'h')
         {
@@ -1177,16 +1161,12 @@ rt_int32_t rt_vsnprintf(char       *buf,
         }
         else
         {
-            num = va_arg(args, long);
-            if (flags & SIGN)
-            {
-                num = (rt_int32_t)num;
-            }
+            num = (rt_uint32_t)va_arg(args, unsigned long);
         }
 #ifdef RT_PRINTF_PRECISION
-        str = print_number(str, end, num, base, field_width, precision, flags);
+        str = print_number(str, end, num, base, qualifier, field_width, precision, flags);
 #else
-        str = print_number(str, end, num, base, field_width, flags);
+        str = print_number(str, end, num, base, qualifier, field_width, flags);
 #endif
     }
 
