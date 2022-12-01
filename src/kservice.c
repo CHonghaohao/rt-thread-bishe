@@ -1079,11 +1079,15 @@ rt_int32_t rt_vsnprintf(char       *buf,
             if (field_width == -1)
             {
                 field_width = sizeof(void *) << 1;
-                flags |= ZEROPAD | SPECIAL;
+#ifdef RT_PRINTF_SPECIAL
+                field_width += 2; /* `0x` prefix */
+                flags |= SPECIAL;
+#endif
+                flags |= ZEROPAD;
             }
 #ifdef RT_PRINTF_PRECISION
             str = print_number(str, end,
-                               (unsigned long long)va_arg(args, void *),
+                               (unsigned long)va_arg(args, void *),
                                16, qualifier, field_width, precision, flags);
 #else
             str = print_number(str, end,
