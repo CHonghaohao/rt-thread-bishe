@@ -917,7 +917,7 @@ int sys_nanosleep(const struct timespec *rqtp, struct timespec *rmtp)
 #ifdef RT_USING_USERSPACE
     struct timespec rqtp_k;
     struct timespec rmtp_k;
-    
+
     lwp_get_from_user(&rqtp_k, (void *)rqtp, sizeof rqtp_k);
     ret = nanosleep(&rqtp_k, &rmtp_k);
     if ((ret != -1 || rt_get_errno() == EINTR) && rmtp && lwp_user_accessable((void *)rmtp, sizeof *rmtp))
@@ -1739,7 +1739,7 @@ int _sys_fork(void)
             LOG_E("malloc fail!\n");
             goto fail;
         }
-        
+
         lwp->tty->foreground = lwp;
     }
     rt_hw_interrupt_enable(level);
@@ -2491,7 +2491,45 @@ int sys_log(const char* log, int size)
 int sys_stat(const char *file, struct stat *buf)
 {
     int ret = 0;
-    ret = stat(file, buf);
+    int err;
+    size_t len;
+    size_t copy_len;
+    char *copy_path;
+    struct stat statbuff;
+
+    if (!lwp_user_accessable((void *)buf, sizeof(struct stat)))
+    {
+        return -EFAULT;
+    }
+
+    len = lwp_user_strlen(file, &err);
+    if (err)
+    {
+        return -EFAULT;
+    }
+
+    copy_path = (char*)rt_malloc(len + 1);
+    if (!copy_path)
+    {
+        return -ENOMEM;
+    }
+
+    copy_len = lwp_get_from_user(copy_path, (void*)file, len);
+    if (copy_len == 0)
+    {
+        rt_free(copy_path);
+        return -EFAULT;
+    }
+    copy_path[copy_len] = '\0';
+
+    ret = stat(copy_path, &statbuff);
+    rt_free(copy_path);
+
+    if (ret == 0)
+    {
+        lwp_put_to_user(buf, &statbuff, sizeof statbuff);
+    }
+
     return (ret < 0 ? GET_ERRNO() : ret);
 }
 
@@ -4100,7 +4138,7 @@ int sys_sched_get_priority_max(int policy)
     {
         rt_set_errno(EINVAL);
         return -rt_get_errno();
-    }    
+    }
     return RT_THREAD_PRIORITY_MAX;
 }
 
