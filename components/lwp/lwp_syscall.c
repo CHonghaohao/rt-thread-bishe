@@ -4063,6 +4063,66 @@ int sys_getrandom(void *buf, size_t buflen, unsigned int flags)
     return ret;
 }
 
+ssize_t sys_readlink(char* path, char *buf, size_t bufsz)
+{
+    size_t len, copy_len;
+    int err;
+    int fd = -1;
+    struct dfs_fd *d;
+    char *copy_path;
+
+    len = lwp_user_strlen(path, &err);
+    if (err)
+    {
+        return -EFAULT;
+    }
+
+    if (!lwp_user_accessable(buf, bufsz))
+    {
+        return -EINVAL;
+    }
+
+    copy_path = (char*)rt_malloc(len + 1);
+    if (!copy_path)
+    {
+        return -ENOMEM;
+    }
+
+    copy_len = lwp_get_from_user(copy_path, path, len);
+    copy_path[copy_len] = '\0';
+
+    /* musl __procfdname */
+    err = sscanf(copy_path, "/proc/self/fd/%d", &fd);
+    rt_free(copy_path);
+
+    if (err != 1)
+    {
+        LOG_E("readlink: path not is /proc/self/fd/* , call by musl __procfdname()?");
+        return -EINVAL;
+    }
+
+    d = fd_get(fd);
+    if (!d)
+    {
+        return -EBADF;
+    }
+
+    if (!d->fnode)
+    {
+        return -EBADF;
+    }
+
+    copy_len = strlen(d->fnode->fullpath);
+    if (copy_len > bufsz)
+    {
+        copy_len = bufsz;
+    }
+
+    bufsz = lwp_put_to_user(buf, d->fnode->fullpath, copy_len);
+
+    return bufsz;
+}
+
 int sys_setaffinity(pid_t pid, size_t size, void *set)
 {
     if (!lwp_user_accessable(set, sizeof(cpu_set_t)))
@@ -4371,7 +4431,7 @@ const static void* func_table[] =
     SYSCALL_SIGN(sys_setrlimit),
     SYSCALL_SIGN(sys_setsid),
     SYSCALL_SIGN(sys_getrandom),
-    SYSCALL_SIGN(sys_notimpl),    // SYSCALL_SIGN(sys_readlink)     /* 145 */
+    SYSCALL_SIGN(sys_readlink),    // SYSCALL_SIGN(sys_readlink)     /* 145 */
     SYSCALL_USPACE(SYSCALL_SIGN(sys_mremap)),
     SYSCALL_USPACE(SYSCALL_SIGN(sys_madvise)),
     SYSCALL_SIGN(sys_sched_setparam),
