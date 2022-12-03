@@ -561,7 +561,8 @@ rt_err_t rt_thread_sleep(rt_tick_t tick)
 
         /* enable interrupt */
         rt_hw_interrupt_enable(temp);
-
+        
+        thread->error = -RT_EINTR;
         rt_schedule();
 
         /* clear error number of this thread to RT_EOK */
