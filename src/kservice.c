@@ -100,7 +100,7 @@ rt_err_t rt_get_errno(void)
     tid = rt_thread_self();
     if (tid == RT_NULL)
     {
-        return __rt_errno;        
+        return __rt_errno;
     }
 
     return tid->error;
@@ -147,13 +147,13 @@ int *_rt_errno(void)
 
     if (rt_interrupt_get_nest() != 0)
     {
-        return (int *)&__rt_errno;        
+        return (int *)&__rt_errno;
     }
 
     tid = rt_thread_self();
     if (tid != RT_NULL)
     {
-        return (int *) & (tid->error);        
+        return (int *) & (tid->error);
     }
 
     return (int *)&__rt_errno;
@@ -208,7 +208,7 @@ void *rt_memset(void *s, int c, rt_ubase_t count)
             buffer = 0;
             for (i = 0; i < LBLOCKSIZE; i ++)
             {
-                buffer = (buffer << 8) | d;                
+                buffer = (buffer << 8) | d;
             }
         }
 
@@ -265,14 +265,14 @@ void *rt_memcpy(void *dst, const void *src, rt_ubase_t count)
     {
         while (count--)
         {
-            *tmp ++ = *s ++;            
+            *tmp ++ = *s ++;
         }
     }
     else
     {
         for (len = count; len > 0; len --)
         {
-            tmp[len - 1] = s[len - 1];            
+            tmp[len - 1] = s[len - 1];
         }
     }
 
@@ -322,7 +322,7 @@ void *rt_memcpy(void *dst, const void *src, rt_ubase_t count)
 
     while (len--)
     {
-        *dst_ptr++ = *src_ptr++;        
+        *dst_ptr++ = *src_ptr++;
     }
 
     return dst;
@@ -355,14 +355,14 @@ void *rt_memmove(void *dest, const void *src, rt_ubase_t n)
 
         while (n--)
         {
-            *(--tmp) = *(--s);            
+            *(--tmp) = *(--s);
         }
     }
     else
     {
         while (n--)
         {
-            *tmp++ = *s++;            
+            *tmp++ = *s++;
         }
     }
 
@@ -388,8 +388,8 @@ rt_int32_t rt_memcmp(const void *cs, const void *ct, rt_ubase_t count)
     {
         if ((res = *su1 - *su2) != 0)
         {
-            break;              
-        }      
+            break;
+        }
     }
 
     return res;
@@ -411,7 +411,7 @@ char *rt_strstr(const char *s1, const char *s2)
     l2 = rt_strlen(s2);
     if (!l2)
     {
-        return (char *)s1;        
+        return (char *)s1;
     }
 
     l1 = rt_strlen(s1);
@@ -420,7 +420,7 @@ char *rt_strstr(const char *s1, const char *s2)
         l1 --;
         if (!rt_memcmp(s1, s2, l2))
         {
-            return (char *)s1;            
+            return (char *)s1;
         }
 
         s1 ++;
@@ -480,7 +480,7 @@ char *rt_strncpy(char *dst, const char *src, rt_ubase_t n)
                 /* NUL pad the remaining n-1 bytes */
                 while (--n != 0)
                 {
-                    *d++ = 0;                    
+                    *d++ = 0;
                 }
 
                 break;
@@ -509,7 +509,7 @@ rt_int32_t rt_strncmp(const char *cs, const char *ct, rt_ubase_t count)
     {
         if ((__res = *cs - *ct++) != 0 || !*cs++)
         {
-            break;            
+            break;
         }
 
         count --;
@@ -595,7 +595,7 @@ char *rt_strdup(const char *s)
 
     if (!tmp)
     {
-        return RT_NULL;        
+        return RT_NULL;
     }
 
     rt_memcpy(tmp, s, len);
@@ -628,52 +628,12 @@ RTM_EXPORT(rt_show_version);
 /* private function */
 #define _ISDIGIT(c)  ((unsigned)((c) - '0') < 10)
 
-#ifdef RT_PRINTF_LONGLONG
-rt_inline int divide(long long *n, int base)
-{
-    int res = 0;
-
-    /* optimized for processor which does not support divide instructions. */
-    if (base == 10)
-    {
-        res = (int)(((unsigned long long)*n) % 10U);
-        *n = (long long)(((unsigned long long)*n) / 10U);
-    }
-    else
-    {
-        res = (int)(((unsigned long long)*n) % 16U);
-        *n = (long long)(((unsigned long long)*n) / 16U);
-    }
-
-    return res;
-}
-#else
-rt_inline int divide(long *n, int base)
-{
-    int res = 0;
-
-    /* optimized for processor which does not support divide instructions. */
-    if (base == 10)
-    {
-        res = (int)(((unsigned long)*n) % 10U);
-        *n = (long)(((unsigned long)*n) / 10U);
-    }
-    else
-    {
-        res = (int)(((unsigned long)*n) % 16U);
-        *n = (long)(((unsigned long)*n) / 16U);
-    }
-
-    return res;
-}
-#endif
-
 rt_inline int skip_atoi(const char **s)
 {
     register int i = 0;
     while (_ISDIGIT(**s))
     {
-        i = i * 10 + *((*s)++) - '0';        
+        i = i * 10 + *((*s)++) - '0';
     }
 
     return i;
@@ -691,11 +651,12 @@ rt_inline int skip_atoi(const char **s)
 static char *print_number(char *buf,
                           char *end,
 #ifdef RT_PRINTF_LONGLONG
-                          long long  num,
+                          unsigned long long  num,
 #else
-                          long  num,
+                          unsigned long  num,
 #endif
                           int   base,
+                          int   qualifier,
                           int   s,
                           int   precision,
                           int   type)
@@ -703,11 +664,12 @@ static char *print_number(char *buf,
 static char *print_number(char *buf,
                           char *end,
 #ifdef RT_PRINTF_LONGLONG
-                          long long  num,
+                          unsigned long long  num,
 #else
-                          long  num,
+                          unsigned long  num,
 #endif
                           int   base,
+                          int   qualifier,
                           int   s,
                           int   type)
 #endif
@@ -716,7 +678,7 @@ static char *print_number(char *buf,
 #ifdef RT_PRINTF_LONGLONG
     char tmp[32] = {0};
 #else
-    char tmp[16] = {0};
+    char tmp[24] = {0};
 #endif
     int precision_bak = precision;
     const char *digits = RT_NULL;
@@ -730,7 +692,7 @@ static char *print_number(char *buf,
     digits = (type & LARGE) ? large_digits : small_digits;
     if (type & LEFT)
     {
-        type &= ~ZEROPAD;        
+        type &= ~ZEROPAD;
     }
 
     c = (type & ZEROPAD) ? '0' : ' ';
@@ -739,18 +701,43 @@ static char *print_number(char *buf,
     sign = 0;
     if (type & SIGN)
     {
-        if (num < 0)
+        switch (qualifier)
         {
-            sign = '-';
-            num = -num;
+        case 'h':
+            if ((rt_int16_t)num < 0)
+            {
+                sign = '-';
+                num = -(rt_int16_t)num;
+            }
+            break;
+        case 'L':
+        case 'l':
+            if ((long)num < 0)
+            {
+                sign = '-';
+                num = -(long)num;
+            }
+            break;
+        case 0:
+        default:
+            if ((rt_int32_t)num < 0)
+            {
+                sign = '-';
+                num = -(rt_int32_t)num;
+            }
+            break;
         }
-        else if (type & PLUS)
+
+        if (sign != '-')
         {
-            sign = '+';            
-        }
-        else if (type & SPACE)
-        {
-            sign = ' ';            
+            if (type & PLUS)
+            {
+                sign = '+';
+            }
+            else if (type & SPACE)
+            {
+                sign = ' ';
+            }
         }
     }
 
@@ -759,11 +746,11 @@ static char *print_number(char *buf,
     {
         if (base == 16)
         {
-            size -= 2;            
+            size -= 2;
         }
         else if (base == 8)
         {
-            size--;            
+            size--;
         }
     }
 #endif
@@ -771,20 +758,21 @@ static char *print_number(char *buf,
     i = 0;
     if (num == 0)
     {
-        tmp[i++] = '0';        
+        tmp[i++] = '0';
     }
     else
     {
         while (num != 0)
         {
-            tmp[i++] = digits[divide(&num, base)];            
+            tmp[i++] = digits[num % base];
+            num /= base;
         }
     }
 
 #ifdef RT_PRINTF_PRECISION
     if (i > precision)
     {
-        precision = i;        
+        precision = i;
     }
     size -= precision;
 #else
@@ -795,14 +783,14 @@ static char *print_number(char *buf,
     {
         if ((sign) && (size > 0))
         {
-            size--;            
+            size--;
         }
 
         while (size-- > 0)
         {
             if (buf < end)
             {
-                *buf = ' ';               
+                *buf = ' ';
             }
 
             ++ buf;
@@ -826,7 +814,7 @@ static char *print_number(char *buf,
         {
             if (buf < end)
             {
-                *buf = '0';                
+                *buf = '0';
             }
 
             ++ buf;
@@ -835,7 +823,7 @@ static char *print_number(char *buf,
         {
             if (buf < end)
             {
-                *buf = '0';                
+                *buf = '0';
             }
 
             ++ buf;
@@ -855,7 +843,7 @@ static char *print_number(char *buf,
         {
             if (buf < end)
             {
-                *buf = c;                
+                *buf = c;
             }
 
             ++ buf;
@@ -867,7 +855,7 @@ static char *print_number(char *buf,
     {
         if (buf < end)
         {
-            *buf = '0';            
+            *buf = '0';
         }
 
         ++ buf;
@@ -879,7 +867,7 @@ static char *print_number(char *buf,
     {
         if (buf < end)
         {
-            *buf = tmp[i];            
+            *buf = tmp[i];
         }
 
         ++ buf;
@@ -889,7 +877,7 @@ static char *print_number(char *buf,
     {
         if (buf < end)
         {
-            *buf = ' ';            
+            *buf = ' ';
         }
 
         ++ buf;
@@ -906,7 +894,7 @@ rt_int32_t rt_vsnprintf(char       *buf,
 #ifdef RT_PRINTF_LONGLONG
     unsigned long long num = 0;
 #else
-    long num = 0;
+    unsigned long num = 0;
 #endif
     int i = 0, len = 0;
     char *str = RT_NULL, *end = RT_NULL, c = 0;
@@ -937,7 +925,7 @@ rt_int32_t rt_vsnprintf(char       *buf,
         {
             if (str < end)
             {
-                *str = *fmt;                
+                *str = *fmt;
             }
 
             ++ str;
@@ -963,7 +951,7 @@ rt_int32_t rt_vsnprintf(char       *buf,
         field_width = -1;
         if (_ISDIGIT(*fmt))
         {
-            field_width = skip_atoi(&fmt);            
+            field_width = skip_atoi(&fmt);
         }
         else if (*fmt == '*')
         {
@@ -985,7 +973,7 @@ rt_int32_t rt_vsnprintf(char       *buf,
             ++ fmt;
             if (_ISDIGIT(*fmt))
             {
-                precision = skip_atoi(&fmt);                
+                precision = skip_atoi(&fmt);
             }
             else if (*fmt == '*')
             {
@@ -1091,16 +1079,20 @@ rt_int32_t rt_vsnprintf(char       *buf,
             if (field_width == -1)
             {
                 field_width = sizeof(void *) << 1;
+#ifdef RT_PRINTF_SPECIAL
+                field_width += 2; /* `0x` prefix */
+                flags |= SPECIAL;
+#endif
                 flags |= ZEROPAD;
             }
 #ifdef RT_PRINTF_PRECISION
             str = print_number(str, end,
-                               (long)va_arg(args, void *),
-                               16, field_width, precision, flags);
+                               (unsigned long)va_arg(args, void *),
+                               16, qualifier, field_width, precision, flags);
 #else
             str = print_number(str, end,
-                               (long)va_arg(args, void *),
-                               16, field_width, flags);
+                               (unsigned long)va_arg(args, void *),
+                               16, qualifier, field_width, flags);
 #endif
             continue;
 
@@ -1154,18 +1146,14 @@ rt_int32_t rt_vsnprintf(char       *buf,
 #ifdef RT_PRINTF_LONGLONG
         if (qualifier == 'L')
         {
-            num = va_arg(args, long long);
+            num = va_arg(args, unsigned long long);
         }
         else if (qualifier == 'l')
 #else
         if (qualifier == 'l')
 #endif
         {
-            num = va_arg(args, long);
-            if (flags & SIGN)
-            {
-                num = (rt_int32_t)num;
-            }
+            num = va_arg(args, unsigned long);
         }
         else if (qualifier == 'h')
         {
@@ -1177,16 +1165,12 @@ rt_int32_t rt_vsnprintf(char       *buf,
         }
         else
         {
-            num = va_arg(args, long);
-            if (flags & SIGN)
-            {
-                num = (rt_int32_t)num;
-            }
+            num = (rt_uint32_t)va_arg(args, unsigned long);
         }
 #ifdef RT_PRINTF_PRECISION
-        str = print_number(str, end, num, base, field_width, precision, flags);
+        str = print_number(str, end, num, base, qualifier, field_width, precision, flags);
 #else
-        str = print_number(str, end, num, base, field_width, flags);
+        str = print_number(str, end, num, base, qualifier, field_width, flags);
 #endif
     }
 
@@ -1315,10 +1299,10 @@ extern void console_init();
 
     /* find new console device */
     new_device = rt_device_find(name);
-    
+
     /* check whether it's a same device */
     if (new_device == old_device) return RT_NULL;
-    
+
     if (new_device != RT_NULL)
     {
         if (_console_device != RT_NULL)
@@ -1394,7 +1378,7 @@ void rt_kprintf(const char *fmt, ...)
     length = rt_vsnprintf(rt_log_buf, sizeof(rt_log_buf) - 1, fmt, args);
     if (length > RT_CONSOLEBUF_SIZE - 1)
     {
-        length = RT_CONSOLEBUF_SIZE - 1;        
+        length = RT_CONSOLEBUF_SIZE - 1;
     }
 
 #ifdef RT_USING_DEVICE
@@ -1524,17 +1508,17 @@ int __rt_ffs(int value)
 
     if (value & 0xff)
     {
-        return __lowest_bit_bitmap[value & 0xff] + 1;        
+        return __lowest_bit_bitmap[value & 0xff] + 1;
     }
 
     if (value & 0xff00)
     {
-        return __lowest_bit_bitmap[(value & 0xff00) >> 8] + 9;        
+        return __lowest_bit_bitmap[(value & 0xff00) >> 8] + 9;
     }
 
     if (value & 0xff0000)
     {
-        return __lowest_bit_bitmap[(value & 0xff0000) >> 16] + 17;        
+        return __lowest_bit_bitmap[(value & 0xff0000) >> 16] + 17;
     }
 
     return __lowest_bit_bitmap[(value & 0xff000000) >> 24] + 25;
