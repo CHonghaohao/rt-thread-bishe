@@ -204,7 +204,7 @@ int clock_nanosleep(clockid_t clockid, int flags, const struct timespec *rqtp, s
     case CLOCK_REALTIME:
     {
         rt_tick_t tick, tick_old = rt_tick_get();
-        if (flags & TIMER_ABSTIME == TIMER_ABSTIME)
+        if (flags & TIMER_ABSTIME)
         {
             tick = (rqtp->tv_sec - _timevalue.tv_sec) * RT_TICK_PER_SECOND + (rqtp->tv_nsec - _timevalue.tv_usec) * (RT_TICK_PER_SECOND / NANOSECOND_PER_SECOND);
             rt_tick_t rt_tick = rt_tick_get();
@@ -350,7 +350,7 @@ int timer_create(clockid_t clockid, struct sigevent *evp, timer_t *timerid)
     struct timer_obj *timer;
     char timername[RT_NAME_MAX] = {0};
 
-    if (clockid > CLOCK_TAI || evp->sigev_notify != SIGEV_NONE && evp->sigev_notify != SIGEV_SIGNAL)
+    if (clockid > CLOCK_TAI || (evp->sigev_notify != SIGEV_NONE && evp->sigev_notify != SIGEV_SIGNAL))
     {
         rt_set_errno(EINVAL);
         return -RT_ERROR;
@@ -412,7 +412,7 @@ RTM_EXPORT(timer_delete);
 
 int timer_getoverrun(timer_t timerid)
 {
-    struct timer_obj *timer = (struct timer_obj *)((uintptr_t)timerid << 1);
+    // struct timer_obj *timer = (struct timer_obj *)((uintptr_t)timerid << 1);
     rt_set_errno(ENOSYS);
     return -RT_ERROR;
 }
@@ -513,7 +513,7 @@ int timer_settime(timer_t timerid, int flags, const struct itimerspec *value,
         return RT_EOK;
     }
     
-    if (flags & TIMER_ABSTIME == TIMER_ABSTIME)
+    if (flags & TIMER_ABSTIME)
     {
         rt_int64_t ts = ((value->it_value.tv_sec - _timevalue.tv_sec) * RT_TICK_PER_SECOND);
         rt_int64_t tns = (value->it_value.tv_nsec - _timevalue.tv_usec) * (RT_TICK_PER_SECOND / NANOSECOND_PER_SECOND);

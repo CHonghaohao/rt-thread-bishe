@@ -1274,7 +1274,7 @@ rt_err_t sys_timer_create(clockid_t clockid, struct sigevent *restrict sevp, tim
 #ifdef RT_USING_USERSPACE
     struct sigevent sevp_k;
     timer_t timerid_k;
-    struct sigevent evp_default;
+
     if (sevp == NULL)
     {
         sevp_k.sigev_notify = SIGEV_SIGNAL;
