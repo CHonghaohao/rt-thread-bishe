@@ -178,9 +178,9 @@ struct rt_thread main_thread;
  *
  * @param  parameter is the arg of the thread.
  */
-void main_thread_entry(void *parameter)
+static void main_thread_entry(void *parameter)
 {
-    extern int main(void);
+    RT_UNUSED(parameter);
 
 #ifdef RT_USING_COMPONENTS_INIT
     /* RT-Thread components initialization */

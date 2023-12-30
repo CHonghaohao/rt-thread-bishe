@@ -42,6 +42,9 @@
 extern "C" {
 #endif
 
+int main(void);
+int entry(void);
+
 /**
  * @addtogroup KernelObject
  * @{
@@ -454,6 +457,8 @@ rt_err_t rt_mb_delete(rt_mailbox_t mb);
 #endif /* RT_USING_HEAP */
 
 rt_err_t rt_mb_send(rt_mailbox_t mb, rt_ubase_t value);
+rt_err_t rt_mb_send_interruptible(rt_mailbox_t mb, rt_ubase_t value);
+rt_err_t rt_mb_send_killable(rt_mailbox_t mb, rt_ubase_t value);
 rt_err_t rt_mb_send_wait(rt_mailbox_t mb,
                          rt_ubase_t  value,
                          rt_int32_t   timeout);

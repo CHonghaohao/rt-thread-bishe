@@ -95,12 +95,18 @@ rt_weak void rt_hw_cpu_shutdown(void)
 
 rt_weak rt_err_t rt_hw_backtrace_frame_get(rt_thread_t thread, struct rt_hw_backtrace_frame *frame)
 {
+    RT_UNUSED(thread);
+    RT_UNUSED(frame);
+
     LOG_W("%s is not implemented", __func__);
     return -RT_ENOSYS;
 }
 
 rt_weak rt_err_t rt_hw_backtrace_frame_unwind(rt_thread_t thread, struct rt_hw_backtrace_frame *frame)
 {
+    RT_UNUSED(thread);
+    RT_UNUSED(frame);
+
     LOG_W("%s is not implemented", __func__);
     return -RT_ENOSYS;
 }
@@ -1482,6 +1488,7 @@ RTM_EXPORT(rt_console_set_device);
 rt_weak void rt_hw_console_output(const char *str)
 {
     /* empty console output */
+    RT_UNUSED(str);
 }
 RTM_EXPORT(rt_hw_console_output);
 
