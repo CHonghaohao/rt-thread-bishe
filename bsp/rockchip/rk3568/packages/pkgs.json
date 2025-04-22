@@ -1,0 +1,17 @@
+[
+ {
+  "name": "MICRO_XRCE_DDS_CLIENT",
+  "path": "/packages/tools/Micro-XRCE-DDS-Client",
+  "ver": "latest"
+ },
+ {
+  "name": "PERF_COUNTER",
+  "path": "/packages/system/perf_counter",
+  "ver": "v2.2.4.1"
+ },
+ {
+  "name": "MICRO_ROS",
+  "path": "/packages/peripherals/micro_ros",
+  "ver": "humble-gcc-10"
+ }
+]
