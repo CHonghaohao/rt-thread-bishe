@@ -1,0 +1,40 @@
+[1.407s] Invoking command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/src/ament_lint/ament_xmllint': AMENT_PREFIX_PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_copyright:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pep257:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_flake8:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_lint PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_copyright/bin:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pep257/bin:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_flake8/bin:${PATH} PYTHONPATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_xmllint/prefix_override:/home/rsl/.local/lib/python3.8/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_xmllint/lib/python3.8/site-packages:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_copyright/lib/python3.8/site-packages:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pep257/lib/python3.8/site-packages:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_flake8/lib/python3.8/site-packages:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_lint/lib/python3.8/site-packages /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/ament_xmllint build --build-base /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_xmllint/build install --record /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_xmllint/install.log --single-version-externally-managed install_data
+[1.543s] running egg_info
+[1.544s] creating ../../../build/ament_xmllint/ament_xmllint.egg-info
+[1.544s] writing ../../../build/ament_xmllint/ament_xmllint.egg-info/PKG-INFO
+[1.544s] writing dependency_links to ../../../build/ament_xmllint/ament_xmllint.egg-info/dependency_links.txt
+[1.545s] writing entry points to ../../../build/ament_xmllint/ament_xmllint.egg-info/entry_points.txt
+[1.545s] writing requirements to ../../../build/ament_xmllint/ament_xmllint.egg-info/requires.txt
+[1.545s] writing top-level names to ../../../build/ament_xmllint/ament_xmllint.egg-info/top_level.txt
+[1.545s] writing manifest file '../../../build/ament_xmllint/ament_xmllint.egg-info/SOURCES.txt'
+[1.582s] reading manifest file '../../../build/ament_xmllint/ament_xmllint.egg-info/SOURCES.txt'
+[1.582s] writing manifest file '../../../build/ament_xmllint/ament_xmllint.egg-info/SOURCES.txt'
+[1.583s] running build
+[1.583s] running build_py
+[1.583s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_xmllint/build
+[1.583s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_xmllint/build/lib
+[1.583s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_xmllint/build/lib/ament_xmllint
+[1.583s] copying ament_xmllint/main.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_xmllint/build/lib/ament_xmllint
+[1.584s] copying ament_xmllint/pytest_marker.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_xmllint/build/lib/ament_xmllint
+[1.584s] copying ament_xmllint/__init__.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_xmllint/build/lib/ament_xmllint
+[1.584s] running install
+[1.587s] running install_lib
+[1.587s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_xmllint/lib/python3.8/site-packages/ament_xmllint
+[1.588s] copying /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_xmllint/build/lib/ament_xmllint/main.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_xmllint/lib/python3.8/site-packages/ament_xmllint
+[1.588s] copying /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_xmllint/build/lib/ament_xmllint/pytest_marker.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_xmllint/lib/python3.8/site-packages/ament_xmllint
+[1.588s] copying /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_xmllint/build/lib/ament_xmllint/__init__.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_xmllint/lib/python3.8/site-packages/ament_xmllint
+[1.589s] byte-compiling /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_xmllint/lib/python3.8/site-packages/ament_xmllint/main.py to main.cpython-38.pyc
+[1.592s] byte-compiling /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_xmllint/lib/python3.8/site-packages/ament_xmllint/pytest_marker.py to pytest_marker.cpython-38.pyc
+[1.592s] byte-compiling /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_xmllint/lib/python3.8/site-packages/ament_xmllint/__init__.py to __init__.cpython-38.pyc
+[1.592s] running install_data
+[1.596s] copying package.xml -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_xmllint/share/ament_xmllint
+[1.596s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_xmllint/share/ament_index
+[1.596s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_xmllint/share/ament_index/resource_index
+[1.596s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_xmllint/share/ament_index/resource_index/packages
+[1.596s] copying resource/ament_xmllint -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_xmllint/share/ament_index/resource_index/packages
+[1.596s] running install_egg_info
+[1.598s] Copying ../../../build/ament_xmllint/ament_xmllint.egg-info to /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_xmllint/lib/python3.8/site-packages/ament_xmllint-0.12.12-py3.8.egg-info
+[1.598s] running install_scripts
+[1.614s] Installing ament_xmllint script to /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_xmllint/bin
+[1.614s] writing list of installed files to '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_xmllint/install.log'
+[1.649s] Invoked command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/src/ament_lint/ament_xmllint' returned '0': AMENT_PREFIX_PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_copyright:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pep257:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_flake8:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_lint PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_copyright/bin:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pep257/bin:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_flake8/bin:${PATH} PYTHONPATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_xmllint/prefix_override:/home/rsl/.local/lib/python3.8/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_xmllint/lib/python3.8/site-packages:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_copyright/lib/python3.8/site-packages:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pep257/lib/python3.8/site-packages:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_flake8/lib/python3.8/site-packages:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_lint/lib/python3.8/site-packages /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/ament_xmllint build --build-base /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_xmllint/build install --record /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_xmllint/install.log --single-version-externally-managed install_data

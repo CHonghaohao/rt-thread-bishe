@@ -1,0 +1,40 @@
+[0.549s] Invoking command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/src/ament_lint/ament_pep257': AMENT_PREFIX_PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_flake8:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_lint PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_flake8/bin:${PATH} PYTHONPATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pep257/prefix_override:/home/rsl/.local/lib/python3.8/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pep257/lib/python3.8/site-packages:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_flake8/lib/python3.8/site-packages:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_lint/lib/python3.8/site-packages /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/ament_pep257 build --build-base /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pep257/build install --record /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pep257/install.log --single-version-externally-managed install_data
+[0.671s] running egg_info
+[0.672s] creating ../../../build/ament_pep257/ament_pep257.egg-info
+[0.672s] writing ../../../build/ament_pep257/ament_pep257.egg-info/PKG-INFO
+[0.672s] writing dependency_links to ../../../build/ament_pep257/ament_pep257.egg-info/dependency_links.txt
+[0.673s] writing entry points to ../../../build/ament_pep257/ament_pep257.egg-info/entry_points.txt
+[0.673s] writing requirements to ../../../build/ament_pep257/ament_pep257.egg-info/requires.txt
+[0.673s] writing top-level names to ../../../build/ament_pep257/ament_pep257.egg-info/top_level.txt
+[0.673s] writing manifest file '../../../build/ament_pep257/ament_pep257.egg-info/SOURCES.txt'
+[0.696s] reading manifest file '../../../build/ament_pep257/ament_pep257.egg-info/SOURCES.txt'
+[0.697s] writing manifest file '../../../build/ament_pep257/ament_pep257.egg-info/SOURCES.txt'
+[0.697s] running build
+[0.697s] running build_py
+[0.698s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pep257/build
+[0.698s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pep257/build/lib
+[0.698s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pep257/build/lib/ament_pep257
+[0.698s] copying ament_pep257/main.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pep257/build/lib/ament_pep257
+[0.698s] copying ament_pep257/pytest_marker.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pep257/build/lib/ament_pep257
+[0.698s] copying ament_pep257/__init__.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pep257/build/lib/ament_pep257
+[0.699s] running install
+[0.701s] running install_lib
+[0.701s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pep257/lib/python3.8/site-packages/ament_pep257
+[0.701s] copying /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pep257/build/lib/ament_pep257/main.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pep257/lib/python3.8/site-packages/ament_pep257
+[0.701s] copying /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pep257/build/lib/ament_pep257/pytest_marker.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pep257/lib/python3.8/site-packages/ament_pep257
+[0.702s] copying /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pep257/build/lib/ament_pep257/__init__.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pep257/lib/python3.8/site-packages/ament_pep257
+[0.702s] byte-compiling /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pep257/lib/python3.8/site-packages/ament_pep257/main.py to main.cpython-38.pyc
+[0.702s] byte-compiling /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pep257/lib/python3.8/site-packages/ament_pep257/pytest_marker.py to pytest_marker.cpython-38.pyc
+[0.703s] byte-compiling /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pep257/lib/python3.8/site-packages/ament_pep257/__init__.py to __init__.cpython-38.pyc
+[0.703s] running install_data
+[0.703s] copying package.xml -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pep257/share/ament_pep257
+[0.703s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pep257/share/ament_index
+[0.703s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pep257/share/ament_index/resource_index
+[0.703s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pep257/share/ament_index/resource_index/packages
+[0.703s] copying resource/ament_pep257 -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pep257/share/ament_index/resource_index/packages
+[0.703s] running install_egg_info
+[0.705s] Copying ../../../build/ament_pep257/ament_pep257.egg-info to /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pep257/lib/python3.8/site-packages/ament_pep257-0.12.12-py3.8.egg-info
+[0.705s] running install_scripts
+[0.718s] Installing ament_pep257 script to /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pep257/bin
+[0.718s] writing list of installed files to '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pep257/install.log'
+[0.739s] Invoked command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/src/ament_lint/ament_pep257' returned '0': AMENT_PREFIX_PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_flake8:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_lint PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_flake8/bin:${PATH} PYTHONPATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pep257/prefix_override:/home/rsl/.local/lib/python3.8/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pep257/lib/python3.8/site-packages:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_flake8/lib/python3.8/site-packages:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_lint/lib/python3.8/site-packages /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/ament_pep257 build --build-base /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pep257/build install --record /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pep257/install.log --single-version-externally-managed install_data

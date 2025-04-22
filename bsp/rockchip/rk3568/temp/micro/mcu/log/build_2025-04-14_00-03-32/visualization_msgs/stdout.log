@@ -1,0 +1,5 @@
+[ 25%] Built target visualization_msgs__rosidl_generator_c
+[ 50%] Built target visualization_msgs__rosidl_typesupport_c
+[ 75%] Built target visualization_msgs__rosidl_typesupport_introspection_c
+[100%] Built target visualization_msgs__rosidl_typesupport_microxrcedds_c
+[100%] Built target visualization_msgs

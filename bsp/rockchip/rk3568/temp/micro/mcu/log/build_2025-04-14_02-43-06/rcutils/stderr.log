@@ -1,0 +1,8 @@
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcutils/src/time_unix.c:52:4:[m[K [01;35m[Kwarning: [m[K#warning is a GCC extension
+   52 | #  [01;35m[Kwarning[m[K no monotonic clock function available
+      |    [01;35m[K^~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcutils/src/time_unix.c:52:4:[m[K [01;35m[Kwarning: [m[K#warning no monotonic clock function available [[01;35m[K-Wcpp[m[K]
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcutils/src/time_unix.c:[m[K In function '[01m[Krcutils_system_time_now[m[K':
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcutils/src/time_unix.c:74:3:[m[K [01;35m[Kwarning: [m[Kimplicit declaration of function '[01m[Kclock_gettime[m[K' [[01;35m[K-Wimplicit-function-declaration[m[K]
+   74 |   [01;35m[Kclock_gettime[m[K(CLOCK_REALTIME, &timespec_now);
+      |   [01;35m[K^~~~~~~~~~~~~[m[K

@@ -1,0 +1,211 @@
+-- The C compiler identification is GNU 10.3.1
+-- The CXX compiler identification is GNU 10.3.1
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/bin/aarch64-none-elf-gcc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/bin/aarch64-none-elf-g++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ament_cmake: 1.3.11 (/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake/share/ament_cmake/cmake)
+-- Found Python3: /usr/bin/python3 (found version "3.8.10") found components: Interpreter
+-- Found rosidl_default_generators: 1.2.0 (/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rosidl_default_generators/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_introspection_c;rosidl_typesupport_microxrcedds_c
+-- Found rosidl_adapter: 3.1.6 (/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rosidl_adapter/cmake)
+-- Found ament_cmake_ros: 0.10.0 (/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_ros/share/ament_cmake_ros/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_introspection_c;rosidl_typesupport_microxrcedds_c
+-- Configuring done (0.8s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/lifecycle_msgs
+[  2%] [34m[1mGenerating C code for ROS interfaces[0m
+[  5%] [32mBuilding C object CMakeFiles/lifecycle_msgs__rosidl_generator_c.dir/rosidl_generator_c/lifecycle_msgs/msg/detail/state__functions.c.obj[0m
+[  7%] [32mBuilding C object CMakeFiles/lifecycle_msgs__rosidl_generator_c.dir/rosidl_generator_c/lifecycle_msgs/msg/detail/transition__functions.c.obj[0m
+[ 10%] [32mBuilding C object CMakeFiles/lifecycle_msgs__rosidl_generator_c.dir/rosidl_generator_c/lifecycle_msgs/msg/detail/transition_description__functions.c.obj[0m
+[ 15%] [32mBuilding C object CMakeFiles/lifecycle_msgs__rosidl_generator_c.dir/rosidl_generator_c/lifecycle_msgs/srv/detail/get_available_states__functions.c.obj[0m
+[ 15%] [32mBuilding C object CMakeFiles/lifecycle_msgs__rosidl_generator_c.dir/rosidl_generator_c/lifecycle_msgs/srv/detail/change_state__functions.c.obj[0m
+[ 17%] [32mBuilding C object CMakeFiles/lifecycle_msgs__rosidl_generator_c.dir/rosidl_generator_c/lifecycle_msgs/msg/detail/transition_event__functions.c.obj[0m
+[ 20%] [32mBuilding C object CMakeFiles/lifecycle_msgs__rosidl_generator_c.dir/rosidl_generator_c/lifecycle_msgs/srv/detail/get_state__functions.c.obj[0m
+[ 22%] [32mBuilding C object CMakeFiles/lifecycle_msgs__rosidl_generator_c.dir/rosidl_generator_c/lifecycle_msgs/srv/detail/get_available_transitions__functions.c.obj[0m
+[ 25%] [32m[1mLinking C static library liblifecycle_msgs__rosidl_generator_c.a[0m
+[ 25%] Built target lifecycle_msgs__rosidl_generator_c
+[ 27%] [34m[1mGenerating C type support for eProsima Micro XRCE-DDS[0m
+[ 30%] [34m[1mGenerating C type support dispatch for ROS interfaces[0m
+[ 32%] [34m[1mGenerating C introspection for ROS interfaces[0m
+[ 37%] [32mBuilding CXX object CMakeFiles/lifecycle_msgs__rosidl_typesupport_c.dir/rosidl_typesupport_c/lifecycle_msgs/msg/state__type_support.cpp.obj[0m
+[ 40%] [32mBuilding CXX object CMakeFiles/lifecycle_msgs__rosidl_typesupport_c.dir/rosidl_typesupport_c/lifecycle_msgs/msg/transition_event__type_support.cpp.obj[0m
+[ 45%] [32mBuilding CXX object CMakeFiles/lifecycle_msgs__rosidl_typesupport_c.dir/rosidl_typesupport_c/lifecycle_msgs/srv/change_state__type_support.cpp.obj[0m
+[ 45%] [32mBuilding CXX object CMakeFiles/lifecycle_msgs__rosidl_typesupport_c.dir/rosidl_typesupport_c/lifecycle_msgs/msg/transition_description__type_support.cpp.obj[0m
+[ 45%] [32mBuilding CXX object CMakeFiles/lifecycle_msgs__rosidl_typesupport_c.dir/rosidl_typesupport_c/lifecycle_msgs/msg/transition__type_support.cpp.obj[0m
+[ 47%] [32mBuilding CXX object CMakeFiles/lifecycle_msgs__rosidl_typesupport_c.dir/rosidl_typesupport_c/lifecycle_msgs/srv/get_state__type_support.cpp.obj[0m
+[ 50%] [32mBuilding CXX object CMakeFiles/lifecycle_msgs__rosidl_typesupport_c.dir/rosidl_typesupport_c/lifecycle_msgs/srv/get_available_states__type_support.cpp.obj[0m
+[ 52%] [32mBuilding CXX object CMakeFiles/lifecycle_msgs__rosidl_typesupport_c.dir/rosidl_typesupport_c/lifecycle_msgs/srv/get_available_transitions__type_support.cpp.obj[0m
+[ 55%] [32m[1mLinking CXX static library liblifecycle_msgs__rosidl_typesupport_c.a[0m
+[ 55%] Built target lifecycle_msgs__rosidl_typesupport_c
+[ 57%] [32mBuilding C object CMakeFiles/lifecycle_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/lifecycle_msgs/msg/detail/state__type_support.c.obj[0m
+[ 62%] [32mBuilding C object CMakeFiles/lifecycle_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/lifecycle_msgs/srv/detail/get_available_states__type_support.c.obj[0m
+[ 62%] [32mBuilding C object CMakeFiles/lifecycle_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/lifecycle_msgs/msg/detail/transition__type_support.c.obj[0m
+[ 72%] [32mBuilding C object CMakeFiles/lifecycle_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/lifecycle_msgs/msg/detail/transition_event__type_support.c.obj[0m
+[ 72%] [32mBuilding C object CMakeFiles/lifecycle_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/lifecycle_msgs/msg/detail/transition_description__type_support.c.obj[0m
+[ 72%] [32mBuilding C object CMakeFiles/lifecycle_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/lifecycle_msgs/srv/detail/get_available_transitions__type_support.c.obj[0m
+[ 72%] [32mBuilding C object CMakeFiles/lifecycle_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/lifecycle_msgs/srv/detail/get_state__type_support.c.obj[0m
+[ 75%] [32mBuilding C object CMakeFiles/lifecycle_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/lifecycle_msgs/srv/detail/change_state__type_support.c.obj[0m
+[ 77%] [32m[1mLinking C static library liblifecycle_msgs__rosidl_typesupport_introspection_c.a[0m
+[ 82%] [32mBuilding C object CMakeFiles/lifecycle_msgs__rosidl_typesupport_microxrcedds_c.dir/rosidl_typesupport_microxrcedds_c/lifecycle_msgs/msg/detail/microxrcedds/state__type_support_c.c.obj[0m
+[ 82%] [32mBuilding C object CMakeFiles/lifecycle_msgs__rosidl_typesupport_microxrcedds_c.dir/rosidl_typesupport_microxrcedds_c/lifecycle_msgs/msg/detail/microxrcedds/transition_description__type_support_c.c.obj[0m
+[ 85%] [32mBuilding C object CMakeFiles/lifecycle_msgs__rosidl_typesupport_microxrcedds_c.dir/rosidl_typesupport_microxrcedds_c/lifecycle_msgs/msg/detail/microxrcedds/transition__type_support_c.c.obj[0m
+[ 87%] [32mBuilding C object CMakeFiles/lifecycle_msgs__rosidl_typesupport_microxrcedds_c.dir/rosidl_typesupport_microxrcedds_c/lifecycle_msgs/srv/detail/microxrcedds/change_state__type_support_c.c.obj[0m
+[ 90%] [32mBuilding C object CMakeFiles/lifecycle_msgs__rosidl_typesupport_microxrcedds_c.dir/rosidl_typesupport_microxrcedds_c/lifecycle_msgs/msg/detail/microxrcedds/transition_event__type_support_c.c.obj[0m
+[ 92%] [32mBuilding C object CMakeFiles/lifecycle_msgs__rosidl_typesupport_microxrcedds_c.dir/rosidl_typesupport_microxrcedds_c/lifecycle_msgs/srv/detail/microxrcedds/get_available_states__type_support_c.c.obj[0m
+[ 95%] [32mBuilding C object CMakeFiles/lifecycle_msgs__rosidl_typesupport_microxrcedds_c.dir/rosidl_typesupport_microxrcedds_c/lifecycle_msgs/srv/detail/microxrcedds/get_available_transitions__type_support_c.c.obj[0m
+[ 97%] [32mBuilding C object CMakeFiles/lifecycle_msgs__rosidl_typesupport_microxrcedds_c.dir/rosidl_typesupport_microxrcedds_c/lifecycle_msgs/srv/detail/microxrcedds/get_state__type_support_c.c.obj[0m
+[ 97%] Built target lifecycle_msgs__rosidl_typesupport_introspection_c
+[100%] [32m[1mLinking C static library liblifecycle_msgs__rosidl_typesupport_microxrcedds_c.a[0m
+[100%] Built target lifecycle_msgs__rosidl_typesupport_microxrcedds_c
+[100%] Built target lifecycle_msgs
+-- Install configuration: "Release"
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/ament_index/resource_index/rosidl_interfaces/lifecycle_msgs
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/srv
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/srv/get_state.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/srv/get_available_states.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/srv/get_available_transitions.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/srv/detail
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/srv/detail/change_state__type_support.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/srv/detail/change_state__functions.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/srv/detail/get_state__struct.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/srv/detail/get_available_transitions__functions.c
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/srv/detail/get_available_transitions__struct.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/srv/detail/get_available_states__functions.c
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/srv/detail/get_available_states__type_support.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/srv/detail/get_available_states__struct.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/srv/detail/get_state__type_support.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/srv/detail/change_state__struct.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/srv/detail/get_available_transitions__functions.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/srv/detail/get_available_transitions__type_support.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/srv/detail/change_state__functions.c
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/srv/detail/get_state__functions.c
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/srv/detail/get_available_states__functions.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/srv/detail/get_state__functions.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/srv/change_state.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/msg
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/msg/rosidl_generator_c__visibility_control.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/msg/transition_description.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/msg/detail
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/msg/detail/transition_description__type_support.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/msg/detail/transition__functions.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/msg/detail/transition__struct.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/msg/detail/transition_description__functions.c
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/msg/detail/transition_event__struct.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/msg/detail/state__functions.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/msg/detail/transition_description__functions.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/msg/detail/transition__type_support.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/msg/detail/transition__functions.c
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/msg/detail/state__functions.c
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/msg/detail/transition_event__type_support.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/msg/detail/transition_event__functions.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/msg/detail/transition_description__struct.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/msg/detail/state__struct.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/msg/detail/transition_event__functions.c
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/msg/detail/state__type_support.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/msg/state.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/msg/transition.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/msg/transition_event.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/environment/library_path.sh
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/environment/library_path.dsv
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/liblifecycle_msgs__rosidl_generator_c.a
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/srv
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/srv/detail
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/srv/detail/change_state__type_support.c
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/srv/detail/get_available_states__rosidl_typesupport_introspection_c.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/srv/detail/get_available_transitions__type_support.c
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/srv/detail/get_state__type_support.c
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/srv/detail/get_available_states__type_support.c
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/srv/detail/get_available_transitions__rosidl_typesupport_introspection_c.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/srv/detail/change_state__rosidl_typesupport_introspection_c.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/srv/detail/get_state__rosidl_typesupport_introspection_c.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/msg
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/msg/rosidl_typesupport_introspection_c__visibility_control.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/msg/detail
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/msg/detail/transition_description__rosidl_typesupport_introspection_c.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/msg/detail/state__type_support.c
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/msg/detail/transition__rosidl_typesupport_introspection_c.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/msg/detail/transition_event__rosidl_typesupport_introspection_c.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/msg/detail/transition__type_support.c
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/msg/detail/transition_description__type_support.c
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/msg/detail/transition_event__type_support.c
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/lifecycle_msgs/msg/detail/state__rosidl_typesupport_introspection_c.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/liblifecycle_msgs__rosidl_typesupport_introspection_c.a
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/srv
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/srv/detail
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/srv/detail/get_available_states__rosidl_typesupport_microxrcedds_c.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/srv/detail/microxrcedds
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/srv/detail/get_available_transitions__rosidl_typesupport_microxrcedds_c.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/srv/detail/change_state__rosidl_typesupport_microxrcedds_c.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/srv/detail/get_state__rosidl_typesupport_microxrcedds_c.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/msg
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/msg/detail
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/msg/detail/transition_description__rosidl_typesupport_microxrcedds_c.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/msg/detail/transition__rosidl_typesupport_microxrcedds_c.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/msg/detail/microxrcedds
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/msg/detail/transition_event__rosidl_typesupport_microxrcedds_c.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/msg/detail/state__rosidl_typesupport_microxrcedds_c.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/lifecycle_msgs/msg/rosidl_typesupport_microxrcedds_c__visibility_control.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/liblifecycle_msgs__rosidl_typesupport_microxrcedds_c.a
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/liblifecycle_msgs__rosidl_typesupport_c.a
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/msg/State.idl
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/msg/Transition.idl
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/msg/TransitionDescription.idl
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/msg/TransitionEvent.idl
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/srv/ChangeState.idl
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/srv/GetAvailableStates.idl
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/srv/GetAvailableTransitions.idl
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/srv/GetState.idl
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/msg/State.msg
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/msg/Transition.msg
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/msg/TransitionDescription.msg
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/msg/TransitionEvent.msg
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/srv/ChangeState.srv
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/srv/ChangeState_Request.msg
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/srv/ChangeState_Response.msg
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/srv/GetAvailableStates.srv
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/srv/GetAvailableStates_Request.msg
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/srv/GetAvailableStates_Response.msg
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/srv/GetAvailableTransitions.srv
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/srv/GetAvailableTransitions_Request.msg
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/srv/GetAvailableTransitions_Response.msg
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/srv/GetState.srv
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/srv/GetState_Request.msg
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/srv/GetState_Response.msg
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/ament_index/resource_index/package_run_dependencies/lifecycle_msgs
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/ament_index/resource_index/parent_prefix_path/lifecycle_msgs
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/environment/ament_prefix_path.sh
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/environment/ament_prefix_path.dsv
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/environment/path.sh
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/environment/path.dsv
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/local_setup.bash
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/local_setup.sh
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/local_setup.zsh
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/local_setup.dsv
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/package.dsv
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/ament_index/resource_index/packages/lifecycle_msgs
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/cmake/export_lifecycle_msgs__rosidl_generator_cExport.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/cmake/export_lifecycle_msgs__rosidl_generator_cExport-release.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/cmake/lifecycle_msgs__rosidl_typesupport_introspection_cExport.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/cmake/lifecycle_msgs__rosidl_typesupport_introspection_cExport-release.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/cmake/lifecycle_msgs__rosidl_typesupport_cExport.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/cmake/lifecycle_msgs__rosidl_typesupport_cExport-release.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/cmake/rosidl_cmake-extras.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/cmake/ament_cmake_export_include_directories-extras.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/cmake/ament_cmake_export_libraries-extras.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/cmake/ament_cmake_export_targets-extras.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/cmake/ament_cmake_export_dependencies-extras.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/cmake/lifecycle_msgsConfig.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/cmake/lifecycle_msgsConfig-version.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/lifecycle_msgs/package.xml

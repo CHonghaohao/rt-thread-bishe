@@ -23,8 +23,22 @@
 #include <drv_uart.h>
 
 #include "mm_page.h"
+#include "rk3588.h"
+#include "hal_pinctrl.h"
+#include "hal_canfd.h"
+#include "hal_timer.h"
+#include <gtimer.h>
+
+#define  CANTRQ  375
+
+
 
 #define PLATFORM_MEM_TALBE(va, size) va, ((unsigned long)va + size - 1)
+
+
+// struct PMU1_IOC_REG *virt_PMU1_IOC_BASE;
+// struct PMU2_IOC_REG *virt_PMU2_IOC_BASE;
+// struct BUS_IOC_REG *virt_BUS_IOC_BASE;
 
 struct mem_desc platform_mem_desc[] =
 {
@@ -36,17 +50,139 @@ struct mem_desc platform_mem_desc[] =
     {PLATFORM_MEM_TALBE(UART1_MMIO_BASE,               0x90000),    UART1_MMIO_BASE,              DEVICE_MEM},
     {PLATFORM_MEM_TALBE(GIC_PL600_DISTRIBUTOR_PPTR,    0x10000),    GIC_PL600_DISTRIBUTOR_PPTR,   DEVICE_MEM},
     {PLATFORM_MEM_TALBE(GIC_PL600_REDISTRIBUTOR_PPTR,  0xc0000),    GIC_PL600_REDISTRIBUTOR_PPTR, DEVICE_MEM},
+    
+    
+    /*add pinctrl mem */
+    {PLATFORM_MEM_TALBE(PMU1_IOC_BASE,  0x4000),                    PMU1_IOC_BASE, DEVICE_MEM},
+    {PLATFORM_MEM_TALBE(PMU2_IOC_BASE,  0x4000),                    PMU2_IOC_BASE, DEVICE_MEM},
+    {PLATFORM_MEM_TALBE(BUS_IOC_BASE,  0x4000),                    BUS_IOC_BASE, DEVICE_MEM},
+    {PLATFORM_MEM_TALBE(VCCIO1_4_IOC_BASE,  0x4000),                    VCCIO1_4_IOC_BASE, DEVICE_MEM},
+    {PLATFORM_MEM_TALBE(VCCIO3_5_IOC_BASE,  0x4000),                   VCCIO3_5_IOC_BASE, DEVICE_MEM},
+    {PLATFORM_MEM_TALBE(VCCIO2_IOC_BASE,  0x4000),                    VCCIO2_IOC_BASE, DEVICE_MEM},
+    {PLATFORM_MEM_TALBE(EMMC_IOC_BASE,  0x4000),                      EMMC_IOC_BASE, DEVICE_MEM},
+    {PLATFORM_MEM_TALBE(VCCIO6_IOC_BASE,  0x4000),                    VCCIO6_IOC_BASE, DEVICE_MEM},
+    {PLATFORM_MEM_TALBE(CAN2_BASE,  0x10000),                    CAN2_BASE, DEVICE_MEM},
+    {PLATFORM_MEM_TALBE(TIMER0_BASE,  0x8000),                    TIMER5_BASE, DEVICE_MEM},
 #ifdef PKG_USING_RT_OPENAMP
     {PLATFORM_MEM_TALBE(AMP_SHARE_MEMORY_ADDRESS, AMP_SHARE_MEMORY_SIZE), AMP_SHARE_MEMORY_ADDRESS, NORMAL_MEM},
 #endif /* PKG_USING_RT_OPENAMP */
 };
 
+
 const rt_uint32_t platform_mem_desc_size = sizeof(platform_mem_desc) / sizeof(platform_mem_desc[0]);
 
 void idle_wfi(void)
 {
-    __asm__ volatile ("wfi");
+    __asm__ volatile ("wfi");      //休眠
 }
+
+
+static void can_isr(int irqno, void *param)
+{  
+    struct CANFD_MSG recvbuff;
+   if(irqno == CANTRQ )
+   {   
+       
+       
+       rt_kprintf("CAN receive !!!\n");
+       HAL_CANFD_Receive((struct CAN_REG *)param,&recvbuff);
+
+       rt_kprintf("buff is %*.s\n",64,recvbuff.data);
+
+       recvbuff.extId += 1;
+       recvbuff.ide = CANFD_ID_EXTENDED;
+
+       HAL_CANFD_Transmit((struct CAN_REG *)param,&recvbuff);
+
+
+       HAL_CANFD_GetInterrupt((struct CAN_REG *)param);
+   }
+}
+
+
+
+void can_init(void)
+{  
+
+   
+    /*pinctrl*/
+
+      
+    HAL_PINCTRL_SetParam(GPIO_BANK3,GPIO_PIN_C5,PIN_CONFIG_MUX_FUNC9 | PIN_CONFIG_PUL_NORMAL |PIN_CONFIG_DRV_LEVEL2);
+    HAL_PINCTRL_SetParam(GPIO_BANK3,GPIO_PIN_C4,PIN_CONFIG_MUX_FUNC9 | PIN_CONFIG_PUL_NORMAL |PIN_CONFIG_DRV_LEVEL2);
+   
+
+
+    /*can controller init*/
+    struct CANFD_CONFIG  can2test = {
+        .canfdMode= CANFD_MODE_FD,
+        .bps = CANFD_BPS_500KBAUD,
+    };
+    
+
+    HAL_CANFD_Init(CAN2_BASE,&can2test);
+    HAL_CANFD_Start(CAN2_BASE);
+    
+    /*rt_hw_interrupt config*/
+    rt_hw_interrupt_umask(CANTRQ);  //enabled can irq
+    rt_hw_interrupt_install(CANTRQ, can_isr, (void *)CAN2_BASE, "can_uart");
+
+    struct CANFD_MSG sendbuff;
+
+    for(int i =0; i < 20; i++)
+    {   
+        sendbuff.extId = 0x123456;
+        sendbuff.ide = CANFD_ID_EXTENDED;
+        //sendbuff.fdf = CANFD_FD_FORMAT;
+
+        memcpy(sendbuff.data,"hello!",7);
+        HAL_CANFD_Transmit(CAN2_BASE,&sendbuff);
+    }
+
+}
+
+
+void rk3588_uart7_changem2(void)
+{
+    // virt_PMU1_IOC_BASE = rt_ioremap(PMU1_IOC_BASE,0x4000);
+    // virt_PMU2_IOC_BASE = rt_ioremap(PMU2_IOC_BASE,0x4000);
+    // virt_BUS_IOC_BASE = rt_ioremap(BUS_IOC_BASE,0x4000);
+
+     
+    HAL_PINCTRL_SetParam(GPIO_BANK1,GPIO_PIN_B4,PIN_CONFIG_MUX_FUNC10 | PIN_CONFIG_PUL_UP | PIN_CONFIG_DRV_LEVEL1);
+    HAL_PINCTRL_SetParam(GPIO_BANK1,GPIO_PIN_B5,PIN_CONFIG_MUX_FUNC10 | PIN_CONFIG_PUL_UP | PIN_CONFIG_DRV_LEVEL1);
+    
+
+    //uart  pullup  and  pull down
+
+    
+    //HAL_PINCTRL_SetIOMUX(GPIO_BANK4,GPIO_PIN_A3,PIN_CONFIG_MUX_FUNC10);
+    //HAL_PINCTRL_SetIOMUX(GPIO_BANK4,GPIO_PIN_A4,PIN_CONFIG_MUX_FUNC10);
+
+    // HAL_PINCTRL_SetParam(GPIO_BANK4,GPIO_PIN_A3,PIN_CONFIG_MUX_FUNC10 | 
+    // PIN_CONFIG_PUL_UP | PIN_CONFIG_DRV_LEVEL1 );
+    // HAL_PINCTRL_SetParam(GPIO_BANK4,GPIO_PIN_A4,PIN_CONFIG_MUX_FUNC10 | PIN_CONFIG_PUL_UP |PIN_CONFIG_DRV_LEVEL1);
+
+}
+
+static void rt_hw_timer_isr_brain(int vector, void *parameter)
+{   
+    rt_tick_increase();
+    HAL_TIMER_ClrInt((struct TIMER_REG *)parameter);   
+}
+
+
+void brain_timer_init(void)
+{   //338
+    HAL_TIMER_Init(TIMER5_BASE,TIMER_FREE_RUNNING);
+    HAL_TIMER_SetCount(TIMER5_BASE,24*10000);            //24M 每10ms中断一次
+
+    rt_hw_interrupt_umask(TIMER5_IRQn);
+    rt_hw_interrupt_install(TIMER5_IRQn, rt_hw_timer_isr_brain, TIMER5_BASE, "tick");
+    HAL_TIMER_Start_IT(TIMER5_BASE);
+
+}
+
 
 void rt_hw_board_init(void)
 {
@@ -54,28 +190,33 @@ void rt_hw_board_init(void)
     rt_region_t init_page_region;
 
     rt_hw_mmu_map_init(&rt_kernel_space, (void *) 0x20000000, 0xE0000000 - 1, MMUTable, 0);
-
+    
     init_page_region.start = RT_HW_PAGE_START;
     init_page_region.end = RT_HW_PAGE_END;
-    rt_page_init(init_page_region);
-
+    
+    rt_page_init(init_page_region);//light-1
+    
     rt_hw_mmu_setup(&rt_kernel_space, platform_mem_desc, platform_mem_desc_size);
-
+    
 #ifdef RT_USING_HEAP
     /* initialize memory system */
     rt_system_heap_init(RT_HW_HEAP_BEGIN, RT_HW_HEAP_END);
 #endif
     /* initialize hardware interrupt */
     rt_hw_interrupt_init();
-
+    
     /* initialize uart */
+    rk3588_uart7_changem2(); 
     rt_hw_uart_init();
 
+    can_init();
+
     /* initialize timer for os tick */
-    rt_hw_gtimer_init();
+    //rt_hw_gtimer_init();  
+    brain_timer_init();
 
     rt_thread_idle_sethook(idle_wfi);
-
+    
 #if defined(RT_USING_CONSOLE) && defined(RT_USING_DEVICE)
     /* set console device */
     rt_console_set_device(RT_CONSOLE_DEVICE_NAME);

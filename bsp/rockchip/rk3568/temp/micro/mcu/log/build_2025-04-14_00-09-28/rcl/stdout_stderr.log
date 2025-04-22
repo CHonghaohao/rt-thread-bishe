@@ -1,0 +1,351 @@
+[  3%] Built target ament_generate_version_header__rcl
+[ 16%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/client.c.obj[0m
+[ 16%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/context.c.obj[0m
+[ 16%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/common.c.obj[0m
+[ 16%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/domain_id.c.obj[0m
+[ 23%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/event.c.obj[0m
+[ 23%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/expand_topic_name.c.obj[0m
+[ 26%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/graph.c.obj[0m
+[ 30%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/guard_condition.c.obj[0m
+[ 33%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/init.c.obj[0m
+[ 36%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/init_options.c.obj[0m
+[ 40%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/lexer_lookahead.c.obj[0m
+[ 43%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/lexer.c.obj[0m
+[ 46%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/localhost.c.obj[0m
+[ 50%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/network_flow_endpoints.c.obj[0m
+[ 53%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/node.c.obj[0m
+[ 56%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/publisher.c.obj[0m
+[ 60%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/node_options.c.obj[0m
+[ 63%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/node_resolve_name.c.obj[0m
+[ 66%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/rmw_implementation_identifier_check.c.obj[0m
+[ 70%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/security.c.obj[0m
+[ 73%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/remap.c.obj[0m
+[ 76%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/service.c.obj[0m
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/graph.c:[m[K In function '[01m[K__validate_node_name_and_namespace[m[K':
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/graph.c:56:18:[m[K [01;35m[Kwarning: [m[Kunused variable '[01m[Kmsg[m[K' [[01;35m[K-Wunused-variable[m[K]
+   56 |     const char * [01;35m[Kmsg[m[K = rmw_namespace_validation_result_string(validation_result);
+      |                  [01;35m[K^~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/graph.c:68:18:[m[K [01;35m[Kwarning: [m[Kunused variable '[01m[Kmsg[m[K' [[01;35m[K-Wunused-variable[m[K]
+   68 |     const char * [01;35m[Kmsg[m[K = rmw_node_name_validation_result_string(validation_result);
+      |                  [01;35m[K^~~[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:34[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:[m[K In function '[01m[Krcl_init[m[K':
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:57:37:[m[K [01;35m[Kwarning: [m[Kpointer targets in passing argument 1 of '[01m[Ksprintf[m[K' differ in signedness [[01;35m[K-Wpointer-sign[m[K]
+   57 |                             sprintf([01;35m[Kbuffer[m[K,"cfile is %s,func is %s,line is %d",__FILE__,__func__,__LINE__);\
+      |                                     [01;35m[K^~~~~~[m[K
+      |                                     [01;35m[K|[m[K
+      |                                     [01;35m[Kuint8_t * {aka unsigned char *}[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:97:3:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+   97 |   [01;36m[Kbrain_debug[m[K(NULL);
+      |   [01;36m[K^~~~~~~~~~~[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/logging.h:22[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/types.h:28[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/types.h:20[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/init_options.h:29[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/context.h:31[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/init.h:26[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:20[m[K:
+[01m[K/home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/aarch64-none-elf/include/stdio.h:244:14:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar * restrict[m[K' but argument is of type '[01m[Kuint8_t *[m[K' {aka '[01m[Kunsigned char *[m[K'}
+  244 | int sprintf ([01;36m[Kc[m[Khar *__restrict, const char *__restrict, ...)
+      |              [01;36m[K^[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:34[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:59:27:[m[K [01;31m[Kerror: [m[Kstray '[01m[K\[m[K' in program
+   59 |                           [01;31m[K\[m[K}while(0U)
+      |                           [01;31m[K^[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:97:3:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+   97 |   [01;36m[Kbrain_debug[m[K(NULL);
+      |   [01;36m[K^~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:57:37:[m[K [01;35m[Kwarning: [m[Kpointer targets in passing argument 1 of '[01m[Ksprintf[m[K' differ in signedness [[01;35m[K-Wpointer-sign[m[K]
+   57 |                             sprintf([01;35m[Kbuffer[m[K,"cfile is %s,func is %s,line is %d",__FILE__,__func__,__LINE__);\
+      |                                     [01;35m[K^~~~~~[m[K
+      |                                     [01;35m[K|[m[K
+      |                                     [01;35m[Kuint8_t * {aka unsigned char *}[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:104:3:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+  104 |   [01;36m[Kbrain_debug[m[K(NULL);
+      |   [01;36m[K^~~~~~~~~~~[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/logging.h:22[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/types.h:28[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/types.h:20[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/init_options.h:29[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/context.h:31[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/init.h:26[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:20[m[K:
+[01m[K/home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/aarch64-none-elf/include/stdio.h:244:14:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar * restrict[m[K' but argument is of type '[01m[Kuint8_t *[m[K' {aka '[01m[Kunsigned char *[m[K'}
+  244 | int sprintf ([01;36m[Kc[m[Khar *__restrict, const char *__restrict, ...)
+      |              [01;36m[K^[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:34[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:59:27:[m[K [01;31m[Kerror: [m[Kstray '[01m[K\[m[K' in program
+   59 |                           [01;31m[K\[m[K}while(0U)
+      |                           [01;31m[K^[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:104:3:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+  104 |   [01;36m[Kbrain_debug[m[K(NULL);
+      |   [01;36m[K^~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:57:37:[m[K [01;35m[Kwarning: [m[Kpointer targets in passing argument 1 of '[01m[Ksprintf[m[K' differ in signedness [[01;35m[K-Wpointer-sign[m[K]
+   57 |                             sprintf([01;35m[Kbuffer[m[K,"cfile is %s,func is %s,line is %d",__FILE__,__func__,__LINE__);\
+      |                                     [01;35m[K^~~~~~[m[K
+      |                                     [01;35m[K|[m[K
+      |                                     [01;35m[Kuint8_t * {aka unsigned char *}[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:109:3:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+  109 |   [01;36m[Kbrain_debug[m[K(NULL);
+      |   [01;36m[K^~~~~~~~~~~[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/logging.h:22[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/types.h:28[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/types.h:20[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/init_options.h:29[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/context.h:31[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/init.h:26[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:20[m[K:
+[01m[K/home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/aarch64-none-elf/include/stdio.h:244:14:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar * restrict[m[K' but argument is of type '[01m[Kuint8_t *[m[K' {aka '[01m[Kunsigned char *[m[K'}
+  244 | int sprintf ([01;36m[Kc[m[Khar *__restrict, const char *__restrict, ...)
+      |              [01;36m[K^[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:34[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:59:27:[m[K [01;31m[Kerror: [m[Kstray '[01m[K\[m[K' in program
+   59 |                           [01;31m[K\[m[K}while(0U)
+      |                           [01;31m[K^[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:109:3:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+  109 |   [01;36m[Kbrain_debug[m[K(NULL);
+      |   [01;36m[K^~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:57:37:[m[K [01;35m[Kwarning: [m[Kpointer targets in passing argument 1 of '[01m[Ksprintf[m[K' differ in signedness [[01;35m[K-Wpointer-sign[m[K]
+   57 |                             sprintf([01;35m[Kbuffer[m[K,"cfile is %s,func is %s,line is %d",__FILE__,__func__,__LINE__);\
+      |                                     [01;35m[K^~~~~~[m[K
+      |                                     [01;35m[K|[m[K
+      |                                     [01;35m[Kuint8_t * {aka unsigned char *}[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:121:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+  121 |     [01;36m[Kbrain_debug[m[K(NULL);
+      |     [01;36m[K^~~~~~~~~~~[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/logging.h:22[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/types.h:28[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/types.h:20[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/init_options.h:29[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/context.h:31[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/init.h:26[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:20[m[K:
+[01m[K/home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/aarch64-none-elf/include/stdio.h:244:14:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar * restrict[m[K' but argument is of type '[01m[Kuint8_t *[m[K' {aka '[01m[Kunsigned char *[m[K'}
+  244 | int sprintf ([01;36m[Kc[m[Khar *__restrict, const char *__restrict, ...)
+      |              [01;36m[K^[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:34[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:59:27:[m[K [01;31m[Kerror: [m[Kstray '[01m[K\[m[K' in program
+   59 |                           [01;31m[K\[m[K}while(0U)
+      |                           [01;31m[K^[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:121:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+  121 |     [01;36m[Kbrain_debug[m[K(NULL);
+      |     [01;36m[K^~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:57:37:[m[K [01;35m[Kwarning: [m[Kpointer targets in passing argument 1 of '[01m[Ksprintf[m[K' differ in signedness [[01;35m[K-Wpointer-sign[m[K]
+   57 |                             sprintf([01;35m[Kbuffer[m[K,"cfile is %s,func is %s,line is %d",__FILE__,__func__,__LINE__);\
+      |                                     [01;35m[K^~~~~~[m[K
+      |                                     [01;35m[K|[m[K
+      |                                     [01;35m[Kuint8_t * {aka unsigned char *}[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:163:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+  163 |     [01;36m[Kbrain_debug[m[K(NULL);
+      |     [01;36m[K^~~~~~~~~~~[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/logging.h:22[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/types.h:28[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/types.h:20[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/init_options.h:29[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/context.h:31[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/init.h:26[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:20[m[K:
+[01m[K/home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/aarch64-none-elf/include/stdio.h:244:14:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar * restrict[m[K' but argument is of type '[01m[Kuint8_t *[m[K' {aka '[01m[Kunsigned char *[m[K'}
+  244 | int sprintf ([01;36m[Kc[m[Khar *__restrict, const char *__restrict, ...)
+      |              [01;36m[K^[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:34[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:59:27:[m[K [01;31m[Kerror: [m[Kstray '[01m[K\[m[K' in program
+   59 |                           [01;31m[K\[m[K}while(0U)
+      |                           [01;31m[K^[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:163:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+  163 |     [01;36m[Kbrain_debug[m[K(NULL);
+      |     [01;36m[K^~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:57:37:[m[K [01;35m[Kwarning: [m[Kpointer targets in passing argument 1 of '[01m[Ksprintf[m[K' differ in signedness [[01;35m[K-Wpointer-sign[m[K]
+   57 |                             sprintf([01;35m[Kbuffer[m[K,"cfile is %s,func is %s,line is %d",__FILE__,__func__,__LINE__);\
+      |                                     [01;35m[K^~~~~~[m[K
+      |                                     [01;35m[K|[m[K
+      |                                     [01;35m[Kuint8_t * {aka unsigned char *}[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:175:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+  175 |     [01;36m[Kbrain_debug[m[K(NULL);
+      |     [01;36m[K^~~~~~~~~~~[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/logging.h:22[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/types.h:28[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/types.h:20[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/init_options.h:29[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/context.h:31[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/init.h:26[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:20[m[K:
+[01m[K/home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/aarch64-none-elf/include/stdio.h:244:14:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar * restrict[m[K' but argument is of type '[01m[Kuint8_t *[m[K' {aka '[01m[Kunsigned char *[m[K'}
+  244 | int sprintf ([01;36m[Kc[m[Khar *__restrict, const char *__restrict, ...)
+      |              [01;36m[K^[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:34[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:59:27:[m[K [01;31m[Kerror: [m[Kstray '[01m[K\[m[K' in program
+   59 |                           [01;31m[K\[m[K}while(0U)
+      |                           [01;31m[K^[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:175:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+  175 |     [01;36m[Kbrain_debug[m[K(NULL);
+      |     [01;36m[K^~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/graph.c:[m[K In function '[01m[K_rcl_wait_for_entities[m[K':
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:57:37:[m[K [01;35m[Kwarning: [m[Kpointer targets in passing argument 1 of '[01m[Ksprintf[m[K' differ in signedness [[01;35m[K-Wpointer-sign[m[K]
+   57 |                             sprintf([01;35m[Kbuffer[m[K,"cfile is %s,func is %s,line is %d",__FILE__,__func__,__LINE__);\
+      |                                     [01;35m[K^~~~~~[m[K
+      |                                     [01;35m[K|[m[K
+      |                                     [01;35m[Kuint8_t * {aka unsigned char *}[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:178:7:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+  178 |       [01;36m[Kbrain_debug[m[K(NULL);
+      |       [01;36m[K^~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/graph.c:524:28:[m[K [01;35m[Kwarning: [m[Kunused variable '[01m[Kerror[m[K' [[01;35m[K-Wunused-variable[m[K]
+  524 |     rcutils_error_string_t [01;35m[Kerror[m[K = rcutils_get_error_string();
+      |                            [01;35m[K^~~~~[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/logging.h:22[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/types.h:28[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/types.h:20[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/init_options.h:29[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/context.h:31[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/init.h:26[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:20[m[K:
+[01m[K/home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/aarch64-none-elf/include/stdio.h:244:14:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar * restrict[m[K' but argument is of type '[01m[Kuint8_t *[m[K' {aka '[01m[Kunsigned char *[m[K'}
+  244 | int sprintf ([01;36m[Kc[m[Khar *__restrict, const char *__restrict, ...)
+      |              [01;36m[K^[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:34[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:59:27:[m[K [01;31m[Kerror: [m[Kstray '[01m[K\[m[K' in program
+   59 |                           [01;31m[K\[m[K}while(0U)
+      |                           [01;31m[K^[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:178:7:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+  178 |       [01;36m[Kbrain_debug[m[K(NULL);
+      |       [01;36m[K^~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/graph.c:558:32:[m[K [01;35m[Kwarning: [m[Kunused variable '[01m[Kerror[m[K' [[01;35m[K-Wunused-variable[m[K]
+  558 |         rcutils_error_string_t [01;35m[Kerror[m[K = rcutils_get_error_string();
+      |                                [01;35m[K^~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:57:37:[m[K [01;35m[Kwarning: [m[Kpointer targets in passing argument 1 of '[01m[Ksprintf[m[K' differ in signedness [[01;35m[K-Wpointer-sign[m[K]
+   57 |                             sprintf([01;35m[Kbuffer[m[K,"cfile is %s,func is %s,line is %d",__FILE__,__func__,__LINE__);\
+      |                                     [01;35m[K^~~~~~[m[K
+      |                                     [01;35m[K|[m[K
+      |                                     [01;35m[Kuint8_t * {aka unsigned char *}[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:233:3:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+  233 |   [01;36m[Kbrain_debug[m[K(NULL);
+      |   [01;36m[K^~~~~~~~~~~[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/logging.h:22[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/types.h:28[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/types.h:20[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/init_options.h:29[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/context.h:31[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/init.h:26[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:20[m[K:
+[01m[K/home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/aarch64-none-elf/include/stdio.h:244:14:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar * restrict[m[K' but argument is of type '[01m[Kuint8_t *[m[K' {aka '[01m[Kunsigned char *[m[K'}
+  244 | int sprintf ([01;36m[Kc[m[Khar *__restrict, const char *__restrict, ...)
+      |              [01;36m[K^[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:34[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:59:27:[m[K [01;31m[Kerror: [m[Kstray '[01m[K\[m[K' in program
+   59 |                           [01;31m[K\[m[K}while(0U)
+      |                           [01;31m[K^[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:233:3:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+  233 |   [01;36m[Kbrain_debug[m[K(NULL);
+      |   [01;36m[K^~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:57:37:[m[K [01;35m[Kwarning: [m[Kpointer targets in passing argument 1 of '[01m[Ksprintf[m[K' differ in signedness [[01;35m[K-Wpointer-sign[m[K]
+   57 |                             sprintf([01;35m[Kbuffer[m[K,"cfile is %s,func is %s,line is %d",__FILE__,__func__,__LINE__);\
+      |                                     [01;35m[K^~~~~~[m[K
+      |                                     [01;35m[K|[m[K
+      |                                     [01;35m[Kuint8_t * {aka unsigned char *}[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:238:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+  238 |     [01;36m[Kbrain_debug[m[K(NULL);
+      |     [01;36m[K^~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/graph.c:[m[K In function '[01m[K__rcl_get_info_by_topic[m[K':
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/logging.h:22[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/types.h:28[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/types.h:20[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/init_options.h:29[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/context.h:31[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/init.h:26[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:20[m[K:
+[01m[K/home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/aarch64-none-elf/include/stdio.h:244:14:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar * restrict[m[K' but argument is of type '[01m[Kuint8_t *[m[K' {aka '[01m[Kunsigned char *[m[K'}
+  244 | int sprintf ([01;36m[Kc[m[Khar *__restrict, const char *__restrict, ...)
+      |              [01;36m[K^[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/graph.c:657:22:[m[K [01;35m[Kwarning: [m[Kvariable '[01m[Kerror_string[m[K' set but not used [[01;35m[K-Wunused-but-set-variable[m[K]
+  657 |   rmw_error_string_t [01;35m[Kerror_string[m[K;
+      |                      [01;35m[K^~~~~~~~~~~~[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:34[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:59:27:[m[K [01;31m[Kerror: [m[Kstray '[01m[K\[m[K' in program
+   59 |                           [01;31m[K\[m[K}while(0U)
+      |                           [01;31m[K^[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:238:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+  238 |     [01;36m[Kbrain_debug[m[K(NULL);
+      |     [01;36m[K^~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:57:37:[m[K [01;35m[Kwarning: [m[Kpointer targets in passing argument 1 of '[01m[Ksprintf[m[K' differ in signedness [[01;35m[K-Wpointer-sign[m[K]
+   57 |                             sprintf([01;35m[Kbuffer[m[K,"cfile is %s,func is %s,line is %d",__FILE__,__func__,__LINE__);\
+      |                                     [01;35m[K^~~~~~[m[K
+      |                                     [01;35m[K|[m[K
+      |                                     [01;35m[Kuint8_t * {aka unsigned char *}[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:243:3:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+  243 |   [01;36m[Kbrain_debug[m[K(NULL);
+      |   [01;36m[K^~~~~~~~~~~[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/logging.h:22[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/types.h:28[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/types.h:20[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/init_options.h:29[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/context.h:31[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/init.h:26[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:20[m[K:
+[01m[K/home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/aarch64-none-elf/include/stdio.h:244:14:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar * restrict[m[K' but argument is of type '[01m[Kuint8_t *[m[K' {aka '[01m[Kunsigned char *[m[K'}
+  244 | int sprintf ([01;36m[Kc[m[Khar *__restrict, const char *__restrict, ...)
+      |              [01;36m[K^[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:34[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:59:27:[m[K [01;31m[Kerror: [m[Kstray '[01m[K\[m[K' in program
+   59 |                           [01;31m[K\[m[K}while(0U)
+      |                           [01;31m[K^[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:243:3:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+  243 |   [01;36m[Kbrain_debug[m[K(NULL);
+      |   [01;36m[K^~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init_options.c:[m[K In function '[01m[Krcl_init_options_copy[m[K':
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init_options.c:108:24:[m[K [01;35m[Kwarning: [m[Kunused variable '[01m[Kerror_string[m[K' [[01;35m[K-Wunused-variable[m[K]
+  108 |     rmw_error_string_t [01;35m[Kerror_string[m[K = rmw_get_error_string();
+      |                        [01;35m[K^~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/network_flow_endpoints.c:[m[K In function '[01m[K__validate_network_flow_endpoint_array[m[K':
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/network_flow_endpoints.c:43:22:[m[K [01;35m[Kwarning: [m[Kvariable '[01m[Kerror_string[m[K' set but not used [[01;35m[K-Wunused-but-set-variable[m[K]
+   43 |   rmw_error_string_t [01;35m[Kerror_string[m[K;
+      |                      [01;35m[K^~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/network_flow_endpoints.c:[m[K In function '[01m[Krcl_publisher_get_network_flow_endpoints[m[K':
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/network_flow_endpoints.c:75:22:[m[K [01;35m[Kwarning: [m[Kvariable '[01m[Kerror_string[m[K' set but not used [[01;35m[K-Wunused-but-set-variable[m[K]
+   75 |   rmw_error_string_t [01;35m[Kerror_string[m[K;
+      |                      [01;35m[K^~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/network_flow_endpoints.c:[m[K In function '[01m[Krcl_subscription_get_network_flow_endpoints[m[K':
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/network_flow_endpoints.c:106:22:[m[K [01;35m[Kwarning: [m[Kvariable '[01m[Kerror_string[m[K' set but not used [[01;35m[K-Wunused-but-set-variable[m[K]
+  106 |   rmw_error_string_t [01;35m[Kerror_string[m[K;
+      |                      [01;35m[K^~~~~~~~~~~~[m[K
+make[2]: *** [CMakeFiles/rcl.dir/build.make:191: CMakeFiles/rcl.dir/src/rcl/init.c.obj] Error 1
+make[2]: *** Waiting for unfinished jobs....
+[ 80%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/subscription.c.obj[0m
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/node_resolve_name.c:[m[K In function '[01m[Krcl_resolve_name[m[K':
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/node_resolve_name.c:49:28:[m[K [01;35m[Kwarning: [m[Kunused variable '[01m[Kerror[m[K' [[01;35m[K-Wunused-variable[m[K]
+   49 |     rcutils_error_string_t [01;35m[Kerror[m[K = rcutils_get_error_string();
+      |                            [01;35m[K^~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/node_resolve_name.c:97:18:[m[K [01;35m[Kwarning: [m[Kunused variable '[01m[Kerror[m[K' [[01;35m[K-Wunused-variable[m[K]
+   97 |     const char * [01;35m[Kerror[m[K = rmw_get_error_string().str;
+      |                  [01;35m[K^~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/node_resolve_name.c:114:28:[m[K [01;35m[Kwarning: [m[Kunused variable '[01m[Kerror[m[K' [[01;35m[K-Wunused-variable[m[K]
+  114 |     rcutils_error_string_t [01;35m[Kerror[m[K = rcutils_get_error_string();
+      |                            [01;35m[K^~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/node_resolve_name.c:33:27:[m[K [01;35m[Kwarning: [m[Kunused parameter '[01m[Klocal_args[m[K' [[01;35m[K-Wunused-parameter[m[K]
+   33 |   [01;35m[Kconst rcl_arguments_t * local_args[m[K,
+      |   [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/node_resolve_name.c:34:27:[m[K [01;35m[Kwarning: [m[Kunused parameter '[01m[Kglobal_args[m[K' [[01;35m[K-Wunused-parameter[m[K]
+   34 |   [01;35m[Kconst rcl_arguments_t * global_args[m[K,
+      |   [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/node_resolve_name.c:40:8:[m[K [01;35m[Kwarning: [m[Kunused parameter '[01m[Konly_expand[m[K' [[01;35m[K-Wunused-parameter[m[K]
+   40 |   bool [01;35m[Ko[m[Knly_expand,
+      |        [01;35m[K^[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/node.c:[m[K In function '[01m[Krcl_node_init[m[K':
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/node.c:166:18:[m[K [01;35m[Kwarning: [m[Kunused variable '[01m[Kmsg[m[K' [[01;35m[K-Wunused-variable[m[K]
+  166 |     const char * [01;35m[Kmsg[m[K = rmw_node_name_validation_result_string(validation_result);
+      |                  [01;35m[K^~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/node.c:198:18:[m[K [01;35m[Kwarning: [m[Kunused variable '[01m[Kmsg[m[K' [[01;35m[K-Wunused-variable[m[K]
+  198 |     const char * [01;35m[Kmsg[m[K = rmw_namespace_validation_result_string(validation_result);
+      |                  [01;35m[K^~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/rmw_implementation_identifier_check.c:[m[K In function '[01m[Krcl_rmw_implementation_identifier_check[m[K':
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/rmw_implementation_identifier_check.c:136:34:[m[K [01;35m[Kwarning: [m[Kunused variable '[01m[Krmw_error_msg[m[K' [[01;35m[K-Wunused-variable[m[K]
+  136 |     const rcutils_error_string_t [01;35m[Krmw_error_msg[m[K = rcl_get_error_string();
+      |                                  [01;35m[K^~~~~~~~~~~~~[m[K
+At top level:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/rmw_implementation_identifier_check.c:168:13:[m[K [01;35m[Kwarning: [m[K'[01m[Kinitialize[m[K' defined but not used [[01;35m[K-Wunused-function[m[K]
+  168 | INITIALIZER([01;35m[Kinitialize[m[K) {
+      |             [01;35m[K^~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/rmw_implementation_identifier_check.c:54:15:[m[K [01;36m[Knote: [m[Kin definition of macro '[01m[KINITIALIZER[m[K'
+   54 |   static void [01;36m[Kf[m[K(void)
+      |               [01;36m[K^[m[K
+make[1]: *** [CMakeFiles/Makefile2:156: CMakeFiles/rcl.dir/all] Error 2
+make: *** [Makefile:146: all] Error 2

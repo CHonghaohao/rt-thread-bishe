@@ -1,0 +1,8 @@
+[33mCMake Warning:
+  Manually-specified variables were not used by the project:
+
+    BUILD_TESTING
+    CMAKE_INSTALL_LIBDIR
+    THIRDPARTY
+
+[0m

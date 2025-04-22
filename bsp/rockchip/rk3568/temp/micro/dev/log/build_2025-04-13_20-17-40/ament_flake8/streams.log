@@ -1,0 +1,44 @@
+[0.477s] Invoking command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/src/ament_lint/ament_flake8': AMENT_PREFIX_PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_lint PYTHONPATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_flake8/prefix_override:/home/rsl/.local/lib/python3.8/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_flake8/lib/python3.8/site-packages:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_lint/lib/python3.8/site-packages /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/ament_flake8 build --build-base /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_flake8/build install --record /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_flake8/install.log --single-version-externally-managed install_data
+[0.581s] running egg_info
+[0.581s] creating ../../../build/ament_flake8/ament_flake8.egg-info
+[0.581s] writing ../../../build/ament_flake8/ament_flake8.egg-info/PKG-INFO
+[0.582s] writing dependency_links to ../../../build/ament_flake8/ament_flake8.egg-info/dependency_links.txt
+[0.582s] writing entry points to ../../../build/ament_flake8/ament_flake8.egg-info/entry_points.txt
+[0.582s] writing requirements to ../../../build/ament_flake8/ament_flake8.egg-info/requires.txt
+[0.582s] writing top-level names to ../../../build/ament_flake8/ament_flake8.egg-info/top_level.txt
+[0.582s] writing manifest file '../../../build/ament_flake8/ament_flake8.egg-info/SOURCES.txt'
+[0.609s] reading manifest file '../../../build/ament_flake8/ament_flake8.egg-info/SOURCES.txt'
+[0.609s] writing manifest file '../../../build/ament_flake8/ament_flake8.egg-info/SOURCES.txt'
+[0.609s] running build
+[0.609s] running build_py
+[0.610s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_flake8/build
+[0.610s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_flake8/build/lib
+[0.610s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_flake8/build/lib/ament_flake8
+[0.610s] copying ament_flake8/main.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_flake8/build/lib/ament_flake8
+[0.610s] copying ament_flake8/pytest_marker.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_flake8/build/lib/ament_flake8
+[0.610s] copying ament_flake8/__init__.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_flake8/build/lib/ament_flake8
+[0.610s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_flake8/build/lib/ament_flake8/configuration
+[0.611s] copying ament_flake8/configuration/ament_flake8.ini -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_flake8/build/lib/ament_flake8/configuration
+[0.611s] running install
+[0.611s] running install_lib
+[0.612s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_flake8/lib/python3.8/site-packages/ament_flake8
+[0.612s] copying /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_flake8/build/lib/ament_flake8/main.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_flake8/lib/python3.8/site-packages/ament_flake8
+[0.612s] copying /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_flake8/build/lib/ament_flake8/pytest_marker.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_flake8/lib/python3.8/site-packages/ament_flake8
+[0.612s] copying /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_flake8/build/lib/ament_flake8/__init__.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_flake8/lib/python3.8/site-packages/ament_flake8
+[0.613s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_flake8/lib/python3.8/site-packages/ament_flake8/configuration
+[0.615s] copying /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_flake8/build/lib/ament_flake8/configuration/ament_flake8.ini -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_flake8/lib/python3.8/site-packages/ament_flake8/configuration
+[0.618s] byte-compiling /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_flake8/lib/python3.8/site-packages/ament_flake8/main.py to main.cpython-38.pyc
+[0.618s] byte-compiling /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_flake8/lib/python3.8/site-packages/ament_flake8/pytest_marker.py to pytest_marker.cpython-38.pyc
+[0.619s] byte-compiling /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_flake8/lib/python3.8/site-packages/ament_flake8/__init__.py to __init__.cpython-38.pyc
+[0.619s] running install_data
+[0.619s] copying package.xml -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_flake8/share/ament_flake8
+[0.619s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_flake8/share/ament_index
+[0.619s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_flake8/share/ament_index/resource_index
+[0.619s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_flake8/share/ament_index/resource_index/packages
+[0.620s] copying resource/ament_flake8 -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_flake8/share/ament_index/resource_index/packages
+[0.620s] running install_egg_info
+[0.620s] Copying ../../../build/ament_flake8/ament_flake8.egg-info to /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_flake8/lib/python3.8/site-packages/ament_flake8-0.12.12-py3.8.egg-info
+[0.622s] running install_scripts
+[0.638s] Installing ament_flake8 script to /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_flake8/bin
+[0.638s] writing list of installed files to '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_flake8/install.log'
+[0.660s] Invoked command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/src/ament_lint/ament_flake8' returned '0': AMENT_PREFIX_PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_lint PYTHONPATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_flake8/prefix_override:/home/rsl/.local/lib/python3.8/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_flake8/lib/python3.8/site-packages:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_lint/lib/python3.8/site-packages /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/ament_flake8 build --build-base /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_flake8/build install --record /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_flake8/install.log --single-version-externally-managed install_data

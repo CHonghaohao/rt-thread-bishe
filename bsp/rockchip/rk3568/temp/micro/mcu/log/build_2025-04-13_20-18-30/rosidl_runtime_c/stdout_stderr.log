@@ -1,0 +1,85 @@
+[0mCMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+[0m
+-- The C compiler identification is GNU 10.3.1
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/bin/aarch64-none-elf-gcc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Found ament_cmake_ros: 0.10.0 (/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_ros/share/ament_cmake_ros/cmake)
+-- Found Python3: /usr/bin/python3 (found version "3.8.10") found components: Interpreter
+-- Found rcutils: 5.1.6 (/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcutils/cmake)
+[33mCMake Warning at /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcutils/cmake/ament_cmake_export_libraries-extras.cmake:116 (message):
+  Package 'rcutils' exports library 'dl' which couldn't be found
+Call Stack (most recent call first):
+  /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcutils/cmake/rcutilsConfig.cmake:41 (include)
+  CMakeLists.txt:15 (find_package)
+
+[0m
+-- Found rosidl_typesupport_interface: 3.1.6 (/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rosidl_typesupport_interface/cmake)
+-- Configuring done (0.3s)
+-- Generating done (0.0s)
+[33mCMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_INSTALL_LIBDIR
+    THIRDPARTY
+
+[0m
+-- Build files have been written to: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_runtime_c
+[ 14%] [32mBuilding C object CMakeFiles/rosidl_runtime_c.dir/src/message_type_support.c.obj[0m
+[ 28%] [32mBuilding C object CMakeFiles/rosidl_runtime_c.dir/src/primitives_sequence_functions.c.obj[0m
+[ 42%] [32mBuilding C object CMakeFiles/rosidl_runtime_c.dir/src/string_functions.c.obj[0m
+[ 57%] [32mBuilding C object CMakeFiles/rosidl_runtime_c.dir/src/sequence_bound.c.obj[0m
+[ 71%] [32mBuilding C object CMakeFiles/rosidl_runtime_c.dir/src/service_type_support.c.obj[0m
+[ 85%] [32mBuilding C object CMakeFiles/rosidl_runtime_c.dir/src/u16string_functions.c.obj[0m
+[100%] [32m[1mLinking C static library librosidl_runtime_c.a[0m
+[100%] Built target rosidl_runtime_c
+-- Install configuration: "Release"
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rosidl_runtime_c/environment/library_path.sh
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rosidl_runtime_c/environment/library_path.dsv
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/ament_index/resource_index/rosidl_runtime_packages/rosidl_runtime_c
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rosidl_runtime_c
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rosidl_runtime_c/rosidl_runtime_c
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rosidl_runtime_c/rosidl_runtime_c/primitives_sequence_functions.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rosidl_runtime_c/rosidl_runtime_c/string_bound.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rosidl_runtime_c/rosidl_runtime_c/message_type_support_struct.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rosidl_runtime_c/rosidl_runtime_c/u16string_functions.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rosidl_runtime_c/rosidl_runtime_c/primitives_sequence.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rosidl_runtime_c/rosidl_runtime_c/message_initialization.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rosidl_runtime_c/rosidl_runtime_c/action_type_support_struct.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rosidl_runtime_c/rosidl_runtime_c/string.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rosidl_runtime_c/rosidl_runtime_c/u16string.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rosidl_runtime_c/rosidl_runtime_c/visibility_control.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rosidl_runtime_c/rosidl_runtime_c/sequence_bound.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rosidl_runtime_c/rosidl_runtime_c/service_type_support_struct.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rosidl_runtime_c/rosidl_runtime_c/string_functions.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/librosidl_runtime_c.a
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/ament_index/resource_index/package_run_dependencies/rosidl_runtime_c
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/ament_index/resource_index/parent_prefix_path/rosidl_runtime_c
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rosidl_runtime_c/environment/ament_prefix_path.sh
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rosidl_runtime_c/environment/ament_prefix_path.dsv
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rosidl_runtime_c/environment/path.sh
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rosidl_runtime_c/environment/path.dsv
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rosidl_runtime_c/local_setup.bash
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rosidl_runtime_c/local_setup.sh
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rosidl_runtime_c/local_setup.zsh
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rosidl_runtime_c/local_setup.dsv
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rosidl_runtime_c/package.dsv
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/ament_index/resource_index/packages/rosidl_runtime_c
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rosidl_runtime_c/cmake/rosidl_runtime_cExport.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rosidl_runtime_c/cmake/rosidl_runtime_cExport-release.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rosidl_runtime_c/cmake/ament_cmake_export_dependencies-extras.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rosidl_runtime_c/cmake/ament_cmake_export_include_directories-extras.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rosidl_runtime_c/cmake/ament_cmake_export_libraries-extras.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rosidl_runtime_c/cmake/ament_cmake_export_targets-extras.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rosidl_runtime_c/cmake/rosidl_runtime_cConfig.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rosidl_runtime_c/cmake/rosidl_runtime_cConfig-version.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rosidl_runtime_c/package.xml

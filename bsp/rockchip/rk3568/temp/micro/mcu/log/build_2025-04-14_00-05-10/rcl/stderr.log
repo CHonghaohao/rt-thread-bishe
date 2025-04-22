@@ -1,0 +1,4 @@
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:[m[K In function '[01m[Krcl_init[m[K':
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:99:3:[m[K [01;35m[Kwarning: [m[Kimplicit declaration of function '[01m[Kbrain_debug[m[K' [[01;35m[K-Wimplicit-function-declaration[m[K]
+   99 |   [01;35m[Kbrain_debug[m[K(NULL);
+      |   [01;35m[K^~~~~~~~~~~[m[K

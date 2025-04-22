@@ -1,0 +1,17 @@
+[ 16%] [32mBuilding C object CMakeFiles/microcdr.dir/src/c/common.c.obj[0m
+[ 33%] [32m[1mLinking C static library libmicrocdr.a[0m
+[100%] Built target microcdr
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/micro-CDR/src/c/common.c:[m[K In function '[01m[Kucdr_align_to[m[K':
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/micro-CDR/src/c/common.c:169:26:[m[K [01;35m[Kwarning: [m[Kconversion from '[01m[Klong unsigned int[m[K' to '[01m[Kuint8_t[m[K' {aka '[01m[Kunsigned char[m[K'} may change value [[01;35m[K-Wconversion[m[K]
+  169 |     ub->last_data_size = [01;35m[K([m[Ksize_t)size;
+      |                          [01;35m[K^[m[K
+-- Install configuration: "Release"
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/libmicrocdr.a
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/ucdr
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/ucdr/visibility.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/ucdr/microcdr.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/ucdr/config.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/microcdr/cmake/microcdrTargets.cmake
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/microcdr/cmake/microcdrTargets-release.cmake
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/microcdr/cmake/microcdrConfig.cmake
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/microcdr/cmake/microcdrConfigVersion.cmake

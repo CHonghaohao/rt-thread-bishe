@@ -1,0 +1,78 @@
+[  3%] Built target ament_generate_version_header__rcl
+[  6%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/init.c.obj[0m
+[ 10%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/time.c.obj[0m
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:[m[K In function '[01m[Kbrain_debug[m[K':
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:52:12:[m[K [01;35m[Kwarning: [m[Kdereferencing '[01m[Kvoid *[m[K' pointer
+   52 |     (void) [01;35m[K*args[m[K;
+      |            [01;35m[K^~~~~[m[K
+[ 13%] [32m[1mLinking CXX static library librcl.a[0m
+[100%] Built target rcl
+-- Install configuration: "Release"
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/librcl.a
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/environment/library_path.sh
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/environment/library_path.dsv
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/version.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/ament_index/resource_index/package_run_dependencies/rcl
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/ament_index/resource_index/parent_prefix_path/rcl
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/environment/ament_prefix_path.sh
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/environment/ament_prefix_path.dsv
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/environment/path.sh
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/environment/path.dsv
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/local_setup.bash
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/local_setup.sh
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/local_setup.zsh
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/local_setup.dsv
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/package.dsv
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/ament_index/resource_index/packages/rcl
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/cmake/rclExport.cmake
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/cmake/rclExport-release.cmake
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/cmake/rcl-extras.cmake
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/cmake/ament_cmake_export_include_directories-extras.cmake
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/cmake/ament_cmake_export_libraries-extras.cmake
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/cmake/ament_cmake_export_targets-extras.cmake
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/cmake/ament_cmake_export_dependencies-extras.cmake
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/cmake/rclConfig.cmake
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/cmake/rclConfig-version.cmake
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/package.xml
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/cmake
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/cmake/get_default_rcl_logging_implementation.cmake
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/cmake/rcl_set_symbol_visibility_hidden.cmake
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/client.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/macros.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/remap.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/validate_enclave_name.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/types.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/error_handling.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/node_options.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/context.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/lexer_lookahead.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/validate_topic_name.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/network_flow_endpoints.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/logging_rosout.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/time.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/security.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/subscription.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/wait.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/expand_topic_name.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/event_callback.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/guard_condition.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/domain_id.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/timer.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/arguments.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/log_level.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/node.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/allocator.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/logging.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/service.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/init_options.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/lexer.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/visibility_control.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/rmw_implementation_identifier_check.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/init.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/event.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/localhost.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/rcl.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/graph.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/publisher.h

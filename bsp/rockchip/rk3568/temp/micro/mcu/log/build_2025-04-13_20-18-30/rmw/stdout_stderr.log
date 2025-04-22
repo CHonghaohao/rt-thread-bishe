@@ -1,0 +1,162 @@
+[0mCMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+[0m
+-- The C compiler identification is GNU 10.3.1
+-- The CXX compiler identification is GNU 10.3.1
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/bin/aarch64-none-elf-gcc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/bin/aarch64-none-elf-g++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ament_cmake_ros: 0.10.0 (/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_ros/share/ament_cmake_ros/cmake)
+-- Found Python3: /usr/bin/python3 (found version "3.8.10") found components: Interpreter
+-- Found rcutils: 5.1.6 (/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcutils/cmake)
+[33mCMake Warning at /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcutils/cmake/ament_cmake_export_libraries-extras.cmake:116 (message):
+  Package 'rcutils' exports library 'dl' which couldn't be found
+Call Stack (most recent call first):
+  /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcutils/cmake/rcutilsConfig.cmake:41 (include)
+  CMakeLists.txt:21 (find_package)
+
+[0m
+-- Found rosidl_runtime_c: 3.1.6 (/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rosidl_runtime_c/cmake)
+-- Configuring done (0.4s)
+-- Generating done (0.0s)
+[33mCMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_INSTALL_LIBDIR
+    THIRDPARTY
+
+[0m
+-- Build files have been written to: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rmw
+[  8%] [32mBuilding C object CMakeFiles/rmw.dir/src/allocators.c.obj[0m
+[  8%] [32mBuilding C object CMakeFiles/rmw.dir/src/event.c.obj[0m
+[ 13%] [32mBuilding C object CMakeFiles/rmw.dir/src/convert_rcutils_ret_to_rmw_ret.c.obj[0m
+[ 17%] [32mBuilding C object CMakeFiles/rmw.dir/src/init_options.c.obj[0m
+[ 26%] [32mBuilding C object CMakeFiles/rmw.dir/src/init.c.obj[0m
+[ 26%] [32mBuilding C object CMakeFiles/rmw.dir/src/message_sequence.c.obj[0m
+[ 30%] [32mBuilding C object CMakeFiles/rmw.dir/src/names_and_types.c.obj[0m
+[ 43%] [32mBuilding C object CMakeFiles/rmw.dir/src/publisher_options.c.obj[0m
+[ 43%] [32mBuilding C object CMakeFiles/rmw.dir/src/network_flow_endpoint_array.c.obj[0m
+[ 43%] [32mBuilding C object CMakeFiles/rmw.dir/src/network_flow_endpoint.c.obj[0m
+[ 52%] [32mBuilding C object CMakeFiles/rmw.dir/src/subscription_content_filter_options.c.obj[0m
+[ 60%] [32mBuilding C object CMakeFiles/rmw.dir/src/sanity_checks.c.obj[0m
+[ 52%] [32mBuilding C object CMakeFiles/rmw.dir/src/qos_string_conversions.c.obj[0m
+[ 65%] [32mBuilding C object CMakeFiles/rmw.dir/src/security_options.c.obj[0m
+[ 65%] [32mBuilding C object CMakeFiles/rmw.dir/src/subscription_options.c.obj[0m
+[ 69%] [32mBuilding C object CMakeFiles/rmw.dir/src/time.c.obj[0m
+[ 73%] [32mBuilding C object CMakeFiles/rmw.dir/src/topic_endpoint_info_array.c.obj[0m
+[ 78%] [32mBuilding C object CMakeFiles/rmw.dir/src/topic_endpoint_info.c.obj[0m
+[ 82%] [32mBuilding C object CMakeFiles/rmw.dir/src/types.c.obj[0m
+[ 86%] [32mBuilding C object CMakeFiles/rmw.dir/src/validate_full_topic_name.c.obj[0m
+[ 91%] [32mBuilding C object CMakeFiles/rmw.dir/src/validate_namespace.c.obj[0m
+[ 95%] [32mBuilding C object CMakeFiles/rmw.dir/src/validate_node_name.c.obj[0m
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw/rmw/src/validate_full_topic_name.c:17[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw/rmw/src/validate_full_topic_name.c:[m[K In function '[01m[Krmw_validate_full_topic_name_with_size[m[K':
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw/rmw/src/validate_full_topic_name.c:106:29:[m[K [01;35m[Kwarning: [m[Karray subscript has type '[01m[Kchar[m[K' [[01;35m[K-Wchar-subscripts[m[K]
+  106 |       if (isdigit([01;35m[Ktopic_name[i + 1][m[K) != 0) {
+      |                   [01;35m[K~~~~~~~~~~^~~~~~~[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw/rmw/src/validate_node_name.c:17[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw/rmw/src/validate_node_name.c:[m[K In function '[01m[Krmw_validate_node_name_with_size[m[K':
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw/rmw/src/validate_node_name.c:72:24:[m[K [01;35m[Kwarning: [m[Karray subscript has type '[01m[Kchar[m[K' [[01;35m[K-Wchar-subscripts[m[K]
+   72 |   if (isdigit([01;35m[Knode_name[0][m[K) != 0) {
+      |               [01;35m[K~~~~~~~~~^~~[m[K
+[100%] [32m[1mLinking C static library librmw.a[0m
+[100%] Built target rmw
+-- Install configuration: "Release"
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw/environment/library_path.sh
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw/environment/library_path.dsv
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/ament_index/resource_index/package_run_dependencies/rmw
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/ament_index/resource_index/parent_prefix_path/rmw
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw/environment/ament_prefix_path.sh
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw/environment/ament_prefix_path.dsv
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw/environment/path.sh
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw/environment/path.dsv
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw/local_setup.bash
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw/local_setup.sh
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw/local_setup.zsh
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw/local_setup.dsv
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw/package.dsv
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/ament_index/resource_index/packages/rmw
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw/cmake/rmwExport.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw/cmake/rmwExport-release.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw/cmake/rmw-extras.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw/cmake/ament_cmake_export_dependencies-extras.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw/cmake/ament_cmake_export_include_directories-extras.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw/cmake/ament_cmake_export_libraries-extras.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw/cmake/ament_cmake_export_targets-extras.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw/cmake/rmwConfig.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw/cmake/rmwConfig-version.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw/package.xml
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw/cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw/cmake/configure_rmw_library.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw/cmake/register_rmw_implementation.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw/cmake/get_rmw_typesupport.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/impl
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/impl/config.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/impl/cpp
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/impl/cpp/key_value.hpp
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/impl/cpp/macros.hpp
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/impl/cpp/demangle.hpp
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/qos_policy_kind.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/sanity_checks.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/macros.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/get_network_flow_endpoints.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/allocators.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/subscription_content_filter_options.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/publisher_options.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/network_flow_endpoint.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/types.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/validate_node_name.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/error_handling.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/convert_rcutils_ret_to_rmw_ret.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/serialized_message.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/get_topic_names_and_types.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/get_node_info_and_types.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/features.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/validate_namespace.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/events_statuses
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/events_statuses/events_statuses.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/events_statuses/offered_deadline_missed.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/events_statuses/message_lost.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/events_statuses/liveliness_lost.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/events_statuses/liveliness_changed.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/events_statuses/requested_deadline_missed.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/events_statuses/incompatible_qos.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/time.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/incompatible_qos_events_statuses.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/get_service_names_and_types.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/rmw.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/event_callback_type.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/qos_string_conversions.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/domain_id.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/network_flow_endpoint_array.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/message_sequence.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/security_options.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/topic_endpoint_info_array.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/init_options.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/visibility_control.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/init.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/event.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/topic_endpoint_info.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/localhost.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/ret_types.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/names_and_types.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/qos_profiles.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/validate_full_topic_name.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/subscription_options.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/get_topic_endpoint_info.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/librmw.a

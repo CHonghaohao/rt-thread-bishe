@@ -1,0 +1,171 @@
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/src/rclc/init.c:[m[K In function '[01m[Krclc_support_init[m[K':
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/src/rclc/init.c:44:3:[m[K [01;35m[Kwarning: [m[Kpointer targets in passing argument 1 of '[01m[Ksprintf[m[K' differ in signedness [[01;35m[K-Wpointer-sign[m[K]
+   44 |   [01;35m[Kbrain_debug[m[K(NULL);
+      |   [01;35m[K^~~~~~~~~~~[m[K
+      |   [01;35m[K|[m[K
+      |   [01;35m[Kuint8_t * {aka unsigned char *}[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/logging.h:22[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/types.h:28[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/types.h:20[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/init_options.h:29[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/context.h:31[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/include/rclc/types.h:25[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/include/rclc/init.h:26[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/src/rclc/init.c:17[m[K:
+[01m[K/home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/aarch64-none-elf/include/stdio.h:244:14:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar * restrict[m[K' but argument is of type '[01m[Kuint8_t *[m[K' {aka '[01m[Kunsigned char *[m[K'}
+  244 | int sprintf ([01;36m[Kc[m[Khar *__restrict, const char *__restrict, ...)
+      |              [01;36m[K^[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/src/rclc/init.c:44:3:[m[K [01;35m[Kwarning: [m[Kpointer targets in passing argument 1 of '[01m[Kstrlen[m[K' differ in signedness [[01;35m[K-Wpointer-sign[m[K]
+   44 |   [01;35m[Kbrain_debug[m[K(NULL);
+      |   [01;35m[K^~~~~~~~~~~[m[K
+      |   [01;35m[K|[m[K
+      |   [01;35m[Kuint8_t * {aka unsigned char *}[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/error_handling.h:34[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/logging.h:25[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/types.h:28[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/types.h:20[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/init_options.h:29[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/context.h:31[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/include/rclc/types.h:25[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/include/rclc/init.h:26[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/src/rclc/init.c:17[m[K:
+[01m[K/home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/aarch64-none-elf/include/string.h:41:17:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kconst char *[m[K' but argument is of type '[01m[Kuint8_t *[m[K' {aka '[01m[Kunsigned char *[m[K'}
+   41 | size_t  strlen ([01;36m[Kconst char *[m[K);
+      |                 [01;36m[K^~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/src/rclc/init.c:[m[K In function '[01m[Krclc_support_init_with_options[m[K':
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/src/rclc/init.c:68:3:[m[K [01;35m[Kwarning: [m[Kpointer targets in passing argument 1 of '[01m[Ksprintf[m[K' differ in signedness [[01;35m[K-Wpointer-sign[m[K]
+   68 |   [01;35m[Kbrain_debug[m[K(NULL);
+      |   [01;35m[K^~~~~~~~~~~[m[K
+      |   [01;35m[K|[m[K
+      |   [01;35m[Kuint8_t * {aka unsigned char *}[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/logging.h:22[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/types.h:28[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/types.h:20[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/init_options.h:29[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/context.h:31[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/include/rclc/types.h:25[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/include/rclc/init.h:26[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/src/rclc/init.c:17[m[K:
+[01m[K/home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/aarch64-none-elf/include/stdio.h:244:14:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar * restrict[m[K' but argument is of type '[01m[Kuint8_t *[m[K' {aka '[01m[Kunsigned char *[m[K'}
+  244 | int sprintf ([01;36m[Kc[m[Khar *__restrict, const char *__restrict, ...)
+      |              [01;36m[K^[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/src/rclc/init.c:68:3:[m[K [01;35m[Kwarning: [m[Kpointer targets in passing argument 1 of '[01m[Kstrlen[m[K' differ in signedness [[01;35m[K-Wpointer-sign[m[K]
+   68 |   [01;35m[Kbrain_debug[m[K(NULL);
+      |   [01;35m[K^~~~~~~~~~~[m[K
+      |   [01;35m[K|[m[K
+      |   [01;35m[Kuint8_t * {aka unsigned char *}[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/error_handling.h:34[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/logging.h:25[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/types.h:28[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/types.h:20[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/init_options.h:29[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/context.h:31[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/include/rclc/types.h:25[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/include/rclc/init.h:26[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/src/rclc/init.c:17[m[K:
+[01m[K/home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/aarch64-none-elf/include/string.h:41:17:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kconst char *[m[K' but argument is of type '[01m[Kuint8_t *[m[K' {aka '[01m[Kunsigned char *[m[K'}
+   41 | size_t  strlen ([01;36m[Kconst char *[m[K);
+      |                 [01;36m[K^~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/src/rclc/init.c:70:3:[m[K [01;35m[Kwarning: [m[Kpointer targets in passing argument 1 of '[01m[Ksprintf[m[K' differ in signedness [[01;35m[K-Wpointer-sign[m[K]
+   70 |   [01;35m[Kbrain_debug[m[K(NULL);
+      |   [01;35m[K^~~~~~~~~~~[m[K
+      |   [01;35m[K|[m[K
+      |   [01;35m[Kuint8_t * {aka unsigned char *}[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/logging.h:22[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/types.h:28[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/types.h:20[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/init_options.h:29[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/context.h:31[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/include/rclc/types.h:25[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/include/rclc/init.h:26[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/src/rclc/init.c:17[m[K:
+[01m[K/home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/aarch64-none-elf/include/stdio.h:244:14:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar * restrict[m[K' but argument is of type '[01m[Kuint8_t *[m[K' {aka '[01m[Kunsigned char *[m[K'}
+  244 | int sprintf ([01;36m[Kc[m[Khar *__restrict, const char *__restrict, ...)
+      |              [01;36m[K^[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/src/rclc/init.c:70:3:[m[K [01;35m[Kwarning: [m[Kpointer targets in passing argument 1 of '[01m[Kstrlen[m[K' differ in signedness [[01;35m[K-Wpointer-sign[m[K]
+   70 |   [01;35m[Kbrain_debug[m[K(NULL);
+      |   [01;35m[K^~~~~~~~~~~[m[K
+      |   [01;35m[K|[m[K
+      |   [01;35m[Kuint8_t * {aka unsigned char *}[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/error_handling.h:34[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/logging.h:25[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/types.h:28[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/types.h:20[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/init_options.h:29[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/context.h:31[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/include/rclc/types.h:25[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/include/rclc/init.h:26[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/src/rclc/init.c:17[m[K:
+[01m[K/home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/aarch64-none-elf/include/string.h:41:17:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kconst char *[m[K' but argument is of type '[01m[Kuint8_t *[m[K' {aka '[01m[Kunsigned char *[m[K'}
+   41 | size_t  strlen ([01;36m[Kconst char *[m[K);
+      |                 [01;36m[K^~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/src/rclc/init.c:76:3:[m[K [01;35m[Kwarning: [m[Kpointer targets in passing argument 1 of '[01m[Ksprintf[m[K' differ in signedness [[01;35m[K-Wpointer-sign[m[K]
+   76 |   [01;35m[Kbrain_debug[m[K(NULL);
+      |   [01;35m[K^~~~~~~~~~~[m[K
+      |   [01;35m[K|[m[K
+      |   [01;35m[Kuint8_t * {aka unsigned char *}[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/logging.h:22[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/types.h:28[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/types.h:20[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/init_options.h:29[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/context.h:31[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/include/rclc/types.h:25[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/include/rclc/init.h:26[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/src/rclc/init.c:17[m[K:
+[01m[K/home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/aarch64-none-elf/include/stdio.h:244:14:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar * restrict[m[K' but argument is of type '[01m[Kuint8_t *[m[K' {aka '[01m[Kunsigned char *[m[K'}
+  244 | int sprintf ([01;36m[Kc[m[Khar *__restrict, const char *__restrict, ...)
+      |              [01;36m[K^[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/src/rclc/init.c:76:3:[m[K [01;35m[Kwarning: [m[Kpointer targets in passing argument 1 of '[01m[Kstrlen[m[K' differ in signedness [[01;35m[K-Wpointer-sign[m[K]
+   76 |   [01;35m[Kbrain_debug[m[K(NULL);
+      |   [01;35m[K^~~~~~~~~~~[m[K
+      |   [01;35m[K|[m[K
+      |   [01;35m[Kuint8_t * {aka unsigned char *}[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/error_handling.h:34[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/logging.h:25[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/types.h:28[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/types.h:20[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/init_options.h:29[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/context.h:31[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/include/rclc/types.h:25[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/include/rclc/init.h:26[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/src/rclc/init.c:17[m[K:
+[01m[K/home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/aarch64-none-elf/include/string.h:41:17:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kconst char *[m[K' but argument is of type '[01m[Kuint8_t *[m[K' {aka '[01m[Kunsigned char *[m[K'}
+   41 | size_t  strlen ([01;36m[Kconst char *[m[K);
+      |                 [01;36m[K^~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/src/rclc/init.c:78:3:[m[K [01;35m[Kwarning: [m[Kpointer targets in passing argument 1 of '[01m[Ksprintf[m[K' differ in signedness [[01;35m[K-Wpointer-sign[m[K]
+   78 |   [01;35m[Kbrain_debug[m[K(NULL);
+      |   [01;35m[K^~~~~~~~~~~[m[K
+      |   [01;35m[K|[m[K
+      |   [01;35m[Kuint8_t * {aka unsigned char *}[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/logging.h:22[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/types.h:28[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/types.h:20[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/init_options.h:29[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/context.h:31[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/include/rclc/types.h:25[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/include/rclc/init.h:26[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/src/rclc/init.c:17[m[K:
+[01m[K/home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/aarch64-none-elf/include/stdio.h:244:14:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar * restrict[m[K' but argument is of type '[01m[Kuint8_t *[m[K' {aka '[01m[Kunsigned char *[m[K'}
+  244 | int sprintf ([01;36m[Kc[m[Khar *__restrict, const char *__restrict, ...)
+      |              [01;36m[K^[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/src/rclc/init.c:78:3:[m[K [01;35m[Kwarning: [m[Kpointer targets in passing argument 1 of '[01m[Kstrlen[m[K' differ in signedness [[01;35m[K-Wpointer-sign[m[K]
+   78 |   [01;35m[Kbrain_debug[m[K(NULL);
+      |   [01;35m[K^~~~~~~~~~~[m[K
+      |   [01;35m[K|[m[K
+      |   [01;35m[Kuint8_t * {aka unsigned char *}[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/error_handling.h:34[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/logging.h:25[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw/rmw/types.h:28[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/types.h:20[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/init_options.h:29[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/context.h:31[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/include/rclc/types.h:25[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/include/rclc/init.h:26[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/src/rclc/init.c:17[m[K:
+[01m[K/home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/aarch64-none-elf/include/string.h:41:17:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kconst char *[m[K' but argument is of type '[01m[Kuint8_t *[m[K' {aka '[01m[Kunsigned char *[m[K'}
+   41 | size_t  strlen ([01;36m[Kconst char *[m[K);
+      |                 [01;36m[K^~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/src/rclc/executor_handle.c:[m[K In function '[01m[Krclc_executor_handle_print[m[K':
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc/src/rclc/executor_handle.c:84:10:[m[K [01;35m[Kwarning: [m[Kvariable '[01m[KtypeName[m[K' set but not used [[01;35m[K-Wunused-but-set-variable[m[K]
+   84 |   char * [01;35m[KtypeName[m[K;
+      |          [01;35m[K^~~~~~~~[m[K

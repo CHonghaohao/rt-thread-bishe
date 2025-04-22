@@ -1,0 +1,230 @@
+[0.123s] Invoking command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rcl': AMENT_PREFIX_PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_ros:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_auto:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_gmock:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/gmock_vendor:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_gtest:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/gtest_vendor:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_lint_common:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_xmllint:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_uncrustify:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_pyflakes:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_pycodestyle:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_pep257:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_pclint:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_lint_auto:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_version:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_vendor_package:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_pytest:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_nose:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_mypy:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_lint_cmake:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_google_benchmark:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_flake8:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_copyright:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_clang_tidy:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_clang_format:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_test:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_target_dependencies:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_python:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_export_dependencies:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_libraries:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_include_directories:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_gen_version_h:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_export_targets:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_export_link_flags:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_export_interfaces:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_export_libraries:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_export_include_directories:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_export_definitions:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_core:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/domain_coordinator:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_xmllint:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_uncrustify:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pyflakes:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pycodestyle:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pep257:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pclint:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_package:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_mypy:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_lint_cmake:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_flake8:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_copyright:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_lint:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_index_python:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_clang_tidy:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_clang_format LD_LIBRARY_PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/bin:${PATH} PYTHONPATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/cmake --build /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rcl -- -j24 -l24
+[0.177s] [  3%] Built target ament_generate_version_header__rcl
+[0.351s] [  6%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/client.c.obj[0m
+[0.351s] [ 10%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/domain_id.c.obj[0m
+[0.351s] [ 13%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/common.c.obj[0m
+[0.351s] [ 16%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/context.c.obj[0m
+[0.351s] [ 20%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/expand_topic_name.c.obj[0m
+[0.351s] [ 23%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/event.c.obj[0m
+[0.351s] [ 26%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/graph.c.obj[0m
+[0.351s] [ 30%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/guard_condition.c.obj[0m
+[0.351s] [ 33%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/init_options.c.obj[0m
+[0.352s] [ 36%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/init.c.obj[0m
+[0.352s] [ 46%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/lexer.c.obj[0m
+[0.352s] [ 46%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/lexer_lookahead.c.obj[0m
+[0.352s] [ 46%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/network_flow_endpoints.c.obj[0m
+[0.352s] [ 50%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/localhost.c.obj[0m
+[0.352s] [ 53%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/node.c.obj[0m
+[0.352s] [ 56%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/node_options.c.obj[0m
+[0.352s] [ 60%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/publisher.c.obj[0m
+[0.352s] [ 63%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/remap.c.obj[0m
+[0.352s] [ 66%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/node_resolve_name.c.obj[0m
+[0.353s] [ 70%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/rmw_implementation_identifier_check.c.obj[0m
+[0.353s] [ 73%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/security.c.obj[0m
+[0.353s] [ 76%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/subscription.c.obj[0m
+[0.353s] [ 80%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/service.c.obj[0m
+[0.353s] [ 83%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/time.c.obj[0m
+[0.353s] In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/lexer_lookahead.c:15[m[K:
+[0.353s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:51:8:[m[K [01;31m[Kerror: [m[Kunknown type name '[01m[Krmw_uxrce_transport_params_t[m[K'
+[0.353s]    51 | extern [01;31m[Krmw_uxrce_transport_params_t[m[K rmw_uxrce_transport_default_params;
+[0.354s]       |        [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[0.354s] In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/graph.c:22[m[K:
+[0.354s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:51:8:[m[K [01;31m[Kerror: [m[Kunknown type name '[01m[Krmw_uxrce_transport_params_t[m[K'
+[0.354s]    51 | extern [01;31m[Krmw_uxrce_transport_params_t[m[K rmw_uxrce_transport_default_params;
+[0.354s]       |        [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[0.354s] In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/lexer.c:15[m[K:
+[0.354s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:51:8:[m[K [01;31m[Kerror: [m[Kunknown type name '[01m[Krmw_uxrce_transport_params_t[m[K'
+[0.354s]    51 | extern [01;31m[Krmw_uxrce_transport_params_t[m[K rmw_uxrce_transport_default_params;
+[0.354s]       |        [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[0.354s] In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init_options.c:25[m[K:
+[0.355s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:51:8:[m[K [01;31m[Kerror: [m[Kunknown type name '[01m[Krmw_uxrce_transport_params_t[m[K'
+[0.355s]    51 | extern [01;31m[Krmw_uxrce_transport_params_t[m[K rmw_uxrce_transport_default_params;
+[0.355s]       |        [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[0.355s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init_options.c:[m[K In function '[01m[Krcl_init_options_copy[m[K':
+[0.355s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init_options.c:108:24:[m[K [01;35m[Kwarning: [m[Kunused variable '[01m[Kerror_string[m[K' [[01;35m[K-Wunused-variable[m[K]
+[0.355s]   108 |     rmw_error_string_t [01;35m[Kerror_string[m[K = rmw_get_error_string();
+[0.355s]       |                        [01;35m[K^~~~~~~~~~~~[m[K
+[0.356s] In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/./context_impl.h:19[m[K,
+[0.356s]                  from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/context.c:25[m[K:
+[0.356s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:51:8:[m[K [01;31m[Kerror: [m[Kunknown type name '[01m[Krmw_uxrce_transport_params_t[m[K'
+[0.356s]    51 | extern [01;31m[Krmw_uxrce_transport_params_t[m[K rmw_uxrce_transport_default_params;
+[0.356s]       |        [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[0.356s] In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/common.c:25[m[K:
+[0.356s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:51:8:[m[K [01;31m[Kerror: [m[Kunknown type name '[01m[Krmw_uxrce_transport_params_t[m[K'
+[0.356s]    51 | extern [01;31m[Krmw_uxrce_transport_params_t[m[K rmw_uxrce_transport_default_params;
+[0.357s]       |        [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[0.357s] In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/node_resolve_name.c:24[m[K:
+[0.357s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:51:8:[m[K [01;31m[Kerror: [m[Kunknown type name '[01m[Krmw_uxrce_transport_params_t[m[K'
+[0.357s]    51 | extern [01;31m[Krmw_uxrce_transport_params_t[m[K rmw_uxrce_transport_default_params;
+[0.357s]       |        [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[0.358s] In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:34[m[K:
+[0.358s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:51:8:[m[K [01;31m[Kerror: [m[Kunknown type name '[01m[Krmw_uxrce_transport_params_t[m[K'
+[0.358s]    51 | extern [01;31m[Krmw_uxrce_transport_params_t[m[K rmw_uxrce_transport_default_params;
+[0.358s]       |        [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[0.358s] In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/guard_condition.c:22[m[K:
+[0.358s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:51:8:[m[K [01;31m[Kerror: [m[Kunknown type name '[01m[Krmw_uxrce_transport_params_t[m[K'
+[0.358s]    51 | extern [01;31m[Krmw_uxrce_transport_params_t[m[K rmw_uxrce_transport_default_params;
+[0.358s]       |        [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[0.358s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/graph.c:[m[K In function '[01m[K__validate_node_name_and_namespace[m[K':
+[0.359s] In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/localhost.c:22[m[K:
+[0.359s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:51:8:[m[K [01;31m[Kerror: [m[Kunknown type name '[01m[Krmw_uxrce_transport_params_t[m[K'
+[0.359s]    51 | extern [01;31m[Krmw_uxrce_transport_params_t[m[K rmw_uxrce_transport_default_params;
+[0.359s]       |        [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[0.359s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/graph.c:56:18:[m[K [01;35m[Kwarning: [m[Kunused variable '[01m[Kmsg[m[K' [[01;35m[K-Wunused-variable[m[K]
+[0.359s]    56 |     const char * [01;35m[Kmsg[m[K = rmw_namespace_validation_result_string(validation_result);
+[0.360s]       |                  [01;35m[K^~~[m[K
+[0.360s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/graph.c:68:18:[m[K [01;35m[Kwarning: [m[Kunused variable '[01m[Kmsg[m[K' [[01;35m[K-Wunused-variable[m[K]
+[0.360s]    68 |     const char * [01;35m[Kmsg[m[K = rmw_node_name_validation_result_string(validation_result);
+[0.360s]       |                  [01;35m[K^~~[m[K
+[0.360s] In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/node_options.c:28[m[K:
+[0.360s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:51:8:[m[K [01;31m[Kerror: [m[Kunknown type name '[01m[Krmw_uxrce_transport_params_t[m[K'
+[0.360s]    51 | extern [01;31m[Krmw_uxrce_transport_params_t[m[K rmw_uxrce_transport_default_params;
+[0.360s]       |        [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[0.361s] In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/network_flow_endpoints.c:20[m[K:
+[0.361s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:51:8:[m[K [01;31m[Kerror: [m[Kunknown type name '[01m[Krmw_uxrce_transport_params_t[m[K'
+[0.361s]    51 | extern [01;31m[Krmw_uxrce_transport_params_t[m[K rmw_uxrce_transport_default_params;
+[0.361s]       |        [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[0.361s] In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/remap.c:19[m[K:
+[0.361s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:51:8:[m[K [01;31m[Kerror: [m[Kunknown type name '[01m[Krmw_uxrce_transport_params_t[m[K'
+[0.361s]    51 | extern [01;31m[Krmw_uxrce_transport_params_t[m[K rmw_uxrce_transport_default_params;
+[0.361s]       |        [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[0.362s] In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/event.c:24[m[K:
+[0.362s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:51:8:[m[K [01;31m[Kerror: [m[Kunknown type name '[01m[Krmw_uxrce_transport_params_t[m[K'
+[0.362s]    51 | extern [01;31m[Krmw_uxrce_transport_params_t[m[K rmw_uxrce_transport_default_params;
+[0.362s]       |        [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[0.362s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/graph.c:[m[K In function '[01m[K_rcl_wait_for_entities[m[K':
+[0.362s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:[m[K In function '[01m[Krcl_init[m[K':
+[0.362s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:95:3:[m[K [01;35m[Kwarning: [m[Kimplicit declaration of function '[01m[Kbrain_debug[m[K' [[01;35m[K-Wimplicit-function-declaration[m[K]
+[0.362s]    95 |   [01;35m[Kbrain_debug[m[K(NULL);
+[0.362s]       |   [01;35m[K^~~~~~~~~~~[m[K
+[0.362s] In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/client.c:25[m[K:
+[0.363s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:51:8:[m[K [01;31m[Kerror: [m[Kunknown type name '[01m[Krmw_uxrce_transport_params_t[m[K'
+[0.363s]    51 | extern [01;31m[Krmw_uxrce_transport_params_t[m[K rmw_uxrce_transport_default_params;
+[0.363s]       |        [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[0.363s] In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/rmw_implementation_identifier_check.c:25[m[K:
+[0.363s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:51:8:[m[K [01;31m[Kerror: [m[Kunknown type name '[01m[Krmw_uxrce_transport_params_t[m[K'
+[0.363s]    51 | extern [01;31m[Krmw_uxrce_transport_params_t[m[K rmw_uxrce_transport_default_params;
+[0.363s]       |        [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[0.364s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/node_resolve_name.c:[m[K In function '[01m[Krcl_resolve_name[m[K':
+[0.364s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/node_resolve_name.c:49:28:[m[K [01;35m[Kwarning: [m[Kunused variable '[01m[Kerror[m[K' [[01;35m[K-Wunused-variable[m[K]
+[0.365s]    49 |     rcutils_error_string_t [01;35m[Kerror[m[K = rcutils_get_error_string();
+[0.365s]       |                            [01;35m[K^~~~~[m[K
+[0.365s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/rmw_implementation_identifier_check.c:[m[K In function '[01m[Krcl_rmw_implementation_identifier_check[m[K':
+[0.365s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/rmw_implementation_identifier_check.c:136:34:[m[K [01;35m[Kwarning: [m[Kunused variable '[01m[Krmw_error_msg[m[K' [[01;35m[K-Wunused-variable[m[K]
+[0.365s]   136 |     const rcutils_error_string_t [01;35m[Krmw_error_msg[m[K = rcl_get_error_string();
+[0.365s]       |                                  [01;35m[K^~~~~~~~~~~~~[m[K
+[0.365s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/graph.c:524:28:[m[K [01;35m[Kwarning: [m[Kunused variable '[01m[Kerror[m[K' [[01;35m[K-Wunused-variable[m[K]
+[0.365s]   524 |     rcutils_error_string_t [01;35m[Kerror[m[K = rcutils_get_error_string();
+[0.365s]       |                            [01;35m[K^~~~~[m[K
+[0.366s] At top level:
+[0.366s] In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/publisher.c:26[m[K:
+[0.366s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:51:8:[m[K [01;31m[Kerror: [m[Kunknown type name '[01m[Krmw_uxrce_transport_params_t[m[K'
+[0.366s]    51 | extern [01;31m[Krmw_uxrce_transport_params_t[m[K rmw_uxrce_transport_default_params;
+[0.366s]       |        [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[0.366s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/rmw_implementation_identifier_check.c:168:13:[m[K [01;35m[Kwarning: [m[K'[01m[Kinitialize[m[K' defined but not used [[01;35m[K-Wunused-function[m[K]
+[0.367s]   168 | INITIALIZER([01;35m[Kinitialize[m[K) {
+[0.367s]       |             [01;35m[K^~~~~~~~~~[m[K
+[0.367s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/rmw_implementation_identifier_check.c:54:15:[m[K [01;36m[Knote: [m[Kin definition of macro '[01m[KINITIALIZER[m[K'
+[0.367s]    54 |   static void [01;36m[Kf[m[K(void)
+[0.367s]       |               [01;36m[K^[m[K
+[0.368s] make[2]: *** [CMakeFiles/rcl.dir/build.make:219: CMakeFiles/rcl.dir/src/rcl/lexer.c.obj] Error 1
+[0.368s] make[2]: *** Waiting for unfinished jobs....
+[0.368s] make[2]: *** [CMakeFiles/rcl.dir/build.make:93: CMakeFiles/rcl.dir/src/rcl/common.c.obj] Error 1
+[0.368s] make[2]: *** [CMakeFiles/rcl.dir/build.make:205: CMakeFiles/rcl.dir/src/rcl/init_options.c.obj] Error 1
+[0.368s] make[2]: *** [CMakeFiles/rcl.dir/build.make:233: CMakeFiles/rcl.dir/src/rcl/lexer_lookahead.c.obj] Error 1
+[0.368s] make[2]: *** [CMakeFiles/rcl.dir/build.make:247: CMakeFiles/rcl.dir/src/rcl/localhost.c.obj] Error 1
+[0.368s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/graph.c:558:32:[m[K [01;35m[Kwarning: [m[Kunused variable '[01m[Kerror[m[K' [[01;35m[K-Wunused-variable[m[K]
+[0.368s]   558 |         rcutils_error_string_t [01;35m[Kerror[m[K = rcutils_get_error_string();
+[0.369s]       |                                [01;35m[K^~~~~[m[K
+[0.369s] make[2]: *** [CMakeFiles/rcl.dir/build.make:317: CMakeFiles/rcl.dir/src/rcl/remap.c.obj] Error 1
+[0.369s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/node_resolve_name.c:97:18:[m[K [01;35m[Kwarning: [m[Kunused variable '[01m[Kerror[m[K' [[01;35m[K-Wunused-variable[m[K]
+[0.369s]    97 |     const char * [01;35m[Kerror[m[K = rmw_get_error_string().str;
+[0.369s]       |                  [01;35m[K^~~~~[m[K
+[0.369s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/graph.c:[m[K In function '[01m[K__rcl_get_info_by_topic[m[K':
+[0.369s] make[2]: *** [CMakeFiles/rcl.dir/build.make:107: CMakeFiles/rcl.dir/src/rcl/context.c.obj] Error 1
+[0.369s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/graph.c:657:22:[m[K [01;35m[Kwarning: [m[Kvariable '[01m[Kerror_string[m[K' set but not used [[01;35m[K-Wunused-but-set-variable[m[K]
+[0.369s]   657 |   rmw_error_string_t [01;35m[Kerror_string[m[K;
+[0.369s]       |                      [01;35m[K^~~~~~~~~~~~[m[K
+[0.369s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/node_resolve_name.c:114:28:[m[K [01;35m[Kwarning: [m[Kunused variable '[01m[Kerror[m[K' [[01;35m[K-Wunused-variable[m[K]
+[0.370s]   114 |     rcutils_error_string_t [01;35m[Kerror[m[K = rcutils_get_error_string();
+[0.370s]       |                            [01;35m[K^~~~~[m[K
+[0.370s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/node_resolve_name.c:33:27:[m[K [01;35m[Kwarning: [m[Kunused parameter '[01m[Klocal_args[m[K' [[01;35m[K-Wunused-parameter[m[K]
+[0.370s]    33 |   [01;35m[Kconst rcl_arguments_t * local_args[m[K,
+[0.370s]       |   [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~[m[K
+[0.370s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/node_resolve_name.c:34:27:[m[K [01;35m[Kwarning: [m[Kunused parameter '[01m[Kglobal_args[m[K' [[01;35m[K-Wunused-parameter[m[K]
+[0.370s]    34 |   [01;35m[Kconst rcl_arguments_t * global_args[m[K,
+[0.370s]       |   [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~[m[K
+[0.371s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/node_resolve_name.c:40:8:[m[K [01;35m[Kwarning: [m[Kunused parameter '[01m[Konly_expand[m[K' [[01;35m[K-Wunused-parameter[m[K]
+[0.371s]    40 |   bool [01;35m[Ko[m[Knly_expand,
+[0.371s]       |        [01;35m[K^[m[K
+[0.371s] make[2]: *** [CMakeFiles/rcl.dir/build.make:289: CMakeFiles/rcl.dir/src/rcl/node_options.c.obj] Error 1
+[0.371s] In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/expand_topic_name.c:26[m[K:
+[0.371s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:51:8:[m[K [01;31m[Kerror: [m[Kunknown type name '[01m[Krmw_uxrce_transport_params_t[m[K'
+[0.371s]    51 | extern [01;31m[Krmw_uxrce_transport_params_t[m[K rmw_uxrce_transport_default_params;
+[0.371s]       |        [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[0.371s] make[2]: *** [CMakeFiles/rcl.dir/build.make:191: CMakeFiles/rcl.dir/src/rcl/init.c.obj] Error 1
+[0.374s] make[2]: *** [CMakeFiles/rcl.dir/build.make:345: CMakeFiles/rcl.dir/src/rcl/rmw_implementation_identifier_check.c.obj] Error 1
+[0.374s] make[2]: *** [CMakeFiles/rcl.dir/build.make:135: CMakeFiles/rcl.dir/src/rcl/event.c.obj] Error 1
+[0.374s] make[2]: *** [CMakeFiles/rcl.dir/build.make:79: CMakeFiles/rcl.dir/src/rcl/client.c.obj] Error 1
+[0.374s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/network_flow_endpoints.c:[m[K In function '[01m[K__validate_network_flow_endpoint_array[m[K':
+[0.374s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/network_flow_endpoints.c:43:22:[m[K [01;35m[Kwarning: [m[Kvariable '[01m[Kerror_string[m[K' set but not used [[01;35m[K-Wunused-but-set-variable[m[K]
+[0.374s]    43 |   rmw_error_string_t [01;35m[Kerror_string[m[K;
+[0.374s]       |                      [01;35m[K^~~~~~~~~~~~[m[K
+[0.374s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/network_flow_endpoints.c:[m[K In function '[01m[Krcl_publisher_get_network_flow_endpoints[m[K':
+[0.375s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/network_flow_endpoints.c:75:22:[m[K [01;35m[Kwarning: [m[Kvariable '[01m[Kerror_string[m[K' set but not used [[01;35m[K-Wunused-but-set-variable[m[K]
+[0.375s]    75 |   rmw_error_string_t [01;35m[Kerror_string[m[K;
+[0.375s]       |                      [01;35m[K^~~~~~~~~~~~[m[K
+[0.375s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/network_flow_endpoints.c:[m[K In function '[01m[Krcl_subscription_get_network_flow_endpoints[m[K':
+[0.375s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/network_flow_endpoints.c:106:22:[m[K [01;35m[Kwarning: [m[Kvariable '[01m[Kerror_string[m[K' set but not used [[01;35m[K-Wunused-but-set-variable[m[K]
+[0.375s]   106 |   rmw_error_string_t [01;35m[Kerror_string[m[K;
+[0.376s]       |                      [01;35m[K^~~~~~~~~~~~[m[K
+[0.376s] make[2]: *** [CMakeFiles/rcl.dir/build.make:331: CMakeFiles/rcl.dir/src/rcl/node_resolve_name.c.obj] Error 1
+[0.376s] make[2]: *** [CMakeFiles/rcl.dir/build.make:177: CMakeFiles/rcl.dir/src/rcl/guard_condition.c.obj] Error 1
+[0.376s] make[2]: *** [CMakeFiles/rcl.dir/build.make:303: CMakeFiles/rcl.dir/src/rcl/publisher.c.obj] Error 1
+[0.376s] make[2]: *** [CMakeFiles/rcl.dir/build.make:163: CMakeFiles/rcl.dir/src/rcl/graph.c.obj] Error 1
+[0.376s] make[2]: *** [CMakeFiles/rcl.dir/build.make:261: CMakeFiles/rcl.dir/src/rcl/network_flow_endpoints.c.obj] Error 1
+[0.376s] make[2]: *** [CMakeFiles/rcl.dir/build.make:149: CMakeFiles/rcl.dir/src/rcl/expand_topic_name.c.obj] Error 1
+[0.376s] In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/domain_id.c:22[m[K:
+[0.376s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:51:8:[m[K [01;31m[Kerror: [m[Kunknown type name '[01m[Krmw_uxrce_transport_params_t[m[K'
+[0.377s]    51 | extern [01;31m[Krmw_uxrce_transport_params_t[m[K rmw_uxrce_transport_default_params;
+[0.377s]       |        [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[0.388s] make[2]: *** [CMakeFiles/rcl.dir/build.make:121: CMakeFiles/rcl.dir/src/rcl/domain_id.c.obj] Error 1
+[0.392s] In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/security.c:19[m[K:
+[0.392s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:51:8:[m[K [01;31m[Kerror: [m[Kunknown type name '[01m[Krmw_uxrce_transport_params_t[m[K'
+[0.392s]    51 | extern [01;31m[Krmw_uxrce_transport_params_t[m[K rmw_uxrce_transport_default_params;
+[0.392s]       |        [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[0.392s] make[2]: *** [CMakeFiles/rcl.dir/build.make:359: CMakeFiles/rcl.dir/src/rcl/security.c.obj] Error 1
+[0.393s] In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/node.c:30[m[K:
+[0.393s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:51:8:[m[K [01;31m[Kerror: [m[Kunknown type name '[01m[Krmw_uxrce_transport_params_t[m[K'
+[0.393s]    51 | extern [01;31m[Krmw_uxrce_transport_params_t[m[K rmw_uxrce_transport_default_params;
+[0.393s]       |        [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[0.393s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/node.c:[m[K In function '[01m[Krcl_node_init[m[K':
+[0.393s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/node.c:166:18:[m[K [01;35m[Kwarning: [m[Kunused variable '[01m[Kmsg[m[K' [[01;35m[K-Wunused-variable[m[K]
+[0.393s]   166 |     const char * [01;35m[Kmsg[m[K = rmw_node_name_validation_result_string(validation_result);
+[0.393s]       |                  [01;35m[K^~~[m[K
+[0.393s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/node.c:198:18:[m[K [01;35m[Kwarning: [m[Kunused variable '[01m[Kmsg[m[K' [[01;35m[K-Wunused-variable[m[K]
+[0.393s]   198 |     const char * [01;35m[Kmsg[m[K = rmw_namespace_validation_result_string(validation_result);
+[0.394s]       |                  [01;35m[K^~~[m[K
+[0.394s] In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/service.c:25[m[K:
+[0.394s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:51:8:[m[K [01;31m[Kerror: [m[Kunknown type name '[01m[Krmw_uxrce_transport_params_t[m[K'
+[0.394s]    51 | extern [01;31m[Krmw_uxrce_transport_params_t[m[K rmw_uxrce_transport_default_params;
+[0.394s]       |        [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[0.395s] In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/time.c:22[m[K:
+[0.395s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:51:8:[m[K [01;31m[Kerror: [m[Kunknown type name '[01m[Krmw_uxrce_transport_params_t[m[K'
+[0.395s]    51 | extern [01;31m[Krmw_uxrce_transport_params_t[m[K rmw_uxrce_transport_default_params;
+[0.395s]       |        [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[0.395s] make[2]: *** [CMakeFiles/rcl.dir/build.make:275: CMakeFiles/rcl.dir/src/rcl/node.c.obj] Error 1
+[0.395s] In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/subscription.c:24[m[K:
+[0.396s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/include/rcl/error_handling.h:51:8:[m[K [01;31m[Kerror: [m[Kunknown type name '[01m[Krmw_uxrce_transport_params_t[m[K'
+[0.396s]    51 | extern [01;31m[Krmw_uxrce_transport_params_t[m[K rmw_uxrce_transport_default_params;
+[0.396s]       |        [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[0.396s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/time.c:[m[K In function '[01m[Krcl_clock_init[m[K':
+[0.397s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/time.c:106:7:[m[K [01;35m[Kwarning: [m[Kimplicit declaration of function '[01m[Kbrain_debug[m[K' [[01;35m[K-Wimplicit-function-declaration[m[K]
+[0.397s]   106 |       [01;35m[Kbrain_debug[m[K(NULL);
+[0.397s]       |       [01;35m[K^~~~~~~~~~~[m[K
+[0.397s] make[2]: *** [CMakeFiles/rcl.dir/build.make:373: CMakeFiles/rcl.dir/src/rcl/service.c.obj] Error 1
+[0.397s] make[2]: *** [CMakeFiles/rcl.dir/build.make:401: CMakeFiles/rcl.dir/src/rcl/time.c.obj] Error 1
+[0.397s] make[2]: *** [CMakeFiles/rcl.dir/build.make:387: CMakeFiles/rcl.dir/src/rcl/subscription.c.obj] Error 1
+[0.397s] make[1]: *** [CMakeFiles/Makefile2:156: CMakeFiles/rcl.dir/all] Error 2
+[0.397s] make: *** [Makefile:146: all] Error 2
+[0.545s] Invoked command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rcl' returned '2': AMENT_PREFIX_PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_ros:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_auto:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_gmock:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/gmock_vendor:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_gtest:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/gtest_vendor:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_lint_common:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_xmllint:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_uncrustify:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_pyflakes:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_pycodestyle:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_pep257:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_pclint:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_lint_auto:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_version:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_vendor_package:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_pytest:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_nose:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_mypy:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_lint_cmake:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_google_benchmark:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_flake8:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_copyright:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_clang_tidy:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_clang_format:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_test:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_target_dependencies:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_python:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_export_dependencies:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_libraries:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_include_directories:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_gen_version_h:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_export_targets:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_export_link_flags:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_export_interfaces:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_export_libraries:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_export_include_directories:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_export_definitions:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_core:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/domain_coordinator:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_xmllint:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_uncrustify:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pyflakes:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pycodestyle:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pep257:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pclint:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_package:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_mypy:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_lint_cmake:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_flake8:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_copyright:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_lint:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_index_python:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_clang_tidy:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_clang_format LD_LIBRARY_PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/bin:${PATH} PYTHONPATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/cmake --build /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rcl -- -j24 -l24

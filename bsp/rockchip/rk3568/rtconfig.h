@@ -1,11 +1,77 @@
 #ifndef RT_CONFIG_H__
 #define RT_CONFIG_H__
 
-/* Automatically generated file; DO NOT EDIT. */
-/* RT-Thread Project Configuration */
-
 /* RT-Thread Kernel */
 
+/* klibc options */
+
+/* rt_vsnprintf options */
+
+#define RT_KLIBC_USING_VSNPRINTF_LONGLONG
+#define RT_KLIBC_USING_VSNPRINTF_STANDARD
+#define RT_KLIBC_USING_VSNPRINTF_DECIMAL_SPECIFIERS
+#define RT_KLIBC_USING_VSNPRINTF_EXPONENTIAL_SPECIFIERS
+#define RT_KLIBC_USING_VSNPRINTF_WRITEBACK_SPECIFIER
+#define RT_KLIBC_USING_VSNPRINTF_CHECK_NUL_IN_FORMAT_SPECIFIER
+#define RT_KLIBC_USING_VSNPRINTF_INTEGER_BUFFER_SIZE 32
+#define RT_KLIBC_USING_VSNPRINTF_DECIMAL_BUFFER_SIZE 32
+#define RT_KLIBC_USING_VSNPRINTF_FLOAT_PRECISION 6
+#define RT_KLIBC_USING_VSNPRINTF_MAX_INTEGRAL_DIGITS_FOR_DECIMAL 9
+#define RT_KLIBC_USING_VSNPRINTF_LOG10_TAYLOR_TERMS 4
+/* end of rt_vsnprintf options */
+
+/* rt_vsscanf options */
+
+/* end of rt_vsscanf options */
+
+/* rt_memset options */
+
+/* end of rt_memset options */
+
+/* rt_memcpy options */
+
+/* end of rt_memcpy options */
+
+/* rt_memmove options */
+
+/* end of rt_memmove options */
+
+/* rt_memcmp options */
+
+/* end of rt_memcmp options */
+
+/* rt_strstr options */
+
+/* end of rt_strstr options */
+
+/* rt_strcasecmp options */
+
+/* end of rt_strcasecmp options */
+
+/* rt_strncpy options */
+
+/* end of rt_strncpy options */
+
+/* rt_strcpy options */
+
+/* end of rt_strcpy options */
+
+/* rt_strncmp options */
+
+/* end of rt_strncmp options */
+
+/* rt_strcmp options */
+
+/* end of rt_strcmp options */
+
+/* rt_strlen options */
+
+/* end of rt_strlen options */
+
+/* rt_strnlen options */
+
+/* end of rt_strnlen options */
+/* end of klibc options */
 #define RT_NAME_MAX 8
 #define RT_USING_SMP
 #define RT_CPUS_NR 4
@@ -19,15 +85,15 @@
 #define RT_USING_IDLE_HOOK
 #define RT_IDLE_HOOK_LIST_SIZE 4
 #define IDLE_THREAD_STACK_SIZE 4096
-#define SYSTEM_THREAD_STACK_SIZE 4096
 #define RT_USING_TIMER_SOFT
 #define RT_TIMER_THREAD_PRIO 4
-#define RT_TIMER_THREAD_STACK_SIZE 4096
+#define RT_TIMER_THREAD_STACK_SIZE 2048
 
-/* kservice optimization */
+/* kservice options */
 
-#define RT_KPRINTF_USING_LONGLONG
+/* end of kservice options */
 #define RT_USING_DEBUG
+#define RT_DEBUGING_ASSERT
 #define RT_DEBUGING_COLOR
 #define RT_DEBUGING_CONTEXT
 
@@ -38,10 +104,10 @@
 #define RT_USING_EVENT
 #define RT_USING_MAILBOX
 #define RT_USING_MESSAGEQUEUE
+/* end of Inter-Thread communication */
 
 /* Memory Management */
 
-#define RT_PAGE_MAX_ORDER 11
 #define RT_USING_MEMPOOL
 #define RT_USING_SMALL_MEM
 #define RT_USING_MEMHEAP
@@ -49,14 +115,15 @@
 #define RT_USING_SMALL_MEM_AS_HEAP
 #define RT_USING_MEMTRACE
 #define RT_USING_HEAP
+/* end of Memory Management */
 #define RT_USING_DEVICE
 #define RT_USING_DEVICE_OPS
-#define RT_USING_SCHED_THREAD_CTX
 #define RT_USING_CONSOLE
 #define RT_CONSOLEBUF_SIZE 128
 #define RT_CONSOLE_DEVICE_NAME "uart2"
-#define RT_VER_NUM 0x50100
+#define RT_VER_NUM 0x50200
 #define RT_BACKTRACE_LEVEL_MAX_NR 32
+/* end of RT-Thread Kernel */
 
 /* AArch64 Architecture Configuration */
 
@@ -64,6 +131,10 @@
 #define ARCH_RAM_OFFSET 0
 #define ARCH_SECONDARY_CPU_STACK_SIZE 4096
 #define ARCH_HAVE_EFFICIENT_UNALIGNED_ACCESS
+#define ARCH_USING_GENERIC_CPUID
+#define ARCH_HEAP_SIZE 0x4000000
+#define ARCH_INIT_PAGE_SIZE 0x200000
+/* end of AArch64 Architecture Configuration */
 #define ARCH_CPU_64BIT
 #define RT_USING_CACHE
 #define RT_USING_HW_ATOMIC
@@ -76,6 +147,9 @@
 #define RT_NO_USING_GIC
 #define ARCH_ARM_CORTEX_A55
 #define ARCH_ARMV8
+#define ARCH_USING_ASID
+#define ARCH_USING_HW_THREAD_SELF
+#define ARCH_USING_IRQ_CTX_LIST
 
 /* RT-Thread Components */
 
@@ -100,24 +174,36 @@
 
 /* DFS: device virtual file system */
 
+#define RT_USING_DFS
+#define DFS_USING_POSIX
+#define DFS_USING_WORKDIR
+#define DFS_FD_MAX 16
+#define RT_USING_DFS_V1
+#define DFS_FILESYSTEMS_MAX 4
+#define DFS_FILESYSTEM_TYPES_MAX 4
+#define RT_USING_DFS_DEVFS
+/* end of DFS: device virtual file system */
 
 /* Device Drivers */
 
 #define RT_USING_DM
 #define RT_USING_DEVICE_IPC
 #define RT_UNAMED_PIPE_NUMBER 64
+#define RT_USING_SYSTEM_WORKQUEUE
+#define RT_SYSTEM_WORKQUEUE_STACKSIZE 2048
+#define RT_SYSTEM_WORKQUEUE_PRIORITY 23
 #define RT_USING_SERIAL
 #define RT_USING_SERIAL_V1
+#define RT_SERIAL_USING_DMA
 #define RT_SERIAL_RB_BUFSZ 64
 #define RT_USING_PM
 #define PM_TICKLESS_THRESHOLD_TIME 2
 #define RT_USING_OFW
 #define RT_FDT_EARLYCON_MSG_SIZE 128
+#define RT_USING_OFW_BUS_RANGES_NUMBER 8
 #define RT_USING_PIN
 #define RT_USING_CLK
-
-/* Using USB */
-
+/* end of Device Drivers */
 
 /* C/C++ and POSIX layer */
 
@@ -129,21 +215,48 @@
 #define RT_LIBC_TZ_DEFAULT_HOUR 8
 #define RT_LIBC_TZ_DEFAULT_MIN 0
 #define RT_LIBC_TZ_DEFAULT_SEC 0
+/* end of Timezone and Daylight Saving Time */
+/* end of ISO-ANSI C layer */
 
 /* POSIX (Portable Operating System Interface) layer */
 
+#define RT_USING_POSIX_FS
+#define RT_USING_POSIX_POLL
+#define RT_USING_POSIX_SELECT
+#define RT_USING_POSIX_SOCKET
+#define RT_USING_POSIX_DELAY
+#define RT_USING_POSIX_CLOCK
 
 /* Interprocess Communication (IPC) */
 
 
 /* Socket is in the 'Network' category */
 
+/* end of Interprocess Communication (IPC) */
+/* end of POSIX (Portable Operating System Interface) layer */
+/* end of C/C++ and POSIX layer */
 
 /* Network */
 
+#define RT_USING_SAL
+#define SAL_INTERNET_CHECK
+
+/* Docking with protocol stacks */
+
+/* end of Docking with protocol stacks */
+#define SAL_USING_POSIX
+#define RT_USING_NETDEV
+#define NETDEV_USING_IFCONFIG
+#define NETDEV_USING_PING
+#define NETDEV_USING_NETSTAT
+#define NETDEV_USING_AUTO_DEFAULT
+#define NETDEV_IPV4 1
+#define NETDEV_IPV6 0
+/* end of Network */
 
 /* Memory protection */
 
+/* end of Memory protection */
 
 /* Utilities */
 
@@ -152,9 +265,31 @@
 #define RT_USING_ADT_BITMAP
 #define RT_USING_ADT_HASHMAP
 #define RT_USING_ADT_REF
+/* end of Utilities */
+
+/* Memory management */
+
+#define RT_PAGE_AFFINITY_BLOCK_SIZE 0x1000
+#define RT_PAGE_MAX_ORDER 11
+#define RT_USING_MEMBLOCK
+#define RT_INIT_MEMORY_REGIONS 128
+
+/* Debugging */
+
+/* end of Debugging */
+/* end of Memory management */
+
+/* Using USB legacy version */
+
+#define RT_USING_USB
+#define RT_USING_USB_HOST
+#define RT_USBD_THREAD_STACK_SZ 4096
+/* end of Using USB legacy version */
+/* end of RT-Thread Components */
 
 /* RT-Thread Utestcases */
 
+/* end of RT-Thread Utestcases */
 
 /* RT-Thread online packages */
 
@@ -165,57 +300,87 @@
 
 /* Marvell WiFi */
 
+/* end of Marvell WiFi */
 
 /* Wiced WiFi */
 
+/* end of Wiced WiFi */
 
 /* CYW43012 WiFi */
 
+/* end of CYW43012 WiFi */
 
 /* BL808 WiFi */
 
+/* end of BL808 WiFi */
 
 /* CYW43439 WiFi */
 
+/* end of CYW43439 WiFi */
+/* end of Wi-Fi */
 
 /* IoT Cloud */
 
+/* end of IoT Cloud */
+/* end of IoT - internet of things */
 
 /* security packages */
 
+/* end of security packages */
 
 /* language packages */
 
 /* JSON: JavaScript Object Notation, a lightweight data-interchange format */
 
+/* end of JSON: JavaScript Object Notation, a lightweight data-interchange format */
 
 /* XML: Extensible Markup Language */
 
+/* end of XML: Extensible Markup Language */
+/* end of language packages */
 
 /* multimedia packages */
 
 /* LVGL: powerful and easy-to-use embedded GUI library */
 
+/* end of LVGL: powerful and easy-to-use embedded GUI library */
 
 /* u8g2: a monochrome graphic library */
 
+/* end of u8g2: a monochrome graphic library */
+/* end of multimedia packages */
 
 /* tools packages */
 
+#define PKG_USING_MICRO_XRCE_DDS_CLIENT
+
+/* Micro-XRCE-DDS-Client Options */
+
+#define MICRO_XRCE_DDS_CLIENT_USING_EXAMPLE
+/* end of Micro-XRCE-DDS-Client Options */
+#define PKG_USING_MICRO_XRCE_DDS_CLIENT_LATEST_VERSION
+/* end of tools packages */
 
 /* system packages */
 
 /* enhanced kernel services */
 
+/* end of enhanced kernel services */
 
 /* acceleration: Assembly language or algorithmic acceleration packages */
 
+/* end of acceleration: Assembly language or algorithmic acceleration packages */
 
 /* CMSIS: ARM Cortex-M Microcontroller Software Interface Standard */
 
+/* end of CMSIS: ARM Cortex-M Microcontroller Software Interface Standard */
 
 /* Micrium: Micrium software products porting for RT-Thread */
 
+/* end of Micrium: Micrium software products porting for RT-Thread */
+#define PKG_USING_PERF_COUNTER
+#define PKG_USING_PERF_COUNTER_V2241
+/* end of system packages */
 
 /* peripheral libraries and drivers */
 
@@ -223,73 +388,129 @@
 
 /* STM32 HAL & SDK Drivers */
 
+/* end of STM32 HAL & SDK Drivers */
+
+/* Infineon HAL Packages */
+
+/* end of Infineon HAL Packages */
 
 /* Kendryte SDK */
 
+/* end of Kendryte SDK */
+
+/* WCH HAL & SDK Drivers */
+
+/* end of WCH HAL & SDK Drivers */
+
+/* AT32 HAL & SDK Drivers */
+
+/* end of AT32 HAL & SDK Drivers */
+/* end of HAL & SDK Drivers */
 
 /* sensors drivers */
 
+/* end of sensors drivers */
 
 /* touch drivers */
 
+/* end of touch drivers */
+#define PKG_USING_MICRO_ROS
+#define MICRO_ROS_USE_SERIAL
+#define MICRO_ROS_USING_ARCH_CORTEX_M3
+#define MICRO_ROS_USING_GCC_10
+#define MICRO_ROS_SERIAL_NAME "uart7"
+#define PKG_USING_MICRO_ROS_HUMBLE_GCC_10
+/* end of peripheral libraries and drivers */
 
 /* AI packages */
 
+/* end of AI packages */
 
 /* Signal Processing and Control Algorithm Packages */
 
+/* end of Signal Processing and Control Algorithm Packages */
 
 /* miscellaneous packages */
 
 /* project laboratory */
 
+/* end of project laboratory */
+
 /* samples: kernel and components samples */
 
+/* end of samples: kernel and components samples */
 
 /* entertainment: terminal games and other interesting software packages */
 
+/* end of entertainment: terminal games and other interesting software packages */
+/* end of miscellaneous packages */
 
 /* Arduino libraries */
 
 
 /* Projects and Demos */
 
+/* end of Projects and Demos */
 
 /* Sensors */
 
+/* end of Sensors */
 
 /* Display */
 
+/* end of Display */
 
 /* Timing */
 
+/* end of Timing */
 
 /* Data Processing */
 
+/* end of Data Processing */
 
 /* Data Storage */
 
 /* Communication */
 
+/* end of Communication */
 
 /* Device Control */
 
+/* end of Device Control */
 
 /* Other */
 
+/* end of Other */
 
 /* Signal IO */
 
+/* end of Signal IO */
 
 /* Uncategorized */
 
+/* end of Arduino libraries */
+/* end of RT-Thread online packages */
+#define PKG_USING_MICRO_ROS_RTTHREAD_PACKAGE
+#define PKG_MICRO_ROS_RTTHREAD_PACKAGE_HUMBLE_DISTRO
+
+/* Memory configuration */
+
+#define PKG_MICRO_ROS_RTTHREAD_PACKAGE_MAX_NODES 5
+#define PKG_MICRO_ROS_RTTHREAD_PACKAGE_MAX_PUBLISHERS 30
+#define PKG_MICRO_ROS_RTTHREAD_PACKAGE_MAX_SUBSCRIBERS 30
+#define PKG_MICRO_ROS_RTTHREAD_PACKAGE_MAX_SERVICES 10
+#define PKG_MICRO_ROS_RTTHREAD_PACKAGE_MAX_CLIENTS 10
+/* end of Memory configuration */
+#define PKG_MICRO_ROS_USE_SERIAL
 #define SOC_RK3568
 
 /* Hardware Drivers Config */
 
 #define BSP_USING_UART
 #define RT_USING_UART2
+#define RT_USING_UART7
 #define BSP_USING_GIC
 #define BSP_USING_GICV3
+/* end of Hardware Drivers Config */
 
 #endif

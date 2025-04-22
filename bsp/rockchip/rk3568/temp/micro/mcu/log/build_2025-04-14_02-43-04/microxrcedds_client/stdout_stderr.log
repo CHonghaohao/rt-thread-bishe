@@ -1,0 +1,9 @@
+[  4%] [32mBuilding C object CMakeFiles/microxrcedds_client.dir/src/c/core/session/session.c.obj[0m
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:22[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw_microros/rmw_microros.h:20:10:[m[K [01;31m[Kfatal error: [m[Krmw/rmw.h: No such file or directory
+   20 | #include [01;31m[K<rmw/rmw.h>[m[K
+      |          [01;31m[K^~~~~~~~~~~[m[K
+compilation terminated.
+make[2]: *** [CMakeFiles/microxrcedds_client.dir/build.make:177: CMakeFiles/microxrcedds_client.dir/src/c/core/session/session.c.obj] Error 1
+make[1]: *** [CMakeFiles/Makefile2:87: CMakeFiles/microxrcedds_client.dir/all] Error 2
+make: *** [Makefile:136: all] Error 2

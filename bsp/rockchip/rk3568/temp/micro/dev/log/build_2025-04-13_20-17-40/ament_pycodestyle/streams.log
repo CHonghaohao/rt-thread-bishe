@@ -1,0 +1,41 @@
+[0.609s] Invoking command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/src/ament_lint/ament_pycodestyle': PYTHONPATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pycodestyle/prefix_override:/home/rsl/.local/lib/python3.8/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pycodestyle/lib/python3.8/site-packages: /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/ament_pycodestyle build --build-base /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pycodestyle/build install --record /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pycodestyle/install.log --single-version-externally-managed install_data
+[0.713s] running egg_info
+[0.714s] creating ../../../build/ament_pycodestyle/ament_pycodestyle.egg-info
+[0.714s] writing ../../../build/ament_pycodestyle/ament_pycodestyle.egg-info/PKG-INFO
+[0.714s] writing dependency_links to ../../../build/ament_pycodestyle/ament_pycodestyle.egg-info/dependency_links.txt
+[0.714s] writing entry points to ../../../build/ament_pycodestyle/ament_pycodestyle.egg-info/entry_points.txt
+[0.714s] writing requirements to ../../../build/ament_pycodestyle/ament_pycodestyle.egg-info/requires.txt
+[0.714s] writing top-level names to ../../../build/ament_pycodestyle/ament_pycodestyle.egg-info/top_level.txt
+[0.714s] writing manifest file '../../../build/ament_pycodestyle/ament_pycodestyle.egg-info/SOURCES.txt'
+[0.739s] reading manifest file '../../../build/ament_pycodestyle/ament_pycodestyle.egg-info/SOURCES.txt'
+[0.740s] writing manifest file '../../../build/ament_pycodestyle/ament_pycodestyle.egg-info/SOURCES.txt'
+[0.741s] running build
+[0.741s] running build_py
+[0.741s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pycodestyle/build
+[0.741s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pycodestyle/build/lib
+[0.741s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pycodestyle/build/lib/ament_pycodestyle
+[0.741s] copying ament_pycodestyle/main.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pycodestyle/build/lib/ament_pycodestyle
+[0.742s] copying ament_pycodestyle/__init__.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pycodestyle/build/lib/ament_pycodestyle
+[0.742s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pycodestyle/build/lib/ament_pycodestyle/configuration
+[0.742s] copying ament_pycodestyle/configuration/ament_pycodestyle.ini -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pycodestyle/build/lib/ament_pycodestyle/configuration
+[0.742s] running install
+[0.743s] running install_lib
+[0.743s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pycodestyle/lib/python3.8/site-packages/ament_pycodestyle
+[0.743s] copying /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pycodestyle/build/lib/ament_pycodestyle/main.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pycodestyle/lib/python3.8/site-packages/ament_pycodestyle
+[0.743s] copying /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pycodestyle/build/lib/ament_pycodestyle/__init__.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pycodestyle/lib/python3.8/site-packages/ament_pycodestyle
+[0.743s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pycodestyle/lib/python3.8/site-packages/ament_pycodestyle/configuration
+[0.743s] copying /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pycodestyle/build/lib/ament_pycodestyle/configuration/ament_pycodestyle.ini -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pycodestyle/lib/python3.8/site-packages/ament_pycodestyle/configuration
+[0.743s] byte-compiling /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pycodestyle/lib/python3.8/site-packages/ament_pycodestyle/main.py to main.cpython-38.pyc
+[0.744s] byte-compiling /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pycodestyle/lib/python3.8/site-packages/ament_pycodestyle/__init__.py to __init__.cpython-38.pyc
+[0.744s] running install_data
+[0.744s] copying package.xml -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pycodestyle/share/ament_pycodestyle
+[0.744s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pycodestyle/share/ament_index
+[0.744s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pycodestyle/share/ament_index/resource_index
+[0.744s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pycodestyle/share/ament_index/resource_index/packages
+[0.744s] copying resource/ament_pycodestyle -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pycodestyle/share/ament_index/resource_index/packages
+[0.744s] running install_egg_info
+[0.745s] Copying ../../../build/ament_pycodestyle/ament_pycodestyle.egg-info to /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pycodestyle/lib/python3.8/site-packages/ament_pycodestyle-0.12.12-py3.8.egg-info
+[0.745s] running install_scripts
+[0.756s] Installing ament_pycodestyle script to /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pycodestyle/bin
+[0.756s] writing list of installed files to '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pycodestyle/install.log'
+[0.784s] Invoked command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/src/ament_lint/ament_pycodestyle' returned '0': PYTHONPATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pycodestyle/prefix_override:/home/rsl/.local/lib/python3.8/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pycodestyle/lib/python3.8/site-packages: /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/ament_pycodestyle build --build-base /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pycodestyle/build install --record /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pycodestyle/install.log --single-version-externally-managed install_data

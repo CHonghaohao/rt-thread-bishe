@@ -1,0 +1,15 @@
+[0.226s] Invoking command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/microcdr': /usr/bin/cmake --build /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/microcdr -- -j24 -l24
+[0.595s] [100%] Built target microcdr
+[0.605s] Invoked command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/microcdr' returned '0': /usr/bin/cmake --build /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/microcdr -- -j24 -l24
+[0.608s] Invoking command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/microcdr': /usr/bin/cmake --install /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/microcdr
+[0.652s] -- Install configuration: "Release"
+[0.653s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/libmicrocdr.a
+[0.654s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/ucdr
+[0.654s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/ucdr/visibility.h
+[0.655s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/ucdr/microcdr.h
+[0.657s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/ucdr/config.h
+[0.658s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/microcdr/cmake/microcdrTargets.cmake
+[0.658s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/microcdr/cmake/microcdrTargets-release.cmake
+[0.658s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/microcdr/cmake/microcdrConfig.cmake
+[0.658s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/microcdr/cmake/microcdrConfigVersion.cmake
+[0.705s] Invoked command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/microcdr' returned '0': /usr/bin/cmake --install /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/microcdr

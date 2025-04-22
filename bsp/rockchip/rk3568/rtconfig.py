@@ -14,10 +14,8 @@ if os.getenv('RTT_CC'):
     CROSS_TOOL = os.getenv('RTT_CC')
 
 PLATFORM    = 'gcc'
-EXEC_PATH   = r'/opt/gcc-arm-8.3-2019.03-x86_64-aarch64-elf/bin/'
+EXEC_PATH   = r'/home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/bin'
 
-if os.getenv('RTT_EXEC_PATH'):
-    EXEC_PATH = os.getenv('RTT_EXEC_PATH')
 
 BUILD = 'debug'
 
@@ -34,8 +32,8 @@ if PLATFORM == 'gcc':
     OBJDUMP = PREFIX + 'objdump'
     OBJCPY  = PREFIX + 'objcopy'
 
-    DEVICE = ' -g -march=armv8-a -mtune=cortex-a53'
-    CFLAGS = DEVICE + ' -Wall -Wno-cpp'
+    DEVICE = ' -g -march=armv8-a -mtune=cortex-a55'
+    CFLAGS = DEVICE + ' -Wall -Wno-cpp '
     AFLAGS = ' -c' + ' -x assembler-with-cpp -D__ASSEMBLY__'
     LFLAGS  = DEVICE + ' -nostartfiles -Wl,--gc-sections,-Map=rtthread.map,-cref,-u,system_vectors -T link.lds'
     CPATH   = ''

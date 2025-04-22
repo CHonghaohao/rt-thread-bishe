@@ -1,0 +1,7 @@
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:24:1:[m[K [01;35m[Kwarning: [m[Kmulti-line comment [[01;35m[K-Wcomment[m[K]
+   24 | [01;35m[K/[m[K/ #define  brain_debug(x) do{\
+      | [01;35m[K^[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:[m[K In function '[01m[Kuxr_create_session_retries[m[K':
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:244:5:[m[K [01;35m[Kwarning: [m[Kimplicit declaration of function '[01m[Kbrain_debug[m[K' [[01;35m[K-Wimplicit-function-declaration[m[K]
+  244 |     [01;35m[Kbrain_debug[m[K(NULL);
+      |     [01;35m[K^~~~~~~~~~~[m[K

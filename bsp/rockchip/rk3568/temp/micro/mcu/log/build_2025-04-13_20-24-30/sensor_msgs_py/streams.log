@@ -1,0 +1,19 @@
+[0.556s] Invoking command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/common_interfaces/sensor_msgs_py': AMENT_PREFIX_PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install:${CMAKE_PREFIX_PATH} LD_LIBRARY_PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/bin:${PATH} PYTHONPATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/sensor_msgs_py/prefix_override:/home/rsl/.local/lib/python3.8/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/sensor_msgs_py build --build-base /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/sensor_msgs_py/build install --record /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/sensor_msgs_py/install.log --single-version-externally-managed install_data
+[0.684s] running egg_info
+[0.685s] writing ../../../build/sensor_msgs_py/sensor_msgs_py.egg-info/PKG-INFO
+[0.685s] writing dependency_links to ../../../build/sensor_msgs_py/sensor_msgs_py.egg-info/dependency_links.txt
+[0.685s] writing requirements to ../../../build/sensor_msgs_py/sensor_msgs_py.egg-info/requires.txt
+[0.685s] writing top-level names to ../../../build/sensor_msgs_py/sensor_msgs_py.egg-info/top_level.txt
+[0.708s] reading manifest file '../../../build/sensor_msgs_py/sensor_msgs_py.egg-info/SOURCES.txt'
+[0.709s] writing manifest file '../../../build/sensor_msgs_py/sensor_msgs_py.egg-info/SOURCES.txt'
+[0.709s] running build
+[0.709s] running build_py
+[0.709s] running install
+[0.710s] running install_lib
+[0.711s] running install_data
+[0.711s] running install_egg_info
+[0.712s] removing '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/sensor_msgs_py-4.8.0-py3.8.egg-info' (and everything under it)
+[0.713s] Copying ../../../build/sensor_msgs_py/sensor_msgs_py.egg-info to /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/sensor_msgs_py-4.8.0-py3.8.egg-info
+[0.713s] running install_scripts
+[0.725s] writing list of installed files to '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/sensor_msgs_py/install.log'
+[0.739s] Invoked command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/common_interfaces/sensor_msgs_py' returned '0': AMENT_PREFIX_PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install:${CMAKE_PREFIX_PATH} LD_LIBRARY_PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/bin:${PATH} PYTHONPATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/sensor_msgs_py/prefix_override:/home/rsl/.local/lib/python3.8/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/sensor_msgs_py build --build-base /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/sensor_msgs_py/build install --record /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/sensor_msgs_py/install.log --single-version-externally-managed install_data

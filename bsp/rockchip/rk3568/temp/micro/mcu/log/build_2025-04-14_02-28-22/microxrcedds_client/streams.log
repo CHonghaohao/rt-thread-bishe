@@ -1,0 +1,85 @@
+[0.117s] Invoking command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/microxrcedds_client': CMAKE_PREFIX_PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install:${CMAKE_PREFIX_PATH} PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/bin:${PATH} PYTHONPATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/cmake --build /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/microxrcedds_client -- -j24 -l24
+[0.146s] [  4%] [32mBuilding C object CMakeFiles/microxrcedds_client.dir/src/c/core/session/session.c.obj[0m
+[0.182s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:[m[K In function '[01m[Kuxr_create_session_retries[m[K':
+[0.182s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:236:5:[m[K [01;35m[Kwarning: [m[Kimplicit declaration of function '[01m[Kbrain_debug[m[K' [[01;35m[K-Wimplicit-function-declaration[m[K]
+[0.183s]   236 |     [01;35m[Kbrain_debug[m[K(NULL);
+[0.183s]       |     [01;35m[K^~~~~~~~~~~[m[K
+[0.357s] [  8%] [32m[1mLinking C static library libmicroxrcedds_client.a[0m
+[0.376s] [100%] Built target microxrcedds_client
+[0.452s] Invoked command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/microxrcedds_client' returned '0': CMAKE_PREFIX_PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install:${CMAKE_PREFIX_PATH} PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/bin:${PATH} PYTHONPATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/cmake --build /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/microxrcedds_client -- -j24 -l24
+[0.455s] Invoking command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/microxrcedds_client': CMAKE_PREFIX_PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install:${CMAKE_PREFIX_PATH} PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/bin:${PATH} PYTHONPATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/cmake --install /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/microxrcedds_client
+[0.477s] -- Install configuration: "Release"
+[0.477s] -- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/libmicroxrcedds_client.a
+[0.477s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client
+[0.478s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/client.h
+[0.478s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/visibility.h
+[0.478s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/transport.h
+[0.478s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/core
+[0.478s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/core/communication
+[0.479s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/core/communication/communication.h
+[0.479s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/core/type
+[0.479s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/core/type/xrce_types.h
+[0.479s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/core/session
+[0.479s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/core/session/object_id.h
+[0.479s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/core/session/create_entities_bin.h
+[0.480s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/core/session/session.h
+[0.480s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/core/session/create_entities_ref.h
+[0.480s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/core/session/common_create_entities.h
+[0.480s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/core/session/time_sync.h
+[0.480s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/core/session/session_info.h
+[0.480s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/core/session/write_access.h
+[0.480s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/core/session/create_entities_xml.h
+[0.480s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/core/session/stream
+[0.480s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/core/session/stream/input_reliable_stream.h
+[0.481s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/core/session/stream/reliable_stream.h
+[0.481s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/core/session/stream/output_reliable_stream.h
+[0.481s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/core/session/stream/seq_num.h
+[0.481s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/core/session/stream/output_best_effort_stream.h
+[0.481s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/core/session/stream/input_best_effort_stream.h
+[0.481s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/core/session/stream/stream_storage.h
+[0.481s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/core/session/stream/stream_id.h
+[0.482s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/core/session/read_access.h
+[0.482s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/util
+[0.482s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/util/time.h
+[0.482s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/util/ping.h
+[0.482s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/profile
+[0.483s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/profile/transport
+[0.483s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/profile/transport/custom
+[0.483s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/profile/transport/custom/custom_transport.h
+[0.483s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/profile/transport/serial
+[0.483s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/profile/transport/serial/serial_transport_rtems_bsd_net.h
+[0.483s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/profile/transport/serial/serial_transport_platform.h
+[0.483s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/profile/transport/serial/serial_transport_posix.h
+[0.483s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/profile/transport/serial/serial_transport.h
+[0.486s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/profile/transport/stream_framing
+[0.486s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/profile/transport/stream_framing/stream_framing_protocol.h
+[0.486s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/profile/transport/ip
+[0.486s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/profile/transport/ip/udp
+[0.486s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/profile/transport/ip/udp/udp_transport.h
+[0.487s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/profile/transport/ip/udp/udp_transport_windows.h
+[0.488s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/profile/transport/ip/udp/udp_transport_posix.h
+[0.488s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/profile/transport/ip/udp/udp_transport_rtems_bsd_net.h
+[0.488s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/profile/transport/ip/udp/udp_transport_freertos_plus_tcp.h
+[0.491s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/profile/transport/ip/udp/udp_transport_posix_nopoll.h
+[0.491s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/profile/transport/ip/ip.h
+[0.492s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/profile/transport/ip/tcp
+[0.492s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/profile/transport/ip/tcp/tcp_transport_rtems_bsd_net.h
+[0.492s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/profile/transport/ip/tcp/tcp_transport_posix_nopoll.h
+[0.492s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/profile/transport/ip/tcp/tcp_transport_windows.h
+[0.492s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/profile/transport/ip/tcp/tcp_transport_posix.h
+[0.492s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/profile/transport/ip/tcp/tcp_transport.h
+[0.492s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/profile/transport/ip/tcp/tcp_transport_freertos_plus_tcp.h
+[0.492s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/profile/transport/can
+[0.492s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/profile/transport/can/can_transport_posix.h
+[0.492s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/profile/transport/can/can_transport.h
+[0.492s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/profile/multithread
+[0.492s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/profile/multithread/multithread.h
+[0.492s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/profile/discovery
+[0.492s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/profile/discovery/discovery.h
+[0.493s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/defines.h
+[0.493s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/uxr/client/config.h
+[0.493s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/microxrcedds_client/cmake/microxrcedds_clientTargets.cmake
+[0.493s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/microxrcedds_client/cmake/microxrcedds_clientTargets-release.cmake
+[0.493s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/microxrcedds_client/cmake/microxrcedds_clientConfig.cmake
+[0.493s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/microxrcedds_client/cmake/microxrcedds_clientConfigVersion.cmake
+[0.650s] Invoked command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/microxrcedds_client' returned '0': CMAKE_PREFIX_PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install:${CMAKE_PREFIX_PATH} PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/bin:${PATH} PYTHONPATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/cmake --install /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/microxrcedds_client

@@ -1,0 +1,10 @@
+[0.129s] Invoking command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/microxrcedds_client': CMAKE_PREFIX_PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install:${CMAKE_PREFIX_PATH} PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/bin:${PATH} PYTHONPATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/cmake --build /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/microxrcedds_client -- -j24 -l24
+[0.154s] [  4%] [32mBuilding C object CMakeFiles/microxrcedds_client.dir/src/c/core/session/session.c.obj[0m
+[0.173s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:22:10:[m[K [01;31m[Kfatal error: [m[Kmcu/src/rmw-microxrcedds/rmw_microxrcedds_c/include/rmw_microros/rmw_microros.h: No such file or directory
+[0.173s]    22 | #include [01;31m[K<mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/include/rmw_microros/rmw_microros.h>[m[K
+[0.173s]       |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[0.173s] compilation terminated.
+[0.175s] make[2]: *** [CMakeFiles/microxrcedds_client.dir/build.make:177: CMakeFiles/microxrcedds_client.dir/src/c/core/session/session.c.obj] Error 1
+[0.175s] make[1]: *** [CMakeFiles/Makefile2:87: CMakeFiles/microxrcedds_client.dir/all] Error 2
+[0.176s] make: *** [Makefile:136: all] Error 2
+[0.193s] Invoked command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/microxrcedds_client' returned '2': CMAKE_PREFIX_PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install:${CMAKE_PREFIX_PATH} PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/bin:${PATH} PYTHONPATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/cmake --build /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/microxrcedds_client -- -j24 -l24

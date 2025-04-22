@@ -1,0 +1,465 @@
+[0.135s] Invoking command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/microxrcedds_client': CMAKE_PREFIX_PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install:${CMAKE_PREFIX_PATH} PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/bin:${PATH} PYTHONPATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/cmake --build /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/microxrcedds_client -- -j24 -l24
+[0.166s] [  4%] [32mBuilding C object CMakeFiles/microxrcedds_client.dir/src/c/core/session/session.c.obj[0m
+[0.196s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:23:8:[m[K [01;31m[Kerror: [m[Kunknown type name '[01m[Krmw_uxrce_transport_params_t[m[K'
+[0.196s]    23 | extern [01;31m[Krmw_uxrce_transport_params_t[m[K rmw_uxrce_transport_default_params;
+[0.196s]       |        [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[0.197s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:[m[K In function '[01m[Kuxr_create_session_retries[m[K':
+[0.197s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:26:3:[m[K [01;35m[Kwarning: [m[Kimplicit declaration of function '[01m[Ksprintf[m[K' [[01;35m[K-Wimplicit-function-declaration[m[K]
+[0.197s]    26 |   [01;35m[Ksprintf[m[K(buffer,"cfile is %s,func is %s,line is %d\n",__FILE__,__func__,__LINE__);\
+[0.197s]       |   [01;35m[K^~~~~~~[m[K
+[0.197s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:244:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.197s]   244 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.197s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.198s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:26:3:[m[K [01;35m[Kwarning: [m[Kincompatible implicit declaration of built-in function '[01m[Ksprintf[m[K'
+[0.198s]    26 |   [01;35m[Ksprintf[m[K(buffer,"cfile is %s,func is %s,line is %d\n",__FILE__,__func__,__LINE__);\
+[0.198s]       |   [01;35m[K^~~~~~~[m[K
+[0.198s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:244:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.198s]   244 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.198s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.199s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:22:1:[m[K [01;36m[Knote: [m[Kinclude '[01m[K<stdio.h>[m[K' or provide a declaration of '[01m[Ksprintf[m[K'
+[0.199s]    21 | #include "../../profile/shared_memory/shared_memory_internal.h"
+[0.199s]   +++ |+[32m[K#include <stdio.h>[m[K
+[0.199s]    22 | 
+[0.199s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:26:11:[m[K [01;35m[Kwarning: [m[Kpointer targets in passing argument 1 of '[01m[Ksprintf[m[K' differ in signedness [[01;35m[K-Wpointer-sign[m[K]
+[0.200s]    26 |   sprintf([01;35m[Kbuffer[m[K,"cfile is %s,func is %s,line is %d\n",__FILE__,__func__,__LINE__);\
+[0.200s]       |           [01;35m[K^~~~~~[m[K
+[0.200s]       |           [01;35m[K|[m[K
+[0.200s]       |           [01;35m[Kuint8_t * {aka unsigned char *}[m[K
+[0.201s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:244:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.201s]   244 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.201s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.202s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:26:11:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kuint8_t *[m[K' {aka '[01m[Kunsigned char *[m[K'}
+[0.202s]    26 |   sprintf([01;36m[Kbuffer[m[K,"cfile is %s,func is %s,line is %d\n",__FILE__,__func__,__LINE__);\
+[0.202s]       |           [01;36m[K^~~~~~[m[K
+[0.202s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:244:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.202s]   244 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.203s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.203s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:27:37:[m[K [01;31m[Kerror: [m[Krequest for member '[01m[Kwrite_cb[m[K' in something not a structure or union
+[0.203s]    27 |   rmw_uxrce_transport_default_params[01;31m[K.[m[Kwrite_cb(NULL,buffer,strlen(buffer),NULL);\
+[0.203s]       |                                     [01;31m[K^[m[K
+[0.203s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:244:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.203s]   244 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.203s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.204s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:27:66:[m[K [01;35m[Kwarning: [m[Kpointer targets in passing argument 1 of '[01m[Kstrlen[m[K' differ in signedness [[01;35m[K-Wpointer-sign[m[K]
+[0.204s]    27 |   rmw_uxrce_transport_default_params.write_cb(NULL,buffer,strlen([01;35m[Kbuffer[m[K),NULL);\
+[0.204s]       |                                                                  [01;35m[K^~~~~~[m[K
+[0.204s]       |                                                                  [01;35m[K|[m[K
+[0.204s]       |                                                                  [01;35m[Kuint8_t * {aka unsigned char *}[m[K
+[0.204s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:244:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.205s]   244 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.205s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.205s] In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/stream/common_reliable_stream_internal.h:28[m[K,
+[0.205s]                  from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:11[m[K:
+[0.205s] [01m[K/home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/aarch64-none-elf/include/string.h:41:17:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kconst char *[m[K' but argument is of type '[01m[Kuint8_t *[m[K' {aka '[01m[Kunsigned char *[m[K'}
+[0.205s]    41 | size_t  strlen ([01;36m[Kconst char *[m[K);
+[0.205s]       |                 [01;36m[K^~~~~~~~~~~~[m[K
+[0.205s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:26:3:[m[K [01;35m[Kwarning: [m[Kincompatible implicit declaration of built-in function '[01m[Ksprintf[m[K'
+[0.206s]    26 |   [01;35m[Ksprintf[m[K(buffer,"cfile is %s,func is %s,line is %d\n",__FILE__,__func__,__LINE__);\
+[0.206s]       |   [01;35m[K^~~~~~~[m[K
+[0.206s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:246:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.206s]   246 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.206s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.206s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:26:3:[m[K [01;36m[Knote: [m[Kinclude '[01m[K<stdio.h>[m[K' or provide a declaration of '[01m[Ksprintf[m[K'
+[0.206s]    26 |   [01;36m[Ksprintf[m[K(buffer,"cfile is %s,func is %s,line is %d\n",__FILE__,__func__,__LINE__);\
+[0.206s]       |   [01;36m[K^~~~~~~[m[K
+[0.207s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:246:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.207s]   246 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.207s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.207s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:26:11:[m[K [01;35m[Kwarning: [m[Kpointer targets in passing argument 1 of '[01m[Ksprintf[m[K' differ in signedness [[01;35m[K-Wpointer-sign[m[K]
+[0.207s]    26 |   sprintf([01;35m[Kbuffer[m[K,"cfile is %s,func is %s,line is %d\n",__FILE__,__func__,__LINE__);\
+[0.207s]       |           [01;35m[K^~~~~~[m[K
+[0.207s]       |           [01;35m[K|[m[K
+[0.208s]       |           [01;35m[Kuint8_t * {aka unsigned char *}[m[K
+[0.208s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:246:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.208s]   246 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.208s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.208s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:26:11:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kuint8_t *[m[K' {aka '[01m[Kunsigned char *[m[K'}
+[0.208s]    26 |   sprintf([01;36m[Kbuffer[m[K,"cfile is %s,func is %s,line is %d\n",__FILE__,__func__,__LINE__);\
+[0.209s]       |           [01;36m[K^~~~~~[m[K
+[0.209s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:246:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.209s]   246 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.209s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.209s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:27:37:[m[K [01;31m[Kerror: [m[Krequest for member '[01m[Kwrite_cb[m[K' in something not a structure or union
+[0.209s]    27 |   rmw_uxrce_transport_default_params[01;31m[K.[m[Kwrite_cb(NULL,buffer,strlen(buffer),NULL);\
+[0.209s]       |                                     [01;31m[K^[m[K
+[0.210s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:246:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.210s]   246 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.210s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.210s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:27:66:[m[K [01;35m[Kwarning: [m[Kpointer targets in passing argument 1 of '[01m[Kstrlen[m[K' differ in signedness [[01;35m[K-Wpointer-sign[m[K]
+[0.210s]    27 |   rmw_uxrce_transport_default_params.write_cb(NULL,buffer,strlen([01;35m[Kbuffer[m[K),NULL);\
+[0.210s]       |                                                                  [01;35m[K^~~~~~[m[K
+[0.210s]       |                                                                  [01;35m[K|[m[K
+[0.210s]       |                                                                  [01;35m[Kuint8_t * {aka unsigned char *}[m[K
+[0.210s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:246:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.211s]   246 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.211s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.211s] In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/stream/common_reliable_stream_internal.h:28[m[K,
+[0.211s]                  from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:11[m[K:
+[0.211s] [01m[K/home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/aarch64-none-elf/include/string.h:41:17:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kconst char *[m[K' but argument is of type '[01m[Kuint8_t *[m[K' {aka '[01m[Kunsigned char *[m[K'}
+[0.211s]    41 | size_t  strlen ([01;36m[Kconst char *[m[K);
+[0.211s]       |                 [01;36m[K^~~~~~~~~~~~[m[K
+[0.212s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:26:3:[m[K [01;35m[Kwarning: [m[Kincompatible implicit declaration of built-in function '[01m[Ksprintf[m[K'
+[0.212s]    26 |   [01;35m[Ksprintf[m[K(buffer,"cfile is %s,func is %s,line is %d\n",__FILE__,__func__,__LINE__);\
+[0.212s]       |   [01;35m[K^~~~~~~[m[K
+[0.212s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:250:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.212s]   250 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.212s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.212s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:26:3:[m[K [01;36m[Knote: [m[Kinclude '[01m[K<stdio.h>[m[K' or provide a declaration of '[01m[Ksprintf[m[K'
+[0.213s]    26 |   [01;36m[Ksprintf[m[K(buffer,"cfile is %s,func is %s,line is %d\n",__FILE__,__func__,__LINE__);\
+[0.213s]       |   [01;36m[K^~~~~~~[m[K
+[0.213s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:250:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.213s]   250 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.213s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.213s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:26:11:[m[K [01;35m[Kwarning: [m[Kpointer targets in passing argument 1 of '[01m[Ksprintf[m[K' differ in signedness [[01;35m[K-Wpointer-sign[m[K]
+[0.213s]    26 |   sprintf([01;35m[Kbuffer[m[K,"cfile is %s,func is %s,line is %d\n",__FILE__,__func__,__LINE__);\
+[0.213s]       |           [01;35m[K^~~~~~[m[K
+[0.213s]       |           [01;35m[K|[m[K
+[0.214s]       |           [01;35m[Kuint8_t * {aka unsigned char *}[m[K
+[0.214s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:250:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.214s]   250 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.214s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.214s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:26:11:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kuint8_t *[m[K' {aka '[01m[Kunsigned char *[m[K'}
+[0.214s]    26 |   sprintf([01;36m[Kbuffer[m[K,"cfile is %s,func is %s,line is %d\n",__FILE__,__func__,__LINE__);\
+[0.215s]       |           [01;36m[K^~~~~~[m[K
+[0.215s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:250:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.215s]   250 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.215s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.215s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:27:37:[m[K [01;31m[Kerror: [m[Krequest for member '[01m[Kwrite_cb[m[K' in something not a structure or union
+[0.215s]    27 |   rmw_uxrce_transport_default_params[01;31m[K.[m[Kwrite_cb(NULL,buffer,strlen(buffer),NULL);\
+[0.215s]       |                                     [01;31m[K^[m[K
+[0.215s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:250:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.216s]   250 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.216s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.216s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:27:66:[m[K [01;35m[Kwarning: [m[Kpointer targets in passing argument 1 of '[01m[Kstrlen[m[K' differ in signedness [[01;35m[K-Wpointer-sign[m[K]
+[0.216s]    27 |   rmw_uxrce_transport_default_params.write_cb(NULL,buffer,strlen([01;35m[Kbuffer[m[K),NULL);\
+[0.216s]       |                                                                  [01;35m[K^~~~~~[m[K
+[0.216s]       |                                                                  [01;35m[K|[m[K
+[0.216s]       |                                                                  [01;35m[Kuint8_t * {aka unsigned char *}[m[K
+[0.216s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:250:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.216s]   250 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.217s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.217s] In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/stream/common_reliable_stream_internal.h:28[m[K,
+[0.217s]                  from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:11[m[K:
+[0.217s] [01m[K/home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/aarch64-none-elf/include/string.h:41:17:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kconst char *[m[K' but argument is of type '[01m[Kuint8_t *[m[K' {aka '[01m[Kunsigned char *[m[K'}
+[0.217s]    41 | size_t  strlen ([01;36m[Kconst char *[m[K);
+[0.217s]       |                 [01;36m[K^~~~~~~~~~~~[m[K
+[0.217s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:26:3:[m[K [01;35m[Kwarning: [m[Kincompatible implicit declaration of built-in function '[01m[Ksprintf[m[K'
+[0.217s]    26 |   [01;35m[Ksprintf[m[K(buffer,"cfile is %s,func is %s,line is %d\n",__FILE__,__func__,__LINE__);\
+[0.218s]       |   [01;35m[K^~~~~~~[m[K
+[0.218s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:253:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.218s]   253 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.218s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.218s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:26:3:[m[K [01;36m[Knote: [m[Kinclude '[01m[K<stdio.h>[m[K' or provide a declaration of '[01m[Ksprintf[m[K'
+[0.218s]    26 |   [01;36m[Ksprintf[m[K(buffer,"cfile is %s,func is %s,line is %d\n",__FILE__,__func__,__LINE__);\
+[0.218s]       |   [01;36m[K^~~~~~~[m[K
+[0.218s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:253:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.219s]   253 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.219s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.219s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:26:11:[m[K [01;35m[Kwarning: [m[Kpointer targets in passing argument 1 of '[01m[Ksprintf[m[K' differ in signedness [[01;35m[K-Wpointer-sign[m[K]
+[0.219s]    26 |   sprintf([01;35m[Kbuffer[m[K,"cfile is %s,func is %s,line is %d\n",__FILE__,__func__,__LINE__);\
+[0.219s]       |           [01;35m[K^~~~~~[m[K
+[0.220s]       |           [01;35m[K|[m[K
+[0.220s]       |           [01;35m[Kuint8_t * {aka unsigned char *}[m[K
+[0.220s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:253:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.220s]   253 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.220s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.220s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:26:11:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kuint8_t *[m[K' {aka '[01m[Kunsigned char *[m[K'}
+[0.220s]    26 |   sprintf([01;36m[Kbuffer[m[K,"cfile is %s,func is %s,line is %d\n",__FILE__,__func__,__LINE__);\
+[0.220s]       |           [01;36m[K^~~~~~[m[K
+[0.220s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:253:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.221s]   253 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.221s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.221s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:27:37:[m[K [01;31m[Kerror: [m[Krequest for member '[01m[Kwrite_cb[m[K' in something not a structure or union
+[0.221s]    27 |   rmw_uxrce_transport_default_params[01;31m[K.[m[Kwrite_cb(NULL,buffer,strlen(buffer),NULL);\
+[0.221s]       |                                     [01;31m[K^[m[K
+[0.221s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:253:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.221s]   253 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.221s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.222s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:27:66:[m[K [01;35m[Kwarning: [m[Kpointer targets in passing argument 1 of '[01m[Kstrlen[m[K' differ in signedness [[01;35m[K-Wpointer-sign[m[K]
+[0.222s]    27 |   rmw_uxrce_transport_default_params.write_cb(NULL,buffer,strlen([01;35m[Kbuffer[m[K),NULL);\
+[0.222s]       |                                                                  [01;35m[K^~~~~~[m[K
+[0.222s]       |                                                                  [01;35m[K|[m[K
+[0.222s]       |                                                                  [01;35m[Kuint8_t * {aka unsigned char *}[m[K
+[0.222s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:253:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.222s]   253 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.222s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.223s] In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/stream/common_reliable_stream_internal.h:28[m[K,
+[0.223s]                  from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:11[m[K:
+[0.223s] [01m[K/home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/aarch64-none-elf/include/string.h:41:17:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kconst char *[m[K' but argument is of type '[01m[Kuint8_t *[m[K' {aka '[01m[Kunsigned char *[m[K'}
+[0.223s]    41 | size_t  strlen ([01;36m[Kconst char *[m[K);
+[0.223s]       |                 [01;36m[K^~~~~~~~~~~~[m[K
+[0.223s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:26:3:[m[K [01;35m[Kwarning: [m[Kincompatible implicit declaration of built-in function '[01m[Ksprintf[m[K'
+[0.223s]    26 |   [01;35m[Ksprintf[m[K(buffer,"cfile is %s,func is %s,line is %d\n",__FILE__,__func__,__LINE__);\
+[0.223s]       |   [01;35m[K^~~~~~~[m[K
+[0.223s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:255:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.224s]   255 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.224s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.224s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:26:3:[m[K [01;36m[Knote: [m[Kinclude '[01m[K<stdio.h>[m[K' or provide a declaration of '[01m[Ksprintf[m[K'
+[0.224s]    26 |   [01;36m[Ksprintf[m[K(buffer,"cfile is %s,func is %s,line is %d\n",__FILE__,__func__,__LINE__);\
+[0.224s]       |   [01;36m[K^~~~~~~[m[K
+[0.224s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:255:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.224s]   255 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.225s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.225s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:26:11:[m[K [01;35m[Kwarning: [m[Kpointer targets in passing argument 1 of '[01m[Ksprintf[m[K' differ in signedness [[01;35m[K-Wpointer-sign[m[K]
+[0.228s]    26 |   sprintf([01;35m[Kbuffer[m[K,"cfile is %s,func is %s,line is %d\n",__FILE__,__func__,__LINE__);\
+[0.228s]       |           [01;35m[K^~~~~~[m[K
+[0.228s]       |           [01;35m[K|[m[K
+[0.228s]       |           [01;35m[Kuint8_t * {aka unsigned char *}[m[K
+[0.228s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:255:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.228s]   255 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.228s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.229s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:26:11:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kuint8_t *[m[K' {aka '[01m[Kunsigned char *[m[K'}
+[0.229s]    26 |   sprintf([01;36m[Kbuffer[m[K,"cfile is %s,func is %s,line is %d\n",__FILE__,__func__,__LINE__);\
+[0.229s]       |           [01;36m[K^~~~~~[m[K
+[0.229s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:255:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.229s]   255 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.229s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.229s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:27:37:[m[K [01;31m[Kerror: [m[Krequest for member '[01m[Kwrite_cb[m[K' in something not a structure or union
+[0.229s]    27 |   rmw_uxrce_transport_default_params[01;31m[K.[m[Kwrite_cb(NULL,buffer,strlen(buffer),NULL);\
+[0.229s]       |                                     [01;31m[K^[m[K
+[0.229s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:255:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.230s]   255 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.230s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.230s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:27:66:[m[K [01;35m[Kwarning: [m[Kpointer targets in passing argument 1 of '[01m[Kstrlen[m[K' differ in signedness [[01;35m[K-Wpointer-sign[m[K]
+[0.230s]    27 |   rmw_uxrce_transport_default_params.write_cb(NULL,buffer,strlen([01;35m[Kbuffer[m[K),NULL);\
+[0.230s]       |                                                                  [01;35m[K^~~~~~[m[K
+[0.230s]       |                                                                  [01;35m[K|[m[K
+[0.230s]       |                                                                  [01;35m[Kuint8_t * {aka unsigned char *}[m[K
+[0.230s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:255:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.230s]   255 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.230s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.230s] In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/stream/common_reliable_stream_internal.h:28[m[K,
+[0.231s]                  from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:11[m[K:
+[0.231s] [01m[K/home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/aarch64-none-elf/include/string.h:41:17:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kconst char *[m[K' but argument is of type '[01m[Kuint8_t *[m[K' {aka '[01m[Kunsigned char *[m[K'}
+[0.231s]    41 | size_t  strlen ([01;36m[Kconst char *[m[K);
+[0.231s]       |                 [01;36m[K^~~~~~~~~~~~[m[K
+[0.231s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:26:3:[m[K [01;35m[Kwarning: [m[Kincompatible implicit declaration of built-in function '[01m[Ksprintf[m[K'
+[0.231s]    26 |   [01;35m[Ksprintf[m[K(buffer,"cfile is %s,func is %s,line is %d\n",__FILE__,__func__,__LINE__);\
+[0.231s]       |   [01;35m[K^~~~~~~[m[K
+[0.231s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:258:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.231s]   258 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.231s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.232s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:26:3:[m[K [01;36m[Knote: [m[Kinclude '[01m[K<stdio.h>[m[K' or provide a declaration of '[01m[Ksprintf[m[K'
+[0.232s]    26 |   [01;36m[Ksprintf[m[K(buffer,"cfile is %s,func is %s,line is %d\n",__FILE__,__func__,__LINE__);\
+[0.232s]       |   [01;36m[K^~~~~~~[m[K
+[0.232s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:258:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.232s]   258 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.232s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.232s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:26:11:[m[K [01;35m[Kwarning: [m[Kpointer targets in passing argument 1 of '[01m[Ksprintf[m[K' differ in signedness [[01;35m[K-Wpointer-sign[m[K]
+[0.232s]    26 |   sprintf([01;35m[Kbuffer[m[K,"cfile is %s,func is %s,line is %d\n",__FILE__,__func__,__LINE__);\
+[0.233s]       |           [01;35m[K^~~~~~[m[K
+[0.233s]       |           [01;35m[K|[m[K
+[0.233s]       |           [01;35m[Kuint8_t * {aka unsigned char *}[m[K
+[0.233s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:258:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.233s]   258 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.233s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.233s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:26:11:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kuint8_t *[m[K' {aka '[01m[Kunsigned char *[m[K'}
+[0.233s]    26 |   sprintf([01;36m[Kbuffer[m[K,"cfile is %s,func is %s,line is %d\n",__FILE__,__func__,__LINE__);\
+[0.233s]       |           [01;36m[K^~~~~~[m[K
+[0.233s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:258:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.234s]   258 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.234s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.234s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:27:37:[m[K [01;31m[Kerror: [m[Krequest for member '[01m[Kwrite_cb[m[K' in something not a structure or union
+[0.234s]    27 |   rmw_uxrce_transport_default_params[01;31m[K.[m[Kwrite_cb(NULL,buffer,strlen(buffer),NULL);\
+[0.234s]       |                                     [01;31m[K^[m[K
+[0.234s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:258:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.234s]   258 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.234s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.234s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:27:66:[m[K [01;35m[Kwarning: [m[Kpointer targets in passing argument 1 of '[01m[Kstrlen[m[K' differ in signedness [[01;35m[K-Wpointer-sign[m[K]
+[0.234s]    27 |   rmw_uxrce_transport_default_params.write_cb(NULL,buffer,strlen([01;35m[Kbuffer[m[K),NULL);\
+[0.235s]       |                                                                  [01;35m[K^~~~~~[m[K
+[0.235s]       |                                                                  [01;35m[K|[m[K
+[0.235s]       |                                                                  [01;35m[Kuint8_t * {aka unsigned char *}[m[K
+[0.235s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:258:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.235s]   258 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.235s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.235s] In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/stream/common_reliable_stream_internal.h:28[m[K,
+[0.235s]                  from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:11[m[K:
+[0.235s] [01m[K/home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/aarch64-none-elf/include/string.h:41:17:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kconst char *[m[K' but argument is of type '[01m[Kuint8_t *[m[K' {aka '[01m[Kunsigned char *[m[K'}
+[0.235s]    41 | size_t  strlen ([01;36m[Kconst char *[m[K);
+[0.236s]       |                 [01;36m[K^~~~~~~~~~~~[m[K
+[0.236s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:26:3:[m[K [01;35m[Kwarning: [m[Kincompatible implicit declaration of built-in function '[01m[Ksprintf[m[K'
+[0.236s]    26 |   [01;35m[Ksprintf[m[K(buffer,"cfile is %s,func is %s,line is %d\n",__FILE__,__func__,__LINE__);\
+[0.236s]       |   [01;35m[K^~~~~~~[m[K
+[0.236s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:260:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.236s]   260 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.236s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.236s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:26:3:[m[K [01;36m[Knote: [m[Kinclude '[01m[K<stdio.h>[m[K' or provide a declaration of '[01m[Ksprintf[m[K'
+[0.236s]    26 |   [01;36m[Ksprintf[m[K(buffer,"cfile is %s,func is %s,line is %d\n",__FILE__,__func__,__LINE__);\
+[0.236s]       |   [01;36m[K^~~~~~~[m[K
+[0.237s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:260:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.237s]   260 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.237s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.237s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:26:11:[m[K [01;35m[Kwarning: [m[Kpointer targets in passing argument 1 of '[01m[Ksprintf[m[K' differ in signedness [[01;35m[K-Wpointer-sign[m[K]
+[0.237s]    26 |   sprintf([01;35m[Kbuffer[m[K,"cfile is %s,func is %s,line is %d\n",__FILE__,__func__,__LINE__);\
+[0.237s]       |           [01;35m[K^~~~~~[m[K
+[0.237s]       |           [01;35m[K|[m[K
+[0.237s]       |           [01;35m[Kuint8_t * {aka unsigned char *}[m[K
+[0.237s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:260:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.237s]   260 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.237s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.238s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:26:11:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kuint8_t *[m[K' {aka '[01m[Kunsigned char *[m[K'}
+[0.238s]    26 |   sprintf([01;36m[Kbuffer[m[K,"cfile is %s,func is %s,line is %d\n",__FILE__,__func__,__LINE__);\
+[0.238s]       |           [01;36m[K^~~~~~[m[K
+[0.238s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:260:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.238s]   260 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.238s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.238s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:27:37:[m[K [01;31m[Kerror: [m[Krequest for member '[01m[Kwrite_cb[m[K' in something not a structure or union
+[0.238s]    27 |   rmw_uxrce_transport_default_params[01;31m[K.[m[Kwrite_cb(NULL,buffer,strlen(buffer),NULL);\
+[0.238s]       |                                     [01;31m[K^[m[K
+[0.239s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:260:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.239s]   260 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.239s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.239s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:27:66:[m[K [01;35m[Kwarning: [m[Kpointer targets in passing argument 1 of '[01m[Kstrlen[m[K' differ in signedness [[01;35m[K-Wpointer-sign[m[K]
+[0.239s]    27 |   rmw_uxrce_transport_default_params.write_cb(NULL,buffer,strlen([01;35m[Kbuffer[m[K),NULL);\
+[0.239s]       |                                                                  [01;35m[K^~~~~~[m[K
+[0.239s]       |                                                                  [01;35m[K|[m[K
+[0.239s]       |                                                                  [01;35m[Kuint8_t * {aka unsigned char *}[m[K
+[0.239s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:260:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.240s]   260 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.240s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.240s] In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/stream/common_reliable_stream_internal.h:28[m[K,
+[0.240s]                  from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:11[m[K:
+[0.240s] [01m[K/home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/aarch64-none-elf/include/string.h:41:17:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kconst char *[m[K' but argument is of type '[01m[Kuint8_t *[m[K' {aka '[01m[Kunsigned char *[m[K'}
+[0.240s]    41 | size_t  strlen ([01;36m[Kconst char *[m[K);
+[0.240s]       |                 [01;36m[K^~~~~~~~~~~~[m[K
+[0.240s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:26:3:[m[K [01;35m[Kwarning: [m[Kincompatible implicit declaration of built-in function '[01m[Ksprintf[m[K'
+[0.240s]    26 |   [01;35m[Ksprintf[m[K(buffer,"cfile is %s,func is %s,line is %d\n",__FILE__,__func__,__LINE__);\
+[0.240s]       |   [01;35m[K^~~~~~~[m[K
+[0.241s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:264:9:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.241s]   264 |     {   [01;36m[Kbrain_debug[m[K(NULL);
+[0.241s]       |         [01;36m[K^~~~~~~~~~~[m[K
+[0.241s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:26:3:[m[K [01;36m[Knote: [m[Kinclude '[01m[K<stdio.h>[m[K' or provide a declaration of '[01m[Ksprintf[m[K'
+[0.241s]    26 |   [01;36m[Ksprintf[m[K(buffer,"cfile is %s,func is %s,line is %d\n",__FILE__,__func__,__LINE__);\
+[0.241s]       |   [01;36m[K^~~~~~~[m[K
+[0.241s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:264:9:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.241s]   264 |     {   [01;36m[Kbrain_debug[m[K(NULL);
+[0.241s]       |         [01;36m[K^~~~~~~~~~~[m[K
+[0.241s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:26:11:[m[K [01;35m[Kwarning: [m[Kpointer targets in passing argument 1 of '[01m[Ksprintf[m[K' differ in signedness [[01;35m[K-Wpointer-sign[m[K]
+[0.242s]    26 |   sprintf([01;35m[Kbuffer[m[K,"cfile is %s,func is %s,line is %d\n",__FILE__,__func__,__LINE__);\
+[0.242s]       |           [01;35m[K^~~~~~[m[K
+[0.242s]       |           [01;35m[K|[m[K
+[0.242s]       |           [01;35m[Kuint8_t * {aka unsigned char *}[m[K
+[0.242s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:264:9:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.242s]   264 |     {   [01;36m[Kbrain_debug[m[K(NULL);
+[0.242s]       |         [01;36m[K^~~~~~~~~~~[m[K
+[0.242s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:26:11:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kuint8_t *[m[K' {aka '[01m[Kunsigned char *[m[K'}
+[0.243s]    26 |   sprintf([01;36m[Kbuffer[m[K,"cfile is %s,func is %s,line is %d\n",__FILE__,__func__,__LINE__);\
+[0.243s]       |           [01;36m[K^~~~~~[m[K
+[0.243s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:264:9:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.243s]   264 |     {   [01;36m[Kbrain_debug[m[K(NULL);
+[0.244s]       |         [01;36m[K^~~~~~~~~~~[m[K
+[0.244s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:27:37:[m[K [01;31m[Kerror: [m[Krequest for member '[01m[Kwrite_cb[m[K' in something not a structure or union
+[0.244s]    27 |   rmw_uxrce_transport_default_params[01;31m[K.[m[Kwrite_cb(NULL,buffer,strlen(buffer),NULL);\
+[0.244s]       |                                     [01;31m[K^[m[K
+[0.245s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:264:9:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.245s]   264 |     {   [01;36m[Kbrain_debug[m[K(NULL);
+[0.245s]       |         [01;36m[K^~~~~~~~~~~[m[K
+[0.245s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:27:66:[m[K [01;35m[Kwarning: [m[Kpointer targets in passing argument 1 of '[01m[Kstrlen[m[K' differ in signedness [[01;35m[K-Wpointer-sign[m[K]
+[0.245s]    27 |   rmw_uxrce_transport_default_params.write_cb(NULL,buffer,strlen([01;35m[Kbuffer[m[K),NULL);\
+[0.245s]       |                                                                  [01;35m[K^~~~~~[m[K
+[0.246s]       |                                                                  [01;35m[K|[m[K
+[0.246s]       |                                                                  [01;35m[Kuint8_t * {aka unsigned char *}[m[K
+[0.246s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:264:9:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.246s]   264 |     {   [01;36m[Kbrain_debug[m[K(NULL);
+[0.246s]       |         [01;36m[K^~~~~~~~~~~[m[K
+[0.246s] In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/stream/common_reliable_stream_internal.h:28[m[K,
+[0.246s]                  from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:11[m[K:
+[0.246s] [01m[K/home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/aarch64-none-elf/include/string.h:41:17:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kconst char *[m[K' but argument is of type '[01m[Kuint8_t *[m[K' {aka '[01m[Kunsigned char *[m[K'}
+[0.246s]    41 | size_t  strlen ([01;36m[Kconst char *[m[K);
+[0.246s]       |                 [01;36m[K^~~~~~~~~~~~[m[K
+[0.247s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:26:3:[m[K [01;35m[Kwarning: [m[Kincompatible implicit declaration of built-in function '[01m[Ksprintf[m[K'
+[0.247s]    26 |   [01;35m[Ksprintf[m[K(buffer,"cfile is %s,func is %s,line is %d\n",__FILE__,__func__,__LINE__);\
+[0.247s]       |   [01;35m[K^~~~~~~[m[K
+[0.247s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:266:9:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.247s]   266 |         [01;36m[Kbrain_debug[m[K(NULL);
+[0.248s]       |         [01;36m[K^~~~~~~~~~~[m[K
+[0.248s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:26:3:[m[K [01;36m[Knote: [m[Kinclude '[01m[K<stdio.h>[m[K' or provide a declaration of '[01m[Ksprintf[m[K'
+[0.248s]    26 |   [01;36m[Ksprintf[m[K(buffer,"cfile is %s,func is %s,line is %d\n",__FILE__,__func__,__LINE__);\
+[0.248s]       |   [01;36m[K^~~~~~~[m[K
+[0.248s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:266:9:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.248s]   266 |         [01;36m[Kbrain_debug[m[K(NULL);
+[0.248s]       |         [01;36m[K^~~~~~~~~~~[m[K
+[0.248s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:26:11:[m[K [01;35m[Kwarning: [m[Kpointer targets in passing argument 1 of '[01m[Ksprintf[m[K' differ in signedness [[01;35m[K-Wpointer-sign[m[K]
+[0.248s]    26 |   sprintf([01;35m[Kbuffer[m[K,"cfile is %s,func is %s,line is %d\n",__FILE__,__func__,__LINE__);\
+[0.248s]       |           [01;35m[K^~~~~~[m[K
+[0.249s]       |           [01;35m[K|[m[K
+[0.249s]       |           [01;35m[Kuint8_t * {aka unsigned char *}[m[K
+[0.249s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:266:9:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.249s]   266 |         [01;36m[Kbrain_debug[m[K(NULL);
+[0.249s]       |         [01;36m[K^~~~~~~~~~~[m[K
+[0.249s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:26:11:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kuint8_t *[m[K' {aka '[01m[Kunsigned char *[m[K'}
+[0.249s]    26 |   sprintf([01;36m[Kbuffer[m[K,"cfile is %s,func is %s,line is %d\n",__FILE__,__func__,__LINE__);\
+[0.250s]       |           [01;36m[K^~~~~~[m[K
+[0.250s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:266:9:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.250s]   266 |         [01;36m[Kbrain_debug[m[K(NULL);
+[0.250s]       |         [01;36m[K^~~~~~~~~~~[m[K
+[0.250s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:27:37:[m[K [01;31m[Kerror: [m[Krequest for member '[01m[Kwrite_cb[m[K' in something not a structure or union
+[0.250s]    27 |   rmw_uxrce_transport_default_params[01;31m[K.[m[Kwrite_cb(NULL,buffer,strlen(buffer),NULL);\
+[0.250s]       |                                     [01;31m[K^[m[K
+[0.251s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:266:9:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.251s]   266 |         [01;36m[Kbrain_debug[m[K(NULL);
+[0.251s]       |         [01;36m[K^~~~~~~~~~~[m[K
+[0.251s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:27:66:[m[K [01;35m[Kwarning: [m[Kpointer targets in passing argument 1 of '[01m[Kstrlen[m[K' differ in signedness [[01;35m[K-Wpointer-sign[m[K]
+[0.251s]    27 |   rmw_uxrce_transport_default_params.write_cb(NULL,buffer,strlen([01;35m[Kbuffer[m[K),NULL);\
+[0.251s]       |                                                                  [01;35m[K^~~~~~[m[K
+[0.251s]       |                                                                  [01;35m[K|[m[K
+[0.251s]       |                                                                  [01;35m[Kuint8_t * {aka unsigned char *}[m[K
+[0.251s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:266:9:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.251s]   266 |         [01;36m[Kbrain_debug[m[K(NULL);
+[0.251s]       |         [01;36m[K^~~~~~~~~~~[m[K
+[0.252s] In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/stream/common_reliable_stream_internal.h:28[m[K,
+[0.252s]                  from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:11[m[K:
+[0.252s] [01m[K/home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/aarch64-none-elf/include/string.h:41:17:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kconst char *[m[K' but argument is of type '[01m[Kuint8_t *[m[K' {aka '[01m[Kunsigned char *[m[K'}
+[0.252s]    41 | size_t  strlen ([01;36m[Kconst char *[m[K);
+[0.252s]       |                 [01;36m[K^~~~~~~~~~~~[m[K
+[0.252s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:[m[K In function '[01m[Kuxr_create_session[m[K':
+[0.252s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:26:3:[m[K [01;35m[Kwarning: [m[Kincompatible implicit declaration of built-in function '[01m[Ksprintf[m[K'
+[0.252s]    26 |   [01;35m[Ksprintf[m[K(buffer,"cfile is %s,func is %s,line is %d\n",__FILE__,__func__,__LINE__);\
+[0.252s]       |   [01;35m[K^~~~~~~[m[K
+[0.253s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:275:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.253s]   275 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.253s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.253s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:26:3:[m[K [01;36m[Knote: [m[Kinclude '[01m[K<stdio.h>[m[K' or provide a declaration of '[01m[Ksprintf[m[K'
+[0.253s]    26 |   [01;36m[Ksprintf[m[K(buffer,"cfile is %s,func is %s,line is %d\n",__FILE__,__func__,__LINE__);\
+[0.254s]       |   [01;36m[K^~~~~~~[m[K
+[0.254s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:275:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.254s]   275 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.254s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.254s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:26:11:[m[K [01;35m[Kwarning: [m[Kpointer targets in passing argument 1 of '[01m[Ksprintf[m[K' differ in signedness [[01;35m[K-Wpointer-sign[m[K]
+[0.255s]    26 |   sprintf([01;35m[Kbuffer[m[K,"cfile is %s,func is %s,line is %d\n",__FILE__,__func__,__LINE__);\
+[0.255s]       |           [01;35m[K^~~~~~[m[K
+[0.255s]       |           [01;35m[K|[m[K
+[0.255s]       |           [01;35m[Kuint8_t * {aka unsigned char *}[m[K
+[0.255s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:275:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.255s]   275 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.255s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.255s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:26:11:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kuint8_t *[m[K' {aka '[01m[Kunsigned char *[m[K'}
+[0.255s]    26 |   sprintf([01;36m[Kbuffer[m[K,"cfile is %s,func is %s,line is %d\n",__FILE__,__func__,__LINE__);\
+[0.255s]       |           [01;36m[K^~~~~~[m[K
+[0.255s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:275:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.256s]   275 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.256s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.256s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:27:37:[m[K [01;31m[Kerror: [m[Krequest for member '[01m[Kwrite_cb[m[K' in something not a structure or union
+[0.256s]    27 |   rmw_uxrce_transport_default_params[01;31m[K.[m[Kwrite_cb(NULL,buffer,strlen(buffer),NULL);\
+[0.256s]       |                                     [01;31m[K^[m[K
+[0.256s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:275:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.256s]   275 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.256s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.256s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:27:66:[m[K [01;35m[Kwarning: [m[Kpointer targets in passing argument 1 of '[01m[Kstrlen[m[K' differ in signedness [[01;35m[K-Wpointer-sign[m[K]
+[0.257s]    27 |   rmw_uxrce_transport_default_params.write_cb(NULL,buffer,strlen([01;35m[Kbuffer[m[K),NULL);\
+[0.257s]       |                                                                  [01;35m[K^~~~~~[m[K
+[0.257s]       |                                                                  [01;35m[K|[m[K
+[0.257s]       |                                                                  [01;35m[Kuint8_t * {aka unsigned char *}[m[K
+[0.257s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:275:5:[m[K [01;36m[Knote: [m[Kin expansion of macro '[01m[Kbrain_debug[m[K'
+[0.257s]   275 |     [01;36m[Kbrain_debug[m[K(NULL);
+[0.257s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[0.257s] In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/stream/common_reliable_stream_internal.h:28[m[K,
+[0.258s]                  from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:11[m[K:
+[0.258s] [01m[K/home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/aarch64-none-elf/include/string.h:41:17:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kconst char *[m[K' but argument is of type '[01m[Kuint8_t *[m[K' {aka '[01m[Kunsigned char *[m[K'}
+[0.258s]    41 | size_t  strlen ([01;36m[Kconst char *[m[K);
+[0.258s]       |                 [01;36m[K^~~~~~~~~~~~[m[K
+[0.258s] make[2]: *** [CMakeFiles/microxrcedds_client.dir/build.make:177: CMakeFiles/microxrcedds_client.dir/src/c/core/session/session.c.obj] Error 1
+[0.258s] make[1]: *** [CMakeFiles/Makefile2:87: CMakeFiles/microxrcedds_client.dir/all] Error 2
+[0.258s] make: *** [Makefile:136: all] Error 2
+[0.328s] Invoked command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/microxrcedds_client' returned '2': CMAKE_PREFIX_PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install:${CMAKE_PREFIX_PATH} PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/bin:${PATH} PYTHONPATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/cmake --build /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/microxrcedds_client -- -j24 -l24

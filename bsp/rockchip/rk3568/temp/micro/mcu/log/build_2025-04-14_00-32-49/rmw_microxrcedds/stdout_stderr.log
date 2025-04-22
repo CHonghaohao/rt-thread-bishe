@@ -1,0 +1,17 @@
+[  2%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/rmw_init.c.obj[0m
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/callbacks.h:20[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_init.c:26[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:277:28:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_services[m[K' [[01;35m[K-Wpedantic[m[K]
+  277 | extern rmw_uxrce_service_t [01;35m[Kcustom_services[m[K[RMW_UXRCE_MAX_SERVICES];
+      |                            [01;35m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:280:27:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_clients[m[K' [[01;35m[K-Wpedantic[m[K]
+  280 | extern rmw_uxrce_client_t [01;35m[Kcustom_clients[m[K[RMW_UXRCE_MAX_CLIENTS];
+      |                           [01;35m[K^~~~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_init.c:[m[K In function '[01m[Krmw_init[m[K':
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_init.c:202:3:[m[K [01;31m[Kerror: [m[Kimplicit declaration of function '[01m[Kbrain_debug[m[K' [[01;31m[K-Werror=implicit-function-declaration[m[K]
+  202 |   [01;31m[Kbrain_debug[m[K(NULL);
+      |   [01;31m[K^~~~~~~~~~~[m[K
+cc1: some warnings being treated as errors
+make[2]: *** [CMakeFiles/rmw_microxrcedds.dir/build.make:275: CMakeFiles/rmw_microxrcedds.dir/src/rmw_init.c.obj] Error 1
+make[1]: *** [CMakeFiles/Makefile2:153: CMakeFiles/rmw_microxrcedds.dir/all] Error 2
+make: *** [Makefile:146: all] Error 2

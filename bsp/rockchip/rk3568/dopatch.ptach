@@ -1,0 +1,323 @@
+diff -u /home/rsl/rt-thread.bak/bsp/rockchip/rk3568/packages/micro_ros_rtthread_component/builder/microros_utils/library_builder.py packages/micro_ros_rtthread_component/builder/microros_utils/library_builder.py
+--- /home/rsl/rt-thread.bak/bsp/rockchip/rk3568/packages/micro_ros_rtthread_component/builder/microros_utils/library_builder.py	2025-04-17 23:39:13.143300189 -0700
++++ packages/micro_ros_rtthread_component/builder/microros_utils/library_builder.py	2025-04-17 23:23:21.067936868 -0700
+@@ -11,7 +11,7 @@
+ class Build:
+     def __init__(self, library_folder, packages_folder, distro, env):
+ 
+-        self.temp_folder = os.getenv('TEMP') + "\\micro"
++        self.temp_folder = "/home/rsl/rt-thread/bsp/rockchip/rk3568/temp" + "/micro"
+ 
+         self.library_folder = library_folder
+         self.packages_folder = packages_folder
+@@ -22,15 +22,15 @@
+         self.dev_packages = []
+         self.mcu_packages = []
+ 
+-        self.dev_folder = self.build_folder + '\\dev'
+-        self.dev_src_folder = self.dev_folder + '\\src'
+-        self.mcu_folder = self.build_folder + '\\mcu'
+-        self.mcu_src_folder = self.mcu_folder + '\\src'
+-        self.patch_folder = library_folder + '\\patchs\\' + self.distro
+-
+-        self.library_path = library_folder + '\\libmicroros'
+-        self.library = self.library_path + "\\libmicroros.a"
+-        self.includes = self.library_path+ '\\include'
++        self.dev_folder = self.build_folder + '/dev'
++        self.dev_src_folder = self.dev_folder + '/src'
++        self.mcu_folder = self.build_folder + '/mcu'
++        self.mcu_src_folder = self.mcu_folder + '/src'
++        self.patch_folder = library_folder + '/patchs/' + self.distro
++
++        self.library_path = library_folder + '/libmicroros'
++        self.library = self.library_path + "/libmicroros.a"
++        self.includes = self.library_path+ '/include'
+         self.library_name = "microros"
+ 
+     def run(self, toolchain, user_meta = ""):
+@@ -39,20 +39,20 @@
+             return
+ 
+         # Delete previous build folders
+-        rmtree(self.temp_folder)
+-        os.makedirs(self.temp_folder)
++        #rmtree(self.temp_folder)
++        #os.makedirs(self.temp_folder)
+ 
+-        self.download_dev_environment()
+-        self.apply_patchs(self.dev_src_folder)
+-        self.build_dev_environment()
+-        self.download_mcu_environment()
+-        self.download_extra_packages()
+-        self.apply_patchs(self.mcu_src_folder)
++        #self.download_dev_environment()
++        #self.apply_patchs(self.dev_src_folder)
++        #self.build_dev_environment()
++        #self.download_mcu_environment()
++        #self.download_extra_packages()
++        #self.apply_patchs(self.mcu_src_folder)
+         self.build_mcu_environment(toolchain, user_meta)
+         self.package_mcu_library()
+ 
+         # Delete generated build folders
+-        rmtree(self.temp_folder)
++        #rmtree(self.temp_folder)
+ 
+     def ignore_package(self, name):
+         for p in self.mcu_packages:
+@@ -62,13 +62,13 @@
+     def apply_patchs(self, target_folder):
+         for patch_file in [x for x in os.listdir(self.patch_folder) if x.endswith('patch')]:
+             repository_name = patch_file.split('.')[0]
+-            repository_path = target_folder + "\\" + repository_name
++            repository_path = target_folder + "/" + repository_name
+ 
+             # Check if repository exist
+             if (os.path.isdir(repository_path)):
+ 
+                 # Apply patch
+-                patch_path = self.patch_folder + "\\" + patch_file
++                patch_path = self.patch_folder + "/" + patch_file
+                 command = "git apply {} --verbose".format(patch_path)
+                 result, stderr = run_cmd(command, env=self.env, capture_output=True, cwd=repository_path)
+ 
+@@ -87,7 +87,7 @@
+ 
+     def build_dev_environment(self):
+         print("Building micro-ROS dev dependencies")
+-        command = 'py -3 -m colcon build --packages-ignore-regex=.*_cpp --cmake-args -DBUILD_TESTING=OFF -G "Unix Makefiles"'.format()
++        command = 'python3 -m colcon build --packages-ignore-regex=.*_cpp --cmake-args -DBUILD_TESTING=OFF -G "Unix Makefiles"'.format()
+         result, stderr = run_cmd(command, env=self.env, cwd=self.dev_folder)
+ 
+         if 0 != result:
+@@ -124,35 +124,72 @@
+ 
+     def build_mcu_environment(self, toolchain_file, user_meta = ""):
+         print("Building micro-ROS library")
+-        common_meta_path = self.library_folder + '\\metas\\common.meta'
+-        colcon_command = 'py -3 -m colcon build --merge-install --packages-ignore-regex=.*_cpp --metas {} {} --cmake-args -DCMAKE_INSTALL_LIBDIR=lib -DCMAKE_POSITION_INDEPENDENT_CODE:BOOL=OFF -DTHIRDPARTY=ON -DBUILD_SHARED_LIBS=OFF -DBUILD_TESTING=OFF -DCMAKE_BUILD_TYPE=Release --toolchain={} -G "Unix Makefiles"'.format(common_meta_path, user_meta, toolchain_file)
+-        command = "{}\\install\\setup.bat && {}".format(self.dev_folder, colcon_command)
++        common_meta_path = self.library_folder + '/metas/common.meta'
++        colcon_command = 'python3 -m colcon build --merge-install --packages-ignore-regex=.*_cpp --metas {} {} --cmake-args -DCMAKE_INSTALL_LIBDIR=lib -DCMAKE_POSITION_INDEPENDENT_CODE:BOOL=OFF -DTHIRDPARTY=ON -DBUILD_SHARED_LIBS=OFF -DBUILD_TESTING=OFF -DCMAKE_BUILD_TYPE=Release --toolchain={} -G "Unix Makefiles"'.format(common_meta_path, user_meta, toolchain_file)
++        
++        
++        print("---"*10,colcon_command,"   ",  self.mcu_folder, "///"*10)
++        
++        command = "chmod +x  {}/install/local_setup.sh".format(self.dev_folder)
+         result, stderr = run_cmd(command, env=self.env, cwd=self.mcu_folder)
+-
++        
++        command = "chmod +x  {}/install/setup.sh".format(self.dev_folder)
++        result, stderr = run_cmd(command, env=self.env, cwd=self.mcu_folder)
++        
++        #build /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcutils/src/time_unix.c  fixed clock
++    
++        
++        
++        command = ". {}/install/setup.sh && {}".format(self.dev_folder, colcon_command)
++        result, stderr = run_cmd(command, env=self.env, cwd=self.mcu_folder)
++   
+         if 0 != result:
+             print("Build mcu micro-ROS environment failed\n")
+-            sys.exit(1)
++            
++            #build /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcutils/src/time_unix.c  fixed clock
++    
++            file_path = self.mcu_folder + "/src/rcutils/src/time_unix.c"
++            
++            print(" verify source dir is ",file_path)
++            with open(file_path, 'r') as file:
++                lines = file.readlines()
++ 
++        # 修改第3行的内容（索引从0开始）
++                line_to_modify = 103  # 第3行对应索引为2
++                new_content = " clock_gettime(CLOCK_REALTIME, &timespec_now);\n"
++ 
++        # 修改指定行内容
++                lines[line_to_modify] = new_content
++ 
++        # 将修改后的内容写回文件
++            with open(file_path, 'w') as file:
++                file.writelines(lines)
++            #sys.exit(1)
++            result, stderr = run_cmd(command, env=self.env, cwd=self.mcu_folder)  #rebuild agin
++            if 0 != result:
++                print("Build mcu micro-ROS environment failed\n")
++                sys.exit(1)
+ 
+     def package_mcu_library(self):
+-        aux_folder = self.build_folder + "\\temp"
+-        aux_naming_folder = aux_folder + "\\naming"
++        aux_folder = self.build_folder + "/temp"
++        aux_naming_folder = aux_folder + "/naming"
+ 
+-        os.makedirs(aux_folder)
+-        os.makedirs(aux_naming_folder)
+-        os.makedirs(self.library_path)
++        os.makedirs(aux_folder,exist_ok=True)
++        os.makedirs(aux_naming_folder,exist_ok=True)
++        os.makedirs(self.library_path,exist_ok=True)
+ 
+         AR = rtconfig.PREFIX + 'ar'
+         # Generate object files with namespace prefix
+         obj_list = []
+         os.chdir(aux_naming_folder)
+         # print("-------------Generate object files with namespace prefix------------")
+-        for root, dirs, files in os.walk(self.mcu_folder + "\\install\\lib"):
++        for root, dirs, files in os.walk(self.mcu_folder + "/install/lib"):
+             for f in files:
+                 if f.endswith('.a'):
+-                    os.system("{AR} x {PATH}".format(AR=AR, PATH=(root + "\\" + f)))
++                    os.system("{AR} x {PATH}".format(AR=AR, PATH=(root + "/" + f)))
+                     for obj in [x for x in os.listdir(aux_naming_folder) if x.endswith('obj')]:
+                         updated_name = f.split('.')[0] + "__" + obj
+-                        os.rename(obj, '..\\' + updated_name)
++                        os.rename(obj, '../' + updated_name)
+                         obj_list.append(updated_name)
+                         print("updated_name:" + updated_name)
+         # pdb.set_trace()
+@@ -170,7 +207,10 @@
+             ar_script.write("END")
+ 
+         # Execute linker script
++        
++      
+         command = "{} -M < ar_script.m".format(AR)
++        print("ar script is running  ",command)
+         result, stderr = run_cmd(command, env=self.env)
+ 
+         if 0 != result:
+@@ -180,15 +220,15 @@
+         os.rename('libmicroros.a', self.library)
+ 
+         # Copy includes
+-        shutil.copytree(self.build_folder + "\\mcu\\install\\include", self.includes)
++        shutil.copytree(self.build_folder + "/mcu/install/include", self.includes)
+ 
+         # Fix include paths
+         if self.distro not in ["galactic", "foxy"]:
+             include_folders = os.listdir(self.includes)
+ 
+             for folder in include_folders:
+-                folder_path = self.includes + "\\{}".format(folder)
+-                repeated_path = folder_path + "\\{}".format(folder)
++                folder_path = self.includes + "/{}".format(folder)
++                repeated_path = folder_path + "/{}".format(folder)
+ 
+                 if os.path.exists(repeated_path):
+                     copy_tree(repeated_path, folder_path)
+Only in packages/micro_ros_rtthread_component/builder/microros_utils/: __pycache__
+diff -u /home/rsl/rt-thread.bak/bsp/rockchip/rk3568/packages/micro_ros_rtthread_component/builder/microros_utils/repositories.py packages/micro_ros_rtthread_component/builder/microros_utils/repositories.py
+--- /home/rsl/rt-thread.bak/bsp/rockchip/rk3568/packages/micro_ros_rtthread_component/builder/microros_utils/repositories.py	2025-04-17 23:39:13.143300189 -0700
++++ packages/micro_ros_rtthread_component/builder/microros_utils/repositories.py	2025-04-09 03:19:15.942960278 -0700
+@@ -25,7 +25,7 @@
+         self.path = None
+ 
+     def clone(self, folder):
+-        self.path = folder + "\\" + self.name
++        self.path = folder + "/" + self.name
+         # TODO(pablogs) ensure that git is installed
+         command = "git clone -b {} {} {}".format(self.branch, self.url, self.path)
+         result, stderr = run_cmd(command, capture_output=True)
+diff -u /home/rsl/rt-thread.bak/bsp/rockchip/rk3568/packages/micro_ros_rtthread_component/builder/microros_utils/utils.py packages/micro_ros_rtthread_component/builder/microros_utils/utils.py
+--- /home/rsl/rt-thread.bak/bsp/rockchip/rk3568/packages/micro_ros_rtthread_component/builder/microros_utils/utils.py	2025-04-17 23:39:13.143300189 -0700
++++ packages/micro_ros_rtthread_component/builder/microros_utils/utils.py	2025-04-11 03:09:07.963910618 -0700
+@@ -2,27 +2,31 @@
+ import os
+ import stat
+ import json
++import shutil
++
+ 
+ def run_cmd(command, env=None, capture_output=False, cwd=None):
+ 
+ 	if (capture_output):
+-		p = Popen(command, shell=True, env=env, stdout=PIPE, stderr=PIPE, cwd=cwd)
++		p = Popen(command, shell=True,  env=env, stdout=PIPE, stderr=PIPE, cwd=cwd)
+ 	else:
+-		p = Popen(command, shell=True, env=env, cwd=cwd)
++		p = Popen(command, shell=True,  env=env, cwd=cwd)
+ 
+ 	stdout, stderr = p.communicate()
+ 	return p.returncode, stderr
+ 
+ def rmtree(directory):
+-    if (os.path.isdir(directory)):
+-        for root, dirs, files in os.walk(directory, topdown=False):
+-            for name in files:
+-                filename = os.path.join(root, name)
+-                os.chmod(filename, stat.S_IWUSR)
+-                os.remove(filename)
+-            for name in dirs:
+-                os.rmdir(os.path.join(root, name))
+-        os.rmdir(directory)
++    # if (os.path.isdir(directory)):
++    #     for root, dirs, files in os.walk(directory, topdown=False):
++    #         for name in files:
++    #             filename = os.path.join(root, name)
++    #             os.chmod(filename, stat.S_IWUSR)
++    #             os.remove(filename)
++    #         for name in dirs:
++    #             os.rmdir(os.path.join(root, name))
++    #     os.rmdir(directory)
++    	shutil.rmtree(directory,ignore_errors=True, onerror=None)
++    
+ 
+ class EnvironmentHandler:
+ 	def __init__(self):
+@@ -38,19 +42,21 @@
+ 		self.modified_env = os.environ.copy()
+ 
+ 	def find_and_set_python3(self):
+-		path = self.modified_env['PATH'].split(";")
+-		possible_python_path = [x for x in path if "Python3" in x and "Scripts" not in x]
+-
++		path = self.modified_env['PATH'].split(":")
++		path.append('/usr/bin/python3')
++		possible_python_path = [x for x in path if "python3" in x and "Scripts" not in x]
++		print("path is",path)
++		print("possible_python_ptah",possible_python_path)
+ 		if len(possible_python_path) >= 1:
+-			python_script_path = [x for x in path if "Python3" in x and "Scripts" in x]
++			python_script_path = [x for x in path if "python3" in x and "Scripts" in x]
+ 			path.insert(0, possible_python_path[0])
+-			path.insert(0, python_script_path[0])
+-			self.set_environment_variable('PATH', ";".join(path))
+-			self.set_environment_variable('PYTHONHOME', ";".join(possible_python_path))
+-			self.set_environment_variable('PYTHONPATH', ";".join(possible_python_path))
++			#path.insert(0, python_script_path[0])
++			#self.set_environment_variable('PATH', ";".join(path))
++			#self.set_environment_variable('PYTHONHOME', ";".join(possible_python_path))
++			#self.set_environment_variable('PYTHONPATH', ";".join(possible_python_path))
+ 
+ 			# Check that pip is installed
+-			run_cmd('py -3 -m ensurepip', env=self.modified_env, capture_output=True)
++			#run_cmd('py -3 -m ensurepip', env=self.modified_env, capture_output=True)
+ 
+ 			return True
+ 		else:
+@@ -58,7 +64,7 @@
+ 
+ 	def install_python_dependencies(self, deps):
+ 		# Install dependencies
+-		pip_command = Popen('py -3 -m pip freeze', shell=True, env=self.modified_env, stdout=PIPE, stderr=PIPE)
++		pip_command = Popen('python3 -m pip freeze', shell=True, env=self.modified_env, stdout=PIPE, stderr=PIPE)
+ 		stdout, stderr = pip_command.communicate()
+ 		# pip_packages = [x.split("==")[0] for x in stdout.split('\n')]
+ 		stdout = stdout.decode('utf-8')
+@@ -74,7 +80,7 @@
+ 
+ 		for p in to_install:
+ 			print('Installing {} with pip at RT-Thread environment'.format(p))
+-			run_cmd('py -3 -m pip install {}'.format(p), env=self.modified_env, capture_output=False)
++			run_cmd('python3  -m pip install {}'.format(p), env=self.modified_env, capture_output=False)
+ 
+ class MetaFileGenerator:
+ 	def __init__(self, path):
+@@ -90,4 +96,4 @@
+ 
+ 	def save(self):
+ 		with open(self.path, "w") as file:
+-			file.write(json.dumps(self.meta, indent=4))
+\ No newline at end of file
++			file.write(json.dumps(self.meta, indent=4))

@@ -1,0 +1,24 @@
+[  3%] Built target ament_generate_version_header__rcl
+[ 16%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/client.c.obj[0m
+[ 16%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/context.c.obj[0m
+[ 16%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/common.c.obj[0m
+[ 16%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/domain_id.c.obj[0m
+[ 23%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/event.c.obj[0m
+[ 23%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/expand_topic_name.c.obj[0m
+[ 26%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/graph.c.obj[0m
+[ 30%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/guard_condition.c.obj[0m
+[ 33%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/init.c.obj[0m
+[ 36%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/init_options.c.obj[0m
+[ 40%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/lexer_lookahead.c.obj[0m
+[ 43%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/lexer.c.obj[0m
+[ 46%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/localhost.c.obj[0m
+[ 50%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/network_flow_endpoints.c.obj[0m
+[ 53%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/node.c.obj[0m
+[ 56%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/publisher.c.obj[0m
+[ 60%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/node_options.c.obj[0m
+[ 63%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/node_resolve_name.c.obj[0m
+[ 66%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/rmw_implementation_identifier_check.c.obj[0m
+[ 70%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/security.c.obj[0m
+[ 73%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/remap.c.obj[0m
+[ 76%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/service.c.obj[0m
+[ 80%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/subscription.c.obj[0m

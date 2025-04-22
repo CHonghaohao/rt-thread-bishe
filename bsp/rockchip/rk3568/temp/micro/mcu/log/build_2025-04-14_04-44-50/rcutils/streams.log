@@ -1,0 +1,97 @@
+[0.085s] Invoking command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rcutils': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/domain_coordinator:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_xmllint:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_uncrustify:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pyflakes:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pycodestyle:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pep257:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pclint:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_package:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_mypy:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_lint_cmake:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_flake8:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_copyright:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_lint:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_index_python:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_clang_tidy:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_clang_format /usr/bin/cmake --build /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rcutils -- -j24 -l24
+[0.623s] [  0%] Built target ament_cmake_python_copy_rcutils
+[0.626s] [100%] Built target rcutils
+[0.629s] running egg_info
+[0.629s] writing rcutils.egg-info/PKG-INFO
+[0.630s] writing dependency_links to rcutils.egg-info/dependency_links.txt
+[0.631s] writing top-level names to rcutils.egg-info/top_level.txt
+[0.632s] reading manifest file 'rcutils.egg-info/SOURCES.txt'
+[0.632s] writing manifest file 'rcutils.egg-info/SOURCES.txt'
+[0.632s] [100%] Built target ament_cmake_python_build_rcutils_egg
+[0.633s] Invoked command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rcutils' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/domain_coordinator:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_xmllint:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_uncrustify:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pyflakes:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pycodestyle:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pep257:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pclint:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_package:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_mypy:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_lint_cmake:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_flake8:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_copyright:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_lint:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_index_python:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_clang_tidy:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_clang_format /usr/bin/cmake --build /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rcutils -- -j24 -l24
+[0.638s] Invoking command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rcutils': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/domain_coordinator:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_xmllint:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_uncrustify:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pyflakes:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pycodestyle:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pep257:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pclint:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_package:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_mypy:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_lint_cmake:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_flake8:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_copyright:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_lint:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_index_python:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_clang_tidy:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_clang_format /usr/bin/cmake --install /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rcutils
+[0.658s] -- Install configuration: "Release"
+[0.658s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcutils/environment/pythonpath.sh
+[0.658s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcutils/environment/pythonpath.dsv
+[0.659s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rcutils-5.1.6-py3.8.egg-info
+[0.660s] -- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rcutils-5.1.6-py3.8.egg-info/dependency_links.txt
+[0.660s] -- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rcutils-5.1.6-py3.8.egg-info/top_level.txt
+[0.660s] -- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rcutils-5.1.6-py3.8.egg-info/PKG-INFO
+[0.660s] -- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rcutils-5.1.6-py3.8.egg-info/SOURCES.txt
+[0.660s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rcutils
+[0.661s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rcutils/logging.py
+[0.661s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rcutils/__init__.py
+[0.688s] Listing '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rcutils'...
+[0.689s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/librcutils.a
+[0.689s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcutils/environment/library_path.sh
+[0.689s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcutils/environment/library_path.dsv
+[0.689s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/ament_index/resource_index/package_run_dependencies/rcutils
+[0.689s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/ament_index/resource_index/parent_prefix_path/rcutils
+[0.689s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcutils/environment/ament_prefix_path.sh
+[0.689s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcutils/environment/ament_prefix_path.dsv
+[0.689s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcutils/environment/path.sh
+[0.689s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcutils/environment/path.dsv
+[0.689s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcutils/local_setup.bash
+[0.690s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcutils/local_setup.sh
+[0.690s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcutils/local_setup.zsh
+[0.690s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcutils/local_setup.dsv
+[0.691s] -- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcutils/package.dsv
+[0.691s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/ament_index/resource_index/packages/rcutils
+[0.692s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcutils/cmake/rcutilsExport.cmake
+[0.693s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcutils/cmake/rcutilsExport-release.cmake
+[0.693s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcutils/cmake/ament_cmake_export_include_directories-extras.cmake
+[0.694s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcutils/cmake/ament_cmake_export_libraries-extras.cmake
+[0.695s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcutils/cmake/ament_cmake_export_targets-extras.cmake
+[0.695s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcutils/cmake/ament_cmake_export_dependencies-extras.cmake
+[0.695s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcutils/cmake/rcutilsConfig.cmake
+[0.696s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcutils/cmake/rcutilsConfig-version.cmake
+[0.696s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcutils/package.xml
+[0.696s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils
+[0.696s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils
+[0.696s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/filesystem.h
+[0.696s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/macros.h
+[0.696s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/strdup.h
+[0.696s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/repl_str.h
+[0.697s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/process.h
+[0.697s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/types.h
+[0.697s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/qsort.h
+[0.698s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/configuration_flags.h.in
+[0.699s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/error_handling.h
+[0.699s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/cmdline_parser.h
+[0.699s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/get_env.h
+[0.700s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/stdatomic_helper.h
+[0.700s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/find.h
+[0.700s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/time.h
+[0.700s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/testing
+[0.700s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/testing/fault_injection.h
+[0.700s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/strerror.h
+[0.700s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/types
+[0.701s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/types/array_list.h
+[0.701s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/types/char_array.h
+[0.701s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/types/uint8_array.h
+[0.701s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/types/hash_map.h
+[0.701s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/types/rcutils_ret.h
+[0.701s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/types/string_array.h
+[0.702s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/types/string_map.h
+[0.702s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/security_directory.h
+[0.702s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/shared_library.h
+[0.702s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/env.h
+[0.703s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/snprintf.h
+[0.703s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/split.h
+[0.703s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/allocator.h
+[0.703s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/logging.h
+[0.704s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/visibility_control.h
+[0.704s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/isalnum_no_locale.h
+[0.704s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/visibility_control_macros.h
+[0.704s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/strcasecmp.h
+[0.704s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/format_string.h
+[0.705s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/stdatomic_helper
+[0.705s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/stdatomic_helper/win32
+[0.705s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/stdatomic_helper/win32/stdatomic.h
+[0.705s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/stdatomic_helper/gcc
+[0.706s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/stdatomic_helper/gcc/stdatomic.h
+[0.706s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils
+[0.706s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils
+[0.706s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/logging_macros.h
+[0.706s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils/rcutils/configuration_flags.h
+[0.818s] Invoked command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rcutils' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/domain_coordinator:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_xmllint:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_uncrustify:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pyflakes:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pycodestyle:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pep257:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pclint:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_package:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_mypy:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_lint_cmake:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_flake8:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_copyright:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_lint:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_index_python:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_clang_tidy:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_clang_format /usr/bin/cmake --install /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rcutils

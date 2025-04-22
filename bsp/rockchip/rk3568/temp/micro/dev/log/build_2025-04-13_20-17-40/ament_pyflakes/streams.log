@@ -1,0 +1,37 @@
+[0.473s] Invoking command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/src/ament_lint/ament_pyflakes': AMENT_PREFIX_PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pycodestyle PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pycodestyle/bin:${PATH} PYTHONPATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pyflakes/prefix_override:/home/rsl/.local/lib/python3.8/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pyflakes/lib/python3.8/site-packages:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pycodestyle/lib/python3.8/site-packages /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/ament_pyflakes build --build-base /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pyflakes/build install --record /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pyflakes/install.log --single-version-externally-managed install_data
+[0.576s] running egg_info
+[0.576s] creating ../../../build/ament_pyflakes/ament_pyflakes.egg-info
+[0.576s] writing ../../../build/ament_pyflakes/ament_pyflakes.egg-info/PKG-INFO
+[0.576s] writing dependency_links to ../../../build/ament_pyflakes/ament_pyflakes.egg-info/dependency_links.txt
+[0.577s] writing entry points to ../../../build/ament_pyflakes/ament_pyflakes.egg-info/entry_points.txt
+[0.577s] writing requirements to ../../../build/ament_pyflakes/ament_pyflakes.egg-info/requires.txt
+[0.577s] writing top-level names to ../../../build/ament_pyflakes/ament_pyflakes.egg-info/top_level.txt
+[0.577s] writing manifest file '../../../build/ament_pyflakes/ament_pyflakes.egg-info/SOURCES.txt'
+[0.605s] reading manifest file '../../../build/ament_pyflakes/ament_pyflakes.egg-info/SOURCES.txt'
+[0.605s] writing manifest file '../../../build/ament_pyflakes/ament_pyflakes.egg-info/SOURCES.txt'
+[0.606s] running build
+[0.606s] running build_py
+[0.606s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pyflakes/build
+[0.606s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pyflakes/build/lib
+[0.606s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pyflakes/build/lib/ament_pyflakes
+[0.606s] copying ament_pyflakes/main.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pyflakes/build/lib/ament_pyflakes
+[0.606s] copying ament_pyflakes/__init__.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pyflakes/build/lib/ament_pyflakes
+[0.607s] running install
+[0.607s] running install_lib
+[0.607s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pyflakes/lib/python3.8/site-packages/ament_pyflakes
+[0.607s] copying /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pyflakes/build/lib/ament_pyflakes/main.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pyflakes/lib/python3.8/site-packages/ament_pyflakes
+[0.607s] copying /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pyflakes/build/lib/ament_pyflakes/__init__.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pyflakes/lib/python3.8/site-packages/ament_pyflakes
+[0.610s] byte-compiling /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pyflakes/lib/python3.8/site-packages/ament_pyflakes/main.py to main.cpython-38.pyc
+[0.612s] byte-compiling /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pyflakes/lib/python3.8/site-packages/ament_pyflakes/__init__.py to __init__.cpython-38.pyc
+[0.612s] running install_data
+[0.613s] copying package.xml -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pyflakes/share/ament_pyflakes
+[0.613s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pyflakes/share/ament_index
+[0.613s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pyflakes/share/ament_index/resource_index
+[0.613s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pyflakes/share/ament_index/resource_index/packages
+[0.616s] copying resource/ament_pyflakes -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pyflakes/share/ament_index/resource_index/packages
+[0.616s] running install_egg_info
+[0.617s] Copying ../../../build/ament_pyflakes/ament_pyflakes.egg-info to /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pyflakes/lib/python3.8/site-packages/ament_pyflakes-0.12.12-py3.8.egg-info
+[0.621s] running install_scripts
+[0.630s] Installing ament_pyflakes script to /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pyflakes/bin
+[0.630s] writing list of installed files to '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pyflakes/install.log'
+[0.667s] Invoked command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/src/ament_lint/ament_pyflakes' returned '0': AMENT_PREFIX_PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pycodestyle PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pycodestyle/bin:${PATH} PYTHONPATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pyflakes/prefix_override:/home/rsl/.local/lib/python3.8/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pyflakes/lib/python3.8/site-packages:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_pycodestyle/lib/python3.8/site-packages /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/ament_pyflakes build --build-base /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pyflakes/build install --record /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/build/ament_pyflakes/install.log --single-version-externally-managed install_data

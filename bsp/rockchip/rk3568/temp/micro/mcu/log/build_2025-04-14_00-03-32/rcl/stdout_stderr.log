@@ -1,0 +1,9 @@
+[  3%] Built target ament_generate_version_header__rcl
+[  6%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/init.c.obj[0m
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:49:10:[m[K [01;31m[Kfatal error: [m[Krmw_microxrcedds_c/rmw_microros/custom_transport.h: No such file or directory
+   49 | #include [01;31m[K"rmw_microxrcedds_c/rmw_microros/custom_transport.h"[m[K
+      |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+compilation terminated.
+make[2]: *** [CMakeFiles/rcl.dir/build.make:191: CMakeFiles/rcl.dir/src/rcl/init.c.obj] Error 1
+make[1]: *** [CMakeFiles/Makefile2:156: CMakeFiles/rcl.dir/all] Error 2
+make: *** [Makefile:146: all] Error 2

@@ -1,0 +1,15 @@
+running egg_info
+writing ../../../build/test_tracetools_launch/test_tracetools_launch.egg-info/PKG-INFO
+writing dependency_links to ../../../build/test_tracetools_launch/test_tracetools_launch.egg-info/dependency_links.txt
+writing requirements to ../../../build/test_tracetools_launch/test_tracetools_launch.egg-info/requires.txt
+writing top-level names to ../../../build/test_tracetools_launch/test_tracetools_launch.egg-info/top_level.txt
+reading manifest file '../../../build/test_tracetools_launch/test_tracetools_launch.egg-info/SOURCES.txt'
+writing manifest file '../../../build/test_tracetools_launch/test_tracetools_launch.egg-info/SOURCES.txt'
+running build
+running install
+running install_data
+running install_egg_info
+removing '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/test_tracetools_launch-4.1.1-py3.8.egg-info' (and everything under it)
+Copying ../../../build/test_tracetools_launch/test_tracetools_launch.egg-info to /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/test_tracetools_launch-4.1.1-py3.8.egg-info
+running install_scripts
+writing list of installed files to '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/test_tracetools_launch/install.log'

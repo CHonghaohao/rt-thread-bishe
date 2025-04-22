@@ -1,0 +1,127 @@
+-- The C compiler identification is GNU 10.3.1
+-- The CXX compiler identification is GNU 10.3.1
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/bin/aarch64-none-elf-gcc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/bin/aarch64-none-elf-g++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ament_cmake_ros: 0.10.0 (/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_ros/share/ament_cmake_ros/cmake)
+-- Found Python3: /usr/bin/python3 (found version "3.8.10") found components: Interpreter
+-- Found rcl_interfaces: 1.2.1 (/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl_interfaces/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_introspection_c;rosidl_typesupport_microxrcedds_c
+-- Found rosidl_adapter: 3.1.6 (/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rosidl_adapter/cmake)
+-- Found rcl_logging_interface: 2.3.1 (/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl_logging_interface/cmake)
+-- Found rmw_implementation: 2.8.4 (/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw_implementation/cmake)
+-- Found rmw_implementation_cmake: 6.1.2 (/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw_implementation_cmake/cmake)
+-- Found rmw_microxrcedds: 3.0.3 (/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw_microxrcedds/cmake)
+-- Using RMW implementation 'rmw_microxrcedds'
+-- Found tracetools: 4.1.1 (/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/tracetools/cmake)
+-- Configuring done (0.6s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rcl
+[  3%] [34m[1mGenerating rcl/version.h[0m
+[  3%] Built target ament_generate_version_header__rcl
+[  6%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/common.c.obj[0m
+[ 10%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/client.c.obj[0m
+[ 13%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/domain_id.c.obj[0m
+[ 16%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/context.c.obj[0m
+[ 23%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/event.c.obj[0m
+[ 23%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/expand_topic_name.c.obj[0m
+[ 26%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/graph.c.obj[0m
+[ 30%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/guard_condition.c.obj[0m
+[ 33%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/init.c.obj[0m
+[ 36%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/lexer.c.obj[0m
+[ 40%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/init_options.c.obj[0m
+[ 43%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/localhost.c.obj[0m
+[ 46%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/network_flow_endpoints.c.obj[0m
+[ 50%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/node.c.obj[0m
+[ 53%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/lexer_lookahead.c.obj[0m
+[ 60%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/node_options.c.obj[0m
+[ 60%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/publisher.c.obj[0m
+[ 66%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/remap.c.obj[0m
+[ 66%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/node_resolve_name.c.obj[0m
+[ 70%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/rmw_implementation_identifier_check.c.obj[0m
+[ 73%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/security.c.obj[0m
+[ 76%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/service.c.obj[0m
+[ 80%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/time.c.obj[0m
+[ 83%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/timer.c.obj[0m
+[ 86%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/subscription.c.obj[0m
+[ 90%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/validate_enclave_name.c.obj[0m
+[ 93%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/validate_topic_name.c.obj[0m
+[ 96%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/wait.c.obj[0m
+[100%] [32m[1mLinking CXX static library librcl.a[0m
+[100%] Built target rcl
+-- Install configuration: "Release"
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/librcl.a
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/environment/library_path.sh
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/environment/library_path.dsv
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/version.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/ament_index/resource_index/package_run_dependencies/rcl
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/ament_index/resource_index/parent_prefix_path/rcl
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/environment/ament_prefix_path.sh
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/environment/ament_prefix_path.dsv
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/environment/path.sh
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/environment/path.dsv
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/local_setup.bash
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/local_setup.sh
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/local_setup.zsh
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/local_setup.dsv
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/package.dsv
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/ament_index/resource_index/packages/rcl
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/cmake/rclExport.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/cmake/rclExport-release.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/cmake/rcl-extras.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/cmake/ament_cmake_export_include_directories-extras.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/cmake/ament_cmake_export_libraries-extras.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/cmake/ament_cmake_export_targets-extras.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/cmake/ament_cmake_export_dependencies-extras.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/cmake/rclConfig.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/cmake/rclConfig-version.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/package.xml
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/cmake/get_default_rcl_logging_implementation.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/cmake/rcl_set_symbol_visibility_hidden.cmake
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/client.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/macros.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/remap.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/validate_enclave_name.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/types.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/error_handling.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/node_options.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/context.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/lexer_lookahead.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/validate_topic_name.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/network_flow_endpoints.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/logging_rosout.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/time.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/security.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/subscription.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/wait.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/expand_topic_name.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/event_callback.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/guard_condition.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/domain_id.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/timer.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/arguments.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/log_level.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/node.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/allocator.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/logging.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/service.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/init_options.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/lexer.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/visibility_control.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/rmw_implementation_identifier_check.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/init.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/event.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/localhost.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/rcl.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/graph.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl/rcl/publisher.h

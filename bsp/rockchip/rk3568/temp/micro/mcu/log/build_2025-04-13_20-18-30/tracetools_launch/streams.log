@@ -1,0 +1,45 @@
+[0.620s] Invoking command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/ros2_tracing/tracetools_launch': AMENT_PREFIX_PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install:${CMAKE_PREFIX_PATH} PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/bin:${PATH} PYTHONPATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/tracetools_launch/prefix_override:/home/rsl/.local/lib/python3.8/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/tracetools_launch build --build-base /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/tracetools_launch/build install --record /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/tracetools_launch/install.log --single-version-externally-managed install_data
+[0.756s] running egg_info
+[0.757s] creating ../../../build/tracetools_launch/tracetools_launch.egg-info
+[0.757s] writing ../../../build/tracetools_launch/tracetools_launch.egg-info/PKG-INFO
+[0.757s] writing dependency_links to ../../../build/tracetools_launch/tracetools_launch.egg-info/dependency_links.txt
+[0.757s] writing entry points to ../../../build/tracetools_launch/tracetools_launch.egg-info/entry_points.txt
+[0.757s] writing requirements to ../../../build/tracetools_launch/tracetools_launch.egg-info/requires.txt
+[0.757s] writing top-level names to ../../../build/tracetools_launch/tracetools_launch.egg-info/top_level.txt
+[0.757s] writing manifest file '../../../build/tracetools_launch/tracetools_launch.egg-info/SOURCES.txt'
+[0.788s] reading manifest file '../../../build/tracetools_launch/tracetools_launch.egg-info/SOURCES.txt'
+[0.789s] writing manifest file '../../../build/tracetools_launch/tracetools_launch.egg-info/SOURCES.txt'
+[0.790s] running build
+[0.790s] running build_py
+[0.790s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/tracetools_launch/build
+[0.790s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/tracetools_launch/build/lib
+[0.791s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/tracetools_launch/build/lib/tracetools_launch
+[0.791s] copying tracetools_launch/__init__.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/tracetools_launch/build/lib/tracetools_launch
+[0.791s] copying tracetools_launch/action.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/tracetools_launch/build/lib/tracetools_launch
+[0.791s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/tracetools_launch/build/lib/tracetools_launch/actions
+[0.791s] copying tracetools_launch/actions/ld_preload.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/tracetools_launch/build/lib/tracetools_launch/actions
+[0.792s] copying tracetools_launch/actions/__init__.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/tracetools_launch/build/lib/tracetools_launch/actions
+[0.792s] running install
+[0.792s] running install_lib
+[0.793s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/tracetools_launch
+[0.793s] copying /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/tracetools_launch/build/lib/tracetools_launch/__init__.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/tracetools_launch
+[0.793s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/tracetools_launch/actions
+[0.793s] copying /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/tracetools_launch/build/lib/tracetools_launch/actions/ld_preload.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/tracetools_launch/actions
+[0.793s] copying /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/tracetools_launch/build/lib/tracetools_launch/actions/__init__.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/tracetools_launch/actions
+[0.793s] copying /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/tracetools_launch/build/lib/tracetools_launch/action.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/tracetools_launch
+[0.793s] byte-compiling /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/tracetools_launch/__init__.py to __init__.cpython-38.pyc
+[0.794s] byte-compiling /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/tracetools_launch/actions/ld_preload.py to ld_preload.cpython-38.pyc
+[0.795s] byte-compiling /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/tracetools_launch/actions/__init__.py to __init__.cpython-38.pyc
+[0.796s] byte-compiling /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/tracetools_launch/action.py to action.cpython-38.pyc
+[0.798s] running install_data
+[0.798s] copying package.xml -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/tracetools_launch
+[0.798s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/tracetools_launch/launch
+[0.798s] copying launch/example.launch.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/tracetools_launch/launch
+[0.798s] copying launch/example.launch.yaml -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/tracetools_launch/launch
+[0.799s] copying launch/example.launch.xml -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/tracetools_launch/launch
+[0.799s] copying resource/tracetools_launch -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/ament_index/resource_index/packages
+[0.799s] running install_egg_info
+[0.801s] Copying ../../../build/tracetools_launch/tracetools_launch.egg-info to /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/tracetools_launch-4.1.1-py3.8.egg-info
+[0.802s] running install_scripts
+[0.817s] writing list of installed files to '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/tracetools_launch/install.log'
+[0.841s] Invoked command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/ros2_tracing/tracetools_launch' returned '0': AMENT_PREFIX_PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install:${CMAKE_PREFIX_PATH} PATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/bin:${PATH} PYTHONPATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/tracetools_launch/prefix_override:/home/rsl/.local/lib/python3.8/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/tracetools_launch build --build-base /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/tracetools_launch/build install --record /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/tracetools_launch/install.log --single-version-externally-managed install_data

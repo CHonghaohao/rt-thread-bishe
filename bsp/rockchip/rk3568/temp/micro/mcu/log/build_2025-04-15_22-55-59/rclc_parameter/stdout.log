@@ -1,0 +1,44 @@
+/usr/bin/cmake -S/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc_parameter -B/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rclc_parameter --check-build-system CMakeFiles/Makefile.cmake 0
+/usr/bin/cmake -E cmake_progress_start /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rclc_parameter/CMakeFiles /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rclc_parameter//CMakeFiles/progress.marks
+/usr/bin/make  -f CMakeFiles/Makefile2 all
+make[1]: Entering directory '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rclc_parameter'
+/usr/bin/make  -f CMakeFiles/rclc_parameter.dir/build.make CMakeFiles/rclc_parameter.dir/depend
+make[2]: Entering directory '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rclc_parameter'
+cd /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rclc_parameter && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc_parameter /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc_parameter /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rclc_parameter /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rclc_parameter /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rclc_parameter/CMakeFiles/rclc_parameter.dir/DependInfo.cmake "--color="
+make[2]: Leaving directory '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rclc_parameter'
+/usr/bin/make  -f CMakeFiles/rclc_parameter.dir/build.make CMakeFiles/rclc_parameter.dir/build
+make[2]: Entering directory '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rclc_parameter'
+make[2]: Nothing to be done for 'CMakeFiles/rclc_parameter.dir/build'.
+make[2]: Leaving directory '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rclc_parameter'
+[100%] Built target rclc_parameter
+make[1]: Leaving directory '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rclc_parameter'
+/usr/bin/cmake -E cmake_progress_start /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rclc_parameter/CMakeFiles 0
+-- Install configuration: "Release"
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/librclc_parameter.a
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rclc_parameter
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rclc_parameter/rclc_parameter.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rclc_parameter/visibility_control.h
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rclc_parameter/environment/library_path.sh
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rclc_parameter/environment/library_path.dsv
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/ament_index/resource_index/package_run_dependencies/rclc_parameter
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/ament_index/resource_index/parent_prefix_path/rclc_parameter
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rclc_parameter/environment/ament_prefix_path.sh
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rclc_parameter/environment/ament_prefix_path.dsv
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rclc_parameter/environment/path.sh
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rclc_parameter/environment/path.dsv
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rclc_parameter/local_setup.bash
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rclc_parameter/local_setup.sh
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rclc_parameter/local_setup.zsh
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rclc_parameter/local_setup.dsv
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rclc_parameter/package.dsv
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/ament_index/resource_index/packages/rclc_parameter
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rclc_parameter/cmake/rclc_parameterExport.cmake
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rclc_parameter/cmake/rclc_parameterExport-release.cmake
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rclc_parameter/cmake/ament_cmake_export_include_directories-extras.cmake
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rclc_parameter/cmake/ament_cmake_export_libraries-extras.cmake
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rclc_parameter/cmake/ament_cmake_export_targets-extras.cmake
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rclc_parameter/cmake/ament_cmake_export_dependencies-extras.cmake
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rclc_parameter/cmake/rclc_parameterConfig.cmake
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rclc_parameter/cmake/rclc_parameterConfig-version.cmake
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rclc_parameter/package.xml

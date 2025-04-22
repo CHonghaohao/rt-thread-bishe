@@ -1,0 +1,21 @@
+[0.220s] Invoking command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/microcdr': /usr/bin/cmake --build /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/microcdr -- -j24 -l24
+[0.585s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/micro-CDR/src/c/common.c:[m[K In function '[01m[Kucdr_align_to[m[K':
+[0.585s] [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/micro-CDR/src/c/common.c:169:26:[m[K [01;35m[Kwarning: [m[Kconversion from '[01m[Klong unsigned int[m[K' to '[01m[Kuint8_t[m[K' {aka '[01m[Kunsigned char[m[K'} may change value [[01;35m[K-Wconversion[m[K]
+[0.585s]   169 |     ub->last_data_size = [01;35m[K([m[Ksize_t)size;
+[0.585s]       |                          [01;35m[K^[m[K
+[0.587s] [ 16%] [32mBuilding C object CMakeFiles/microcdr.dir/src/c/common.c.obj[0m
+[0.587s] [ 33%] [32m[1mLinking C static library libmicrocdr.a[0m
+[0.587s] [100%] Built target microcdr
+[0.597s] Invoked command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/microcdr' returned '0': /usr/bin/cmake --build /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/microcdr -- -j24 -l24
+[0.599s] Invoking command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/microcdr': /usr/bin/cmake --install /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/microcdr
+[0.621s] -- Install configuration: "Release"
+[0.621s] -- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/libmicrocdr.a
+[0.622s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/ucdr
+[0.622s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/ucdr/visibility.h
+[0.622s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/ucdr/microcdr.h
+[0.622s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/ucdr/config.h
+[0.623s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/microcdr/cmake/microcdrTargets.cmake
+[0.623s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/microcdr/cmake/microcdrTargets-release.cmake
+[0.624s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/microcdr/cmake/microcdrConfig.cmake
+[0.626s] -- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/microcdr/cmake/microcdrConfigVersion.cmake
+[0.656s] Invoked command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/microcdr' returned '0': /usr/bin/cmake --install /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/microcdr

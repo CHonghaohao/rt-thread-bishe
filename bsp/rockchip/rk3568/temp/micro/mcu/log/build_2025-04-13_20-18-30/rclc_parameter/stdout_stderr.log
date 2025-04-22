@@ -1,0 +1,107 @@
+[0mCMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+[0m
+-- The C compiler identification is GNU 10.3.1
+-- The CXX compiler identification is GNU 10.3.1
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/bin/aarch64-none-elf-gcc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/bin/aarch64-none-elf-g++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ament_cmake: 1.3.11 (/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake/share/ament_cmake/cmake)
+-- Found Python3: /usr/bin/python3 (found version "3.8.10") found components: Interpreter
+-- Found rcl: 5.3.9 (/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/cmake)
+[33mCMake Warning at /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcutils/cmake/ament_cmake_export_libraries-extras.cmake:116 (message):
+  Package 'rcutils' exports library 'dl' which couldn't be found
+Call Stack (most recent call first):
+  /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcutils/cmake/rcutilsConfig.cmake:41 (include)
+  /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rosidl_runtime_c/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)
+  /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rosidl_runtime_c/cmake/rosidl_runtime_cConfig.cmake:41 (include)
+  /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/builtin_interfaces/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)
+  /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/builtin_interfaces/cmake/builtin_interfacesConfig.cmake:41 (include)
+  /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl_interfaces/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)
+  /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl_interfaces/cmake/rcl_interfacesConfig.cmake:41 (include)
+  /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)
+  /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcl/cmake/rclConfig.cmake:41 (include)
+  CMakeLists.txt:34 (find_package)
+
+[0m
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_introspection_c;rosidl_typesupport_microxrcedds_c
+-- Found rosidl_adapter: 3.1.6 (/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rosidl_adapter/cmake)
+-- Found rmw_implementation_cmake: 6.1.2 (/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw_implementation_cmake/cmake)
+-- Found rmw_microxrcedds: 3.0.3 (/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw_microxrcedds/cmake)
+-- Using RMW implementation 'rmw_microxrcedds'
+-- Found rclc: 4.0.2 (/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rclc/cmake)
+-- Configuring done (0.6s)
+-- Generating done (0.0s)
+[33mCMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_INSTALL_LIBDIR
+    THIRDPARTY
+
+[0m
+-- Build files have been written to: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rclc_parameter
+/usr/bin/cmake -S/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc_parameter -B/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rclc_parameter --check-build-system CMakeFiles/Makefile.cmake 0
+/usr/bin/cmake -E cmake_progress_start /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rclc_parameter/CMakeFiles /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rclc_parameter//CMakeFiles/progress.marks
+/usr/bin/make  -f CMakeFiles/Makefile2 all
+make[1]: Entering directory '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rclc_parameter'
+/usr/bin/make  -f CMakeFiles/rclc_parameter.dir/build.make CMakeFiles/rclc_parameter.dir/depend
+make[2]: Entering directory '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rclc_parameter'
+cd /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rclc_parameter && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc_parameter /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc_parameter /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rclc_parameter /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rclc_parameter /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rclc_parameter/CMakeFiles/rclc_parameter.dir/DependInfo.cmake "--color="
+make[2]: Leaving directory '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rclc_parameter'
+/usr/bin/make  -f CMakeFiles/rclc_parameter.dir/build.make CMakeFiles/rclc_parameter.dir/build
+make[2]: Entering directory '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rclc_parameter'
+[ 66%] [32mBuilding C object CMakeFiles/rclc_parameter.dir/src/rclc_parameter/parameter_server.c.obj[0m
+[ 66%] [32mBuilding C object CMakeFiles/rclc_parameter.dir/src/rclc_parameter/parameter_utils.c.obj[0m
+/home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/bin/aarch64-none-elf-gcc -DRCLC_PARAMETER_BUILDING_LIBRARY -DRCLC_PARAMETER_MAX_STRING_LENGTH=50 -I/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc_parameter/include -I/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc_parameter/src -isystem /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl -isystem /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include -isystem /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rosidl_typesupport_interface -isystem /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils -isystem /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/builtin_interfaces -isystem /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl_interfaces -isystem /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rosidl_runtime_c -isystem /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rosidl_typesupport_introspection_c -isystem /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl_logging_interface -isystem /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw -isystem /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/tracetools -isystem /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl_action -isystem /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/action_msgs -isystem /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/unique_identifier_msgs -std=c11 -O2 -mcpu=cortex-a55+simd -ffunction-sections -fdata-sections -nostdlib --param max-inline-insns-single=500  -fno-exceptions -mlittle-endian -mcmodel=small  -DCLOCK_MONOTONIC=0 -D'__attribute__(x)=' -O3 -DNDEBUG -std=gnu11 -Wall -Wextra -Wpedantic -MD -MT CMakeFiles/rclc_parameter.dir/src/rclc_parameter/parameter_utils.c.obj -MF CMakeFiles/rclc_parameter.dir/src/rclc_parameter/parameter_utils.c.obj.d -o CMakeFiles/rclc_parameter.dir/src/rclc_parameter/parameter_utils.c.obj -c /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc_parameter/src/rclc_parameter/parameter_utils.c
+/home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/bin/aarch64-none-elf-gcc -DRCLC_PARAMETER_BUILDING_LIBRARY -DRCLC_PARAMETER_MAX_STRING_LENGTH=50 -I/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc_parameter/include -I/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc_parameter/src -isystem /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl -isystem /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include -isystem /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rosidl_typesupport_interface -isystem /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcutils -isystem /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/builtin_interfaces -isystem /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl_interfaces -isystem /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rosidl_runtime_c -isystem /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rosidl_typesupport_introspection_c -isystem /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl_logging_interface -isystem /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw -isystem /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/tracetools -isystem /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rcl_action -isystem /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/action_msgs -isystem /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/unique_identifier_msgs -std=c11 -O2 -mcpu=cortex-a55+simd -ffunction-sections -fdata-sections -nostdlib --param max-inline-insns-single=500  -fno-exceptions -mlittle-endian -mcmodel=small  -DCLOCK_MONOTONIC=0 -D'__attribute__(x)=' -O3 -DNDEBUG -std=gnu11 -Wall -Wextra -Wpedantic -MD -MT CMakeFiles/rclc_parameter.dir/src/rclc_parameter/parameter_server.c.obj -MF CMakeFiles/rclc_parameter.dir/src/rclc_parameter/parameter_server.c.obj.d -o CMakeFiles/rclc_parameter.dir/src/rclc_parameter/parameter_server.c.obj -c /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rclc/rclc_parameter/src/rclc_parameter/parameter_server.c
+[100%] [32m[1mLinking CXX static library librclc_parameter.a[0m
+/usr/bin/cmake -P CMakeFiles/rclc_parameter.dir/cmake_clean_target.cmake
+/usr/bin/cmake -E cmake_link_script CMakeFiles/rclc_parameter.dir/link.txt --verbose=1
+/home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/bin/aarch64-none-elf-ar qc librclc_parameter.a CMakeFiles/rclc_parameter.dir/src/rclc_parameter/parameter_server.c.obj CMakeFiles/rclc_parameter.dir/src/rclc_parameter/parameter_utils.c.obj
+/home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/bin/aarch64-none-elf-ranlib librclc_parameter.a
+make[2]: Leaving directory '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rclc_parameter'
+[100%] Built target rclc_parameter
+make[1]: Leaving directory '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rclc_parameter'
+/usr/bin/cmake -E cmake_progress_start /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rclc_parameter/CMakeFiles 0
+-- Install configuration: "Release"
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/librclc_parameter.a
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rclc_parameter
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rclc_parameter/rclc_parameter.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rclc_parameter/visibility_control.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rclc_parameter/environment/library_path.sh
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rclc_parameter/environment/library_path.dsv
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/ament_index/resource_index/package_run_dependencies/rclc_parameter
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/ament_index/resource_index/parent_prefix_path/rclc_parameter
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rclc_parameter/environment/ament_prefix_path.sh
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rclc_parameter/environment/ament_prefix_path.dsv
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rclc_parameter/environment/path.sh
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rclc_parameter/environment/path.dsv
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rclc_parameter/local_setup.bash
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rclc_parameter/local_setup.sh
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rclc_parameter/local_setup.zsh
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rclc_parameter/local_setup.dsv
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rclc_parameter/package.dsv
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/ament_index/resource_index/packages/rclc_parameter
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rclc_parameter/cmake/rclc_parameterExport.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rclc_parameter/cmake/rclc_parameterExport-release.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rclc_parameter/cmake/ament_cmake_export_include_directories-extras.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rclc_parameter/cmake/ament_cmake_export_libraries-extras.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rclc_parameter/cmake/ament_cmake_export_targets-extras.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rclc_parameter/cmake/ament_cmake_export_dependencies-extras.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rclc_parameter/cmake/rclc_parameterConfig.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rclc_parameter/cmake/rclc_parameterConfig-version.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rclc_parameter/package.xml

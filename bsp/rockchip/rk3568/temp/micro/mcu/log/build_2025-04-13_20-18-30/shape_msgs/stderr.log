@@ -1,0 +1,31 @@
+[0mCMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+[0m
+[33mCMake Warning at /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcutils/cmake/ament_cmake_export_libraries-extras.cmake:116 (message):
+  Package 'rcutils' exports library 'dl' which couldn't be found
+Call Stack (most recent call first):
+  /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcutils/cmake/rcutilsConfig.cmake:41 (include)
+  /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rosidl_runtime_c/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)
+  /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rosidl_runtime_c/cmake/rosidl_runtime_cConfig.cmake:41 (include)
+  /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/builtin_interfaces/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)
+  /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/builtin_interfaces/cmake/builtin_interfacesConfig.cmake:41 (include)
+  /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/std_msgs/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)
+  /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/std_msgs/cmake/std_msgsConfig.cmake:41 (include)
+  /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/geometry_msgs/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)
+  /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/geometry_msgs/cmake/geometry_msgsConfig.cmake:41 (include)
+  CMakeLists.txt:14 (find_package)
+
+[0m
+[33mCMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_INSTALL_LIBDIR
+    THIRDPARTY
+
+[0m

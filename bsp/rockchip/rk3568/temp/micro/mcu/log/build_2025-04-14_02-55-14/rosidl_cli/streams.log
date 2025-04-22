@@ -1,0 +1,20 @@
+[0.930s] Invoking command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rosidl/rosidl_cli': PYTHONPATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/prefix_override:/home/rsl/.local/lib/python3.8/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/rosidl_cli build --build-base /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/build install --record /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/install.log --single-version-externally-managed install_data
+[1.071s] running egg_info
+[1.071s] writing ../../../build/rosidl_cli/rosidl_cli.egg-info/PKG-INFO
+[1.071s] writing dependency_links to ../../../build/rosidl_cli/rosidl_cli.egg-info/dependency_links.txt
+[1.071s] writing entry points to ../../../build/rosidl_cli/rosidl_cli.egg-info/entry_points.txt
+[1.072s] writing requirements to ../../../build/rosidl_cli/rosidl_cli.egg-info/requires.txt
+[1.072s] writing top-level names to ../../../build/rosidl_cli/rosidl_cli.egg-info/top_level.txt
+[1.095s] reading manifest file '../../../build/rosidl_cli/rosidl_cli.egg-info/SOURCES.txt'
+[1.096s] writing manifest file '../../../build/rosidl_cli/rosidl_cli.egg-info/SOURCES.txt'
+[1.096s] running build
+[1.096s] running build_py
+[1.097s] running install
+[1.098s] running install_lib
+[1.100s] running install_data
+[1.100s] running install_egg_info
+[1.101s] removing '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rosidl_cli-3.1.6-py3.8.egg-info' (and everything under it)
+[1.102s] Copying ../../../build/rosidl_cli/rosidl_cli.egg-info to /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rosidl_cli-3.1.6-py3.8.egg-info
+[1.103s] running install_scripts
+[1.116s] Installing rosidl script to /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/bin
+[1.117s] writing list of installed files to '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/install.log'

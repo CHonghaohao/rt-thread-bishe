@@ -1,0 +1,33 @@
+[  3%] Built target ament_generate_version_header__rcl
+[  6%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/init.c.obj[0m
+[ 13%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/time.c.obj[0m
+[ 13%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/timer.c.obj[0m
+[ 16%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/validate_enclave_name.c.obj[0m
+[ 20%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/wait.c.obj[0m
+[ 23%] [32mBuilding C object CMakeFiles/rcl.dir/src/rcl/validate_topic_name.c.obj[0m
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/time.c:[m[K In function '[01m[Krcl_clock_init[m[K':
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/time.c:106:7:[m[K [01;35m[Kwarning: [m[Kimplicit declaration of function '[01m[Kbrain_debug[m[K' [[01;35m[K-Wimplicit-function-declaration[m[K]
+  106 |       [01;35m[Kbrain_debug[m[K(NULL);
+      |       [01;35m[K^~~~~~~~~~~[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/validate_topic_name.c:22[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/validate_topic_name.c:[m[K In function '[01m[Krcl_validate_topic_name_with_size[m[K':
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/validate_topic_name.c:58:25:[m[K [01;35m[Kwarning: [m[Karray subscript has type '[01m[Kchar[m[K' [[01;35m[K-Wchar-subscripts[m[K]
+   58 |   if (isdigit([01;35m[Ktopic_name[0][m[K) != 0) {
+      |               [01;35m[K~~~~~~~~~~^~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/validate_topic_name.c:84:27:[m[K [01;35m[Kwarning: [m[Karray subscript has type '[01m[Kchar[m[K' [[01;35m[K-Wchar-subscripts[m[K]
+   84 |         isdigit([01;35m[Ktopic_name[i][m[K) != 0 &&
+      |                 [01;35m[K~~~~~~~~~~^~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/validate_topic_name.c:179:29:[m[K [01;35m[Kwarning: [m[Karray subscript has type '[01m[Kchar[m[K' [[01;35m[K-Wchar-subscripts[m[K]
+  179 |       if (isdigit([01;35m[Ktopic_name[i + 1][m[K) != 0) {
+      |                   [01;35m[K~~~~~~~~~~^~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:49:8:[m[K [01;31m[Kerror: [m[Kunknown type name '[01m[Krmw_uxrce_transport_params_t[m[K'
+   49 | extern [01;31m[Krmw_uxrce_transport_params_t[m[K rmw_uxrce_transport_default_params;
+      |        [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:[m[K In function '[01m[Krcl_init[m[K':
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rcl/rcl/src/rcl/init.c:96:3:[m[K [01;35m[Kwarning: [m[Kimplicit declaration of function '[01m[Kbrain_debug[m[K' [[01;35m[K-Wimplicit-function-declaration[m[K]
+   96 |   [01;35m[Kbrain_debug[m[K(NULL);
+      |   [01;35m[K^~~~~~~~~~~[m[K
+make[2]: *** [CMakeFiles/rcl.dir/build.make:191: CMakeFiles/rcl.dir/src/rcl/init.c.obj] Error 1
+make[2]: *** Waiting for unfinished jobs....
+make[1]: *** [CMakeFiles/Makefile2:156: CMakeFiles/rcl.dir/all] Error 2
+make: *** [Makefile:146: all] Error 2

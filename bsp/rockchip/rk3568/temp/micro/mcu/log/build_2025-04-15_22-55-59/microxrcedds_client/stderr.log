@@ -1,0 +1,3 @@
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/core/session/session.c:236:1:[m[K [01;35m[Kwarning: [m[Kmulti-line comment [[01;35m[K-Wcomment[m[K]
+  236 | [01;35m[K/[m[K/ #define  brain_debug(x) do{\
+      | [01;35m[K^[m[K

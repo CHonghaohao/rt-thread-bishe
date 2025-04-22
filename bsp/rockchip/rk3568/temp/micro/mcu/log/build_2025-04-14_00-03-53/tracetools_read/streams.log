@@ -1,0 +1,19 @@
+[0.897s] Invoking command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/ros2_tracing/tracetools_read': PYTHONPATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/tracetools_read/prefix_override:/home/rsl/.local/lib/python3.8/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/tracetools_read build --build-base /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/tracetools_read/build install --record /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/tracetools_read/install.log --single-version-externally-managed install_data
+[1.006s] running egg_info
+[1.006s] writing ../../../build/tracetools_read/tracetools_read.egg-info/PKG-INFO
+[1.006s] writing dependency_links to ../../../build/tracetools_read/tracetools_read.egg-info/dependency_links.txt
+[1.006s] writing requirements to ../../../build/tracetools_read/tracetools_read.egg-info/requires.txt
+[1.007s] writing top-level names to ../../../build/tracetools_read/tracetools_read.egg-info/top_level.txt
+[1.040s] reading manifest file '../../../build/tracetools_read/tracetools_read.egg-info/SOURCES.txt'
+[1.040s] writing manifest file '../../../build/tracetools_read/tracetools_read.egg-info/SOURCES.txt'
+[1.040s] running build
+[1.040s] running build_py
+[1.040s] running install
+[1.040s] running install_lib
+[1.046s] running install_data
+[1.046s] running install_egg_info
+[1.049s] removing '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/tracetools_read-4.1.1-py3.8.egg-info' (and everything under it)
+[1.049s] Copying ../../../build/tracetools_read/tracetools_read.egg-info to /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/tracetools_read-4.1.1-py3.8.egg-info
+[1.056s] running install_scripts
+[1.059s] writing list of installed files to '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/tracetools_read/install.log'
+[1.113s] Invoked command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/ros2_tracing/tracetools_read' returned '0': PYTHONPATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/tracetools_read/prefix_override:/home/rsl/.local/lib/python3.8/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/tracetools_read build --build-base /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/tracetools_read/build install --record /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/tracetools_read/install.log --single-version-externally-managed install_data

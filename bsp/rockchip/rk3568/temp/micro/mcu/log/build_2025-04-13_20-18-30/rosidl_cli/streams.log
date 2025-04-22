@@ -1,0 +1,77 @@
+[0.917s] Invoking command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rosidl/rosidl_cli': PYTHONPATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/prefix_override:/home/rsl/.local/lib/python3.8/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/rosidl_cli build --build-base /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/build install --record /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/install.log --single-version-externally-managed install_data
+[1.057s] running egg_info
+[1.057s] creating ../../../build/rosidl_cli/rosidl_cli.egg-info
+[1.057s] writing ../../../build/rosidl_cli/rosidl_cli.egg-info/PKG-INFO
+[1.059s] writing dependency_links to ../../../build/rosidl_cli/rosidl_cli.egg-info/dependency_links.txt
+[1.059s] writing entry points to ../../../build/rosidl_cli/rosidl_cli.egg-info/entry_points.txt
+[1.059s] writing requirements to ../../../build/rosidl_cli/rosidl_cli.egg-info/requires.txt
+[1.059s] writing top-level names to ../../../build/rosidl_cli/rosidl_cli.egg-info/top_level.txt
+[1.059s] writing manifest file '../../../build/rosidl_cli/rosidl_cli.egg-info/SOURCES.txt'
+[1.083s] reading manifest file '../../../build/rosidl_cli/rosidl_cli.egg-info/SOURCES.txt'
+[1.083s] writing manifest file '../../../build/rosidl_cli/rosidl_cli.egg-info/SOURCES.txt'
+[1.084s] running build
+[1.084s] running build_py
+[1.084s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/build
+[1.084s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/build/lib
+[1.084s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/build/lib/rosidl_cli
+[1.084s] copying rosidl_cli/__init__.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/build/lib/rosidl_cli
+[1.084s] copying rosidl_cli/extensions.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/build/lib/rosidl_cli
+[1.084s] copying rosidl_cli/entry_points.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/build/lib/rosidl_cli
+[1.085s] copying rosidl_cli/common.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/build/lib/rosidl_cli
+[1.085s] copying rosidl_cli/cli.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/build/lib/rosidl_cli
+[1.085s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/build/lib/rosidl_cli/command
+[1.085s] copying rosidl_cli/command/__init__.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/build/lib/rosidl_cli/command
+[1.085s] copying rosidl_cli/command/helpers.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/build/lib/rosidl_cli/command
+[1.085s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/build/lib/rosidl_cli/command/generate
+[1.086s] copying rosidl_cli/command/generate/api.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/build/lib/rosidl_cli/command/generate
+[1.086s] copying rosidl_cli/command/generate/__init__.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/build/lib/rosidl_cli/command/generate
+[1.086s] copying rosidl_cli/command/generate/extensions.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/build/lib/rosidl_cli/command/generate
+[1.086s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/build/lib/rosidl_cli/command/translate
+[1.087s] copying rosidl_cli/command/translate/api.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/build/lib/rosidl_cli/command/translate
+[1.087s] copying rosidl_cli/command/translate/__init__.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/build/lib/rosidl_cli/command/translate
+[1.087s] copying rosidl_cli/command/translate/extensions.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/build/lib/rosidl_cli/command/translate
+[1.087s] running install
+[1.088s] running install_lib
+[1.088s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rosidl_cli
+[1.088s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rosidl_cli/command
+[1.088s] copying /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/build/lib/rosidl_cli/command/__init__.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rosidl_cli/command
+[1.088s] copying /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/build/lib/rosidl_cli/command/helpers.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rosidl_cli/command
+[1.088s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rosidl_cli/command/generate
+[1.088s] copying /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/build/lib/rosidl_cli/command/generate/api.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rosidl_cli/command/generate
+[1.089s] copying /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/build/lib/rosidl_cli/command/generate/__init__.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rosidl_cli/command/generate
+[1.089s] copying /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/build/lib/rosidl_cli/command/generate/extensions.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rosidl_cli/command/generate
+[1.089s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rosidl_cli/command/translate
+[1.090s] copying /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/build/lib/rosidl_cli/command/translate/api.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rosidl_cli/command/translate
+[1.090s] copying /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/build/lib/rosidl_cli/command/translate/__init__.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rosidl_cli/command/translate
+[1.090s] copying /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/build/lib/rosidl_cli/command/translate/extensions.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rosidl_cli/command/translate
+[1.090s] copying /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/build/lib/rosidl_cli/__init__.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rosidl_cli
+[1.090s] copying /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/build/lib/rosidl_cli/extensions.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rosidl_cli
+[1.090s] copying /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/build/lib/rosidl_cli/entry_points.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rosidl_cli
+[1.091s] copying /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/build/lib/rosidl_cli/common.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rosidl_cli
+[1.091s] copying /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/build/lib/rosidl_cli/cli.py -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rosidl_cli
+[1.091s] byte-compiling /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rosidl_cli/command/__init__.py to __init__.cpython-38.pyc
+[1.091s] byte-compiling /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rosidl_cli/command/helpers.py to helpers.cpython-38.pyc
+[1.091s] byte-compiling /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rosidl_cli/command/generate/api.py to api.cpython-38.pyc
+[1.091s] byte-compiling /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rosidl_cli/command/generate/__init__.py to __init__.cpython-38.pyc
+[1.092s] byte-compiling /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rosidl_cli/command/generate/extensions.py to extensions.cpython-38.pyc
+[1.092s] byte-compiling /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rosidl_cli/command/translate/api.py to api.cpython-38.pyc
+[1.092s] byte-compiling /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rosidl_cli/command/translate/__init__.py to __init__.cpython-38.pyc
+[1.092s] byte-compiling /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rosidl_cli/command/translate/extensions.py to extensions.cpython-38.pyc
+[1.093s] byte-compiling /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rosidl_cli/__init__.py to __init__.cpython-38.pyc
+[1.093s] byte-compiling /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rosidl_cli/extensions.py to extensions.cpython-38.pyc
+[1.093s] byte-compiling /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rosidl_cli/entry_points.py to entry_points.cpython-38.pyc
+[1.093s] byte-compiling /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rosidl_cli/common.py to common.cpython-38.pyc
+[1.093s] byte-compiling /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rosidl_cli/cli.py to cli.cpython-38.pyc
+[1.093s] running install_data
+[1.094s] copying resource/rosidl_cli -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/ament_index/resource_index/packages
+[1.094s] copying package.xml -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rosidl_cli
+[1.094s] copying resource/package.dsv -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rosidl_cli
+[1.094s] creating /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rosidl_cli/environment
+[1.094s] copying completion/rosidl-argcomplete.bash -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rosidl_cli/environment
+[1.095s] copying completion/rosidl-argcomplete.zsh -> /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rosidl_cli/environment
+[1.095s] running install_egg_info
+[1.095s] Copying ../../../build/rosidl_cli/rosidl_cli.egg-info to /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/rosidl_cli-3.1.6-py3.8.egg-info
+[1.096s] running install_scripts
+[1.108s] Installing rosidl script to /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/bin
+[1.108s] writing list of installed files to '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/install.log'
+[1.135s] Invoked command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rosidl/rosidl_cli' returned '0': PYTHONPATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/prefix_override:/home/rsl/.local/lib/python3.8/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/rosidl_cli build --build-base /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/build install --record /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rosidl_cli/install.log --single-version-externally-managed install_data

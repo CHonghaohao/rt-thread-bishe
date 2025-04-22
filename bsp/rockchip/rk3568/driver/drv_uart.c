@@ -14,6 +14,7 @@
 
 #include <board.h>
 
+
 /*
  * The Synopsys DesignWare 8250 has an extra feature whereby it detects if the
  * LCR is written whilst busy. If it is, then a busy detect interrupt is
@@ -288,7 +289,7 @@ static void rt_hw_uart_isr(int irqno, void *param)
 
     if (!(iir & UART_IIR_NO_INT))
     {
-        rt_hw_serial_isr(serial, RT_SERIAL_EVENT_RX_IND);
+        rt_hw_serial_isr(serial, RT_SERIAL_EVENT_RX_IND);   //接收数据
     }
 
     if ((iir & UART_IIR_BUSY) == UART_IIR_BUSY)
@@ -306,7 +307,7 @@ int rt_hw_uart_init(void)
     struct hw_uart_device* uart;
     struct serial_configure config = RT_SERIAL_CONFIG_DEFAULT;
     RT_UNUSED(value);
-
+    
     config.baud_rate = 1500000;
 
 #define BSP_INSTALL_UART_DEVICE(no)     \
@@ -351,6 +352,7 @@ int rt_hw_uart_init(void)
 #endif
 
 #ifdef RT_USING_UART7
+    config.baud_rate = 115200;
     BSP_INSTALL_UART_DEVICE(7);
 #endif
 

@@ -1,0 +1,11 @@
+[33mCMake Warning:
+  Manually-specified variables were not used by the project:
+
+    BUILD_TESTING
+    THIRDPARTY
+
+[0m
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/util/time.c:[m[K In function '[01m[Kuxr_nanos[m[K':
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/Micro-XRCE-DDS-Client/src/c/util/time.c:71:5:[m[K [01;35m[Kwarning: [m[Kimplicit declaration of function '[01m[Kclock_gettime[m[K' [[01;35m[K-Wimplicit-function-declaration[m[K]
+   71 |     [01;35m[Kclock_gettime[m[K(CLOCK_REALTIME, &ts);
+      |     [01;35m[K^~~~~~~~~~~~~[m[K

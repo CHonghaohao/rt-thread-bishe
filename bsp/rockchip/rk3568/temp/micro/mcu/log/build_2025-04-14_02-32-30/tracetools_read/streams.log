@@ -1,0 +1,18 @@
+[0.996s] Invoking command in '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/ros2_tracing/tracetools_read': PYTHONPATH=/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/tracetools_read/prefix_override:/home/rsl/.local/lib/python3.8/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/tracetools_read build --build-base /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/tracetools_read/build install --record /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/tracetools_read/install.log --single-version-externally-managed install_data
+[1.131s] running egg_info
+[1.131s] writing ../../../build/tracetools_read/tracetools_read.egg-info/PKG-INFO
+[1.131s] writing dependency_links to ../../../build/tracetools_read/tracetools_read.egg-info/dependency_links.txt
+[1.132s] writing requirements to ../../../build/tracetools_read/tracetools_read.egg-info/requires.txt
+[1.132s] writing top-level names to ../../../build/tracetools_read/tracetools_read.egg-info/top_level.txt
+[1.157s] reading manifest file '../../../build/tracetools_read/tracetools_read.egg-info/SOURCES.txt'
+[1.158s] writing manifest file '../../../build/tracetools_read/tracetools_read.egg-info/SOURCES.txt'
+[1.158s] running build
+[1.158s] running build_py
+[1.158s] running install
+[1.159s] running install_lib
+[1.160s] running install_data
+[1.160s] running install_egg_info
+[1.162s] removing '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/tracetools_read-4.1.1-py3.8.egg-info' (and everything under it)
+[1.162s] Copying ../../../build/tracetools_read/tracetools_read.egg-info to /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/python3.8/site-packages/tracetools_read-4.1.1-py3.8.egg-info
+[1.163s] running install_scripts
+[1.175s] writing list of installed files to '/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/tracetools_read/install.log'

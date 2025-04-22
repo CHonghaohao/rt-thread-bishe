@@ -1,0 +1,388 @@
+[0mCMake Deprecation Warning at CMakeLists.txt:15 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+[0m
+-- The C compiler identification is GNU 10.3.1
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /home/rsl/gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/bin/aarch64-none-elf-gcc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Found ament_cmake_ros: 0.10.0 (/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/dev/install/ament_cmake_ros/share/ament_cmake_ros/cmake)
+-- Found Python3: /usr/bin/python3 (found version "3.8.10") found components: Interpreter
+-- Found rcutils: 5.1.6 (/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcutils/cmake)
+[33mCMake Warning at /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcutils/cmake/ament_cmake_export_libraries-extras.cmake:116 (message):
+  Package 'rcutils' exports library 'dl' which couldn't be found
+Call Stack (most recent call first):
+  /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rcutils/cmake/rcutilsConfig.cmake:41 (include)
+  CMakeLists.txt:27 (find_package)
+
+[0m
+-- Found rosidl_runtime_c: 3.1.6 (/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rosidl_runtime_c/cmake)
+-- Found rmw: 6.1.2 (/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw/cmake)
+-- Found rosidl_typesupport_microxrcedds_c: 3.0.1 (/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rosidl_typesupport_microxrcedds_c/cmake)
+-- Found rosidl_adapter: 3.1.6 (/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rosidl_adapter/cmake)
+-- Configuring done (0.4s)
+-- Generating done (0.0s)
+[33mCMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_INSTALL_LIBDIR
+    THIRDPARTY
+
+[0m
+-- Build files have been written to: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/build/rmw_microxrcedds
+[  2%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/identifiers.c.obj[0m
+[  6%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/memory.c.obj[0m
+[  6%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/rmw_compare_gids_equal.c.obj[0m
+[ 10%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/rmw_count.c.obj[0m
+[ 10%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/rmw_client.c.obj[0m
+[ 13%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/rmw_event.c.obj[0m
+[ 15%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/rmw_get_gid_for_publisher.c.obj[0m
+[ 17%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/rmw_features.c.obj[0m
+[ 19%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/rmw_get_implementation_identifier.c.obj[0m
+[ 21%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/rmw_get_serialization_format.c.obj[0m
+[ 26%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/rmw_get_topic_endpoint_info.c.obj[0m
+[ 26%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/rmw_get_endpoint_network_flow.c.obj[0m
+[ 28%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/rmw_qos_profile_check_compatible.c.obj[0m
+[ 30%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/rmw_init.c.obj[0m
+[ 32%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/rmw_guard_condition.c.obj[0m
+[ 34%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/rmw_microxrcedds_topic.c.obj[0m
+[ 36%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/rmw_node.c.obj[0m
+[ 39%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/rmw_logging.c.obj[0m
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_get_gid_for_publisher.c:18[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:277:28:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_services[m[K' [[01;35m[K-Wpedantic[m[K]
+  277 | extern rmw_uxrce_service_t [01;35m[Kcustom_services[m[K[RMW_UXRCE_MAX_SERVICES];
+      |                            [01;35m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:280:27:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_clients[m[K' [[01;35m[K-Wpedantic[m[K]
+  280 | extern rmw_uxrce_client_t [01;35m[Kcustom_clients[m[K[RMW_UXRCE_MAX_CLIENTS];
+      |                           [01;35m[K^~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/utils.h:20[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_client.c:26[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:277:28:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_services[m[K' [[01;35m[K-Wpedantic[m[K]
+  277 | extern rmw_uxrce_service_t [01;35m[Kcustom_services[m[K[RMW_UXRCE_MAX_SERVICES];
+      |                            [01;35m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:280:27:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_clients[m[K' [[01;35m[K-Wpedantic[m[K]
+  280 | extern rmw_uxrce_client_t [01;35m[Kcustom_clients[m[K[RMW_UXRCE_MAX_CLIENTS];
+      |                           [01;35m[K^~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_get_topic_endpoint_info.c:25[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:277:28:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_services[m[K' [[01;35m[K-Wpedantic[m[K]
+  277 | extern rmw_uxrce_service_t [01;35m[Kcustom_services[m[K[RMW_UXRCE_MAX_SERVICES];
+      |                            [01;35m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:280:27:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_clients[m[K' [[01;35m[K-Wpedantic[m[K]
+  280 | extern rmw_uxrce_client_t [01;35m[Kcustom_clients[m[K[RMW_UXRCE_MAX_CLIENTS];
+      |                           [01;35m[K^~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/utils.h:20[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_get_implementation_identifier.c:16[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:277:28:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_services[m[K' [[01;35m[K-Wpedantic[m[K]
+  277 | extern rmw_uxrce_service_t [01;35m[Kcustom_services[m[K[RMW_UXRCE_MAX_SERVICES];
+      |                            [01;35m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:280:27:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_clients[m[K' [[01;35m[K-Wpedantic[m[K]
+  280 | extern rmw_uxrce_client_t [01;35m[Kcustom_clients[m[K[RMW_UXRCE_MAX_CLIENTS];
+      |                           [01;35m[K^~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_count.c:22[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:277:28:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_services[m[K' [[01;35m[K-Wpedantic[m[K]
+  277 | extern rmw_uxrce_service_t [01;35m[Kcustom_services[m[K[RMW_UXRCE_MAX_SERVICES];
+      |                            [01;35m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:280:27:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_clients[m[K' [[01;35m[K-Wpedantic[m[K]
+  280 | extern rmw_uxrce_client_t [01;35m[Kcustom_clients[m[K[RMW_UXRCE_MAX_CLIENTS];
+      |                           [01;35m[K^~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/utils.h:20[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_get_serialization_format.c:16[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:277:28:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_services[m[K' [[01;35m[K-Wpedantic[m[K]
+  277 | extern rmw_uxrce_service_t [01;35m[Kcustom_services[m[K[RMW_UXRCE_MAX_SERVICES];
+      |                            [01;35m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:280:27:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_clients[m[K' [[01;35m[K-Wpedantic[m[K]
+  280 | extern rmw_uxrce_client_t [01;35m[Kcustom_clients[m[K[RMW_UXRCE_MAX_CLIENTS];
+      |                           [01;35m[K^~~~~~~~~~~~~~[m[K
+[ 43%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/rmw_node_info_and_types.c.obj[0m
+[ 43%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/rmw_node_names.c.obj[0m
+[ 45%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/rmw_publish.c.obj[0m
+[ 47%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/rmw_request.c.obj[0m
+[ 50%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/rmw_publisher.c.obj[0m
+[ 52%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/rmw_serialize.c.obj[0m
+[ 54%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/rmw_response.c.obj[0m
+[ 56%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/rmw_service_names_and_types.c.obj[0m
+[ 58%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/rmw_service.c.obj[0m
+[ 60%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/rmw_subscription.c.obj[0m
+[ 65%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/rmw_take.c.obj[0m
+[ 65%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/rmw_service_server_is_available.c.obj[0m
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/callbacks.h:20[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_init.c:26[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:277:28:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_services[m[K' [[01;35m[K-Wpedantic[m[K]
+  277 | extern rmw_uxrce_service_t [01;35m[Kcustom_services[m[K[RMW_UXRCE_MAX_SERVICES];
+      |                            [01;35m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:280:27:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_clients[m[K' [[01;35m[K-Wpedantic[m[K]
+  280 | extern rmw_uxrce_client_t [01;35m[Kcustom_clients[m[K[RMW_UXRCE_MAX_CLIENTS];
+      |                           [01;35m[K^~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/utils.h:20[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_guard_condition.c:18[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:277:28:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_services[m[K' [[01;35m[K-Wpedantic[m[K]
+  277 | extern rmw_uxrce_service_t [01;35m[Kcustom_services[m[K[RMW_UXRCE_MAX_SERVICES];
+      |                            [01;35m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:280:27:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_clients[m[K' [[01;35m[K-Wpedantic[m[K]
+  280 | extern rmw_uxrce_client_t [01;35m[Kcustom_clients[m[K[RMW_UXRCE_MAX_CLIENTS];
+      |                           [01;35m[K^~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_microros_internal/rmw_microxrcedds_topic.h:21[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_microxrcedds_topic.c:15[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:277:28:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_services[m[K' [[01;35m[K-Wpedantic[m[K]
+  277 | extern rmw_uxrce_service_t [01;35m[Kcustom_services[m[K[RMW_UXRCE_MAX_SERVICES];
+      |                            [01;35m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:280:27:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_clients[m[K' [[01;35m[K-Wpedantic[m[K]
+  280 | extern rmw_uxrce_client_t [01;35m[Kcustom_clients[m[K[RMW_UXRCE_MAX_CLIENTS];
+      |                           [01;35m[K^~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_node_info_and_types.c:21[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:277:28:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_services[m[K' [[01;35m[K-Wpedantic[m[K]
+  277 | extern rmw_uxrce_service_t [01;35m[Kcustom_services[m[K[RMW_UXRCE_MAX_SERVICES];
+      |                            [01;35m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:280:27:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_clients[m[K' [[01;35m[K-Wpedantic[m[K]
+  280 | extern rmw_uxrce_client_t [01;35m[Kcustom_clients[m[K[RMW_UXRCE_MAX_CLIENTS];
+      |                           [01;35m[K^~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_node_names.c:23[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:277:28:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_services[m[K' [[01;35m[K-Wpedantic[m[K]
+  277 | extern rmw_uxrce_service_t [01;35m[Kcustom_services[m[K[RMW_UXRCE_MAX_SERVICES];
+      |                            [01;35m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:280:27:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_clients[m[K' [[01;35m[K-Wpedantic[m[K]
+  280 | extern rmw_uxrce_client_t [01;35m[Kcustom_clients[m[K[RMW_UXRCE_MAX_CLIENTS];
+      |                           [01;35m[K^~~~~~~~~~~~~~[m[K
+[ 67%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/rmw_trigger_guard_condition.c.obj[0m
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_microros_internal/rmw_node.h:20[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_node.c:15[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:277:28:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_services[m[K' [[01;35m[K-Wpedantic[m[K]
+  277 | extern rmw_uxrce_service_t [01;35m[Kcustom_services[m[K[RMW_UXRCE_MAX_SERVICES];
+      |                            [01;35m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:280:27:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_clients[m[K' [[01;35m[K-Wpedantic[m[K]
+  280 | extern rmw_uxrce_client_t [01;35m[Kcustom_clients[m[K[RMW_UXRCE_MAX_CLIENTS];
+      |                           [01;35m[K^~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/utils.h:20[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_request.c:19[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:277:28:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_services[m[K' [[01;35m[K-Wpedantic[m[K]
+  277 | extern rmw_uxrce_service_t [01;35m[Kcustom_services[m[K[RMW_UXRCE_MAX_SERVICES];
+      |                            [01;35m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:280:27:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_clients[m[K' [[01;35m[K-Wpedantic[m[K]
+  280 | extern rmw_uxrce_client_t [01;35m[Kcustom_clients[m[K[RMW_UXRCE_MAX_CLIENTS];
+      |                           [01;35m[K^~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/utils.h:20[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_response.c:19[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:277:28:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_services[m[K' [[01;35m[K-Wpedantic[m[K]
+  277 | extern rmw_uxrce_service_t [01;35m[Kcustom_services[m[K[RMW_UXRCE_MAX_SERVICES];
+      |                            [01;35m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:280:27:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_clients[m[K' [[01;35m[K-Wpedantic[m[K]
+  280 | extern rmw_uxrce_client_t [01;35m[Kcustom_clients[m[K[RMW_UXRCE_MAX_CLIENTS];
+      |                           [01;35m[K^~~~~~~~~~~~~~[m[K
+[ 69%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/rmw_wait.c.obj[0m
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/utils.h:20[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_service.c:15[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:277:28:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_services[m[K' [[01;35m[K-Wpedantic[m[K]
+  277 | extern rmw_uxrce_service_t [01;35m[Kcustom_services[m[K[RMW_UXRCE_MAX_SERVICES];
+      |                            [01;35m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:280:27:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_clients[m[K' [[01;35m[K-Wpedantic[m[K]
+  280 | extern rmw_uxrce_client_t [01;35m[Kcustom_clients[m[K[RMW_UXRCE_MAX_CLIENTS];
+      |                           [01;35m[K^~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/utils.h:20[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_publisher.c:34[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:277:28:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_services[m[K' [[01;35m[K-Wpedantic[m[K]
+  277 | extern rmw_uxrce_service_t [01;35m[Kcustom_services[m[K[RMW_UXRCE_MAX_SERVICES];
+      |                            [01;35m[K^~~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_publish.c:19[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:277:28:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_services[m[K' [[01;35m[K-Wpedantic[m[K]
+  277 | extern rmw_uxrce_service_t [01;35m[Kcustom_services[m[K[RMW_UXRCE_MAX_SERVICES];
+      |                            [01;35m[K^~~~~~~~~~~~~~~[m[K
+[ 73%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/rmw_wait_set.c.obj[0m
+[ 73%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/rmw_topic_names_and_types.c.obj[0m
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:280:27:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_clients[m[K' [[01;35m[K-Wpedantic[m[K]
+  280 | extern rmw_uxrce_client_t [01;35m[Kcustom_clients[m[K[RMW_UXRCE_MAX_CLIENTS];
+      |                           [01;35m[K^~~~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:280:27:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_clients[m[K' [[01;35m[K-Wpedantic[m[K]
+  280 | extern rmw_uxrce_client_t [01;35m[Kcustom_clients[m[K[RMW_UXRCE_MAX_CLIENTS];
+      |                           [01;35m[K^~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_service_names_and_types.c:21[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:277:28:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_services[m[K' [[01;35m[K-Wpedantic[m[K]
+  277 | extern rmw_uxrce_service_t [01;35m[Kcustom_services[m[K[RMW_UXRCE_MAX_SERVICES];
+      |                            [01;35m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:280:27:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_clients[m[K' [[01;35m[K-Wpedantic[m[K]
+  280 | extern rmw_uxrce_client_t [01;35m[Kcustom_clients[m[K[RMW_UXRCE_MAX_CLIENTS];
+      |                           [01;35m[K^~~~~~~~~~~~~~[m[K
+[ 76%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/types.c.obj[0m
+[ 78%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/utils.c.obj[0m
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/utils.h:20[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_take.c:19[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:277:28:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_services[m[K' [[01;35m[K-Wpedantic[m[K]
+  277 | extern rmw_uxrce_service_t [01;35m[Kcustom_services[m[K[RMW_UXRCE_MAX_SERVICES];
+      |                            [01;35m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:280:27:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_clients[m[K' [[01;35m[K-Wpedantic[m[K]
+  280 | extern rmw_uxrce_client_t [01;35m[Kcustom_clients[m[K[RMW_UXRCE_MAX_CLIENTS];
+      |                           [01;35m[K^~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/utils.h:20[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_subscription.c:32[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:277:28:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_services[m[K' [[01;35m[K-Wpedantic[m[K]
+  277 | extern rmw_uxrce_service_t [01;35m[Kcustom_services[m[K[RMW_UXRCE_MAX_SERVICES];
+      |                            [01;35m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:280:27:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_clients[m[K' [[01;35m[K-Wpedantic[m[K]
+  280 | extern rmw_uxrce_client_t [01;35m[Kcustom_clients[m[K[RMW_UXRCE_MAX_CLIENTS];
+      |                           [01;35m[K^~~~~~~~~~~~~~[m[K
+[ 82%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/rmw_event_callbacks.c.obj[0m
+[ 82%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/callbacks.c.obj[0m
+[ 84%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/rmw_uxrce_transports.c.obj[0m
+[ 86%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/rmw_microros/continous_serialization.c.obj[0m
+[ 89%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/rmw_microros/init_options.c.obj[0m
+[ 91%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/rmw_microros/time_sync.c.obj[0m
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/utils.h:20[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_trigger_guard_condition.c:18[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:277:28:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_services[m[K' [[01;35m[K-Wpedantic[m[K]
+  277 | extern rmw_uxrce_service_t [01;35m[Kcustom_services[m[K[RMW_UXRCE_MAX_SERVICES];
+      |                            [01;35m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:280:27:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_clients[m[K' [[01;35m[K-Wpedantic[m[K]
+  280 | extern rmw_uxrce_client_t [01;35m[Kcustom_clients[m[K[RMW_UXRCE_MAX_CLIENTS];
+      |                           [01;35m[K^~~~~~~~~~~~~~[m[K
+[ 93%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/rmw_microros/timing.c.obj[0m
+[ 95%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/rmw_microros/custom_transport.c.obj[0m
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/utils.h:20[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_wait.c:22[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:277:28:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_services[m[K' [[01;35m[K-Wpedantic[m[K]
+  277 | extern rmw_uxrce_service_t [01;35m[Kcustom_services[m[K[RMW_UXRCE_MAX_SERVICES];
+      |                            [01;35m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:280:27:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_clients[m[K' [[01;35m[K-Wpedantic[m[K]
+  280 | extern rmw_uxrce_client_t [01;35m[Kcustom_clients[m[K[RMW_UXRCE_MAX_CLIENTS];
+      |                           [01;35m[K^~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_topic_names_and_types.c:21[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:277:28:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_services[m[K' [[01;35m[K-Wpedantic[m[K]
+  277 | extern rmw_uxrce_service_t [01;35m[Kcustom_services[m[K[RMW_UXRCE_MAX_SERVICES];
+      |                            [01;35m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:280:27:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_clients[m[K' [[01;35m[K-Wpedantic[m[K]
+  280 | extern rmw_uxrce_client_t [01;35m[Kcustom_clients[m[K[RMW_UXRCE_MAX_CLIENTS];
+      |                           [01;35m[K^~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/types.c:15[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_microros_internal/types.h:277:28:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_services[m[K' [[01;35m[K-Wpedantic[m[K]
+  277 | extern rmw_uxrce_service_t [01;35m[Kcustom_services[m[K[RMW_UXRCE_MAX_SERVICES];
+      |                            [01;35m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_microros_internal/types.h:280:27:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_clients[m[K' [[01;35m[K-Wpedantic[m[K]
+  280 | extern rmw_uxrce_client_t [01;35m[Kcustom_clients[m[K[RMW_UXRCE_MAX_CLIENTS];
+      |                           [01;35m[K^~~~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/types.c:49:21:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_services[m[K' [[01;35m[K-Wpedantic[m[K]
+   49 | rmw_uxrce_service_t [01;35m[Kcustom_services[m[K[RMW_UXRCE_MAX_SERVICES];
+      |                     [01;35m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/types.c:52:20:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_clients[m[K' [[01;35m[K-Wpedantic[m[K]
+   52 | rmw_uxrce_client_t [01;35m[Kcustom_clients[m[K[RMW_UXRCE_MAX_CLIENTS];
+      |                    [01;35m[K^~~~~~~~~~~~~~[m[K
+[ 97%] [32mBuilding C object CMakeFiles/rmw_microxrcedds.dir/src/rmw_microros/ping.c.obj[0m
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/utils.h:20[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_wait_set.c:18[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:277:28:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_services[m[K' [[01;35m[K-Wpedantic[m[K]
+  277 | extern rmw_uxrce_service_t [01;35m[Kcustom_services[m[K[RMW_UXRCE_MAX_SERVICES];
+      |                            [01;35m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:280:27:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_clients[m[K' [[01;35m[K-Wpedantic[m[K]
+  280 | extern rmw_uxrce_client_t [01;35m[Kcustom_clients[m[K[RMW_UXRCE_MAX_CLIENTS];
+      |                           [01;35m[K^~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_microros_internal/utils.h:20[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/utils.c:15[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:277:28:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_services[m[K' [[01;35m[K-Wpedantic[m[K]
+  277 | extern rmw_uxrce_service_t [01;35m[Kcustom_services[m[K[RMW_UXRCE_MAX_SERVICES];
+      |                            [01;35m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:280:27:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_clients[m[K' [[01;35m[K-Wpedantic[m[K]
+  280 | extern rmw_uxrce_client_t [01;35m[Kcustom_clients[m[K[RMW_UXRCE_MAX_CLIENTS];
+      |                           [01;35m[K^~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_microros_internal/callbacks.h:20[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/callbacks.c:15[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:277:28:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_services[m[K' [[01;35m[K-Wpedantic[m[K]
+  277 | extern rmw_uxrce_service_t [01;35m[Kcustom_services[m[K[RMW_UXRCE_MAX_SERVICES];
+      |                            [01;35m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:280:27:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_clients[m[K' [[01;35m[K-Wpedantic[m[K]
+  280 | extern rmw_uxrce_client_t [01;35m[Kcustom_clients[m[K[RMW_UXRCE_MAX_CLIENTS];
+      |                           [01;35m[K^~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_microros_internal/rmw_uxrce_transports.h:30[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_uxrce_transports.c:15[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:277:28:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_services[m[K' [[01;35m[K-Wpedantic[m[K]
+  277 | extern rmw_uxrce_service_t [01;35m[Kcustom_services[m[K[RMW_UXRCE_MAX_SERVICES];
+      |                            [01;35m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:280:27:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_clients[m[K' [[01;35m[K-Wpedantic[m[K]
+  280 | extern rmw_uxrce_client_t [01;35m[Kcustom_clients[m[K[RMW_UXRCE_MAX_CLIENTS];
+      |                           [01;35m[K^~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_microros/init_options.c:20[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_microros/../rmw_microros_internal/types.h:277:28:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_services[m[K' [[01;35m[K-Wpedantic[m[K]
+  277 | extern rmw_uxrce_service_t [01;35m[Kcustom_services[m[K[RMW_UXRCE_MAX_SERVICES];
+      |                            [01;35m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_microros/../rmw_microros_internal/types.h:280:27:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_clients[m[K' [[01;35m[K-Wpedantic[m[K]
+  280 | extern rmw_uxrce_client_t [01;35m[Kcustom_clients[m[K[RMW_UXRCE_MAX_CLIENTS];
+      |                           [01;35m[K^~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_microros/time_sync.c:20[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_microros/../rmw_microros_internal/types.h:277:28:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_services[m[K' [[01;35m[K-Wpedantic[m[K]
+  277 | extern rmw_uxrce_service_t [01;35m[Kcustom_services[m[K[RMW_UXRCE_MAX_SERVICES];
+      |                            [01;35m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_microros/../rmw_microros_internal/types.h:280:27:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_clients[m[K' [[01;35m[K-Wpedantic[m[K]
+  280 | extern rmw_uxrce_client_t [01;35m[Kcustom_clients[m[K[RMW_UXRCE_MAX_CLIENTS];
+      |                           [01;35m[K^~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_microros/continous_serialization.c:20[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_microros/../rmw_microros_internal/types.h:277:28:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_services[m[K' [[01;35m[K-Wpedantic[m[K]
+  277 | extern rmw_uxrce_service_t [01;35m[Kcustom_services[m[K[RMW_UXRCE_MAX_SERVICES];
+      |                            [01;35m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_microros/../rmw_microros_internal/types.h:280:27:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_clients[m[K' [[01;35m[K-Wpedantic[m[K]
+  280 | extern rmw_uxrce_client_t [01;35m[Kcustom_clients[m[K[RMW_UXRCE_MAX_CLIENTS];
+      |                           [01;35m[K^~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_microros/../rmw_microros_internal/rmw_uxrce_transports.h:30[m[K,
+                 from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_microros/ping.c:24[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:277:28:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_services[m[K' [[01;35m[K-Wpedantic[m[K]
+  277 | extern rmw_uxrce_service_t [01;35m[Kcustom_services[m[K[RMW_UXRCE_MAX_SERVICES];
+      |                            [01;35m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/./rmw_microros_internal/types.h:280:27:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_clients[m[K' [[01;35m[K-Wpedantic[m[K]
+  280 | extern rmw_uxrce_client_t [01;35m[Kcustom_clients[m[K[RMW_UXRCE_MAX_CLIENTS];
+      |                           [01;35m[K^~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_microros/custom_transport.c:20[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_microros/../rmw_microros_internal/types.h:277:28:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_services[m[K' [[01;35m[K-Wpedantic[m[K]
+  277 | extern rmw_uxrce_service_t [01;35m[Kcustom_services[m[K[RMW_UXRCE_MAX_SERVICES];
+      |                            [01;35m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_microros/../rmw_microros_internal/types.h:280:27:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_clients[m[K' [[01;35m[K-Wpedantic[m[K]
+  280 | extern rmw_uxrce_client_t [01;35m[Kcustom_clients[m[K[RMW_UXRCE_MAX_CLIENTS];
+      |                           [01;35m[K^~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_microros/timing.c:21[m[K:
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_microros/../rmw_microros_internal/types.h:277:28:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_services[m[K' [[01;35m[K-Wpedantic[m[K]
+  277 | extern rmw_uxrce_service_t [01;35m[Kcustom_services[m[K[RMW_UXRCE_MAX_SERVICES];
+      |                            [01;35m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/src/rmw-microxrcedds/rmw_microxrcedds_c/src/rmw_microros/../rmw_microros_internal/types.h:280:27:[m[K [01;35m[Kwarning: [m[KISO C forbids zero-size array '[01m[Kcustom_clients[m[K' [[01;35m[K-Wpedantic[m[K]
+  280 | extern rmw_uxrce_client_t [01;35m[Kcustom_clients[m[K[RMW_UXRCE_MAX_CLIENTS];
+      |                           [01;35m[K^~~~~~~~~~~~~~[m[K
+[100%] [32m[1mLinking C static library librmw_microxrcedds.a[0m
+[100%] Built target rmw_microxrcedds
+-- Install configuration: "Release"
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw_microxrcedds/environment/library_path.sh
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw_microxrcedds/environment/library_path.dsv
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/ament_index/resource_index/rmw_typesupport_c/rmw_microxrcedds
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/ament_index/resource_index/rmw_typesupport/rmw_microxrcedds
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/ament_index/resource_index/package_run_dependencies/rmw_microxrcedds
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/ament_index/resource_index/parent_prefix_path/rmw_microxrcedds
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw_microxrcedds/environment/ament_prefix_path.sh
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw_microxrcedds/environment/ament_prefix_path.dsv
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw_microxrcedds/environment/path.sh
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw_microxrcedds/environment/path.dsv
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw_microxrcedds/local_setup.bash
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw_microxrcedds/local_setup.sh
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw_microxrcedds/local_setup.zsh
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw_microxrcedds/local_setup.dsv
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw_microxrcedds/package.dsv
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/ament_index/resource_index/packages/rmw_microxrcedds
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw_microxrcedds/cmake/ament_cmake_export_include_directories-extras.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw_microxrcedds/cmake/ament_cmake_export_libraries-extras.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw_microxrcedds/cmake/ament_cmake_export_dependencies-extras.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw_microxrcedds/cmake/rmw_microxrceddsConfig.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw_microxrcedds/cmake/rmw_microxrceddsConfig-version.cmake
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/share/rmw_microxrcedds/package.xml
+-- Up-to-date: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw_microxrcedds_c
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw_microxrcedds_c/rmw_c_macros.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw_microros
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw_microros/rmw_microros.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw_microros/error_handling.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw_microros/continous_serialization.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw_microros/ping.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw_microros/discovery.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw_microros/time_sync.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw_microros/timing.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw_microros/custom_transport.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw_microros/init_options.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/include/rmw_microxrcedds_c/config.h
+-- Installing: /home/rsl/rt-thread/bsp/rockchip/rk3568/temp/micro/mcu/install/lib/librmw_microxrcedds.a
