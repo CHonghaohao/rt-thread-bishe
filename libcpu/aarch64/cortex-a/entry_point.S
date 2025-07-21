@@ -93,6 +93,7 @@ _start:
     mov     boot_arg1, x2
     mov     boot_arg2, x3
 
+    bl      __asm_flush_dcache_all
     /* Save cpu stack */
     get_phy stack_top, .boot_cpu_stack_top
     /* Save cpu id temp */
@@ -105,13 +106,13 @@ _start:
     bl      init_cpu_el
     bl      init_kernel_bss
     bl      init_cpu_stack_early
-
+    
 #ifdef RT_USING_OFW
     /* Save devicetree info */
     mov     x0, dtb_paddr
     bl      rt_hw_fdt_install_early
 #endif
-
+    
     /* Now we are in the end of boot cpu process */
     ldr     x8, =rtthread_startup
     b       init_mmu_early
@@ -196,23 +197,24 @@ init_cpu_el:
     orr     x1, x1, #(1 << 8)       /* Mask SError */
     orr     x1, x1, #(1 << 9)       /* Mask Debug Exception */
     msr     spsr_el3, x1
-
+    
     get_phy x1, .init_cpu_hyp
     msr     elr_el3, x1
+    
     eret
 
 .init_cpu_hyp:
     /* running at EL2? */
     cmp     x0, #2                  /* EL2 = 0b10  */
     bne     .init_cpu_sys
-
+    
     /* Enable CNTP for EL1 */
     mrs     x0, cnthctl_el2         /* Counter-timer Hypervisor Control register */
     orr     x0, x0, #(1 << 0)       /* Don't traps NS EL0/1 accesses to the physical counter */
     orr     x0, x0, #(1 << 1)       /* Don't traps NS EL0/1 accesses to the physical timer */
     msr     cnthctl_el2, x0
     msr     cntvoff_el2, xzr
-
+    
     mov     x0, #(1 << 31)          /* Enable AArch64 in EL1 */
     orr     x0, x0, #(1 << 1)       /* SWIO hardwired */
     msr     hcr_el2, x0
@@ -223,13 +225,23 @@ init_cpu_el:
     orr     x0, x0, #(1 << 8)       /* Mask SError */
     orr     x0, x0, #(1 << 9)       /* Mask Debug Exception */
     msr     spsr_el2, x0
-
+    
     get_phy x0, .init_cpu_sys
     msr     elr_el2, x0
+    mrs     x0, sctlr_el1
+    bic     x0, x0, #(1 << 2)
+    bic     x0, x0, #(1 << 12)
+    msr     sctlr_el1, x0
+    
+    dsb     ish
+    isb
+    
     eret
 
 .init_cpu_sys:
+    
     mrs     x0, sctlr_el1
+    
     bic     x0, x0, #(3 << 3)       /* Disable SP Alignment check */
     bic     x0, x0, #(1 << 1)       /* Disable Alignment check */
     msr     sctlr_el1, x0
@@ -245,7 +257,7 @@ init_cpu_el:
     /* Applying context change */
     dsb     ish
     isb
-
+    
     ret
 
 init_kernel_bss:

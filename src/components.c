@@ -241,12 +241,12 @@ int rtthread_startup(void)
     rt_hw_spin_lock_init(&_cpus_lock);
 #endif
     rt_hw_local_irq_disable();
-
+    
     /* board level initialization
      * NOTE: please initialize heap inside board initialization.
      */
     rt_hw_board_init();
-
+    
     /* show RT-Thread version */
     rt_show_version();
 
@@ -279,7 +279,7 @@ int rtthread_startup(void)
 
     /* start scheduler */
     rt_system_scheduler_start();
-
+    
     /* never reach here */
     return 0;
 }
