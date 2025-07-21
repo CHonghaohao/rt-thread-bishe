@@ -3,6 +3,16 @@
 #ifdef __cplusplus
   extern "C" {
 #endif
+
+#include <stdint.h>
+#ifdef __cplusplus
+     #define   __I     volatile             /*!< brief Defines 'read only' permissions    */
+#else
+     #define   __I     volatile const       /*!< brief Defines 'read only' permissions    */
+#endif
+#define     __O     volatile             /*!< brief Defines 'write only' permissions   */
+#define     __IO    volatile             /*!< brief Defines 'read / write' permissions */
+
 /****************************************************************************************/
 /*                                                                                      */
 /*                               Module Structure Section                               */

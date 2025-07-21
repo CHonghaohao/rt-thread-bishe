@@ -47,7 +47,7 @@
   #define __STATIC_INLINE                        static inline
 #endif
 #ifndef   __STATIC_FORCEINLINE
-  #define __STATIC_FORCEINLINE                   __attribute__((always_inline)) static inline
+  #define __STATIC_FORCEINLINE                   static inline __attribute__((always_inline)) 
 #endif
 #ifndef   __NO_RETURN
   #define __NO_RETURN                            __attribute__((__noreturn__))

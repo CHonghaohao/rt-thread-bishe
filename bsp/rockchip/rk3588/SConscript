@@ -1,10 +1,19 @@
 # for module compiling
 import os
+Import('RTT_ROOT')
 from building import *
+
+PROJECT = 'CA'
+Export('PROJECT')
+
+SOC = 'RK3588'
+Export('SOC')
 
 cwd  = GetCurrentDir()
 objs = []
 list = os.listdir(cwd)
+
+objs = SConscript(os.path.join(cwd, '../common/HalSConscript'), variant_dir = 'common/hal', duplicate=0)
 
 for d in list:
     path = os.path.join(cwd, d)

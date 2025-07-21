@@ -31,6 +31,9 @@
 #ifndef __CMSIS_CP15_H
 #define __CMSIS_CP15_H
 
+#include "stdint.h"
+#define CMSIS_DEPRECATED          __attribute__((deprecated))
+
 /** \brief  Get ACTLR
     \return               Auxiliary Control register value
  */
@@ -459,8 +462,7 @@ __STATIC_FORCEINLINE uint32_t __get_CSSELR(void)
 /** \brief  Set CCSIDR
     \deprecated CCSIDR itself is read-only. Use __set_CSSELR to select cache level instead.
  */
-CMSIS_DEPRECATED
-__STATIC_FORCEINLINE void __set_CCSIDR(uint32_t value)
+CMSIS_DEPRECATED __STATIC_FORCEINLINE void __set_CCSIDR(uint32_t value)
 {
   __set_CSSELR(value);
 }

@@ -71,7 +71,7 @@ struct hw_uart_device
 #define BSP_DEFINE_UART_DEVICE(no)                  \
 static struct hw_uart_device _uart##no##_device =   \
 {                                                   \
-    UART##no##_MMIO_BASE,                           \
+    UART##no##_BASE,                           \
     UART##no##_IRQ                                  \
 };                                                  \
 static struct rt_serial_device _serial##no;

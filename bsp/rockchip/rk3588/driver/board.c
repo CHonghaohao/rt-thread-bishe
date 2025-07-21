@@ -31,10 +31,10 @@ struct mem_desc platform_mem_desc[] =
     {PLATFORM_MEM_TALBE(0x20000000,                    0x10000000), 0x20000000,                   NORMAL_MEM},
     {PLATFORM_MEM_TALBE(PMU0_GRF_BASE,                  0x2000),    PMU0_GRF_BASE,                DEVICE_MEM},
     {PLATFORM_MEM_TALBE(PMU1_GRF_BASE,                  0x2000),    PMU1_GRF_BASE,                DEVICE_MEM},
-    {PLATFORM_MEM_TALBE(GRF_SYS_BASE,                   0x4000),    GRF_SYS_BASE,                 DEVICE_MEM},
+    {PLATFORM_MEM_TALBE(SYS_GRF_BASE,                   0x4000),    SYS_GRF_BASE,                 DEVICE_MEM},
     {PLATFORM_MEM_TALBE(CRU_BASE,                       0x8000),    CRU_BASE,                     DEVICE_MEM},
-    {PLATFORM_MEM_TALBE(UART0_MMIO_BASE,               0x10000),    UART0_MMIO_BASE,              DEVICE_MEM},
-    {PLATFORM_MEM_TALBE(UART1_MMIO_BASE,               0x90000),    UART1_MMIO_BASE,              DEVICE_MEM},
+    {PLATFORM_MEM_TALBE(UART0_BASE,                    0x10000),    UART0_BASE,                   DEVICE_MEM},
+    {PLATFORM_MEM_TALBE(UART1_BASE,                    0x90000),    UART1_BASE,                   DEVICE_MEM},
     {PLATFORM_MEM_TALBE(GIC_PL600_DISTRIBUTOR_PPTR,    0x10000),    GIC_PL600_DISTRIBUTOR_PPTR,   DEVICE_MEM},
     {PLATFORM_MEM_TALBE(GIC_PL600_REDISTRIBUTOR_PPTR,  0xc0000),    GIC_PL600_REDISTRIBUTOR_PPTR, DEVICE_MEM},
 #ifdef PKG_USING_RT_OPENAMP
