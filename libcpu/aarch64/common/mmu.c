@@ -511,7 +511,7 @@ static void _init_region(void *vaddr, size_t size)
 {
     rt_ioremap_start = vaddr;
     rt_ioremap_size = size;
-    rt_mpr_start = (char *)rt_ioremap_start - rt_mpr_size;
+    rt_mpr_start = (char *)rt_ioremap_start + rt_mpr_size;
 }
 
 

@@ -5,7 +5,8 @@ from building import *
 
 # get current directory
 cwd = GetCurrentDir()
-hal_lib = cwd + '/rk_hal/lib'
+hal_lib = cwd + '/hal/lib'
+hal_proj = cwd + '/hal/project'
 
 # The set of source files associated with this SConscript file.
 src = Glob(hal_lib + '/CMSIS/Device/' + SOC + '/Source/*.c')
@@ -17,7 +18,9 @@ src += Glob(hal_lib + '/bsp/' + SOC + '/*.c')
 path = [hal_lib + '/hal/inc',
         hal_lib + '/bsp/' + SOC,
         hal_lib + '/CMSIS/Device/' + SOC + '/Include',
-        hal_lib + '/CMSIS/Core/Include']
+        hal_lib + '/CMSIS/Core/Include',
+        hal_lib + '/CMSIS/Core_A/Include',
+        hal_proj + '/rk3588/src']
 
 group = DefineGroup(SOC + '_StdPeriph', src, depend = [''], CPPPATH = path)
 
