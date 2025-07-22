@@ -24,6 +24,7 @@
 
 #include "mm_page.h"
 #include "hal_pinctrl.h"
+#include "hal_timer.h"
 #define PLATFORM_MEM_TALBE(va, size) va, ((unsigned long)va + size - 1)
 
 struct mem_desc platform_mem_desc[] =
@@ -34,12 +35,13 @@ struct mem_desc platform_mem_desc[] =
     {PLATFORM_MEM_TALBE(SYS_GRF_BASE,                   0x4000),    SYS_GRF_BASE,                 DEVICE_MEM},
     {PLATFORM_MEM_TALBE(CRU_BASE,                       0x8000),    CRU_BASE,                     DEVICE_MEM},
     {PLATFORM_MEM_TALBE(UART0_BASE,                    0x10000),    UART0_BASE,                   DEVICE_MEM},
-    {PLATFORM_MEM_TALBE(UART1_BASE,                    0x90000),    UART1_BASE,                   DEVICE_MEM},
+    {PLATFORM_MEM_TALBE(UART3_BASE,                    0x10000),    UART3_BASE,                   DEVICE_MEM},
     {PLATFORM_MEM_TALBE(GIC_PL600_DISTRIBUTOR_PPTR,    0x10000),    GIC_PL600_DISTRIBUTOR_PPTR,   DEVICE_MEM},
     {PLATFORM_MEM_TALBE(GIC_PL600_REDISTRIBUTOR_PPTR,  0xc0000),    GIC_PL600_REDISTRIBUTOR_PPTR, DEVICE_MEM},
     {PLATFORM_MEM_TALBE(BUS_IOC_BASE,                   0x4000),    BUS_IOC_BASE,                 DEVICE_MEM},
     {PLATFORM_MEM_TALBE(VCCIO3_5_IOC_BASE,              0x1000),    VCCIO3_5_IOC_BASE,            DEVICE_MEM},
     {PLATFORM_MEM_TALBE(VCCIO6_IOC_BASE,                0x1000),    VCCIO6_IOC_BASE,              DEVICE_MEM},
+    {PLATFORM_MEM_TALBE(TIMER0_BASE,                    0x8000),    TIMER5_BASE,                  DEVICE_MEM},
 
 #ifdef PKG_USING_RT_OPENAMP
     {PLATFORM_MEM_TALBE(AMP_SHARE_MEMORY_ADDRESS, AMP_SHARE_MEMORY_SIZE), AMP_SHARE_MEMORY_ADDRESS, NORMAL_MEM},
@@ -51,6 +53,23 @@ const rt_uint32_t platform_mem_desc_size = sizeof(platform_mem_desc) / sizeof(pl
 void idle_wfi(void)
 {
     __asm__ volatile ("wfi");
+}
+
+static void rt_hw_timer_isr_brain(int vector, void *parameter)
+{   
+    rt_tick_increase();
+    HAL_TIMER_ClrInt((struct TIMER_REG *)parameter);   
+}
+
+void brain_timer_init(void)
+{   //338
+    HAL_TIMER_Init((void *)TIMER5_BASE,TIMER_FREE_RUNNING);
+    HAL_TIMER_SetCount((void *)TIMER5_BASE, 240000);            //24M 每10ms中断一次
+
+    rt_hw_interrupt_umask(TIMER5_IRQn);
+    rt_hw_interrupt_install(TIMER5_IRQn, rt_hw_timer_isr_brain, (void *)TIMER5_BASE, "tick");
+    HAL_TIMER_Start_IT((struct TIMER_REG *)TIMER5_BASE);
+
 }
 
 void rt_hw_board_init(void)
@@ -91,7 +110,9 @@ void rt_hw_board_init(void)
     rt_hw_uart_init();
 
     /* initialize timer for os tick */
-    rt_hw_gtimer_init();
+    // rt_hw_gtimer_init();
+    brain_timer_init();
+
 
     rt_thread_idle_sethook(idle_wfi);
 
