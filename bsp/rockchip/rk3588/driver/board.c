@@ -29,7 +29,8 @@
 
 struct mem_desc platform_mem_desc[] =
 {
-    {PLATFORM_MEM_TALBE(0x40008000,                 0x10000000),    0x40008000,                   NORMAL_MEM},
+    {PLATFORM_MEM_TALBE(0x40008000,                  0x9000000),    0x40008000,                   NORMAL_MEM},
+    {PLATFORM_MEM_TALBE(0x49008000,       RT_UNCACHE_HEAP_SIZE),    0x49008000,           NORMAL_NOCACHE_MEM},
     {PLATFORM_MEM_TALBE(PMU0_GRF_BASE,                  0x2000),    PMU0_GRF_BASE,                DEVICE_MEM},
     {PLATFORM_MEM_TALBE(PMU1_GRF_BASE,                  0x2000),    PMU1_GRF_BASE,                DEVICE_MEM},
     {PLATFORM_MEM_TALBE(SYS_GRF_BASE,                   0x4000),    SYS_GRF_BASE,                 DEVICE_MEM},
@@ -89,6 +90,9 @@ void rt_hw_board_init(void)
 #ifdef RT_USING_HEAP
     /* initialize memory system */
     rt_system_heap_init(RT_HW_HEAP_BEGIN, RT_HW_HEAP_END);
+#ifdef RT_USING_UNCACHE_HEAP
+    rt_uncache_heap_init((void *)0x49008000, (void *)(0x49008000 + RT_UNCACHE_HEAP_SIZE));
+#endif
 #endif
     /* initialize hardware interrupt */
     rt_hw_interrupt_init();
