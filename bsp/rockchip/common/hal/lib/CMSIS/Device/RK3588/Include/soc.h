@@ -193,6 +193,9 @@ typedef enum {
   UART7_IRQn                =  370 + NUM_INTERRUPTS,     /*!< UART7 Interrupt               */
   UART8_IRQn                =  371 + NUM_INTERRUPTS,     /*!< UART8 Interrupt               */
   UART9_IRQn                =  372 + NUM_INTERRUPTS,     /*!< UART9 Interrupt               */
+  CAN0_IRQn                 =  373 + NUM_INTERRUPTS,     /*!< CAN0 Interrupt                */
+  CAN1_IRQn                 =  374 + NUM_INTERRUPTS,     /*!< CAN1 Interrupt                */
+  CAN2_IRQn                 =  375 + NUM_INTERRUPTS,     /*!< CAN2 Interrupt                */
   TOTAL_INTERRUPTS          =  (INTMUX_IRQ_START_NUM + NUM_INTERRUPTS + NUM_EXT_INTERRUPTS),
 } IRQn_Type;
 #elif defined(RKMCU_RK3588_NPU)
@@ -365,6 +368,9 @@ typedef enum
     UART7_IRQn             = 370,      /*!< UART7  Interrupt            */
     UART8_IRQn             = 371,      /*!< UART8  Interrupt            */
     UART9_IRQn             = 372,      /*!< UART9  Interrupt            */
+    CAN0_IRQn              = 373,      /*!< CAN0 Interrupt              */
+    CAN1_IRQn               = 374,      /*!< CAN1 Interrupt              */
+    CAN2_IRQn              = 375,      /*!< CAN2 Interrupt              */
     RSVD0_IRQn             = 454,      /*!< RSVD0  Interrupt            */
     NUM_INTERRUPTS         = 512,
 } IRQn_Type;
@@ -627,7 +633,9 @@ typedef enum CLOCK_Name {
     CLK_UART9_SRC        = CLK64(CLK_UART9_SRC_SEL, CLK_UART9_SRC_DIV),
     CLK_UART9_FRAC       = CLK64(0U, CLK_UART9_FRAC_DIV),
     CLK_UART9            = CLK64(SCLK_UART9_SEL, 0U),
-
+    CLK_CAN0             = CLK64(CLK_CAN0_SEL, CLK_CAN0_DIV),
+    CLK_CAN1             = CLK64(CLK_CAN1_SEL, CLK_CAN1_DIV),
+    CLK_CAN2             = CLK64(CLK_CAN2_SEL, CLK_CAN2_DIV),
     CLK_I2C0             = CLK64(CLK_I2C0_SEL, 0U),
     CLK_I2C1             = CLK64(CLK_I2C1_SEL, 0U),
     CLK_I2C2             = CLK64(CLK_I2C2_SEL, 0U),
