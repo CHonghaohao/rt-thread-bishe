@@ -23,7 +23,7 @@
 #include <drv_uart.h>
 
 #include "mm_page.h"
-
+#include "hal_pinctrl.h"
 #define PLATFORM_MEM_TALBE(va, size) va, ((unsigned long)va + size - 1)
 
 struct mem_desc platform_mem_desc[] =
@@ -37,6 +37,10 @@ struct mem_desc platform_mem_desc[] =
     {PLATFORM_MEM_TALBE(UART1_BASE,                    0x90000),    UART1_BASE,                   DEVICE_MEM},
     {PLATFORM_MEM_TALBE(GIC_PL600_DISTRIBUTOR_PPTR,    0x10000),    GIC_PL600_DISTRIBUTOR_PPTR,   DEVICE_MEM},
     {PLATFORM_MEM_TALBE(GIC_PL600_REDISTRIBUTOR_PPTR,  0xc0000),    GIC_PL600_REDISTRIBUTOR_PPTR, DEVICE_MEM},
+    {PLATFORM_MEM_TALBE(BUS_IOC_BASE,                   0x4000),    BUS_IOC_BASE,                 DEVICE_MEM},
+    {PLATFORM_MEM_TALBE(VCCIO3_5_IOC_BASE,              0x1000),    VCCIO3_5_IOC_BASE,            DEVICE_MEM},
+    {PLATFORM_MEM_TALBE(VCCIO6_IOC_BASE,                0x1000),    VCCIO6_IOC_BASE,              DEVICE_MEM},
+
 #ifdef PKG_USING_RT_OPENAMP
     {PLATFORM_MEM_TALBE(AMP_SHARE_MEMORY_ADDRESS, AMP_SHARE_MEMORY_SIZE), AMP_SHARE_MEMORY_ADDRESS, NORMAL_MEM},
 #endif /* PKG_USING_RT_OPENAMP */
@@ -68,6 +72,20 @@ void rt_hw_board_init(void)
 #endif
     /* initialize hardware interrupt */
     rt_hw_interrupt_init();
+    
+    HAL_PINCTRL_SetIOMUX(GPIO_BANK4,
+        GPIO_PIN_A5,
+        PIN_CONFIG_MUX_FUNC10);
+    HAL_PINCTRL_SetIOMUX(GPIO_BANK4,
+        GPIO_PIN_A6,
+        PIN_CONFIG_MUX_FUNC10);
+        
+    HAL_PINCTRL_SetIOMUX(GPIO_BANK4,
+        GPIO_PIN_A3,
+        PIN_CONFIG_MUX_FUNC10 | PIN_CONFIG_PUL_UP | PIN_CONFIG_DRV_LEVEL1);// | PIN_CONFIG_PUL_UP | PIN_CONFIG_DRV_LEVEL1
+    HAL_PINCTRL_SetIOMUX(GPIO_BANK4,
+        GPIO_PIN_A4,
+        PIN_CONFIG_MUX_FUNC10 | PIN_CONFIG_PUL_UP | PIN_CONFIG_DRV_LEVEL1);
 
     /* initialize uart */
     rt_hw_uart_init();

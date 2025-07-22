@@ -54,7 +54,7 @@
 #define RT_USING_SCHED_THREAD_CTX
 #define RT_USING_CONSOLE
 #define RT_CONSOLEBUF_SIZE 128
-#define RT_CONSOLE_DEVICE_NAME "uart2"
+#define RT_CONSOLE_DEVICE_NAME "uart3"
 #define RT_VER_NUM 0x50100
 #define RT_BACKTRACE_LEVEL_MAX_NR 32
 
@@ -288,7 +288,8 @@
 /* Hardware Drivers Config */
 
 #define BSP_USING_UART
-#define RT_USING_UART2
+#define RT_USING_UART0
+#define RT_USING_UART3
 #define BSP_USING_GIC
 #define BSP_USING_GICV3
 
