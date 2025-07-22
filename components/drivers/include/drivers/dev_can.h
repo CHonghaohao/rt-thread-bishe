@@ -56,9 +56,9 @@ enum CANBAUD
 };
 
 #define RT_CAN_MODE_NORMAL              0
-#define RT_CAN_MODE_LISTEN              1
+#define RT_CAN_MODE_LISEN              1
 #define RT_CAN_MODE_LOOPBACK            2
-#define RT_CAN_MODE_LOOPBACKANLISTEN    3
+#define RT_CAN_MODE_LOOPBACKANLISEN    3
 
 #define RT_CAN_MODE_PRIV                0x01
 #define RT_CAN_MODE_NOPRIV              0x00
@@ -217,8 +217,7 @@ struct rt_can_filter_item
     rt_uint32_t rtr : 1;
     rt_uint32_t mode : 1;
     rt_uint32_t mask;
-    rt_int32_t  hdr_bank;/*Should be defined as:rx.FilterBank,which should be changed to rt_int32_t hdr_bank*/
-    rt_uint32_t rxfifo;/*Add a configuration item that CAN_RX_FIFO0/CAN_RX_FIFO1*/
+    rt_int32_t hdr;
 #ifdef RT_CAN_USING_HDR
     rt_err_t (*ind)(rt_device_t dev, void *args , rt_int32_t hdr, rt_size_t size);
     void *args;
@@ -348,10 +347,10 @@ struct rt_can_ops;
 
 enum RT_CAN_STATUS_MODE
 {
-    NORMAL = 0,
-    ERRWARNING = 1,
-    ERRPASSIVE = 2,
-    BUSOFF = 4,
+    RT_CAN_NORMAL = 0,
+    RT_CAN_ERRWARNING = 1,
+    RT_CAN_ERRPASSIVE = 2,
+    RT_CAN_BUSOFF = 4,
 };
 enum RT_CAN_BUS_ERR
 {
@@ -443,21 +442,9 @@ struct rt_can_msg
     rt_uint32_t rsv : 1;
     rt_uint32_t len : 8;
     rt_uint32_t priv : 8;
-    rt_int32_t hdr_index : 8;/*Should be defined as:rx.FilterMatchIndex,which should be changed to rt_int32_t hdr_index : 8*/
-#ifdef RT_CAN_USING_CANFD
-    rt_uint32_t fd_frame : 1;
-    rt_uint32_t brs : 1;
-    rt_uint32_t rxfifo : 2;/*Redefined to return :CAN RX FIFO0/CAN RX FIFO1*/
-    rt_uint32_t reserved : 4;
-#else
-    rt_uint32_t rxfifo : 2;/*Redefined to return :CAN RX FIFO0/CAN RX FIFO1*/
-    rt_uint32_t reserved : 6;
-#endif
-#ifdef RT_CAN_USING_CANFD
-    rt_uint8_t data[64];
-#else
+    rt_uint32_t hdr : 8;
+    rt_uint32_t reserved : 8;
     rt_uint8_t data[8];
-#endif
 };
 typedef struct rt_can_msg *rt_can_msg_t;
 
@@ -511,8 +498,8 @@ struct rt_can_ops
 {
     rt_err_t (*configure)(struct rt_can_device *can, struct can_configure *cfg);
     rt_err_t (*control)(struct rt_can_device *can, int cmd, void *arg);
-    rt_ssize_t (*sendmsg)(struct rt_can_device *can, const void *buf, rt_uint32_t boxno);
-    rt_ssize_t (*recvmsg)(struct rt_can_device *can, void *buf, rt_uint32_t boxno);
+    int (*sendmsg)(struct rt_can_device *can, const void *buf, rt_uint32_t boxno);
+    int (*recvmsg)(struct rt_can_device *can, void *buf, rt_uint32_t boxno);
 };
 
 /**

@@ -42,6 +42,7 @@ struct mem_desc platform_mem_desc[] =
     {PLATFORM_MEM_TALBE(VCCIO3_5_IOC_BASE,              0x1000),    VCCIO3_5_IOC_BASE,            DEVICE_MEM},
     {PLATFORM_MEM_TALBE(VCCIO6_IOC_BASE,                0x1000),    VCCIO6_IOC_BASE,              DEVICE_MEM},
     {PLATFORM_MEM_TALBE(TIMER0_BASE,                    0x8000),    TIMER5_BASE,                  DEVICE_MEM},
+    {PLATFORM_MEM_TALBE(CAN2_BASE,                     0x10000),    CAN2_BASE,                    DEVICE_MEM},
 
 #ifdef PKG_USING_RT_OPENAMP
     {PLATFORM_MEM_TALBE(AMP_SHARE_MEMORY_ADDRESS, AMP_SHARE_MEMORY_SIZE), AMP_SHARE_MEMORY_ADDRESS, NORMAL_MEM},
