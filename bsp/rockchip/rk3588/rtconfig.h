@@ -301,4 +301,8 @@
 #define RT_USING_INTERRUPT_INFO
 #define ARCH_USING_IRQ_CTX_LIST
 
+#define RT_USING_CAN
+#define RT_USING_CANFD
+#define RT_USING_CAN2
+
 #endif

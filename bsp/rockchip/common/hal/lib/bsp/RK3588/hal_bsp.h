@@ -48,6 +48,12 @@ extern const struct HAL_UART_DEV g_uart8Dev;
 extern const struct HAL_UART_DEV g_uart9Dev;
 #endif
 
+#ifdef HAL_CANFD_MODULE_ENABLED
+extern const struct HAL_CANFD_DEV g_can0Dev;
+extern const struct HAL_CANFD_DEV g_can1Dev;
+extern const struct HAL_CANFD_DEV g_can2Dev;
+#endif
+
 #ifdef HAL_VAD_MODULE_ENABLED
 extern struct HAL_VAD_DEV g_vadDev;
 #endif

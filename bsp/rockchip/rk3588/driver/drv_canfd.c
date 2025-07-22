@@ -437,6 +437,8 @@ int rockchip_canfd_dev_init(void)
 #endif
 
 #ifdef RT_USING_CAN2
+    HAL_PINCTRL_SetIOMUX(GPIO_BANK3, GPIO_PIN_C4, PIN_CONFIG_MUX_FUNC9 | PIN_CONFIG_PUL_UP | PIN_CONFIG_DRV_LEVEL1);
+    HAL_PINCTRL_SetIOMUX(GPIO_BANK3, GPIO_PIN_C5, PIN_CONFIG_MUX_FUNC9 | PIN_CONFIG_PUL_UP | PIN_CONFIG_DRV_LEVEL1);
     rockchip_canfd2.config.baud_rate = CAN500kBaud;
     rockchip_canfd2.config.msgboxsz = 1;
     rockchip_canfd2.config.sndboxnumber = 1;
@@ -453,7 +455,7 @@ int rockchip_canfd_dev_init(void)
 
     rt_hw_interrupt_install(rockchip_canfd2data.dev->irqNum, (rt_isr_handler_t)rockchip_canfd2data.irq, RT_NULL, "can2");
     rt_hw_interrupt_umask(rockchip_canfd2data.dev->irqNum);
-    HAL_CRU_ClkSetFreq(rockchip_canfd1data.dev->sclkID, ROCKCHIP_CAN_CLK_RATE);
+    // HAL_CRU_ClkSetFreq(rockchip_canfd1data.dev->sclkID, ROCKCHIP_CAN_CLK_RATE);
 
 #endif
 
@@ -468,7 +470,7 @@ INIT_DEVICE_EXPORT(rockchip_canfd_dev_init);
 
 #ifdef RT_USING_FINSH
 #include <finsh.h>
-#define CAN_DEV_NAME       "rk_can1"
+#define CAN_DEV_NAME       "rk_can2"
 static struct rt_semaphore rx_sem;
 static rt_device_t can_dev;
 
@@ -538,7 +540,7 @@ int can_sample(int argc, char *argv[])
     res = rt_device_open(can_dev, RT_DEVICE_FLAG_INT_TX | RT_DEVICE_FLAG_INT_RX);
     RT_ASSERT(res == RT_EOK);
     rt_device_control(can_dev, RT_CAN_CMD_SET_MODE, (void *)RT_CAN_MODE_NORMAL);
-    thread = rt_thread_create("can_rx", can_rx_thread, RT_NULL, 1024, 25, 10);
+    thread = rt_thread_create("can_rx", can_rx_thread, RT_NULL, 1024*8, 25, 10);
     if (thread != RT_NULL)
     {
         rt_thread_startup(thread);

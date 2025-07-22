@@ -93,6 +93,35 @@ struct HAL_I2STDM_DEV g_i2sTdm1Dev =
 };
 #endif
 
+#ifdef HAL_CANFD_MODULE_ENABLED
+const struct HAL_CANFD_DEV g_can0Dev =
+{
+    .pReg = CAN0,
+    .sclkID = CLK_CAN0,
+    .sclkGateID = CLK_CAN0_GATE,
+    .pclkGateID = PCLK_CAN0_GATE,
+    .irqNum = CAN0_IRQn,
+};
+
+const struct HAL_CANFD_DEV g_can1Dev =
+{
+    .pReg = CAN1,
+    .sclkID = CLK_CAN1,
+    .sclkGateID = CLK_CAN1_GATE,
+    .pclkGateID = PCLK_CAN1_GATE,
+    .irqNum = CAN1_IRQn,
+};
+
+const struct HAL_CANFD_DEV g_can2Dev =
+{
+    .pReg = CAN2,
+    .sclkID = CLK_CAN2,
+    .sclkGateID = CLK_CAN2_GATE,
+    .pclkGateID = PCLK_CAN2_GATE,
+    .irqNum = CAN2_IRQn,
+};
+#endif
+
 #ifdef HAL_I2S_MODULE_ENABLED
 struct HAL_I2S_DEV g_i2s2Dev =
 {
