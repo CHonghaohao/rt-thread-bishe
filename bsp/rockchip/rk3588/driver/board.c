@@ -28,7 +28,7 @@
 
 struct mem_desc platform_mem_desc[] =
 {
-    {PLATFORM_MEM_TALBE(0x20000000,                    0x10000000), 0x20000000,                   NORMAL_MEM},
+    {PLATFORM_MEM_TALBE(0x40008000,                 0x10000000),    0x40008000,                   NORMAL_MEM},
     {PLATFORM_MEM_TALBE(PMU0_GRF_BASE,                  0x2000),    PMU0_GRF_BASE,                DEVICE_MEM},
     {PLATFORM_MEM_TALBE(PMU1_GRF_BASE,                  0x2000),    PMU1_GRF_BASE,                DEVICE_MEM},
     {PLATFORM_MEM_TALBE(SYS_GRF_BASE,                   0x4000),    SYS_GRF_BASE,                 DEVICE_MEM},
@@ -58,7 +58,7 @@ void rt_hw_board_init(void)
     extern unsigned long MMUTable[512];
     rt_region_t init_page_region;
 
-    rt_hw_mmu_map_init(&rt_kernel_space, (void *) 0x20000000, 0xE0000000 - 1, MMUTable, 0);
+    rt_hw_mmu_map_init(&rt_kernel_space, (void *) 0x40008000, 0xE0000000 - 1, MMUTable, 0);
 
     init_page_region.start = RT_HW_PAGE_START;
     init_page_region.end = RT_HW_PAGE_END;
@@ -72,7 +72,7 @@ void rt_hw_board_init(void)
 #endif
     /* initialize hardware interrupt */
     rt_hw_interrupt_init();
-    
+
     HAL_PINCTRL_SetIOMUX(GPIO_BANK4,
         GPIO_PIN_A5,
         PIN_CONFIG_MUX_FUNC10);
