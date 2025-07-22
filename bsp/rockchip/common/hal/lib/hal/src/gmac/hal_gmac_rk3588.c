@@ -169,7 +169,7 @@ void HAL_GMAC_SetRGMIISpeed(struct GMAC_HANDLE *pGMAC, int32_t speed)
 {
     eCLOCK_Name clkID;
     uint32_t rate;
-    int32_t ret;
+    // int32_t ret;
 
     switch (speed) {
     case 10:

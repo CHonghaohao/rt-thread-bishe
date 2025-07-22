@@ -164,6 +164,10 @@ typedef enum {
   MBOX0_CH1_BB_IRQn         =  98  + NUM_INTERRUPTS,     /*!< MAILBOX_CH1_BB Interrupt      */
   MBOX0_CH2_BB_IRQn         =  99  + NUM_INTERRUPTS,     /*!< MAILBOX_CH2_BB Interrupt      */
   MBOX0_CH3_BB_IRQn         =  100 + NUM_INTERRUPTS,     /*!< MAILBOX_CH3_BB Interrupt      */
+  GMAC0_IRQn_PMT            =  258 + NUM_INTERRUPTS,     /*!< GMAC0 Interrupt PMT           */
+  GMAC0_IRQn_SBD            =  259 + NUM_INTERRUPTS,     /*!< GMAC0 Interrupt SBD           */
+  GMAC1_IRQn_PMT            =  265 + NUM_INTERRUPTS,     /*!< GMAC0 Interrupt PMT           */
+  GMAC1_IRQn_SBD            =  266 + NUM_INTERRUPTS,     /*!< GMAC1 Interrupt SBD           */
   GPIO1_IRQn                =  310 + NUM_INTERRUPTS,     /*!< GPIO1 Interrupt               */
   GPIO2_IRQn                =  311 + NUM_INTERRUPTS,     /*!< GPIO2 Interrupt               */
   GPIO3_IRQn                =  312 + NUM_INTERRUPTS,     /*!< GPIO3 Interrupt               */
@@ -335,6 +339,10 @@ typedef enum
     I2S1_8CH_IRQn          = 213,      /*!< I2S1_8CH Interrupt          */
     I2S2_2CH_IRQn          = 214,      /*!< I2S2_2CH Interrupt          */
     I2S3_2CH_IRQn          = 215,      /*!< I2S3_2CH Interrupt          */
+    GMAC0_IRQn_PMT         = 258,      /*!< GMAC0 Interrupt pmt         */
+    GMAC0_IRQn_SBD         = 259,      /*!< GMAC0 Interrupt sbd         */
+    GMAC1_IRQn_PMT         = 265,      /*!< GMAC0 Interrupt pmt         */
+    GMAC1_IRQn_SBD         = 266,      /*!< GMAC1 Interrupt sbd         */
     PCIE30x4_LEGACY_IRQn   = 292,      /*!< PCIe3x4_legacy Interrupt    */
     GPIO0_IRQn             = 309,      /*!< GPIO0 Interrupt             */
     GPIO1_IRQn             = 310,      /*!< GPIO1 Interrupt             */

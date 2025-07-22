@@ -1609,9 +1609,7 @@ eGMAC_IRQ_Status HAL_GMAC_IRQHandler(struct GMAC_HANDLE *pGMAC)
     uint32_t intrStatus;
 
     HAL_ASSERT(pGMAC != NULL);
-
     intrStatus = READ_REG(pGMAC->pReg->DMA_CH0_STATUS);
-    rayirq = intrStatus;
     /* ABNORMAL interrupts */
     // 14 
     if (intrStatus & DMA_CHAN_STATUS_AIS) {

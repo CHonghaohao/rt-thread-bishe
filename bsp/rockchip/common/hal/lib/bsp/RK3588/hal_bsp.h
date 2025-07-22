@@ -26,6 +26,11 @@ extern struct HAL_I2S_DEV g_i2s3Dev;
 extern struct HAL_PCIE_DEV g_pcieDev;
 #endif
 
+#ifdef HAL_GMAC_MODULE_ENABLED
+extern const struct HAL_GMAC_DEV g_gmac0Dev;
+extern const struct HAL_GMAC_DEV g_gmac1Dev;
+#endif
+
 #ifdef HAL_PDM_MODULE_ENABLED
 extern struct HAL_PDM_DEV g_pdm0Dev;
 #endif
