@@ -4,6 +4,7 @@
  */
 
 #include "hal_base.h"
+#include "cache.h"
 
 #ifdef HAL_GMAC_MODULE_ENABLED
 
@@ -74,24 +75,24 @@
 /********************* Private MACRO Definition ******************************/
 
 /* GMAC config */
-#define GMAC_CONFIG_GPSLCE (1 << GMAC_MAC_CONFIGURATION_GPSLCE_SHIFT)
-#define GMAC_CONFIG_IPC    (1 << GMAC_MAC_CONFIGURATION_IPC_SHIFT)
+#define GMAC_CONFIG_GPSLCE (1 << GMAC_MAC_CONFIGURATION_GPSLCE_SHIFT) //23
+#define GMAC_CONFIG_IPC    (1 << GMAC_MAC_CONFIGURATION_IPC_SHIFT)   //27
 #define GMAC_CONFIG_2K     (1 << GMAC_MAC_CONFIGURATION_S2KP_SHIFT)
 #define GMAC_CONFIG_CST    (1 << GMAC_MAC_CONFIGURATION_CST_SHIFT)
-#define GMAC_CONFIG_ACS    (1 << GMAC_MAC_CONFIGURATION_ACS_SHIFT)
-#define GMAC_CONFIG_WD     (1 << GMAC_MAC_CONFIGURATION_WD_SHIFT)
-#define GMAC_CONFIG_BE     (1 << GMAC_MAC_CONFIGURATION_BE_SHIFT)
-#define GMAC_CONFIG_JD     (1 << GMAC_MAC_CONFIGURATION_JD_SHIFT)
-#define GMAC_CONFIG_JE     (1 << GMAC_MAC_CONFIGURATION_JE_SHIFT)
-#define GMAC_CONFIG_PS     (1 << GMAC_MAC_CONFIGURATION_PS_SHIFT)
-#define GMAC_CONFIG_FES    (1 << GMAC_MAC_CONFIGURATION_FES_SHIFT)
-#define GMAC_CONFIG_DM     (1 << GMAC_MAC_CONFIGURATION_DM_SHIFT)
-#define GMAC_CONFIG_DCRS   (1 << GMAC_MAC_CONFIGURATION_DCRS_SHIFT)
-#define GMAC_CONFIG_TE     (1 << GMAC_MAC_CONFIGURATION_TE_SHIFT)
-#define GMAC_CONFIG_RE     (1 << GMAC_MAC_CONFIGURATION_RE_SHIFT)
-
-#define GMAC_CORE_INIT (GMAC_CONFIG_JD | GMAC_CONFIG_PS | GMAC_CONFIG_ACS | \
-                        GMAC_CONFIG_BE | GMAC_CONFIG_DCRS)
+#define GMAC_CONFIG_ACS    (1 << GMAC_MAC_CONFIGURATION_ACS_SHIFT)   //20
+#define GMAC_CONFIG_WD     (1 << GMAC_MAC_CONFIGURATION_WD_SHIFT)    //19
+#define GMAC_CONFIG_BE     (1 << GMAC_MAC_CONFIGURATION_BE_SHIFT)    //18
+#define GMAC_CONFIG_JD     (1 << GMAC_MAC_CONFIGURATION_JD_SHIFT)    //17
+#define GMAC_CONFIG_JE     (1 << GMAC_MAC_CONFIGURATION_JE_SHIFT)    //16
+#define GMAC_CONFIG_PS     (1 << GMAC_MAC_CONFIGURATION_PS_SHIFT)    //15
+#define GMAC_CONFIG_FES    (1 << GMAC_MAC_CONFIGURATION_FES_SHIFT)   //14
+#define GMAC_CONFIG_DM     (1 << GMAC_MAC_CONFIGURATION_DM_SHIFT)    //13
+#define GMAC_CONFIG_DCRS   (1 << GMAC_MAC_CONFIGURATION_DCRS_SHIFT)  //9
+#define GMAC_CONFIG_TE     (1 << GMAC_MAC_CONFIGURATION_TE_SHIFT)    //1
+#define GMAC_CONFIG_RE     (1 << GMAC_MAC_CONFIGURATION_RE_SHIFT)    //0
+//9 15 16 17 18
+#define GMAC_CORE_INIT (GMAC_CONFIG_BE | GMAC_CONFIG_JD | GMAC_CONFIG_JE | \
+                        GMAC_CONFIG_PS | GMAC_CONFIG_DCRS)
 
 /* GMAC HW features1 bitmap */
 #define GMAC_HW_FEAT_AVSEL       (1 << GMAC_MAC_HW_FEATURE1_AVSEL_SHIFT)
@@ -253,26 +254,32 @@
 #define DMA_CHAN_STATUS_TI        (1 << GMAC_DMA_CH0_STATUS_TI_SHIFT)
 
 /* Interrupt enable bits per channel */
-#define DMA_CHAN_INTR_ENA_NIE  (1 << GMAC_DMA_CH0_INTERRUPT_ENABLE_NIE_SHIFT)
-#define DMA_CHAN_INTR_ENA_AIE  (1 << GMAC_DMA_CH0_INTERRUPT_ENABLE_AIE_SHIFT)
-#define DMA_CHAN_INTR_ENA_CDE  (1 << GMAC_DMA_CH0_INTERRUPT_ENABLE_CDEE_SHIFT)
-#define DMA_CHAN_INTR_ENA_FBE  (1 << GMAC_DMA_CH0_INTERRUPT_ENABLE_FBEE_SHIFT)
-#define DMA_CHAN_INTR_ENA_ERE  (1 << GMAC_DMA_CH0_INTERRUPT_ENABLE_ERIE_SHIFT)
-#define DMA_CHAN_INTR_ENA_ETE  (1 << GMAC_DMA_CH0_INTERRUPT_ENABLE_ETIE_SHIFT)
-#define DMA_CHAN_INTR_ENA_RWE  (1 << GMAC_DMA_CH0_INTERRUPT_ENABLE_RWTE_SHIFT)
-#define DMA_CHAN_INTR_ENA_RSE  (1 << GMAC_DMA_CH0_INTERRUPT_ENABLE_RSE_SHIFT)
-#define DMA_CHAN_INTR_ENA_RBUE (1 << GMAC_DMA_CH0_INTERRUPT_ENABLE_RBUE_SHIFT)
-#define DMA_CHAN_INTR_ENA_RIE  (1 << GMAC_DMA_CH0_INTERRUPT_ENABLE_RIE_SHIFT)
-#define DMA_CHAN_INTR_ENA_TBUE (1 << GMAC_DMA_CH0_INTERRUPT_ENABLE_TBUE_SHIFT)
-#define DMA_CHAN_INTR_ENA_TSE  (1 << GMAC_DMA_CH0_INTERRUPT_ENABLE_TXSE_SHIFT))
-#define DMA_CHAN_INTR_ENA_TIE  (1 << GMAC_DMA_CH0_INTERRUPT_ENABLE_TIE_SHIFT)
+#define DMA_CHAN_INTR_ENA_NIE  (1 << GMAC_DMA_CH0_INTERRUPT_ENABLE_NIE_SHIFT)   //15
+#define DMA_CHAN_INTR_ENA_AIE  (1 << GMAC_DMA_CH0_INTERRUPT_ENABLE_AIE_SHIFT)   //14
+#define DMA_CHAN_INTR_ENA_CDE  (1 << GMAC_DMA_CH0_INTERRUPT_ENABLE_CDEE_SHIFT)  //13
+#define DMA_CHAN_INTR_ENA_FBE  (1 << GMAC_DMA_CH0_INTERRUPT_ENABLE_FBEE_SHIFT)  //12
+#define DMA_CHAN_INTR_ENA_ERE  (1 << GMAC_DMA_CH0_INTERRUPT_ENABLE_ERIE_SHIFT)  //11
+#define DMA_CHAN_INTR_ENA_ETE  (1 << GMAC_DMA_CH0_INTERRUPT_ENABLE_ETIE_SHIFT)  //10
+#define DMA_CHAN_INTR_ENA_RWE  (1 << GMAC_DMA_CH0_INTERRUPT_ENABLE_RWTE_SHIFT)  //9
+#define DMA_CHAN_INTR_ENA_RSE  (1 << GMAC_DMA_CH0_INTERRUPT_ENABLE_RSE_SHIFT)   //8
+#define DMA_CHAN_INTR_ENA_RBUE (1 << GMAC_DMA_CH0_INTERRUPT_ENABLE_RBUE_SHIFT)  //7
+#define DMA_CHAN_INTR_ENA_RIE  (1 << GMAC_DMA_CH0_INTERRUPT_ENABLE_RIE_SHIFT)   //6
+#define DMA_CHAN_INTR_ENA_TBUE (1 << GMAC_DMA_CH0_INTERRUPT_ENABLE_TBUE_SHIFT)  //2
+#define DMA_CHAN_INTR_ENA_TSE  (1 << GMAC_DMA_CH0_INTERRUPT_ENABLE_TXSE_SHIFT)  //1
+#define DMA_CHAN_INTR_ENA_TIE  (1 << GMAC_DMA_CH0_INTERRUPT_ENABLE_TIE_SHIFT)   //0
 
 #define DMA_CHAN_INTR_NORMAL (DMA_CHAN_INTR_ENA_NIE | \
+                              DMA_CHAN_INTR_ENA_ERE | \
                               DMA_CHAN_INTR_ENA_RIE | \
+                              DMA_CHAN_INTR_ENA_TBUE| \
                               DMA_CHAN_INTR_ENA_TIE)
 
 #define DMA_CHAN_INTR_ABNORMAL (DMA_CHAN_INTR_ENA_AIE | \
-                                DMA_CHAN_INTR_ENA_FBE)
+                                DMA_CHAN_INTR_ENA_CDE | \
+                                DMA_CHAN_INTR_ENA_FBE | \
+                                DMA_CHAN_INTR_ENA_RSE | \
+                                DMA_CHAN_INTR_ENA_RBUE| \
+                                DMA_CHAN_INTR_ENA_TSE)
 /* DMA default interrupt mask */
 #define DMA_CHAN_INTR_DEFAULT_MASK (DMA_CHAN_INTR_NORMAL | \
                                     DMA_CHAN_INTR_ABNORMAL)
@@ -464,6 +471,8 @@
 #define ESTATUS_1000XH 0x4000
 
 #define ETH_FCS_LEN 4 /* Octets in the FCS */
+#define dsb(opt) asm volatile("dsb " #opt : : : "memory")
+#define wmb()    dsb(st)
 
 /********************* Private Structure Definition **************************/
 
@@ -523,7 +532,6 @@ static HAL_Status PHY_GetID(struct GMAC_HANDLE *pGMAC, int32_t addr,
 
     /* Grab the bits from PHYIR2, and put them in the lower half */
     phyReg = HAL_GMAC_MDIORead(pGMAC, addr, MII_PHYSID2);
-
     if (phyReg < 0) {
         return phyReg;
     }
@@ -548,6 +556,7 @@ static HAL_Status PHY_InfoCreate(struct GMAC_HANDLE *pGMAC,
                                  struct GMAC_PHY_Config *config,
                                  int32_t addr, uint32_t id)
 {
+//为pGMAC强行配置信息
     pGMAC->phyStatus.link = 0;
     pGMAC->phyStatus.duplex = config->duplexMode;
     pGMAC->phyStatus.interface = config->interface;
@@ -577,12 +586,11 @@ static HAL_Status PHY_Connect(struct GMAC_HANDLE *pGMAC,
 {
     HAL_Status status;
     uint32_t phyID = 0xffffffff;
-
+    // 设备标识信息phyID
     status = PHY_GetID(pGMAC, addr, &phyID);
     if (status == HAL_OK && (phyID & 0x1fffffff) != 0x1fffffff) {
         return PHY_InfoCreate(pGMAC, config, addr, phyID);
     }
-
     return HAL_NODEV;
 }
 
@@ -595,8 +603,18 @@ static HAL_Status PHY_Connect(struct GMAC_HANDLE *pGMAC,
   */
 static HAL_Status PHY_SetupForced(struct GMAC_HANDLE *pGMAC)
 {
-    int32_t ctl = BMCR_ANRESTART;
+    int32_t ctl = HAL_GMAC_MDIORead(pGMAC, pGMAC->phyStatus.addr, MII_MMD_CTRL);
+    ctl |= 0x4007;
+    HAL_GMAC_MDIOWrite(pGMAC, pGMAC->phyStatus.addr, MII_MMD_CTRL, ctl);
+    ctl = 0;
+    HAL_GMAC_MDIOWrite(pGMAC, pGMAC->phyStatus.addr, MII_DCOUNTER, ctl);
+    ctl = 0x311e;
+    HAL_GMAC_MDIOWrite(pGMAC, pGMAC->phyStatus.addr, MII_LBRERROR, ctl);
+    ctl = HAL_GMAC_MDIORead(pGMAC, pGMAC->phyStatus.addr, 0x07);
+    ctl |= 0x800;
+    HAL_GMAC_MDIOWrite(pGMAC, pGMAC->phyStatus.addr, 0x07, ctl);
 
+    ctl = BMCR_ANRESTART;
     if (PHY_SPEED_1000M == pGMAC->phyStatus.speed) {
         ctl |= BMCR_SPEED1000;
     } else if (PHY_SPEED_100M == pGMAC->phyStatus.speed) {
@@ -606,7 +624,7 @@ static HAL_Status PHY_SetupForced(struct GMAC_HANDLE *pGMAC)
     if (PHY_DUPLEX_FULL == pGMAC->phyStatus.duplex) {
         ctl |= BMCR_FULLDPLX;
     }
-
+    ctl |= BMCR_ANENABLE | BMCR_RESET;
     return HAL_GMAC_MDIOWrite(pGMAC, pGMAC->phyStatus.addr, MII_BMCR, ctl);
 }
 
@@ -660,7 +678,7 @@ static int32_t PHY_ConfigAdvert(struct GMAC_HANDLE *pGMAC)
     if (adverTise & ADVERTISED_1000baseX_Full) {
         adv |= ADVERTISE_1000XFULL;
     }
-
+    adv |= 0xde0;
     if (adv != oldAdv) {
         err = HAL_GMAC_MDIOWrite(pGMAC, pGMAC->phyStatus.addr,
                                  MII_ADVERTISE, adv);
@@ -672,6 +690,7 @@ static int32_t PHY_ConfigAdvert(struct GMAC_HANDLE *pGMAC)
     }
 
     bmsr = HAL_GMAC_MDIORead(pGMAC, pGMAC->phyStatus.addr, MII_BMSR);
+    // by here 
     if (bmsr < 0) {
         return bmsr;
     }
@@ -757,18 +776,17 @@ static HAL_Status PHY_ConfigAneg(struct GMAC_HANDLE *pGMAC)
     if (PHY_AUTONEG_ENABLE != pGMAC->phyStatus.neg) {
         return PHY_SetupForced(pGMAC);
     }
-
     result = PHY_ConfigAdvert(pGMAC);
     if (result < 0) { /* error */
         return result;
     }
-
     if (result == 0) {
         /*
          * Advertisment hasn't changed, but maybe aneg was never on to
          * begin with? Or maybe phy was isolated?
          */
         int32_t ctl = HAL_GMAC_MDIORead(pGMAC, pGMAC->phyStatus.addr, MII_BMCR);
+        
         if (ctl < 0) {
             return ctl;
         }
@@ -785,7 +803,6 @@ static HAL_Status PHY_ConfigAneg(struct GMAC_HANDLE *pGMAC)
     if (result > 0) {
         result = PHY_RestartAneg(pGMAC);
     }
-
     return result;
 }
 
@@ -837,7 +854,6 @@ static HAL_Status PHY_Config(struct GMAC_HANDLE *pGMAC)
             return status;
         }
     }
-
     features = (HAL_GMAC_PHY_SUPPORTED_TP | HAL_GMAC_PHY_SUPPORTED_MII |
                 HAL_GMAC_PHY_SUPPORTED_AUI | HAL_GMAC_PHY_SUPPORTED_FIBRE |
                 HAL_GMAC_PHY_SUPPORTED_BNC);
@@ -887,9 +903,7 @@ static HAL_Status PHY_Config(struct GMAC_HANDLE *pGMAC)
 
     pGMAC->phyStatus.supported &= features;
     pGMAC->phyStatus.advertising &= features;
-
     PHY_ConfigAneg(pGMAC);
-
     return HAL_OK;
 }
 
@@ -951,6 +965,7 @@ static HAL_Status GMAC_DMARXOpMode(struct GMAC_HANDLE *pGMAC, int32_t mode,
     uint32_t mtlRXOP, mtlRXInt;
 
     mtlRXOP = READ_REG(pGMAC->pReg->MTL_RXQ0_OPERATION_MODE);
+    HAL_DBG("GMAC: MTL_RXQ0_OPERATION_MODE %x\n", mtlRXOP);
     if (mode == SF_DMA_MODE) {
         HAL_DBG("GMAC: enable RX store and forward mode\n");
         mtlRXOP |= MTL_RXQ0_OPERATION_MODE_RSF;
@@ -1022,6 +1037,7 @@ static HAL_Status GMAC_DMARXOpMode(struct GMAC_HANDLE *pGMAC, int32_t mode,
     }
 
     WRITE_REG(pGMAC->pReg->MTL_RXQ0_OPERATION_MODE, mtlRXOP);
+    // WRITE_REG(pGMAC->pReg->MTL_RXQ0_OPERATION_MODE, 0x7f1c4a0);
 
     /* Enable MTL RX overflow */
     mtlRXInt = READ_REG(pGMAC->pReg->MTL_Q0_INTERRUPT_CTRL_STATUS);
@@ -1124,25 +1140,24 @@ int32_t HAL_GMAC_MDIORead(struct GMAC_HANDLE *pGMAC, int32_t mdioAddr,
 
     HAL_ASSERT(pGMAC != NULL);
 
-    HAL_DBG("Mdio Read addr=%ld, reg=%ld\n", mdioAddr, mdioReg);
-    status = Mdio_WaitIdle(pGMAC);
+    // HAL_DBG("Mdio Read addr=%ld, reg=%ld\n", mdioAddr, mdioReg); //
+    status = Mdio_WaitIdle(pGMAC); 
     if (status) {
         HAL_DBG("MDIO not idle at entry");
 
         return status;
     }
-
+    //读取MDIO
     val = READ_REG(pGMAC->pReg->MAC_MDIO_ADDRESS);
     val &= GMAC_MDIO_ADDRESS_SKAP |
            GMAC_MDIO_ADDRESS_C45E;
     val |= (mdioAddr << GMAC_MDIO_ADDRESS_PA_SHIFT) |
            (mdioReg << GMAC_MDIO_ADDRESS_RDA_SHIFT) |
-           (pGMAC->clkCSR <<
-            GMAC_MDIO_ADDRESS_CR_SHIFT) |
-           GMAC_MDIO_ADDRESS_GOC_READ |
+           (pGMAC->clkCSR << GMAC_MDIO_ADDRESS_CR_SHIFT) |
+           (GMAC_MDIO_ADDRESS_GOC_READ) |
            GMAC_MDIO_ADDRESS_GB;
     WRITE_REG(pGMAC->pReg->MAC_MDIO_ADDRESS, val);
-
+   
     status = Mdio_WaitIdle(pGMAC);
     if (status) {
         HAL_DBG("MDIO read didn't complete");
@@ -1171,38 +1186,35 @@ HAL_Status HAL_GMAC_MDIOWrite(struct GMAC_HANDLE *pGMAC, int32_t mdioAddr,
 {
     HAL_Status status;
     uint32_t val;
+    uint32_t test;//
 
     HAL_ASSERT(pGMAC != NULL);
 
-    HAL_DBG("%s(addr=%lx, reg=%ld, val=%x):\n", __func__,
-            mdioAddr, mdioReg, mdioVal);
+    // HAL_DBG("%s(addr=%lx, reg=%ld, val=%x):\n", __func__,
+    //         mdioAddr, mdioReg, mdioVal);
     status = Mdio_WaitIdle(pGMAC);
+    
     if (status) {
         HAL_DBG("MDIO not idle at entry");
-
         return status;
     }
-
+ 
     WRITE_REG(pGMAC->pReg->MAC_MDIO_DATA, mdioVal);
     val = READ_REG(pGMAC->pReg->MAC_MDIO_ADDRESS);
     val &= GMAC_MDIO_ADDRESS_SKAP |
            GMAC_MDIO_ADDRESS_C45E;
     val |= (mdioAddr << GMAC_MDIO_ADDRESS_PA_SHIFT) |
            (mdioReg << GMAC_MDIO_ADDRESS_RDA_SHIFT) |
-           (pGMAC->clkCSR <<
-            GMAC_MDIO_ADDRESS_CR_SHIFT) |
-           GMAC_MDIO_ADDRESS_GOC_WRITE |
+           (pGMAC->clkCSR << GMAC_MDIO_ADDRESS_CR_SHIFT) |
+           (GMAC_MDIO_ADDRESS_GOC_WRITE) |
            GMAC_MDIO_ADDRESS_GB;
-
     WRITE_REG(pGMAC->pReg->MAC_MDIO_ADDRESS, val);
-
     status = Mdio_WaitIdle(pGMAC);
     if (status) {
         HAL_DBG("MDIO read didn't complete");
 
         return status;
     }
-
     return HAL_OK;
 }
 
@@ -1222,7 +1234,7 @@ HAL_Status HAL_GMAC_PHYInit(struct GMAC_HANDLE *pGMAC, struct GMAC_PHY_Config *c
     int32_t reg;
 
     HAL_ASSERT(pGMAC != NULL);
-
+    //由hal_mac.h定义写死
     if (!config->features) {
         config->features = HAL_GMAC_PHY_GBIT_FEATURES | HAL_GMAC_PHY_SUPPORTED_MII |
                            HAL_GMAC_PHY_SUPPORTED_AUI | HAL_GMAC_PHY_SUPPORTED_FIBRE |
@@ -1231,31 +1243,30 @@ HAL_Status HAL_GMAC_PHYInit(struct GMAC_HANDLE *pGMAC, struct GMAC_PHY_Config *c
 
     pGMAC->phyStatus.advertising = pGMAC->phyStatus.supported = config->features;
 
-    /* softreset */
-    if (HAL_GMAC_MDIOWrite(pGMAC, config->phyAddress, MII_BMCR, BMCR_RESET) < 0) {
-        HAL_DBG("PHY reset failed\n");
+    
+    /* softreset */ 
+    // 参数 pGMAC 1 00 8000
+    if (HAL_GMAC_MDIOWrite(pGMAC, config->phyAddress, MII_BMCR, BMCR_RESET) < 0) { 
+        HAL_DBG("PHY reset failed: %p\n", config ->phyAddress);
 
         return HAL_ERROR;
     }
-
     reg = HAL_GMAC_MDIORead(pGMAC, config->phyAddress, MII_BMCR);
+
     while ((reg & BMCR_RESET) && timeout--) {
         reg = HAL_GMAC_MDIORead(pGMAC, config->phyAddress, MII_BMCR);
         if (reg < 0) {
             HAL_DBG("PHY status read failed\n");
-
             return HAL_ERROR;
         }
-        HAL_DelayUs(1000);
+        rt_thread_mdelay(1);
     }
 
     if (reg & BMCR_RESET) {
         HAL_DBG("PHY reset timed out\n");
-
         return HAL_TIMEOUT;
     }
 
-    HAL_DelayUs(100000);
 
     if (config->phyAddress < 0) {
         for (i = 0; i < 16; i++) {
@@ -1280,11 +1291,10 @@ HAL_Status HAL_GMAC_PHYInit(struct GMAC_HANDLE *pGMAC, struct GMAC_PHY_Config *c
     } else {
         HAL_DBG("PHY found ID: 0x%lx\n", pGMAC->phyStatus.phyID);
     }
-
+    //如果存在init函数，但好像不存在
     if (pGMAC->phyOps.init) {
         status = pGMAC->phyOps.init(pGMAC);
     }
-
     return status;
 }
 
@@ -1295,6 +1305,7 @@ HAL_Status HAL_GMAC_PHYInit(struct GMAC_HANDLE *pGMAC, struct GMAC_PHY_Config *c
   *
   * @return HAL status
   */
+
 HAL_Status HAL_GMAC_PHYUpdateLink(struct GMAC_HANDLE *pGMAC)
 {
     int32_t reg;
@@ -1306,6 +1317,7 @@ HAL_Status HAL_GMAC_PHYUpdateLink(struct GMAC_HANDLE *pGMAC)
      * (ie - we're capable and it's not done)
      */
     reg = HAL_GMAC_MDIORead(pGMAC, pGMAC->phyStatus.addr, MII_BMSR);
+    // rt_kprintf("HERE 2220 %d - %d\n", reg, pGMAC->phyStatus.link);
     if (reg < 0) {
         return reg;
     }
@@ -1314,10 +1326,11 @@ HAL_Status HAL_GMAC_PHYUpdateLink(struct GMAC_HANDLE *pGMAC)
      * If we already saw the link up, and it hasn't gone down, then
      * we don't need to wait for autoneg again
      */
+    pGMAC->phyStatus.oldLink = pGMAC->phyStatus.link;
     if (pGMAC->phyStatus.link && reg & BMSR_LSTATUS) {
         return HAL_OK;
     }
-
+    
     reg = HAL_GMAC_MDIORead(pGMAC, pGMAC->phyStatus.addr, MII_BMSR);
     if (reg & BMSR_LSTATUS) {
         pGMAC->phyStatus.link = 1;
@@ -1356,6 +1369,7 @@ HAL_Status HAL_GMAC_PHYParseLink(struct GMAC_HANDLE *pGMAC)
              * We want a list of states supported by
              * both PHYs in the link
              */
+            //HERE
             gblpa = HAL_GMAC_MDIORead(pGMAC, pGMAC->phyStatus.addr, MII_STAT1000);
             if (gblpa < 0) {
                 HAL_DBG("Could not read MII_STAT1000. Ignoring gigabit capability\n");
@@ -1368,8 +1382,8 @@ HAL_Status HAL_GMAC_PHYParseLink(struct GMAC_HANDLE *pGMAC)
          * Set the baseline so we only have to set them
          * if they're different
          */
-        pGMAC->phyStatus.speed = PHY_SPEED_10M;
-        pGMAC->phyStatus.duplex = PHY_DUPLEX_HALF;
+        pGMAC->phyStatus.speed = PHY_SPEED_1000M;
+        pGMAC->phyStatus.duplex = PHY_DUPLEX_FULL;
 
         /* Check the gigabit fields */
         if (gblpa & (PHY_1000BTSR_1000FD | PHY_1000BTSR_1000HD)) {
@@ -1385,7 +1399,6 @@ HAL_Status HAL_GMAC_PHYParseLink(struct GMAC_HANDLE *pGMAC)
 
         lpa = HAL_GMAC_MDIORead(pGMAC, pGMAC->phyStatus.addr, MII_ADVERTISE);
         lpa &= HAL_GMAC_MDIORead(pGMAC, pGMAC->phyStatus.addr, MII_LPA);
-
         if (lpa & (LPA_100FULL | LPA_100HALF)) {
             pGMAC->phyStatus.speed = PHY_SPEED_100M;
 
@@ -1422,8 +1435,8 @@ HAL_Status HAL_GMAC_PHYParseLink(struct GMAC_HANDLE *pGMAC)
     } else {
         uint32_t bmcr = HAL_GMAC_MDIORead(pGMAC, pGMAC->phyStatus.addr, MII_BMCR);
 
-        pGMAC->phyStatus.speed = PHY_SPEED_10M;
-        pGMAC->phyStatus.duplex = PHY_DUPLEX_HALF;
+        pGMAC->phyStatus.speed = PHY_SPEED_1000M;
+        pGMAC->phyStatus.duplex = PHY_DUPLEX_FULL;
 
         if (bmcr & BMCR_FULLDPLX) {
             pGMAC->phyStatus.duplex = PHY_DUPLEX_FULL;
@@ -1453,7 +1466,6 @@ HAL_Status HAL_GMAC_PHYStartup(struct GMAC_HANDLE *pGMAC)
     HAL_Status status;
 
     HAL_ASSERT(pGMAC != NULL);
-
     if (pGMAC->phyStatus.maxSpeed) {
         status = PHY_Setsupported(pGMAC, pGMAC->phyStatus.maxSpeed);
         if (status) {
@@ -1462,21 +1474,19 @@ HAL_Status HAL_GMAC_PHYStartup(struct GMAC_HANDLE *pGMAC)
             return status;
         }
     }
-
     status = PHY_Config(pGMAC);
     if (status) {
         HAL_DBG("PHY_ConfigAneg failed");
-
         return status;
     }
-
     if (pGMAC->phyOps.startup) {
+        HAL_DBG("no start up func\n");
         status = pGMAC->phyOps.startup(pGMAC);
         if (status) {
             return status;
         }
     }
-
+    HAL_DBG("over start up func\n");
     return HAL_OK;
 }
 
@@ -1534,13 +1544,12 @@ HAL_Status HAL_GMAC_DMATxDescInit(struct GMAC_HANDLE *pGMAC,
     for (i = 0; i < count; i++) {
         /* Get the pointer on the ith member of the Tx Desc list */
         desc = txDescs + i;
-
-        desc->des0 = 0;
+        desc->des0 = 0; 
         desc->des1 = 0;
         desc->des2 = 0;
         desc->des3 = 0;
     }
-
+    wmb();
     /* Return function status */
     return HAL_OK;
 }
@@ -1582,7 +1591,7 @@ HAL_Status HAL_GMAC_DMARxDescInit(struct GMAC_HANDLE *pGMAC,
         desc->des2 = 0;
         desc->des3 = GMAC_DESC3_OWN | GMAC_DESC3_BUF1V | GMAC_DESC3_IOC;
     }
-
+    wmb();
     /* Return function status */
     return HAL_OK;
 }
@@ -1600,30 +1609,36 @@ eGMAC_IRQ_Status HAL_GMAC_IRQHandler(struct GMAC_HANDLE *pGMAC)
     uint32_t intrStatus;
 
     HAL_ASSERT(pGMAC != NULL);
-
     intrStatus = READ_REG(pGMAC->pReg->DMA_CH0_STATUS);
     /* ABNORMAL interrupts */
+    // 14 
     if (intrStatus & DMA_CHAN_STATUS_AIS) {
+        // 7 无可用接收描述符
         if (intrStatus & DMA_CHAN_STATUS_RBU) {
             pGMAC->extraStatus.rxBufUnavIRQ++;
             status = DMA_RX_ERROR;
         }
+        // 8 接收进程停止
         if (intrStatus & DMA_CHAN_STATUS_RPS) {
             pGMAC->extraStatus.rxProcessStoppedIRQ++;
             status = DMA_RX_ERROR;
         }
+        // 9 接收看门狗超时
         if (intrStatus & DMA_CHAN_STATUS_RWT) {
             pGMAC->extraStatus.rxWatchdogIRQ++;
             status = DMA_RX_ERROR;
         }
+        // 10 提前发送中断
         if (intrStatus & DMA_CHAN_STATUS_ETI) {
             pGMAC->extraStatus.txEarlyIRQ++;
             status = DMA_TX_ERROR;
         }
+        // 1 发送进程停止
         if (intrStatus & DMA_CHAN_STATUS_TPS) {
-            pGMAC->extraStatus.rxProcessStoppedIRQ++;
+            pGMAC->extraStatus.txProcessStoppedIRQ++;
             status = DMA_TX_ERROR;
         }
+        // 12 总线重大错误
         if (intrStatus & DMA_CHAN_STATUS_FBE) {
             pGMAC->extraStatus.fatalBusErrorIRQ++;
             status = DMA_TX_ERROR;
@@ -1631,21 +1646,26 @@ eGMAC_IRQ_Status HAL_GMAC_IRQHandler(struct GMAC_HANDLE *pGMAC)
     }
 
     /* TX/RX NORMAL interrupts */
+    // 15 
     if (intrStatus & DMA_CHAN_STATUS_NIS) {
         pGMAC->extraStatus.normalIRQN++;
+        // 6 接收中断完成
         if (intrStatus & DMA_CHAN_STATUS_RI) {
             uint32_t value;
-
+            //中断使能
             value = READ_REG(pGMAC->pReg->DMA_CH0_INTERRUPT_ENABLE);
+            // d041 & 6
             if (value & DMA_CHAN_INTR_ENA_RIE) {
                 pGMAC->extraStatus.rxNormalIRQN++;
                 status |= DMA_HANLE_RX;
             }
         }
+        // 0 发送中断完成
         if (intrStatus & DMA_CHAN_STATUS_TI) {
             pGMAC->extraStatus.txNormallIRQN++;
             status |= DMA_HANLE_TX;
         }
+        // 11 提前接收中断
         if (intrStatus & DMA_CHAN_STATUS_ERI) {
             pGMAC->extraStatus.rxEarlyIRQ++;
         }
@@ -1676,7 +1696,7 @@ HAL_Status HAL_GMAC_AdjustLink(struct GMAC_HANDLE *pGMAC, int32_t txDelay,
 
     HAL_ASSERT(pGMAC != NULL);
 
-    ctrl = READ_REG(pGMAC->pReg->MAC_CONFIGURATION);
+    ctrl = READ_REG(pGMAC->pReg->MAC_CONFIGURATION);//8078302
     ctrl |= GMAC_CORE_INIT;
 
     /* Flow Control operation */
@@ -1759,15 +1779,23 @@ HAL_Status HAL_GMAC_Start(struct GMAC_HANDLE *pGMAC, uint8_t *addr)
         if (!(READ_REG(pGMAC->pReg->DMA_MODE) & DMA_MODE_SWR)) {
             break;
         }
-        HAL_DelayMs(10);
+        rt_thread_mdelay(50);
     }
     if (limit <= 0) {
-        HAL_DBG("DMA_MODE_SWR stuck\n");
+        HAL_DBG("DMA_MODE_SWR stuck %d\n", limit);
 
         return HAL_TIMEOUT;
     }
+    else
+    {
+        HAL_DBG("DMA_MODE_SWR success !!\n");
+    }
 
-    HAL_DelayMs(100);
+    rt_thread_mdelay(1000);
+
+    WRITE_REG(pGMAC->pReg ->MAC_RXQ_CTRL0, 0x2);
+    WRITE_REG(pGMAC->pReg ->MAC_RXQ_CTRL1, 0x100000);
+    WRITE_REG(pGMAC->pReg ->MAC_PACKET_FILTER, 0x10424);
 
     /* DMA init */
     WRITE_REG(pGMAC->pReg->DMA_SYSBUS_MODE, DMA_SYSBUS_MODE_BLEN16 |
@@ -1778,29 +1806,39 @@ HAL_Status HAL_GMAC_Start(struct GMAC_HANDLE *pGMAC, uint8_t *addr)
 
     hwCap = READ_REG(pGMAC->pReg->MAC_HW_FEATURE1);
     /* Set the HW DMA mode and the COE */
-    txFifosz = 128 << ((hwCap & GMAC_HW_TXFIFOSIZE) >> GMAC_HW_TXFIFOSIZE_SHIFT);
-    rxFifosz = 128 << ((hwCap & GMAC_HW_RXFIFOSIZE) >> GMAC_HW_RXFIFOSIZE_SHIFT);
-
+    txFifosz = 128 << ((hwCap & GMAC_HW_TXFIFOSIZE) >> GMAC_HW_TXFIFOSIZE_SHIFT); //0x4000
+    rxFifosz = 128 << ((hwCap & GMAC_HW_RXFIFOSIZE) >> GMAC_HW_RXFIFOSIZE_SHIFT); //0x8000
+    
     /* init rx chan */
     value = READ_REG(pGMAC->pReg->DMA_CH0_RX_CONTROL);
     value &= ~DMA_CH0_RX_CONTROL_RBSZ_MASK;
     value |= (rxFifosz << DMA_CH0_RX_CONTROL_RBSZ_SHIFT) & DMA_CH0_RX_CONTROL_RBSZ_MASK;
-    value = value | (8 << DMA_CH0_RX_CONTROL_RXPBL_SHIFT);
-    WRITE_REG(pGMAC->pReg->DMA_CH0_RX_CONTROL, value);
+    value = value | (8 << DMA_CH0_RX_CONTROL_RXPBL_SHIFT); // 16+3
+    value = value | 0xc00;
+    WRITE_REG(pGMAC->pReg->DMA_CH0_RX_CONTROL, value); //80c00
     WRITE_REG(pGMAC->pReg->DMA_CH0_RXDESC_LIST_ADDRESS, (uint32_t)pGMAC->rxDescs);
-    WRITE_REG(pGMAC->pReg->DMA_CH0_RXDESC_TAIL_POINTER,
-              (uint32_t)(pGMAC->rxDescs + pGMAC->rxSize));
+    WRITE_REG(pGMAC->pReg->RESERVED110C[1], 0);//
+    WRITE_REG(pGMAC->pReg->DMA_CH0_RXDESC_TAIL_POINTER, (uint32_t)(pGMAC->rxDescs + (pGMAC->rxSize-1)));
 
     /* init tx chan */
     value = READ_REG(pGMAC->pReg->DMA_CH0_TX_CONTROL);
-    value = value | (8 << DMA_CH0_TX_CONTROL_TXPBL_SHIFT);
-    value |= DMA_CH0_TX_CONTROL_OSF;
+    value = value | (8 << DMA_CH0_TX_CONTROL_TXPBL_SHIFT); // 16+3
+    value |= DMA_CH0_TX_CONTROL_OSF; // 4
+    value |= 0x1000;//
     WRITE_REG(pGMAC->pReg->DMA_CH0_TX_CONTROL, value);
 
-    WRITE_REG(pGMAC->pReg->DMA_CH0_TXDESC_LIST_ADDRESS, (uint32_t)pGMAC->txDescs);
-    WRITE_REG(pGMAC->pReg->DMA_CH0_TXDESC_TAIL_POINTER, (uint32_t)pGMAC->txDescs);
+    value = READ_REG(pGMAC->pReg->DMA_CH0_RX_INTERRUPT_WATCHDOG_TIMER);//
+    value |= 0xa0;//
+    WRITE_REG(pGMAC->pReg->DMA_CH0_RX_INTERRUPT_WATCHDOG_TIMER, value);//
 
+    WRITE_REG(pGMAC->pReg->DMA_CH0_TXDESC_LIST_ADDRESS, (uint32_t)pGMAC->txDescs);
+    WRITE_REG(pGMAC->pReg->RESERVED1118, 0);//
+    WRITE_REG(pGMAC->pReg->DMA_CH0_TXDESC_TAIL_POINTER, (uint32_t)pGMAC->txDescs);
     HAL_GMAC_WriteHWAddr(pGMAC, addr);
+    
+    value = READ_REG(pGMAC->pReg->MAC_INTERRUPT_ENABLE);//
+    value|= 0x30;
+    WRITE_REG(pGMAC->pReg->MAC_INTERRUPT_ENABLE, value);//
 
     /* core init */
     value = READ_REG(pGMAC->pReg->MAC_CONFIGURATION);
@@ -1824,7 +1862,7 @@ HAL_Status HAL_GMAC_Start(struct GMAC_HANDLE *pGMAC, uint8_t *addr)
     WRITE_REG(pGMAC->pReg->MMC_TX_INTERRUPT_MASK, MMC_DEFAULT_MASK);
     WRITE_REG(pGMAC->pReg->MMC_IPC_RX_INTERRUPT_MASK, MMC_DEFAULT_MASK);
     value = READ_REG(pGMAC->pReg->MMC_CONTROL);
-    value |= (mmc_mode & 0x3F);
+    value |= (mmc_mode & 0x3F); 
     WRITE_REG(pGMAC->pReg->MMC_CONTROL, value);
 
     HAL_ASSERT(pGMAC->txSize > 0);
@@ -1834,7 +1872,11 @@ HAL_Status HAL_GMAC_Start(struct GMAC_HANDLE *pGMAC, uint8_t *addr)
     WRITE_REG(pGMAC->pReg->DMA_CH0_TXDESC_RING_LENGTH, pGMAC->txSize - 1);
     WRITE_REG(pGMAC->pReg->DMA_CH0_RXDESC_RING_LENGTH, pGMAC->rxSize - 1);
 
-    HAL_GMAC_EnableDmaIRQ(pGMAC);
+    value = READ_REG(pGMAC->pReg->DMA_CH0_CONTROL);
+    value |= 0x10000;
+    WRITE_REG(pGMAC->pReg->DMA_CH0_CONTROL, value);
+
+    HAL_GMAC_EnableDmaIRQ(pGMAC); //dma irq
 
     value = READ_REG(pGMAC->pReg->DMA_CH0_TX_CONTROL);
     value |= DMA_CH0_TX_CONTROL_ST;
@@ -1843,7 +1885,7 @@ HAL_Status HAL_GMAC_Start(struct GMAC_HANDLE *pGMAC, uint8_t *addr)
     value = READ_REG(pGMAC->pReg->DMA_CH0_RX_CONTROL);
     value |= DMA_CH0_RX_CONTROL_SR;
     WRITE_REG(pGMAC->pReg->DMA_CH0_RX_CONTROL, value);
-
+ 
     return HAL_OK;
 }
 
@@ -1861,7 +1903,7 @@ HAL_Status HAL_GMAC_Stop(struct GMAC_HANDLE *pGMAC)
     uint32_t i = 0;
 
     HAL_ASSERT(pGMAC != NULL);
-
+    rt_kprintf("in hal_gmac_stop \n");
     value = READ_REG(pGMAC->pReg->DMA_CH0_TX_CONTROL);
     value &= ~DMA_CH0_TX_CONTROL_ST;
     WRITE_REG(pGMAC->pReg->DMA_CH0_TX_CONTROL, value);
@@ -1918,7 +1960,7 @@ uint32_t HAL_GMAC_GetRXIndex(struct GMAC_HANDLE *pGMAC)
 {
     HAL_ASSERT(pGMAC != NULL);
 
-    return pGMAC->txDescIdx;
+    return pGMAC->rxDescIdx;
 }
 
 /**
@@ -1966,15 +2008,14 @@ HAL_Status HAL_GMAC_Send(struct GMAC_HANDLE *pGMAC, void *packet,
 
     HAL_ASSERT(pGMAC != NULL);
     HAL_ASSERT(packet != NULL);
-
     desc = pGMAC->txDescs + pGMAC->txDescIdx;
+
     if (desc->des3 & GMAC_DESC3_OWN) {
         HAL_DBG("%s(desc=%p, index=%ld) is busy\n", __func__, desc,
                 pGMAC->txDescIdx);
-
         return HAL_TIMEOUT;
     }
-
+    
     pGMAC->txDescIdx++;
     pGMAC->txDescIdx %= pGMAC->txSize;
 
@@ -1985,25 +2026,22 @@ HAL_Status HAL_GMAC_Send(struct GMAC_HANDLE *pGMAC, void *packet,
      * Make sure that if HW sees the _OWN write below, it will see all the
      * writes to the rest of the descriptor too.
      */
-    desc->des3 = GMAC_DESC3_OWN | GMAC_DESC3_FD | GMAC_DESC3_LD;
-
-    WRITE_REG(pGMAC->pReg->DMA_CH0_TXDESC_TAIL_POINTER,
-              (uint32_t)(pGMAC->txDescs + pGMAC->txDescIdx));
-
+    desc->des3 = GMAC_DESC3_OWN | GMAC_DESC3_FD | GMAC_DESC3_LD | length;
+    rt_hw_cpu_dcache_clean(pGMAC->txDescs, (pGMAC->txSize)*sizeof(struct GMAC_Desc));    
+    WRITE_REG(pGMAC->pReg->DMA_CH0_TXDESC_TAIL_POINTER, (uint32_t)(pGMAC->txDescs + pGMAC->txDescIdx));
     for (i = 0; i < 1000000; i++) {
         if (!(desc->des3 & GMAC_DESC3_OWN)) {
             return HAL_BUSY;
         }
     }
-
     if (desc->des3 & DES3_ERROR_SUMMARY) {
         pGMAC->extraStatus.txErrors++;
     } else {
         pGMAC->extraStatus.txPktN++;
         pGMAC->extraStatus.txBytesN += length;
     }
-
-    return HAL_OK;
+    // rt_hw_cpu_dcache_clean(pGMAC->txDescs, (pGMAC->txSize)*sizeof(struct GMAC_Desc));
+    return HAL_OK;  
 }
 
 /**
@@ -2019,22 +2057,19 @@ uint8_t *HAL_GMAC_Recv(struct GMAC_HANDLE *pGMAC, int32_t *length)
     struct GMAC_Desc *desc;
     uint8_t *packet;
     uint32_t des3;
-
     HAL_ASSERT(pGMAC != NULL);
     HAL_ASSERT(length != NULL);
-
     *length = 0;
     desc = pGMAC->rxDescs + pGMAC->rxDescIdx;
     des3 = desc->des3;
     if (des3 & GMAC_DESC3_OWN) {
-        HAL_DBG("%s: RX packet not available\n", __func__);
-
+        HAL_DBG("%s(desc=%p, index=%ld) is busy\n", __func__, desc,
+                pGMAC->rxDescIdx);
         return NULL;
     }
-
-    packet = pGMAC->rxBuf + (pGMAC->rxDescIdx * HAL_GMAC_MAX_PACKET_SIZE);
+    
+    packet = (uint8_t *)((uint64_t)pGMAC->rxBuf + (pGMAC->rxDescIdx * HAL_GMAC_MAX_PACKET_SIZE));
     *length = des3 & 0x7fff;
-
     if (des3 & DES3_ERROR_SUMMARY) {
         *length = 0;
         pGMAC->extraStatus.rxErrors++;
@@ -2055,7 +2090,7 @@ uint8_t *HAL_GMAC_Recv(struct GMAC_HANDLE *pGMAC, int32_t *length)
 
         return NULL;
     }
-
+    
     *length -= ETH_FCS_LEN;
 
     pGMAC->extraStatus.rxPktN++;
@@ -2076,17 +2111,22 @@ void HAL_GMAC_CleanRX(struct GMAC_HANDLE *pGMAC)
     HAL_ASSERT(pGMAC != NULL);
 
     /* Get the pointer on the ith member of the Tx Desc list */
-    desc = pGMAC->rxDescs + pGMAC->rxDescIdx;
-
-    desc->des0 = (uint32_t)(pGMAC->rxBuf + (pGMAC->rxDescIdx *
-                                            HAL_GMAC_MAX_PACKET_SIZE));
-    desc->des1 = 0;
-    desc->des2 = 0;
-    desc->des3 = GMAC_DESC3_OWN | GMAC_DESC3_BUF1V | GMAC_DESC3_IOC;
-    WRITE_REG(pGMAC->pReg->DMA_CH0_RXDESC_TAIL_POINTER, (uint32_t)desc);
-
-    pGMAC->rxDescIdx++;
-    pGMAC->rxDescIdx %= pGMAC->rxSize;
+    while (1)
+    {
+        desc = pGMAC->rxDescs + pGMAC ->rxDescIdx;
+        if(!(desc ->des3 & GMAC_DESC3_OWN))
+        {
+            desc->des0 = (uint32_t)(pGMAC->rxBuf + (pGMAC ->rxDescIdx * HAL_GMAC_MAX_PACKET_SIZE));
+            desc->des1 = 0;
+            desc->des2 = 0;
+            desc->des3 = GMAC_DESC3_OWN | GMAC_DESC3_BUF1V | GMAC_DESC3_IOC;
+            rt_hw_cpu_dcache_clean(desc, sizeof(struct GMAC_Desc));
+            WRITE_REG(pGMAC->pReg->DMA_CH0_RXDESC_TAIL_POINTER, (uint32_t)desc);
+            pGMAC->rxDescIdx++;
+            pGMAC->rxDescIdx %= pGMAC->rxSize;
+        }
+        else break;
+    }
 }
 
 /**
@@ -2134,15 +2174,15 @@ void HAL_GMAC_WriteHWAddr(struct GMAC_HANDLE *pGMAC, uint8_t *enetAddr)
   *
   * @retval HAL status
   */
+
 HAL_Status HAL_GMAC_Init(struct GMAC_HANDLE *pGMAC, struct GMAC_REG *pReg,
                          uint32_t freq, eGMAC_PHY_Interface interface,
                          bool extClk)
 {
-    /* Check the GMAC handle allocation */
     HAL_ASSERT(pGMAC != NULL);
     HAL_ASSERT(IS_GMAC_INSTANCE(pReg));
 
-    pGMAC->pReg = pReg;
+    pGMAC->pReg = pReg; //gmac_reg
 
     pGMAC->txDescIdx = 0;
     pGMAC->rxDescIdx = 0;
@@ -2167,12 +2207,13 @@ HAL_Status HAL_GMAC_Init(struct GMAC_HANDLE *pGMAC, struct GMAC_REG *pReg,
         /* CSR Clock Range between 250-300 MHz */
         pGMAC->clkCSR = GMAC_CSR_250_300M;
     }
-
+    
     pGMAC->link.duplex = GMAC_CONFIG_DM;
     pGMAC->link.speed10 = GMAC_CONFIG_PS;
     pGMAC->link.speed100 = GMAC_CONFIG_FES | GMAC_CONFIG_PS;
     pGMAC->link.speed1000 = 0;
     pGMAC->link.speedMask = GMAC_CONFIG_FES | GMAC_CONFIG_PS;
+    // rk3588 理论上可用，需测试
 
     pGMAC->mac.miiAddrShift = 21;
     pGMAC->mac.miiAddrMask = 0x03e00000;
@@ -2180,15 +2221,16 @@ HAL_Status HAL_GMAC_Init(struct GMAC_HANDLE *pGMAC, struct GMAC_REG *pReg,
     pGMAC->mac.miiRegMask = 0x001f0000;
     pGMAC->mac.clkCsrShift = 8;
     pGMAC->mac.clkCsrMask = 0xf00;
-
+    // rk3588 理论上可用，需测试
+    //gmac0 rx: 0x4f tx: 0x44    gmac1 rx: 0x4f tx: 0x42
     if (interface == PHY_INTERFACE_MODE_RGMII) {
-        HAL_GMAC_SetToRGMII(pGMAC, 0, 0); /* update delayline at link */
+        HAL_GMAC_SetToRGMII(pGMAC, 0x42, 0x42); /* update delayline at link *///LAST
     } else {
         HAL_GMAC_SetToRMII(pGMAC);
     }
-
+    
     HAL_GMAC_SetExtclkSrc(pGMAC, extClk);
-
+    //以上需要重写一个hal_gmac_rk3588.c
     return HAL_OK;
 }
 

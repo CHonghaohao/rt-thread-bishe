@@ -346,6 +346,31 @@ struct HAL_VAD_DEV g_vadDev =
 };
 #endif
 
+#ifdef HAL_GMAC_MODULE_ENABLED
+
+const struct HAL_GMAC_DEV g_gmac1Dev =
+{
+    .pReg = GMAC1,
+    .clkID = 125000000,
+    // .clkGateID = CLK_MAC0_2TOP_GATE,
+    // .pclkID = PCLK_PHP,
+    .pclkGateID = PCLK_GMAC1_GATE,
+    .irqNum = GMAC1_IRQn_SBD,
+};
+
+// #ifdef RT_USING_GMAC0
+// const struct HAL_GMAC_DEV g_gmac0Dev =
+// {
+//     .pReg = GMAC0,
+//     .clkID = 125000000,
+//     // .clkGateID = CLK_MAC0_2TOP_GATE,
+//     // .pclkID = PCLK_PHP, //PCLK_USB
+//     .pclkGateID = PCLK_GMAC0_GATE,
+//     .irqNum = GMAC0_IRQn_SBD,
+// };
+// #endif
+#endif
+
 void BSP_Init(void)
 {
 }

@@ -29,7 +29,8 @@
 
 struct mem_desc platform_mem_desc[] =
 {
-    {PLATFORM_MEM_TALBE(0x40008000,                 0x10000000),    0x40008000,                   NORMAL_MEM},
+    {PLATFORM_MEM_TALBE(0x40008000,                  0x9000000),    0x40008000,                   NORMAL_MEM},
+    {PLATFORM_MEM_TALBE(0x49008000,       RT_UNCACHE_HEAP_SIZE),    0x49008000,           NORMAL_NOCACHE_MEM},
     {PLATFORM_MEM_TALBE(PMU0_GRF_BASE,                  0x2000),    PMU0_GRF_BASE,                DEVICE_MEM},
     {PLATFORM_MEM_TALBE(PMU1_GRF_BASE,                  0x2000),    PMU1_GRF_BASE,                DEVICE_MEM},
     {PLATFORM_MEM_TALBE(SYS_GRF_BASE,                   0x4000),    SYS_GRF_BASE,                 DEVICE_MEM},
@@ -43,6 +44,11 @@ struct mem_desc platform_mem_desc[] =
     {PLATFORM_MEM_TALBE(VCCIO6_IOC_BASE,                0x1000),    VCCIO6_IOC_BASE,              DEVICE_MEM},
     {PLATFORM_MEM_TALBE(TIMER0_BASE,                    0x8000),    TIMER5_BASE,                  DEVICE_MEM},
     {PLATFORM_MEM_TALBE(CAN2_BASE,                     0x10000),    CAN2_BASE,                    DEVICE_MEM},
+    {PLATFORM_MEM_TALBE(GMAC1_BASE,                    0x10000),    GMAC1_BASE,                   DEVICE_MEM},
+    {PLATFORM_MEM_TALBE(CRU_BASE,                       0x8000),    CRU_BASE,                     DEVICE_MEM},
+    {PLATFORM_MEM_TALBE(PHP_GRF_BASE,                   0x4000),    PHP_GRF_BASE,                 DEVICE_MEM},
+    {PLATFORM_MEM_TALBE(SYS_GRF_BASE,                   0x4000),    SYS_GRF_BASE,                 DEVICE_MEM},
+    {PLATFORM_MEM_TALBE(GPIO2_BASE,                    0x10000),    GPIO2_BASE,                   DEVICE_MEM},
 
 #ifdef PKG_USING_RT_OPENAMP
     {PLATFORM_MEM_TALBE(AMP_SHARE_MEMORY_ADDRESS, AMP_SHARE_MEMORY_SIZE), AMP_SHARE_MEMORY_ADDRESS, NORMAL_MEM},
@@ -89,6 +95,9 @@ void rt_hw_board_init(void)
 #ifdef RT_USING_HEAP
     /* initialize memory system */
     rt_system_heap_init(RT_HW_HEAP_BEGIN, RT_HW_HEAP_END);
+#ifdef RT_USING_UNCACHE_HEAP
+    rt_uncache_heap_init((void *)0x49008000, (void *)(0x49008000 + RT_UNCACHE_HEAP_SIZE));
+#endif
 #endif
     /* initialize hardware interrupt */
     rt_hw_interrupt_init();

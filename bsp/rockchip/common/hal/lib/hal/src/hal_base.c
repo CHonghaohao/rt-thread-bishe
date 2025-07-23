@@ -5,6 +5,8 @@
 
 #include "hal_base.h"
 
+uint32_t SystemCoreClock = 816000000U;
+
 /** @addtogroup RK_HAL_Driver
  *  @{
  */
