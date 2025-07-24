@@ -49,6 +49,7 @@ struct mem_desc platform_mem_desc[] =
     {PLATFORM_MEM_TALBE(PHP_GRF_BASE,                   0x4000),    PHP_GRF_BASE,                 DEVICE_MEM},
     {PLATFORM_MEM_TALBE(SYS_GRF_BASE,                   0x4000),    SYS_GRF_BASE,                 DEVICE_MEM},
     {PLATFORM_MEM_TALBE(GPIO2_BASE,                    0x10000),    GPIO2_BASE,                   DEVICE_MEM},
+    {PLATFORM_MEM_TALBE(VIRTIO_MMIO_BASE,               0x4000),    VIRTIO_MMIO_BASE,             DEVICE_MEM},
 
 #ifdef PKG_USING_RT_OPENAMP
     {PLATFORM_MEM_TALBE(AMP_SHARE_MEMORY_ADDRESS, AMP_SHARE_MEMORY_SIZE), AMP_SHARE_MEMORY_ADDRESS, NORMAL_MEM},

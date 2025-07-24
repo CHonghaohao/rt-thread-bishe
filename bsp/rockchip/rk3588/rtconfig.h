@@ -6,7 +6,7 @@
 
 /* RT-Thread Kernel */
 
-#define RT_NAME_MAX 8
+#define RT_NAME_MAX 16
 #define RT_USING_SMP
 #define RT_CPUS_NR 4
 #define RT_ALIGN_SIZE 8
@@ -122,6 +122,14 @@
 #define RT_SERIAL_RB_BUFSZ 64
 #define RT_USING_PM
 #define PM_TICKLESS_THRESHOLD_TIME 2
+
+/* Virtio*/
+#define RT_USING_VIRTIO
+#define RT_USING_VIRTIO10
+#define RT_USING_VIRTIO_MMIO_ALIGN
+#define RT_USING_VIRTIO_CONSOLE
+#define RT_USING_VIRTIO_CONSOLE_PORT_MAX_NR 4
+
 #define RT_USING_OFW
 #define RT_FDT_EARLYCON_MSG_SIZE 128
 #define RT_USING_PIN
@@ -243,6 +251,12 @@
 
 /* touch drivers */
 
+#define PKG_USING_MICRO_ROS
+#define MICRO_ROS_USE_SERIAL
+#define MICRO_ROS_USING_ARCH_CORTEX_M3
+#define MICRO_ROS_USING_GCC_10
+#define MICRO_ROS_SERIAL_NAME "vport0p1"
+#define PKG_USING_MICRO_ROS_HUMBLE_GCC_10
 
 /* AI packages */
 

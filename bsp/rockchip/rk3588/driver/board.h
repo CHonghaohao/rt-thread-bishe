@@ -66,6 +66,14 @@ rt_inline uint32_t platform_get_gic_its_base(void)
     return GIC_PL600_ITS_PPTR;
 }
 
+/* VirtIO */
+#define VIRTIO_MMIO_BASE    0xff9e0000
+#define VIRTIO_MMIO_SIZE    0x00000200
+#define VIRTIO_MAX_NR       1
+#define VIRTIO_IRQ_BASE     (64 + 16)
+// #define VIRTIO_VENDOR_ID    0x554d4551  /* "QEMU" */
+#define VIRTIO_VENDOR_ID    0x48564953  /* "hvisor-tool" */
+
 extern unsigned char __bss_start;
 extern unsigned char __bss_end;
 
