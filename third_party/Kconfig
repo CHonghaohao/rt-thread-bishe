@@ -1,0 +1,5 @@
+menu "RT-Thread third party package"
+
+source "$RTT_DIR/third_party/netutils/Kconfig"
+
+endmenu

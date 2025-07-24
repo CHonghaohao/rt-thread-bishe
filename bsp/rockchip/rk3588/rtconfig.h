@@ -102,6 +102,15 @@
 
 /* DFS: device virtual file system */
 
+#define RT_USING_DFS
+#define DFS_USING_POSIX
+#define DFS_USING_WORKDIR
+#define DFS_FD_MAX 16
+#define RT_USING_DFS_V1
+#define DFS_FILESYSTEMS_MAX 4
+#define DFS_FILESYSTEM_TYPES_MAX 4
+#define RT_USING_DFS_DEVFS
+/* end of DFS: device virtual file system */
 
 /* Device Drivers */
 
@@ -142,7 +151,7 @@
 
 
 /* Network */
-
+#define RT_USING_SAL
 
 /* Memory protection */
 
@@ -370,5 +379,7 @@
 #define NETDEV_USING_AUTO_DEFAULT
 #define NETDEV_IPV4 1
 #define NETDEV_IPV6 0
+
+#define RT_NETUTILS_IPERF
 
 #endif

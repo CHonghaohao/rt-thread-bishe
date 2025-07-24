@@ -21,5 +21,6 @@ for d in list:
         objs = objs + SConscript(os.path.join(d, 'SConscript'))
 
 objs = objs + SConscript(os.path.join(RTT_ROOT, 'bsp/rockchip/common/drivers/SConscript'), variant_dir = 'common/drivers', duplicate=0)
+objs = objs + SConscript(os.path.join(RTT_ROOT, 'third_party/SConscript'), variant_dir = 'third_party', duplicate=0)
 
 Return('objs')
