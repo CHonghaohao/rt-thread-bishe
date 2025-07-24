@@ -386,19 +386,27 @@ static rt_ssize_t virtio_console_port_write(rt_device_t dev, rt_off_t pos, const
     rt_base_t level = rt_spin_lock_irqsave(&port_dev->spinlock_tx);
 #endif
 
-    while (i < size || ch == '\r')
+    // while (i < size || ch == '\r')
+    while (i < size)
     {
         id = queue_tx->avail->idx % queue_tx->num;
+        // rt_kprintf("queue_tx->avail->idx: %d\n", queue_tx->avail->idx);
+        // rt_kprintf("queue_tx->num: %d\n", queue_tx->num);
+        // rt_kprintf("id: %d\n", id);
 
         /* Keep the way until 'new line' are unified */
-        if (ch != '\r')
-        {
-            ch = *((const char *)buffer + i);
-        }
-        else
-        {
-            i -= sizeof(char);
-        }
+
+        ch = *((const char *)buffer + i);
+        // 不需要特殊处理，直接处理下一字符
+        // if (ch != '\r')
+        // {
+        //     ch = *((const char *)buffer + i);
+        //     // rt_kprintf("ch: %c (0x%02X)\n", ch, (unsigned char)ch);  // 调试打印
+        // }
+        // else
+        // {
+        //     i -= sizeof(char);
+        // }
 
         port_dev->info[id].tx_char = ch;
 
