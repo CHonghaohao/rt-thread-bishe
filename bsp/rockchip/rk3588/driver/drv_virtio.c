@@ -53,6 +53,7 @@ int rt_virtio_devices_init(void)
     int i;
     rt_uint32_t irq = VIRTIO_IRQ_BASE;
     rt_ubase_t mmio_base = VIRTIO_MMIO_BASE;
+    rt_kprintf("virtio——init mmio_base: %#x!\n", mmio_base);
     struct virtio_mmio_config *mmio_config;
     virtio_device_init_handler init_handler;
 

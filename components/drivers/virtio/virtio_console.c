@@ -151,8 +151,21 @@ static rt_err_t virtio_console_port_create(struct virtio_console_device *virtio_
     port_dev->need_destroy = RT_FALSE;
     port_dev->rx_notify = RT_TRUE;
     port_dev->console = virtio_console_dev;
-    port_dev->queue_rx_index = VIRTIO_CONSOLE_PORT_QUEUE_INDEX(port_dev->port_id, VIRTIO_CONSOLE_QUEUE_DATA_RX);
-    port_dev->queue_tx_index = VIRTIO_CONSOLE_PORT_QUEUE_INDEX(port_dev->port_id, VIRTIO_CONSOLE_QUEUE_DATA_TX);
+    if (port_dev->port_id == 0)
+    {
+        port_dev->queue_rx_index = 4;
+        port_dev->queue_tx_index = 5;
+    }
+    else if (port_dev->port_id == 1)
+    {
+        port_dev->queue_rx_index = 0;
+        port_dev->queue_tx_index = 1;
+    }
+    else
+    {
+        port_dev->queue_rx_index = VIRTIO_CONSOLE_PORT_QUEUE_INDEX(port_dev->port_id, VIRTIO_CONSOLE_QUEUE_DATA_RX);
+        port_dev->queue_tx_index = VIRTIO_CONSOLE_PORT_QUEUE_INDEX(port_dev->port_id, VIRTIO_CONSOLE_QUEUE_DATA_TX);
+    }
     port_dev->queue_rx = &virtio_dev->queues[port_dev->queue_rx_index];
     port_dev->queue_tx = &virtio_dev->queues[port_dev->queue_tx_index];
 
@@ -215,8 +228,21 @@ static rt_err_t virtio_console_port_init(rt_device_t dev)
     struct virtio_device *virtio_dev = &virtio_console_dev->virtio_dev;
     struct virtq *queue_rx, *queue_tx;
 
-    rx_queue_index = VIRTIO_CONSOLE_PORT_QUEUE_INDEX(port_dev->port_id, VIRTIO_CONSOLE_QUEUE_DATA_RX);
-    tx_queue_index = VIRTIO_CONSOLE_PORT_QUEUE_INDEX(port_dev->port_id, VIRTIO_CONSOLE_QUEUE_DATA_TX);
+    if (port_dev->port_id == 0)
+    {
+        rx_queue_index = 4;
+        tx_queue_index = 5;
+    }
+    else if (port_dev->port_id == 1)
+    {
+        rx_queue_index = 0;
+        tx_queue_index = 1;
+    }
+    else
+    {
+        rx_queue_index = VIRTIO_CONSOLE_PORT_QUEUE_INDEX(port_dev->port_id, VIRTIO_CONSOLE_QUEUE_DATA_RX);
+        tx_queue_index = VIRTIO_CONSOLE_PORT_QUEUE_INDEX(port_dev->port_id, VIRTIO_CONSOLE_QUEUE_DATA_TX);
+    }
 
     queue_rx = &virtio_dev->queues[rx_queue_index];
     queue_tx = &virtio_dev->queues[tx_queue_index];
@@ -621,7 +647,6 @@ static void virtio_console_isr(int irqno, void *param)
 #ifdef RT_USING_SMP
         rt_base_t level = rt_spin_lock_irqsave(&port_dev->spinlock_rx);
 #endif
-
         if (queue_rx->used_idx != queue_rx->used->idx)
         {
             rt_hw_dsb();
@@ -636,15 +661,15 @@ static void virtio_console_isr(int irqno, void *param)
             #endif
                 /* Will call virtio_console_port_read to inc used_idx */
 
-                if (port_dev->parent.rx_indicate != RT_NULL)
-                {
-                    port_dev->parent.rx_indicate(&port_dev->parent, len);
-                }
+                // if (port_dev->parent.rx_indicate != RT_NULL)
+                // {
+                //     port_dev->parent.rx_indicate(&port_dev->parent, len);
+                // }
 
-                if (port_dev->rx_notify_helper.notify != RT_NULL)
-                {
-                    port_dev->rx_notify_helper.notify(port_dev->rx_notify_helper.dev);
-                }
+                // if (port_dev->rx_notify_helper.notify != RT_NULL)
+                // {
+                //     port_dev->rx_notify_helper.notify(port_dev->rx_notify_helper.dev);
+                // }
 
             #ifdef RT_USING_SMP
                 level = rt_spin_lock_irqsave(&port_dev->spinlock_rx);
@@ -717,7 +742,7 @@ rt_err_t rt_virtio_console_init(rt_ubase_t *mmio_base, rt_uint32_t irq)
         }
         else
         {
-            virtio_console_dev->max_port_nr = virtio_console_dev->config->max_nr_ports;
+            virtio_console_dev->max_port_nr = 2;
         }
 
         queues_num = VIRTIO_CONSOLE_PORT_QUEUE_INDEX(virtio_console_dev->max_port_nr, VIRTIO_CONSOLE_QUEUE_DATA_RX);
@@ -764,7 +789,14 @@ rt_err_t rt_virtio_console_init(rt_ubase_t *mmio_base, rt_uint32_t irq)
     rt_hw_interrupt_install(irq, virtio_console_isr, virtio_console_dev, dev_name);
     rt_hw_interrupt_umask(irq);
 
-    return rt_device_register((rt_device_t)virtio_console_dev, dev_name, RT_DEVICE_FLAG_RDWR | RT_DEVICE_FLAG_INT_RX);
+    rt_err_t ret = rt_device_register((rt_device_t)virtio_console_dev, dev_name, RT_DEVICE_FLAG_RDWR | RT_DEVICE_FLAG_INT_RX);
+    if (ret != RT_EOK) {
+    // 处理注册失败的情况
+        rt_kprintf("Device registration failed, error code: %d\n", ret);
+    } else {
+        rt_kprintf("rt_device_register succed\n");
+    }
+    return ret;
 
 _alloc_fail:
 
