@@ -23,7 +23,7 @@
 #define VIRTIO_CONSOLE_QUEUE_DATA_TX    1
 #define VIRTIO_CONSOLE_QUEUE_CTRL_RX    2
 #define VIRTIO_CONSOLE_QUEUE_CTRL_TX    3
-#define VIRTIO_CONSOLE_QUEUE_SIZE       64
+#define VIRTIO_CONSOLE_QUEUE_SIZE       256
 
 /* Every port has data rx & tx, and port0 has ctrl rx & tx in multiport */
 #define VIRTIO_CONSOLE_PORT_QUEUE_INDEX(id, queue)  ((id) * 2 + (!!(id)) * 2 + (queue))
