@@ -25,7 +25,7 @@
 #endif
 
 #ifdef RT_USING_VIRTIO10
-#define RT_USING_VIRTIO_VERSION 0x1
+#define RT_USING_VIRTIO_VERSION 0x2
 #endif
 
 #include <virtio_mmio.h>

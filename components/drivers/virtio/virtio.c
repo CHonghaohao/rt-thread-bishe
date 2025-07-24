@@ -93,6 +93,7 @@ rt_err_t virtio_queue_init(struct virtio_device *dev, rt_uint32_t queue_index, r
     void *pages;
     rt_size_t pages_total_size;
     struct virtq *queue;
+    uintptr_t desc_addr, avail_addr, used_addr;
 
     _virtio_dev_check(dev);
 
@@ -123,17 +124,47 @@ rt_err_t virtio_queue_init(struct virtio_device *dev, rt_uint32_t queue_index, r
 
     rt_memset(pages, 0, pages_total_size);
 
+    // 可以注释，tool中没有相应的寄存器支持
     dev->mmio_config->guest_page_size = VIRTIO_PAGE_SIZE;
     dev->mmio_config->queue_sel = queue_index;
     dev->mmio_config->queue_num = ring_size;
     dev->mmio_config->queue_align = VIRTIO_PAGE_SIZE;
-    dev->mmio_config->queue_pfn = VIRTIO_VA2PA(pages) >> VIRTIO_PAGE_SHIFT;
+
+    // 计算各部分偏移量（使用相同的基准）
+    rt_ubase_t desc_offset  = 0;
+    rt_ubase_t avail_offset = VIRTQ_DESC_TOTAL_SIZE(ring_size);
+    rt_ubase_t used_offset  = VIRTIO_PAGE_ALIGN(avail_offset + VIRTQ_AVAIL_TOTAL_SIZE(ring_size));
+
+    // 设置物理地址
+    desc_addr  = VIRTIO_VA2PA((void *)((rt_ubase_t)pages + desc_offset));
+    avail_addr = VIRTIO_VA2PA((void *)((rt_ubase_t)pages + avail_offset));
+    used_addr  = VIRTIO_VA2PA((void *)((rt_ubase_t)pages + used_offset));
+
+    int virtio_mmio_v1 = 2;
+    if (virtio_mmio_v1 == 1)
+    {
+        rt_kprintf("virtio use pfn!\n");
+        dev->mmio_config->queue_pfn = VIRTIO_VA2PA(pages) >> VIRTIO_PAGE_SHIFT;
+        // rt_kprintf("dev->mmio_config->queue_pfn! 0x%x\n", VIRTIO_VA2PA(pages));
+    }
+    else
+    {
+        // rt_kprintf("virtio use set three addr!\n");    
+        // 新方式：分别设置三个地址
+        dev->mmio_config->queue_desc_low = (uint32_t)(desc_addr & 0xFFFFFFFF);
+        dev->mmio_config->queue_desc_high = (uint32_t)(desc_addr >> 32);
+        dev->mmio_config->queue_driver_low = (uint32_t)(avail_addr & 0xFFFFFFFF);
+        dev->mmio_config->queue_driver_high = (uint32_t)(avail_addr >> 32);
+        dev->mmio_config->queue_device_low = (uint32_t)(used_addr & 0xFFFFFFFF);
+        dev->mmio_config->queue_device_high = (uint32_t)(used_addr >> 32);
+    }
 
     queue->num = ring_size;
-    queue->desc = (struct virtq_desc *)((rt_ubase_t)pages);
-    queue->avail = (struct virtq_avail *)(((rt_ubase_t)pages) + VIRTQ_DESC_TOTAL_SIZE(ring_size));
-    queue->used = (struct virtq_used *)VIRTIO_PAGE_ALIGN(
-            (rt_ubase_t)&queue->avail->ring[ring_size] + VIRTQ_AVAIL_RES_SIZE);
+
+    // 设置虚拟地址
+    queue->desc  = (struct virtq_desc *)((rt_ubase_t)pages + desc_offset);
+    queue->avail = (struct virtq_avail *)((rt_ubase_t)pages + avail_offset);
+    queue->used  = (struct virtq_used *)((rt_ubase_t)pages + used_offset);
 
     queue->used_idx = 0;
 
