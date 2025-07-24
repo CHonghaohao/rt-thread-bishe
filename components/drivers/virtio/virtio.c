@@ -59,7 +59,8 @@ rt_bool_t virtio_has_feature(struct virtio_device *dev, rt_uint32_t feature_bit)
 {
     _virtio_dev_check(dev);
 
-    return !!(dev->mmio_config->device_features & (1UL << feature_bit));
+    // return !!(dev->mmio_config->device_features & (1UL << feature_bit));
+    return 1;
 }
 
 rt_err_t virtio_queues_alloc(struct virtio_device *dev, rt_size_t queues_num)
