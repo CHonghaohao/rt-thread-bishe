@@ -63,19 +63,20 @@ static struct rt_semaphore rx_sem;
 static rt_device_t micro_ros_serial;
 
 #ifndef MICRO_ROS_SERIAL_NAME
-    #define MICRO_ROS_SERIAL_NAME "uart3"
+    #define MICRO_ROS_SERIAL_NAME "vport0p1"
 #endif
 
-// #define micro_rollover_useconds 4294967295
+#define micro_rollover_useconds 4294967295
 
 int clock_gettime(clockid_t unused, struct timespec *tp)
 {
     (void)unused;
-
+     //1s + 100
     uint64_t m = rt_tick_get() * 1000 / RT_TICK_PER_SECOND * 1000;
     tp->tv_sec = m / 1000000;
     tp->tv_nsec = (m % 1000000) * 1000;
-
+    
+    //这个地方可能有问题
     return 0;
 }
 
@@ -99,6 +100,7 @@ bool rtt_transport_open(struct uxrCustomTransport * transport)
         rt_sem_init(&rx_sem, "micro_ros_rx_sem", 0, RT_IPC_FLAG_FIFO);
         sem_initialized = 1;
     }
+    // rt_device_open(micro_ros_serial, RT_DEVICE_FLAG_RDWR);
     rt_device_open(micro_ros_serial, RT_DEVICE_FLAG_INT_RX);
     rt_device_set_rx_indicate(micro_ros_serial, uart_input);
     return 1;
@@ -113,30 +115,73 @@ bool rtt_transport_close(struct uxrCustomTransport * transport)
 }
 
 size_t rtt_transport_write(struct uxrCustomTransport * transport, const uint8_t *buf, size_t len, uint8_t *errcode)
-{
+{    
+    // rt_kprintf("rtt_transport_write !!!\n");
+    // rt_tick_t tick = rt_tick_get(); 
+    // uint64_t tick_ms = (uint64_t)tick * 1000 / RT_TICK_PER_SECOND;
+    // rt_kprintf("WRITE 系统启动时间：%llu ms\n", tick_ms);
+    if(micro_ros_serial == NULL)
+    {
+        rtt_transport_open(NULL);
+    }
     return rt_device_write(micro_ros_serial, 0, buf, len);
 }
 
 size_t rtt_transport_read(struct uxrCustomTransport * transport, uint8_t *buf, size_t len, int timeout, uint8_t *errcode)
-{
+{   
+    // rt_kprintf("rt_transport_read !!!\n");
+    //len = rt_device_read(micro_ros_serial, 0, &buf, sizeof(&buf));
     int tick = rt_tick_get();
     for (int i = 0; i < len; ++i)
     {
+        // rt_kprintf("Read i: %d\n", i);
+        // rt_tick_t tick = rt_tick_get(); 
+        // uint64_t tick_ms = (uint64_t)tick * 1000 / RT_TICK_PER_SECOND;
+        // rt_kprintf("READ0 系统启动时间：%llu ms\n", tick_ms);
         if(sem_initialized == 0)
         {
             rt_sem_init(&rx_sem, "micro_ros_rx_sem", 0, RT_IPC_FLAG_FIFO);
             sem_initialized = 1;
         }
+        
         while (rt_device_read(micro_ros_serial, -1, &buf[i], 1) != 1)
         {
-            rt_sem_take(&rx_sem, timeout / 4);
+            //rt_kprintf("rt_device_read go on !!!");
+            rt_sem_take(&rx_sem, timeout / 4);   //sem_take timeout can not release;
+            // tick = rt_tick_get(); 
+            // tick_ms = (uint64_t)tick * 1000 / RT_TICK_PER_SECOND;
+            // rt_kprintf("时间：%llu ms\n", tick_ms);
             if( (rt_tick_get() - tick) > timeout )
             {
                 // LOG_E("Read timeout");
+                // rt_kprintf("Read timeout");
                 return i;
             }
         }
+        // tick = rt_tick_get(); 
+        // tick_ms = (uint64_t)tick * 1000 / RT_TICK_PER_SECOND;
+        // rt_kprintf("READ1 系统启动时间：%llu ms\n", tick_ms);
     }
+
+    // rt_tick_t tick = rt_tick_get(); 
+    // uint64_t tick_ms = (uint64_t)tick * 1000 / RT_TICK_PER_SECOND;
+    // rt_kprintf("READ 系统启动时间：%llu ms\n", tick_ms);
+    // if(sem_initialized == 0)
+    // {
+    //     rt_sem_init(&rx_sem, "micro_ros_rx_sem", 0, RT_IPC_FLAG_FIFO);
+    //     sem_initialized = 1;
+    // }
+    
+    // while (rt_device_read(micro_ros_serial, -1, &buf, len) == 0)
+    // {
+    //         //rt_kprintf("rt_device_read go on !!!");
+    //     rt_sem_take(&rx_sem, timeout / 4);   //sem_take timeout can not release;
+    //     if( (rt_tick_get() - tick) > timeout )
+    //     {
+    //         rt_kprintf("Read timeout");
+    //         return 0;
+    //     }
+    // }
     return len;
 }
 
