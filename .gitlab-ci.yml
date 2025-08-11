@@ -1,0 +1,50 @@
+include:
+    - project: "infra/gitlab-cicd"
+      file:
+          - "/templates/global.yml"
+          - "/templates/functions.yml"
+
+build-arm64:
+    extends:
+        - .job.common
+        - .func.get_pkgver
+    image: swf-registry.cn-beijing.cr.aliyuncs.com/library/rtt-toolchain:10.3-bookworm-slim
+    stage: build
+    tags: [cn, docker]
+    variables:
+        TARGETPLATFORM: linux/arm64
+    before_script:
+        - !reference [.func.get_pkgver, script]
+        - !reference [.job.common, before_script]
+        - |
+            export PKG_VERSION=`get_pkgver || exit 1`
+    script:
+        - |
+            echo "APT::Get::Assume-Yes \"true\";" >> /etc/apt/apt.conf
+
+            rm -rf /etc/apt/sources.list
+            tee <<EOF /etc/apt/sources.list.d/debian.sources
+            Types: deb
+            URIs: http://mirrors.ustc.edu.cn/debian
+            Suites: bookworm bookworm-updates
+            Components: main
+            Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
+
+            Types: deb
+            URIs: http://mirrors.ustc.edu.cn/debian-security
+            Suites: bookworm-security
+            Components: main
+            Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
+            EOF
+
+            apt update && apt-get install --no-install-recommends scons
+
+            cd bsp/rockchip/rk3588
+            export RTT_CC=gcc
+            export RTT_EXEC_PATH=$ARM_GCC_ROOT/bin
+            scons || exit 1
+            mv ./rtthread.bin ${CI_PROJECT_DIR}/
+
+    artifacts:
+        paths:
+            - rtthread.bin
