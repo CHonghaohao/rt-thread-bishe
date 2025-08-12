@@ -80,11 +80,40 @@ void kick_guest0(void) {
 static int ringbuf_write(ring_buffer_t *rb, const void *data, uint32_t len)
 {
 
+#if 0
+	uint32_t next = (rb->write_idx + 1) % SLOT_NUM;
+	if (next == rb->read_idx)
+		return -1; // 满
+
+	if (len > SLOT_SIZE) len = SLOT_SIZE;
+	rb->slots[rb->write_idx].len = len;
+	memcpy(rb->slots[rb->write_idx].data, data, len);
+	__sync_synchronize();
+	rb->write_idx = next;
+#endif
+    char *txaddr =ivc_get_tx_buffer();
+    rt_strcpy(txaddr, data);
+    rt_hw_cpu_dcache_clean(txaddr,0x100);
+
     return 0;
 }
 
 static int ringbuf_read(ring_buffer_t *rb, void *buf, uint32_t *len)
 {
+#if 0
+	if (rb->read_idx == rb->write_idx)
+		return -1;
+
+	uint32_t l = rb->slots[rb->read_idx].len;
+	if (l > SLOT_SIZE) l = SLOT_SIZE;
+	memcpy(buf, rb->slots[rb->read_idx].data, l);
+	*len = l;
+	rb->read_idx = (rb->read_idx + 1) % SLOT_NUM;
+#endif
+    rt_hw_dmb();
+    char *m =ivc_get_rx_buffer();
+    rt_hw_dmb();
+
 
     return 0;
 }
