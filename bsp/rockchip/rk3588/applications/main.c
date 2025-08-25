@@ -14,7 +14,5 @@ int main(int argc, char** argv)
 {
     rt_kprintf("Hi, this is RT-Thread!!\n");
 
-    rt_thread_mdelay(5000);
-    microros_ping_pong();
     return 0;
 }

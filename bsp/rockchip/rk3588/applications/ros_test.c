@@ -232,4 +232,4 @@ void microros_ping_pong(void)
 			rt_kprintf("[micro_ros] Failed to create thread mr_pubint32\n");
 		}
 }
-// MSH_CMD_EXPORT(microros_ping_pong, microros_ping_pong);
+MSH_CMD_EXPORT(microros_ping_pong, microros_ping_pong);
