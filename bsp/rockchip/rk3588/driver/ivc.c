@@ -21,8 +21,8 @@
 #define IVC_MB_SIZE  16  //
 void *buffer;
 
-static struct rt_mailbox ivc_mb;
-static char ivc_mb_pool[IVC_MB_SIZE * 4];  
+//static struct rt_mailbox ivc_mb;
+//static char ivc_mb_pool[IVC_MB_SIZE * 4];  
 
 
 
@@ -77,7 +77,7 @@ void kick_guest0(void) {
 
 
 /*  */
-static int ringbuf_write(ring_buffer_t *rb, const void *data, uint32_t len)
+static int ringbuf_write(ring_buffer_t *rb,  void *data, uint32_t len)
 {
 
 #if 0
@@ -111,7 +111,8 @@ static int ringbuf_read(ring_buffer_t *rb, void *buf, uint32_t *len)
 	rb->read_idx = (rb->read_idx + 1) % SLOT_NUM;
 #endif
     rt_hw_dmb();
-    char *m =ivc_get_rx_buffer();
+    buffer =ivc_get_rx_buffer();
+    rt_hw_cpu_dcache_clean(buffer,0x100);
     rt_hw_dmb();
 
 

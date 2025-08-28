@@ -30,6 +30,7 @@
 struct mem_desc platform_mem_desc[] =
 {
     {PLATFORM_MEM_TALBE(0x40008000,                  0x9000000),    0x40008000,                   NORMAL_MEM},
+     {PLATFORM_MEM_TALBE(0xD0000000,       0x3000),    0xD0000000,           NORMAL_NOCACHE_MEM},
     {PLATFORM_MEM_TALBE(0x49008000,       RT_UNCACHE_HEAP_SIZE),    0x49008000,           NORMAL_NOCACHE_MEM},
     {PLATFORM_MEM_TALBE(PMU0_GRF_BASE,                  0x2000),    PMU0_GRF_BASE,                DEVICE_MEM},
     {PLATFORM_MEM_TALBE(PMU1_GRF_BASE,                  0x2000),    PMU1_GRF_BASE,                DEVICE_MEM},

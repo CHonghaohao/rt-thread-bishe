@@ -3,7 +3,7 @@
 from building import *
 
 cwd     = GetCurrentDir()
-src     = ['board.c', 'drv_uart.c','drv_canfd.c','drv_gmac.c']
+src     = Glob('*.c') + Glob('*.cpp')
 list    = os.listdir(cwd)
 CPPPATH = [cwd]
 objs    = []
