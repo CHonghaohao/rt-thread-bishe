@@ -124,6 +124,7 @@ size_t rtt_transport_write(struct uxrCustomTransport * transport, const uint8_t 
     {
         rtt_transport_open(NULL);
     }
+    rt_kprintf("send : %s , buflen : %d, len: %d \n", buf, rt_strlen(buf), len);
     return rt_device_write(micro_ros_serial, 0, buf, len);
 }
 

@@ -252,11 +252,17 @@
 /* touch drivers */
 
 #define PKG_USING_MICRO_ROS
-#define MICRO_ROS_USE_SERIAL
 #define MICRO_ROS_USING_ARCH_CORTEX_M3
 #define MICRO_ROS_USING_GCC_10
-#define MICRO_ROS_SERIAL_NAME "vport0p1"
 #define PKG_USING_MICRO_ROS_HUMBLE_GCC_10
+// #define MICRO_ROS_USE_SERIAL
+// #define MICRO_ROS_SERIAL_NAME "vport0p1"
+
+// IVC
+/*SERIAL uart0 SHAREMEM ivc*/
+#define MICRO_ROS_USE_SHAREMEM
+#define MICRO_ROS_SHAREMEM_NAME "ivc"
+
 
 /* AI packages */
 

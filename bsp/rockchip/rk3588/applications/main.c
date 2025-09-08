@@ -9,6 +9,7 @@
  */
 
 #include <rtthread.h>
+extern void microros_ping_pong(void);
 
 int main(int argc, char** argv)
 {

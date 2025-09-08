@@ -174,10 +174,10 @@ void microros_ping_pong(void)
 	  
 		// create init_options
 		RCCHECK(rclc_support_init(&support, 0, NULL, &allocator));
-
+		rt_kprintf("rclc support init \n");
 		// create node
 		RCCHECK(rclc_node_init_default(&node, "pingpong_node", "", &support));
-
+		rt_kprintf("rclc node init\n");
 		// Create a reliable ping publisher
 		RCCHECK(rclc_publisher_init_default(&ping_publisher, &node, ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, String), "/microROS/ping"));
 
