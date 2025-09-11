@@ -30,16 +30,17 @@ static int ivc_send_example(const uint8_t *send_data, uint32_t data_len)
     }
 
     // 2. 打开IVC设备（若未打开）
+    // 1. 打开IVC设备（若未打开）
     if (g_ivc_dev == RT_NULL)
     {
-        rt_device_t dev = rt_device_find(IVC_DEV_NAME);
-        //g_ivc_dev = rt_device_open(dev, RT_DEVICE_OFLAG_RDWR);
+        g_ivc_dev = rt_device_find(IVC_DEV_NAME);
+        // g_ivc_dev = rt_device_open(dev, RT_DEVICE_OFLAG_RDWR);
         if (rt_device_open(g_ivc_dev, RT_DEVICE_FLAG_RDWR) != RT_EOK)
         {
-            rt_kprintf("[IVC_SEND] 打开设备 %s 失败\n", IVC_DEV_NAME);
+            rt_kprintf("[IVC_RECV] 打开设备 %s 失败\n", IVC_DEV_NAME);
             return -1;
         }
-        rt_kprintf("[IVC_SEND] 成功打开设备 %s（句柄：%p）\n", IVC_DEV_NAME, g_ivc_dev);
+        rt_kprintf("[IVC_RECV] 成功打开设备 %s（句柄：%p）\n", IVC_DEV_NAME, g_ivc_dev);
     }
 
     // 3. 调用 ivc_write 发送数据（驱动会自动封装“长度+数据”格式）
@@ -88,10 +89,10 @@ static int ivc_recv_example(void)
     // 2. 分批次读取数据（直到读完所有数据）
     rt_size_t total_recv_len = 0;            // 累计接收长度
     rt_memset(g_recv_buf, 0, RECV_BUF_SIZE); // 清空接收缓冲区
-
+    uint32_t read_len = READ_BATCH_LEN;
     while (1)
     {
-        uint32_t read_len = READ_BATCH_LEN; // 本次请求读取长度（分批次）
+        read_len--; // 本次请求读取长度（分批次）
         // 调用 ivc_read 读取数据（驱动会自动解析总长度，跟踪读取偏移）
         rt_size_t actual_len = rt_device_read(g_ivc_dev, 0, g_recv_buf + total_recv_len, read_len);
 
