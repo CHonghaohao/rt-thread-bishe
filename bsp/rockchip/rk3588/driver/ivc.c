@@ -26,15 +26,34 @@ ivc_serial_dev_t g_ivc_serial;
 extern ring_buffer_t *ivc_get_tx_buffer(void);
 extern ring_buffer_t *ivc_get_rx_buffer(void);
 
+// void kick_guest0(void)
+// {
+//     // 直接使用全局虚拟地址，不重复映射
+//     if (g_control_table_virt == NULL)
+//     {
+//         rt_kprintf("[IVC] kick_guest0: 控制表虚拟地址未初始化！\n");
+//         return;
+//     }
+//     struct ivc_control_table *ct = (void *)g_control_table_virt;
+//     ct->ipi_invoke = 0;
+//     // 写操作后加内存屏障，确保数据同步到物理内存
+//     rt_hw_dmb();
+// }
+
+// void kick_guest1(void)
+// {
+//     if (g_control_table_virt == NULL)
+//     {
+//         rt_kprintf("[IVC] kick_guest1: 控制表虚拟地址未初始化！\n");
+//         return;
+//     }
+//     struct ivc_control_table *ct = (void *)g_control_table_virt;
+//     ct->ipi_invoke = 1;
+//     rt_hw_dmb();
+// }
 void kick_guest0(void)
 {
-    // 直接使用全局虚拟地址，不重复映射
-    if (g_control_table_virt == NULL)
-    {
-        rt_kprintf("[IVC] kick_guest0: 控制表虚拟地址未初始化！\n");
-        return;
-    }
-    struct ivc_control_table *ct = (void *)g_control_table_virt;
+    struct ivc_control_table *ct = (void *)control_table_IPA;
     ct->ipi_invoke = 0;
     // 写操作后加内存屏障，确保数据同步到物理内存
     rt_hw_dmb();
@@ -42,12 +61,7 @@ void kick_guest0(void)
 
 void kick_guest1(void)
 {
-    if (g_control_table_virt == NULL)
-    {
-        rt_kprintf("[IVC] kick_guest1: 控制表虚拟地址未初始化！\n");
-        return;
-    }
-    struct ivc_control_table *ct = (void *)g_control_table_virt;
+    struct ivc_control_table *ct = (void *)control_table_IPA;
     ct->ipi_invoke = 1;
     rt_hw_dmb();
 }
@@ -95,11 +109,12 @@ int ringbuf_write(ring_buffer_t *rb, const void *data, uint32_t len)
     }
 
     uint32_t *len_ptr = (uint32_t *)txaddr;      // 长度字段指针（共享内存首地址）
-    *len_ptr = len;                              // 存储数据长度
     char *data_addr = txaddr + sizeof(uint32_t); // 数据存储地址（跳过长度字段）
-
     // 拷贝数据到共享内存（从 data_addr 开始，长度为 len）
     rt_memcpy(data_addr, data, len);
+    rt_hw_wmb();
+    *len_ptr = len; // 存储数据长度
+    rt_hw_wmb();
     rt_hw_cpu_dcache_clean(txaddr, sizeof(uint32_t) + len);
     // rt_kprintf("ringbuf_write: 成功写入（长度：%u 字节，数据地址：%p）\n", len, data_addr);
     return 0;
@@ -184,7 +199,7 @@ int ringbuf_read(ring_buffer_t *rb, void *buf, uint32_t *len)
         }
     }
     // 2. 内存屏障：确保读取到共享内存最新数据
-    rt_hw_dmb();
+
 
     // 3. 获取共享内存基地址
     char *rx_base = (char *)ivc_get_rx_buffer();
@@ -195,6 +210,8 @@ int ringbuf_read(ring_buffer_t *rb, void *buf, uint32_t *len)
         return -1;
     }
 
+    rt_hw_cpu_dcache_invalidate(rx_base, sizeof(uint32_t));
+    rt_hw_rmb();
     // 4. 动态解析总数据长度（首次读取时解析，后续复用缓存值）
     if (g_cached_total_len == 0)
     {
@@ -232,6 +249,7 @@ int ringbuf_read(ring_buffer_t *rb, void *buf, uint32_t *len)
     // 8. 复制数据到目标缓冲区（从当前偏移量开始）
     char *read_start = data_base + g_read_offset; // 本次读取起始地址
     rt_hw_cpu_dcache_invalidate(data_base + g_read_offset, actual_read_len);
+    rt_hw_rmb();
     rt_memcpy(buf, read_start, actual_read_len);
 
     // 9. 更新读取偏移量（下次从新位置开始）
@@ -253,7 +271,7 @@ int ringbuf_read(ring_buffer_t *rb, void *buf, uint32_t *len)
     // }
     // rt_kprintf("\n");
 
-    // 12. 内存屏障 + 缓存清理（确保数据同步）
+    // 12. 内存屏障 + 缓存清理
     rt_hw_dmb();
     rt_hw_cpu_dcache_clean((uint8_t *)buf, actual_read_len);
 
@@ -261,33 +279,27 @@ int ringbuf_read(ring_buffer_t *rb, void *buf, uint32_t *len)
 }
 
 /*  poll */
-static int ivc_poll(void)
+static void ivc_poll(void)
 {
     char buf[64];
-    uint32_t len = 0;
-    rt_ubase_t msg;
-
+    uint32_t len;
     while (1)
     {
-        // if (rt_sem_take(ivc_devs->irq_sem, RT_WAITING_FOREVER) == RT_EOK)
-        // {
-        //     while (ivc_devs->received_irq > 0)
-        //     {
-        //         ivc_devs->received_irq--;
-        len = 31;
-        ringbuf_read(g_ivc_serial.rx_buf, buf, &len);
-        // 打印读取到的数据（假设是字符串）
-        //     ivc_devs->received_irq = 0;
-        // }
-        // buffer = "hello zone0! I'm zone1. test";
-        ringbuf_write(g_ivc_serial.tx_buf, buf, len);
-        rt_kprintf("addr : %p - %p , send : %s\n", &g_ivc_serial, g_ivc_serial.tx_buf, buf);
-        kick_guest0();
-        // }
-    }
+        /* 阻塞等待中断信号，避免忙等 */
+        // rt_sem_take(ivc_devs->irq_sem, RT_WAITING_FOREVER);
 
-    return 0;
+        /* 有数据再读 */
+        len = sizeof(buf);
+        while (ringbuf_read(g_ivc_serial.rx_buf, buf, &len) == 0 && len > 0)
+        {
+            rt_kprintf("send : %s\n", buf);
+            ringbuf_write(g_ivc_serial.tx_buf, buf, len);
+            kick_guest0();     /* 回发 */
+            len = sizeof(buf); /* 继续读下一批 */
+        }
+    }
 }
+
 
 /* IRQ handler */
 void ivc_irq_handler(int vector, void *param)
@@ -322,6 +334,19 @@ rt_size_t ivc_read(rt_device_t dev, rt_off_t pos, void *buffer, rt_size_t size)
     // rt_kprintf("[IVC] 调用ivc_read！\n");
     ivc_serial_dev_t *ivc = (ivc_serial_dev_t *)dev->user_data;
     // rt_kprintf("\n[RECV] - ivc_read传入长度：%u 字节\n", size);
+    // 2. 检查是否有可用数据，若无则阻塞等待
+    if (ivc_devs->received_irq == 0)
+    {
+        // 阻塞模式：等待信号量
+        // rt_kprintf("ringbuf_read: 等待中断...\n");
+        rt_err_t ret = rt_sem_take(ivc_devs->irq_sem, RT_WAITING_FOREVER);
+        if (ret != RT_EOK)
+        {
+            rt_kprintf("ringbuf_read: 等待被中断（ret=%d）\n", ret);
+            return ret;
+        }
+    }
+
     if (ringbuf_read(ivc->rx_buf, buffer, &size) == 0)
     {
         // rt_kprintf("\n[RECV] - ivc_read传回长度：%u 字节\n", size);
@@ -353,30 +378,50 @@ static struct rt_device_ops ivc_ops = {
     .write = ivc_write,
     .control = ivc_control};
 
+// ring_buffer_t *ivc_get_rx_buffer(void)
+// {
+//     // 直接返回共享内存的全局虚拟地址
+//     if (g_shared_mem_virt == NULL)
+//     {
+//         rt_kprintf("[IVC] ivc_get_rx_buffer: 共享内存未映射！\n");
+//         return NULL;
+//     }
+//     return (ring_buffer_t *)g_shared_mem_virt;
+// }
+
+// ring_buffer_t *ivc_get_tx_buffer(void)
+// {
+//     if (g_control_table_virt == NULL || g_shared_mem_virt == NULL)
+//     {
+//         rt_kprintf("[IVC] ivc_get_tx_buffer: 地址未映射！\n");
+//         return NULL;
+//     }
+//     // 使用控制表的全局虚拟地址
+//     struct ivc_control_table *ct = (void *)g_control_table_virt;
+//     // 基于共享内存的全局虚拟地址计算 tx 地址
+//     uintptr_t tx_virt_addr = (uintptr_t)g_shared_mem_virt + ct->out_sec_size * ct->peer_id;
+//     // 检查地址是否超出共享内存范围（0x1000 是共享内存大小）
+//     if (tx_virt_addr >= (uintptr_t)g_shared_mem_virt + 0x2000)
+//     {
+//         rt_kprintf("[IVC] tx 地址超出范围：0x%lx\n", tx_virt_addr);
+//         return NULL;
+//     }
+//     return (ring_buffer_t *)tx_virt_addr;
+// }
+
 ring_buffer_t *ivc_get_rx_buffer(void)
 {
-    // 直接返回共享内存的全局虚拟地址
-    if (g_shared_mem_virt == NULL)
-    {
-        rt_kprintf("[IVC] ivc_get_rx_buffer: 共享内存未映射！\n");
-        return NULL;
-    }
-    return (ring_buffer_t *)g_shared_mem_virt;
+    return (ring_buffer_t *)shared_mem_IPA;
 }
 
 ring_buffer_t *ivc_get_tx_buffer(void)
 {
-    if (g_control_table_virt == NULL || g_shared_mem_virt == NULL)
-    {
-        rt_kprintf("[IVC] ivc_get_tx_buffer: 地址未映射！\n");
-        return NULL;
-    }
-    // 使用控制表的全局虚拟地址
-    struct ivc_control_table *ct = (void *)g_control_table_virt;
-    // 基于共享内存的全局虚拟地址计算 tx 地址
-    uintptr_t tx_virt_addr = (uintptr_t)g_shared_mem_virt + ct->out_sec_size * ct->peer_id;
+    // 使用控制表的全局地址
+    struct ivc_control_table *ct = (void *)control_table_IPA;
+    // 基于共享内存的全局地址计算 tx 地址
+    uintptr_t tx_virt_addr = (uintptr_t)shared_mem_IPA + ct->out_sec_size * ct->peer_id;
     // 检查地址是否超出共享内存范围（0x1000 是共享内存大小）
-    if (tx_virt_addr >= (uintptr_t)g_shared_mem_virt + 0x2000)
+    if (tx_virt_addr >= (uintptr_t)shared_mem_IPA + 0x2000)
     {
         rt_kprintf("[IVC] tx 地址超出范围：0x%lx\n", tx_virt_addr);
         return NULL;
@@ -386,24 +431,24 @@ ring_buffer_t *ivc_get_tx_buffer(void)
 
 void rt_ivc_init(void)
 {
-    // 1. 第一步：映射控制表物理地址（0xd0000000）
-    g_control_table_virt = rt_ioremap((void *)control_table_IPA, 0x1000);
-    if (g_control_table_virt == NULL)
-    {
-        rt_kprintf("[IVC] 控制表映射失败！物理地址：0x%x\n", control_table_IPA);
-        return;
-    }
-    rt_kprintf("[IVC] 控制表映射成功：物理0x%x → 虚拟0x%p\n", control_table_IPA, g_control_table_virt);
+    // // 1. 第一步：映射控制表物理地址（0xd0000000）
+    // g_control_table_virt = rt_ioremap_nocache((void *)control_table_IPA, 0x1000);
+    // if (g_control_table_virt == NULL)
+    // {
+    //     rt_kprintf("[IVC] 控制表映射失败！物理地址：0x%x\n", control_table_IPA);
+    //     return;
+    // }
+    // rt_kprintf("[IVC] 控制表映射成功：物理0x%x → 虚拟0x%p\n", control_table_IPA, g_control_table_virt);
 
-    // 2. 第二步：映射共享内存物理地址（0xd0001000）
-    g_shared_mem_virt = rt_ioremap((void *)shared_mem_IPA, 0x2000);
-    if (g_shared_mem_virt == NULL)
-    {
-        rt_kprintf("[IVC] 共享内存映射失败！物理地址：0x%x\n", shared_mem_IPA);
-        rt_iounmap(g_control_table_virt); // 映射失败，释放已映射的控制表
-        return;
-    }
-    rt_kprintf("[IVC] 共享内存映射成功：物理0x%x → 虚拟0x%p\n", shared_mem_IPA, g_shared_mem_virt);
+    // // 2. 第二步：映射共享内存物理地址（0xd0001000）
+    // g_shared_mem_virt = rt_ioremap_nocache((void *)shared_mem_IPA, 0x2000);
+    // if (g_shared_mem_virt == NULL)
+    // {
+    //     rt_kprintf("[IVC] 共享内存映射失败！物理地址：0x%x\n", shared_mem_IPA);
+    //     rt_iounmap(g_control_table_virt); // 映射失败，释放已映射的控制表
+    //     return;
+    // }
+    // rt_kprintf("[IVC] 共享内存映射成功：物理0x%x → 虚拟0x%p\n", shared_mem_IPA, g_shared_mem_virt);
     ivc_devs = rt_malloc(sizeof(struct ivc_dev));
     ivc_devs->received_irq = 0;
     ivc_devs->irq_sem = rt_sem_create("ivc_irq", 0, RT_IPC_FLAG_FIFO);

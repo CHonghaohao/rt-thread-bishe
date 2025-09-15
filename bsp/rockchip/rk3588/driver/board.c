@@ -28,57 +28,56 @@
 #define PLATFORM_MEM_TALBE(va, size) va, ((unsigned long)va + size - 1)
 
 struct mem_desc platform_mem_desc[] =
-{
-    {PLATFORM_MEM_TALBE(0x40008000,                  0x9000000),    0x40008000,                   NORMAL_MEM},
-    {PLATFORM_MEM_TALBE(0x49008000,       RT_UNCACHE_HEAP_SIZE),    0x49008000,           NORMAL_NOCACHE_MEM},
-    {PLATFORM_MEM_TALBE(PMU0_GRF_BASE,                  0x2000),    PMU0_GRF_BASE,                DEVICE_MEM},
-    {PLATFORM_MEM_TALBE(PMU1_GRF_BASE,                  0x2000),    PMU1_GRF_BASE,                DEVICE_MEM},
-    {PLATFORM_MEM_TALBE(SYS_GRF_BASE,                   0x4000),    SYS_GRF_BASE,                 DEVICE_MEM},
-    {PLATFORM_MEM_TALBE(CRU_BASE,                       0x8000),    CRU_BASE,                     DEVICE_MEM},
-    {PLATFORM_MEM_TALBE(UART0_BASE,                    0x10000),    UART0_BASE,                   DEVICE_MEM},
-    {PLATFORM_MEM_TALBE(UART3_BASE,                    0x10000),    UART3_BASE,                   DEVICE_MEM},
-    {PLATFORM_MEM_TALBE(GIC_PL600_DISTRIBUTOR_PPTR,    0x10000),    GIC_PL600_DISTRIBUTOR_PPTR,   DEVICE_MEM},
-    {PLATFORM_MEM_TALBE(GIC_PL600_REDISTRIBUTOR_PPTR,  0xc0000),    GIC_PL600_REDISTRIBUTOR_PPTR, DEVICE_MEM},
-    {PLATFORM_MEM_TALBE(BUS_IOC_BASE,                   0x4000),    BUS_IOC_BASE,                 DEVICE_MEM},
-    {PLATFORM_MEM_TALBE(VCCIO3_5_IOC_BASE,              0x1000),    VCCIO3_5_IOC_BASE,            DEVICE_MEM},
-    {PLATFORM_MEM_TALBE(VCCIO6_IOC_BASE,                0x1000),    VCCIO6_IOC_BASE,              DEVICE_MEM},
-    {PLATFORM_MEM_TALBE(TIMER0_BASE,                    0x8000),    TIMER5_BASE,                  DEVICE_MEM},
-    {PLATFORM_MEM_TALBE(CAN2_BASE,                     0x10000),    CAN2_BASE,                    DEVICE_MEM},
-    {PLATFORM_MEM_TALBE(GMAC1_BASE,                    0x10000),    GMAC1_BASE,                   DEVICE_MEM},
-    {PLATFORM_MEM_TALBE(CRU_BASE,                       0x8000),    CRU_BASE,                     DEVICE_MEM},
-    {PLATFORM_MEM_TALBE(PHP_GRF_BASE,                   0x4000),    PHP_GRF_BASE,                 DEVICE_MEM},
-    {PLATFORM_MEM_TALBE(SYS_GRF_BASE,                   0x4000),    SYS_GRF_BASE,                 DEVICE_MEM},
-    {PLATFORM_MEM_TALBE(GPIO2_BASE,                    0x10000),    GPIO2_BASE,                   DEVICE_MEM},
-    {PLATFORM_MEM_TALBE(VIRTIO_MMIO_BASE,               0x4000),    VIRTIO_MMIO_BASE,             DEVICE_MEM},
-    {PLATFORM_MEM_TALBE(0xd0000000,                     0x3000),    0xd0000000,                   NORMAL_NOCACHE_MEM},
+    {
+        {                  PLATFORM_MEM_TALBE(0x40008000,             0x9000000),                   0x40008000,         NORMAL_MEM},
+        {                  PLATFORM_MEM_TALBE(0x49008000,  RT_UNCACHE_HEAP_SIZE),                   0x49008000, NORMAL_NOCACHE_MEM},
+        {               PLATFORM_MEM_TALBE(PMU0_GRF_BASE,                0x2000),                PMU0_GRF_BASE,         DEVICE_MEM},
+        {               PLATFORM_MEM_TALBE(PMU1_GRF_BASE,                0x2000),                PMU1_GRF_BASE,         DEVICE_MEM},
+        {                PLATFORM_MEM_TALBE(SYS_GRF_BASE,                0x4000),                 SYS_GRF_BASE,         DEVICE_MEM},
+        {                    PLATFORM_MEM_TALBE(CRU_BASE,                0x8000),                     CRU_BASE,         DEVICE_MEM},
+        {                  PLATFORM_MEM_TALBE(UART0_BASE,               0x10000),                   UART0_BASE,         DEVICE_MEM},
+        {                  PLATFORM_MEM_TALBE(UART3_BASE,               0x10000),                   UART3_BASE,         DEVICE_MEM},
+        {  PLATFORM_MEM_TALBE(GIC_PL600_DISTRIBUTOR_PPTR,               0x10000),   GIC_PL600_DISTRIBUTOR_PPTR,         DEVICE_MEM},
+        {PLATFORM_MEM_TALBE(GIC_PL600_REDISTRIBUTOR_PPTR,               0xc0000), GIC_PL600_REDISTRIBUTOR_PPTR,         DEVICE_MEM},
+        {                PLATFORM_MEM_TALBE(BUS_IOC_BASE,                0x4000),                 BUS_IOC_BASE,         DEVICE_MEM},
+        {           PLATFORM_MEM_TALBE(VCCIO3_5_IOC_BASE,                0x1000),            VCCIO3_5_IOC_BASE,         DEVICE_MEM},
+        {             PLATFORM_MEM_TALBE(VCCIO6_IOC_BASE,                0x1000),              VCCIO6_IOC_BASE,         DEVICE_MEM},
+        {                 PLATFORM_MEM_TALBE(TIMER0_BASE,                0x8000),                  TIMER5_BASE,         DEVICE_MEM},
+        {                   PLATFORM_MEM_TALBE(CAN2_BASE,               0x10000),                    CAN2_BASE,         DEVICE_MEM},
+        {                  PLATFORM_MEM_TALBE(GMAC1_BASE,               0x10000),                   GMAC1_BASE,         DEVICE_MEM},
+        {                    PLATFORM_MEM_TALBE(CRU_BASE,                0x8000),                     CRU_BASE,         DEVICE_MEM},
+        {                PLATFORM_MEM_TALBE(PHP_GRF_BASE,                0x4000),                 PHP_GRF_BASE,         DEVICE_MEM},
+        {                PLATFORM_MEM_TALBE(SYS_GRF_BASE,                0x4000),                 SYS_GRF_BASE,         DEVICE_MEM},
+        {                  PLATFORM_MEM_TALBE(GPIO2_BASE,               0x10000),                   GPIO2_BASE,         DEVICE_MEM},
+        {            PLATFORM_MEM_TALBE(VIRTIO_MMIO_BASE,                0x4000),             VIRTIO_MMIO_BASE,         DEVICE_MEM},
+        {                  PLATFORM_MEM_TALBE(0xd0000000,                0x3000),                   0xd0000000, NORMAL_NOCACHE_MEM},
 
 #ifdef PKG_USING_RT_OPENAMP
-    {PLATFORM_MEM_TALBE(AMP_SHARE_MEMORY_ADDRESS, AMP_SHARE_MEMORY_SIZE), AMP_SHARE_MEMORY_ADDRESS, NORMAL_MEM},
-#endif /* PKG_USING_RT_OPENAMP */
+        {    PLATFORM_MEM_TALBE(AMP_SHARE_MEMORY_ADDRESS, AMP_SHARE_MEMORY_SIZE),     AMP_SHARE_MEMORY_ADDRESS,         NORMAL_MEM},
+#endif  /* PKG_USING_RT_OPENAMP */
 };
 
 const rt_uint32_t platform_mem_desc_size = sizeof(platform_mem_desc) / sizeof(platform_mem_desc[0]);
 
 void idle_wfi(void)
 {
-    __asm__ volatile ("wfi");
+    __asm__ volatile("wfi");
 }
 
 static void rt_hw_timer_isr_brain(int vector, void *parameter)
-{   
+{
     rt_tick_increase();
-    HAL_TIMER_ClrInt((struct TIMER_REG *)parameter);   
+    HAL_TIMER_ClrInt((struct TIMER_REG *)parameter);
 }
 
 void brain_timer_init(void)
-{   //338
-    HAL_TIMER_Init((void *)TIMER5_BASE,TIMER_FREE_RUNNING);
-    HAL_TIMER_SetCount((void *)TIMER5_BASE, 240000);            //24M 每10ms中断一次
+{                                                    //338
+    HAL_TIMER_Init((void *)TIMER5_BASE, TIMER_FREE_RUNNING);
+    HAL_TIMER_SetCount((void *)TIMER5_BASE, 240000); //24M 每10ms中断一次
 
     rt_hw_interrupt_umask(TIMER5_IRQn);
     rt_hw_interrupt_install(TIMER5_IRQn, rt_hw_timer_isr_brain, (void *)TIMER5_BASE, "tick");
     HAL_TIMER_Start_IT((struct TIMER_REG *)TIMER5_BASE);
-
 }
 
 void rt_hw_board_init(void)
@@ -86,7 +85,7 @@ void rt_hw_board_init(void)
     extern unsigned long MMUTable[512];
     rt_region_t init_page_region;
 
-    rt_hw_mmu_map_init(&rt_kernel_space, (void *) 0x40008000, 0xE0000000 - 1, MMUTable, 0);
+    rt_hw_mmu_map_init(&rt_kernel_space, (void *)0x40008000, 0xE0000000 - 1, MMUTable, 0);
 
     init_page_region.start = RT_HW_PAGE_START;
     init_page_region.end = RT_HW_PAGE_END;
@@ -105,18 +104,18 @@ void rt_hw_board_init(void)
     rt_hw_interrupt_init();
 
     HAL_PINCTRL_SetIOMUX(GPIO_BANK4,
-        GPIO_PIN_A5,
-        PIN_CONFIG_MUX_FUNC10);
+                         GPIO_PIN_A5,
+                         PIN_CONFIG_MUX_FUNC10);
     HAL_PINCTRL_SetIOMUX(GPIO_BANK4,
-        GPIO_PIN_A6,
-        PIN_CONFIG_MUX_FUNC10);
-        
+                         GPIO_PIN_A6,
+                         PIN_CONFIG_MUX_FUNC10);
+
     HAL_PINCTRL_SetIOMUX(GPIO_BANK4,
-        GPIO_PIN_A3,
-        PIN_CONFIG_MUX_FUNC10 | PIN_CONFIG_PUL_UP | PIN_CONFIG_DRV_LEVEL1);// | PIN_CONFIG_PUL_UP | PIN_CONFIG_DRV_LEVEL1
+                         GPIO_PIN_A3,
+                         PIN_CONFIG_MUX_FUNC10 | PIN_CONFIG_PUL_UP | PIN_CONFIG_DRV_LEVEL1); // | PIN_CONFIG_PUL_UP | PIN_CONFIG_DRV_LEVEL1
     HAL_PINCTRL_SetIOMUX(GPIO_BANK4,
-        GPIO_PIN_A4,
-        PIN_CONFIG_MUX_FUNC10 | PIN_CONFIG_PUL_UP | PIN_CONFIG_DRV_LEVEL1);
+                         GPIO_PIN_A4,
+                         PIN_CONFIG_MUX_FUNC10 | PIN_CONFIG_PUL_UP | PIN_CONFIG_DRV_LEVEL1);
 
     /* initialize uart */
     rt_hw_uart_init();
@@ -153,7 +152,7 @@ void reboot(void)
 {
     psci_system_reboot();
 
-    void *cur_base = rt_ioremap((void *) CRU_BASE, 0x100);
+    void *cur_base = rt_ioremap((void *)CRU_BASE, 0x100);
     HWREG32(cur_base + 0x00D4) = 0xfdb9;
     HWREG32(cur_base + 0x00D8) = 0xeca8;
 }
@@ -169,7 +168,7 @@ MSH_CMD_EXPORT_ALIAS(print_cpu_id, cpuid, print_cpu_id);
 void start_cpu(int argc, char *argv[])
 {
     rt_uint32_t status;
-    status = rt_psci_cpu_on(0x3, (rt_uint64_t) 0x7A000000);
+    status = rt_psci_cpu_on(0x3, (rt_uint64_t)0x7A000000);
     rt_kprintf("arm_psci_cpu_on 0x%X\n", status);
 }
 MSH_CMD_EXPORT(start_cpu, start_cpu);
@@ -184,13 +183,12 @@ void rt_hw_cpu_shutdown(void)
 
 #if defined(RT_USING_SMP) || defined(RT_USING_AMP)
 rt_uint64_t rt_cpu_mpidr_early[] =
-{
-    [0] = 0x80000000,
-    [1] = 0x80000100,
-    [2] = 0x80000200,
-    [3] = 0x80000300,
-    [RT_CPUS_NR] = 0
-};
+    {
+        [0] = 0x80000000,
+        [1] = 0x80000100,
+        [2] = 0x80000200,
+        [3] = 0x80000300,
+        [RT_CPUS_NR] = 0};
 #endif
 
 #ifdef RT_USING_SMP
