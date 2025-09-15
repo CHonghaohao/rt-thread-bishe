@@ -221,7 +221,7 @@ int ringbuf_read(ring_buffer_t *rb, void *buf, uint32_t *len)
         // 重置状态：准备读取下一段新数据
         g_read_offset = 0;
         g_cached_total_len = 0;
-        ivc_devs->received_irq--;
+        ivc_devs->received_irq = 0;
 
         return 0;
     }
@@ -269,26 +269,21 @@ static int ivc_poll(void)
 
     while (1)
     {
-        if (rt_sem_take(ivc_devs->irq_sem, RT_WAITING_FOREVER) == RT_EOK)
-        {
-            while (ivc_devs->received_irq > 0)
-            {
-                ivc_devs->received_irq--;
-                len = 10;
-                ringbuf_read(g_ivc_serial.rx_buf, buf, &len);
-                len = 10;
-                ringbuf_read(g_ivc_serial.rx_buf, buf, &len);
-                // 打印读取到的数据（假设是字符串）
-                ivc_devs->received_irq = 0;
-            }
-            rt_kprintf("write前\n");
-            buffer = "hello zone0! I'm zone1. test";
-            len = 31;
-            ringbuf_write(g_ivc_serial.tx_buf, buffer, len);
-            rt_kprintf("write后\n");
-            rt_kprintf("addr : %p - %p , send : %s\n", &g_ivc_serial, g_ivc_serial.tx_buf, buffer);
-            kick_guest0();
-        }
+        // if (rt_sem_take(ivc_devs->irq_sem, RT_WAITING_FOREVER) == RT_EOK)
+        // {
+        //     while (ivc_devs->received_irq > 0)
+        //     {
+        //         ivc_devs->received_irq--;
+        len = 31;
+        ringbuf_read(g_ivc_serial.rx_buf, buf, &len);
+        // 打印读取到的数据（假设是字符串）
+        //     ivc_devs->received_irq = 0;
+        // }
+        // buffer = "hello zone0! I'm zone1. test";
+        ringbuf_write(g_ivc_serial.tx_buf, buf, len);
+        rt_kprintf("addr : %p - %p , send : %s\n", &g_ivc_serial, g_ivc_serial.tx_buf, buf);
+        kick_guest0();
+        // }
     }
 
     return 0;
@@ -299,9 +294,9 @@ void ivc_irq_handler(int vector, void *param)
 {
     (void)vector;
     (void)param;
-    ivc_devs->received_irq++;
+    ivc_devs->received_irq = 1;
     // 重置读取状态变量，确保新数据从头部开始读取
-    // rt_kprintf("[IVC] 收到中断，重置变量\n");
+    rt_kprintf("[IVC] 收到中断，重置变量\n");
     g_cached_total_len = 0;
     g_read_offset = 0;
     rt_sem_release(ivc_devs->irq_sem);
