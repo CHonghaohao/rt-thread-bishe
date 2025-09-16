@@ -174,7 +174,7 @@ int ringbuf_read(ring_buffer_t *rb, void *buf, uint32_t *len)
 
 
     // 2. 检查是否有可用数据，若无则阻塞等待
-    if (ivc_devs->received_irq == 0)
+    if (g_read_offset == 0 && ivc_devs->received_irq == 0)
     {
         // 阻塞模式：等待信号量
         // rt_kprintf("ringbuf_read: 等待中断...\n");
@@ -293,7 +293,7 @@ void ivc_irq_handler(int vector, void *param)
 {
     (void)vector;
     (void)param;
-    ivc_devs->received_irq = 1;
+    ivc_devs->received_irq++;
     // 重置读取状态变量，确保新数据从头部开始读取
     //rt_kprintf("[IVC] 收到中断，重置变量\n");
     g_cached_total_len = 0;
@@ -322,16 +322,16 @@ rt_size_t ivc_read(rt_device_t dev, rt_off_t pos, void *buffer, rt_size_t size)
     ivc_serial_dev_t *ivc = (ivc_serial_dev_t *)dev->user_data;
     // rt_kprintf("\n[RECV] - ivc_read传入长度：%u 字节\n", size);
     // 2. 检查是否有可用数据，若无则阻塞等待
-    if (ivc_devs->received_irq == 0)
-    {
-        // 阻塞模式：等待信号量
-        rt_err_t ret = rt_sem_take(ivc_devs->irq_sem, RT_WAITING_FOREVER);
-        if (ret != RT_EOK)
-        {
-            rt_kprintf("ringbuf_read: 等待被中断（ret=%d）\n", ret);
-            return ret;
-        }
-    }
+    // if (ivc_devs->received_irq == 0)
+    // {
+    //     // 阻塞模式：等待信号量
+    //     rt_err_t ret = rt_sem_take(ivc_devs->irq_sem, RT_WAITING_FOREVER);
+    //     if (ret != RT_EOK)
+    //     {
+    //         rt_kprintf("ringbuf_read: 等待被中断（ret=%d）\n", ret);
+    //         return ret;
+    //     }
+    // }
 
     if (ringbuf_read(ivc->rx_buf, buffer, &size) == 0)
     {

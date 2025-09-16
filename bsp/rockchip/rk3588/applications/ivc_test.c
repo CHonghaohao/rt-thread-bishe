@@ -94,8 +94,9 @@ static int ivc_recv_example(void)
     {
         read_len--; // 本次请求读取长度（分批次）
         // 调用 ivc_read 读取数据（驱动会自动解析总长度，跟踪读取偏移）
+        // rt_kprintf("\nrt_device_read要读的长度1：%u 字节\n", read_len);
         rt_size_t actual_len = rt_device_read(g_ivc_dev, 0, g_recv_buf + total_recv_len, read_len);
-
+        // rt_kprintf("\nrt_device_read要读的长度2：%u 字节\n", actual_len);
         if (actual_len == 0)
         {
             // 实际长度为0：表示所有数据已读完（驱动内部重置偏移量）
