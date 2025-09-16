@@ -8,20 +8,20 @@
 
 #define RT_NAME_MAX 16
 #define RT_USING_SMP
-#define RT_CPUS_NR 4
+#define RT_CPUS_NR    4
 #define RT_ALIGN_SIZE 8
 #define RT_THREAD_PRIORITY_32
 #define RT_THREAD_PRIORITY_MAX 32
-#define RT_TICK_PER_SECOND 100
+#define RT_TICK_PER_SECOND     100
 #define RT_USING_OVERFLOW_CHECK
 #define RT_USING_HOOK
 #define RT_HOOK_USING_FUNC_PTR
 #define RT_USING_IDLE_HOOK
-#define RT_IDLE_HOOK_LIST_SIZE 4
-#define IDLE_THREAD_STACK_SIZE 4096
+#define RT_IDLE_HOOK_LIST_SIZE   4
+#define IDLE_THREAD_STACK_SIZE   4096
 #define SYSTEM_THREAD_STACK_SIZE 4096
 #define RT_USING_TIMER_SOFT
-#define RT_TIMER_THREAD_PRIO 4
+#define RT_TIMER_THREAD_PRIO       4
 #define RT_TIMER_THREAD_STACK_SIZE 4096
 
 /* kservice optimization */
@@ -55,15 +55,15 @@
 #define RT_USING_DEVICE_OPS
 #define RT_USING_SCHED_THREAD_CTX
 #define RT_USING_CONSOLE
-#define RT_CONSOLEBUF_SIZE 4096
-#define RT_CONSOLE_DEVICE_NAME "uart3"
-#define RT_VER_NUM 0x50100
+#define RT_CONSOLEBUF_SIZE        4096
+#define RT_CONSOLE_DEVICE_NAME    "uart3"
+#define RT_VER_NUM                0x50100
 #define RT_BACKTRACE_LEVEL_MAX_NR 32
 
 /* AArch64 Architecture Configuration */
 
-#define ARCH_TEXT_OFFSET 0x200000
-#define ARCH_RAM_OFFSET 0
+#define ARCH_TEXT_OFFSET              0x200000
+#define ARCH_RAM_OFFSET               0
 #define ARCH_SECONDARY_CPU_STACK_SIZE 4096
 #define ARCH_HAVE_EFFICIENT_UNALIGNED_ACCESS
 #define ARCH_CPU_64BIT
@@ -84,12 +84,12 @@
 #define RT_USING_COMPONENTS_INIT
 #define RT_USING_USER_MAIN
 #define RT_MAIN_THREAD_STACK_SIZE 8192
-#define RT_MAIN_THREAD_PRIORITY 10
+#define RT_MAIN_THREAD_PRIORITY   10
 #define RT_USING_MSH
 #define RT_USING_FINSH
 #define FINSH_USING_MSH
-#define FINSH_THREAD_NAME "tshell"
-#define FINSH_THREAD_PRIORITY 20
+#define FINSH_THREAD_NAME       "tshell"
+#define FINSH_THREAD_PRIORITY   20
 #define FINSH_THREAD_STACK_SIZE 8192
 #define FINSH_USING_HISTORY
 #define FINSH_HISTORY_LINES 5
@@ -107,7 +107,7 @@
 #define DFS_USING_WORKDIR
 #define DFS_FD_MAX 16
 #define RT_USING_DFS_V1
-#define DFS_FILESYSTEMS_MAX 4
+#define DFS_FILESYSTEMS_MAX      4
 #define DFS_FILESYSTEM_TYPES_MAX 4
 #define RT_USING_DFS_DEVFS
 /* end of DFS: device virtual file system */
@@ -146,8 +146,8 @@
 
 #define RT_LIBC_USING_LIGHT_TZ_DST
 #define RT_LIBC_TZ_DEFAULT_HOUR 8
-#define RT_LIBC_TZ_DEFAULT_MIN 0
-#define RT_LIBC_TZ_DEFAULT_SEC 0
+#define RT_LIBC_TZ_DEFAULT_MIN  0
+#define RT_LIBC_TZ_DEFAULT_SEC  0
 
 /* POSIX (Portable Operating System Interface) layer */
 
@@ -326,9 +326,9 @@
 #define BSP_USING_VIRTIO_CONSOLE
 
 #define RT_USING_OFW_BUS_RANGES_NUMBER 8
-#define RT_PAGE_AFFINITY_BLOCK_SIZE 0x1000
-#define ARCH_HEAP_SIZE 0x4000000
-#define ARCH_INIT_PAGE_SIZE 0x200000
+#define RT_PAGE_AFFINITY_BLOCK_SIZE    0x1000
+#define ARCH_HEAP_SIZE                 0x4000000
+#define ARCH_INIT_PAGE_SIZE            0x200000
 #define RT_USING_MEMBLOCK
 #define RT_USING_INTERRUPT_INFO
 #define ARCH_USING_IRQ_CTX_LIST
@@ -353,43 +353,43 @@
 /* RT_LWIP_SNMP is not set */
 #define RT_LWIP_DNS
 #define RT_LWIP_DHCP
-#define IP_SOF_BROADCAST 1
+#define IP_SOF_BROADCAST      1
 #define IP_SOF_BROADCAST_RECV 1
 
 /* Static IPv4 Address */
 
-#define RT_LWIP_IPADDR ""
-#define RT_LWIP_GWADDR ""
+#define RT_LWIP_IPADDR  ""
+#define RT_LWIP_GWADDR  ""
 #define RT_LWIP_MSKADDR ""
 #define RT_LWIP_UDP
 #define RT_LWIP_TCP
 #define RT_LWIP_RAW
 /* RT_LWIP_PPP is not set */
-#define RT_MEMP_NUM_NETCONN 8
-#define RT_LWIP_PBUF_NUM 16
-#define RT_LWIP_RAW_PCB_NUM 4
-#define RT_LWIP_UDP_PCB_NUM 4
-#define RT_LWIP_TCP_PCB_NUM 4
-#define RT_LWIP_TCP_SEG_NUM 40
-#define RT_LWIP_TCP_SND_BUF 8196
-#define RT_LWIP_TCP_WND 8196
-#define RT_LWIP_TCPTHREAD_PRIORITY 10
+#define RT_MEMP_NUM_NETCONN         8
+#define RT_LWIP_PBUF_NUM            16
+#define RT_LWIP_RAW_PCB_NUM         4
+#define RT_LWIP_UDP_PCB_NUM         4
+#define RT_LWIP_TCP_PCB_NUM         4
+#define RT_LWIP_TCP_SEG_NUM         40
+#define RT_LWIP_TCP_SND_BUF         8196
+#define RT_LWIP_TCP_WND             8196
+#define RT_LWIP_TCPTHREAD_PRIORITY  10
 #define RT_LWIP_TCPTHREAD_MBOX_SIZE 8
 #define RT_LWIP_TCPTHREAD_STACKSIZE 4096
 #define RT_LWIP_USING_PING
 /* LWIP_NO_RX_THREAD is not set */
 /* LWIP_NO_TX_THREAD is not set */
-#define RT_LWIP_ETHTHREAD_PRIORITY 12
+#define RT_LWIP_ETHTHREAD_PRIORITY  12
 #define RT_LWIP_ETHTHREAD_STACKSIZE 8192
 #define RT_LWIP_ETHTHREAD_MBOX_SIZE 8
 /* RT_LWIP_REASSEMBLY_FRAG is not set */
 #define LWIP_NETIF_STATUS_CALLBACK 1
-#define SO_REUSE 1
-#define LWIP_SO_RCVTIMEO 1
-#define LWIP_SO_SNDTIMEO 1
-#define LWIP_SO_RCVBUF 1
+#define SO_REUSE                   1
+#define LWIP_SO_RCVTIMEO           1
+#define LWIP_SO_SNDTIMEO           1
+#define LWIP_SO_RCVBUF             1
 /* RT_LWIP_NETIF_LOOPBACK is not set */
-#define LWIP_NETIF_LOOPBACK 0
+#define LWIP_NETIF_LOOPBACK    0
 #define TCPIP_THREAD_STACKSIZE 4096
 
 #define SAL_USING_POSIX

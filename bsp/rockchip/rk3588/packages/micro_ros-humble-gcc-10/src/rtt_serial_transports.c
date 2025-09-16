@@ -125,6 +125,16 @@ size_t rtt_transport_write(struct uxrCustomTransport * transport, const uint8_t 
         rtt_transport_open(NULL);
     }
     rt_kprintf("send : %s , buflen : %d, len: %d \n", buf, rt_strlen(buf), len);
+
+    rt_kprintf("buf 的十六进制数据 (len = %d):\n", len);
+    for (size_t i = 0; i < len; i++)
+    {
+        rt_kprintf("%02X ", buf[i]); // 每个字节两位十六进制
+        if ((i + 1) % 16 == 0)       // 每 16 个字节换行
+            rt_kprintf("\n");
+    }
+    if (len % 16 != 0) // 如果最后一行不足 16 个字节，补一个换行
+        rt_kprintf("\n");
     return rt_device_write(micro_ros_serial, 0, buf, len);
 }
 

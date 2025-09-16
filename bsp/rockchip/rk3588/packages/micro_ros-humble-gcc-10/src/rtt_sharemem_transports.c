@@ -1,7 +1,7 @@
 #include <rtthread.h>
 
 // ---- Build fixes -----
-// undefined reference to `__ctype_ptr__' 
+// undefined reference to `__ctype_ptr__'
 #if defined MICRO_ROS_USE_SHAREMEM
 
 #include "micro_ros_rtt.h"
@@ -10,8 +10,8 @@
 #include <sys/time.h>
 #include "ivc.h"
 
-#define DBG_SECTION_NAME  "micro_ros_shm"
-#define DBG_LEVEL         DBG_LOG
+#define DBG_SECTION_NAME "micro_ros_shm"
+#define DBG_LEVEL        DBG_LOG
 #include <rtdbg.h>
 
 static int sem_initialized = 0;
@@ -23,11 +23,11 @@ static rt_device_t micro_ros_shm;
 int clock_gettime(clockid_t unused, struct timespec *tp)
 {
     (void)unused;
-     //1s + 100
+    //1s + 100
     uint64_t m = rt_tick_get() * 1000 / RT_TICK_PER_SECOND * 1000;
     tp->tv_sec = m / 1000000;
     tp->tv_nsec = (m % 1000000) * 1000;
-    
+
     //这个地方可能有问题
     return 0;
 }
@@ -39,7 +39,7 @@ static rt_err_t uart_input(rt_device_t dev, rt_size_t size)
     return RT_EOK;
 }
 
-bool rtt_transport_open(struct uxrCustomTransport * transport)
+bool rtt_transport_open(struct uxrCustomTransport *transport)
 {
     micro_ros_shm = rt_device_find(MICRO_ROS_SHAREMEM_NAME);
     if (!micro_ros_shm)
@@ -47,58 +47,84 @@ bool rtt_transport_open(struct uxrCustomTransport * transport)
         LOG_E("Failed to open device %s", MICRO_ROS_SHAREMEM_NAME);
         return 0;
     }
+    if (rt_device_open(micro_ros_shm, RT_DEVICE_FLAG_RDWR | RT_DEVICE_FLAG_INT_RX) != RT_EOK)
+    {
+        rt_kprintf("[IVC_UINT] 打开设备 %s 失败\n", MICRO_ROS_SHAREMEM_NAME);
+        micro_ros_shm = RT_NULL;
+        return -1;
+    }
+
     rt_kprintf("rtt transport open\n");
     return 1;
 }
 
-bool rtt_transport_close(struct uxrCustomTransport * transport)
+bool rtt_transport_close(struct uxrCustomTransport *transport)
 {
     rt_kprintf("rtt transport close\n");
     return 1;
 }
 
-size_t rtt_transport_write(struct uxrCustomTransport * transport, const uint8_t *buf, size_t len, uint8_t *errcode)
-{    
-    rt_kprintf("rtt transport white\n");
-    // rt_kprintf("rtt_transport_write !!!\n");
-    // rt_tick_t tick = rt_tick_get(); 
+size_t rtt_transport_write(struct uxrCustomTransport *transport, const uint8_t *buf, size_t len, uint8_t *errcode)
+{
+    rt_kprintf("rtt_transport_write !!!\n");
+    // rt_tick_t tick = rt_tick_get();
     // uint64_t tick_ms = (uint64_t)tick * 1000 / RT_TICK_PER_SECOND;
     // rt_kprintf("WRITE 系统启动时间：%llu ms\n", tick_ms);
-    
+
     // if(micro_ros_shm == NULL)
     // {
     //     rtt_transport_open(NULL);
     // }
     // return rt_device_write(micro_ros_shm, 0, buf, len);
     // ringbuf_write(g_ivc_serial.tx_buf, buf, len);
-    rt_kprintf("send : %s , buflen : %d, len: %d \n", buf, rt_strlen(buf), len);
+    // rt_kprintf("send : %s , buflen : %d, len: %d \n", buf, rt_strlen(buf), len);
     // kick_guest0();
-    return ivc_write(micro_ros_shm, 0, (const void *)buf, len);
+    // return ivc_write(micro_ros_shm, 0, (const void *)buf, len);
+
+    rt_kprintf("buf 的十六进制数据 (len = %d):\n", len);
+    for (size_t i = 0; i < len; i++)
+    {
+        rt_kprintf("%02X ", buf[i]); // 每个字节两位十六进制
+        if ((i + 1) % 16 == 0)       // 每 16 个字节换行
+            rt_kprintf("\n");
+    }
+    if (len % 16 != 0) // 如果最后一行不足 16 个字节，补一个换行
+        rt_kprintf("\n");
+    return rt_device_write(micro_ros_shm, 0, buf, len);
 }
 
-size_t rtt_transport_read(struct uxrCustomTransport * transport, uint8_t *buf, size_t len, int timeout, uint8_t *errcode)
-{   
+size_t rtt_transport_read(struct uxrCustomTransport *transport, uint8_t *buf, size_t len, int timeout, uint8_t *errcode)
+{
     rt_kprintf("rtt transport read\n");
     int tick = rt_tick_get();
     for (int i = 0; i < len; ++i)
     {
-        if(sem_initialized == 0)
+        if (sem_initialized == 0)
         {
             rt_sem_init(&rx_sem, "micro_ros_rx_sem", 0, RT_IPC_FLAG_FIFO);
             sem_initialized = 1;
         }
-        
-        // while (rt_device_read(micro_ros_shm, -1, &buf[i], 1) != 1)
-        while (ivc_read(micro_ros_shm, -1, &buf[i], 1) != 1)
-        {
-            rt_sem_take(&rx_sem, timeout / 4);  
 
-            if( (rt_tick_get() - tick) > timeout )
+        while (rt_device_read(micro_ros_shm, -1, &buf[i], 1) != 1)
+        // while (ivc_read(micro_ros_shm, -1, &buf[i], 1) != 1)
+        {
+            rt_sem_take(&rx_sem, timeout / 4);
+
+            if ((rt_tick_get() - tick) > timeout)
             {
                 return i;
             }
         }
     }
+    rt_kprintf("读buf 的十六进制数据 (len = %d):\n", len);
+    for (size_t i = 0; i < len; i++)
+    {
+        rt_kprintf("%02X ", buf[i]); // 每个字节两位十六进制
+        if ((i + 1) % 16 == 0)       // 每 16 个字节换行
+            rt_kprintf("\n");
+    }
+    if (len % 16 != 0) // 如果最后一行不足 16 个字节，补一个换行
+        rt_kprintf("\n");
     // ivc_read(g_ivc_serial, 0, (const void *)buf, len);
     return len;
 }

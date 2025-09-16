@@ -142,7 +142,7 @@ int ringbuf_write(ring_buffer_t *rb, const void *data, uint32_t len)
     rt_hw_wmb();
     *len_ptr = len; // 存储数据长度
     rt_hw_wmb();
-    rt_hw_cpu_dcache_clean(txaddr, sizeof(uint32_t) + len);
+    // rt_hw_cpu_dcache_clean(txaddr, sizeof(uint32_t) + len);
     // rt_kprintf("ringbuf_write: 成功写入（长度：%u 字节，数据地址：%p）\n", len, data_addr);
     return 0;
 }
@@ -200,7 +200,7 @@ int ringbuf_read(ring_buffer_t *rb, void *buf, uint32_t *len)
     // 4. 动态解析总数据长度（首次读取时解析，后续复用缓存值）
     if (g_cached_total_len == 0)
     {
-        rt_hw_cpu_dcache_invalidate(rx_base, LEN_FIELD_BYTES);
+        // rt_hw_cpu_dcache_invalidate(rx_base, LEN_FIELD_BYTES);
         rt_hw_rmb();
         g_cached_total_len = *(uint32_t *)rx_base;
         if (g_cached_total_len == 0)
@@ -235,7 +235,7 @@ int ringbuf_read(ring_buffer_t *rb, void *buf, uint32_t *len)
 
     // 8. 复制数据到目标缓冲区（从当前偏移量开始）
     char *read_start = data_base + g_read_offset; // 本次读取起始地址
-    rt_hw_cpu_dcache_invalidate(data_base + g_read_offset, actual_read_len);
+    // rt_hw_cpu_dcache_invalidate(data_base + g_read_offset, actual_read_len);
     rt_hw_rmb();
     rt_memcpy(buf, read_start, actual_read_len);
 
