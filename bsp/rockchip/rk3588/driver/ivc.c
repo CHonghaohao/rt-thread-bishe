@@ -26,6 +26,33 @@ ivc_serial_dev_t g_ivc_serial;
 extern ring_buffer_t *ivc_get_tx_buffer(void);
 extern ring_buffer_t *ivc_get_rx_buffer(void);
 
+
+#include <rthw.h>
+#include <mm_aspace.h>
+enum ioremap_type
+{
+    MM_AREA_TYPE_PHY,
+    MM_AREA_TYPE_PHY_WT,
+    MM_AREA_TYPE_PHY_CACHED
+};
+void check_addr_cache_attr(void *addr)
+{
+    struct rt_varea *varea = rt_aspace_query(&rt_kernel_space, addr);
+    if (!varea)
+    {
+        rt_kprintf("地址 %p 不在任何映射区域\n", addr);
+        return;
+    }
+
+    if (varea->attr & MM_AREA_TYPE_PHY_CACHED)
+        rt_kprintf("地址 %p : Normal Cached 区域\n", addr);
+    else if (varea->attr & MM_AREA_TYPE_PHY_WT)
+        rt_kprintf("地址 %p : Write-Through 区域\n", addr);
+    else
+        rt_kprintf("地址 %p : 非缓存 (Device/Normal-nocache) 区域\n", addr);
+}
+
+
 // void kick_guest0(void)
 // {
 //     // 直接使用全局虚拟地址，不重复映射
@@ -122,51 +149,12 @@ int ringbuf_write(ring_buffer_t *rb, const void *data, uint32_t len)
 
 // 1. 协议配置（与发送端对齐）
 #define LEN_FIELD_BYTES   4               // 总长度字段占 4 字节
-#define MAX_VALID_TOTAL   1024            // 最大合法总长度（防止解析到垃圾值，如 0xffffffff）
 #define DATA_START_OFFSET LEN_FIELD_BYTES // 实际业务数据的起始偏移（跳过长度字段）
 
 // 2. 读取偏移量（跟踪已读取到业务数据的哪个位置）
 static uint32_t g_read_offset = 0;
 // 3. 缓存解析出的总数据长度（避免每次读取都重复解析）
 static uint32_t g_cached_total_len = 0;
-
-/**
- * @brief 从共享内存动态解析总数据长度（TOTAL_DATA_LEN）
- * @param rx_base 共享内存基地址
- * @return 有效总长度（>0 成功，0 失败）
- */
-static uint32_t get_total_len_from_shared_mem(char *rx_base)
-{
-    if (rx_base == NULL)
-    {
-        rt_kprintf("get_total_len: 共享内存基地址为空\n");
-        return 0;
-    }
-
-    // 解析长度字段（前 LEN_FIELD_BYTES 字节）
-    uint32_t total_len = 0;
-    if (LEN_FIELD_BYTES == 4)
-    {
-        // 长度字段占 4 字节
-        rt_hw_cpu_dcache_invalidate(rx_base, LEN_FIELD_BYTES);
-        total_len = *(uint32_t *)rx_base;
-    }
-    else
-    {
-        rt_kprintf("get_total_len: 不支持的长度字段字节数（%u）\n", LEN_FIELD_BYTES);
-        return 0;
-    }
-
-    // 检查总长度合法性（避免垃圾值，如 0 或超过最大限制）
-    if (total_len == 0 || total_len > MAX_VALID_TOTAL)
-    {
-        rt_kprintf("get_total_len: 无效总长度（%u 字节），可能是垃圾数据\n", total_len);
-        return 0;
-    }
-
-    // rt_kprintf("get_total_len: 动态解析总长度 = %u 字节\n", total_len);
-    return total_len;
-}
 
 /**
  * @brief 分批次读取共享内存数据（动态获取总长度）
@@ -198,7 +186,6 @@ int ringbuf_read(ring_buffer_t *rb, void *buf, uint32_t *len)
             return ret;
         }
     }
-    // 2. 内存屏障：确保读取到共享内存最新数据
 
 
     // 3. 获取共享内存基地址
@@ -210,12 +197,12 @@ int ringbuf_read(ring_buffer_t *rb, void *buf, uint32_t *len)
         return -1;
     }
 
-    rt_hw_cpu_dcache_invalidate(rx_base, sizeof(uint32_t));
-    rt_hw_rmb();
     // 4. 动态解析总数据长度（首次读取时解析，后续复用缓存值）
     if (g_cached_total_len == 0)
     {
-        g_cached_total_len = get_total_len_from_shared_mem(rx_base);
+        rt_hw_cpu_dcache_invalidate(rx_base, LEN_FIELD_BYTES);
+        rt_hw_rmb();
+        g_cached_total_len = *(uint32_t *)rx_base;
         if (g_cached_total_len == 0)
         {
             rt_kprintf("ringbuf_read: 总长度解析失败，无法读取数据\n");
@@ -272,8 +259,8 @@ int ringbuf_read(ring_buffer_t *rb, void *buf, uint32_t *len)
     // rt_kprintf("\n");
 
     // 12. 内存屏障 + 缓存清理
-    rt_hw_dmb();
-    rt_hw_cpu_dcache_clean((uint8_t *)buf, actual_read_len);
+    //rt_hw_dmb();
+    // rt_hw_cpu_dcache_clean((uint8_t *)buf, actual_read_len);
 
     return 0;
 }
@@ -292,7 +279,7 @@ static void ivc_poll(void)
         len = sizeof(buf);
         while (ringbuf_read(g_ivc_serial.rx_buf, buf, &len) == 0 && len > 0)
         {
-            rt_kprintf("send : %s\n", buf);
+            // rt_kprintf("send : %s\n", buf);
             ringbuf_write(g_ivc_serial.tx_buf, buf, len);
             kick_guest0();     /* 回发 */
             len = sizeof(buf); /* 继续读下一批 */
@@ -308,7 +295,7 @@ void ivc_irq_handler(int vector, void *param)
     (void)param;
     ivc_devs->received_irq = 1;
     // 重置读取状态变量，确保新数据从头部开始读取
-    rt_kprintf("[IVC] 收到中断，重置变量\n");
+    //rt_kprintf("[IVC] 收到中断，重置变量\n");
     g_cached_total_len = 0;
     g_read_offset = 0;
     rt_sem_release(ivc_devs->irq_sem);
@@ -338,7 +325,6 @@ rt_size_t ivc_read(rt_device_t dev, rt_off_t pos, void *buffer, rt_size_t size)
     if (ivc_devs->received_irq == 0)
     {
         // 阻塞模式：等待信号量
-        // rt_kprintf("ringbuf_read: 等待中断...\n");
         rt_err_t ret = rt_sem_take(ivc_devs->irq_sem, RT_WAITING_FOREVER);
         if (ret != RT_EOK)
         {
@@ -358,7 +344,7 @@ rt_size_t ivc_read(rt_device_t dev, rt_off_t pos, void *buffer, rt_size_t size)
 
 static rt_err_t ivc_open(rt_device_t dev, rt_uint16_t oflag)
 {
-    rt_kprintf("[IVC] 调用ivc_open！\n");
+    // rt_kprintf("[IVC] 调用ivc_open！\n");
     return RT_EOK;
 }
 static rt_err_t ivc_close(rt_device_t dev)

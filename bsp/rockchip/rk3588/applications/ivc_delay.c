@@ -41,8 +41,8 @@ static int ivc_init(void)
             g_ivc_dev = RT_NULL;
             return -1;
         }
-        rt_kprintf("[IVC_UINT] 成功打开IVC设备（非负范围: 0 至 %d）\n", INT_MAX);
-        rt_kprintf("[IVC_UINT] 等待Linux端发送数据...\n");
+        // rt_kprintf("[IVC_UINT] 成功打开IVC设备（非负范围: 0 至 %d）\n", INT_MAX);
+        // rt_kprintf("[IVC_UINT] 等待Linux端发送数据...\n");
     }
     return 0;
 }
@@ -82,11 +82,11 @@ static rt_size_t ivc_read_msg(void)
         rt_kprintf("[IVC_UINT] 读取失败\n");
         return 0;
     }
-    else if (actual_len == 0)
-    {
-        rt_kprintf("[IVC_UINT] 无数据可读（超时或设备关闭）\n");
-        return 0;
-    }
+    // else if (actual_len == 0)
+    // {
+    //     rt_kprintf("[IVC_UINT] 无数据可读（超时或设备关闭）\n");
+    //     return 0;
+    // }
 
     // 添加字符串终止符，避免解析错误
     g_recv_buf[actual_len] = '\0';
@@ -144,7 +144,7 @@ static int ivc_send_reply(int num)
         return -1;
     }
 
-    rt_kprintf("[IVC_UINT] 处理完成：接收%d → 回复%d\n", num, reply_num);
+    // rt_kprintf("[IVC_UINT] 处理完成：接收%d → 回复%d\n", num, reply_num);
     return 0;
 }
 
@@ -170,7 +170,7 @@ static void ivc_uint_test_thread(void *parameter)
         rt_size_t recv_len = ivc_read_msg();
         if (recv_len <= MSG_PREFIX_LEN)
         {
-            rt_thread_mdelay(10); // 短延时后重试，避免CPU空转
+            // rt_thread_mdelay(10); // 短延时后重试，避免CPU空转
             continue;
         }
 
@@ -179,7 +179,6 @@ static void ivc_uint_test_thread(void *parameter)
         if (strncmp((char *)g_recv_buf, MSG_PREFIX, MSG_PREFIX_LEN) != 0)
         {
             rt_kprintf("[IVC_UINT] 格式错误: %s（需以\"%s\"开头）\n", g_recv_buf, MSG_PREFIX);
-            rt_thread_mdelay(10);
             continue;
         }
 
@@ -189,7 +188,6 @@ static void ivc_uint_test_thread(void *parameter)
         if (rt_sscanf(num_str, "%d", &num) != 1 || num < 0)
         {
             rt_kprintf("[IVC_UINT] 数字无效: %s\n", num_str);
-            rt_thread_mdelay(10);
             continue;
         }
 
@@ -198,15 +196,11 @@ static void ivc_uint_test_thread(void *parameter)
         {
             total_count++;
             // 每处理100次打印一次统计（可选，用于查看进度）
-            if (total_count % 100 == 0)
-            {
-                rt_kprintf("[IVC_UINT] 累计处理 %d 次\n", total_count);
-            }
+            // if (total_count % 100 == 0)
+            // {
+            //     rt_kprintf("[IVC_UINT] 累计处理 %d 次\n", total_count);
+            // }
         }
-
-
-        // 短延时：降低CPU占用，避免频繁轮询
-        rt_thread_mdelay(1);
     }
 
     // 测试结束后清理
