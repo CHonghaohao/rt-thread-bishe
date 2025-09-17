@@ -258,10 +258,6 @@ int ringbuf_read(ring_buffer_t *rb, void *buf, uint32_t *len)
     // }
     // rt_kprintf("\n");
 
-    // 12. 内存屏障 + 缓存清理
-    //rt_hw_dmb();
-    // rt_hw_cpu_dcache_clean((uint8_t *)buf, actual_read_len);
-
     return 0;
 }
 

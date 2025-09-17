@@ -1,82 +1,107 @@
+// rt_virtio_console_echo.c
 #include <rtthread.h>
 #include <rtdevice.h>
+#include <string.h>
+#include <stdint.h>
 
 #define VIRTIO_CONSOLE_DEVICE_NAME "vport0p1"
-#define READ_WAIT_TIME 1000  // 等待时间，单位：毫秒
-#define SEND_COUNT 100       // 发送次数
-#define SEND_INTERVAL 500    // 发送间隔，单位：毫秒
+#define MAX_PAYLOAD                512
 
-static void test_virtio_console_write(void)
+static rt_device_t dev;
+
+static rt_ssize_t read_exact(rt_device_t d, void *buf, rt_size_t len)
 {
-    rt_device_t dev;
-    rt_size_t size;
-    char recv_buf[128];
-    int i;
-
-    /* 查找Virtio-Console设备 */
-    dev = rt_device_find(VIRTIO_CONSOLE_DEVICE_NAME);
-    if (dev == RT_NULL)
+    uint8_t *p = buf;
+    rt_size_t left = len;
+    while (left)
     {
-        rt_kprintf("Virtio-Console device %s not found!\n", VIRTIO_CONSOLE_DEVICE_NAME);
-        return;
+        rt_size_t r = rt_device_read(d, 0, p, left);
+        if (r == 0)
+        {
+            // 阻塞一会儿等数据（视驱动行为决定是否需要）
+            // rt_thread_mdelay(1);
+            continue;
+        }
+        p += r;
+        left -= r;
     }
-
-    // 添加调试信息，确认设备状态
-    rt_kprintf("Device state: 0x%x\n", dev->flag);
-    
-    /* 打开设备 */
-    if (rt_device_open(dev, RT_DEVICE_FLAG_RDWR) != RT_EOK)
-    {
-        rt_kprintf("Failed to open Virtio-Console device %s!\n", VIRTIO_CONSOLE_DEVICE_NAME);
-        return;
-    }
-
-
-    /* 循环发送100次数据 */
-    char dynamic_buf[64];  // 定义一个足够大的缓冲区存储动态生成的消息
-    for (i = 0; i < SEND_COUNT; i++)
-    {
-        // 使用sprintf动态生成包含序号的消息
-        sprintf(dynamic_buf, "Hello, I'm RTthread! seq: %d", i + 1);
-
-        rt_kprintf("===== Sending iteration %d/%d =====\n", i + 1, SEND_COUNT);
-        
-        // 获取实际生成的字符串长度
-        size_t actual_length = strlen(dynamic_buf);
-
-        /* 向设备写入数据 */
-        size = rt_device_write(dev, 0, dynamic_buf, actual_length);
-        if (size > 0)
-        {
-            rt_kprintf("Write %d bytes to Virtio-Console %s: %s\n", size, VIRTIO_CONSOLE_DEVICE_NAME, dynamic_buf);
-        }
-        else
-        {
-            rt_kprintf("Failed to write to Virtio-Console device %s!\n", VIRTIO_CONSOLE_DEVICE_NAME);
-            rt_kprintf("Write error code: %d\n", rt_get_errno());
-        }
-
-        // 等待一段时间，确保有数据到达
-        rt_thread_mdelay(READ_WAIT_TIME);
-
-        rt_kprintf("--------------------------------\n");
-        /* 从设备读取数据 */
-        size = rt_device_read(dev, 0, recv_buf, sizeof(recv_buf));
-        if (size > 0)
-        {
-            recv_buf[size] = '\0';
-            rt_kprintf("Read %d bytes from Virtio-Console %s: %s\n", size, VIRTIO_CONSOLE_DEVICE_NAME, recv_buf);
-        }
-        else
-        {
-            rt_kprintf("Failed to read from Virtio-Console device %s!\n", VIRTIO_CONSOLE_DEVICE_NAME);
-            rt_kprintf("Read error code: %d\n", rt_get_errno());
-        }
-        // 每次发送后添加间隔
-        rt_thread_mdelay(SEND_INTERVAL);
-    }
-
-    /* 关闭设备 */
-    // rt_device_close(dev);
+    return len;
 }
-MSH_CMD_EXPORT(test_virtio_console_write, Test_VirtioConsole_device);
+
+static rt_ssize_t write_exact(rt_device_t d, const void *buf, rt_size_t len)
+{
+    const uint8_t *p = buf;
+    rt_size_t left = len;
+    while (left)
+    {
+        rt_size_t w = rt_device_write(d, 0, p, left);
+        if (w == 0)
+        {
+            // rt_thread_mdelay(1);
+            continue;
+        }
+        p += w;
+        left -= w;
+    }
+    return len;
+}
+
+static int recv_frame(uint8_t *buf, uint16_t *out_len)
+{
+    uint8_t hdr[2];
+    if (read_exact(dev, hdr, 2) != 2) return -1;
+    uint16_t len = (uint16_t)hdr[0] | ((uint16_t)hdr[1] << 8);
+    if (len > MAX_PAYLOAD) return -1;
+    if (read_exact(dev, buf, len) != len) return -1;
+    *out_len = len;
+    return 0;
+}
+
+static int send_frame(const uint8_t *buf, uint16_t len)
+{
+    uint8_t hdr[2] = {(uint8_t)(len & 0xFF), (uint8_t)(len >> 8)};
+    if (write_exact(dev, hdr, 2) != 2) return -1;
+    if (write_exact(dev, buf, len) != len) return -1;
+    return 0;
+}
+
+static void virtio_console_echo(void)
+{
+    dev = rt_device_find(VIRTIO_CONSOLE_DEVICE_NAME);
+    if (!dev)
+    {
+        rt_kprintf("device %s not found\n", VIRTIO_CONSOLE_DEVICE_NAME);
+        return;
+    }
+    if (rt_device_open(dev, RT_DEVICE_OFLAG_RDWR) != RT_EOK)
+    {
+        rt_kprintf("open %s failed\n", VIRTIO_CONSOLE_DEVICE_NAME);
+        return;
+    }
+
+    // 先阻塞读：等待 Linux 的 HELLO（解决“不会等待”的问题）
+    uint8_t buf[MAX_PAYLOAD];
+    uint16_t len = 0;
+    if (recv_frame(buf, &len) == 0)
+    {
+        // 回一帧，完成握手
+        send_frame(buf, len);
+    }
+
+    // 进入回显循环：收到什么回什么
+    while (1)
+    {
+        if (recv_frame(buf, &len) == 0)
+        {
+            // 这里也可做校验/处理后再回
+            send_frame(buf, len);
+        }
+        // else
+        // {
+        //     // 可选：短暂休眠避免空转
+        //     rt_thread_mdelay(1);
+        // }
+    }
+}
+
+MSH_CMD_EXPORT(virtio_console_echo, virtio console echo test);
