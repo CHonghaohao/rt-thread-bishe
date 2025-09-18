@@ -50,7 +50,8 @@ struct mem_desc platform_mem_desc[] =
         {                PLATFORM_MEM_TALBE(SYS_GRF_BASE,                0x4000),                 SYS_GRF_BASE,         DEVICE_MEM},
         {                  PLATFORM_MEM_TALBE(GPIO2_BASE,               0x10000),                   GPIO2_BASE,         DEVICE_MEM},
         {            PLATFORM_MEM_TALBE(VIRTIO_MMIO_BASE,                0x4000),             VIRTIO_MMIO_BASE,         DEVICE_MEM},
-        {                  PLATFORM_MEM_TALBE(0xd0000000,                0x3000),                   0xd0000000, NORMAL_NOCACHE_MEM},
+        {                  PLATFORM_MEM_TALBE(0xd0000000,                0x1000),                   0xd0000000,         DEVICE_MEM},
+        {                  PLATFORM_MEM_TALBE(0xd0001000,                0x2000),                   0xd0001000, NORMAL_NOCACHE_MEM},
 
 #ifdef PKG_USING_RT_OPENAMP
         {    PLATFORM_MEM_TALBE(AMP_SHARE_MEMORY_ADDRESS, AMP_SHARE_MEMORY_SIZE),     AMP_SHARE_MEMORY_ADDRESS,         NORMAL_MEM},

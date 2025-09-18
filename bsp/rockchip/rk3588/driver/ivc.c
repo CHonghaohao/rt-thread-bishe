@@ -27,32 +27,6 @@ extern ring_buffer_t *ivc_get_tx_buffer(void);
 extern ring_buffer_t *ivc_get_rx_buffer(void);
 
 
-#include <rthw.h>
-#include <mm_aspace.h>
-enum ioremap_type
-{
-    MM_AREA_TYPE_PHY,
-    MM_AREA_TYPE_PHY_WT,
-    MM_AREA_TYPE_PHY_CACHED
-};
-void check_addr_cache_attr(void *addr)
-{
-    struct rt_varea *varea = rt_aspace_query(&rt_kernel_space, addr);
-    if (!varea)
-    {
-        rt_kprintf("地址 %p 不在任何映射区域\n", addr);
-        return;
-    }
-
-    if (varea->attr & MM_AREA_TYPE_PHY_CACHED)
-        rt_kprintf("地址 %p : Normal Cached 区域\n", addr);
-    else if (varea->attr & MM_AREA_TYPE_PHY_WT)
-        rt_kprintf("地址 %p : Write-Through 区域\n", addr);
-    else
-        rt_kprintf("地址 %p : 非缓存 (Device/Normal-nocache) 区域\n", addr);
-}
-
-
 // void kick_guest0(void)
 // {
 //     // 直接使用全局虚拟地址，不重复映射
@@ -431,6 +405,7 @@ void rt_ivc_init(void)
     //     return;
     // }
     // rt_kprintf("[IVC] 共享内存映射成功：物理0x%x → 虚拟0x%p\n", shared_mem_IPA, g_shared_mem_virt);
+
     ivc_devs = rt_malloc(sizeof(struct ivc_dev));
     ivc_devs->received_irq = 0;
     ivc_devs->irq_sem = rt_sem_create("ivc_irq", 0, RT_IPC_FLAG_FIFO);
@@ -475,3 +450,138 @@ void rt_ivc_poll(void)
         rt_thread_startup(th);
 }
 MSH_CMD_EXPORT(rt_ivc_poll, ivc device init);
+
+
+#include <stddef.h>
+#define __MMU_INTERNAL
+#include "mm_page.h"
+#include "mmu.h"
+#include "tlb.h"
+#include "ioremap.h"
+#ifdef RT_USING_SMART
+#include <lwp_mm.h>
+#endif
+#include <rthw.h>
+#include <mm_aspace.h>
+
+static unsigned long *rt_hw_mmu_query(rt_aspace_t aspace, void *vaddr, int *plvl_shf);
+static int cmd_check_mair(int argc, char **argv)
+{
+    if (argc < 2)
+    {
+        rt_kprintf("Usage: %s <virtual_addr>\n", argv[0]);
+        return -1;
+    }
+
+    /* 1️⃣ 解析用户输入的虚拟地址 */
+    unsigned long long va = strtoull(argv[1], NULL, 0);
+    rt_kprintf("Input VA = 0x%llx\n", va);
+
+    /* 2️⃣ 查询页表项(PTE) */
+    int level_shift;
+    rt_ubase_t *pte = rt_hw_mmu_query(&rt_kernel_space, (void *)va, &level_shift);
+    if (!pte)
+    {
+        rt_kprintf("Translation fault: no mapping for 0x%llx\n", va);
+        return -1;
+    }
+
+    rt_kprintf("PTE = 0x%lx\n", *pte);
+
+    /* 3️⃣ 提取 AttrIndx */
+    unsigned int attridx = (*pte >> 2) & 0x7;
+    rt_kprintf("AttrIndx = %u\n", attridx);
+
+    /* 4️⃣ 读取 MAIR_EL1 */
+    unsigned long long mair;
+    __asm__ volatile("mrs %0, mair_el1" : "=r"(mair));
+    rt_kprintf("MAIR_EL1 = 0x%016llx\n", mair);
+
+    /* 5️⃣ 解析该索引对应的 8bit 属性 */
+    unsigned int mair_val = (mair >> (attridx * 8)) & 0xff;
+    rt_kprintf("MAIR_EL1[slot %u] = 0x%02x\n", attridx, mair_val);
+
+    /*
+       常见值对照:
+         0x00 -> Device-nGnRnE
+         0x44 -> Normal Non-cacheable (Write-Combine)
+         0xff -> Normal Write-Back, Read/Write Allocate
+    */
+
+    return 0;
+}
+
+/* 注册到 msh 命令行 */
+MSH_CMD_EXPORT(cmd_check_mair, check MAIR attr of a virtual address);
+
+
+
+#define TCR_CONFIG_TBI0 rt_hw_mmu_config_tbi(0)
+#define TCR_CONFIG_TBI1 rt_hw_mmu_config_tbi(1)
+
+#define MMU_LEVEL_MASK   0x1ffUL
+#define MMU_LEVEL_SHIFT  9
+#define MMU_ADDRESS_BITS 39
+#define MMU_ADDRESS_MASK 0x0000fffffffff000UL
+#define MMU_ATTRIB_MASK  0xfff0000000000ffcUL
+
+#define MMU_TYPE_MASK  3UL
+#define MMU_TYPE_USED  1UL
+#define MMU_TYPE_BLOCK 1UL
+#define MMU_TYPE_TABLE 3UL
+#define MMU_TYPE_PAGE  3UL
+
+#define MMU_TBL_BLOCK_2M_LEVEL 2
+#define MMU_TBL_PAGE_4k_LEVEL  3
+#define MMU_TBL_LEVEL_NR       4
+
+/* restrict virtual address on usage of RT_NULL */
+#ifndef KERNEL_VADDR_START
+#define KERNEL_VADDR_START 0x1000
+#endif
+static unsigned long *rt_hw_mmu_query(rt_aspace_t aspace, void *vaddr, int *plvl_shf)
+{
+    int level;
+    unsigned long va = (unsigned long)vaddr;
+    unsigned long *cur_lv_tbl;
+    unsigned long page;
+    unsigned long off;
+    int level_shift = MMU_ADDRESS_BITS;
+
+    cur_lv_tbl = aspace->page_table;
+    RT_ASSERT(cur_lv_tbl);
+
+    for (level = 0; level < MMU_TBL_PAGE_4k_LEVEL; level++)
+    {
+        off = (va >> level_shift);
+        off &= MMU_LEVEL_MASK;
+
+        if (!(cur_lv_tbl[off] & MMU_TYPE_USED))
+        {
+            *plvl_shf = level_shift;
+            return (void *)0;
+        }
+
+        page = cur_lv_tbl[off];
+        if ((page & MMU_TYPE_MASK) == MMU_TYPE_BLOCK)
+        {
+            *plvl_shf = level_shift;
+            return &cur_lv_tbl[off];
+        }
+
+        cur_lv_tbl = (unsigned long *)(page & MMU_ADDRESS_MASK);
+        cur_lv_tbl = (unsigned long *)((unsigned long)cur_lv_tbl - PV_OFFSET);
+        level_shift -= MMU_LEVEL_SHIFT;
+    }
+    /* now is level MMU_TBL_PAGE_4k_LEVEL */
+    off = (va >> ARCH_PAGE_SHIFT);
+    off &= MMU_LEVEL_MASK;
+    page = cur_lv_tbl[off];
+
+    *plvl_shf = level_shift;
+    if (!(page & MMU_TYPE_USED))
+    {
+        return (void *)0;
+    }
+    return &cur_lv_tbl[off];
+}
