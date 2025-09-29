@@ -185,7 +185,7 @@ int ivc_rb_read(void *buf, uint32_t *inout_len)
 
 static void ivc_poll(void)
 {
-    char buf[128];
+    char buf[300];
     uint32_t want;
     int rc;
 
