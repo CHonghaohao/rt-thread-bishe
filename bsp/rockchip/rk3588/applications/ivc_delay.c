@@ -7,10 +7,10 @@
 
 // 配置参数（与发送端保持一致，删除 TEST_COUNT）
 #define IVC_DEV_NAME   "ivc"
-#define MSG_PREFIX     "TEST_UINT:"
+#define MSG_PREFIX     "Hello from zone1, message #"
 #define MSG_PREFIX_LEN strlen(MSG_PREFIX)
-#define RECV_BUF_SIZE  32 // 足够存储非负整数字符串
-#define SEND_BUF_SIZE  32
+#define RECV_BUF_SIZE  80 // 足够存储非负整数字符串
+#define SEND_BUF_SIZE  80
 #define READ_BATCH_LEN 10
 
 // 全局变量（仅由测试线程访问，无需互斥锁）
@@ -76,6 +76,13 @@ static rt_size_t ivc_read_msg(void)
     // rt_kprintf("\n");
     // rt_kprintf("[RECV] - data 内容（字符串） = %s\n", (const char *)hex_buf);
 
+
+    if (actual_len == (rt_size_t)-RT_ETIMEOUT || actual_len == 0)
+    {
+        // rt_kprintf("[IVC_UINT] 超时或者没数据\n");
+        // 没有新数据，直接返回 0，让上层 while 循环 continue
+        return 0;
+    }
 
     if (actual_len == (rt_size_t)-1)
     {
@@ -195,6 +202,7 @@ static void ivc_uint_test_thread(void *parameter)
         if (ivc_send_reply(num) == 0)
         {
             total_count++;
+            // rt_kprintf("[IVC_UINT] 累计处理 %d 次\n", total_count);
             // 每处理100次打印一次统计（可选，用于查看进度）
             // if (total_count % 100 == 0)
             // {

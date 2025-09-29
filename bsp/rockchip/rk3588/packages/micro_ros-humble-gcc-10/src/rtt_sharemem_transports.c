@@ -66,7 +66,7 @@ bool rtt_transport_close(struct uxrCustomTransport *transport)
 
 size_t rtt_transport_write(struct uxrCustomTransport *transport, const uint8_t *buf, size_t len, uint8_t *errcode)
 {
-    rt_kprintf("rtt_transport_write !!!\n");
+    // rt_kprintf("rtt_transport_write !!!\n");
     // rt_tick_t tick = rt_tick_get();
     // uint64_t tick_ms = (uint64_t)tick * 1000 / RT_TICK_PER_SECOND;
     // rt_kprintf("WRITE 系统启动时间：%llu ms\n", tick_ms);
@@ -81,21 +81,21 @@ size_t rtt_transport_write(struct uxrCustomTransport *transport, const uint8_t *
     // kick_guest0();
     // return ivc_write(micro_ros_shm, 0, (const void *)buf, len);
 
-    rt_kprintf("buf 的十六进制数据 (len = %d):\n", len);
-    for (size_t i = 0; i < len; i++)
-    {
-        rt_kprintf("%02X ", buf[i]); // 每个字节两位十六进制
-        if ((i + 1) % 16 == 0)       // 每 16 个字节换行
-            rt_kprintf("\n");
-    }
-    if (len % 16 != 0) // 如果最后一行不足 16 个字节，补一个换行
-        rt_kprintf("\n");
+    // rt_kprintf("buf 的十六进制数据 (len = %d):\n", len);
+    // for (size_t i = 0; i < len; i++)
+    // {
+    //     rt_kprintf("%02X ", buf[i]); // 每个字节两位十六进制
+    //     if ((i + 1) % 16 == 0)       // 每 16 个字节换行
+    //         rt_kprintf("\n");
+    // }
+    // if (len % 16 != 0) // 如果最后一行不足 16 个字节，补一个换行
+    //     rt_kprintf("\n");
     return rt_device_write(micro_ros_shm, 0, buf, len);
 }
 
 size_t rtt_transport_read(struct uxrCustomTransport *transport, uint8_t *buf, size_t len, int timeout, uint8_t *errcode)
 {
-    rt_kprintf("rtt transport read\n");
+    // rt_kprintf("rtt transport read\n");
     int tick = rt_tick_get();
     for (int i = 0; i < len; ++i)
     {
@@ -116,16 +116,16 @@ size_t rtt_transport_read(struct uxrCustomTransport *transport, uint8_t *buf, si
             }
         }
     }
-    rt_kprintf("读buf 的十六进制数据 (len = %d):\n", len);
-    for (size_t i = 0; i < len; i++)
-    {
-        rt_kprintf("%02X ", buf[i]); // 每个字节两位十六进制
-        if ((i + 1) % 16 == 0)       // 每 16 个字节换行
-            rt_kprintf("\n");
-    }
-    if (len % 16 != 0) // 如果最后一行不足 16 个字节，补一个换行
-        rt_kprintf("\n");
-    // ivc_read(g_ivc_serial, 0, (const void *)buf, len);
+    // rt_kprintf("读buf 的十六进制数据 (len = %d):\n", len);
+    // for (size_t i = 0; i < len; i++)
+    // {
+    //     rt_kprintf("%02X ", buf[i]); // 每个字节两位十六进制
+    //     if ((i + 1) % 16 == 0)       // 每 16 个字节换行
+    //         rt_kprintf("\n");
+    // }
+    // if (len % 16 != 0) // 如果最后一行不足 16 个字节，补一个换行
+    //     rt_kprintf("\n");
+    // // ivc_read(g_ivc_serial, 0, (const void *)buf, len);
     return len;
 }
 

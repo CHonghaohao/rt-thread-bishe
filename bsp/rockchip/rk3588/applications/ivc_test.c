@@ -94,7 +94,7 @@ static int ivc_recv_example(void)
     {
         read_len--; // 本次请求读取长度（分批次）
         // 调用 ivc_read 读取数据（驱动会自动解析总长度，跟踪读取偏移）
-        // rt_kprintf("\nrt_device_read要读的长度1：%u 字节\n", read_len);
+        rt_kprintf("\nrt_device_read要读的长度1：%u 字节\n", read_len);
         rt_size_t actual_len = rt_device_read(g_ivc_dev, 0, g_recv_buf + total_recv_len, read_len);
         // rt_kprintf("\nrt_device_read要读的长度2：%u 字节\n", actual_len);
         if (actual_len == 0)
@@ -110,6 +110,19 @@ static int ivc_recv_example(void)
             total_recv_len = 0;
             break;
         }
+
+        // 打印本次读取到的actual_len长度的数据
+        rt_kprintf("[IVC_RECV] 本次读取%u字节，数据如下：\n", actual_len);
+        // 以十六进制格式打印（每行16字节，便于查看）
+        for (rt_size_t i = 0; i < actual_len; i++)
+        {
+            rt_kprintf("%02X ", (unsigned char)(g_recv_buf[total_recv_len + i]));
+            if ((i + 1) % 16 == 0) // 每16字节换行
+            {
+                rt_kprintf("\n");
+            }
+        }
+        rt_kprintf("\n"); // 最后换行，避免后续输出连在一起
 
         // 3. 更新累计接收长度
         total_recv_len += actual_len;
