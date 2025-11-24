@@ -1,0 +1,13 @@
+menuconfig PKG_USING_RPMSG_LITE
+    bool "Enable rpmsg-lite"
+    default n
+    help
+      Build the rpmsg-lite sources under packages/rpmsg_lite.
+
+if PKG_USING_RPMSG_LITE
+
+config PKG_USING_RPMSG_LITE_DEFAULT
+    bool "Use default rpmsg-lite settings"
+    default y
+
+endif

@@ -1,15 +1,32 @@
-# RT-Thread building script for bridge
-
-import os
 from building import *
+import os
 
 cwd = GetCurrentDir()
-objs = []
-list = os.listdir(cwd)
 
-for d in list:
-    path = os.path.join(cwd, d)
-    if os.path.isfile(os.path.join(path, 'SConscript')):
-        objs = objs + SConscript(os.path.join(d, 'SConscript'))
+src = [
+    'lib/virtio/virtqueue.c',
+    'lib/common/llist.c',
+    'lib/rpmsg_lite/rpmsg_lite.c',
+    'lib/rpmsg_lite/rpmsg_ns.c',
+    'lib/rpmsg_lite/porting/environment/rpmsg_env_rt-thread.c',
+    'lib/rpmsg_lite/porting/platform/rtthread_generic/rpmsg_platform.c',
+]
 
-Return('objs')
+paths = [
+    cwd + '/lib/include',
+    cwd + '/lib/include/platform/rtthread_generic',
+    cwd + '/lib/rpmsg_lite',
+    cwd + '/lib/rpmsg_lite/porting/environment',
+    cwd + '/lib/rpmsg_lite/porting/platform/rtthread_generic',
+    cwd + '/lib/virtio',
+    cwd + '/lib/common',
+]
+
+group = DefineGroup(
+    'rpmsg_lite',
+    [os.path.join(cwd, s) for s in src],
+    depend=['PKG_USING_RPMSG_LITE'],
+    CPPPATH=paths,
+)
+
+Return('group')
