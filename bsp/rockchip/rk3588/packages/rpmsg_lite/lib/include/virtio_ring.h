@@ -33,6 +33,8 @@
 #ifndef VIRTIO_RING_H
 #define VIRTIO_RING_H
 
+#include <stdint.h>
+
 /* This marks a buffer as continuing via the next field. */
 #define VRING_DESC_F_NEXT 1U
 /* This marks a buffer as write-only (otherwise read-only). */
@@ -144,7 +146,7 @@ static inline void vring_init(struct vring *vr, uint32_t num, uint8_t *p, uint32
     vr->num   = num;
     vr->desc  = (struct vring_desc *)(void *)p;
     vr->avail = (struct vring_avail *)(void *)(p + num * sizeof(struct vring_desc));
-    vr->used  = (struct vring_used *)(((uint32_t)&vr->avail->ring[num] + align - 1UL) & ~(align - 1UL));
+    vr->used  = (struct vring_used *)(((uintptr_t)&vr->avail->ring[num] + align - 1UL) & ~(align - 1UL));
 }
 
 /*

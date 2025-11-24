@@ -31,6 +31,8 @@ documentation/html
 #source insight 4 project files
 *.si4project
 packages
+!bsp/rockchip/rk3588/packages/
+!bsp/rockchip/rk3588/packages/**
 dist
 rt-studio-project
 cconfig.h

@@ -104,7 +104,7 @@ static int32_t os_in_isr(void)
  * @returns - true, if currently in ISR
  *
  */
-static int32_t env_in_isr(void)
+static int32_t __attribute__((unused)) env_in_isr(void)
 {
 #if defined(AARCH64)
     return os_in_isr();
@@ -738,7 +738,7 @@ void env_delete_queue(void *queue)
  * @return - status of function execution
  */
 
-int32_t env_put_queue(void *queue, void *msg, uintptr_t timeout_ms)
+int32_t env_put_queue(void *queue, void *msg, uint32_t timeout_ms)
 {
     rt_int32_t timeout;
     if  (timeout_ms == RL_BLOCK)
@@ -771,7 +771,7 @@ int32_t env_put_queue(void *queue, void *msg, uintptr_t timeout_ms)
  * @return - status of function execution
  */
 
-int32_t env_get_queue(void *queue, void *msg, uintptr_t timeout_ms)
+int32_t env_get_queue(void *queue, void *msg, uint32_t timeout_ms)
 {
     rt_int32_t timeout;
     if  (timeout_ms == RL_BLOCK)

@@ -1,0 +1,5 @@
+menu "BSP packages"
+
+source "rpmsg_lite/Kconfig"
+
+endmenu
